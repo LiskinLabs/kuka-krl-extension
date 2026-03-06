@@ -455,6 +455,19 @@ documents.onDidChangeContent(async (change) => {
   }
 });
 
+documents.onDidClose((e) => {
+  const uri = e.document.uri;
+  // Clear any pending validation timeout for closed documents
+  const existingTimeout = validationTimeouts.get(uri);
+  if (existingTimeout) {
+    clearTimeout(existingTimeout);
+    validationTimeouts.delete(uri);
+  }
+  
+  // Also clear diagnostics when a document is closed
+  connection.sendDiagnostics({ uri, diagnostics: [] });
+});
+
 /**
  * Tek bir belgeden fonksiyon tanımlarını günceller.
  */

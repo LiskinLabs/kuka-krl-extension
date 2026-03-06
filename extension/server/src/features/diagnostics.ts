@@ -60,6 +60,36 @@ const VALID_DECL_STARTS = new Set([
 // Pre-compiled regexes for optimization
 const REGEX_LABEL_DECL = /^\s*([a-zA-Z_]\w*)\s*:/gim;
 
+/**
+ * Returns the line content up to the first ';' that is NOT inside a string.
+ * This correctly strips out KRL comments while preserving string contents.
+ */
+function getLineWithoutComment(line: string): string {
+  let inString = false;
+  for (let j = 0; j < line.length; j++) {
+    const char = line[j];
+    if (char === '"') {
+      inString = !inString;
+    } else if (char === ';' && !inString) {
+      return line.substring(0, j);
+    }
+  }
+  return line;
+}
+
+/**
+ * Returns the line content ready for variable extraction, preserving offsets.
+ * Replaces string contents and scientific notations with spaces.
+ */
+function getSafeCodePart(line: string): string {
+  let codePart = getLineWithoutComment(line);
+  // Replaces string contents with spaces to preserve length
+  codePart = codePart.replace(REGEX_STRING_CONTENT, (match) => ' '.repeat(match.length));
+  // Replaces scientific notations with spaces (or 0s) to preserve length
+  codePart = codePart.replace(REGEX_SCIENTIFIC_NOTATION, (match) => '0'.repeat(match.length));
+  return stripInvisibleChars(codePart);
+}
+
 const EXIT_KEYWORDS = ["RETURN", "EXIT", "HALT"];
 const EXIT_KEYWORD_REGEXES = EXIT_KEYWORDS.map((kw) => ({
   keyword: kw,
@@ -469,13 +499,7 @@ export class DiagnosticsProvider {
       const line = lines[i];
 
       // Yorumları atla
-      const commentIdx = line.indexOf(";");
-      let codePart = commentIdx >= 0 ? line.substring(0, commentIdx) : line;
-
-      // String ve bilimsel gösterimi temizle
-      codePart = codePart.replace(REGEX_STRING_CONTENT, '""');
-      codePart = codePart.replace(REGEX_SCIENTIFIC_NOTATION, "0");
-      codePart = stripInvisibleChars(codePart);
+      let codePart = getSafeCodePart(line);
 
       let match;
       variableRegex.lastIndex = 0;
@@ -589,22 +613,11 @@ export class DiagnosticsProvider {
         continue;
       }
 
-      // Tırnak içindeki stringleri gizle
-      let processedLine = line.replace(REGEX_STRING_CONTENT, '""');
-      // Bilimsel gösterimi gizle (örn: 1.0E+02)
-      processedLine = processedLine.replace(REGEX_SCIENTIFIC_NOTATION, "0");
-      // Görünmez Unicode karakterlerini kaldır (zero-width space vb.)
-      processedLine = stripInvisibleChars(processedLine);
+      let processedLine = getSafeCodePart(line);
 
       let match;
       while ((match = variableRegex.exec(processedLine)) !== null) {
         const varName = match[1];
-
-        // ';' ile başlayan yorumları atla
-        // NOT: processedLine üzerinde arama yapılmalı, orijinal line değil!
-        // Çünkü match.index processedLine'a aittir.
-        const commentIndex = processedLine.indexOf(";");
-        if (commentIndex !== -1 && match.index >= commentIndex) continue;
 
         // '&' ile başlayan parametreleri atla
         const lineBeforeMatch = processedLine.substring(0, match.index);
@@ -710,8 +723,7 @@ export class DiagnosticsProvider {
       const line = lines[i];
 
       // Пропустить комментарии
-      const commentIdx = line.indexOf(";");
-      const codePart = commentIdx >= 0 ? line.substring(0, commentIdx) : line;
+      const codePart = getLineWithoutComment(line);
 
       // Проверка $VEL.CP
       let match;
@@ -783,8 +795,7 @@ export class DiagnosticsProvider {
       const line = lines[i];
 
       // Пропустить комментарии
-      const commentIdx = line.indexOf(";");
-      const codePart = commentIdx >= 0 ? line.substring(0, commentIdx) : line;
+      const codePart = getLineWithoutComment(line);
 
       // Проверить инициализацию TOOL
       if (toolInitPattern.test(codePart)) {
@@ -861,8 +872,7 @@ export class DiagnosticsProvider {
       // Skip header lines
       if (line.trim().startsWith("&")) continue;
 
-      const commentIdx = line.indexOf(";");
-      const codePart = commentIdx >= 0 ? line.substring(0, commentIdx) : line;
+      const codePart = getLineWithoutComment(line);
       // const upperCode = codePart.toUpperCase(); // Reserved for future use
 
       // Проверка открывающих блоков
@@ -1022,8 +1032,7 @@ export class DiagnosticsProvider {
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
-      const commentIdx = line.indexOf(";");
-      const codePart = commentIdx >= 0 ? line.substring(0, commentIdx) : line;
+      const codePart = getLineWithoutComment(line);
 
       // Проверка функций
       const funcMatch = funcRegex.exec(codePart);
@@ -1072,8 +1081,7 @@ export class DiagnosticsProvider {
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
-      const commentIdx = line.indexOf(";");
-      const codePart = commentIdx >= 0 ? line.substring(0, commentIdx) : line;
+      const codePart = getLineWithoutComment(line);
       const trimmed = codePart.trim();
       const upperTrimmed = trimmed.toUpperCase();
 
@@ -1162,8 +1170,7 @@ export class DiagnosticsProvider {
         // Skip header lines
         if (line.trim().startsWith("&")) continue;
 
-        const commentIdx = line.indexOf(";");
-        const codePart = commentIdx >= 0 ? line.substring(0, commentIdx) : line;
+        const codePart = getLineWithoutComment(line);
 
         // Проверяем начало блока, но исключаем паттерны вроде WAIT FOR
         if (
@@ -1176,11 +1183,7 @@ export class DiagnosticsProvider {
           let hasCode = false;
           for (let j = blockStartLine + 1; j < i; j++) {
             const innerLine = lines[j];
-            const innerComment = innerLine.indexOf(";");
-            const innerCode =
-              innerComment >= 0
-                ? innerLine.substring(0, innerComment)
-                : innerLine;
+            const innerCode = getLineWithoutComment(innerLine);
             if (innerCode.trim() !== "") {
               hasCode = true;
               break;
@@ -1220,8 +1223,7 @@ export class DiagnosticsProvider {
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
-      const commentIdx = line.indexOf(";");
-      const codePart = commentIdx >= 0 ? line.substring(0, commentIdx) : line;
+      const codePart = getLineWithoutComment(line);
 
       // WAIT FOR без TIMEOUT
       if (/\bWAIT\s+FOR\b/i.test(codePart) && !/\bTIMEOUT\b/i.test(codePart)) {
@@ -1294,8 +1296,7 @@ export class DiagnosticsProvider {
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
-      const commentIdx = line.indexOf(";");
-      const codePart = commentIdx >= 0 ? line.substring(0, commentIdx) : line;
+      const codePart = getLineWithoutComment(line);
 
       // Проверка SWITCH с REAL переменной
       const switchMatch = codePart.match(/\bSWITCH\s+(\w+)/i);
@@ -1455,8 +1456,7 @@ export class DiagnosticsProvider {
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
-      const commentIdx = line.indexOf(";");
-      const codePart = commentIdx >= 0 ? line.substring(0, commentIdx) : line;
+      const codePart = getLineWithoutComment(line);
 
       // 0. Check Non-ASCII (Strict Mode: Warn on any non-ASCII in code)
       const nonAsciiMatch = codePart.match(REGEX_NON_ASCII);
@@ -1571,7 +1571,7 @@ export class DiagnosticsProvider {
       // Ignore lines containing only invisible characters (if not handled by trim)
       if (trimmed.replace(REGEX_INVISIBLE_CHARS, '').trim() === '') continue;
 
-      const codePart = line.split(";")[0];
+      const codePart = getLineWithoutComment(line);
       const trimmedCode = codePart.trim();
 
       if (!trimmedCode) continue;
@@ -1647,7 +1647,7 @@ function levenshteinDistance(s1: string, s2: string): number {
     matrix[i] = [i];
   }
 
-  for (let j = 0; j <= len2; j++) {
+  for (let j = 1; j <= len2; j++) {
     matrix[0][j] = j;
   }
 

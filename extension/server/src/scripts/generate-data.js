@@ -189,4 +189,3 @@ manualCommands.forEach(cmd => {
 });
 
 fs.writeFileSync(output, JSON.stringify(result, null, 2));
-console.log("krl-ref.json generated successfully!");

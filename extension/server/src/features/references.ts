@@ -31,12 +31,11 @@ export class ReferencesProvider {
     if (!wordInfo) return [];
 
     const symbolName = wordInfo.word;
-    const locations: Location[] = [];
 
     // Tüm kaynak dosyalarında ara
     const files = await getAllSourceFiles(state.workspaceRoot);
 
-    for (const filePath of files) {
+    const promises = files.map(async (filePath) => {
       const uri = URI.file(filePath).toString();
       let content: string;
 
@@ -48,20 +47,20 @@ export class ReferencesProvider {
         try {
           content = await fs.promises.readFile(filePath, "utf8");
         } catch {
-          continue;
+          return [];
         }
       }
 
-      const fileLocations = this.findReferencesInContent(
+      return this.findReferencesInContent(
         uri,
         content,
         symbolName,
         params.context.includeDeclaration,
       );
-      locations.push(...fileLocations);
-    }
+    });
 
-    return locations;
+    const results = await Promise.all(promises);
+    return results.flat();
   }
 
   /**

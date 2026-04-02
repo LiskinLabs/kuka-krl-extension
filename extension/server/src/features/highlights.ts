@@ -71,10 +71,13 @@ export class HighlightProvider {
     let symbolMatch;
     while ((symbolMatch = symbolRegex.exec(allText)) !== null) {
       let matchIdx = symbolMatch.index;
-      if (actualWord.startsWith("$") && symbolMatch[0].length > actualWord.length) {
+      if (
+        actualWord.startsWith("$") &&
+        symbolMatch[0].length > actualWord.length
+      ) {
         matchIdx += symbolMatch[0].length - actualWord.length;
       }
-      
+
       highlights.push({
         range: {
           start: document.positionAt(matchIdx),

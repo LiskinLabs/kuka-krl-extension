@@ -704,10 +704,12 @@
   "scripts": {
     "compile": "tsc -b client server",
     "watch": "tsc -b client server -w",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint .",
+    "package": "vsce package",
     "test": "node tests/extension.test.js"
   },
   "devDependencies": {
+    "@vscode/vsce": "^2.32.0",
     "@types/node": "^18.19.130",
     "@typescript-eslint/eslint-plugin": "^8.50.0",
     "@typescript-eslint/parser": "^8.50.0",

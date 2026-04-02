@@ -14,13 +14,14 @@ build_extension:
     - node -v
     - npm -v
     - cd extension
-    - npm install --progress=false --silent
+    - npm install --progress=false
     - npm run compile
     - npm run lint
+    - npm run package
   artifacts:
     name: "kuka-krl-extension-$CI_COMMIT_SHORT_SHA"
     paths:
-      - kuka-krl-extension-*.vsix
+      - extension/*.vsix
     expire_in: 1 week
   only:
     - main

@@ -37,7 +37,10 @@ export class InlayHintsProvider {
         const prefix = type.split("_")[0]; // TOOL or BASE
         const searchKey = `$${prefix}`;
         const alias = state.mergedVariables.find(
-          (v) => v.signalType === searchKey && v.signalIndex === index && v.type === "NAME_ALIAS"
+          (v) =>
+            v.signalType === searchKey &&
+            v.signalIndex === index &&
+            v.type === "NAME_ALIAS",
         );
         if (alias) {
           name = alias.name;
@@ -45,7 +48,10 @@ export class InlayHintsProvider {
       } else {
         // Look for SIGNAL assigned to this $IN/$OUT index
         const signal = state.mergedVariables.find(
-          (v) => v.signalType === type && v.signalIndex === index && v.type === "SIGNAL"
+          (v) =>
+            v.signalType === type &&
+            v.signalIndex === index &&
+            v.type === "SIGNAL",
         );
         if (signal) {
           name = signal.name;

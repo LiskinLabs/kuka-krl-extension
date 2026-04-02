@@ -94,10 +94,10 @@ export class SymbolResolver {
       if (localMatch && localMatch.range) {
         return Location.create(params.textDocument.uri, localMatch.range);
       }
-      
+
       // 2. Aynı dosyada (örn. .dat kısmında) olan global/genel değişkeni bul
       const fileMatch = localVars.find(
-        (v) => v.name.toUpperCase() === functionName.toUpperCase() && v.range
+        (v) => v.name.toUpperCase() === functionName.toUpperCase() && v.range,
       );
       if (fileMatch && fileMatch.range) {
         return Location.create(params.textDocument.uri, fileMatch.range);
@@ -107,9 +107,7 @@ export class SymbolResolver {
     // 3. Yerel olarak bulunamadıysa mergedVariables'da global (veya diğer dosyalardaki) değişkenleri ara
     const globalMatch = state.mergedVariables.find(
       (v) =>
-        v.name.toUpperCase() === functionName.toUpperCase() &&
-        v.uri &&
-        v.range,
+        v.name.toUpperCase() === functionName.toUpperCase() && v.uri && v.range,
     );
 
     if (globalMatch && globalMatch.uri && globalMatch.range) {

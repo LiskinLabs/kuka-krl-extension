@@ -82,7 +82,7 @@ export class ReferencesProvider {
     const pattern = symbolName.startsWith("$")
       ? `(?:^|[^\\w$])${escapedSymbol}\\b`
       : `\\b${escapedSymbol}\\b`;
-    
+
     const regex = new RegExp(pattern, "gi");
 
     for (let i = 0; i < lines.length; i++) {

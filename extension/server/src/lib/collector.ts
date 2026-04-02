@@ -220,13 +220,16 @@ export class SymbolExtractor {
             if (nameArrMatch && value.startsWith('"')) {
               const idx = parseInt(nameArrMatch[2], 10);
               const cleanVal = value.replace(/"/g, "").trim();
-              this.variables.set(`${nameArrMatch[1].toUpperCase()}_NAME_${idx}`, {
-                name: cleanVal,
-                type: "NAME_ALIAS",
-                value: cleanVal,
-                signalIndex: idx,
-                signalType: ("$" + nameArrMatch[1].toUpperCase()) as any,
-              });
+              this.variables.set(
+                `${nameArrMatch[1].toUpperCase()}_NAME_${idx}`,
+                {
+                  name: cleanVal,
+                  type: "NAME_ALIAS",
+                  value: cleanVal,
+                  signalIndex: idx,
+                  signalType: ("$" + nameArrMatch[1].toUpperCase()) as any,
+                },
+              );
             }
           }
         }

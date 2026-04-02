@@ -8,6 +8,8 @@ import { TextDocument } from "vscode-languageserver-textdocument";
 import { TextDocuments } from "vscode-languageserver/node";
 import { ServerState, EnclosuresLines } from "../types";
 import { isSymbolDeclared, getWordAtPosition } from "../lib/parser";
+import { KSS_87_SYSTEM_VARS } from "../lib/systemVars";
+import { SYSTEM_VAR_DOCS } from "../lib/systemVarDocs";
 import * as krlData from "../data/krl-ref.json";
 
 export class SymbolResolver {
@@ -25,48 +27,36 @@ export class SymbolResolver {
     const lines = doc.getText().split(/\r?\n/);
     const lineText = lines[params.position.line];
 
-    // Bildirim satırlarını atla
-    if (
-      /^\s*(GLOBAL\s+)?(DEF|DEFFCT|DECL\s+INT|DECL\s+REAL|DECL\s+BOOL|DECL\s+FRAME)\b/i.test(
-        lineText,
-      )
-    )
-      return;
-
-    // Struct içindeki alt değişkenleri atla
-    if (getWordAtPosition(lineText, params.position.character)?.isSubvariable) {
-      return;
-    }
-
-    const functionName = getWordAtPosition(
-      lineText,
-      params.position.character,
-    )?.word;
-    if (!functionName) return;
+    const wordAtPos = getWordAtPosition(lineText, params.position.character);
+    if (!wordAtPos) return;
+    const functionName = wordAtPos.word;
 
     // Feature 2: System Variables Definition
     let sysVarName = functionName.toUpperCase();
     if (!sysVarName.startsWith("$")) sysVarName = "$" + sysVarName;
 
-    const sysData =
+    const isSystemVar =
       (krlData.systemVariables as any)[sysVarName] ||
-      (krlData.systemVariables as any)[functionName.toUpperCase()];
+      (krlData.systemVariables as any)[functionName.toUpperCase()] ||
+      KSS_87_SYSTEM_VARS.includes(sysVarName) ||
+      SYSTEM_VAR_DOCS.some((d) => d.name.toUpperCase() === sysVarName);
 
-    if (sysData) {
-      // Return location at the top of the current file
-      return Location.create(params.textDocument.uri, Range.create(0, 0, 0, 0));
+    if (isSystemVar) {
+      // Return location at current position to satisfy VS Code and avoid "No definition found"
+      return Location.create(
+        params.textDocument.uri,
+        Range.create(params.position, params.position),
+      );
     }
 
-    // Önce fonksiyon olarak ara
-    const resultFct = await isSymbolDeclared(
-      state.workspaceRoot,
-      functionName,
-      "function",
+    // Hızlı önbellek araması: Önce fonksiyon olarak ara
+    const cachedFunc = state.functionsDeclared.find(
+      (f) => f.name.toUpperCase() === functionName.toUpperCase(),
     );
-    if (resultFct != undefined) {
-      return Location.create(resultFct.uri, {
-        start: Position.create(resultFct.line, resultFct.startChar),
-        end: Position.create(resultFct.line, resultFct.endChar),
+    if (cachedFunc) {
+      return Location.create(cachedFunc.uri, {
+        start: Position.create(cachedFunc.line, cachedFunc.startChar),
+        end: Position.create(cachedFunc.line, cachedFunc.endChar),
       });
     }
 
@@ -90,41 +80,40 @@ export class SymbolResolver {
     // Değişken olarak ara
     const enclosures = this.findEnclosuresLines(params.position.line, lines);
 
-    // Önce mergedVariables listesinden kontrol et
-    for (const element of state.mergedVariables) {
-      if (element.name.toUpperCase() === functionName.toUpperCase()) {
-        // İlk: yerel kapsamda ara (kapsam içinde)
-        const scopedResult = await isSymbolDeclared(
-          state.workspaceRoot,
-          functionName,
-          "variable",
-          params.textDocument.uri,
-          enclosures.upperLine,
-          enclosures.bottomLine,
-          lines.join("\n"),
-        );
-
-        if (scopedResult) {
-          return Location.create(scopedResult.uri, {
-            start: Position.create(scopedResult.line, scopedResult.startChar),
-            end: Position.create(scopedResult.line, scopedResult.endChar),
-          });
-        }
-
-        // Yerel olarak bulunamadıysa global arama yap
-        const resultVar = await isSymbolDeclared(
-          state.workspaceRoot,
-          functionName,
-          "variable",
-        );
-
-        if (resultVar) {
-          return Location.create(resultVar.uri, {
-            start: Position.create(resultVar.line, resultVar.startChar),
-            end: Position.create(resultVar.line, resultVar.endChar),
-          });
-        }
+    // Hızlı önbellek araması: İlk önce yerel değişkenleri kontrol et
+    const localVars = state.fileVariablesMap.get(params.textDocument.uri);
+    if (localVars) {
+      // 1. Kapsam içindeki yerel değişkeni bul
+      const localMatch = localVars.find(
+        (v) =>
+          v.name.toUpperCase() === functionName.toUpperCase() &&
+          v.range &&
+          v.range.start.line >= enclosures.upperLine &&
+          v.range.start.line <= enclosures.bottomLine,
+      );
+      if (localMatch && localMatch.range) {
+        return Location.create(params.textDocument.uri, localMatch.range);
       }
+      
+      // 2. Aynı dosyada (örn. .dat kısmında) olan global/genel değişkeni bul
+      const fileMatch = localVars.find(
+        (v) => v.name.toUpperCase() === functionName.toUpperCase() && v.range
+      );
+      if (fileMatch && fileMatch.range) {
+        return Location.create(params.textDocument.uri, fileMatch.range);
+      }
+    }
+
+    // 3. Yerel olarak bulunamadıysa mergedVariables'da global (veya diğer dosyalardaki) değişkenleri ara
+    const globalMatch = state.mergedVariables.find(
+      (v) =>
+        v.name.toUpperCase() === functionName.toUpperCase() &&
+        v.uri &&
+        v.range,
+    );
+
+    if (globalMatch && globalMatch.uri && globalMatch.range) {
+      return Location.create(globalMatch.uri, globalMatch.range);
     }
 
     return;

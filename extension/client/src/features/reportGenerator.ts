@@ -16,9 +16,11 @@ export async function generateReport() {
     // Only include KRL files or files with KRL diagnostics
     const uriStr = uri.toString();
     const isKrlFile = /\.(src|dat|sub)$/i.test(uri.fsPath);
-    
+
     // We filter for KRL files OR if the source is our extension
-    const krlDiags = diags.filter(d => d.source === "krl-language-support" || isKrlFile);
+    const krlDiags = diags.filter(
+      (d) => d.source === "krl-language-support" || isKrlFile,
+    );
 
     if (krlDiags.length > 0) {
       fileDiagnostics.set(uriStr, krlDiags);
@@ -66,7 +68,7 @@ export async function generateReport() {
       const relativePath = vscode.workspace.asRelativePath(uri);
 
       report += `### 📄 ${relativePath}\n`;
-      
+
       // Sort diagnostics by line number
       diags.sort((a, b) => a.range.start.line - b.range.start.line);
 

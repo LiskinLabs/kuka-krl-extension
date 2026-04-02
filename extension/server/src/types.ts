@@ -7,6 +7,9 @@ export interface VariableInfo {
   value?: string;
   range?: Range;
   isGlobal?: boolean;
+  uri?: string;
+  signalIndex?: number;
+  signalType?: "$IN" | "$OUT" | "$ANIN" | "$ANOUT";
 }
 
 // Struct haritası - struct adı => üye isimleri

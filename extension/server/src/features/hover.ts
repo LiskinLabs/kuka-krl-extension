@@ -227,21 +227,7 @@ export class InfoProvider {
       }
     }
 
-    // Önbellekte yoksa dosyalardan fonksiyon ara
-    const result = await isSymbolDeclared(
-      state.workspaceRoot,
-      symbolName,
-      "function",
-    );
-    if (result) {
-      return {
-        contents: {
-          kind: "markdown",
-          value: `**${symbolName}**(${result.params})`,
-        },
-      };
-    }
-
+    // Bilinmeyen veya tanımlanmamış sembol (Önbellekte yoksa)
     return undefined;
   }
 }

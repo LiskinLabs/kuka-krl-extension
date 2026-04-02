@@ -117,7 +117,11 @@ export class CodeActionsProvider {
         const data = diagnostic.data as { varName?: string } | undefined;
         if (data?.varName) {
           actions.push(
-            this.createRemoveUnusedVariableAction(doc, diagnostic, data.varName),
+            this.createRemoveUnusedVariableAction(
+              doc,
+              diagnostic,
+              data.varName,
+            ),
           );
         }
       }

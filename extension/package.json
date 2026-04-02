@@ -8,16 +8,16 @@
   "author": {
     "name": "Liskin Labs",
     "email": "silvlis@outlook.com",
-    "url": "https://github.com/SilvestrLiskin"
+    "url": "https://gitlab.com/LiskinLabs"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SilvestrLiskin/kuka-krl-extension.git"
+    "url": "https://gitlab.com/LiskinLabs/kuka-krl-extension.git"
   },
   "license": "MIT",
-  "homepage": "https://github.com/SilvestrLiskin/kuka-krl-extension",
+  "homepage": "https://gitlab.com/LiskinLabs/kuka-krl-extension",
   "bugs": {
-    "url": "https://github.com/SilvestrLiskin/kuka-krl-extension/issues"
+    "url": "https://gitlab.com/LiskinLabs/kuka-krl-extension/-/issues"
   },
   "categories": [
     "Programming Languages",
@@ -40,24 +40,21 @@
   },
   "badges": [
     {
-      "url": "https://img.shields.io/github/v/release/SilvestrLiskin/kuka-krl-extension",
-      "href": "https://github.com/SilvestrLiskin/kuka-krl-extension/releases",
-      "description": "GitHub Release"
+      "url": "https://img.shields.io/badge/version-1.7.2-blue.svg?style=flat-square",
+      "href": "https://gitlab.com/LiskinLabs/kuka-krl-extension",
+      "description": "Version"
     },
     {
-      "url": "https://img.shields.io/github/license/SilvestrLiskin/kuka-krl-extension",
-      "href": "https://github.com/SilvestrLiskin/kuka-krl-extension/blob/main/LICENSE.txt",
+      "url": "https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square",
+      "href": "https://gitlab.com/LiskinLabs/kuka-krl-extension/-/blob/main/LICENSE.txt",
       "description": "License"
     },
     {
-      "url": "https://img.shields.io/badge/Sponsor-%E2%9D%A4-ea4aaa",
-      "href": "https://github.com/sponsors/SilvestrLiskin",
-      "description": "Sponsor"
+      "url": "https://img.shields.io/badge/platform-GitLab-e24329.svg?style=flat-square&logo=gitlab",
+      "href": "https://gitlab.com/LiskinLabs/kuka-krl-extension",
+      "description": "GitLab"
     }
   ],
-  "sponsor": {
-    "url": "https://github.com/sponsors/SilvestrLiskin"
-  },
   "engines": {
     "vscode": "^1.85.0"
   },

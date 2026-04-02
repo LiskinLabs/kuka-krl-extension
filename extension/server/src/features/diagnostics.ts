@@ -20,19 +20,23 @@ const REGEX_NON_ASCII = /[^\x00-\x7F]/g;
 const REGEX_DEFDAT_START = /^DEFDAT\s+(\w+)(?:\s+PUBLIC)?/i;
 const REGEX_PUBLIC = /PUBLIC/i;
 const REGEX_ENDDAT = /^ENDDAT\b/i;
-const REGEX_IS_DECL_LINE = /^(?:DECL\s+)?(?:GLOBAL\s+)?(?:DECL\s+)?\w+\s+(?:\$?[a-zA-Z0-9_]+)/i;
+const REGEX_IS_DECL_LINE =
+  /^(?:DECL\s+)?(?:GLOBAL\s+)?(?:DECL\s+)?\w+\s+(?:\$?[a-zA-Z0-9_]+)/i;
 const REGEX_SIGNAL = /^\s*SIGNAL\b/i;
 const REGEX_STRUC = /^STRUC\b/i;
 const REGEX_GLOBAL = /\bGLOBAL\b/i;
 const REGEX_DECL_SIGNAL_STRUC = /^(?:DECL|SIGNAL|STRUC)\b/i;
-const REGEX_VAR_NAME_DECL = /^(?:GLOBAL\s+)?(?:DECL\s+)?(?:GLOBAL\s+)?\w+\s+(\w+)/i;
+const REGEX_VAR_NAME_DECL =
+  /^(?:GLOBAL\s+)?(?:DECL\s+)?(?:GLOBAL\s+)?\w+\s+(\w+)/i;
 const REGEX_STARTS_WITH_DIGIT = /^\d/;
 
 const REGEX_VARIABLE = /\b([a-zA-Z_]\w*)\b/g;
-const REGEX_LOCAL_DECL = /^\s*(?:GLOBAL\s+)?(?:DECL\s+)?\w+\s+([a-zA-Z_]\w*(?:\s*\[[^\]]*\])?(?:\s*,\s*[a-zA-Z_]\w*(?:\s*\[[^\]]*\])?)*)/gim;
+const REGEX_LOCAL_DECL =
+  /^\s*(?:GLOBAL\s+)?(?:DECL\s+)?\w+\s+([a-zA-Z_]\w*[^;\r\n]*)/gim;
 const REGEX_ARRAY_BRACKETS = /\[.*?\]/g;
 const REGEX_VALID_VAR_NAME = /^[a-zA-Z_]\w*$/;
-const REGEX_SKIP_DECL_STRUC_SIGNAL = /^\s*(?:GLOBAL\s+)?(?:DECL|STRUC|SIGNAL)\b/i;
+const REGEX_SKIP_DECL_STRUC_SIGNAL =
+  /^\s*(?:GLOBAL\s+)?(?:DECL|STRUC|SIGNAL)\b/i;
 const REGEX_SKIP_DEF = /^\s*(?:GLOBAL\s+)?(?:DEF|DEFFCT)\b/i;
 const REGEX_STRING_CONTENT = /"[^"]*"/g;
 const REGEX_SCIENTIFIC_NOTATION = /\d+\.?\d*[eE][+-]?\d+/g;
@@ -40,21 +44,39 @@ const REGEX_SCIENTIFIC_NOTATION = /\d+\.?\d*[eE][+-]?\d+/g;
 const REGEX_VEL_CP = /\$VEL\.CP\s*=\s*(\d+(?:\.\d+)?)/gi;
 const REGEX_VEL_PTP = /\$VEL_PTP\s*=\s*(\d+(?:\.\d+)?)/gi;
 
-const REGEX_TOOL_INIT = /\$TOOL\s*=|BAS\s*\(\s*(?:#INITMOV|#FRAMES|#PTP_PARAMS|#CP_PARAMS)/i;
-const REGEX_BASE_INIT = /\$BASE\s*=|BAS\s*\(\s*(?:#INITMOV|#FRAMES|#PTP_PARAMS|#CP_PARAMS)/i;
+const REGEX_TOOL_INIT =
+  /\$TOOL\s*=|BAS\s*\(\s*(?:#INITMOV|#FRAMES|#PTP_PARAMS|#CP_PARAMS)/i;
+const REGEX_BASE_INIT =
+  /\$BASE\s*=|BAS\s*\(\s*(?:#INITMOV|#FRAMES|#PTP_PARAMS|#CP_PARAMS)/i;
 const REGEX_MOVEMENT = /^\s*(?:PTP|LIN|CIRC|SPTP|SLIN|SCIRC)\s+/i;
 const REGEX_DEF_RESET = /^\s*(?:DEF|DEFFCT)\s+/i;
 
-const REGEX_FUNC_DEF = /^\s*(?:GLOBAL\s+)?(DEF|DEFFCT)\s+(?:\w+\s+)?(\w+)\b\s*\(/i;
+const REGEX_FUNC_DEF =
+  /^\s*(?:GLOBAL\s+)?(DEF|DEFFCT)\s+(?:\w+\s+)?(\w+)\b\s*\(/i;
 
 const REGEX_LABEL = /^\w+\s*:\s*$/i;
-const REGEX_BLOCK_END = /^(END|ENDIF|ENDFOR|ENDWHILE|ENDLOOP|ENDFCT|UNTIL|CASE|DEFAULT|ELSE|ENDDAT|ENDSUB|ENDSPS|ENDSWITCH)\b/i;
+const REGEX_BLOCK_END =
+  /^(END|ENDIF|ENDFOR|ENDWHILE|ENDLOOP|ENDFCT|UNTIL|CASE|DEFAULT|ELSE|ENDDAT|ENDSUB|ENDSPS|ENDSWITCH)\b/i;
 
 // Keywords that indicate a variable declaration start (including types)
 const VALID_DECL_STARTS = new Set([
-  "DECL", "GLOBAL", "SIGNAL", "STRUC", "ENUM", "CONST",
-  "INT", "REAL", "BOOL", "CHAR", "STRING",
-  "FRAME", "POS", "E6POS", "AXIS", "E6AXIS", "LOAD"
+  "DECL",
+  "GLOBAL",
+  "SIGNAL",
+  "STRUC",
+  "ENUM",
+  "CONST",
+  "INT",
+  "REAL",
+  "BOOL",
+  "CHAR",
+  "STRING",
+  "FRAME",
+  "POS",
+  "E6POS",
+  "AXIS",
+  "E6AXIS",
+  "LOAD",
 ]);
 
 // Pre-compiled regexes for optimization
@@ -70,7 +92,7 @@ function getLineWithoutComment(line: string): string {
     const char = line[j];
     if (char === '"') {
       inString = !inString;
-    } else if (char === ';' && !inString) {
+    } else if (char === ";" && !inString) {
       return line.substring(0, j);
     }
   }
@@ -84,9 +106,13 @@ function getLineWithoutComment(line: string): string {
 function getSafeCodePart(line: string): string {
   let codePart = getLineWithoutComment(line);
   // Replaces string contents with spaces to preserve length
-  codePart = codePart.replace(REGEX_STRING_CONTENT, (match) => ' '.repeat(match.length));
+  codePart = codePart.replace(REGEX_STRING_CONTENT, (match) =>
+    " ".repeat(match.length),
+  );
   // Replaces scientific notations with spaces (or 0s) to preserve length
-  codePart = codePart.replace(REGEX_SCIENTIFIC_NOTATION, (match) => '0'.repeat(match.length));
+  codePart = codePart.replace(REGEX_SCIENTIFIC_NOTATION, (match) =>
+    "0".repeat(match.length),
+  );
   return stripInvisibleChars(codePart);
 }
 
@@ -122,7 +148,6 @@ const BLOCK_CLOSE_REGEXES: Record<string, RegExp> = {};
 for (const kw of Object.keys(CLOSE_TO_OPEN)) {
   BLOCK_CLOSE_REGEXES[kw] = new RegExp(`\\b${kw}\\b`, "i");
 }
-
 
 /**
  * Удаляет невидимые Unicode-символы.
@@ -172,7 +197,7 @@ export class DiagnosticsProvider {
   private checkVariableDeclaration(
     lineText: string,
     lineIndex: number,
-    diagnostics: Diagnostic[]
+    diagnostics: Diagnostic[],
   ) {
     // Regex matches the whole line structure (assuming it's a declaration)
     const declRegex =
@@ -213,7 +238,10 @@ export class DiagnosticsProvider {
               severity: DiagnosticSeverity.Error,
               range: {
                 start: { line: lineIndex, character: restStartOffset },
-                end: { line: lineIndex, character: restStartOffset + name.length },
+                end: {
+                  line: lineIndex,
+                  character: restStartOffset + name.length,
+                },
               },
               message: t("diag.nameTooLong", name, name.length),
               source: "krl-language-support",
@@ -330,7 +358,6 @@ export class DiagnosticsProvider {
             if (charCode > 127) {
               // BOM (Byte Order Mark) karakterini yoksay (U+FEFF = 65279)
               if (charCode === 0xfeff) continue;
-
 
               const char = checkPart[j];
               diagnostics.push({
@@ -962,8 +989,7 @@ export class DiagnosticsProvider {
                   },
                   end: {
                     line: missedBlock.line,
-                    character:
-                      missedBlock.character + missedBlock.type.length,
+                    character: missedBlock.character + missedBlock.type.length,
                   },
                 },
                 message: t(
@@ -1538,10 +1564,12 @@ export class DiagnosticsProvider {
     const REGEX_HEADER_CTRL = /^\s*&/i; // &ACCESS, &REL, &PARAM
     // Allow system variables starting with $ on LHS of assignment. Support Struct.Field[i] mixed.
     // Support nested brackets (up to one level of nesting) like $A[B[1]]
-    const REGEX_ASSIGNMENT = /^\s*(?:\$?[a-zA-Z0-9_]+)(?:\[(?:[^\[\]]|\[[^\[\]]*\])*\]|\.[a-zA-Z0-9_]+)*\s*=\s*/i;
+    const REGEX_ASSIGNMENT =
+      /^\s*(?:\$?[a-zA-Z0-9_]+)(?:\[(?:[^\[\]]|\[[^\[\]]*\])*\]|\.[a-zA-Z0-9_]+)*\s*=\s*/i;
     const REGEX_PROC_CALL = /^\s*(?:\$|\w+)\s*\(.*\)/i;
     const REGEX_WAIT = /^\s*WAIT\s+(?:FOR\s+|SEC\s+)/i;
-    const REGEX_INTERRUPT = /^\s*(?:GLOBAL\s+)?INTERRUPT\s+(?:DECL|ON|OFF|ENABLE|DISABLE)/i;
+    const REGEX_INTERRUPT =
+      /^\s*(?:GLOBAL\s+)?INTERRUPT\s+(?:DECL|ON|OFF|ENABLE|DISABLE)/i;
     const REGEX_BRAKE = /^\s*BRAKE\b/i;
     const REGEX_RESUME = /^\s*RESUME\b/i;
     const REGEX_CONFIRM = /^\s*CONFIRM\b/i;
@@ -1569,7 +1597,7 @@ export class DiagnosticsProvider {
       if (!/[a-zA-Z0-9_\$&]/.test(trimmed)) continue;
 
       // Ignore lines containing only invisible characters (if not handled by trim)
-      if (trimmed.replace(REGEX_INVISIBLE_CHARS, '').trim() === '') continue;
+      if (trimmed.replace(REGEX_INVISIBLE_CHARS, "").trim() === "") continue;
 
       const codePart = getLineWithoutComment(line);
       const trimmedCode = codePart.trim();
@@ -1655,9 +1683,9 @@ function levenshteinDistance(s1: string, s2: string): number {
     for (let j = 1; j <= len2; j++) {
       const cost = s1[i - 1] === s2[j - 1] ? 0 : 1;
       matrix[i][j] = Math.min(
-        matrix[i - 1][j] + 1,      // deletion
-        matrix[i][j - 1] + 1,      // insertion
-        matrix[i - 1][j - 1] + cost // substitution
+        matrix[i - 1][j] + 1, // deletion
+        matrix[i][j - 1] + 1, // insertion
+        matrix[i - 1][j - 1] + cost, // substitution
       );
     }
   }

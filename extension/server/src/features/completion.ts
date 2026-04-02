@@ -25,18 +25,15 @@ export class AutoCompleter {
     const document = documents.get(params.textDocument.uri);
     if (!document) return [];
 
-    const lines = document.getText().split(/\r?\n/);
+    const text = document.getText();
+    const lines = text.split(/\r?\n/);
 
-    // Yerel değişken tiplerini çıkar
+    // Optimized: Use local variables from fileVariablesMap instead of re-parsing every time
+    const localVars = state.fileVariablesMap.get(params.textDocument.uri) || [];
     const localVariableStructTypes: Record<string, string> = {};
-    for (const line of lines) {
-      const declRegex =
-        /^(?:GLOBAL\s+)?(?:DECL\s+)?(?:GLOBAL\s+)?(\w+)\s+(\w+)/i;
-      const match = declRegex.exec(line.trim());
-      if (match) {
-        const type = match[1];
-        const varName = match[2];
-        localVariableStructTypes[varName] = type;
+    for (const v of localVars) {
+      if (v.type) {
+        localVariableStructTypes[v.name] = v.type;
       }
     }
 

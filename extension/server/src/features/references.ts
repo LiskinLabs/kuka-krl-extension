@@ -76,7 +76,14 @@ export class ReferencesProvider {
     const lines = content.split(/\r?\n/);
 
     // Kelime sınırlarıyla eşleşen regex (büyük/küçük harf duyarsız)
-    const regex = new RegExp(`\\b${escapeRegex(symbolName)}\\b`, "gi");
+    // Değişken adı '$' ile başlıyorsa \b (word boundary) '$' işaretinden önce çalışmaz.
+    // Bu yüzden '$' işaretini özel ele alıyoruz.
+    const escapedSymbol = escapeRegex(symbolName);
+    const pattern = symbolName.startsWith("$")
+      ? `(?:^|[^\\w$])${escapedSymbol}\\b`
+      : `\\b${escapedSymbol}\\b`;
+    
+    const regex = new RegExp(pattern, "gi");
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
@@ -93,8 +100,14 @@ export class ReferencesProvider {
       let isFirstMatch = true;
 
       while ((match = regex.exec(codePart)) !== null) {
+        // Regex (?:^|[^\w$]) kullandığımız için asıl eşleşme ofsetini düzeltmeliyiz
+        let matchIndex = match.index;
+        if (symbolName.startsWith("$") && match[0].length > symbolName.length) {
+          matchIndex += match[0].length - symbolName.length;
+        }
+
         // String içinde mi kontrol et
-        if (isInsideString(codePart, match.index)) continue;
+        if (isInsideString(codePart, matchIndex)) continue;
 
         // Eğer includeDeclaration false ise ve bu bildirim satırının ilk eşleşmesiyse, atla
         if (!includeDeclaration && isDeclaration && isFirstMatch) {
@@ -105,8 +118,8 @@ export class ReferencesProvider {
 
         locations.push(
           Location.create(uri, {
-            start: Position.create(i, match.index),
-            end: Position.create(i, match.index + symbolName.length),
+            start: Position.create(i, matchIndex),
+            end: Position.create(i, matchIndex + symbolName.length),
           }),
         );
       }

@@ -190,22 +190,44 @@ export class SymbolExtractor {
 
         let name = part;
         let value: string | undefined = undefined;
+        let signalIndex: number | undefined = undefined;
+        let signalType: "$IN" | "$OUT" | "$ANIN" | "$OUT" | any = undefined;
 
         // SIGNAL durumunu özel işle
         if (type.toUpperCase() === "SIGNAL") {
           // "SIGNAL Name $IN[1] ..."
-          // Boşlukla ilk ayırıcıyı bul
           const firstSpace = part.search(/\s/);
           if (firstSpace > 0) {
             name = part.substring(0, firstSpace);
             value = part.substring(firstSpace).trim();
+
+            // Extract index: $IN[5] -> 5
+            const sigMatch = value.match(/\$(IN|OUT|ANIN|ANOUT)\[(\d+)\]/i);
+            if (sigMatch) {
+              signalType = ("$" + sigMatch[1].toUpperCase()) as any;
+              signalIndex = parseInt(sigMatch[2], 10);
+            }
           }
         } else {
-          // Normal DECL: "a=5" veya "a"
+          // Normal DECL: "a=5" или "a"
           const eqIndex = part.indexOf("=");
           if (eqIndex > 0) {
             name = part.substring(0, eqIndex).trim();
             value = part.substring(eqIndex + 1).trim();
+
+            // Специальная обработка для имен инструментов/баз: TOOL_NAME[1,]="MyTool"
+            const nameArrMatch = name.match(/(TOOL|BASE)_NAME\[(\d+),?\]/i);
+            if (nameArrMatch && value.startsWith('"')) {
+              const idx = parseInt(nameArrMatch[2], 10);
+              const cleanVal = value.replace(/"/g, "").trim();
+              this.variables.set(`${nameArrMatch[1].toUpperCase()}_NAME_${idx}`, {
+                name: cleanVal,
+                type: "NAME_ALIAS",
+                value: cleanVal,
+                signalIndex: idx,
+                signalType: ("$" + nameArrMatch[1].toUpperCase()) as any,
+              });
+            }
           }
         }
 
@@ -214,9 +236,6 @@ export class SymbolExtractor {
 
         if (/^[a-zA-Z_]\w*$/.test(cleanName)) {
           if (!this.variables.has(cleanName.toUpperCase())) {
-            // Range hesaplama
-            // partObj.offset, name'in başlangıcıdır (leading space hariç)
-            // cleanName uzunluğu kadar range oluştur
             const startPos = this.getPosition(partObj.offset, lineOffsets);
             const endPos = this.getPosition(
               partObj.offset + cleanName.length,
@@ -229,6 +248,8 @@ export class SymbolExtractor {
               value: value,
               range: Range.create(startPos, endPos),
               isGlobal: isGlobal,
+              signalIndex,
+              signalType,
             });
           }
         }
@@ -244,7 +265,7 @@ export class SymbolExtractor {
       // ENUM üyeleri için pozisyon hesaplama biraz daha zor çünkü splitVars kullanmıyoruz
       // Şimdilik sadece isimleri alıyoruz
       // İyileştirme: splitVarsRespectingBracketsWithOffsets benzeri bir şey yapılabilir
-      
+
       for (const member of members) {
         if (
           /^[a-zA-Z_]\w*$/.test(member) &&
@@ -273,7 +294,7 @@ export class SymbolExtractor {
       // Parametreler için de pozisyon hesaplaması eksik
       // Ancak "Unused Variable" genellikle local değişkenler için (DECL)
       // Parametreler kullanılmasa da kaldırılması zordur (API değişimi)
-      
+
       for (const p of params) {
         if (!this.variables.has(p.toUpperCase())) {
           this.variables.set(p.toUpperCase(), { name: p, type: "PARAM" });

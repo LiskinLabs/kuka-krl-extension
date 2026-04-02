@@ -154,7 +154,7 @@ export async function cleanupUnusedVariables() {
     let isUsed = false;
 
     for (const v of vars) {
-      const escapedV = v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const escapedV = v.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       const regex = new RegExp(`\\b${escapedV}\\b`, "i"); // Case insensitive? KRL is case insensitive.
 
       // Check in SRC

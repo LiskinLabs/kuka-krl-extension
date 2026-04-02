@@ -88,7 +88,7 @@ export function getWordAtPosition(
   lineText: string,
   character: number,
 ): WordInfo | undefined {
-  const wordRegex = /\b(\w+)\b/g;
+  const wordRegex = /(\$?\w+)/g;
   let match;
 
   while ((match = wordRegex.exec(lineText)) !== null) {

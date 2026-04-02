@@ -1,42 +1,42 @@
-import * as vscode from 'vscode';
-import * as path from 'path';
+import * as vscode from "vscode";
+import * as path from "path";
 
 export function showSnippetGenerator(context: vscode.ExtensionContext) {
-    const panel = vscode.window.createWebviewPanel(
-        'krlSnippetGenerator',
-        'KRL Snippet Generator',
-        vscode.ViewColumn.Beside,
-        {
-            enableScripts: true,
-            localResourceRoots: []
-        }
-    );
+  const panel = vscode.window.createWebviewPanel(
+    "krlSnippetGenerator",
+    "KRL Snippet Generator",
+    vscode.ViewColumn.Beside,
+    {
+      enableScripts: true,
+      localResourceRoots: [],
+    },
+  );
 
-    panel.webview.html = getWebviewContent();
+  panel.webview.html = getWebviewContent();
 
-    panel.webview.onDidReceiveMessage(
-        message => {
-            switch (message.command) {
-                case 'insertCode':
-                    const editor = vscode.window.activeTextEditor;
-                    if (editor) {
-                        editor.edit(editBuilder => {
-                            editBuilder.insert(editor.selection.active, message.text);
-                        });
-                        vscode.window.showInformationMessage('Snippet inserted!');
-                    } else {
-                        vscode.window.showErrorMessage('No active KRL editor found!');
-                    }
-                    return;
-            }
-        },
-        undefined,
-        context.subscriptions
-    );
+  panel.webview.onDidReceiveMessage(
+    (message) => {
+      switch (message.command) {
+        case "insertCode":
+          const editor = vscode.window.activeTextEditor;
+          if (editor) {
+            editor.edit((editBuilder) => {
+              editBuilder.insert(editor.selection.active, message.text);
+            });
+            vscode.window.showInformationMessage("Snippet inserted!");
+          } else {
+            vscode.window.showErrorMessage("No active KRL editor found!");
+          }
+          return;
+      }
+    },
+    undefined,
+    context.subscriptions,
+  );
 }
 
 function getWebviewContent() {
-    return `<!DOCTYPE html>
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

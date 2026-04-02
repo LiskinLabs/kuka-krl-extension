@@ -26,6 +26,7 @@ import { SymbolResolver } from "./features/definition";
 import { AutoCompleter } from "./features/completion";
 import { DiagnosticsProvider } from "./features/diagnostics";
 import { InfoProvider } from "./features/hover";
+import { InlayHintsProvider } from "./features/inlayHints";
 import { RegionProvider } from "./features/regions";
 import { KrlFormatter, setFormattingSettings } from "./features/formatter";
 import { DocumentSymbolsProvider } from "./features/symbols";
@@ -46,7 +47,6 @@ import * as path from "path";
 import * as os from "os";
 
 // DEBUG KAYIT - Hata ayıklama için log dosyası
-// Sadece DEBUG ortam değişkeni ayarlandığında loglar
 const DEBUG_ENABLED = process.env.KRL_DEBUG === "true";
 const logFile = DEBUG_ENABLED
   ? path.join(os.tmpdir(), "krl-server-debug.log")
@@ -56,11 +56,8 @@ let logStream: fs.WriteStream | null = null;
 if (DEBUG_ENABLED && logFile) {
   try {
     logStream = fs.createWriteStream(logFile, { flags: "a" });
-    logStream.on("error", () => {
-      // Log akışı hatalarını yoksay
-    });
   } catch {
-    // Akış oluşturma hatasını yoksay
+    /* ignore */
   }
 }
 
@@ -69,16 +66,12 @@ function log(msg: string) {
   logStream.write(`[${new Date().toISOString()}] ${msg}\n`);
 }
 
-// Sunucu başlatılıyor
-log(`Sunucu başlatılıyor. Node: ${process.version}, PID: ${process.pid}`);
+log(`Sunucu başlatılıyor. PID: ${process.pid}`);
 
 // Hata yakalama
 process.on("uncaughtException", (err) => {
-  log("Yakalanmamış Hata: " + err.toString() + "\n" + (err.stack || ""));
+  log("Yakalanmamış Hata: " + err.toString());
   process.exit(1);
-});
-process.on("unhandledRejection", (err) => {
-  log("İşlenmemiş Red: " + (err instanceof Error ? err.stack : err));
 });
 
 // Bağlantı oluştur
@@ -95,29 +88,20 @@ const state: ServerState = {
   mergedVariables: [],
 };
 
-// Конфигурация (получаемая от клиента)
+// Конфигурация
 let serverConfig = {
   validateNonAscii: true,
   separateBeforeBlocks: false,
   separateAfterBlocks: false,
 };
 
-// Debounce механизм для валидации документов
-// Это предотвращает ложные ошибки при быстром редактировании
 const validationTimeouts = new Map<string, NodeJS.Timeout>();
-const VALIDATION_DELAY_MS = 750; // Увеличена задержка для предотвращения ложных ошибок
-
-// Флаг готовности инициализации workspace
-// Пока workspace не загружен полностью, не показываем ошибки "переменная не определена"
+const VALIDATION_DELAY_MS = 750;
 let workspaceInitialized = false;
 
 function scheduleValidation(uri: string, validationFn: () => void) {
-  // Отменяем предыдущий таймаут для этого документа
   const existingTimeout = validationTimeouts.get(uri);
-  if (existingTimeout) {
-    clearTimeout(existingTimeout);
-  }
-  // Планируем новую валидацию
+  if (existingTimeout) clearTimeout(existingTimeout);
   const timeout = setTimeout(() => {
     validationTimeouts.delete(uri);
     validationFn();
@@ -140,6 +124,7 @@ const codeActions = new CodeActionsProvider();
 const codeLens = new CodeLensProvider();
 const callHierarchy = new CallHierarchyProvider();
 const highlights = new HighlightProvider();
+const inlayHints = new InlayHintsProvider();
 const diagnostics = new DiagnosticsProvider(connection);
 
 // =======================
@@ -147,11 +132,9 @@ const diagnostics = new DiagnosticsProvider(connection);
 // =======================
 
 connection.onInitialize((params: InitializeParams): InitializeResult => {
-  log(`[Başlatma] Kök URI: ${params.rootUri}`);
   state.workspaceRoot = params.rootUri
     ? URI.parse(params.rootUri).fsPath
     : null;
-  log(`[Başlatma] Çalışma alanı kökü ayarlandı: ${state.workspaceRoot}`);
   diagnostics.setWorkspaceRoot(state.workspaceRoot);
 
   return {
@@ -164,17 +147,13 @@ connection.onInitialize((params: InitializeParams): InitializeResult => {
       documentSymbolProvider: true,
       workspaceSymbolProvider: true,
       documentHighlightProvider: true,
-      renameProvider: {
-        prepareProvider: true,
-      },
+      renameProvider: { prepareProvider: true },
       referencesProvider: true,
       signatureHelpProvider: {
         triggerCharacters: ["(", ","],
         retriggerCharacters: [","],
       },
-      codeActionProvider: {
-        codeActionKinds: ["quickfix", "refactor.extract"],
-      },
+      codeActionProvider: { codeActionKinds: ["quickfix", "refactor.extract"] },
       completionProvider: {
         triggerCharacters: [
           ".",
@@ -192,15 +171,13 @@ connection.onInitialize((params: InitializeParams): InitializeResult => {
           ..."abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_",
         ],
       },
-      codeLensProvider: {
-        resolveProvider: true,
-      },
+      codeLensProvider: { resolveProvider: true },
+      inlayHintProvider: true,
       callHierarchyProvider: true,
     },
   };
 });
 
-// Получение настроек конфигурации от клиента
 connection.onNotification(
   "custom/updateSettings",
   (settings: typeof serverConfig) => {
@@ -209,81 +186,52 @@ connection.onNotification(
       separateBeforeBlocks: serverConfig.separateBeforeBlocks,
       separateAfterBlocks: serverConfig.separateAfterBlocks,
     });
-    log(`[Настройки] Обновлены: ${JSON.stringify(serverConfig)}`);
   },
 );
 
-// Получение локали от клиента
-connection.onNotification("custom/setLocale", (locale: string) => {
-  setLocale(locale);
-  log(`[Локаль] Установлена: ${locale}`);
-});
+connection.onNotification("custom/setLocale", (locale: string) =>
+  setLocale(locale),
+);
 
 connection.onInitialized(async () => {
   if (!state.workspaceRoot) return;
-
-  // .dat dosyalarından değişkenleri yükle
   const datFiles = await getAllDatFiles(state.workspaceRoot);
   for (const filePath of datFiles) {
     try {
       const content = await fs.promises.readFile(filePath, "utf8");
       const uri = URI.file(filePath).toString();
-
       const extractor = new SymbolExtractor();
       extractor.extractFromText(content);
       state.fileVariablesMap.set(uri, extractor.getVariables());
-
-      // Struct tanımlarını güncelle
       const structs = extractStrucVariables(content);
       Object.assign(state.structDefinitions, structs);
     } catch (err) {
-      connection.console.error(`Dosya okuma hatası ${filePath}: ${err}`);
+      /* ignore */
     }
   }
-
-  // .src ve .sub dosyalarından fonksiyonları yükle
   await extractFunctionsFromWorkspace(state.workspaceRoot);
-
   state.mergedVariables = mergeAllVariables(state.fileVariablesMap);
-
-  // Fonksiyon önbelleğini güncelle
   diagnostics.updateFunctionCache(state.functionsDeclared.map((f) => f.name));
-
-  // Workspace полностью инициализирован - теперь можно показывать ошибки
   workspaceInitialized = true;
-
-  log(
-    `[Başlatma] ${state.functionsDeclared.length} fonksiyon ve ${state.mergedVariables.length} değişken yüklendi.`,
-  );
 });
 
-/**
- * Çalışma alanındaki tüm kaynak dosyalardan fonksiyon tanımlarını çıkarır.
- */
 async function extractFunctionsFromWorkspace(
   workspaceRoot: string,
 ): Promise<void> {
   const sourceFiles = await getAllSourceFiles(workspaceRoot);
   const defRegex =
     /^\s*(?:GLOBAL\s+)?(DEF|DEFFCT)\s+(?:\w+\s+)?(\w+)\s*\(([^)]*)\)/gim;
-
   for (const filePath of sourceFiles) {
     try {
       const content = await fs.promises.readFile(filePath, "utf8");
       const uri = URI.file(filePath).toString();
       const lines = content.split(/\r?\n/);
-
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         let match;
         defRegex.lastIndex = 0;
-
         while ((match = defRegex.exec(line)) !== null) {
           const funcName = match[2];
-          const params = match[3] ? match[3].trim() : "";
-          const startChar = line.indexOf(funcName);
-
-          // Tekrar kontrolü
           if (
             !state.functionsDeclared.some(
               (f) => f.name.toUpperCase() === funcName.toUpperCase(),
@@ -292,404 +240,208 @@ async function extractFunctionsFromWorkspace(
             state.functionsDeclared.push({
               uri,
               line: i,
-              startChar,
-              endChar: startChar + funcName.length,
-              params,
+              startChar: line.indexOf(funcName),
+              endChar: line.indexOf(funcName) + funcName.length,
+              params: match[3]?.trim() || "",
               name: funcName,
             });
           }
         }
       }
     } catch (err) {
-      log(`Fonksiyon çıkarma hatası ${filePath}: ${err}`);
+      /* ignore */
     }
   }
 }
 
 // ==========================
-// Belge Değişiklik Olayı
+// Belge Olayları
 // ==========================
+
+documents.onDidOpen(async (event) => {
+  const { document } = event;
+  log(`[onDidOpen] Checking: ${document.uri}`);
+  updateDocumentState(document);
+  await validateDocument(document);
+});
 
 documents.onDidChangeContent(async (change) => {
   const { document } = change;
-
-  try {
-    // Öртлилы Çalışma Alanı Çıkarımı (Async & Cached)
-    if (!state.workspaceRoot) {
-      const docPath = URI.parse(document.uri).fsPath;
-      const root = await findWorkspaceRoot(path.dirname(docPath));
-      
-      // If we found a root, OR if we are just single file mode
-      state.workspaceRoot = root || path.dirname(docPath);
-
-      log(`[ÖrtülüKök] Çıkarılan kök: ${state.workspaceRoot}`);
-      diagnostics.setWorkspaceRoot(state.workspaceRoot);
-
-      // onInitialized atlandığı için ilk tarama
-      const datFiles = await getAllDatFiles(state.workspaceRoot);
-      for (const filePath of datFiles) {
-        try {
-          const content = await fs.promises.readFile(filePath, "utf8");
-          const uri = URI.file(filePath).toString();
-          const extractor = new SymbolExtractor();
-          extractor.extractFromText(content);
-          state.fileVariablesMap.set(uri, extractor.getVariables());
-
-          const structs = extractStrucVariables(content);
-          Object.assign(state.structDefinitions, structs);
-        } catch (err) {
-          log(`Dosya okuma hatası ${filePath}: ${err}`);
-        }
-      }
-
-      // Fonksiyonları da yükle
-      await extractFunctionsFromWorkspace(state.workspaceRoot);
-      state.mergedVariables = mergeAllVariables(state.fileVariablesMap);
-
-      // Fonksiyon önbelleğini güncelle
-      diagnostics.updateFunctionCache(state.functionsDeclared.map((f) => f.name));
-
-      // Workspace полностью инициализирован (неявное определение)
-      workspaceInitialized = true;
+  updateDocumentState(document);
+  scheduleValidation(document.uri, async () => {
+    const currentDoc = documents.get(document.uri);
+    if (currentDoc && currentDoc.version === document.version) {
+      await validateDocument(currentDoc);
     }
-
-    if (document.uri.endsWith(".dat")) {
-      // Struct tanımlarını güncelle
-      const structs = extractStrucVariables(document.getText());
-      Object.assign(state.structDefinitions, structs);
-    }
-
-    // Değişkenleri güncelle
-    const extractor = new SymbolExtractor();
-    extractor.extractFromText(document.getText());
-    state.fileVariablesMap.set(document.uri, extractor.getVariables());
-
-    state.mergedVariables = mergeAllVariables(state.fileVariablesMap);
-
-    // Fonksiyonları güncelle (mevcut dosyadan)
-    updateFunctionsFromDocument(document);
-
-    // Fonksiyon önbelleğini güncelle
-    diagnostics.updateFunctionCache(state.functionsDeclared.map((f) => f.name));
-
-    // Запланировать валидацию с задержкой (предотвращает ложные ошибки)
-    // Сохраняем URI и версию документа для безопасного обращения в callback
-    const docUri = document.uri;
-    const docVersion = document.version;
-
-    scheduleValidation(docUri, () => {
-      try {
-        // Получаем актуальный документ из коллекции
-        const currentDoc = documents.get(docUri);
-        // Если документ закрыт или версия изменилась — пропускаем валидацию
-        if (!currentDoc || currentDoc.version !== docVersion) {
-          return;
-        }
-
-        // Tüm teşhisleri topla ve tek seferde gönder
-        let allDiagnostics: Diagnostic[] = [];
-
-        // Обновляем mergedVariables перед валидацией (могут быть загружены новые переменные)
-        state.mergedVariables = mergeAllVariables(state.fileVariablesMap);
-
-        // Kullanım doğrulaması - только если workspace полностью загружен
-        // Это предотвращает ложные ошибки "переменная не определена" при открытии файлов
-        if (workspaceInitialized) {
-          const varDiags = diagnostics.validateVariablesUsage(
-            currentDoc,
-            state.mergedVariables,
-          );
-          allDiagnostics.push(...varDiags);
-
-          // Feature 1: Unused Variable Detection
-          const localVars = state.fileVariablesMap.get(docUri);
-          if (localVars) {
-            allDiagnostics.push(
-              ...diagnostics.validateUnusedVariables(currentDoc, localVars),
-            );
-          }
-        }
-
-        // Generic Diagnostics for all file types
-        if (currentDoc.uri.toLowerCase().endsWith(".dat")) {
-          allDiagnostics.push(...diagnostics.validateDatFile(currentDoc));
-        }
-
-        if (
-          currentDoc.uri.toLowerCase().endsWith(".src") ||
-          currentDoc.uri.toLowerCase().endsWith(".dat")
-        ) {
-          allDiagnostics.push(
-            ...diagnostics.validateKrlConstraints(currentDoc),
-            ...diagnostics.validateGeneralSyntax(currentDoc),
-          );
-        }
-
-        // Safety diagnostics für SRC Dateien
-        if (currentDoc.uri.toLowerCase().endsWith(".src")) {
-          allDiagnostics.push(
-            ...diagnostics.validateSafetySpeeds(currentDoc),
-            ...diagnostics.validateToolBaseInit(currentDoc),
-            ...diagnostics.validateBlockBalance(currentDoc),
-            ...diagnostics.validateDuplicateNames(currentDoc),
-            ...diagnostics.validateDeadCode(currentDoc),
-            ...diagnostics.validateEmptyBlocks(currentDoc),
-            ...diagnostics.validateDangerousStatements(currentDoc),
-            ...diagnostics.validateTypeUsage(currentDoc, state.mergedVariables),
-          );
-        }
-
-        // Tüm teşhisleri tek seferde gönder
-        connection.sendDiagnostics({
-          uri: currentDoc.uri,
-          diagnostics: allDiagnostics,
-        });
-      } catch (e) {
-        log(`Validation error for ${docUri}: ${e}`);
-        connection.console.error(`Validation error: ${e}`);
-      }
-    });
-  } catch (e) {
-    log(`onDidChangeContent error: ${e}`);
-    connection.console.error(`onDidChangeContent error: ${e}`);
-  }
+  });
 });
 
 documents.onDidClose((e) => {
   const uri = e.document.uri;
-  // Clear any pending validation timeout for closed documents
   const existingTimeout = validationTimeouts.get(uri);
-  if (existingTimeout) {
-    clearTimeout(existingTimeout);
-    validationTimeouts.delete(uri);
-  }
-  
-  // Also clear diagnostics when a document is closed
+  if (existingTimeout) clearTimeout(existingTimeout);
   connection.sendDiagnostics({ uri, diagnostics: [] });
 });
 
-/**
- * Tek bir belgeden fonksiyon tanımlarını günceller.
- */
+async function validateDocument(document: TextDocument): Promise<void> {
+  try {
+    let allDiagnostics: Diagnostic[] = [];
+    if (workspaceInitialized) {
+      allDiagnostics.push(
+        ...diagnostics.validateVariablesUsage(document, state.mergedVariables),
+      );
+      const localVars = state.fileVariablesMap.get(document.uri);
+      if (localVars)
+        allDiagnostics.push(
+          ...diagnostics.validateUnusedVariables(document, localVars),
+        );
+    }
+    const isDat = document.uri.toLowerCase().endsWith(".dat");
+    const isSrc = document.uri.toLowerCase().endsWith(".src");
+    if (isDat) allDiagnostics.push(...diagnostics.validateDatFile(document));
+    if (isSrc || isDat) {
+      allDiagnostics.push(
+        ...diagnostics.validateKrlConstraints(document),
+        ...diagnostics.validateGeneralSyntax(document),
+      );
+    }
+    if (isSrc) {
+      allDiagnostics.push(
+        ...diagnostics.validateSafetySpeeds(document),
+        ...diagnostics.validateToolBaseInit(document),
+        ...diagnostics.validateBlockBalance(document),
+        ...diagnostics.validateDuplicateNames(document),
+        ...diagnostics.validateDeadCode(document),
+        ...diagnostics.validateEmptyBlocks(document),
+        ...diagnostics.validateDangerousStatements(document),
+        ...diagnostics.validateTypeUsage(document, state.mergedVariables),
+      );
+    }
+    connection.sendDiagnostics({
+      uri: document.uri,
+      diagnostics: allDiagnostics,
+    });
+  } catch (e) {
+    log(`Error validating ${document.uri}: ${e}`);
+  }
+}
+
+function updateDocumentState(document: TextDocument): void {
+  if (document.uri.endsWith(".dat"))
+    Object.assign(
+      state.structDefinitions,
+      extractStrucVariables(document.getText()),
+    );
+  const extractor = new SymbolExtractor();
+  extractor.extractFromText(document.getText());
+  state.fileVariablesMap.set(document.uri, extractor.getVariables());
+  state.mergedVariables = mergeAllVariables(state.fileVariablesMap);
+  updateFunctionsFromDocument(document);
+  diagnostics.updateFunctionCache(state.functionsDeclared.map((f) => f.name));
+}
+
 function updateFunctionsFromDocument(document: TextDocument): void {
   const uri = document.uri;
   const content = document.getText();
-  const lines = content.split(/\r?\n/);
   const defRegex =
     /^\s*(?:GLOBAL\s+)?(DEF|DEFFCT)\s+(?:\w+\s+)?(\w+)\s*\(([^)]*)\)/gim;
-
-  // Bu URI'ye ait eski fonksiyonları kaldır
   state.functionsDeclared = state.functionsDeclared.filter(
     (f) => f.uri !== uri,
   );
-
+  const lines = content.split(/\r?\n/);
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
     let match;
     defRegex.lastIndex = 0;
-
-    while ((match = defRegex.exec(line)) !== null) {
-      const funcName = match[2];
-      const params = match[3] ? match[3].trim() : "";
-      const startChar = line.indexOf(funcName);
-
+    while ((match = defRegex.exec(lines[i])) !== null) {
+      const name = match[2];
       state.functionsDeclared.push({
         uri,
         line: i,
-        startChar,
-        endChar: startChar + funcName.length,
-        params,
-        name: funcName,
+        startChar: lines[i].indexOf(name),
+        endChar: lines[i].indexOf(name) + name.length,
+        params: match[3]?.trim() || "",
+        name,
       });
     }
   }
 }
 
-// =====================
-// Özel İstekler
-// =====================
-
-connection.onNotification("custom/validateFile", (params: { uri: string, text: string }) => {
-  try {
-    const doc = TextDocument.create(params.uri, "krl", 1, params.text);
-    
-    // Trigger standard validation logic immediately
-    let allDiagnostics: Diagnostic[] = [];
-    
-    // Ensure variables are up to date
-    state.mergedVariables = mergeAllVariables(state.fileVariablesMap);
-
-    if (workspaceInitialized) {
-      allDiagnostics.push(...diagnostics.validateVariablesUsage(doc, state.mergedVariables));
-      const localVars = state.fileVariablesMap.get(params.uri);
-      if (localVars) {
-        allDiagnostics.push(...diagnostics.validateUnusedVariables(doc, localVars));
-      }
-    }
-
-    if (doc.uri.toLowerCase().endsWith(".dat")) {
-      allDiagnostics.push(...diagnostics.validateDatFile(doc));
-    }
-
-    if (doc.uri.toLowerCase().endsWith(".src") || doc.uri.toLowerCase().endsWith(".dat")) {
-      allDiagnostics.push(
-        ...diagnostics.validateKrlConstraints(doc),
-        ...diagnostics.validateGeneralSyntax(doc)
-      );
-    }
-
-    if (doc.uri.toLowerCase().endsWith(".src")) {
-      allDiagnostics.push(
-        ...diagnostics.validateSafetySpeeds(doc),
-        ...diagnostics.validateToolBaseInit(doc),
-        ...diagnostics.validateBlockBalance(doc),
-        ...diagnostics.validateDuplicateNames(doc),
-        ...diagnostics.validateDeadCode(doc),
-        ...diagnostics.validateEmptyBlocks(doc),
-        ...diagnostics.validateDangerousStatements(doc),
-        ...diagnostics.validateTypeUsage(doc, state.mergedVariables)
-      );
-    }
-
-    connection.sendDiagnostics({
-      uri: doc.uri,
-      diagnostics: allDiagnostics
-    });
-
-  } catch (e) {
-    log(`custom/validateFile error: ${e}`);
-  }
-});
-
 connection.onNotification("custom/validateWorkspace", async () => {
   if (!state.workspaceRoot) return;
-
-  log("[ÇalışmaAlanıDoğrulama] Tam tarama başlatılıyor...");
   const files = await getAllSourceFiles(state.workspaceRoot);
-
   for (const filePath of files) {
     try {
       const content = await fs.promises.readFile(filePath, "utf8");
-      const uri = URI.file(filePath).toString();
-
-      // Teşhis için TextDocument oluştur
-      const doc = TextDocument.create(uri, "krl", 1, content);
-      let fileDiagnostics: Diagnostic[] = [];
-
-      if (doc.uri.endsWith(".dat")) {
-        fileDiagnostics.push(...diagnostics.validateDatFile(doc));
-      }
-      fileDiagnostics.push(...diagnostics.validateVariablesUsage(doc, state.mergedVariables));
-
-      // Actually send the diagnostics
-      connection.sendDiagnostics({
-        uri: uri,
-        diagnostics: fileDiagnostics
-      });
-      
+      const doc = TextDocument.create(
+        URI.file(filePath).toString(),
+        "krl",
+        1,
+        content,
+      );
+      await validateDocument(doc);
     } catch (e) {
-      log(`Doğrulama hatası ${filePath}: ${e}`);
+      /* ignore */
     }
   }
-  log(`[ÇalışmaAlanıDoğrulama] Tamamlandı. ${files.length} dosya tarandı.`);
 });
 
-// =====================
 // İstek İşleyicileri
-// =====================
+connection.onDefinition((p) => definitions.onDefinition(p, documents, state));
+connection.onCompletion((p) => completions.onCompletion(p, documents, state));
+connection.onHover((p) => hoverInfo.onHover(p, documents, state));
+connection.onFoldingRanges((p) => regions.onFoldingRanges(p, documents));
+connection.onDocumentFormatting((p) =>
+  formatter.provideFormatting(p, documents),
+);
+connection.onDocumentSymbol((p) =>
+  documentSymbols.onDocumentSymbols(p, documents),
+);
+connection.onWorkspaceSymbol((p) =>
+  workspaceSymbols.onWorkspaceSymbol(p, state),
+);
+connection.onPrepareRename((p) =>
+  renameProvider.prepareRename(p, documents, state),
+);
+connection.onRenameRequest((p) => renameProvider.onRename(p, documents, state));
+connection.onReferences((p) =>
+  referencesProvider.onReferences(p, documents, state),
+);
+connection.onSignatureHelp((p) =>
+  signatureHelp.onSignatureHelp(p, documents, state),
+);
+connection.onCodeAction((p) => codeActions.onCodeAction(p, documents, state));
+connection.onCodeLens((p) => codeLens.onCodeLens(p, documents, state));
+connection.onCodeLensResolve((l) => codeLens.onCodeLensResolve(l));
+connection.onDocumentHighlight((p) =>
+  highlights.onDocumentHighlight(p, documents),
+);
+connection.languages.callHierarchy.onPrepare((p) =>
+  callHierarchy.prepareCallHierarchy(p, documents, state),
+);
+connection.languages.callHierarchy.onIncomingCalls((p) =>
+  callHierarchy.incomingCalls(p, documents, state),
+);
+connection.languages.callHierarchy.onOutgoingCalls((p) =>
+  callHierarchy.outgoingCalls(p, documents, state),
+);
 
-connection.onDefinition((params: DefinitionParams) => {
-  return definitions.onDefinition(params, documents, state);
-});
-
-connection.onCompletion((params: CompletionParams) => {
-  return completions.onCompletion(params, documents, state);
-});
-
-connection.onHover((params: HoverParams) => {
-  return hoverInfo.onHover(params, documents, state);
-});
-
-connection.onFoldingRanges((params: FoldingRangeParams) => {
-  return regions.onFoldingRanges(params, documents);
-});
-
-connection.onDocumentFormatting((params) => {
-  return formatter.provideFormatting(params, documents);
-});
-
-connection.onDocumentSymbol((params: DocumentSymbolParams) => {
-  return documentSymbols.onDocumentSymbols(params, documents);
-});
-
-connection.onWorkspaceSymbol((params: WorkspaceSymbolParams) => {
-  return workspaceSymbols.onWorkspaceSymbol(params, state);
-});
-
-connection.onPrepareRename((params: PrepareRenameParams) => {
-  return renameProvider.prepareRename(params, documents, state);
-});
-
-connection.onRenameRequest((params: RenameParams) => {
-  return renameProvider.onRename(params, documents, state);
-});
-
-connection.onReferences((params: ReferenceParams) => {
-  return referencesProvider.onReferences(params, documents, state);
-});
-
-connection.onSignatureHelp((params: SignatureHelpParams) => {
-  return signatureHelp.onSignatureHelp(params, documents, state);
-});
-
-connection.onCodeAction((params: CodeActionParams) => {
-  return codeActions.onCodeAction(params, documents, state);
-});
-
-connection.onCodeLens((params: CodeLensParams) => {
-  return codeLens.onCodeLens(params, documents, state);
-});
-
-connection.onCodeLensResolve((lens) => {
-  return codeLens.onCodeLensResolve(lens);
-});
-
-connection.onDocumentHighlight((params) => {
-  return highlights.onDocumentHighlight(params, documents);
-});
-
-connection.languages.callHierarchy.onPrepare((params) => {
-  return callHierarchy.prepareCallHierarchy(params, documents, state);
-});
-
-connection.languages.callHierarchy.onIncomingCalls((params) => {
-  return callHierarchy.incomingCalls(params, documents, state);
-});
-
-connection.languages.callHierarchy.onOutgoingCalls((params) => {
-  return callHierarchy.outgoingCalls(params, documents, state);
-});
-
-// =====================
-// Yardımcı Fonksiyonlar
-// =====================
+connection.languages.inlayHint.on((params) =>
+  inlayHints.onInlayHint(params, documents, state),
+);
 
 function mergeAllVariables(map: Map<string, VariableInfo[]>): VariableInfo[] {
   const result: VariableInfo[] = [];
   const seen = new Set<string>();
-
-  for (const vars of map.values()) {
+  for (const [uri, vars] of map.entries()) {
     for (const v of vars) {
-      const upperName = v.name.toUpperCase();
-      if (!seen.has(upperName)) {
-        seen.add(upperName);
-        result.push({ name: v.name, type: v.type || "" });
+      if (!seen.has(v.name.toUpperCase())) {
+        seen.add(v.name.toUpperCase());
+        result.push({ ...v, uri });
       }
     }
   }
   return result;
 }
 
-// Sunucuyu Başlat
 connection.listen();
 documents.listen(connection);

@@ -1,27 +1,26 @@
 image: node:18
 
 stages:
-  - build
-  - test
+  - build_and_test
 
 cache:
+  key: ${CI_COMMIT_REF_SLUG}
   paths:
     - extension/node_modules/
 
-install_dependencies:
-  stage: build
+build_extension:
+  stage: build_and_test
   script:
+    - node -v
+    - npm -v
     - cd extension
-    - npm install
-  artifacts:
-    paths:
-      - extension/node_modules/
-
-lint_and_compile:
-  stage: test
-  script:
-    - cd extension
-    - npm run lint
+    - npm install --progress=false --silent
     - npm run compile
-  dependencies:
-    - install_dependencies
+    - npm run lint
+  artifacts:
+    name: "kuka-krl-extension-$CI_COMMIT_SHORT_SHA"
+    paths:
+      - kuka-krl-extension-*.vsix
+    expire_in: 1 week
+  only:
+    - main

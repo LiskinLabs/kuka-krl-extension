@@ -1,0 +1,27 @@
+image: node:18
+
+stages:
+  - build
+  - test
+
+cache:
+  paths:
+    - extension/node_modules/
+
+install_dependencies:
+  stage: build
+  script:
+    - cd extension
+    - npm install
+  artifacts:
+    paths:
+      - extension/node_modules/
+
+lint_and_compile:
+  stage: test
+  script:
+    - cd extension
+    - npm run lint
+    - npm run compile
+  dependencies:
+    - install_dependencies

@@ -1,4 +1,4 @@
-image: node:18
+image: node:20
 
 stages:
   - build_and_test
@@ -13,6 +13,7 @@ build_extension:
   script:
     - node -v
     - npm -v
+    - cp LICENSE.txt extension/
     - cd extension
     - npm install --progress=false
     - npm run compile

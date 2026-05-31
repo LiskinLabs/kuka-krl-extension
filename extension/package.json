@@ -503,6 +503,24 @@
         "title": "Show Control Flow Graph",
         "category": "KRL",
         "icon": "$(git-merge)"
+      },
+      {
+        "command": "krl.activateLicense",
+        "title": "Activate Pro License",
+        "category": "KRL",
+        "icon": "$(key)"
+      },
+      {
+        "command": "krl.deactivateLicense",
+        "title": "Deactivate Pro License",
+        "category": "KRL",
+        "icon": "$(lock)"
+      },
+      {
+        "command": "krl.checkLicenseStatus",
+        "title": "Check License Status",
+        "category": "KRL",
+        "icon": "$(info)"
       }
     ],
     "views": {

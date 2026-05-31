@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="logo.png" width="160" alt="KUKA KRL Extension" />
+  <img src="logo.png" width="160" alt="KUKA KRL Professional" />
 </p>
 
 <h1 align="center">KUKA KRL Professional</h1>
 
 <p align="center">
   <b>The definitive industrial development suite for KUKA Robot Language.</b><br />
-  Professional-grade LSP support for KRC4 & KRC5 projects.
+  Professional-grade IDE & LSP support built for KRC4 & KRC5 robotics.
 </p>
 
 <p align="center">
@@ -16,30 +16,35 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Language-KRL-orange?style=flat-square" />
+  <img src="https://img.shields.io/badge/Offline--First-Ready-green?style=flat-square" />
   <img src="https://img.shields.io/badge/Localization-EN%20|%20RU%20|%20TR-blue?style=flat-square" />
 </p>
 
 ---
 
-## ⚡ Engineered for Performance
+## ⚡ Engineered for Industrial Speed
 
-Stop the slow "WorkVisual-to-Pendant" cycle. **KUKA KRL Professional** transforms VS Code and Cursor into a powerhouse offline IDE for robot programming, providing real-time feedback, interactive visualizations, and industrial-grade safety checks.
+Stop the slow, painful **"WorkVisual-to-Pendant-to-Controller"** iteration cycle. 
 
-We offer two editions of the extension: **Community Edition** (Free core tooling) and **Pro Edition** (Advanced diagnostics, flowcharts, and commissioning tools).
+**KUKA KRL Professional** transforms VS Code and Cursor into a world-class offline IDE for industrial robot programmers. Write clean, crash-free code with real-time feedback, advanced syntax analytics, mathematical tools, and visual logic flow diagnostics before uploading files to the robot controller.
+
+We offer two editions tailored to your workflow:
+* 🟢 **Community Edition**: Core syntax support, basic autocompletion, and professional themes (100% free).
+* 👑 **Pro Edition**: Advanced industrial diagnostics, structural visualization, mathematical calculators, and compliance tools designed for field engineers.
 
 ---
 
-## 👑 Go Pro & Support Development
+## 👑 Upgrade to Pro & Unlock Full Power
 
-Unlock the full power of industrial offline programming. By purchasing a **Pro License**, you gain access to our advanced visualization, diagnostics, and calculator tools while supporting the active development of the project.
+Investing in a **KRL Pro License** is a game-changer for commissioning engineers, paying for itself in the first hour of deployment on a factory floor.
 
-<div align="center">
+<div align="center" style="margin: 20px 0;">
   <a href="https://liskin.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7" style="text-decoration:none;">
-    <kbd style="font-size: 1.3em; padding: 8px 16px; background-color: #FF6600; color: white; border-radius: 6px; font-weight: bold; border: 1px solid #d15500;">
+    <kbd style="font-size: 1.4em; padding: 12px 24px; background-color: #FF6600; color: white; border-radius: 8px; font-weight: bold; border: 1px solid #d15500; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
       🛒 Buy KRL Extension Pro License
     </kbd>
   </a>
-  <p style="margin-top: 10px;">Secure subscription payments managed via <b>Lemon Squeezy</b> (Merchant of Record)</p>
+  <p style="margin-top: 12px; font-size: 0.95em; color: #555;">Secure subscription & activation keys managed by <b>Lemon Squeezy</b> (Merchant of Record)</p>
 </div>
 
 ---
@@ -50,88 +55,85 @@ Unlock the full power of industrial offline programming. By purchasing a **Pro L
 | :--- | :---: | :---: |
 | **KRL Syntax Highlighting** (`.src`, `.dat`, `.sub`) | ✅ | ✅ |
 | **50+ Specialized Themes** (including WorkVisual Dark/Light) | ✅ | ✅ |
-| **Basic Contextual Autocomplete** | ✅ | ✅ |
-| **FOLD / ENDFOLD Region Folding** | ✅ | ✅ |
+| **Contextual Autocomplete & Smart Folds** | ✅ | ✅ |
 | **Trilingual Localization** (EN, RU, TR) | ✅ | ✅ |
-| **Interactive Flowchart Viewer** (Mermaid, zoom, pan, SVG download) | ❌ | **✅ Pro** |
-| **Integrated KUKA Frame Calculator** (3-point method) | ❌ | **✅ Pro** |
-| **Advanced Syntax & Block Balance Diagnostics** (balancing `IF/FOR/LOOP`) | ❌ | **✅ Pro** |
+| **Interactive Flowchart Viewer** (Logic mapping & navigation) | ❌ | **✅ Pro** |
+| **Integrated KUKA Frame Calculator** (3-Point Method) | ❌ | **✅ Pro** |
+| **Advanced Syntax & Block Balance Diagnostics** (`IF/LOOP/FOR`) | ❌ | **✅ Pro** |
 | **Safety Velocity & Tool/Base Initialization Warnings** | ❌ | **✅ Pro** |
-| **Workspace-wide Dead-Code Analysis** (`GLOBAL DEF` usage check) | ❌ | **✅ Pro** |
+| **Workspace-wide Dead-Code Analysis** (`GLOBAL DEF` checker) | ❌ | **✅ Pro** |
 | **Automated Code Quality Report Generator** | ❌ | **✅ Pro** |
 
 ---
 
 ## 🧠 Pro Features Deep-Dive
 
-### 1. Interactive Flowchart Viewer [Pro]
-Visualize complex nested logic into clean control flow diagrams inside VS Code.
-- Click any flowchart block to immediately jump to the corresponding line in the editor.
-- Click subprogram calls (e.g., `GrabPart()`) to instantly navigate and load the flowchart for that subroutine.
-- Toggle **Detailed Mode** to show I/O operations and boolean flags with specialized emojis (🚗, ⏳, 💡).
-- Export flowcharts directly to SVG for documentation.
+### 1. 🗺️ Interactive Flowchart Viewer
+*Stop tracing nested logic by hand.* Turn massive, complex `.src` programs into visual, clean control-flow diagrams.
+* **Bi-directional Navigation**: Click any block in the flowchart to jump to the exact line of code in the editor.
+* **Subroutine Drill-Down**: Click subprogram calls (e.g., `GrabPart()`) to instantly load and display their flowcharts.
+* **Detailed Info-mode**: Toggle flags, timers, and I/O states directly on the flowchart blocks with color indicators.
+* **SVG Export**: Export vector graphics of your subprograms in one click to embed directly into client documentation.
 
 *Preview:*
 <div align="center">
   <img src="media/dead-code-demo.gif" width="600" alt="Flowchart Viewer Demo" />
 </div>
 
-### 2. Industrial-Grade Safety & Diagnostics [Pro]
-Catch logical and compilation errors before you load files onto the controller.
-- **Strict Block Integrity:** Verifies correct block endings (`IF/ENDIF`, `LOOP/ENDLOOP`, `FOR/ENDFOR`), filtering out KRL commands like `WAIT FOR`.
-- **Tool/Base Initialization Warning:** Flags movements (`PTP`, `LIN`) if no active `$TOOL` or `$BASE` has been set in the routine.
-- **Safety Threshold Checks:** Issues warnings for dangerously high velocity values (`$VEL.CP` over 3.0 m/s).
-- **Non-ASCII Detection:** Identifies Cyrillic or special characters in executable code that trigger silent compilation failures on KRC loaders.
+### 2. 🛡️ Industrial-Grade Safety & Diagnostics
+*Catch syntax crashes and physical collision risks before you run the code.*
+* **Strict Block Balance**: Flags missing or orphaned block endings (`IF/ENDIF`, `FOR/ENDFOR`, `LOOP/ENDLOOP`). Handles complex KRL syntax without false positives.
+* **Collision Guard (Tool/Base Check)**: Warns you if movements (`PTP`, `LIN`, `CIRC`) are declared before active `$TOOL` or `$BASE` values have been initialized in the current routine.
+* **High Velocity Warning**: Alerts you when speed settings exceed safe commissioning levels (e.g., `$VEL.CP` exceeding 3.0 m/s) to prevent manual test-run accidents.
+* **Silent Error Blocker (Non-ASCII)**: Cyrillic comments or invisible non-ASCII characters inside executable lines cause quiet compiler failures on older KRC software. Pro checks detect and pinpoint them immediately.
 
 *Preview:*
 <div align="center">
   <img src="media/type-validation-demo.gif" width="600" alt="Diagnostics Demo" />
 </div>
 
-### 3. KUKA Frame Calculator [Pro]
-Calculate active robot transformations (`TOOL` and `BASE` coordinate frames) inside the editor using the 3-point method. Saves time and eliminates manual paperwork during commissioning.
+### 3. 📐 KUKA Frame Calculator
+Calculate coordinate system transformations using the classic **3-Point Method** directly inside VS Code.
+* No need to export coordinates to external spreadsheets or compute matrices on paper.
+* Calculate `TOOL` offset or `BASE` origin transformations using measured points.
+* Insert computed coordinates directly into your `.dat` files with a single click.
+
+### 4. 📋 Automated Code Quality Reports
+Ensure your code meets the high standards of automotive manufacturers (VASS, BMW, Stellantis).
+* Scan the workspace for unused local variables and dead global subroutines.
+* Generate a structured codebase health report to show your client or lead engineer that the code is optimized, clean, and safe.
 
 ---
 
-## ⚙️ Configuration
+## 🔒 Offline-First Guarantee (For Factory Floors)
 
-Tune the IDE behavior via `settings.json`:
+We know that automation engineers work in interference-heavy environments, underground cells, and factories with **zero internet connection**. 
+
+Our licensing module is built with an **Offline-First Architecture**:
+* **Activation**: Connect once to activate your license key.
+* **Cache**: The verified license state is safely cached on your machine.
+* **Offline Access**: The extension does **not** lock you out if internet connection is lost. It will continue running all Pro features offline, only attempting to sync status silently in the background when connectivity becomes available.
+
+---
+
+## ⚙️ Configuration Settings
+
+Configure extension behaviors in your `settings.json`:
 
 | Setting | Default | Description |
 |:---|:---:|:---|
-| `krl.indentWidth` | `3` | Match the KUKA Pendant standard (3 spaces). |
-| `krl.alignAssignments` | `true` | Vertically align `=` signs for clean `.dat` files. |
-| `krl.errorLens.enabled` | `true` | Show diagnostics as inline text at the end of lines. |
-| `krl.validateNonAscii` | `true` | Prevent "invisible" characters from breaking builds. |
+| `krl.indentWidth` | `3` | Adjust indentation size (3 spaces is the KUKA standard). |
+| `krl.alignAssignments` | `true` | Auto-align `=` symbols in `.dat` files for clean matrices. |
+| `krl.errorLens.enabled` | `true` | Show diagnostic errors as inline text at the end of lines. |
+| `krl.validateNonAscii` | `true` | Scan for characters that break older KRC compilers. |
+| `krl.inlayHints.enabled` | `true` | Show descriptive names for I/O signals inline. |
 
 ---
 
-## 🚀 Why Upgrade to Pro? (Value for Automation Engineers)
+## 📄 License & Credits
 
-Investing in a **KRL Pro License** is a game-changer for professional robot programmers. It addresses the main friction points of commissioning and offline programming:
-
-### 1. Zero-Collision Safety Guard
-* **Movements Validation:** Moving a 6-axis industrial robot without setting an active `$TOOL` or `$BASE` is one of the most common causes of physical collisions during automatic commissioning. Pro features flag missing initializations before you upload the files to the KRC controller.
-* **Speed Threshold Monitoring:** Dangerous programming errors, such as setting `$VEL.CP` or `$VEL_AXIS` above safe manual limits in untested areas, are immediately caught and flagged.
-
-### 2. Visual Debugging of Complex Logic
-* **Flowchart Navigation:** Debugging legacy code with nested `IF-THEN-ELSE` branches or deep subprogram calls can take hours on a pendant. The Interactive Flowchart Viewer displays the logic layout instantly.
-* **Code Syncing:** Click on any block in the flowchart, and your cursor jumps to the exact line in your KRL file. Click on a subroutine to drill down into its flow.
-
-### 3. Smart Code Cleanliness & Compliance
-* **Dead-Code Analysis:** Detect globally defined subroutines and variables that are never called or referenced, helping you keep your controller memory light and compliant with automotive standards (VASS, BMW, etc.).
-* **Non-ASCII Character Blocker:** Non-ASCII characters (e.g. Cyrillic comments inside executable lines) can cause silent compilation failures on older KRC loaders. Pro diagnostics pinpoint these characters instantly.
-
-### 4. Direct commissioning tools in VS Code
-* **Frame Calculator:** No need for manual matrix calculations or spreadsheets. Calculate transformations using 3-point alignment directly in the editor and insert them right into your `.dat` files.
-* **Code Reports:** Instantly export a codebase health report for project handover to client engineering leads, demonstrating compliance and professional code structure.
-
----
-
-## 📄 Credits & License
-
-*   **Developer**: [Liskin Labs](https://gitlab.com/LiskinLabs) / [Silvestr Liskin](https://www.linkedin.com/in/silvestr-liskin-ab712920b/)
-*   **Themes**: Adapted from [Bearded Theme](https://github.com/BeardedBear/bearded-theme) (GPL-3.0)
-*   **Data**: Reference data via [OpenKuka](https://github.com/openkuka)
+* **Publisher & Developer**: [Liskin Labs](https://gitlab.com/LiskinLabs) / [Silvestr Liskin](https://www.linkedin.com/in/silvestr-liskin-ab712920b/)
+* **Themes**: Base themes adapted from [Bearded Theme](https://github.com/BeardedBear/bearded-theme) (GPL-3.0)
+* **Data Sources**: KRL grammar references based on [OpenKuka](https://github.com/openkuka)
 
 Licensed under the GPL-3.0 License.

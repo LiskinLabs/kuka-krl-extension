@@ -4,9 +4,8 @@ const path = require('path');
 const files = [
     'client/syntaxes/krl.tmLanguage.json',
     'client/snippets/krl.code-snippets',
-    'client/themes/krl-tao-theme.json',
-    'client/themes/krl-tao-darker-theme.json',
-    'client/themes/krl-modern-dark-theme.json',
+    'client/themes/KRL_Bearded_Arc.json',
+    'client/themes/KRL_WorkVisual_Dark.json',
     'package.json'
 ];
 
@@ -17,9 +16,9 @@ files.forEach(file => {
     try {
         const content = fs.readFileSync(file, 'utf8');
         JSON.parse(content);
-        console.log(`✓ ${file}: VALID`);
+        console.log(`[OK] ${file}`);
     } catch (e) {
-        console.log(`✗ ${file}: INVALID - ${e.message}`);
+        console.log(`[FAIL] ${file}: ${e.message}`);
         allValid = false;
     }
 });

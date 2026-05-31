@@ -42,6 +42,7 @@ export interface FunctionDeclaration {
   endChar: number;
   params: string;
   name: string;
+  isGlobal?: boolean;
 }
 
 // Sunucu durumu - tüm global veriler burada tutulur
@@ -52,4 +53,5 @@ export interface ServerState {
   structDefinitions: StructMap;
   functionsDeclared: FunctionDeclaration[];
   mergedVariables: VariableInfo[];
+  fileWordCounts: Map<string, Map<string, number>>;
 }

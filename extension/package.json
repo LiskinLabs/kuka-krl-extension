@@ -14,7 +14,10 @@
     "type": "git",
     "url": "https://gitlab.com/LiskinLabs/kuka-krl-extension.git"
   },
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
+  "sponsor": {
+    "url": "https://gitlab.com/LiskinLabs/kuka-krl-extension#support-the-project"
+  },
   "homepage": "https://gitlab.com/LiskinLabs/kuka-krl-extension",
   "bugs": {
     "url": "https://gitlab.com/LiskinLabs/kuka-krl-extension/-/issues"
@@ -38,23 +41,6 @@
     "color": "#FF6600",
     "theme": "dark"
   },
-  "badges": [
-    {
-      "url": "https://img.shields.io/badge/version-1.7.2-blue.svg?style=flat-square",
-      "href": "https://gitlab.com/LiskinLabs/kuka-krl-extension",
-      "description": "Version"
-    },
-    {
-      "url": "https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square",
-      "href": "https://gitlab.com/LiskinLabs/kuka-krl-extension/-/blob/main/LICENSE.txt",
-      "description": "License"
-    },
-    {
-      "url": "https://img.shields.io/badge/platform-GitLab-e24329.svg?style=flat-square&logo=gitlab",
-      "href": "https://gitlab.com/LiskinLabs/kuka-krl-extension",
-      "description": "GitLab"
-    }
-  ],
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -316,9 +302,9 @@
         "path": "./client/themes/KRL_Bearded_oceanic.json"
       },
       {
-        "label": "KRL Bearded Oceanic Reverded",
+        "label": "KRL Bearded Oceanic Reversed",
         "uiTheme": "vs-dark",
-        "path": "./client/themes/KRL_Bearded_oceanicReverded.json"
+        "path": "./client/themes/KRL_Bearded_oceanicReversed.json"
       },
       {
         "label": "KRL Bearded Stained Purple",
@@ -511,6 +497,12 @@
         "title": "Generate Analysis Report",
         "category": "KRL",
         "icon": "$(report)"
+      },
+      {
+        "command": "krl.showFlowchart",
+        "title": "Show Control Flow Graph",
+        "category": "KRL",
+        "icon": "$(git-merge)"
       }
     ],
     "views": {
@@ -569,6 +561,11 @@
           "command": "krl.refreshIOView",
           "group": "navigation@7",
           "when": "resourceLangId == krl"
+        },
+        {
+          "command": "krl.showFlowchart",
+          "group": "navigation@1",
+          "when": "resourceLangId == krl"
         }
       ],
       "editor/context": [
@@ -615,6 +612,11 @@
         {
           "command": "krl.renameSignal",
           "group": "1_modification@9",
+          "when": "resourceLangId == krl"
+        },
+        {
+          "command": "krl.showFlowchart",
+          "group": "1_modification@10",
           "when": "resourceLangId == krl"
         }
       ],
@@ -683,11 +685,6 @@
           "default": true,
           "description": "%config.validateNonAscii.description%"
         },
-        "krl.errorLens.enabled": {
-          "type": "boolean",
-          "default": true,
-          "description": "%config.errorLens.enabled%"
-        },
         "krl.indentFolds": {
           "type": "boolean",
           "default": true,
@@ -697,22 +694,49 @@
           "type": "boolean",
           "default": true,
           "description": "%config.alignAssignments%"
+        },
+        "krl.inlayHints.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show descriptive names for I/O signals and system data as inline hints."
+        },
+        "krl.errorLens.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show diagnostics as inline text (Error Lens style)."
+        },
+        "krl.codeLens.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show CodeLens hints for references and documentation."
+        },
+        "krl.callHierarchy.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Call Hierarchy support for functions."
+        },
+        "krl.documentHighlights.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Highlight occurrences of the same variable/function in the document."
         }
       }
     }
   },
   "scripts": {
-    "compile": "tsc -b client server",
-    "watch": "tsc -b client server -w",
+    "vscode:prepublish": "node esbuild.js --production",
+    "compile": "node esbuild.js --production",
+    "watch": "node esbuild.js --watch",
     "lint": "eslint .",
     "package": "vsce package",
     "test": "node tests/extension.test.js"
   },
   "devDependencies": {
-    "@vscode/vsce": "^2.32.0",
-    "@types/node": "^18.19.130",
+    "@types/node": "^20.17.23",
     "@typescript-eslint/eslint-plugin": "^8.50.0",
     "@typescript-eslint/parser": "^8.50.0",
+    "@vscode/vsce": "^2.32.0",
+    "esbuild": "^0.28.0",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",

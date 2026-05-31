@@ -2,11 +2,7 @@ import { Hover, HoverParams } from "vscode-languageserver/node";
 import { TextDocument } from "vscode-languageserver-textdocument";
 import { TextDocuments } from "vscode-languageserver/node";
 import { ServerState } from "../types";
-import {
-  isSymbolDeclared,
-  getWordAtPosition,
-  CODE_KEYWORDS,
-} from "../lib/parser";
+import { getWordAtPosition, CODE_KEYWORDS } from "../lib/parser";
 import { KSS_87_SYSTEM_VARS } from "../lib/systemVars";
 import { getSystemVarDoc } from "../lib/systemVarDocs";
 import { t, getLocale } from "../lib/i18n";

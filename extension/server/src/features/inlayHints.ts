@@ -3,7 +3,6 @@ import {
   InlayHintKind,
   InlayHintParams,
   TextDocuments,
-  Position,
 } from "vscode-languageserver/node";
 import { TextDocument } from "vscode-languageserver-textdocument";
 import { ServerState } from "../types";

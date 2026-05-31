@@ -82,8 +82,18 @@ export class KrlFormatter {
         continue;
       }
 
-      // Yorum kısmını ayır
-      const commentIndex = line.indexOf(";");
+      // Yorum kısmını ayır (string-safe: ';' inside "..." is NOT a comment)
+      let commentIndex = -1;
+      {
+        let inStr = false;
+        for (let j = 0; j < line.length; j++) {
+          if (line[j] === '"') inStr = !inStr;
+          else if (line[j] === ";" && !inStr) {
+            commentIndex = j;
+            break;
+          }
+        }
+      }
       let codePart = commentIndex >= 0 ? line.substring(0, commentIndex) : line;
 
       // Anahtar kelimeleri büyük harfe dönüştür

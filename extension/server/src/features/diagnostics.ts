@@ -4,11 +4,10 @@ import {
   Diagnostic,
   DiagnosticSeverity,
   DiagnosticTag,
-  Range,
 } from "vscode-languageserver/node";
 import { CODE_KEYWORDS } from "../lib/parser";
 import { splitVarsRespectingBracketsWithOffsets } from "../lib/collector";
-import { VariableInfo } from "../types";
+import { VariableInfo, ServerState } from "../types";
 import { t } from "../lib/i18n";
 
 // =============================================================================
@@ -26,8 +25,6 @@ const REGEX_SIGNAL = /^\s*SIGNAL\b/i;
 const REGEX_STRUC = /^STRUC\b/i;
 const REGEX_GLOBAL = /\bGLOBAL\b/i;
 const REGEX_DECL_SIGNAL_STRUC = /^(?:DECL|SIGNAL|STRUC)\b/i;
-const REGEX_VAR_NAME_DECL =
-  /^(?:GLOBAL\s+)?(?:DECL\s+)?(?:GLOBAL\s+)?\w+\s+(\w+)/i;
 const REGEX_STARTS_WITH_DIGIT = /^\d/;
 
 const REGEX_VARIABLE = /\b([a-zA-Z_]\w*)\b/g;
@@ -169,6 +166,30 @@ function stripInvisibleChars(text: string): string {
 
 // Önbellek - fonksiyon isimleri için hızlı arama
 let functionNamesCache: Set<string> = new Set();
+
+/**
+ * Проверяет, является ли файл системным файлом KUKA.
+ * Системные файлы (MADA, System, TP) не должны выдавать предупреждения о неизвестных переменных.
+ */
+function isSystemFile(uri: string): boolean {
+  const lowerUri = uri.toLowerCase().replace(/\\/g, "/");
+  return (
+    lowerUri.includes("/krc/r1/mada/") ||
+    lowerUri.includes("/krc/r1/system/") ||
+    lowerUri.includes("/krc/r1/tp/") ||
+    lowerUri.includes("/krc/steu/mada/") ||
+    lowerUri.includes("/r1/mada/") ||
+    lowerUri.includes("/r1/system/") ||
+    lowerUri.includes("/r1/tp/") ||
+    lowerUri.includes("/steu/mada/") ||
+    lowerUri.endsWith("/mada/machine.dat") ||
+    lowerUri.endsWith("/system/config.dat") ||
+    lowerUri.endsWith("/mada/$machine.dat") ||
+    lowerUri.endsWith("/system/$config.dat") ||
+    lowerUri.endsWith("/system/$custom.dat") ||
+    lowerUri.endsWith("/system/$option.dat")
+  );
+}
 
 export class DiagnosticsProvider {
   private connection: Connection;
@@ -323,13 +344,8 @@ export class DiagnosticsProvider {
     document: TextDocument,
     validateNonAscii: boolean = true,
   ): Diagnostic[] {
-    // SİSTEM DOSYALARINI ATLA (büyük/küçük harf duyarsız)
-    const lowerUri = document.uri.toLowerCase().replace(/\\/g, "/");
-    if (
-      lowerUri.includes("/mada/") ||
-      lowerUri.includes("/system/") ||
-      lowerUri.includes("/tp/")
-    ) {
+    // SİSTEM DOSYALARINI ATLA
+    if (isSystemFile(document.uri)) {
       return [];
     }
 
@@ -588,14 +604,7 @@ export class DiagnosticsProvider {
     const variableRegex = REGEX_VARIABLE;
 
     // MAKİNA DAT DOSYALARINI VE SİSTEM KONFİGÜRASYONUNU ATLA
-    const lowerUri = document.uri.toLowerCase().replace(/\\/g, "/");
-    if (
-      lowerUri.includes("/mada/") ||
-      lowerUri.includes("/system/") ||
-      lowerUri.includes("/tp/") ||
-      lowerUri.includes("machine.dat") ||
-      lowerUri.includes("config.dat")
-    ) {
+    if (isSystemFile(document.uri)) {
       return [];
     }
 
@@ -652,14 +661,25 @@ export class DiagnosticsProvider {
 
         // '$' veya '#' ile başlayan sistem değişkenlerini atla
         // NOT: processedLine üzerinde kontrol yapılmalı!
+        // Çift dolar ($$) ile başlayan değişkenleri ATLAMA - bunlar hatadır
         if (
           match.index !== undefined &&
           match.index > 0 &&
-          (processedLine[match.index - 1] === "$" ||
-            processedLine[match.index - 1] === "#" ||
+          (processedLine[match.index - 1] === "#" ||
             processedLine[match.index - 1] === ".")
         )
           continue;
+        if (
+          match.index !== undefined &&
+          match.index > 0 &&
+          processedLine[match.index - 1] === "$"
+        ) {
+          // Only skip if it's a single $ prefix (valid system variable)
+          // Double $$ is invalid and should be reported as an error
+          if (match.index < 2 || processedLine[match.index - 2] !== "$") {
+            continue;
+          }
+        }
 
         // Anahtar kelimeleri atla
         if (CODE_KEYWORDS.includes(varName.toUpperCase())) continue;
@@ -730,12 +750,7 @@ export class DiagnosticsProvider {
    */
   public validateSafetySpeeds(document: TextDocument): Diagnostic[] {
     // SİSTEM DOSYALARINI ATLA
-    const lowerUri = document.uri.toLowerCase().replace(/\\/g, "/");
-    if (
-      lowerUri.includes("/mada/") ||
-      lowerUri.includes("/system/") ||
-      lowerUri.includes("/tp/")
-    ) {
+    if (isSystemFile(document.uri)) {
       return [];
     }
 
@@ -797,12 +812,7 @@ export class DiagnosticsProvider {
    */
   public validateToolBaseInit(document: TextDocument): Diagnostic[] {
     // SİSTEM DOSYALARINI ATLA
-    const lowerUri = document.uri.toLowerCase().replace(/\\/g, "/");
-    if (
-      lowerUri.includes("/mada/") ||
-      lowerUri.includes("/system/") ||
-      lowerUri.includes("/tp/")
-    ) {
+    if (isSystemFile(document.uri)) {
       return [];
     }
 
@@ -1154,6 +1164,58 @@ export class DiagnosticsProvider {
   }
 
   /**
+   * Проверяет мертвые глобальные функции во всем рабочем пространстве.
+   * Функция считается мертвой, если она объявлена как GLOBAL, но используется
+   * только один раз во всем проекте (собственно, само объявление).
+   */
+  public validateDeadGlobalFunctions(
+    document: TextDocument,
+    state: ServerState,
+  ): Diagnostic[] {
+    const diagnostics: Diagnostic[] = [];
+    const uri = document.uri;
+
+    // SİSTEM DOSYALARINI ATLA
+    if (isSystemFile(uri)) {
+      return [];
+    }
+
+    // Найти все глобальные функции, объявленные в текущем документе
+    const declaredInDoc = state.functionsDeclared.filter(
+      (f) => f.uri === uri && f.isGlobal,
+    );
+
+    for (const func of declaredInDoc) {
+      const funcNameUpper = func.name.toUpperCase();
+      let totalUsages = 0;
+
+      // Суммируем количество использований этого слова по всем файлам
+      for (const wordCounts of state.fileWordCounts.values()) {
+        totalUsages += wordCounts.get(funcNameUpper) || 0;
+      }
+
+      // Если слово встречается 1 или 0 раз, это означает, что оно не вызывается нигде (или даже само объявление не засчиталось)
+      // Так как `extractFunctionsFromWorkspace` и `wordCounts` могут парсить слово `DEF` и `ИмяФункции`, то 1 использование - это само определение.
+      if (totalUsages <= 1) {
+        diagnostics.push({
+          severity: DiagnosticSeverity.Hint,
+          tags: [DiagnosticTag.Unnecessary],
+          range: {
+            start: { line: func.line, character: func.startChar },
+            end: { line: func.line, character: func.endChar },
+          },
+          message:
+            t("diag.deadGlobalFunction", func.name) ||
+            `Global function '${func.name}' is never used in the workspace.`,
+          source: "krl-language-support",
+        });
+      }
+    }
+
+    return diagnostics;
+  }
+
+  /**
    * Проверяет пустые блоки IF/FOR/WHILE.
    */
   public validateEmptyBlocks(document: TextDocument): Diagnostic[] {
@@ -1281,6 +1343,42 @@ export class DiagnosticsProvider {
             source: "krl-language-support",
           });
         }
+      }
+
+      // Check for assignment to read-only variables
+      const readOnlyRegex =
+        /^\s*(\$(?:IN|ANIN|POS_ACT|AXIS_ACT|ROB_TIMER|PRO_IP|ON_PATH))\b(?:\[.*?\]|\.[a-zA-Z0-9_]+)?\s*=(?!=)/i;
+      const roMatch = codePart.match(readOnlyRegex);
+      if (roMatch) {
+        diagnostics.push({
+          severity: DiagnosticSeverity.Error,
+          range: {
+            start: { line: i, character: roMatch.index || 0 },
+            end: {
+              line: i,
+              character: (roMatch.index || 0) + roMatch[1].length,
+            },
+          },
+          message: `System variable '${roMatch[1].toUpperCase()}' is read-only and cannot be assigned a value.`,
+          source: "krl-language-support",
+        });
+      }
+
+      // Check for assigning keywords like THEN, ELSE, ENDIF
+      const assignKeywordRegex =
+        /(?:[a-zA-Z0-9_\$\[\]\.]+)\s*=(?!=)\s*(THEN|ELSE|ENDIF|ENDFOR|ENDWHILE|ENDLOOP|ENDSWITCH|CASE|DEFAULT|DEF|END|GLOBAL|DECL)\b/i;
+      const kwMatch = codePart.match(assignKeywordRegex);
+      if (kwMatch) {
+        const kwIndex = codePart.indexOf(kwMatch[1], kwMatch.index || 0);
+        diagnostics.push({
+          severity: DiagnosticSeverity.Error,
+          range: {
+            start: { line: i, character: kwIndex },
+            end: { line: i, character: kwIndex + kwMatch[1].length },
+          },
+          message: `Control keyword '${kwMatch[1].toUpperCase()}' cannot be used as an expression or assigned to a variable.`,
+          source: "krl-language-support",
+        });
       }
     }
 

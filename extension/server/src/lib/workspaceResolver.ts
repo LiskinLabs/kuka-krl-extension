@@ -50,7 +50,7 @@ export async function findWorkspaceRoot(startDir: string): Promise<string> {
         foundRoot = traceDir;
         break;
       }
-    } catch (e) {
+    } catch {
       // Error reading FS (e.g. permission), assume not root
     }
 

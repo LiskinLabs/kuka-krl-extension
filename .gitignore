@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build output
+**/out/
+*.tsbuildinfo
+
+# Packaged extension
+*.vsix
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

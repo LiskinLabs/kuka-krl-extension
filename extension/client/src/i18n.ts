@@ -42,6 +42,7 @@ interface Messages {
   "command.foldAll": string;
   "command.unfoldAll": string;
   "command.refreshIOView": string;
+  "command.showFlowchart": string;
 }
 
 // English (default)
@@ -73,6 +74,7 @@ const en: Messages = {
   "command.foldAll": "Fold All",
   "command.unfoldAll": "Unfold All",
   "command.refreshIOView": "Refresh I/O",
+  "command.showFlowchart": "Show Flowchart",
 };
 
 // Russian
@@ -104,6 +106,7 @@ const ru: Messages = {
   "command.foldAll": "Свернуть всё",
   "command.unfoldAll": "Развернуть всё",
   "command.refreshIOView": "Обновить I/O",
+  "command.showFlowchart": "Блок-схема",
 };
 
 // Turkish
@@ -136,6 +139,7 @@ const tr: Messages = {
   "command.foldAll": "Tümünü Katla",
   "command.unfoldAll": "Tümünü Aç",
   "command.refreshIOView": "I/O Listesini Yenile",
+  "command.showFlowchart": "Akış Şeması",
 };
 
 const locales: Record<Locale, Messages> = { en, ru, tr };

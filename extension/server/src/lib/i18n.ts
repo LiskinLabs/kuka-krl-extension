@@ -59,6 +59,7 @@ interface ServerMessages {
   "diag.unmatchedBlock": string;
   "diag.duplicateName": string;
   "diag.deadCode": string;
+  "diag.deadGlobalFunction": string;
   "diag.emptyBlock": string;
   "diag.waitWithoutTimeout": string;
   "diag.dangerousHalt": string;
@@ -131,6 +132,8 @@ const en: ServerMessages = {
   "diag.unmatchedBlock": 'Unmatched "{0}" — missing "{1}".',
   "diag.duplicateName": 'Duplicate {0} name "{1}" (first defined at line {2}).',
   "diag.deadCode": 'Unreachable code after "{0}".',
+  "diag.deadGlobalFunction":
+    "Global function '{0}' is declared but never used in the workspace.",
   "diag.emptyBlock": 'Empty "{0}" block.',
   "diag.waitWithoutTimeout":
     "WAIT FOR without timeout may cause indefinite wait.",
@@ -207,6 +210,8 @@ const ru: ServerMessages = {
   "diag.duplicateName":
     'Дублирование {0} "{1}" (впервые определено в строке {2}).',
   "diag.deadCode": 'Недостижимый код после "{0}".',
+  "diag.deadGlobalFunction":
+    "Глобальная функция '{0}' объявлена, но нигде не используется.",
   "diag.emptyBlock": 'Пустой блок "{0}".',
   "diag.waitWithoutTimeout":
     "WAIT FOR без таймаута может вызвать бесконечное ожидание.",
@@ -284,6 +289,8 @@ const tr: ServerMessages = {
   "diag.unmatchedBlock": 'Eşleşmeyen "{0}" — "{1}" eksik.',
   "diag.duplicateName": 'Yinelenen {0} adı "{1}" (ilk tanım satır {2}).',
   "diag.deadCode": '"{0}" sonrası erişilemeyen kod.',
+  "diag.deadGlobalFunction":
+    "Global fonksiyon '{0}' tanımlanmış ama çalışma alanında hiç kullanılmamış.",
   "diag.emptyBlock": 'Boş "{0}" bloğu.',
   "diag.waitWithoutTimeout":
     "Zaman aşımı olmadan WAIT FOR sonsuz beklemeye neden olabilir.",

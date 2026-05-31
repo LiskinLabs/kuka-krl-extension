@@ -6,18 +6,6 @@ import {
   InitializeResult,
   TextDocumentSyncKind,
   Diagnostic,
-  DefinitionParams,
-  CompletionParams,
-  HoverParams,
-  FoldingRangeParams,
-  DocumentSymbolParams,
-  WorkspaceSymbolParams,
-  RenameParams,
-  PrepareRenameParams,
-  ReferenceParams,
-  SignatureHelpParams,
-  CodeActionParams,
-  CodeLensParams,
 } from "vscode-languageserver/node";
 import { TextDocument } from "vscode-languageserver-textdocument";
 import { URI } from "vscode-uri";
@@ -38,10 +26,17 @@ import { CodeActionsProvider } from "./features/codeActions";
 import { CodeLensProvider } from "./features/codeLens";
 import { CallHierarchyProvider } from "./features/callHierarchy";
 import { HighlightProvider } from "./features/highlights";
+import {
+  SemanticTokensProvider,
+  semanticTokensLegend,
+} from "./features/semanticTokens";
+import {
+  analyzeControlFlow,
+  generateMermaid,
+} from "./features/controlFlowAnalyzer";
 import { SymbolExtractor, extractStrucVariables } from "./lib/collector";
 import { getAllDatFiles, getAllSourceFiles } from "./lib/fileSystem";
 import { setLocale } from "./lib/i18n";
-import { findWorkspaceRoot } from "./lib/workspaceResolver";
 import * as fs from "fs";
 import * as path from "path";
 import * as os from "os";
@@ -86,6 +81,7 @@ const state: ServerState = {
   structDefinitions: {},
   functionsDeclared: [],
   mergedVariables: [],
+  fileWordCounts: new Map(),
 };
 
 // Конфигурация
@@ -93,6 +89,10 @@ let serverConfig = {
   validateNonAscii: true,
   separateBeforeBlocks: false,
   separateAfterBlocks: false,
+  inlayHintsEnabled: true,
+  codeLensEnabled: true,
+  callHierarchyEnabled: true,
+  documentHighlightsEnabled: true,
 };
 
 const validationTimeouts = new Map<string, NodeJS.Timeout>();
@@ -126,6 +126,7 @@ const callHierarchy = new CallHierarchyProvider();
 const highlights = new HighlightProvider();
 const inlayHints = new InlayHintsProvider();
 const diagnostics = new DiagnosticsProvider(connection);
+const semanticTokens = new SemanticTokensProvider();
 
 // =======================
 // Başlatma İşleyicileri
@@ -174,6 +175,10 @@ connection.onInitialize((params: InitializeParams): InitializeResult => {
       codeLensProvider: { resolveProvider: true },
       inlayHintProvider: true,
       callHierarchyProvider: true,
+      semanticTokensProvider: {
+        legend: semanticTokensLegend,
+        full: true,
+      },
     },
   };
 });
@@ -205,7 +210,7 @@ connection.onInitialized(async () => {
       state.fileVariablesMap.set(uri, extractor.getVariables());
       const structs = extractStrucVariables(content);
       Object.assign(state.structDefinitions, structs);
-    } catch (err) {
+    } catch {
       /* ignore */
     }
   }
@@ -231,6 +236,7 @@ async function extractFunctionsFromWorkspace(
         let match;
         defRegex.lastIndex = 0;
         while ((match = defRegex.exec(line)) !== null) {
+          const isGlobal = /\bGLOBAL\b/i.test(match[0]);
           const funcName = match[2];
           if (
             !state.functionsDeclared.some(
@@ -244,11 +250,25 @@ async function extractFunctionsFromWorkspace(
               endChar: line.indexOf(funcName) + funcName.length,
               params: match[3]?.trim() || "",
               name: funcName,
+              isGlobal: isGlobal,
             });
           }
         }
       }
-    } catch (err) {
+
+      // Count all words in the file (excluding strings and comments)
+      const wordCounts = new Map<string, number>();
+      const wordRegex = /\b[a-zA-Z_]\w*\b/g;
+      let wordMatch;
+      let cleanContent = content
+        .replace(/"[^"]*"/g, " ")
+        .replace(/;.*$/gm, " ");
+      while ((wordMatch = wordRegex.exec(cleanContent)) !== null) {
+        const w = wordMatch[0].toUpperCase();
+        wordCounts.set(w, (wordCounts.get(w) || 0) + 1);
+      }
+      state.fileWordCounts.set(uri, wordCounts);
+    } catch {
       /* ignore */
     }
   }
@@ -312,6 +332,7 @@ async function validateDocument(document: TextDocument): Promise<void> {
         ...diagnostics.validateBlockBalance(document),
         ...diagnostics.validateDuplicateNames(document),
         ...diagnostics.validateDeadCode(document),
+        ...diagnostics.validateDeadGlobalFunctions(document, state),
         ...diagnostics.validateEmptyBlocks(document),
         ...diagnostics.validateDangerousStatements(document),
         ...diagnostics.validateTypeUsage(document, state.mergedVariables),
@@ -353,6 +374,7 @@ function updateFunctionsFromDocument(document: TextDocument): void {
     let match;
     defRegex.lastIndex = 0;
     while ((match = defRegex.exec(lines[i])) !== null) {
+      const isGlobal = /\bGLOBAL\b/i.test(match[0]);
       const name = match[2];
       state.functionsDeclared.push({
         uri,
@@ -361,9 +383,21 @@ function updateFunctionsFromDocument(document: TextDocument): void {
         endChar: lines[i].indexOf(name) + name.length,
         params: match[3]?.trim() || "",
         name,
+        isGlobal: isGlobal,
       });
     }
   }
+
+  // Count all words in the document (excluding strings and comments)
+  const wordCounts = new Map<string, number>();
+  const wordRegex = /\b[a-zA-Z_]\w*\b/g;
+  let wordMatch;
+  let cleanContent = content.replace(/"[^"]*"/g, " ").replace(/;.*$/gm, " ");
+  while ((wordMatch = wordRegex.exec(cleanContent)) !== null) {
+    const w = wordMatch[0].toUpperCase();
+    wordCounts.set(w, (wordCounts.get(w) || 0) + 1);
+  }
+  state.fileWordCounts.set(uri, wordCounts);
 }
 
 connection.onNotification("custom/validateWorkspace", async () => {
@@ -371,15 +405,26 @@ connection.onNotification("custom/validateWorkspace", async () => {
   const files = await getAllSourceFiles(state.workspaceRoot);
   for (const filePath of files) {
     try {
-      const content = await fs.promises.readFile(filePath, "utf8");
-      const doc = TextDocument.create(
-        URI.file(filePath).toString(),
-        "krl",
-        1,
-        content,
-      );
-      await validateDocument(doc);
-    } catch (e) {
+      const targetFsPath = filePath.toLowerCase();
+      const openDoc = documents
+        .all()
+        .find((d) => URI.parse(d.uri).fsPath.toLowerCase() === targetFsPath);
+
+      if (openDoc) {
+        // Используем актуальную версию из памяти редактора (даже если она не сохранена)
+        await validateDocument(openDoc);
+      } else {
+        // Читаем с диска только для закрытых файлов
+        const content = await fs.promises.readFile(filePath, "utf8");
+        const doc = TextDocument.create(
+          URI.file(filePath).toString(),
+          "krl",
+          1,
+          content,
+        );
+        await validateDocument(doc);
+      }
+    } catch {
       /* ignore */
     }
   }
@@ -410,23 +455,64 @@ connection.onSignatureHelp((p) =>
   signatureHelp.onSignatureHelp(p, documents, state),
 );
 connection.onCodeAction((p) => codeActions.onCodeAction(p, documents, state));
-connection.onCodeLens((p) => codeLens.onCodeLens(p, documents, state));
-connection.onCodeLensResolve((l) => codeLens.onCodeLensResolve(l));
-connection.onDocumentHighlight((p) =>
-  highlights.onDocumentHighlight(p, documents),
-);
-connection.languages.callHierarchy.onPrepare((p) =>
-  callHierarchy.prepareCallHierarchy(p, documents, state),
-);
-connection.languages.callHierarchy.onIncomingCalls((p) =>
-  callHierarchy.incomingCalls(p, documents, state),
-);
-connection.languages.callHierarchy.onOutgoingCalls((p) =>
-  callHierarchy.outgoingCalls(p, documents, state),
-);
+connection.onCodeLens((p) => {
+  if (!serverConfig.codeLensEnabled) return [];
+  return codeLens.onCodeLens(p, documents, state);
+});
+connection.onCodeLensResolve((l) => {
+  if (!serverConfig.codeLensEnabled) return l;
+  return codeLens.onCodeLensResolve(l);
+});
+connection.onDocumentHighlight((p) => {
+  if (!serverConfig.documentHighlightsEnabled) return [];
+  return highlights.onDocumentHighlight(p, documents);
+});
+connection.languages.callHierarchy.onPrepare((p) => {
+  if (!serverConfig.callHierarchyEnabled) return null;
+  return callHierarchy.prepareCallHierarchy(p, documents, state);
+});
+connection.languages.callHierarchy.onIncomingCalls((p) => {
+  if (!serverConfig.callHierarchyEnabled) return [];
+  return callHierarchy.incomingCalls(p, documents, state);
+});
+connection.languages.callHierarchy.onOutgoingCalls((p) => {
+  if (!serverConfig.callHierarchyEnabled) return [];
+  return callHierarchy.outgoingCalls(p, documents, state);
+});
 
-connection.languages.inlayHint.on((params) =>
-  inlayHints.onInlayHint(params, documents, state),
+connection.languages.inlayHint.on((params) => {
+  if (!serverConfig.inlayHintsEnabled) return [];
+  return inlayHints.onInlayHint(params, documents, state);
+});
+
+connection.languages.semanticTokens.on((params) => {
+  return semanticTokens.provideSemanticTokens(params, documents, state);
+});
+
+// Control Flow Graph request handler
+connection.onRequest(
+  "custom/getControlFlowGraph",
+  async (params: { uri: string; detailed?: boolean }) => {
+    try {
+      const doc = documents.get(params.uri);
+      let text: string;
+      if (doc) {
+        text = doc.getText();
+      } else {
+        const fsPath = URI.parse(params.uri).fsPath;
+        text = await fs.promises.readFile(fsPath, "utf8");
+      }
+      const graph = analyzeControlFlow(text, params.detailed);
+      const mermaid = generateMermaid(graph);
+      return { graph, mermaid };
+    } catch (e) {
+      log(`Error analyzing control flow: ${e}`);
+      return {
+        graph: { nodes: [], edges: [], errors: [] },
+        mermaid: "graph TD\n  A[Error analyzing file]",
+      };
+    }
+  },
 );
 
 function mergeAllVariables(map: Map<string, VariableInfo[]>): VariableInfo[] {

@@ -18,12 +18,17 @@ import { showCalculator } from "./features/calculator";
 import { initErrorLens } from "./features/errorLens";
 import { showSnippetGenerator } from "./features/snippetGenerator";
 import { generateReport } from "./features/reportGenerator";
+import { showFlowchartViewer } from "./features/flowchartViewer";
+import { initLicense, ensurePremium } from "./features/license";
 
 // KRL tanılama koleksiyonu
 const krlDiagnostics = vscode.languages.createDiagnosticCollection("krl");
 let lsClient: LanguageClient;
 
 export function activate(context: vscode.ExtensionContext) {
+  // Initialize License System
+  initLicense(context);
+
   // Initialize Error Lens
   initErrorLens(context);
 
@@ -67,6 +72,16 @@ export function activate(context: vscode.ExtensionContext) {
         separateAfterBlocks: config.get<boolean>("separateAfterBlocks", false),
         indentFolds: config.get<boolean>("indentFolds", true),
         alignAssignments: config.get<boolean>("alignAssignments", true),
+        inlayHintsEnabled: config.get<boolean>("inlayHints.enabled", true),
+        codeLensEnabled: config.get<boolean>("codeLens.enabled", true),
+        callHierarchyEnabled: config.get<boolean>(
+          "callHierarchy.enabled",
+          true,
+        ),
+        documentHighlightsEnabled: config.get<boolean>(
+          "documentHighlights.enabled",
+          true,
+        ),
       });
     }
   }
@@ -295,9 +310,12 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Calculator
   context.subscriptions.push(
-    vscode.commands.registerCommand("krl.showCalculator", () => {
-      showCalculator(context);
-    }),
+    vscode.commands.registerCommand(
+      "krl.showCalculator",
+      ensurePremium(() => {
+        showCalculator(context);
+      })
+    ),
   );
 
   // Snippet Generator
@@ -309,9 +327,22 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Report Generator
   context.subscriptions.push(
-    vscode.commands.registerCommand("krl.generateReport", () => {
-      generateReport();
-    }),
+    vscode.commands.registerCommand(
+      "krl.generateReport",
+      ensurePremium(() => {
+        generateReport();
+      })
+    ),
+  );
+
+  // Flowchart Viewer
+  context.subscriptions.push(
+    vscode.commands.registerCommand(
+      "krl.showFlowchart",
+      ensurePremium(() => {
+        showFlowchartViewer(context, lsClient);
+      })
+    ),
   );
 
   // FOLD bölgesi ekle komutu

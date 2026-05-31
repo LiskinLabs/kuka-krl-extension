@@ -1,5 +1,4 @@
 import * as vscode from "vscode";
-import * as path from "path";
 
 export function showSnippetGenerator(context: vscode.ExtensionContext) {
   const panel = vscode.window.createWebviewPanel(
@@ -65,6 +64,7 @@ function getWebviewContent() {
     <div class="tab">
         <button class="tablinks active" onclick="openTab(event, 'Message')">Message Builder</button>
         <button class="tablinks" onclick="openTab(event, 'Grid')">Grid Pattern</button>
+        <button class="tablinks" onclick="openTab(event, 'Motion')">Motion (PTP/LIN)</button>
     </div>
 
     <div id="Message" class="tabcontent" style="display: block;">
@@ -118,6 +118,35 @@ function getWebviewContent() {
             <input type="number" id="gridSpaceY" value="100">
         </div>
         <button class="action-btn" onclick="generateGrid()">Insert Snippet</button>
+    </div>
+
+    <div id="Motion" class="tabcontent">
+        <h3>Motion Command</h3>
+        <p>Generates standard PTP or LIN movement blocks.</p>
+        <div class="form-group">
+            <label>Motion Type</label>
+            <select id="motionType">
+                <option value="PTP">PTP</option>
+                <option value="LIN">LIN</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Point Name</label>
+            <input type="text" id="motionPoint" value="p1">
+        </div>
+        <div class="form-group">
+            <label>Velocity (m/s or %)</label>
+            <input type="number" id="motionVel" value="100">
+        </div>
+        <div class="form-group">
+            <label>Approximation (C_PTP/C_DIS/None)</label>
+            <select id="motionApprox">
+                <option value="">None</option>
+                <option value="C_PTP">C_PTP</option>
+                <option value="C_DIS">C_DIS</option>
+            </select>
+        </div>
+        <button class="action-btn" onclick="generateMotion()">Insert Snippet</button>
     </div>
 
     <script>
@@ -197,6 +226,36 @@ function getWebviewContent() {
             krl += \`    \n\`;
             krl += \`  ENDFOR\n\`;
             krl += \`ENDFOR\n\`;
+            krl += \`;ENDFOLD\n\`;
+
+            vscode.postMessage({
+                command: 'insertCode',
+                text: krl
+            });
+        }
+
+        function generateMotion() {
+            const type = document.getElementById('motionType').value;
+            const point = document.getElementById('motionPoint').value || "p1";
+            const vel = document.getElementById('motionVel').value || "100";
+            const approx = document.getElementById('motionApprox').value;
+            
+            let krl = \`;FOLD \${type} \${point} Vel=\${vel} \${type==='PTP'?'%':'m/s'} \${approx}\n\`;
+            
+            if (type === 'PTP') {
+                krl += \`$BWDSTART=FALSE\n\`;
+                krl += \`PDAT_ACT=PDEF_DAT\n\`;
+                krl += \`FDAT_ACT=FDEF_DAT\n\`;
+                krl += \`BAS(#PTP_PARAMS, \${vel})\n\`;
+                krl += \`\${type} X\${point} \${approx}\n\`;
+            } else {
+                krl += \`$BWDSTART=FALSE\n\`;
+                krl += \`LDAT_ACT=LDEF_DAT\n\`;
+                krl += \`FDAT_ACT=FDEF_DAT\n\`;
+                krl += \`BAS(#CP_PARAMS, \${vel})\n\`;
+                krl += \`\${type} X\${point} \${approx}\n\`;
+            }
+            
             krl += \`;ENDFOLD\n\`;
 
             vscode.postMessage({

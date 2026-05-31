@@ -314,7 +314,7 @@ export function activate(context: vscode.ExtensionContext) {
       "krl.showCalculator",
       ensurePremium(() => {
         showCalculator(context);
-      })
+      }),
     ),
   );
 
@@ -331,7 +331,7 @@ export function activate(context: vscode.ExtensionContext) {
       "krl.generateReport",
       ensurePremium(() => {
         generateReport();
-      })
+      }),
     ),
   );
 
@@ -341,7 +341,7 @@ export function activate(context: vscode.ExtensionContext) {
       "krl.showFlowchart",
       ensurePremium(() => {
         showFlowchartViewer(context, lsClient);
-      })
+      }),
     ),
   );
 

@@ -12,6 +12,12 @@ node_modules/
 logs/
 *.log
 
+# Personal & Temporary
+MEMORY.md
+project_memory/
+2026-02-23_10-13-15/
+demo-workspace/
+
 # OS files
 .DS_Store
 Thumbs.db

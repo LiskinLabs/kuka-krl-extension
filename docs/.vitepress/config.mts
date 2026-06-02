@@ -3,6 +3,8 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "KUKA KRL Professional",
   description: "The definitive industrial development suite for KUKA Robot Language.",
+  base: '/kuka-krl-extension/',
+  outDir: '../public',
   themeConfig: {
     logo: '/logo.png',
     

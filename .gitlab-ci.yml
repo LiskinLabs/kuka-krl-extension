@@ -2,18 +2,20 @@ image: node:20
 
 stages:
   - build_and_test
+  - deploy
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - extension/node_modules/
+    - docs/node_modules/
 
 build_extension:
   stage: build_and_test
   script:
     - node -v
     - npm -v
-    - cp LICENSE.txt extension/
+    - cp LICENSE extension/LICENSE.txt
     - cd extension
     - npm install --progress=false
     - npm run compile
@@ -24,5 +26,17 @@ build_extension:
     paths:
       - extension/*.vsix
     expire_in: 1 week
+  only:
+    - main
+
+pages:
+  stage: deploy
+  script:
+    - cd docs
+    - npm install --progress=false
+    - npx vitepress build
+  artifacts:
+    paths:
+      - public
   only:
     - main

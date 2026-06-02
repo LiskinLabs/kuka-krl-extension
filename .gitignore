@@ -21,3 +21,8 @@ demo-workspace/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Docs build output
+public/
+docs/.vitepress/dist/
+docs/.vitepress/cache/

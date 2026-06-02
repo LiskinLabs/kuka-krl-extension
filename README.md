@@ -49,18 +49,18 @@ Investing in a **KRL Pro License** is a game-changer for commissioning engineers
 
 We offer flexible, industrial-grade licensing through our official merchant, **Lemon Squeezy**. All payments are secure and support Credit Cards, PayPal, and corporate invoices.
 
-### 💳 Choose Your Plan:
+### 💳 Pricing & Plans:
 
-| Plan | Best For | License Type |
-|:---|:---|:---|
-| ⏱️ **Monthly** | Short-term commissioning trips | Subscription (Cancel anytime) |
-| 📅 **Annual** | Full-time robotics engineers *(Save 20%)* | Subscription |
-| ♾️ **Lifetime** | Enterprises & long-term ownership | One-time payment (Yours forever) |
+| Plan | Price | Best For | License Type |
+|:---|:---:|:---|:---|
+| ⏱️ **Pro Monthly** | **$19** / mo | Short-term commissioning trips | Subscription (Cancel anytime) |
+| 📅 **Pro Annual** | **$149** / yr | Full-time robotics engineers *(Save ~35%)* | Subscription |
+| ♾️ **Pro Lifetime** | **$399** | Enterprises & long-term ownership | One-time payment (Yours forever) |
 
 <div align="center" style="margin: 30px 0;">
   <a href="https://liskin.lemonsqueezy.com/" style="text-decoration:none;">
     <kbd style="font-size: 1.4em; padding: 14px 28px; background-color: #FF6600; color: white; border-radius: 8px; font-weight: bold; border: 1px solid #d15500; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">
-      🛒 View Pricing & Get Pro License
+      🛒 Buy KRL Extension Pro License
     </kbd>
   </a>
   <p style="margin-top: 12px; font-size: 0.95em; color: #555;">Instant activation key delivery via <b>Lemon Squeezy</b> (Merchant of Record)</p>
@@ -73,7 +73,7 @@ We offer flexible, industrial-grade licensing through our official merchant, **L
 | Feature | Community (Free) | Pro (Premium) |
 | :--- | :---: | :---: |
 | **KRL Syntax Highlighting** (`.src`, `.dat`, `.sub`) | ✅ | ✅ |
-| **50+ Specialized Themes** (including WorkVisual Dark/Light) | ✅ | ✅ |
+| **Exclusive KUKA Themes** (Midnight OLED, Industrial, WorkVisual) | ✅ | ✅ |
 | **Contextual Autocomplete & Smart Folds** | ✅ | ✅ |
 | **Trilingual Localization** (EN, RU, TR) | ✅ | ✅ |
 | **Interactive Flowchart Viewer** (Logic mapping & navigation) | ❌ | **✅ Pro** |

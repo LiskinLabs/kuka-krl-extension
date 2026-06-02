@@ -536,4 +536,3 @@ function stripKrlComment(line: string): string {
   }
   return line;
 }
-

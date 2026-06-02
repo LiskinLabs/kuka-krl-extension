@@ -490,7 +490,7 @@ function runSyntaxCheck(document: vscode.TextDocument): void {
 
   for (let i = 0; i < document.lineCount; i++) {
     const line = document.lineAt(i);
-    const text = line.text.split(";")[0].trim();
+    const text = stripKrlComment(line.text).trim();
 
     if (!text) continue;
 
@@ -519,3 +519,21 @@ function runSyntaxCheck(document: vscode.TextDocument): void {
 
   krlDiagnostics.set(document.uri, issues);
 }
+
+/**
+ * Убирает комментарий из строки KRL, учитывая строковые литералы.
+ * Символ `;` внутри `"..."` не считается началом комментария.
+ */
+function stripKrlComment(line: string): string {
+  let inString = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') {
+      inString = !inString;
+    } else if (ch === ";" && !inString) {
+      return line.substring(0, i);
+    }
+  }
+  return line;
+}
+

@@ -120,17 +120,16 @@ test('Snippets contain E6POS/E6AXIS declarations', () => {
 // Test 3: Themes
 console.log('\n--- Theme Tests ---');
 
-test('Tao Theme exists', () => {
-    // Replaced by Bearded themes
-    const themePath = path.join(__dirname, '..', 'client', 'themes', 'KRL_Bearded_Arc.json'); // Fixed case
-    assertTrue(fs.existsSync(themePath), 'Bearded Arc Theme not found');
+test('Industrial Dark Theme exists', () => {
+    const themePath = path.join(__dirname, '..', 'client', 'themes', 'KRL_Industrial_Dark.json');
+    assertTrue(fs.existsSync(themePath), 'Industrial Dark Theme not found');
 });
 
 test('Theme has KRL-specific rules', () => {
-    const theme = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'client', 'themes', 'KRL_Bearded_Arc.json'), 'utf8')); // Fixed case
+    const theme = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'client', 'themes', 'KRL_Industrial_Dark.json'), 'utf8'));
     const content = JSON.stringify(theme);
-    // Bearded themes might have different scopes or structure, checking generic validity
-    assertTrue(content.length > 0, 'Theme is empty');
+    assertTrue(content.includes('keyword.control.krl'), 'KRL control keywords scope missing');
+    assertTrue(content.includes('keyword.function.movement.krl'), 'KRL movement scope missing');
 });
 
 test('All themes are valid JSON', () => {
@@ -143,7 +142,7 @@ test('All themes are valid JSON', () => {
             throw new Error(`Failed to parse theme: ${theme}`);
         }
     });
-    assertTrue(themes.length >= 7, `Expected at least 7 themes, got ${themes.length}`);
+    assertTrue(themes.length >= 6, `Expected at least 6 themes, got ${themes.length}`);
 });
 
 // Test 4: Package.json
@@ -157,10 +156,11 @@ test('Package.json version is 1.7.2', () => {
 test('Package.json has all themes registered', () => {
     const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
     const themes = pkg.contributes.themes;
-    assertTrue(themes.length >= 7, `Expected at least 7 themes, got ${themes.length}`);
+    assertTrue(themes.length >= 6, `Expected at least 6 themes, got ${themes.length}`);
     const labels = themes.map(t => t.label);
-    assertTrue(labels.includes('KRL Bearded Arc'), 'KRL Bearded Arc theme not registered');
-    assertTrue(labels.includes('KRL Bearded Monokai Terra'), 'KRL Bearded Monokai Terra theme not registered');
+    assertTrue(labels.includes('KRL Industrial Dark'), 'KRL Industrial Dark theme not registered');
+    assertTrue(labels.includes('KRL Blueprint'), 'KRL Blueprint theme not registered');
+    assertTrue(labels.includes('KRL WorkVisual Dark (Standard)'), 'KRL WorkVisual Dark theme not registered');
 });
 
 test('Package.json has KRL language definition', () => {

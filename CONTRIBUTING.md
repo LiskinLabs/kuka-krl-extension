@@ -6,7 +6,7 @@ First off, thank you for considering contributing to this project! It's people l
 
 1. **Clone the repository**:
    ```bash
-   git clone https://gitlab.com/LiskinLabs/kuka-krl-extension.git
+   git clone https://github.com/LiskinLabs/kuka-krl-extension.git
    ```
 
 2. **Install dependencies**:
@@ -28,10 +28,10 @@ First off, thank you for considering contributing to this project! It's people l
 
 ## Reporting Bugs
 
-- Check if the bug is already reported in the [Issues](https://gitlab.com/LiskinLabs/kuka-krl-extension/-/issues) section.
+- Check if the bug is already reported in the [Issues](https://github.com/LiskinLabs/kuka-krl-extension/issues) section.
 - Provide a clear description of the problem and steps to reproduce it.
 - Attach a sample `.src` or `.dat` file if possible.
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the [GPL-3.0 License](LICENSE.txt).
+By contributing, you agree that your contributions will be licensed under the [GPL-3.0 License](LICENSE).

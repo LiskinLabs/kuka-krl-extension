@@ -8,19 +8,19 @@
   "author": {
     "name": "Liskin Labs",
     "email": "silvlis@outlook.com",
-    "url": "https://gitlab.com/LiskinLabs"
+    "url": "https://github.com/LiskinLabs"
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/LiskinLabs/kuka-krl-extension.git"
+    "url": "https://github.com/LiskinLabs/kuka-krl-extension.git"
   },
   "license": "GPL-3.0-or-later",
   "sponsor": {
-    "url": "https://gitlab.com/LiskinLabs/kuka-krl-extension#support-the-project"
+    "url": "https://github.com/LiskinLabs/kuka-krl-extension#support-the-project"
   },
-  "homepage": "https://gitlab.com/LiskinLabs/kuka-krl-extension",
+  "homepage": "https://github.com/LiskinLabs/kuka-krl-extension",
   "bugs": {
-    "url": "https://gitlab.com/LiskinLabs/kuka-krl-extension/-/issues"
+    "url": "https://github.com/LiskinLabs/kuka-krl-extension/issues"
   },
   "categories": [
     "Programming Languages",

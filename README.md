@@ -21,7 +21,9 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Language-KRL-orange?style=flat-square" />
-  <img src="https://img.shields.io/badge/engines-VS%20Code%20%3E%3D%201.85.0-blue?logo=visual-studio-code&style=flat-square" />
+  <img src="https://img.shields.io/badge/Compatible%20with-VS%20Code-007ACC?logo=visual-studio-code&style=flat-square" />
+  <img src="https://img.shields.io/badge/Compatible%20with-Cursor-00c1ff?style=flat-square" />
+  <img src="https://img.shields.io/badge/Compatible%20with-Antigravity-black?style=flat-square" />
   <img src="https://img.shields.io/github/license/LiskinLabs/kuka-krl-extension?style=flat-square&color=blue" />
   <img src="https://img.shields.io/github/last-commit/LiskinLabs/kuka-krl-extension?style=flat-square" />
   <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" />

@@ -34,17 +34,25 @@ We offer two editions tailored to your workflow:
 
 ---
 
-## 👑 Upgrade to Pro & Unlock Full Power
+## 👑 Upgrade to Pro: Pricing & Licensing
 
-Investing in a **KRL Pro License** is a game-changer for commissioning engineers, paying for itself in the first hour of deployment on a factory floor.
+Investing in a **KRL Pro License** is a game-changer for commissioning engineers. By catching a single syntax error or coordinate mismatch before it reaches the robot pendant, the extension **pays for itself instantly** in saved factory downtime.
 
-<div align="center" style="margin: 20px 0;">
-  <a href="https://liskin.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7" style="text-decoration:none;">
-    <kbd style="font-size: 1.4em; padding: 12px 24px; background-color: #FF6600; color: white; border-radius: 8px; font-weight: bold; border: 1px solid #d15500; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+We offer flexible, industrial-grade licensing through our official merchant, **Lemon Squeezy**:
+
+| Plan | Price | Best For | License Type |
+|:---|:---:|:---|:---|
+| ⏱️ **Pro Monthly** | **$19** / mo | Short-term commissioning trips | Subscription (Cancel anytime) |
+| 📅 **Pro Annual** | **$149** / yr | Full-time robotics engineers *(Save ~35%)* | Subscription |
+| ♾️ **Pro Lifetime** | **$399** | Enterprises & long-term ownership | One-time payment (Yours forever) |
+
+<div align="center" style="margin: 30px 0;">
+  <a href="https://liskin.lemonsqueezy.com/" style="text-decoration:none;">
+    <kbd style="font-size: 1.4em; padding: 14px 28px; background-color: #FF6600; color: white; border-radius: 8px; font-weight: bold; border: 1px solid #d15500; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">
       🛒 Buy KRL Extension Pro License
     </kbd>
   </a>
-  <p style="margin-top: 12px; font-size: 0.95em; color: #555;">Secure subscription & activation keys managed by <b>Lemon Squeezy</b> (Merchant of Record)</p>
+  <p style="margin-top: 12px; font-size: 0.95em; color: #555;">Instant activation key delivery via <b>Lemon Squeezy</b> (Merchant of Record)</p>
 </div>
 
 ---
@@ -54,7 +62,7 @@ Investing in a **KRL Pro License** is a game-changer for commissioning engineers
 | Feature | Community (Free) | Pro (Premium) |
 | :--- | :---: | :---: |
 | **KRL Syntax Highlighting** (`.src`, `.dat`, `.sub`) | ✅ | ✅ |
-| **50+ Specialized Themes** (including WorkVisual Dark/Light) | ✅ | ✅ |
+| **Exclusive KUKA Themes** (Midnight OLED, Industrial, WorkVisual) | ✅ | ✅ |
 | **Contextual Autocomplete & Smart Folds** | ✅ | ✅ |
 | **Trilingual Localization** (EN, RU, TR) | ✅ | ✅ |
 | **Interactive Flowchart Viewer** (Logic mapping & navigation) | ❌ | **✅ Pro** |
@@ -133,7 +141,8 @@ Configure extension behaviors in your `settings.json`:
 ## 📄 License & Credits
 
 * **Publisher & Developer**: [Liskin Labs](https://gitlab.com/LiskinLabs) / [Silvestr Liskin](https://www.linkedin.com/in/silvestr-liskin-ab712920b/)
-* **Themes**: Base themes adapted from [Bearded Theme](https://github.com/BeardedBear/bearded-theme) (GPL-3.0)
+* **Themes**: 100% original KUKA-inspired themes (Industrial Dark, Midnight OLED, Blueprint)
 * **Data Sources**: KRL grammar references based on [OpenKuka](https://github.com/openkuka)
 
-Licensed under the GPL-3.0 License.
+**Licensed under a Proprietary EULA.**  
+The Community Edition is free for personal and commercial use. Reverse-engineering, decompiling, or redistributing the extension or its Premium features is strictly prohibited. See the `LICENSE` file for full terms.

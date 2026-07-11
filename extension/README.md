@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.png" width="160" alt="KUKA KRL Professional" />
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension-core/main/logo.png" width="160" alt="KUKA KRL Professional" />
 </p>
 
 <h1 align="center">KUKA KRL Professional</h1>
@@ -85,7 +85,7 @@ We offer flexible, industrial-grade licensing through our official merchant, **L
 
 *Preview:*
 <div align="center">
-  <img src="media/dead-code-demo.gif" width="600" alt="Flowchart Viewer Demo" />
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension-core/main/media/dead-code-demo.gif" width="600" alt="Flowchart Viewer Demo" />
 </div>
 
 ### 2. 🛡️ Industrial-Grade Safety & Diagnostics
@@ -97,7 +97,7 @@ We offer flexible, industrial-grade licensing through our official merchant, **L
 
 *Preview:*
 <div align="center">
-  <img src="media/type-validation-demo.gif" width="600" alt="Diagnostics Demo" />
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension-core/main/media/type-validation-demo.gif" width="600" alt="Diagnostics Demo" />
 </div>
 
 ### 3. 📐 KUKA Frame Calculator

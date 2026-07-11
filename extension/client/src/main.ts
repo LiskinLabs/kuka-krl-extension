@@ -189,6 +189,41 @@ export function activate(context: vscode.ExtensionContext) {
     ),
   );
 
+  // KUKA Git Metadata Cleaner
+  context.subscriptions.push(
+    vscode.commands.registerCommand("krl.cleanGitMetadata", async () => {
+      const editor = vscode.window.activeTextEditor;
+      if (!editor || editor.document.languageId !== "krl") {
+        vscode.window.showWarningMessage(t("warning.noActiveKrlFile"));
+        return;
+      }
+
+      const document = editor.document;
+      const edits: vscode.TextEdit[] = [];
+      const metadataRegex = /^&(ACCESS|REL|PARAM|COMMENT)\b/;
+
+      for (let i = 0; i < document.lineCount; i++) {
+        const line = document.lineAt(i);
+        if (metadataRegex.test(line.text.trim())) {
+          // Delete the line including the newline character if it's not the last line
+          const range = line.rangeIncludingLineBreak;
+          edits.push(vscode.TextEdit.delete(range));
+        }
+      }
+
+      if (edits.length > 0) {
+        const edit = new vscode.WorkspaceEdit();
+        edit.set(document.uri, edits);
+        await vscode.workspace.applyEdit(edit);
+        vscode.window.showInformationMessage(
+          `Removed ${edits.length} KUKA metadata line(s) for a clean Git commit.`
+        );
+      } else {
+        vscode.window.showInformationMessage("No KUKA metadata lines found.");
+      }
+    }),
+  );
+
   // =====================
   // Tree Views
   // =====================

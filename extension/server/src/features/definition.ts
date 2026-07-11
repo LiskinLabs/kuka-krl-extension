@@ -104,6 +104,33 @@ export class SymbolResolver {
       }
     }
 
+    // 2.5. Eğer .src dosyasındaysak, ilgili .dat dosyasını kontrol et
+    const uri = params.textDocument.uri.toLowerCase();
+    if (uri.endsWith(".src")) {
+      const datUriPattern = uri.substring(0, uri.length - 4) + ".dat";
+      
+      // Map keys case-sensitive olduğu için doğru uri'yi bul
+      let datUri = "";
+      for (const key of state.fileVariablesMap.keys()) {
+        if (key.toLowerCase() === datUriPattern) {
+          datUri = key;
+          break;
+        }
+      }
+      
+      if (datUri) {
+        const datVars = state.fileVariablesMap.get(datUri);
+        if (datVars) {
+          const datMatch = datVars.find(
+            (v) => v.name.toUpperCase() === functionName.toUpperCase() && v.range,
+          );
+          if (datMatch && datMatch.range) {
+            return Location.create(datUri, datMatch.range);
+          }
+        }
+      }
+    }
+
     // 3. Yerel olarak bulunamadıysa mergedVariables'da global (veya diğer dosyalardaki) değişkenleri ara
     const globalMatch = state.mergedVariables.find(
       (v) =>

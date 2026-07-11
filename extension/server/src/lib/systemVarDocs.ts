@@ -903,6 +903,82 @@ export const SYSTEM_VAR_DOCS: SystemVarDoc[] = [
     },
     readOnly: true,
   },
+  // --- KINEMATICS & DYNAMICS (MANUALLY TRANSLATED & VERIFIED) ---
+  {
+    name: "$ACC_AXIS",
+    type: "REAL[]",
+    description: {
+      en: "Axis acceleration in advance run.",
+      ru: "Ускорение осей при предварительном выполнении (advance run).",
+      tr: "Ön çalışma (advance run) sırasında eksen ivmesi.",
+    },
+  },
+  {
+    name: "$ACC_AXIS_C",
+    type: "REAL[]",
+    description: {
+      en: "Axis acceleration in main run.",
+      ru: "Ускорение осей при основном выполнении (main run).",
+      tr: "Ana çalışma (main run) sırasında eksen ivmesi.",
+    },
+  },
+  {
+    name: "$ACC_EXTAX",
+    type: "REAL[]",
+    description: {
+      en: "External axis acceleration in advance run.",
+      ru: "Ускорение внешних осей при предварительном выполнении.",
+      tr: "Ön çalışma sırasında harici eksen ivmesi.",
+    },
+  },
+  {
+    name: "$ACC_EXTAX_C",
+    type: "REAL[]",
+    description: {
+      en: "External axis acceleration in main run.",
+      ru: "Ускорение внешних осей при основном выполнении.",
+      tr: "Ana çalışma sırasında harici eksen ivmesi.",
+    },
+  },
+  {
+    name: "$ACC_MA",
+    type: "STRUC",
+    description: {
+      en: "Maximum values for path, swivel, and rotational accelerations.",
+      ru: "Максимальные значения для ускорений: путевого, поворотного и вращательного.",
+      tr: "Yörünge, dönüş ve dönme ivmeleri için maksimum değerler.",
+    },
+  },
+  {
+    name: "$ACT_BASE",
+    type: "INT",
+    description: {
+      en: "Number of the currently active BASE coordinate system.",
+      ru: "Номер текущей активной базовой системы координат (BASE).",
+      tr: "Şu anda aktif olan BASE (Taban) koordinat sisteminin numarası.",
+    },
+    range: "1-32, 0=WORLD, -1=NONE",
+  },
+  {
+    name: "$ACT_TOOL",
+    type: "INT",
+    description: {
+      en: "Number of the currently active TOOL coordinate system.",
+      ru: "Номер текущей активной системы координат инструмента (TOOL).",
+      tr: "Şu anda aktif olan TOOL (Alet) koordinat sisteminin numarası.",
+    },
+    range: "1-16, 0=FLANGE, -1=NONE",
+  },
+  {
+    name: "$ACT_ADVANCE",
+    type: "INT",
+    description: {
+      en: "Current number of planned motion blocks in the main run (Advance Run Queue).",
+      ru: "Текущее количество запланированных блоков движения в очереди предварительного чтения.",
+      tr: "Ana çalışmada planlanan hareket bloklarının mevcut sayısı (Ön Okuma Kuyruğu).",
+    },
+    readOnly: true,
+  }
 ];
 
 /**

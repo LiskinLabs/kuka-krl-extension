@@ -516,17 +516,40 @@ connection.onRequest(
 );
 
 function mergeAllVariables(map: Map<string, VariableInfo[]>): VariableInfo[] {
-  const result: VariableInfo[] = [];
-  const seen = new Set<string>();
+  const result = new Map<string, VariableInfo & { uri: string }>();
+
   for (const [uri, vars] of map.entries()) {
+    const isDat = uri.toLowerCase().endsWith(".dat");
     for (const v of vars) {
-      if (!seen.has(v.name.toUpperCase())) {
-        seen.add(v.name.toUpperCase());
-        result.push({ ...v, uri });
+      const key = v.name.toUpperCase();
+      const existing = result.get(key);
+      
+      // Calculate priority for current variable
+      // Priority 4: GLOBAL + .dat
+      // Priority 3: .dat
+      // Priority 2: GLOBAL + .src
+      // Priority 1: .src
+      let currentPriority = 1;
+      if (isDat && v.isGlobal) currentPriority = 4;
+      else if (isDat) currentPriority = 3;
+      else if (v.isGlobal) currentPriority = 2;
+
+      let existingPriority = 0;
+      if (existing) {
+        const existingIsDat = existing.uri.toLowerCase().endsWith(".dat");
+        if (existingIsDat && existing.isGlobal) existingPriority = 4;
+        else if (existingIsDat) existingPriority = 3;
+        else if (existing.isGlobal) existingPriority = 2;
+        else existingPriority = 1;
+      }
+
+      if (!existing || currentPriority > existingPriority) {
+        result.set(key, { ...v, uri });
       }
     }
   }
-  return result;
+  
+  return Array.from(result.values());
 }
 
 connection.listen();

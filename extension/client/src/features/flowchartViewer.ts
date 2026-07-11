@@ -247,34 +247,34 @@ function getWebviewContent(
   isDetailed: boolean,
 ): string {
   const errorTypeMap: Record<string, string> = {
-    unreachable: "Недостижимый код",
-    infiniteLoop: "Бесконечный цикл",
-    emptyBranch: "Пустая ветка",
-    invalidGoto: "Неверный GOTO",
-    uninitMotion: "Без инициализации",
+    unreachable: t("flow.err.unreachable"),
+    infiniteLoop: t("flow.err.infiniteLoop"),
+    emptyBranch: t("flow.err.emptyBranch"),
+    invalidGoto: t("flow.err.invalidGoto"),
+    uninitMotion: t("flow.err.uninitMotion"),
   };
 
   const localizeMessage = (e: any) => {
-    const lineNum = e.line + 1;
+    const lineNum = (e.line + 1).toString();
     if (e.type === "emptyBranch") {
-      return `Условие IF на строке ${lineNum} имеет пустую ветку (не содержит исполняемого кода).`;
+      return t("flow.msg.emptyBranch", lineNum);
     }
     if (e.type === "infiniteLoop") {
-      return `Цикл LOOP на строке ${lineNum} не имеет команд выхода (EXIT/HALT) и является бесконечным.`;
+      return t("flow.msg.infiniteLoop", lineNum);
     }
     if (e.type === "unreachable") {
       if (e.message.toLowerCase().includes("motion")) {
-        return `Команда движения на строке ${lineNum} недостижима после прерывания потока выполнения.`;
+        return t("flow.msg.unreachableMotion", lineNum);
       }
-      return `Код на строке ${lineNum} недостижим из-за прерывания потока (RETURN/EXIT/HALT) выше.`;
+      return t("flow.msg.unreachableCode", lineNum);
     }
     if (e.type === "uninitMotion") {
-      return `Движение на строке ${lineNum} вызвано без предварительной инициализации TOOL или BASE (нужен BAS(#INITMOV) или $TOOL/$BASE).`;
+      return t("flow.msg.uninitMotion", lineNum);
     }
     if (e.type === "invalidGoto") {
       const match = e.message.match(/target '([^']+)'/);
-      const target = match ? match[1] : "неизвестная";
-      return `Целевая метка '${target}' для перехода GOTO на строке ${lineNum} не определена в файле.`;
+      const target = match ? match[1] : "unknown";
+      return t("flow.msg.invalidGoto", target, lineNum);
     }
     return e.message;
   };

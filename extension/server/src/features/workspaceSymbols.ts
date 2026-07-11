@@ -42,7 +42,7 @@ export class WorkspaceSymbolsProvider {
           symbols.push({
             name: variable.name,
             kind: this.getSymbolKind(variable.type),
-            location: Location.create(uri, {
+            location: Location.create(uri, variable.range || {
               start: Position.create(0, 0),
               end: Position.create(0, variable.name.length),
             }),

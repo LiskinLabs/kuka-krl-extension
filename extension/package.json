@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/LiskinLabs/kuka-krl-extension.git"
+    "url": "https://github.com/LiskinLabs/kuka-krl-extension-core.git"
   },
   "license": "SEE LICENSE IN LICENSE.txt",
   "sponsor": {
-    "url": "https://github.com/LiskinLabs/kuka-krl-extension#support-the-project"
+    "url": "https://github.com/LiskinLabs/kuka-krl-extension-core#support-the-project"
   },
-  "homepage": "https://github.com/LiskinLabs/kuka-krl-extension",
+  "homepage": "https://github.com/LiskinLabs/kuka-krl-extension-core",
   "bugs": {
-    "url": "https://github.com/LiskinLabs/kuka-krl-extension/issues"
+    "url": "https://github.com/LiskinLabs/kuka-krl-extension-core/issues"
   },
   "categories": [
     "Programming Languages",
@@ -144,6 +144,12 @@
         "title": "%command.removeTrailingWhitespace%",
         "category": "KRL",
         "icon": "$(whitespace)"
+      },
+      {
+        "command": "krl.cleanGitMetadata",
+        "title": "Clean KUKA Git Metadata",
+        "category": "KRL",
+        "icon": "$(clear-all)"
       },
       {
         "command": "krl.sortDeclarations",
@@ -276,6 +282,11 @@
           "when": "resourceLangId == krl"
         },
         {
+          "command": "krl.cleanGitMetadata",
+          "group": "navigation@8",
+          "when": "resourceLangId == krl"
+        },
+        {
           "command": "krl.showFlowchart",
           "group": "navigation@1",
           "when": "resourceLangId == krl"
@@ -295,6 +306,11 @@
         {
           "command": "krl.removeTrailingWhitespace",
           "group": "1_modification@3",
+          "when": "resourceLangId == krl"
+        },
+        {
+          "command": "krl.cleanGitMetadata",
+          "group": "1_modification@3_1",
           "when": "resourceLangId == krl"
         },
         {
@@ -459,6 +475,7 @@
   },
   "dependencies": {
     "@types/vscode": "^1.109.0",
+    "@vscode/webview-ui-toolkit": "^1.4.0",
     "vscode-languageclient": "^9.0.1",
     "vscode-languageserver": "^9.0.1",
     "vscode-languageserver-textdocument": "^1.0.12",

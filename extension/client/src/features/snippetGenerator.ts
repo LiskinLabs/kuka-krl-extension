@@ -1,17 +1,29 @@
 import * as vscode from "vscode";
+import { t } from "../i18n";
 
 export function showSnippetGenerator(context: vscode.ExtensionContext) {
   const panel = vscode.window.createWebviewPanel(
     "krlSnippetGenerator",
-    "KRL Snippet Generator",
+    t("snippet.title"),
     vscode.ViewColumn.Beside,
     {
       enableScripts: true,
-      localResourceRoots: [],
+      localResourceRoots: [vscode.Uri.joinPath(context.extensionUri, "node_modules")],
     },
   );
 
-  panel.webview.html = getWebviewContent();
+  const toolkitUri = panel.webview.asWebviewUri(
+    vscode.Uri.joinPath(
+      context.extensionUri,
+      "node_modules",
+      "@vscode",
+      "webview-ui-toolkit",
+      "dist",
+      "toolkit.js",
+    ),
+  );
+
+  panel.webview.html = getWebviewContent(toolkitUri.toString());
 
   panel.webview.onDidReceiveMessage(
     (message) => {
@@ -22,9 +34,9 @@ export function showSnippetGenerator(context: vscode.ExtensionContext) {
             editor.edit((editBuilder) => {
               editBuilder.insert(editor.selection.active, message.text);
             });
-            vscode.window.showInformationMessage("Snippet inserted!");
+            vscode.window.showInformationMessage(t("snippet.alert.inserted"));
           } else {
-            vscode.window.showErrorMessage("No active KRL editor found!");
+            vscode.window.showErrorMessage(t("snippet.alert.noEditor"));
           }
           return;
       }
@@ -34,137 +46,127 @@ export function showSnippetGenerator(context: vscode.ExtensionContext) {
   );
 }
 
-function getWebviewContent() {
+function getWebviewContent(toolkitUri: string) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRL Snippet Generator</title>
+    <title>${t("snippet.title")}</title>
+    <script type="module" src="${toolkitUri}"></script>
     <style>
-        body { font-family: var(--vscode-font-family); color: var(--vscode-editor-foreground); background-color: var(--vscode-editor-background); padding: 20px; }
-        h2 { border-bottom: 1px solid var(--vscode-panel-border); padding-bottom: 10px; }
-        .tab { overflow: hidden; border: 1px solid #333; background-color: var(--vscode-editor-background); display: flex; }
-        .tab button { background-color: inherit; border: none; outline: none; cursor: pointer; padding: 10px 16px; transition: 0.3s; color: var(--vscode-editor-foreground); opacity: 0.7; border-bottom: 2px solid transparent; }
-        .tab button:hover { opacity: 1; background-color: var(--vscode-list-hoverBackground); }
-        .tab button.active { opacity: 1; border-bottom: 2px solid var(--vscode-panelTitle-activeBorder); font-weight: bold; }
-        .tabcontent { display: none; padding: 20px; border: 1px solid var(--vscode-panel-border); border-top: none; animation: fadeEffect 0.5s; }
-        @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input, select, textarea { width: 100%; padding: 8px; box-sizing: border-box; background-color: var(--vscode-input-background); color: var(--vscode-input-foreground); border: 1px solid var(--vscode-input-border); }
-        button.action-btn { background-color: var(--vscode-button-background); color: var(--vscode-button-foreground); padding: 10px 20px; border: none; cursor: pointer; margin-top: 10px; font-size: 14px; }
-        button.action-btn:hover { background-color: var(--vscode-button-hoverBackground); }
-        .code-preview { background-color: var(--vscode-textBlockQuote-background); padding: 10px; border-left: 4px solid var(--vscode-textBlockQuote-border); font-family: monospace; white-space: pre-wrap; margin-top: 20px; }
+        body { padding: 20px; }
+        h2 { border-bottom: 1px solid var(--vscode-panel-border); padding-bottom: 10px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 4px; max-width: 400px; }
+        vscode-panel-tab { text-transform: uppercase; }
+        .action-container { margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--vscode-panel-border); }
     </style>
 </head>
 <body>
-    <h2>KRL Snippet Generator</h2>
+    <h2>${t("snippet.title")}</h2>
 
-    <div class="tab">
-        <button class="tablinks active" onclick="openTab(event, 'Message')">Message Builder</button>
-        <button class="tablinks" onclick="openTab(event, 'Grid')">Grid Pattern</button>
-        <button class="tablinks" onclick="openTab(event, 'Motion')">Motion (PTP/LIN)</button>
-    </div>
+    <vscode-panels>
+        <vscode-panel-tab id="tab-1">${t("snippet.tab.message")}</vscode-panel-tab>
+        <vscode-panel-tab id="tab-2">${t("snippet.tab.grid")}</vscode-panel-tab>
+        <vscode-panel-tab id="tab-3">${t("snippet.tab.motion")}</vscode-panel-tab>
 
-    <div id="Message" class="tabcontent" style="display: block;">
-        <h3>KUKA User Message</h3>
-        <p>Generates code for KUKA User Messages (KrlMsg).</p>
-        <div class="form-group">
-            <label>Type</label>
-            <select id="msgType">
-                <option value="Notify">Notify (Log)</option>
-                <option value="Quit">Quit (Acknowledge)</option>
-                <option value="State">State (Status)</option>
-                <option value="Wait">Wait (Blocking)</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Key (Unique ID)</label>
-            <input type="text" id="msgKey" placeholder="e.g. MyMsg1" value="Msg1">
-        </div>
-        <div class="form-group">
-            <label>Message Text (use %1, %2 for params)</label>
-            <input type="text" id="msgText" placeholder="e.g. Value is %1" value="Process started">
-        </div>
-        <div class="form-group">
-            <label>Parameter 1 (Optional)</label>
-            <input type="text" id="msgP1" placeholder="e.g. nCount">
-        </div>
-        <button class="action-btn" onclick="generateMessage()">Insert Snippet</button>
-    </div>
+        <vscode-panel-view id="view-1">
+            <div style="width:100%;">
+                <h3>${t("snippet.msg.title")}</h3>
+                <p>${t("snippet.msg.desc")}</p>
+                <div class="form-group">
+                    <label>${t("snippet.msg.type")}</label>
+                    <vscode-dropdown id="msgType">
+                        <vscode-option value="Notify">${t("snippet.msg.type.notify")}</vscode-option>
+                        <vscode-option value="Quit">${t("snippet.msg.type.quit")}</vscode-option>
+                        <vscode-option value="State">${t("snippet.msg.type.state")}</vscode-option>
+                        <vscode-option value="Wait">${t("snippet.msg.type.wait")}</vscode-option>
+                    </vscode-dropdown>
+                </div>
+                <div class="form-group">
+                    <label>${t("snippet.msg.key")}</label>
+                    <vscode-text-field id="msgKey" placeholder="${t("snippet.msg.key.placeholder")}" value="Msg1"></vscode-text-field>
+                </div>
+                <div class="form-group">
+                    <label>${t("snippet.msg.text")}</label>
+                    <vscode-text-field id="msgText" placeholder="${t("snippet.msg.text.placeholder")}" value="Process started"></vscode-text-field>
+                </div>
+                <div class="form-group">
+                    <label>${t("snippet.msg.param1")}</label>
+                    <vscode-text-field id="msgP1" placeholder="${t("snippet.msg.param1.placeholder")}"></vscode-text-field>
+                </div>
+                <div class="action-container">
+                    <vscode-button onclick="generateMessage()">${t("snippet.insert")}</vscode-button>
+                </div>
+            </div>
+        </vscode-panel-view>
 
-    <div id="Grid" class="tabcontent">
-        <h3>Palletizing Grid</h3>
-        <p>Generates nested loops for a grid pattern.</p>
-        <div class="form-group">
-            <label>Base Point Name</label>
-            <input type="text" id="gridBase" value="xBasePoint">
-        </div>
-        <div class="form-group">
-            <label>Rows (X)</label>
-            <input type="number" id="gridRows" value="3">
-        </div>
-        <div class="form-group">
-            <label>Cols (Y)</label>
-            <input type="number" id="gridCols" value="2">
-        </div>
-        <div class="form-group">
-            <label>Spacing X (mm)</label>
-            <input type="number" id="gridSpaceX" value="100">
-        </div>
-        <div class="form-group">
-            <label>Spacing Y (mm)</label>
-            <input type="number" id="gridSpaceY" value="100">
-        </div>
-        <button class="action-btn" onclick="generateGrid()">Insert Snippet</button>
-    </div>
+        <vscode-panel-view id="view-2">
+            <div style="width:100%;">
+                <h3>${t("snippet.grid.title")}</h3>
+                <p>${t("snippet.grid.desc")}</p>
+                <div class="form-group">
+                    <label>${t("snippet.grid.base")}</label>
+                    <vscode-text-field id="gridBase" value="xBasePoint"></vscode-text-field>
+                </div>
+                <div class="form-group">
+                    <label>${t("snippet.grid.rows")}</label>
+                    <vscode-text-field id="gridRows" value="3"></vscode-text-field>
+                </div>
+                <div class="form-group">
+                    <label>${t("snippet.grid.cols")}</label>
+                    <vscode-text-field id="gridCols" value="2"></vscode-text-field>
+                </div>
+                <div class="form-group">
+                    <label>${t("snippet.grid.spaceX")}</label>
+                    <vscode-text-field id="gridSpaceX" value="100"></vscode-text-field>
+                </div>
+                <div class="form-group">
+                    <label>${t("snippet.grid.spaceY")}</label>
+                    <vscode-text-field id="gridSpaceY" value="100"></vscode-text-field>
+                </div>
+                <div class="action-container">
+                    <vscode-button onclick="generateGrid()">${t("snippet.insert")}</vscode-button>
+                </div>
+            </div>
+        </vscode-panel-view>
 
-    <div id="Motion" class="tabcontent">
-        <h3>Motion Command</h3>
-        <p>Generates standard PTP or LIN movement blocks.</p>
-        <div class="form-group">
-            <label>Motion Type</label>
-            <select id="motionType">
-                <option value="PTP">PTP</option>
-                <option value="LIN">LIN</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Point Name</label>
-            <input type="text" id="motionPoint" value="p1">
-        </div>
-        <div class="form-group">
-            <label>Velocity (m/s or %)</label>
-            <input type="number" id="motionVel" value="100">
-        </div>
-        <div class="form-group">
-            <label>Approximation (C_PTP/C_DIS/None)</label>
-            <select id="motionApprox">
-                <option value="">None</option>
-                <option value="C_PTP">C_PTP</option>
-                <option value="C_DIS">C_DIS</option>
-            </select>
-        </div>
-        <button class="action-btn" onclick="generateMotion()">Insert Snippet</button>
-    </div>
+        <vscode-panel-view id="view-3">
+            <div style="width:100%;">
+                <h3>${t("snippet.mot.title")}</h3>
+                <p>${t("snippet.mot.desc")}</p>
+                <div class="form-group">
+                    <label>${t("snippet.mot.type")}</label>
+                    <vscode-dropdown id="motionType">
+                        <vscode-option value="PTP">PTP</vscode-option>
+                        <vscode-option value="LIN">LIN</vscode-option>
+                    </vscode-dropdown>
+                </div>
+                <div class="form-group">
+                    <label>${t("snippet.mot.point")}</label>
+                    <vscode-text-field id="motionPoint" value="p1"></vscode-text-field>
+                </div>
+                <div class="form-group">
+                    <label>${t("snippet.mot.vel")}</label>
+                    <vscode-text-field id="motionVel" value="100"></vscode-text-field>
+                </div>
+                <div class="form-group">
+                    <label>${t("snippet.mot.approx")}</label>
+                    <vscode-dropdown id="motionApprox">
+                        <vscode-option value="">${t("snippet.mot.approx.none")}</vscode-option>
+                        <vscode-option value="C_PTP">C_PTP</vscode-option>
+                        <vscode-option value="C_DIS">C_DIS</vscode-option>
+                    </vscode-dropdown>
+                </div>
+                <div class="action-container">
+                    <vscode-button onclick="generateMotion()">${t("snippet.insert")}</vscode-button>
+                </div>
+            </div>
+        </vscode-panel-view>
+    </vscode-panels>
 
     <script>
         const vscode = acquireVsCodeApi();
-
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
 
         function generateMessage() {
             const type = document.getElementById('msgType').value;
@@ -173,29 +175,29 @@ function getWebviewContent() {
             const p1 = document.getElementById('msgP1').value;
 
             // Generate clean code
-            let krl = \`;FOLD Message: \${text}\n\`;
-            krl += \`decl KrlMsg_T msg\n\`;
-            krl += \`decl KrlMsgPar_T par[3]\n\`;
-            krl += \`decl KrlMsgOpt_T opt\n\`;
-            krl += \`decl INT handle\n\n\`;
+            let krl = \`;FOLD Message: \${text}\\n\`;
+            krl += \`decl KrlMsg_T msg\\n\`;
+            krl += \`decl KrlMsgPar_T par[3]\\n\`;
+            krl += \`decl KrlMsgOpt_T opt\\n\`;
+            krl += \`decl INT handle\\n\\n\`;
 
-            krl += \`msg = {Modul[] "User", Nr 1, Msg_txt[] "\${text}"}\n\`;
+            krl += \`msg = {Modul[] "User", Nr 1, Msg_txt[] "\${text}"}\\n\`;
             
             if (p1) {
-                krl += \`par[1] = {Par_type #Value, Par_int \${p1}}\n\`;
+                krl += \`par[1] = {Par_type #Value, Par_int \${p1}}\\n\`;
             }
 
             if (type === 'Notify') {
-                krl += \`handle = Set_KrlMsg(#Notify, msg, par[], opt)\n\`;
+                krl += \`handle = Set_KrlMsg(#Notify, msg, par[], opt)\\n\`;
             } else if (type === 'Quit') {
-                 krl += \`handle = Set_KrlMsg(#Quit, msg, par[], opt)\n\`;
-                 krl += \`WHILE ( Exists_KrlMsg(handle) )\n  WAIT SEC 0.1\nENDWHILE\n\`;
+                 krl += \`handle = Set_KrlMsg(#Quit, msg, par[], opt)\\n\`;
+                 krl += \`WHILE ( Exists_KrlMsg(handle) )\\n  WAIT SEC 0.1\\nENDWHILE\\n\`;
             } else if (type === 'State') {
-                krl += \`handle = Set_KrlMsg(#State, msg, par[], opt)\n\`;
+                krl += \`handle = Set_KrlMsg(#State, msg, par[], opt)\\n\`;
             } else if (type === 'Wait') {
-                krl += \`handle = Set_KrlMsg(#Waiting, msg, par[], opt)\n\`;
+                krl += \`handle = Set_KrlMsg(#Waiting, msg, par[], opt)\\n\`;
             }
-            krl += \`;ENDFOLD\n\`;
+            krl += \`;ENDFOLD\\n\`;
             
             vscode.postMessage({
                 command: 'insertCode',
@@ -210,23 +212,23 @@ function getWebviewContent() {
             const spaceX = document.getElementById('gridSpaceX').value;
             const spaceY = document.getElementById('gridSpaceY').value;
 
-            let krl = \`;FOLD Grid Pattern\n\`;
-            krl += \`; Please declare these at the top of your file:\n\`;
-            krl += \`; DECL INT i_grid, j_grid\n\`;
-            krl += \`; DECL FRAME fPos\n\n\`;
+            let krl = \`;FOLD Grid Pattern\\n\`;
+            krl += \`; Please declare these at the top of your file:\\n\`;
+            krl += \`; DECL INT i_grid, j_grid\\n\`;
+            krl += \`; DECL FRAME fPos\\n\\n\`;
 
-            krl += \`FOR i_grid = 1 TO \${rows}\n\`;
-            krl += \`  FOR j_grid = 1 TO \${cols}\n\`;
-            krl += \`    fPos = \${base}\n\`;
-            krl += \`    fPos.X = fPos.X + (i_grid-1) * \${spaceX}\n\`;
-            krl += \`    fPos.Y = fPos.Y + (j_grid-1) * \${spaceY}\n\`;
-            krl += \`    \n\`;
-            krl += \`    ; Move to position\n\`;
-            krl += \`    LIN fPos\n\`;
-            krl += \`    \n\`;
-            krl += \`  ENDFOR\n\`;
-            krl += \`ENDFOR\n\`;
-            krl += \`;ENDFOLD\n\`;
+            krl += \`FOR i_grid = 1 TO \${rows}\\n\`;
+            krl += \`  FOR j_grid = 1 TO \${cols}\\n\`;
+            krl += \`    fPos = \${base}\\n\`;
+            krl += \`    fPos.X = fPos.X + (i_grid-1) * \${spaceX}\\n\`;
+            krl += \`    fPos.Y = fPos.Y + (j_grid-1) * \${spaceY}\\n\`;
+            krl += \`    \\n\`;
+            krl += \`    ; Move to position\\n\`;
+            krl += \`    LIN fPos\\n\`;
+            krl += \`    \\n\`;
+            krl += \`  ENDFOR\\n\`;
+            krl += \`ENDFOR\\n\`;
+            krl += \`;ENDFOLD\\n\`;
 
             vscode.postMessage({
                 command: 'insertCode',
@@ -240,23 +242,23 @@ function getWebviewContent() {
             const vel = document.getElementById('motionVel').value || "100";
             const approx = document.getElementById('motionApprox').value;
             
-            let krl = \`;FOLD \${type} \${point} Vel=\${vel} \${type==='PTP'?'%':'m/s'} \${approx}\n\`;
+            let krl = \`;FOLD \${type} \${point} Vel=\${vel} \${type==='PTP'?'%':'m/s'} \${approx}\\n\`;
             
             if (type === 'PTP') {
-                krl += \`$BWDSTART=FALSE\n\`;
-                krl += \`PDAT_ACT=PDEF_DAT\n\`;
-                krl += \`FDAT_ACT=FDEF_DAT\n\`;
-                krl += \`BAS(#PTP_PARAMS, \${vel})\n\`;
-                krl += \`\${type} X\${point} \${approx}\n\`;
+                krl += \`$BWDSTART=FALSE\\n\`;
+                krl += \`PDAT_ACT=PDEF_DAT\\n\`;
+                krl += \`FDAT_ACT=FDEF_DAT\\n\`;
+                krl += \`BAS(#PTP_PARAMS, \${vel})\\n\`;
+                krl += \`\${type} X\${point} \${approx}\\n\`;
             } else {
-                krl += \`$BWDSTART=FALSE\n\`;
-                krl += \`LDAT_ACT=LDEF_DAT\n\`;
-                krl += \`FDAT_ACT=FDEF_DAT\n\`;
-                krl += \`BAS(#CP_PARAMS, \${vel})\n\`;
-                krl += \`\${type} X\${point} \${approx}\n\`;
+                krl += \`$BWDSTART=FALSE\\n\`;
+                krl += \`LDAT_ACT=LDEF_DAT\\n\`;
+                krl += \`FDAT_ACT=FDEF_DAT\\n\`;
+                krl += \`BAS(#CP_PARAMS, \${vel})\\n\`;
+                krl += \`\${type} X\${point} \${approx}\\n\`;
             }
             
-            krl += \`;ENDFOLD\n\`;
+            krl += \`;ENDFOLD\\n\`;
 
             vscode.postMessage({
                 command: 'insertCode',

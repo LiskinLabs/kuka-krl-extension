@@ -8,7 +8,9 @@ export function showSnippetGenerator(context: vscode.ExtensionContext) {
     vscode.ViewColumn.Beside,
     {
       enableScripts: true,
-      localResourceRoots: [vscode.Uri.joinPath(context.extensionUri, "node_modules")],
+      localResourceRoots: [
+        vscode.Uri.joinPath(context.extensionUri, "node_modules"),
+      ],
     },
   );
 

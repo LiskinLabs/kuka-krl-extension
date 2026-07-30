@@ -978,7 +978,7 @@ export const SYSTEM_VAR_DOCS: SystemVarDoc[] = [
       tr: "Ana çalışmada planlanan hareket bloklarının mevcut sayısı (Ön Okuma Kuyruğu).",
     },
     readOnly: true,
-  }
+  },
 ];
 
 /**

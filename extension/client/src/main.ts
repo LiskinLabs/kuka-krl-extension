@@ -216,7 +216,7 @@ export function activate(context: vscode.ExtensionContext) {
         edit.set(document.uri, edits);
         await vscode.workspace.applyEdit(edit);
         vscode.window.showInformationMessage(
-          `Removed ${edits.length} KUKA metadata line(s) for a clean Git commit.`
+          `Removed ${edits.length} KUKA metadata line(s) for a clean Git commit.`,
         );
       } else {
         vscode.window.showInformationMessage("No KUKA metadata lines found.");

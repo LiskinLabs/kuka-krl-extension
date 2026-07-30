@@ -523,7 +523,7 @@ function mergeAllVariables(map: Map<string, VariableInfo[]>): VariableInfo[] {
     for (const v of vars) {
       const key = v.name.toUpperCase();
       const existing = result.get(key);
-      
+
       // Calculate priority for current variable
       // Priority 4: GLOBAL + .dat
       // Priority 3: .dat
@@ -548,7 +548,7 @@ function mergeAllVariables(map: Map<string, VariableInfo[]>): VariableInfo[] {
       }
     }
   }
-  
+
   return Array.from(result.values());
 }
 

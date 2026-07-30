@@ -132,10 +132,14 @@ const en: Messages = {
   "flow.err.uninitMotion": "Uninitialized Motion",
   "flow.msg.emptyBranch": "IF condition on line {0} has an empty branch.",
   "flow.msg.infiniteLoop": "LOOP on line {0} has no EXIT/HALT commands.",
-  "flow.msg.unreachableMotion": "Motion command on line {0} is unreachable after flow interruption.",
-  "flow.msg.unreachableCode": "Code on line {0} is unreachable due to flow interruption (RETURN/EXIT/HALT).",
-  "flow.msg.uninitMotion": "Motion on line {0} lacks prior TOOL/BASE initialization (needs BAS(#INITMOV) or $TOOL/$BASE).",
-  "flow.msg.invalidGoto": "Target label '{0}' for GOTO on line {1} is undefined in this file.",
+  "flow.msg.unreachableMotion":
+    "Motion command on line {0} is unreachable after flow interruption.",
+  "flow.msg.unreachableCode":
+    "Code on line {0} is unreachable due to flow interruption (RETURN/EXIT/HALT).",
+  "flow.msg.uninitMotion":
+    "Motion on line {0} lacks prior TOOL/BASE initialization (needs BAS(#INITMOV) or $TOOL/$BASE).",
+  "flow.msg.invalidGoto":
+    "Target label '{0}' for GOTO on line {1} is undefined in this file.",
 
   "snippet.title": "KRL Snippet Generator",
   "snippet.tab.message": "Message Builder",
@@ -209,12 +213,18 @@ const ru: Messages = {
   "flow.err.emptyBranch": "Пустая ветка",
   "flow.err.invalidGoto": "Неверный GOTO",
   "flow.err.uninitMotion": "Без инициализации",
-  "flow.msg.emptyBranch": "Условие IF на строке {0} имеет пустую ветку (не содержит исполняемого кода).",
-  "flow.msg.infiniteLoop": "Цикл LOOP на строке {0} не имеет команд выхода (EXIT/HALT) и является бесконечным.",
-  "flow.msg.unreachableMotion": "Команда движения на строке {0} недостижима после прерывания потока выполнения.",
-  "flow.msg.unreachableCode": "Код на строке {0} недостижим из-за прерывания потока (RETURN/EXIT/HALT) выше.",
-  "flow.msg.uninitMotion": "Движение на строке {0} вызвано без предварительной инициализации TOOL/BASE.",
-  "flow.msg.invalidGoto": "Целевая метка '{0}' для перехода GOTO на строке {1} не определена в файле.",
+  "flow.msg.emptyBranch":
+    "Условие IF на строке {0} имеет пустую ветку (не содержит исполняемого кода).",
+  "flow.msg.infiniteLoop":
+    "Цикл LOOP на строке {0} не имеет команд выхода (EXIT/HALT) и является бесконечным.",
+  "flow.msg.unreachableMotion":
+    "Команда движения на строке {0} недостижима после прерывания потока выполнения.",
+  "flow.msg.unreachableCode":
+    "Код на строке {0} недостижим из-за прерывания потока (RETURN/EXIT/HALT) выше.",
+  "flow.msg.uninitMotion":
+    "Движение на строке {0} вызвано без предварительной инициализации TOOL/BASE.",
+  "flow.msg.invalidGoto":
+    "Целевая метка '{0}' для перехода GOTO на строке {1} не определена в файле.",
 
   "snippet.title": "Генератор KRL Сниппетов",
   "snippet.tab.message": "Сообщения KUKA",
@@ -290,11 +300,16 @@ const tr: Messages = {
   "flow.err.invalidGoto": "Geçersiz GOTO",
   "flow.err.uninitMotion": "Başlatılmamış Hareket",
   "flow.msg.emptyBranch": "{0}. satırdaki IF koşulunun boş bir dalı var.",
-  "flow.msg.infiniteLoop": "{0}. satırdaki LOOP döngüsünde EXIT/HALT komutları yok.",
-  "flow.msg.unreachableMotion": "{0}. satırdaki hareket komutuna akış kesintisi nedeniyle ulaşılamıyor.",
-  "flow.msg.unreachableCode": "{0}. satırdaki koda akış kesintisi (RETURN/EXIT/HALT) nedeniyle ulaşılamıyor.",
-  "flow.msg.uninitMotion": "{0}. satırdaki hareket, TOOL/BASE başlatılması olmadan çağrıldı (BAS(#INITMOV) gerekir).",
-  "flow.msg.invalidGoto": "{1}. satırdaki GOTO hedef etiketi '{0}' dosyada tanımlanmamış.",
+  "flow.msg.infiniteLoop":
+    "{0}. satırdaki LOOP döngüsünde EXIT/HALT komutları yok.",
+  "flow.msg.unreachableMotion":
+    "{0}. satırdaki hareket komutuna akış kesintisi nedeniyle ulaşılamıyor.",
+  "flow.msg.unreachableCode":
+    "{0}. satırdaki koda akış kesintisi (RETURN/EXIT/HALT) nedeniyle ulaşılamıyor.",
+  "flow.msg.uninitMotion":
+    "{0}. satırdaki hareket, TOOL/BASE başlatılması olmadan çağrıldı (BAS(#INITMOV) gerekir).",
+  "flow.msg.invalidGoto":
+    "{1}. satırdaki GOTO hedef etiketi '{0}' dosyada tanımlanmamış.",
 
   "snippet.title": "KRL Snippet Oluşturucu",
   "snippet.tab.message": "Mesaj Oluşturucu",

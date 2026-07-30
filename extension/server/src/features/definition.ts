@@ -108,7 +108,7 @@ export class SymbolResolver {
     const uri = params.textDocument.uri.toLowerCase();
     if (uri.endsWith(".src")) {
       const datUriPattern = uri.substring(0, uri.length - 4) + ".dat";
-      
+
       // Map keys case-sensitive olduğu için doğru uri'yi bul
       let datUri = "";
       for (const key of state.fileVariablesMap.keys()) {
@@ -117,12 +117,13 @@ export class SymbolResolver {
           break;
         }
       }
-      
+
       if (datUri) {
         const datVars = state.fileVariablesMap.get(datUri);
         if (datVars) {
           const datMatch = datVars.find(
-            (v) => v.name.toUpperCase() === functionName.toUpperCase() && v.range,
+            (v) =>
+              v.name.toUpperCase() === functionName.toUpperCase() && v.range,
           );
           if (datMatch && datMatch.range) {
             return Location.create(datUri, datMatch.range);

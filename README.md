@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="extension/logo.png" width="160" alt="KUKA KRL Professional" />
+  <img src="docs/public/logo.png" width="160" alt="KUKA KRL Professional" />
 </p>
 
 <h1 align="center">KUKA KRL Professional</h1>
@@ -96,10 +96,10 @@ We offer flexible, industrial-grade licensing through our official merchant, **L
 
 *Preview:*
 <div align="center">
-  <img src="extension/media/dead-code-demo.gif" width="600" alt="Flowchart Viewer Demo" />
+  <img src="docs/public/media/dead-code-demo.gif" width="600" alt="Flowchart Viewer Demo" />
 </div>
 
-### 2. 🛡️ Industrial-Grade Safety & Diagnostics
+### 2. 🛡️ Industrial-Grade Diagnostics
 *Catch syntax crashes and physical collision risks before you run the code.*
 * **Strict Block Balance**: Flags missing or orphaned block endings (`IF/ENDIF`, `FOR/ENDFOR`, `LOOP/ENDLOOP`). Handles complex KRL syntax without false positives.
 * **Collision Guard (Tool/Base Check)**: Warns you if movements (`PTP`, `LIN`, `CIRC`) are declared before active `$TOOL` or `$BASE` values have been initialized in the current routine.
@@ -108,7 +108,7 @@ We offer flexible, industrial-grade licensing through our official merchant, **L
 
 *Preview:*
 <div align="center">
-  <img src="extension/media/type-validation-demo.gif" width="600" alt="Diagnostics Demo" />
+  <img src="docs/public/media/type-validation-demo.gif" width="600" alt="Diagnostics Demo" />
 </div>
 
 ### 3. 📐 KUKA Frame Calculator

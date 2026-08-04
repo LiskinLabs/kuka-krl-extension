@@ -2,6 +2,18 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.8.5] - 2026-08-02
+
+### Added
+- **Interactive SVG Motion Diagrams**: Dynamic 2-column Motion Scheme visualization in `Snippet Generator` for `PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`, and `SPLINE Block`.
+- **KSS 8.3+ Spline Motion Snippets**: Full support for Spline PTP (`SPTP`), Spline Linear (`SLIN`), Spline Circular (`SCIRC`), and `SPLINE Path Block` with automatic `$SGEAR_JERK` and `C_Spl` blending configurations.
+- **KRC Backup Diff & Point Delta Inspector**: Direct comparison of `.src`/`.dat` files and $E6POS/POS/E6AXIS$ point coordinates against KRC `.zip` backup archives.
+- **Initialization FOLD Snippet (`INI`)**: Standardized KUKA KRC4/KRC5 initialization FOLD block snippet.
+
+### Fixed
+- **Codicon UI Manifest Fix**: Fixed broken icon rendering for `krl.showCalculator` (`$(symbol-numeric)`) and `krl.validateEkiXml` (`$(file-code)`).
+- **Icon Auto-Validation**: Integrated strict VS Code Codicon validation into `validate-json.js`.
+
 ## [1.7.2] - 2026-04-02
 
 ### Added

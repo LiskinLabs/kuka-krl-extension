@@ -34,16 +34,23 @@ export class InfoProvider {
     const symbolName = wordInfo.word;
 
     // Check krl-ref.json for System Types (E6POS, FRAME, etc.)
-    const typeData =
-      (krlData.types as any)[symbolName.toUpperCase()] ||
-      (krlData.types as any)[symbolName];
+    const typesMap = krlData.types as Record<
+      string,
+      { name: string; description: string; fields?: unknown; values?: unknown }
+    >;
+    const typeData = typesMap[symbolName.toUpperCase()] || typesMap[symbolName];
     if (typeData) {
       let md = `**${typeData.name}** (System Type)\n\n${typeData.description}`;
       if (typeData.fields) {
         let fieldNames: string[] = [];
         if (Array.isArray(typeData.fields)) {
-          fieldNames = typeData.fields.map((f: any) => f.name);
-        } else if (typeof typeData.fields === "object") {
+          fieldNames = typeData.fields.map(
+            (f: { name?: string }) => f.name || "",
+          );
+        } else if (
+          typeof typeData.fields === "object" &&
+          typeData.fields !== null
+        ) {
           fieldNames = Object.keys(typeData.fields);
         }
         if (fieldNames.length > 0) {
@@ -54,8 +61,13 @@ export class InfoProvider {
         // For Enums
         let valueNames: string[] = [];
         if (Array.isArray(typeData.values)) {
-          valueNames = typeData.values.map((v: any) => v.name);
-        } else if (typeof typeData.values === "object") {
+          valueNames = typeData.values.map(
+            (v: { name?: string }) => v.name || "",
+          );
+        } else if (
+          typeof typeData.values === "object" &&
+          typeData.values !== null
+        ) {
           valueNames = Object.keys(typeData.values);
         }
         if (valueNames.length > 0) {
@@ -71,9 +83,12 @@ export class InfoProvider {
     }
 
     // Check krl-ref.json for commands/keywords
+    const commandsMap = krlData.commands as Record<
+      string,
+      { name: string; description: string; syntax?: string }
+    >;
     const cmdData =
-      (krlData.commands as any)[symbolName.toUpperCase()] ||
-      (krlData.commands as any)[symbolName];
+      commandsMap[symbolName.toUpperCase()] || commandsMap[symbolName];
     if (cmdData) {
       let md = `**${cmdData.name}**\n\n${cmdData.description}`;
       if (cmdData.syntax) md += `\n\n\`\`\`krl\n${cmdData.syntax}\n\`\`\``;
@@ -113,9 +128,18 @@ export class InfoProvider {
     if (!sysVarName.startsWith("$")) sysVarName = "$" + sysVarName;
 
     // Check both variations in JSON keys
-    const sysData =
-      (krlData.systemVariables as any)[sysVarName] ||
-      (krlData.systemVariables as any)[symbolName];
+    const sysVarsMap = krlData.systemVariables as Record<
+      string,
+      {
+        name: string;
+        description: string;
+        type?: string;
+        "data-type"?: string;
+        constraint?: string;
+        unit?: string;
+      }
+    >;
+    const sysData = sysVarsMap[sysVarName] || sysVarsMap[symbolName];
 
     if (sysData) {
       let md = `**${sysData.name}** \`${sysData["data-type"] || sysData.type}\`\n\n${sysData.description}`;
@@ -157,13 +181,27 @@ export class InfoProvider {
     }
 
     // Check krl-ref.json for Built-in Functions
-    const funcData = (krlData.functions as any)[symbolName];
+    const functionsMap = krlData.functions as Record<
+      string,
+      {
+        name: string;
+        description: string;
+        "return-type"?: string;
+        comments?: string;
+        parameters?: Array<{
+          name: string;
+          type: string;
+          description?: string;
+        }>;
+      }
+    >;
+    const funcData = functionsMap[symbolName];
     if (funcData) {
       let md = `**${funcData.name}** -> \`${funcData["return-type"]}\`\n\n${funcData.description}`;
       if (funcData.comments) md += `\n\n${funcData.comments}`;
       if (funcData.parameters && Array.isArray(funcData.parameters)) {
         md += `\n\n**Parameters:**\n`;
-        funcData.parameters.forEach((p: any) => {
+        funcData.parameters.forEach((p) => {
           md += `- \`${p.name}\` (${p.type}): ${p.description || ""}\n`;
         });
       }

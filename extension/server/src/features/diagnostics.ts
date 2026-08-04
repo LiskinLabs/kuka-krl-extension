@@ -746,7 +746,7 @@ export class DiagnosticsProvider {
 
   /**
    * Проверяет безопасные скорости в SRC файлах.
-   * Warning для $VEL.CP > 2 m/s и $VEL_PTP > 100%
+   * Warning для $VEL.CP > 3 m/s и $VEL_PTP > 100%
    */
   public validateSafetySpeeds(document: TextDocument): Diagnostic[] {
     // SİSTEM DOSYALARINI ATLA
@@ -909,7 +909,7 @@ export class DiagnosticsProvider {
       // Skip header lines
       if (line.trim().startsWith("&")) continue;
 
-      const codePart = getLineWithoutComment(line);
+      const codePart = getSafeCodePart(line);
       // const upperCode = codePart.toUpperCase(); // Reserved for future use
 
       // Проверка открывающих блоков
@@ -924,7 +924,19 @@ export class DiagnosticsProvider {
               continue; // Это WAIT FOR, пропускаем
             }
           }
-          // Пропустить DEFFCT внутри DEF (они закрываются отдельно)
+          // Пропустить однострочный IF ... THEN <statement>
+          if (openKeyword === "IF") {
+            const afterIf = codePart.substring(match.index + match[0].length);
+            const thenMatch = /\bTHEN\b/i.exec(afterIf);
+            if (thenMatch) {
+              const restAfterThen = afterIf
+                .substring(thenMatch.index + thenMatch[0].length)
+                .trim();
+              if (restAfterThen.length > 0) {
+                continue; // Это однострочный IF, пропускаем
+              }
+            }
+          }
           blockStack.push({
             type: openKeyword,
             line: i,

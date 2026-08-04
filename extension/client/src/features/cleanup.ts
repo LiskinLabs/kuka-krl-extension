@@ -84,33 +84,25 @@ export async function cleanupUnusedVariables() {
   let srcPath: string;
   let datPath: string;
 
-  if (ext === ".src") {
-    srcPath = doc.fileName;
-    datPath = doc.fileName.replace(/\.src$/i, ".dat");
+  const isKrlFile = [".src", ".dat", ".sub", ".krl", ".up"].includes(ext);
+  if (!isKrlFile) {
+    vscode.window.showWarningMessage(t("warning.noActiveKrlFile"));
+    return;
+  }
+
+  let srcPath = doc.fileName;
+  let datPath = doc.fileName;
+
+  if (ext === ".src" || ext === ".sub" || ext === ".krl" || ext === ".up") {
+    const candidateDat = doc.fileName.replace(/\.[^.]+$/i, ".dat");
+    if (fs.existsSync(candidateDat)) {
+      datPath = candidateDat;
+    }
   } else if (ext === ".dat") {
-    datPath = doc.fileName;
-    srcPath = doc.fileName.replace(/\.dat$/i, ".src");
-  } else {
-    vscode.window.showWarningMessage(t("warning.noActiveKrlFile")); // You might need to add this key or use string
-    return;
-  }
-
-  try {
-    await fs.promises.access(datPath);
-  } catch {
-    vscode.window.showWarningMessage("No corresponding .dat file found.");
-    return;
-  }
-
-  // If .src is missing, we can still clean .dat but we can't check usages!
-  // Wait, if .src is missing, then ALL variables in .dat are unused? No, could be GLOBAL.
-  try {
-    await fs.promises.access(srcPath);
-  } catch {
-    vscode.window.showWarningMessage(
-      "No corresponding .src file found to check usages.",
-    );
-    return;
+    const candidateSrc = doc.fileName.replace(/\.dat$/i, ".src");
+    if (fs.existsSync(candidateSrc)) {
+      srcPath = candidateSrc;
+    }
   }
 
   const datDoc = await vscode.workspace.openTextDocument(datPath);

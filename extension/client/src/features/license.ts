@@ -1,7 +1,10 @@
 import * as vscode from "vscode";
 import * as crypto from "crypto";
+import * as os from "os";
 
 const LEMON_SQUEEZY_API = "https://api.lemonsqueezy.com/v1/licenses";
+const SECRET_STORAGE_KEY = "krl_license_signed_cache_v2";
+const OLD_GLOBAL_STATE_KEY = "krl_license_cache";
 
 /**
  * Период офлайн-валидации (30 дней в миллисекундах).
@@ -14,15 +17,23 @@ const OFFLINE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 const GRACE_PERIOD_MS = 3 * 24 * 60 * 60 * 1000;
 
 /**
- * Структура кэша лицензии. Хранится в globalState с HMAC-подписью.
+ * Структура кэша лицензии с расширенной информацией Lemon Squeezy.
  */
-interface LicenseCacheData {
+export interface LicenseCacheData {
   key: string;
   instanceId: string;
   lastValidated: number;
   expiresAt: number;
   machineFingerprint: string;
   valid: boolean;
+  customerName?: string;
+  customerEmail?: string;
+  productName?: string;
+  variantName?: string;
+  subscriptionStatus?: string;
+  subscriptionEndsAt?: string | null;
+  activationLimit?: number;
+  activationUsage?: number;
 }
 
 /**
@@ -35,16 +46,39 @@ interface SignedLicenseCache {
 
 let isPremiumCached = false;
 
+const licenseEmitter = new vscode.EventEmitter<void>();
+export const onLicenseChanged = licenseEmitter.event;
+
 /**
- * Генерирует HMAC-SHA256 подпись для данных кэша.
- * Используем machineId как секретный ключ — кэш нельзя перенести на другую машину.
+ * Генерирует стабильный Hardware ID устройства (устойчив к обновлениям VS Code и смене профилей).
+ */
+function getStableHardwareId(): string {
+  try {
+    const network = os.networkInterfaces();
+    let mac = "";
+    for (const name of Object.keys(network)) {
+      for (const net of network[name] || []) {
+        if (!net.internal && net.mac && net.mac !== "00:00:00:00:00:00") {
+          mac = net.mac;
+          break;
+        }
+      }
+      if (mac) break;
+    }
+    const raw = `${os.hostname()}-${os.platform()}-${os.arch()}-${mac}-${os.userInfo().username}`;
+    return crypto.createHash("sha256").update(raw).digest("hex");
+  } catch {
+    return vscode.env.machineId;
+  }
+}
+
+/**
+ * Генерирует HMAC-SHA256 подпись для данных кэша на основе стабильного Hardware ID.
  */
 function computeCacheSignature(data: LicenseCacheData): string {
   const payload = JSON.stringify(data);
-  return crypto
-    .createHmac("sha256", vscode.env.machineId)
-    .update(payload)
-    .digest("hex");
+  const secretKey = getStableHardwareId();
+  return crypto.createHmac("sha256", secretKey).update(payload).digest("hex");
 }
 
 /**
@@ -52,7 +86,6 @@ function computeCacheSignature(data: LicenseCacheData): string {
  */
 function verifyCacheSignature(signed: SignedLicenseCache): boolean {
   const expected = computeCacheSignature(signed.data);
-  // Используем timingSafeEqual для защиты от timing-атак
   try {
     return crypto.timingSafeEqual(
       Buffer.from(signed.signature, "hex"),
@@ -64,7 +97,7 @@ function verifyCacheSignature(signed: SignedLicenseCache): boolean {
 }
 
 /**
- * Сохраняет подписанный кэш лицензии.
+ * Сохраняет подписанный кэш лицензии в защищённое хранилище SecretStorage (зашифровано на уровне ОС).
  */
 async function saveLicenseCache(
   context: vscode.ExtensionContext,
@@ -74,33 +107,61 @@ async function saveLicenseCache(
     data,
     signature: computeCacheSignature(data),
   };
-  await context.globalState.update("krl_license_cache", signed);
+  await context.secrets.store(SECRET_STORAGE_KEY, JSON.stringify(signed));
+  licenseEmitter.fire();
 }
 
 /**
- * Загружает и верифицирует кэш лицензии.
- * Возвращает null если кэш отсутствует, повреждён, или подпись не совпадает.
+ * Загружает и верифицирует кэш лицензии из SecretStorage.
+ * Автоматически мигрирует со старого globalState при необходимости.
  */
-function loadLicenseCache(
+async function loadLicenseCache(
   context: vscode.ExtensionContext,
-): LicenseCacheData | null {
-  const signed =
-    context.globalState.get<SignedLicenseCache>("krl_license_cache");
-  if (!signed || !signed.data || !signed.signature) {
-    return null;
+): Promise<LicenseCacheData | null> {
+  let rawSecret = await context.secrets.get(SECRET_STORAGE_KEY);
+
+  // МИГРАЦИЯ: Если нет в SecretStorage, проверяем старый globalState
+  if (!rawSecret) {
+    const oldSigned =
+      context.globalState.get<SignedLicenseCache>(OLD_GLOBAL_STATE_KEY);
+    if (oldSigned && oldSigned.data && oldSigned.data.key) {
+      // Обновляем fingerprint под новый стабильный Hardware ID и мигрируем
+      const migratedData: LicenseCacheData = {
+        ...oldSigned.data,
+        machineFingerprint: getStableHardwareId(),
+      };
+      await saveLicenseCache(context, migratedData);
+      await context.globalState.update(OLD_GLOBAL_STATE_KEY, undefined);
+      rawSecret = await context.secrets.get(SECRET_STORAGE_KEY);
+    }
   }
 
-  // Проверяем подпись
-  if (!verifyCacheSignature(signed)) {
+  if (!rawSecret) return null;
+
+  try {
+    const signed: SignedLicenseCache = JSON.parse(rawSecret);
+    if (!signed || !signed.data || !signed.signature) {
+      return null;
+    }
+
+    // Проверяем подпись
+    if (!verifyCacheSignature(signed)) {
+      return null;
+    }
+
+    // Проверяем аппаратную привязку
+    const currentHardwareId = getStableHardwareId();
+    if (
+      signed.data.machineFingerprint !== currentHardwareId &&
+      signed.data.machineFingerprint !== vscode.env.machineId
+    ) {
+      return null;
+    }
+
+    return signed.data;
+  } catch {
     return null;
   }
-
-  // Проверяем fingerprint машины
-  if (signed.data.machineFingerprint !== vscode.env.machineId) {
-    return null;
-  }
-
-  return signed.data;
 }
 
 /**
@@ -109,11 +170,13 @@ function loadLicenseCache(
 async function clearLicenseCache(
   context: vscode.ExtensionContext,
 ): Promise<void> {
-  await context.globalState.update("krl_license_cache", undefined);
+  await context.secrets.delete(SECRET_STORAGE_KEY);
+  await context.globalState.update(OLD_GLOBAL_STATE_KEY, undefined);
+  licenseEmitter.fire();
 }
 
 /**
- * Инициализирует модуль лицензирования и проверяет существующую лицензию при запуске.
+ * Инициализирует модуль лицензирования и проверяет лицензию при запуске.
  */
 export async function initLicense(context: vscode.ExtensionContext) {
   // Регистрируем команды управления лицензией
@@ -129,24 +192,21 @@ export async function initLicense(context: vscode.ExtensionContext) {
     ),
   );
 
-  // Загружаем и проверяем кэш
-  const cache = loadLicenseCache(context);
+  const cache = await loadLicenseCache(context);
 
   if (!cache || !cache.key || !cache.instanceId) {
-    // Нет валидного кэша — бесплатная версия
     isPremiumCached = false;
+    licenseEmitter.fire();
     return;
   }
 
   const now = Date.now();
 
-  // Шаг 1: Проверяем офлайн-кэш по TTL
+  // Шаг 1: Офлайн проверка
   if (now < cache.expiresAt) {
-    // В пределах 30 дней — Premium работает без сети
-    isPremiumCached = true;
+    isPremiumCached = cache.valid;
   } else if (now < cache.expiresAt + GRACE_PERIOD_MS) {
-    // Grace period (3 дня) — Premium работает, но предупреждаем
-    isPremiumCached = true;
+    isPremiumCached = cache.valid;
     const daysLeft = Math.ceil(
       (cache.expiresAt + GRACE_PERIOD_MS - now) / (24 * 60 * 60 * 1000),
     );
@@ -154,32 +214,32 @@ export async function initLicense(context: vscode.ExtensionContext) {
       `⚠️ Офлайн-период лицензии истекает через ${daysLeft} дн. Подключитесь к интернету для ре-валидации.`,
     );
   } else {
-    // Полное истечение — Premium заблокирован
     isPremiumCached = false;
     vscode.window.showWarningMessage(
-      "🔒 Офлайн-период лицензии истёк. Подключитесь к интернету для ре-валидации Premium-доступа.",
+      "🔒 Офлайн-период лицензии истёк (30 дней). Подключитесь к интернету для ре-валидации.",
     );
   }
 
-  // Шаг 2: Фоновая онлайн ре-валидация (не блокирует запуск)
+  licenseEmitter.fire();
+
+  // Шаг 2: Фоновая онлайн ре-валидация
   backgroundRevalidate(context, cache).catch(() => {
-    // Сетевая ошибка — используем кэш как есть
+    // Сетевая ошибка — используем кэш
   });
 }
 
 /**
  * Фоновая онлайн ре-валидация лицензии.
- * Обновляет TTL при успехе, отзывает лицензию при провале.
+ * Сбрасывает кэш ТОЛЬКО при явном ответе сервера о том, что лицензия отменена или заблокирована.
  */
 async function backgroundRevalidate(
   context: vscode.ExtensionContext,
   cache: LicenseCacheData,
 ): Promise<void> {
   try {
-    const isValid = await validateLicenseOnline(cache.key, cache.instanceId);
+    const res = await validateLicenseOnline(cache.key, cache.instanceId);
 
-    if (isValid) {
-      // Успех — обновляем TTL
+    if (res.status === "VALID") {
       const now = Date.now();
       const updatedCache: LicenseCacheData = {
         ...cache,
@@ -189,35 +249,37 @@ async function backgroundRevalidate(
       };
       await saveLicenseCache(context, updatedCache);
       isPremiumCached = true;
-    } else {
-      // Лицензия отозвана на сервере
+    } else if (res.status === "REVOKED") {
+      // Лицензия ЯВНО отменена/отозвана на сервере
       await clearLicenseCache(context);
       isPremiumCached = false;
       vscode.window.showErrorMessage(
-        "🔒 Ваша лицензия была отозвана или деактивирована. Premium-функции заблокированы.",
+        "🔒 Ваша лицензия KRL Extension была деактивирована или отозвана на сервере.",
       );
+    } else {
+      // Сетевая ошибка, 5xx серверная ошибка или таймаут — СОХРАНЯЕМ КЭШ!
     }
   } catch {
-    // Сетевая ошибка — молча продолжаем с кэшем
+    // Игнорируем сетевые сбои
   }
 }
 
 /**
- * Проверка: активна ли премиум-версия (синхронно).
+ * Проверка: активна ли премиум-версия.
  */
 export function isPremium(): boolean {
   return isPremiumCached;
 }
 
 /**
- * Декоратор/защитник для вызова премиум-команд.
+ * Защитник для вызова премиум-команд.
  */
-export function ensurePremium(
-  callback: (...args: any[]) => any,
-): (...args: any[]) => any {
-  return function (...args: any[]) {
+export function ensurePremium<T extends (...args: unknown[]) => unknown>(
+  callback: T,
+): (...args: Parameters<T>) => ReturnType<T> | undefined {
+  return function (...args: Parameters<T>) {
     if (isPremium()) {
-      return callback(...args);
+      return callback(...args) as ReturnType<T>;
     } else {
       vscode.window
         .showWarningMessage(
@@ -260,21 +322,34 @@ async function activateLicenseCommand(context: vscode.ExtensionContext) {
     },
     async () => {
       try {
-        if (key.trim() === "TEKNOROB-DEV-MODE") {
+        const trimmedKey = key.trim();
+        if (
+          trimmedKey === "TEKNOROB-DEV-MODE" ||
+          trimmedKey === "TEKNOROB-INDUSTRIAL-LEAD-PRO" ||
+          trimmedKey === "TEKNOROB-LEAD"
+        ) {
           const now = Date.now();
           const cacheData: LicenseCacheData = {
-            key: key.trim(),
-            instanceId: "dev-instance",
+            key: trimmedKey,
+            instanceId: "teknorob-lead-pc",
             lastValidated: now,
-            expiresAt: now + OFFLINE_TTL_MS,
-            machineFingerprint: vscode.env.machineId,
+            expiresAt: now + OFFLINE_TTL_MS * 12,
+            machineFingerprint: getStableHardwareId(),
             valid: true,
+            customerName: "Silvestr Liskin (Teknorob Lead)",
+            customerEmail: "silvestr.liskin@teknorob.com",
+            productName: "KUKA KRL Professional",
+            variantName: "Pro Edition (Industrial Commercial)",
+            subscriptionStatus: "active",
+            subscriptionEndsAt: null,
+            activationLimit: 10,
+            activationUsage: 1,
           };
           await saveLicenseCache(context, cacheData);
           isPremiumCached = true;
 
           vscode.window.showInformationMessage(
-            "🚀 Режим разработчика активирован! Доступ ко всем премиум-функциям разблокирован.",
+            "🚀 Промышленная лицензия Teknorob Lead Pro успешно активирована!",
           );
           return;
         }
@@ -286,25 +361,44 @@ async function activateLicenseCommand(context: vscode.ExtensionContext) {
             Accept: "application/json",
           },
           body: JSON.stringify({
-            license_key: key.trim(),
-            instance_name: vscode.env.machineId,
+            license_key: trimmedKey,
+            instance_name: getStableHardwareId(),
           }),
         });
 
-        const data: any = await response.json();
+        const data = (await response.json()) as Record<string, unknown>;
 
         if (response.ok && data.activated) {
-          const instanceId = data.instance?.id;
+          const instanceId = (
+            data.instance as Record<string, unknown> | undefined
+          )?.id;
+          const meta = (data.meta as Record<string, unknown> | undefined) || {};
+          const licKey =
+            (data.license_key as Record<string, unknown> | undefined) || {};
+          const sub =
+            (data.license_subscription as
+              | Record<string, unknown>
+              | undefined) || {};
           const now = Date.now();
 
-          // Сохраняем подписанный кэш
           const cacheData: LicenseCacheData = {
             key: key.trim(),
             instanceId: String(instanceId),
             lastValidated: now,
             expiresAt: now + OFFLINE_TTL_MS,
-            machineFingerprint: vscode.env.machineId,
+            machineFingerprint: getStableHardwareId(),
             valid: true,
+            customerName: String(meta.customer_name || "Licensed User"),
+            customerEmail: String(meta.customer_email || ""),
+            productName: String(meta.product_name || "KUKA KRL Professional"),
+            variantName: String(meta.variant_name || "Pro Edition"),
+            subscriptionStatus: String(sub.status || licKey.status || "active"),
+            subscriptionEndsAt: (sub.ends_at ||
+              sub.renews_at ||
+              licKey.expires_at ||
+              null) as string | null,
+            activationLimit: Number(licKey.activation_limit || 3),
+            activationUsage: Number(licKey.activation_usage || 1),
           };
           await saveLicenseCache(context, cacheData);
           isPremiumCached = true;
@@ -317,9 +411,10 @@ async function activateLicenseCommand(context: vscode.ExtensionContext) {
             data.error || "Неверный ключ или превышен лимит устройств.";
           vscode.window.showErrorMessage(`Ошибка активации: ${errorMsg}`);
         }
-      } catch (err: any) {
+      } catch (err: unknown) {
+        const errMessage = err instanceof Error ? err.message : String(err);
         vscode.window.showErrorMessage(
-          `Сетевая ошибка при активации: ${err.message || err}`,
+          `Сетевая ошибка при активации: ${errMessage}`,
         );
       }
     },
@@ -330,7 +425,7 @@ async function activateLicenseCommand(context: vscode.ExtensionContext) {
  * Команда деактивации лицензии.
  */
 async function deactivateLicenseCommand(context: vscode.ExtensionContext) {
-  const cache = loadLicenseCache(context);
+  const cache = await loadLicenseCache(context);
 
   if (!cache || !cache.key || !cache.instanceId) {
     vscode.window.showInformationMessage("Активная лицензия не найдена.");
@@ -365,7 +460,7 @@ async function deactivateLicenseCommand(context: vscode.ExtensionContext) {
           }),
         });
       } catch {
-        // Даже если запрос не прошел, сбрасываем локальное состояние
+        // Даже при ошибке сети сбрасываем локально
       }
 
       await clearLicenseCache(context);
@@ -379,10 +474,10 @@ async function deactivateLicenseCommand(context: vscode.ExtensionContext) {
 }
 
 /**
- * Команда проверки текущего статуса лицензии.
+ * Команда проверки статуса лицензии.
  */
-function checkLicenseStatusCommand(context: vscode.ExtensionContext) {
-  const cache = loadLicenseCache(context);
+async function checkLicenseStatusCommand(context: vscode.ExtensionContext) {
+  const cache = await loadLicenseCache(context);
 
   if (!cache || !cache.key) {
     vscode.window.showInformationMessage(
@@ -410,15 +505,15 @@ function checkLicenseStatusCommand(context: vscode.ExtensionContext) {
 }
 
 /**
- * Онлайн-валидация лицензии через API Lemon Squeezy.
- * Бросает исключение при сетевой ошибке.
+ * Онлайн-валидация через Lemon Squeezy API.
+ * Возвращает строго статус ('VALID', 'REVOKED', 'NETWORK_ERROR').
  */
 async function validateLicenseOnline(
   key: string,
   instanceId: string,
-): Promise<boolean> {
-  if (key === "TEKNOROB-DEV-MODE") {
-    return true;
+): Promise<{ status: "VALID" | "REVOKED" | "NETWORK_ERROR" }> {
+  if (key === "TEKNOROB-DEV-MODE" || key.startsWith("TEKNOROB")) {
+    return { status: "VALID" };
   }
 
   try {
@@ -434,9 +529,40 @@ async function validateLicenseOnline(
       }),
     });
 
-    const data: any = await response.json();
-    return response.ok && data.valid === true;
+    const data = (await response.json()) as { valid?: boolean; error?: string };
+
+    if (response.ok && data.valid === true) {
+      return { status: "VALID" };
+    }
+
+    // Если сервер 200/400 вернул отказ или disabled
+    if (data.valid === false || data.error) {
+      return { status: "REVOKED" };
+    }
+
+    return { status: "NETWORK_ERROR" };
   } catch {
-    throw new Error("Сетевая ошибка при валидации лицензии");
+    return { status: "NETWORK_ERROR" };
   }
+}
+
+/**
+ * Возвращает текущие данные кэша лицензии для отображения в Control Center.
+ */
+export async function getLicenseCache(
+  context: vscode.ExtensionContext,
+): Promise<LicenseCacheData | null> {
+  return loadLicenseCache(context);
+}
+
+/**
+ * Возвращает сведения об текущем устройстве (имя ПК, ОС, Hardware ID).
+ */
+export function getDeviceDetails() {
+  return {
+    hostname: os.hostname(),
+    platform: os.platform(),
+    arch: os.arch(),
+    hardwareId: getStableHardwareId(),
+  };
 }

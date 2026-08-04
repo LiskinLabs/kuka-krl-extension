@@ -148,9 +148,9 @@ test('All themes are valid JSON', () => {
 // Test 4: Package.json
 console.log('\n--- Package Tests ---');
 
-test('Package.json version is 1.7.2', () => {
+test('Package.json version is valid semantic version', () => {
     const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
-    assertEqual(pkg.version, '1.7.2');
+    assertTrue(/^\d+\.\d+\.\d+$/.test(pkg.version), `Invalid package version format: ${pkg.version}`);
 });
 
 test('Package.json has all themes registered', () => {

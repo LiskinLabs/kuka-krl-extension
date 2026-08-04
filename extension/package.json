@@ -2,7 +2,7 @@
   "name": "kuka-krl-extension",
   "displayName": "%extension.displayName%",
   "description": "%extension.description%",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "icon": "logo.png",
   "publisher": "LiskinLabs",
   "author": {
@@ -222,19 +222,62 @@
         "title": "Check License Status",
         "category": "KRL",
         "icon": "$(info)"
+      },
+      {
+        "command": "krl.validateEkiXml",
+        "title": "Validate EthernetKRL (EKI) XML Schema",
+        "category": "KRL",
+        "icon": "$(file-code)"
+      },
+      {
+        "command": "krl.generateEkiCode",
+        "title": "Generate EthernetKRL Communication Handler",
+        "category": "KRL",
+        "icon": "$(symbol-interface)"
+      },
+      {
+        "command": "krl.aiGetIoMatrix",
+        "title": "Extract I/O Matrix for AI Context",
+        "category": "KRL",
+        "icon": "$(list-flat)"
+      },
+      {
+        "command": "krl.aiCheckSafety",
+        "title": "Run AI Safety & Velocity Diagnostic Check",
+        "category": "KRL",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "krl.openControlCenter",
+        "title": "Open KUKA Control Center",
+        "category": "KRL",
+        "icon": "$(widget)"
+      },
+      {
+        "command": "krl.compareKrcBackup",
+        "title": "Compare File & Point Deltas with KRC Backup Archive (.zip)",
+        "category": "KRL",
+        "icon": "$(diff)"
       }
     ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "kuka-krl-container",
+          "title": "KUKA KRL Professional",
+          "icon": "media/kuka-activitybar.svg"
+        }
+      ]
+    },
     "views": {
-      "explorer": [
+      "kuka-krl-container": [
         {
           "id": "krlIO",
-          "name": "KRL I/O Signals",
-          "when": "workbenchState != empty"
+          "name": "KRL I/O Signals"
         },
         {
           "id": "krlCommands",
-          "name": "KUKA Commands",
-          "when": "workbenchState != empty"
+          "name": "KUKA Commands"
         }
       ]
     },
@@ -244,109 +287,93 @@
         "contents": "%view.krlIO.welcome%\n[Refresh](command:krl.refreshIOView)"
       }
     ],
+    "submenus": [
+      {
+        "id": "krl.contextSubmenu",
+        "label": "KUKA KRL Professional"
+      }
+    ],
     "menus": {
       "editor/title": [
         {
-          "command": "krl.foldAll",
+          "command": "krl.openControlCenter",
           "group": "navigation@1",
-          "when": "resourceLangId == krl"
-        },
-        {
-          "command": "krl.unfoldAll",
-          "group": "navigation@2",
-          "when": "resourceLangId == krl"
-        },
-        {
-          "command": "krl.formatDocument",
-          "group": "navigation@3",
-          "when": "resourceLangId == krl"
-        },
-        {
-          "command": "krl.validateWorkspace",
-          "group": "navigation@4",
-          "when": "resourceLangId == krl"
-        },
-        {
-          "command": "krl.showCalculator",
-          "group": "navigation@5",
-          "when": "resourceLangId == krl"
-        },
-        {
-          "command": "krl.openSnippetGenerator",
-          "group": "navigation@6",
-          "when": "resourceLangId == krl"
-        },
-        {
-          "command": "krl.refreshIOView",
-          "group": "navigation@7",
-          "when": "resourceLangId == krl"
-        },
-        {
-          "command": "krl.cleanGitMetadata",
-          "group": "navigation@8",
           "when": "resourceLangId == krl"
         },
         {
           "command": "krl.showFlowchart",
-          "group": "navigation@1",
+          "group": "navigation@2",
+          "when": "resourceLangId == krl"
+        },
+        {
+          "command": "krl.validateWorkspace",
+          "group": "navigation@3",
           "when": "resourceLangId == krl"
         }
       ],
       "editor/context": [
         {
-          "command": "krl.validateWorkspace",
+          "submenu": "krl.contextSubmenu",
           "group": "1_modification@1",
           "when": "resourceLangId == krl"
-        },
+        }
+      ],
+      "krl.contextSubmenu": [
         {
-          "command": "krl.formatDocument",
-          "group": "1_modification@2",
-          "when": "resourceLangId == krl"
-        },
-        {
-          "command": "krl.removeTrailingWhitespace",
-          "group": "1_modification@3",
-          "when": "resourceLangId == krl"
-        },
-        {
-          "command": "krl.cleanGitMetadata",
-          "group": "1_modification@3_1",
-          "when": "resourceLangId == krl"
-        },
-        {
-          "command": "krl.sortDeclarations",
-          "group": "1_modification@4",
-          "when": "resourceLangId == krl"
-        },
-        {
-          "command": "krl.insertFold",
-          "group": "1_modification@5",
-          "when": "resourceLangId == krl"
-        },
-        {
-          "command": "krl.cleanupUnusedVariables",
-          "group": "1_modification@6",
-          "when": "resourceLangId == krl"
-        },
-        {
-          "command": "krl.showCalculator",
-          "group": "1_modification@7",
-          "when": "resourceLangId == krl"
-        },
-        {
-          "command": "krl.openSnippetGenerator",
-          "group": "1_modification@8",
-          "when": "resourceLangId == krl"
-        },
-        {
-          "command": "krl.renameSignal",
-          "group": "1_modification@9",
-          "when": "resourceLangId == krl"
+          "command": "krl.openControlCenter",
+          "group": "1_main@1"
         },
         {
           "command": "krl.showFlowchart",
-          "group": "1_modification@10",
-          "when": "resourceLangId == krl"
+          "group": "1_main@2"
+        },
+        {
+          "command": "krl.validateWorkspace",
+          "group": "1_main@3"
+        },
+        {
+          "command": "krl.formatDocument",
+          "group": "2_code@1"
+        },
+        {
+          "command": "krl.removeTrailingWhitespace",
+          "group": "2_code@2"
+        },
+        {
+          "command": "krl.cleanGitMetadata",
+          "group": "2_code@3"
+        },
+        {
+          "command": "krl.sortDeclarations",
+          "group": "2_code@4"
+        },
+        {
+          "command": "krl.insertFold",
+          "group": "2_code@5"
+        },
+        {
+          "command": "krl.cleanupUnusedVariables",
+          "group": "2_code@6"
+        },
+        {
+          "command": "krl.showCalculator",
+          "group": "3_tools@1"
+        },
+        {
+          "command": "krl.openSnippetGenerator",
+          "group": "3_tools@2"
+        },
+        {
+          "command": "krl.validateEkiXml",
+          "group": "3_tools@3"
+        },
+        {
+          "command": "krl.compareKrcBackup",
+          "group": "3_tools@4"
+        },
+        {
+          "command": "krl.renameSignal",
+          "group": "3_tools@5"
         }
       ],
       "view/title": [
@@ -462,6 +489,7 @@
     "test:e2e": "node tests/e2e.test.js"
   },
   "devDependencies": {
+    "@types/adm-zip": "^0.5.8",
     "@types/node": "^20.17.23",
     "@typescript-eslint/eslint-plugin": "^8.50.0",
     "@typescript-eslint/parser": "^8.50.0",
@@ -477,6 +505,7 @@
   "dependencies": {
     "@types/vscode": "^1.109.0",
     "@vscode/webview-ui-toolkit": "^1.4.0",
+    "adm-zip": "^0.6.0",
     "vscode-languageclient": "^9.0.1",
     "vscode-languageserver": "^9.0.1",
     "vscode-languageserver-textdocument": "^1.0.12",

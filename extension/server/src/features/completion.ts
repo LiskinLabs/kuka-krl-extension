@@ -102,9 +102,13 @@ export class AutoCompleter {
         return a.localeCompare(b);
       });
 
+    const commandsMap = krlData.commands as Record<
+      string,
+      { description?: string; syntax?: string }
+    >;
     const keywordItems = filteredKeywords.map((kw) => {
       // Check if we have data for this keyword in krl-ref.json
-      const cmdData = (krlData.commands as any)[kw];
+      const cmdData = commandsMap[kw];
       return {
         label: kw,
         kind: CompletionItemKind.Keyword,
@@ -133,17 +137,16 @@ export class AutoCompleter {
         new Set([...KSS_87_SYSTEM_VARS, ...definedSysVars]),
       );
 
+      const sysVarMap = krlData.systemVariables as Record<
+        string,
+        { description?: string; type?: string; "data-type"?: string }
+      >;
       sysVarItems = allSysVars.map((v) => {
         // Remove $ if present in key lookup
         const cleanName = v.startsWith("$") ? v : "$" + v;
-        const lookupName = v.startsWith("$") ? v.substring(1) : v; // JSON keys usually don't have $ prefix based on my script?
-        // Wait, script: result.systemVariables[item.name] = item; item.name Usually HAS $ prefix in YAML?
-        // Let's check krl-ref.json content from view_file step 845...
-        // "name": "$A4PAR" -> keys HAS $.
+        const lookupName = v.startsWith("$") ? v.substring(1) : v;
 
-        const data =
-          (krlData.systemVariables as any)[cleanName] ||
-          (krlData.systemVariables as any)[lookupName];
+        const data = sysVarMap[cleanName] || sysVarMap[lookupName];
 
         return {
           label: cleanName,

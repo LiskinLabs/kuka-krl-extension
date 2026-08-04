@@ -3,6 +3,22 @@ import { LanguageClient } from "vscode-languageclient/node";
 import * as path from "path";
 import { t } from "../i18n";
 
+interface FlowGraphError {
+  type: string;
+  line: number;
+  message: string;
+}
+
+interface FlowGraph {
+  errors?: FlowGraphError[];
+  nodes?: unknown[];
+}
+
+interface CfgResult {
+  graph: FlowGraph;
+  mermaid: string;
+}
+
 /**
  * Shows the Control Flow Graph (Flowchart) WebView panel.
  * Automatically searches for cell.src as the main file,
@@ -18,7 +34,7 @@ export async function showFlowchartViewer(
   let isDetailed = false;
 
   // 2. Request CFG from the LSP server
-  let result: { graph: any; mermaid: string };
+  let result: CfgResult;
   try {
     result = await client.sendRequest("custom/getControlFlowGraph", {
       uri: currentUri.toString(),
@@ -104,7 +120,7 @@ export async function showFlowchartViewer(
                 "custom/getControlFlowGraph",
                 { uri: targetUri.toString(), detailed: isDetailed },
               );
-              const r = newResult as { graph: any; mermaid: string };
+              const r = newResult as CfgResult;
               currentUri = targetUri;
               panel.title =
                 "KRL Flowchart: " + path.basename(currentUri.fsPath);
@@ -134,7 +150,7 @@ export async function showFlowchartViewer(
               "custom/getControlFlowGraph",
               { uri: newUri.toString(), detailed: isDetailed },
             );
-            const r = newResult as { graph: any; mermaid: string };
+            const r = newResult as CfgResult;
             currentUri = newUri;
             panel.title = "KRL Flowchart: " + path.basename(currentUri.fsPath);
             panel.webview.html = getWebviewContent(
@@ -177,7 +193,7 @@ export async function showFlowchartViewer(
               "custom/getControlFlowGraph",
               { uri: currentUri!.toString(), detailed: isDetailed },
             );
-            const r = newResult as { graph: any; mermaid: string };
+            const r = newResult as CfgResult;
             panel.webview.html = getWebviewContent(
               mermaidUri.toString(),
               r.mermaid,
@@ -199,50 +215,81 @@ export async function showFlowchartViewer(
 }
 
 /**
- * Find cell.src or let user pick a .src file.
+ * Find active editor file, cell.src, workspace .src files, or show open dialog.
  */
 async function selectMainFile(): Promise<vscode.Uri | undefined> {
-  // Search for cell.src
+  // 1. Active open file in editor
+  const activeEditor = vscode.window.activeTextEditor;
+  if (activeEditor) {
+    const ext = path.extname(activeEditor.document.uri.fsPath).toLowerCase();
+    const isKrlProgram = [".src", ".sub", ".krl", ".up"].includes(ext);
+    if (isKrlProgram) {
+      return activeEditor.document.uri;
+    } else if (ext === ".dat") {
+      const srcPath = activeEditor.document.uri.fsPath.replace(
+        /\.dat$/i,
+        ".src",
+      );
+      if (fs.existsSync(srcPath)) {
+        return vscode.Uri.file(srcPath);
+      }
+    }
+  }
+
+  // 2. Search for cell.src
   const cellFiles = await vscode.workspace.findFiles("**/cell.src", null, 5);
   if (cellFiles.length === 1) {
     return cellFiles[0];
   }
 
-  // Multiple cell.src or none found — show picker
+  // 3. Search all .src files in workspace
   const allSrcFiles = await vscode.workspace.findFiles("**/*.src", null, 200);
-  if (allSrcFiles.length === 0) {
-    vscode.window.showWarningMessage(t("warning.noActiveKrlFile"));
-    return undefined;
+  if (allSrcFiles.length > 0) {
+    const items: vscode.QuickPickItem[] = allSrcFiles
+      .sort((a, b) => {
+        const aIsCell =
+          path.basename(a.fsPath).toLowerCase() === "cell.src" ? 0 : 1;
+        const bIsCell =
+          path.basename(b.fsPath).toLowerCase() === "cell.src" ? 0 : 1;
+        return aIsCell - bIsCell || a.fsPath.localeCompare(b.fsPath);
+      })
+      .map((f) => ({
+        label: path.basename(f.fsPath),
+        description: vscode.workspace.asRelativePath(f),
+        detail: f.fsPath,
+      }));
+
+    const picked = await vscode.window.showQuickPick(items, {
+      placeHolder: "Select main .src file to visualize",
+    });
+
+    if (picked && picked.detail) {
+      return vscode.Uri.file(picked.detail);
+    }
   }
 
-  // Sort: cell.src first
-  const items: vscode.QuickPickItem[] = allSrcFiles
-    .sort((a, b) => {
-      const aIsCell =
-        path.basename(a.fsPath).toLowerCase() === "cell.src" ? 0 : 1;
-      const bIsCell =
-        path.basename(b.fsPath).toLowerCase() === "cell.src" ? 0 : 1;
-      return aIsCell - bIsCell || a.fsPath.localeCompare(b.fsPath);
-    })
-    .map((f) => ({
-      label: path.basename(f.fsPath),
-      description: vscode.workspace.asRelativePath(f),
-      detail: f.fsPath,
-    }));
-
-  const picked = await vscode.window.showQuickPick(items, {
-    placeHolder: "Select main .src file to visualize",
+  // 4. Fallback: System File Open Dialog
+  const chosen = await vscode.window.showOpenDialog({
+    canSelectFiles: true,
+    canSelectFolders: false,
+    canSelectMany: false,
+    openLabel: "Select KRL Program (.src)",
+    filters: { "KRL Source File": ["src"] },
   });
 
-  if (!picked || !picked.detail) return undefined;
-  return vscode.Uri.file(picked.detail);
+  if (chosen && chosen.length > 0) {
+    return chosen[0];
+  }
+
+  vscode.window.showWarningMessage(t("warning.noActiveKrlFile"));
+  return undefined;
 }
 
 function getWebviewContent(
   mermaidSrc: string,
   mermaidCode: string,
-  errors: any[],
-  nodes: any[],
+  errors: FlowGraphError[],
+  nodes: unknown[],
   fileName: string,
   isDetailed: boolean,
 ): string {
@@ -254,7 +301,7 @@ function getWebviewContent(
     uninitMotion: t("flow.err.uninitMotion"),
   };
 
-  const localizeMessage = (e: any) => {
+  const localizeMessage = (e: FlowGraphError) => {
     const lineNum = (e.line + 1).toString();
     if (e.type === "emptyBranch") {
       return t("flow.msg.emptyBranch", lineNum);
@@ -282,7 +329,7 @@ function getWebviewContent(
   const errorListHtml =
     errors.length > 0
       ? errors
-          .map((e: any) => {
+          .map((e: FlowGraphError) => {
             const typeText = errorTypeMap[e.type] || e.type;
             const msgText = localizeMessage(e);
             return `<div class="error-item" onclick="goToLine(${e.line})" data-type="${escHtml(e.type)}">

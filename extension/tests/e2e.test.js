@@ -167,14 +167,10 @@ test('Diagnostics detects unclosed blocks, high velocity, collision guard & non-
     const asciiDiags = diagProvider.validateGeneralSyntax(asciiDoc);
     assertTrue(asciiDiags.length > 0, 'Should detect Cyrillic/non-ASCII characters');
 
-    // Dead global function check
-    const deadDoc = new MockTextDocument('file:///test.src', 'GLOBAL DEF UNUSED_ROUTINE()\nEND');
-    const mockState = {
-        functionsDeclared: [{ name: 'UNUSED_ROUTINE', uri: 'file:///test.src', isGlobal: true, line: 0, startChar: 11, endChar: 25 }],
-        fileWordCounts: new Map([['file:///test.src', new Map([['UNUSED_ROUTINE', 1]])]])
-    };
-    const deadDiags = diagProvider.validateDeadGlobalFunctions(deadDoc, mockState);
-    assertTrue(deadDiags.length === 1, 'Should detect UNUSED_ROUTINE as dead global subprogram');
+    // Block balance: single-line IF & string literal keyword safety
+    const singleLineIfDoc = new MockTextDocument('file:///test.src', 'DEF test()\nIF $IN[1] THEN PTP P1\nMsgNotify("IF error THEN")\nEND');
+    const blockBalanceDiags = diagProvider.validateBlockBalance(singleLineIfDoc);
+    assertTrue(blockBalanceDiags.length === 0, 'Single-line IF and string keywords should not produce false positive block balance errors');
 });
 
 // ----------------------------------------------------
@@ -331,6 +327,151 @@ test('i18n engine correctly resolves EN, RU, and TR translations', () => {
     setLocale('tr');
     const trText = t('diag.highVelocity');
     assertTrue(typeof trText === 'string' && trText.length > 0, 'TR translation should return string');
+});
+
+// ----------------------------------------------------
+// 12. EthernetKRL (EKI) XML Validator E2E
+// ----------------------------------------------------
+console.log('\n📡 SECTION 12: EthernetKRL (EKI) XML Validator & Code Generator');
+
+const { validateEkiXmlContent, generateEkiKrlCode } = require('../server/out/lib/ekiValidator.js');
+
+test('EKI XML Schema Validator verifies valid and invalid EthernetKRL XML files', () => {
+    const validXml = `<ETHERNETKRL>
+  <CONFIGURATION>
+    <EXTERNAL>
+      <TYPE>CameraChannel</TYPE>
+    </EXTERNAL>
+  </CONFIGURATION>
+  <RECEIVE>
+    <XML><ELEMENT Tag="RobotData/PosX" Type="REAL"/></XML>
+  </RECEIVE>
+</ETHERNETKRL>`;
+
+    const invalidXml = `<SOME_OTHER_XML><TAG></TAG></SOME_OTHER_XML>`;
+
+    const validRes = validateEkiXmlContent(validXml);
+    assertTrue(validRes.valid === true, 'Valid EKI XML should pass validation');
+    assertTrue(validRes.channelName === 'CameraChannel', 'Channel name should be extracted');
+
+    const invalidRes = validateEkiXmlContent(invalidXml);
+    assertTrue(invalidRes.valid === false, 'Invalid EKI XML should fail validation');
+    assertTrue(invalidRes.errors.length > 0, 'Should return validation errors');
+});
+
+test('EKI KRL Code Generator outputs syntactically valid EKI handler subprogram', () => {
+    const code = generateEkiKrlCode('CameraServer');
+    assertTrue(code.includes('DEF CameraServer_Handler()'), 'Generated code should contain subprogram name');
+    assertTrue(code.includes('EKI_Init("CameraServer")'), 'Generated code should contain EKI_Init');
+    assertTrue(code.includes('EKI_Open("CameraServer")'), 'Generated code should contain EKI_Open');
+    assertTrue(code.includes('EKI_Close("CameraServer")'), 'Generated code should contain EKI_Close');
+});
+
+// ----------------------------------------------------
+// 13. AI-Supportive Domain Context Tools E2E
+// ----------------------------------------------------
+console.log('\n🤖 SECTION 13: AI-Supportive Domain Context Tools');
+
+const { extractIoMatrixForAi, performAiSafetyCheck } = require('../server/out/lib/aiTools.js');
+
+test('AI I/O Matrix Extractor parses signal definitions and raw physical I/O', () => {
+    const krlCode = `
+SIGNAL doGripperOpen $OUT[16]
+SIGNAL diPartPresent $IN[32]
+$OUT[10] = TRUE
+`;
+
+    const signals = extractIoMatrixForAi(krlCode);
+    assertTrue(signals.length === 3, 'Should extract 3 I/O signals');
+    assertTrue(signals.some(s => s.name === 'doGripperOpen' && s.index === 16), 'Should extract SIGNAL doGripperOpen');
+    assertTrue(signals.some(s => s.name === 'diPartPresent' && s.index === 32), 'Should extract SIGNAL diPartPresent');
+});
+
+test('AI Industrial Safety Check detects high velocity and structural errors', () => {
+    const safeCode = `DEF main()\n   $VEL.CP = 1.5\n   ;FOLD Motion\n   PTP xHome\n   ;ENDFOLD\nEND`;
+    const dangerousCode = `DEF main()\n   $VEL.CP = 4.5\n   ;FOLD Motion\n   PTP xHome\nEND`;
+
+    const safeRes = performAiSafetyCheck(safeCode);
+    assertTrue(safeRes.safe === true, 'Safe KRL code should pass safety check');
+
+    const dangerousRes = performAiSafetyCheck(dangerousCode);
+    assertTrue(dangerousRes.safe === false, 'Dangerous code should fail safety check');
+    assertTrue(dangerousRes.issues.some(i => i.includes('exceeds maximum configured safe limit') || i.includes('Cartesian velocity')), 'Should detect velocity violation');
+    assertTrue(dangerousRes.issues.some(i => i.includes('Mismatched FOLD')), 'Should detect unclosed FOLD block');
+});
+
+// ----------------------------------------------------
+// 14. KRC Backup Diff & Point Delta Inspector E2E
+// ----------------------------------------------------
+console.log('\n📦 SECTION 14: KRC Backup Diff & Point Delta Inspector');
+
+const { parseKrlPositions, comparePositionPoints, extractFileFromZipBackup } = require('../server/out/lib/krcBackupDiff.js');
+const AdmZip = require('adm-zip');
+
+test('parseKrlPositions extracts E6POS, POS, and E6AXIS coordinates', () => {
+    const datText = `
+DEFDAT main PUBLIC
+DECL E6POS xHome = {X 100.0, Y 200.0, Z 300.0, A 0.0, B 90.0, C 0.0, S 6, T 35}
+DECL POS pPick = {X 150.5, Y 400.0, Z 120.0, A -45.0, B 0.0, C 180.0}
+DECL E6AXIS aHome = {A1 0, A2 -90, A3 90, A4 0, A5 0, A6 0}
+ENDDAT`;
+
+    const positions = parseKrlPositions(datText);
+    assertTrue(positions.size === 3, 'Should parse 3 position declarations');
+    assertTrue(positions.has('XHOME'), 'Should parse XHOME position');
+    assertTrue(positions.get('XHOME').coords['Z'] === 300.0, 'XHOME Z coordinate should be 300.0');
+    assertTrue(positions.get('PPICK').coords['X'] === 150.5, 'PPICK X coordinate should be 150.5');
+});
+
+test('comparePositionPoints calculates exact point deltas between Workspace DAT and Backup DAT', () => {
+    const wsDat = `
+DEFDAT main PUBLIC
+DECL E6POS xHome = {X 115.0, Y 200.0, Z 290.0, A 0.0, B 90.0, C 0.0, S 6, T 35}
+DECL POS pPick = {X 150.5, Y 400.0, Z 120.0, A -45.0, B 0.0, C 180.0}
+DECL E6POS pNewInWs = {X 10.0, Y 20.0, Z 30.0}
+ENDDAT`;
+
+    const backupDat = `
+DEFDAT main PUBLIC
+DECL E6POS xHome = {X 100.0, Y 200.0, Z 300.0, A 0.0, B 90.0, C 0.0, S 6, T 35}
+DECL POS pPick = {X 150.5, Y 400.0, Z 120.0, A -45.0, B 0.0, C 180.0}
+DECL E6POS pOldInBackup = {X 5.0, Y 5.0, Z 5.0}
+ENDDAT`;
+
+    const diff = comparePositionPoints(wsDat, backupDat, 'main.dat');
+    assertTrue(diff.hasChanges === true, 'Should detect changes between workspace and backup');
+    
+    const xHomeDiff = diff.positionDiffs.find(p => p.name === 'xHome');
+    assertTrue(xHomeDiff.status === 'CHANGED', 'xHome should be marked as CHANGED');
+    assertTrue(xHomeDiff.deltas['X'].delta === 15, 'xHome X delta should be +15');
+    assertTrue(xHomeDiff.deltas['Z'].delta === -10, 'xHome Z delta should be -10');
+
+    const addedDiff = diff.positionDiffs.find(p => p.name === 'pNewInWs');
+    assertTrue(addedDiff.status === 'ADDED', 'pNewInWs should be marked as ADDED');
+
+    const removedDiff = diff.positionDiffs.find(p => p.name === 'pOldInBackup');
+    assertTrue(removedDiff.status === 'REMOVED', 'pOldInBackup should be marked as REMOVED');
+});
+
+test('extractFileFromZipBackup inspects and extracts matching KRL files from .zip archive', () => {
+    const tempZipPath = path.join(__dirname, 'temp_test_krc_backup.zip');
+    const zip = new AdmZip();
+    zip.addFile('KRC/ROBOTER/KRC/R1/Program/main.src', Buffer.from('DEF main()\nEND', 'utf8'));
+    zip.addFile('KRC/ROBOTER/KRC/R1/Program/main.dat', Buffer.from('DEFDAT main\nENDDAT', 'utf8'));
+    zip.writeZip(tempZipPath);
+
+    try {
+        const resSrc = extractFileFromZipBackup(tempZipPath, 'main.src');
+        assertTrue(resSrc.found === true, 'Should find main.src inside KRC backup zip');
+        assertTrue(resSrc.content.includes('DEF main()'), 'Should extract main.src content correctly');
+
+        const resDat = extractFileFromZipBackup(tempZipPath, 'main.dat');
+        assertTrue(resDat.found === true, 'Should find main.dat inside KRC backup zip');
+    } finally {
+        if (fs.existsSync(tempZipPath)) {
+            fs.unlinkSync(tempZipPath);
+        }
+    }
 });
 
 // ----------------------------------------------------

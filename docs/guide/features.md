@@ -68,3 +68,16 @@ A built-in 3D geometry tool. Input 3 point coordinates (Origin, X-axis, XY-plane
 
 ### 18. Code Quality Report Generator
 Generate a comprehensive HTML or JSON report of your entire workspace. Instantly view the number of unhandled errors, warnings, and dead-code percentages.
+
+### 19. KRC Backup Diff & Point Delta Inspector (v1.8.5)
+Compare current workspace files against KRC4/KRC5 .zip backup archives with point coordinate delta calculations ($\Delta X, \Delta Y, \Delta Z, \Delta A, \Delta B, \Delta C$).
+
+### 20. Motion Scheme Diagrams & Spline Snippets (v1.8.5)
+Interactive SVG trajectory diagrams for `PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`, and `SPLINE` blocks featuring jerk vectors ($SGEAR\_JERK$) and blending parameters ($C\_PTP, C\_DIS, C\_Spl$).
+
+### 21. EthernetKRL (EKI) XML Suite (v1.8.0)
+Validate EthernetKRL XML schemas and auto-generate KRL communication routines for TCP/IP network streams.
+
+### 22. KUKA Control Center & AI Context Tools
+A unified 1-click Control Center dashboard and specialized tools for grounding AI coding assistants (`@kuka /get-io-matrix`, `@kuka /check-safety`).
+

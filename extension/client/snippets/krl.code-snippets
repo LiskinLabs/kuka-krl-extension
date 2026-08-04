@@ -160,6 +160,60 @@
         ],
         "description": "Spline Linear motion (Inline Form)"
     },
+    "CIRC": {
+        "prefix": "CIRC",
+        "body": [
+            ";FOLD CIRC ${1:AUX_POINT} ${2:TARGET_POINT} Vel=${3:2.0} m/s ${4:DEFAULT};%{PE}",
+            "$BWDSTART=FALSE",
+            "LDAT_ACT=L${4:DEFAULT}",
+            "FDAT_ACT=F${2:TARGET_POINT}",
+            "BAS(#CP_PARAMS, ${3:2.0})",
+            "CIRC X${1:AUX_POINT}, X${2:TARGET_POINT} ${5:C_DIS}",
+            ";ENDFOLD"
+        ],
+        "description": "Circular motion (Inline Form)"
+    },
+    "SCIRC": {
+        "prefix": "SCIRC",
+        "body": [
+            ";FOLD SCIRC ${1:AUX_POINT} ${2:TARGET_POINT} CONT Vel=${3:2.0} m/s ${4:DEFAULT};%{PE}",
+            ";FOLD Parameters ;%{h}",
+            ";Params IlfProvider=kukaroboter.basistech.inlineforms.movement.spline; KukaProvider=KUKA; ProjectPath=...",
+            ";ENDFOLD",
+            "SCIRC X${1:AUX_POINT}, X${2:TARGET_POINT} WITH $VEL = SVEL_CP(${3:2.0}, , CPDAT1), $TOOL = STOOL2(F${2:TARGET_POINT}), $BASE = SBASE(F${2:TARGET_POINT}.BASE_NO), $IPO_MODE = SIPO_MODE(F${2:TARGET_POINT}.IPO_FRAME), $LOAD = SLOAD(F${2:TARGET_POINT}.TOOL_NO), $ACC = SACC_CP(CPDAT1), $ORI_TYPE = SORI_TYP(CPDAT1), $APO = SAPO(CPDAT1), $JERK = SJERK(CPDAT1), $COLLMON_TOL_PRO[1] = USE_CM_PRO_VALUES(0) ${5:C_Spl}",
+            ";ENDFOLD"
+        ],
+        "description": "Spline Circular motion (Inline Form)"
+    },
+    "SPLINE_BLOCK": {
+        "prefix": "SPLINE",
+        "body": [
+            ";FOLD SPLINE Path Block",
+            "SPLINE WITH $VEL = SVEL_CP(${1:2.0})",
+            "\tSLIN X${2:P1}",
+            "\tSPL X${3:P2}",
+            "\tSLIN X${4:P3}",
+            "ENDSPLINE",
+            ";ENDFOLD"
+        ],
+        "description": "Spline motion block (SPLINE ... ENDSPLINE)"
+    },
+    "INI_FOLD": {
+        "prefix": "INI",
+        "body": [
+            ";FOLD INI;%{PE}",
+            "\t;FOLD BASISTECH INI",
+            "\t\tGLOBAL INTERRUPT DECL 3 WHEN $STOPMESS==TRUE DO IR_STOPM()",
+            "\t\tINTERRUPT ON 3",
+            "\t\tBAS(#INITMOV, 0)",
+            "\t;ENDFOLD (BASISTECH INI)",
+            "\t;FOLD USER INI",
+            "\t\t;Make your modifications here",
+            "\t;ENDFOLD (USER INI)",
+            ";ENDFOLD (INI)"
+        ],
+        "description": "Standard KUKA Initialization FOLD block"
+    },
     "WAIT": {
         "prefix": "WAIT",
         "body": [

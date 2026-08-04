@@ -5,6 +5,9 @@ const prettierConfig = require("eslint-config-prettier");
 
 module.exports = [
     {
+        ignores: ["out/**", "dist/**", "node_modules/**", "**/*.d.ts", "client/out/**", "server/out/**", "media/**", "tests/**"],
+    },
+    {
         files: ["**/*.ts", "**/*.tsx"],
         languageOptions: {
             parser: typescriptParser,
@@ -21,7 +24,6 @@ module.exports = [
             "@typescript-eslint/no-explicit-any": "warn",
             "prettier/prettier": "error",
         },
-        ignores: ["out/**", "dist/**", "node_modules/**", "**/*.d.ts", "client/out/**", "server/out/**"],
     },
     prettierConfig,
 ];

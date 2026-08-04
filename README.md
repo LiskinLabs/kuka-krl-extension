@@ -76,10 +76,15 @@ We offer flexible, industrial-grade licensing through our official merchant, **L
 | **Exclusive KUKA Themes** (Midnight OLED, Industrial, WorkVisual) | ✅ | ✅ |
 | **Contextual Autocomplete & Smart Folds** | ✅ | ✅ |
 | **Trilingual Localization** (EN, RU, TR) | ✅ | ✅ |
+| **KUKA Control Center Pro Dashboard** (v1.8.5 Pro Hub & Merchant Portal) | ❌ | **✅ Pro** |
 | **Interactive Flowchart Viewer** (Logic mapping & navigation) | ❌ | **✅ Pro** |
+| **KRC Backup Diff & Point Delta Inspector** (Zip Backup vs DAT deltas) | ❌ | **✅ Pro** |
+| **Motion Diagrams & Spline Snippet Builder** (SVG TCP Trajectory Diagrams) | ❌ | **✅ Pro** |
+| **EthernetKRL (EKI) Suite & Generator** (XML Validator & Handler Generator) | ❌ | **✅ Pro** |
 | **Integrated KUKA Frame Calculator** (3-Point Method) | ❌ | **✅ Pro** |
-| **Advanced Syntax & Block Balance Diagnostics** (`IF/LOOP/FOR`) | ❌ | **✅ Pro** |
-| **Safety Velocity & Tool/Base Initialization Warnings** | ❌ | **✅ Pro** |
+| **Advanced Safety & Velocity Diagnostics** (`$VEL.CP > 3.0`, uninit tools) | ❌ | **✅ Pro** |
+| **AI-Supportive Context Tools** (`@kuka /get-io-matrix`, `@kuka /check-safety`) | ❌ | **✅ Pro** |
+| **WorkVisual Git Metadata Cleaner** (`&ACCESS`, `&REL`, `&PARAM`) | ❌ | **✅ Pro** |
 | **Workspace-wide Dead-Code Analysis** (`GLOBAL DEF` checker) | ❌ | **✅ Pro** |
 | **Automated Code Quality Report Generator** | ❌ | **✅ Pro** |
 
@@ -117,7 +122,17 @@ Calculate coordinate system transformations using the classic **3-Point Method**
 * Calculate `TOOL` offset or `BASE` origin transformations using measured points.
 * Insert computed coordinates directly into your `.dat` files with a single click.
 
-### 4. 📋 Automated Code Quality Reports
+### 4. 📦 KRC Backup Diff & Point Delta Inspector
+Inspect and compare `.src` and `.dat` files and $E6POS/POS/E6AXIS$ point coordinates directly against `.zip` backup archives from KRC4/KRC5 SmartPAD controllers.
+* Calculate exact coordinate deltas ($\Delta X, \Delta Y, \Delta Z, \Delta A, \Delta B, \Delta C$).
+* Graphical Side-by-Side Diff Viewer with Output Channel logs.
+
+### 5. 🗺️ Motion Diagrams & KSS 8.3+ Spline Snippet Generator
+Generate clean KRL code for `PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`, and `SPLINE Path Blocks` with real-time SVG Motion Scheme diagrams.
+* Visualizes TCP path trajectories, velocity vectors, and Jerk-Control ($SGEAR_JERK$).
+* Interactive selection for $C\_PTP$, $C\_DIS$, and $C\_Spl$ blending parameters.
+
+### 6. 📋 Automated Code Quality Reports
 Ensure your code meets the high standards of automotive manufacturers (VASS, BMW, Stellantis).
 * Scan the workspace for unused local variables and dead global subroutines.
 * Generate a structured codebase health report to show your client or lead engineer that the code is optimized, clean, and safe.

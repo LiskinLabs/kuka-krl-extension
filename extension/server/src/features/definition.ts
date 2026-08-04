@@ -35,9 +35,10 @@ export class SymbolResolver {
     let sysVarName = functionName.toUpperCase();
     if (!sysVarName.startsWith("$")) sysVarName = "$" + sysVarName;
 
+    const sysVarsMap = krlData.systemVariables as Record<string, unknown>;
     const isSystemVar =
-      (krlData.systemVariables as any)[sysVarName] ||
-      (krlData.systemVariables as any)[functionName.toUpperCase()] ||
+      Boolean(sysVarsMap[sysVarName]) ||
+      Boolean(sysVarsMap[functionName.toUpperCase()]) ||
       KSS_87_SYSTEM_VARS.includes(sysVarName) ||
       SYSTEM_VAR_DOCS.some((d) => d.name.toUpperCase() === sysVarName);
 

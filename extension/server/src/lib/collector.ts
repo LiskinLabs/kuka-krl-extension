@@ -171,7 +171,7 @@ export class SymbolExtractor {
       const varList = match[3];
 
       const matchStart = match.index;
-      const varListStartInMatch = match[0].lastIndexOf(varList);
+      const varListStartInMatch = match[0].length - varList.length;
       const varListStartAbs = matchStart + varListStartInMatch;
 
       // GLOBAL kontrolü
@@ -191,7 +191,8 @@ export class SymbolExtractor {
         let name = part;
         let value: string | undefined = undefined;
         let signalIndex: number | undefined = undefined;
-        let signalType: "$IN" | "$OUT" | "$ANIN" | "$OUT" | any = undefined;
+        let signalType: "$IN" | "$OUT" | "$ANIN" | "$ANOUT" | undefined =
+          undefined;
 
         // SIGNAL durumunu özel işle
         if (type.toUpperCase() === "SIGNAL") {
@@ -204,7 +205,11 @@ export class SymbolExtractor {
             // Extract index: $IN[5] -> 5
             const sigMatch = value.match(/\$(IN|OUT|ANIN|ANOUT)\[(\d+)\]/i);
             if (sigMatch) {
-              signalType = ("$" + sigMatch[1].toUpperCase()) as any;
+              signalType = ("$" + sigMatch[1].toUpperCase()) as
+                | "$IN"
+                | "$OUT"
+                | "$ANIN"
+                | "$ANOUT";
               signalIndex = parseInt(sigMatch[2], 10);
             }
           }
@@ -227,7 +232,9 @@ export class SymbolExtractor {
                   type: "NAME_ALIAS",
                   value: cleanVal,
                   signalIndex: idx,
-                  signalType: ("$" + nameArrMatch[1].toUpperCase()) as any,
+                  signalType: ("$" + nameArrMatch[1].toUpperCase()) as
+                    | "$TOOL"
+                    | "$BASE",
                 },
               );
             }

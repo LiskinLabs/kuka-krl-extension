@@ -20,6 +20,10 @@ import { showSnippetGenerator } from "./features/snippetGenerator";
 import { generateReport } from "./features/reportGenerator";
 import { showFlowchartViewer } from "./features/flowchartViewer";
 import { initLicense, ensurePremium } from "./features/license";
+import { initEkiValidator } from "./features/ekiValidator";
+import { initAiTools } from "./features/aiTools";
+import { initKrcBackupDiff } from "./features/krcBackupDiff";
+import { initControlCenter } from "./features/controlCenter";
 
 // KRL tanılama koleksiyonu
 const krlDiagnostics = vscode.languages.createDiagnosticCollection("krl");
@@ -31,6 +35,12 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Initialize Error Lens
   initErrorLens(context);
+
+  // Initialize EthernetKRL Validator, AI Tools, KRC Backup Diff & Control Center
+  initEkiValidator(context);
+  initAiTools(context);
+  initKrcBackupDiff(context);
+  initControlCenter(context);
 
   // Sunucu yolunu belirle
   const serverPath = context.asAbsolutePath(

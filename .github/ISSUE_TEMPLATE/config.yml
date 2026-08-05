@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 Telegram Чат поддержки KUKA KRL
+    url: https://t.me/kukakrl
+    about: Задать вопрос в сообществе или написать ведущему инженеру Silvestr Liskin
+  - name: ✈️ Telegram Бот
+    url: https://t.me/kukakrlbot
+    about: Быстрое обращение к разработчику

@@ -57,43 +57,5 @@ export function initAiTools(context: vscode.ExtensionContext) {
     }),
   );
 
-  interface VscLmApi {
-    registerTool(
-      name: string,
-      tool: {
-        invoke(options: { input?: string }): Promise<unknown>;
-      },
-    ): void;
-    LanguageModelToolResult: new (parts: unknown[]) => unknown;
-    LanguageModelTextPart: new (text: string) => unknown;
-  }
 
-  // Register VS Code LM Tools API if supported by host IDE (VS Code / Antigravity IDE)
-  const vscLm = (vscode as unknown as { lm?: VscLmApi }).lm;
-  if (vscLm && typeof vscLm.registerTool === "function") {
-    try {
-      vscLm.registerTool("krl_safety_check", {
-        async invoke(options: { input?: string }) {
-          const editor = vscode.window.activeTextEditor;
-          const text = editor ? editor.document.getText() : options.input || "";
-          const res = performAiSafetyCheck(text);
-          return new vscLm.LanguageModelToolResult([
-            new vscLm.LanguageModelTextPart(JSON.stringify(res, null, 2)),
-          ]);
-        },
-      });
-      vscLm.registerTool("krl_io_matrix", {
-        async invoke(options: { input?: string }) {
-          const editor = vscode.window.activeTextEditor;
-          const text = editor ? editor.document.getText() : options.input || "";
-          const res = extractIoMatrixForAi(text);
-          return new vscLm.LanguageModelToolResult([
-            new vscLm.LanguageModelTextPart(JSON.stringify(res, null, 2)),
-          ]);
-        },
-      });
-    } catch {
-      // LM Tools API not supported or already registered
-    }
-  }
 }

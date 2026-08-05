@@ -90,8 +90,8 @@ export async function cleanupUnusedVariables() {
     return;
   }
 
-  let srcPath = doc.fileName;
-  let datPath = doc.fileName;
+  srcPath = doc.fileName;
+  datPath = doc.fileName;
 
   if (ext === ".src" || ext === ".sub" || ext === ".krl" || ext === ".up") {
     const candidateDat = doc.fileName.replace(/\.[^.]+$/i, ".dat");

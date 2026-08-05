@@ -161,3 +161,14 @@ Configure extension behaviors in your `settings.json`:
 
 **Licensed under a Proprietary EULA.**  
 The Community Edition is free for personal and commercial use. Reverse-engineering, decompiling, or redistributing the extension or its Premium features is strictly prohibited. See the `LICENSE` file for full terms.
+
+---
+
+## 📅 Changelog
+
+### v1.7.3 (Industrial Edition Hotfix)
+* 🚀 **Critical Fix**: Resolved an Extension Host crash (command not found) during activation caused by missing AI tools declarations.
+* 🚀 **Critical Fix**: Resolved a duplicate command registration crash (Error: command 'krl.foldAll' already exists) that aborted extension loading.
+* 🧠 **Smart Inlay Hints**: Ported the improved $config.dat global signal resolving logic from v1.8.5. Inlay Hints now correctly display names for $IN[] and $OUT[] across the entire workspace by utilizing workspaceFolders instead of deprecated LSP variables.
+* 🛠️ **Build Optimization**: Cleaned up the sbuild process and removed unnecessary developer scripts for a cleaner production .vsix.
+

@@ -133,9 +133,8 @@ const semanticTokens = new SemanticTokensProvider();
 // =======================
 
 connection.onInitialize((params: InitializeParams): InitializeResult => {
-  state.workspaceRoot = params.rootUri
-    ? URI.parse(params.rootUri).fsPath
-    : null;
+  const root = params.workspaceFolders?.[0]?.uri || params.rootUri;
+  state.workspaceRoot = root ? URI.parse(root).fsPath : null;
   diagnostics.setWorkspaceRoot(state.workspaceRoot);
 
   return {

@@ -1,4 +1,4 @@
-import * as vscode from "vscode";
+import vscode = require("vscode");
 import {
   LanguageClient,
   LanguageClientOptions,
@@ -136,15 +136,6 @@ export function activate(context: vscode.ExtensionContext) {
     }),
   );
 
-  // Katlama komutları
-  context.subscriptions.push(
-    vscode.commands.registerCommand("krl.foldAll", () =>
-      vscode.commands.executeCommand("editor.foldAll"),
-    ),
-    vscode.commands.registerCommand("krl.unfoldAll", () =>
-      vscode.commands.executeCommand("editor.unfoldAll"),
-    ),
-  );
 
   // Belgeyi biçimlendir komutu
   context.subscriptions.push(

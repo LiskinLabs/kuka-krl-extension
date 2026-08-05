@@ -185,6 +185,15 @@ test('Wonderlib contains expected functions', () => {
     assertTrue(content.includes('IN_RANGE'), 'IN_RANGE missing');
 });
 
+// Test 6: Licensing & Links
+console.log('\n--- Licensing Tests ---');
+
+test('Control Center has the correct Lemon Squeezy Checkout URL', () => {
+    const controlCenterPath = path.join(__dirname, '..', 'client', 'src', 'features', 'controlCenter.ts');
+    const content = fs.readFileSync(controlCenterPath, 'utf8');
+    assertTrue(content.includes('https://liskin.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7'), 'Checkout URL is missing or incorrect in controlCenter.ts');
+});
+
 // Summary
 console.log('\n=== Test Summary ===');
 console.log(`Passed: ${passed}`);

@@ -81,7 +81,7 @@ async function openControlCenterPanel(context: vscode.ExtensionContext) {
           break;
         case "buyLicense":
           vscode.env.openExternal(
-            vscode.Uri.parse("https://liskin.lemonsqueezy.com/"),
+            vscode.Uri.parse("https://liskin.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7"),
           );
           vscode.window.showInformationMessage(
             "🛒 Открыт официальный магазин лицензий KUKA KRL Professional.",

@@ -247,6 +247,18 @@ async function backgroundRevalidate(
         expiresAt: now + OFFLINE_TTL_MS,
         valid: true,
       };
+
+      // Обновляем данные подписки, если они пришли от сервера
+      if (res.meta) {
+        const licKey = res.license_key || {};
+        const sub = res.license_subscription || {};
+        
+        updatedCache.subscriptionStatus = String(sub.status || licKey.status || cache.subscriptionStatus || "active");
+        updatedCache.subscriptionEndsAt = (sub.ends_at || sub.renews_at || licKey.expires_at || null) as string | null;
+        updatedCache.activationLimit = Number(licKey.activation_limit || cache.activationLimit);
+        updatedCache.activationUsage = Number(licKey.activation_usage || cache.activationUsage);
+      }
+
       await saveLicenseCache(context, updatedCache);
       isPremiumCached = true;
     } else if (res.status === "REVOKED") {
@@ -519,7 +531,12 @@ async function checkLicenseStatusCommand(context: vscode.ExtensionContext) {
 async function validateLicenseOnline(
   key: string,
   instanceId: string,
-): Promise<{ status: "VALID" | "REVOKED" | "NETWORK_ERROR" }> {
+): Promise<{ 
+  status: "VALID" | "REVOKED" | "NETWORK_ERROR";
+  meta?: Record<string, unknown>;
+  license_key?: Record<string, unknown>;
+  license_subscription?: Record<string, unknown>;
+}> {
   if (key === "TEKNOROB-DEV-MODE" || key.startsWith("TEKNOROB")) {
     return { status: "VALID" };
   }
@@ -537,10 +554,21 @@ async function validateLicenseOnline(
       }),
     });
 
-    const data = (await response.json()) as { valid?: boolean; error?: string };
+    const data = (await response.json()) as { 
+      valid?: boolean; 
+      error?: string;
+      meta?: Record<string, unknown>;
+      license_key?: Record<string, unknown>;
+      license_subscription?: Record<string, unknown>;
+    };
 
     if (response.ok && data.valid === true) {
-      return { status: "VALID" };
+      return { 
+        status: "VALID", 
+        meta: data.meta, 
+        license_key: data.license_key, 
+        license_subscription: data.license_subscription 
+      };
     }
 
     // Если сервер 200/400 вернул отказ или disabled

@@ -79,6 +79,14 @@ async function openControlCenterPanel(context: vscode.ExtensionContext) {
             "🔗 Открыт официальный портал покупателя Lemon Squeezy (управление подписками и инвойсами).",
           );
           break;
+        case "buyLicense":
+          vscode.env.openExternal(
+            vscode.Uri.parse("https://liskin.lemonsqueezy.com/"),
+          );
+          vscode.window.showInformationMessage(
+            "🛒 Открыт официальный магазин лицензий KUKA KRL Professional.",
+          );
+          break;
         case "copyKey":
           if (message.key) {
             await vscode.env.clipboard.writeText(message.key);
@@ -505,8 +513,8 @@ function getControlCenterHtml(
           isPremium()
             ? `<button class="card-btn" style="background:#dc3545;" onclick="deactivate()">🔴 Выйти из учетной записи / Деактивировать ключ</button>
                <button class="card-btn" style="background:#444;" onclick="checkStatus()">🔄 Проверить онлайн-статус</button>`
-            : `<button class="card-btn" style="background:#28a745;" onclick="activate()">🔑 Ввести лицензионный ключ (Активировать)</button>
-               <button class="card-btn" style="background:#007acc;" onclick="openPortal()">🛒 Купить Pro лицензию</button>`
+            : `<button class="card-btn" style="background:#28a745;" onclick="activate()">🔑 Ввести активационный ключ (License Key)</button>
+               <button class="card-btn" style="background:#007acc;" onclick="buyLicense()">🛒 Купить Pro лицензию</button>`
         }
       </div>
     </div>
@@ -571,6 +579,9 @@ function getControlCenterHtml(
     }
     function openPortal() {
       vscode.postMessage({ command: 'openCustomerPortal' });
+    }
+    function buyLicense() {
+      vscode.postMessage({ command: 'buyLicense' });
     }
     function copyKey(k) {
       vscode.postMessage({ command: 'copyKey', key: k });

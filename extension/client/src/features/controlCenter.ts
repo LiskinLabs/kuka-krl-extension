@@ -191,9 +191,13 @@ function getControlCenterHtml(
       )
     : 30;
 
-  const onlineExpiry = licenseCache?.subscriptionEndsAt
-    ? new Date(licenseCache.subscriptionEndsAt).toLocaleDateString()
-    : "Lifetime / Permanent License";
+  let onlineExpiry = "Lifetime / Permanent License";
+  if (licenseCache?.subscriptionEndsAt) {
+    const expDate = new Date(licenseCache.subscriptionEndsAt);
+    const msLeft = expDate.getTime() - now;
+    const daysLeft = Math.max(0, Math.ceil(msLeft / (24 * 60 * 60 * 1000)));
+    onlineExpiry = `${expDate.toLocaleDateString()} (${daysLeft} Days Remaining)`;
+  }
 
   const logoUri = webview.asWebviewUri(
     vscode.Uri.joinPath(context.extensionUri, "media", "logo.png"),

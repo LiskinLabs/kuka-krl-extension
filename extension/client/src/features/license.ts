@@ -488,14 +488,22 @@ async function checkLicenseStatusCommand(context: vscode.ExtensionContext) {
 
   if (isPremium()) {
     const now = Date.now();
-    const daysRemaining = Math.max(
+    const offlineDaysRemaining = Math.max(
       0,
       Math.ceil((cache.expiresAt - now) / (24 * 60 * 60 * 1000)),
     );
     const lastCheck = new Date(cache.lastValidated).toLocaleDateString();
 
+    let subText = "Пожизненная (Lifetime)";
+    if (cache.subscriptionEndsAt) {
+      const subEnd = new Date(cache.subscriptionEndsAt);
+      const msLeft = subEnd.getTime() - now;
+      const subDays = Math.max(0, Math.ceil(msLeft / (24 * 60 * 60 * 1000)));
+      subText = `до ${subEnd.toLocaleDateString()} (${subDays} дн. осталось)`;
+    }
+
     vscode.window.showInformationMessage(
-      `✅ Лицензия активна (Premium). Последняя проверка: ${lastCheck}. Офлайн-доступ: ${daysRemaining} дн.`,
+      `В лицензии активно (Premium). Подписка: ${subText}. Оффлайн-буфер: ${offlineDaysRemaining} дн. (посл. пров: ${lastCheck})`,
     );
   } else {
     vscode.window.showWarningMessage(

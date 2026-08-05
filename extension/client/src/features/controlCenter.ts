@@ -125,6 +125,16 @@ async function openControlCenterPanel(context: vscode.ExtensionContext) {
             );
           }
           break;
+        case "openTelegram":
+          vscode.env.openExternal(
+            vscode.Uri.parse("https://t.me/SilvestrLiskin"),
+          );
+          break;
+        case "openGitHub":
+          vscode.env.openExternal(
+            vscode.Uri.parse("https://github.com/LiskinLabs/kuka-krl-extension-core/issues"),
+          );
+          break;
       }
     },
     undefined,
@@ -559,7 +569,11 @@ function getControlCenterHtml(
     <div id="tab-support" class="tab-content">
       <div style="font-weight:600; margin-bottom:10px; font-size:14px;">🛟 Direct Engineering Support</div>
       <p style="font-size:12px; opacity:0.8; margin-bottom:14px;">Have questions, feature requests, or encountered an industrial KRL issue? Contact Lead Engineer Silvestr Liskin directly.</p>
-      <button class="card-btn" onclick="sendFeedback()">✉️ Send Feedback / Question</button>
+      <div style="display:flex; flex-direction:column; gap:10px; max-width:400px;">
+        <button class="card-btn" style="background:#2AABEE;" onclick="openTelegram()">💬 Написать в Telegram Bot</button>
+        <button class="card-btn" style="background:#333;" onclick="openGitHub()">🐛 Сообщить о баге на GitHub</button>
+        <button class="card-btn" style="background:#007acc;" onclick="sendFeedback()">✉️ Отправить письмо (Email)</button>
+      </div>
     </div>
   </div>
 
@@ -592,6 +606,12 @@ function getControlCenterHtml(
     }
     function sendFeedback() {
       vscode.postMessage({ command: 'sendFeedback' });
+    }
+    function openTelegram() {
+      vscode.postMessage({ command: 'openTelegram' });
+    }
+    function openGitHub() {
+      vscode.postMessage({ command: 'openGitHub' });
     }
     function downloadInvoice() {
       vscode.postMessage({ command: 'downloadInvoice' });

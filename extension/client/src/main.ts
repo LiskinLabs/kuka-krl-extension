@@ -191,6 +191,19 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   // KUKA Git Metadata Cleaner
+  // Katlama komutları (safe registration)
+  try {
+    context.subscriptions.push(
+      vscode.commands.registerCommand("krl.foldAll", () =>
+        vscode.commands.executeCommand("editor.foldAll"),
+      ),
+      vscode.commands.registerCommand("krl.unfoldAll", () =>
+        vscode.commands.executeCommand("editor.unfoldAll"),
+      ),
+    );
+  } catch (e) {
+    console.warn("Fold commands already registered");
+  }
   context.subscriptions.push(
     vscode.commands.registerCommand("krl.cleanGitMetadata", async () => {
       const editor = vscode.window.activeTextEditor;

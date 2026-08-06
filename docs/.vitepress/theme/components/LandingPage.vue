@@ -16,9 +16,13 @@
         <p class="mt-4 max-w-2xl text-xl text-gray-400 mx-auto mb-10" v-html="t.heroSubtitle"></p>
         
         <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-          <a href="#pricing" class="px-8 py-4 bg-kuka-orange hover:bg-orange-600 text-white font-bold rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(255,102,0,0.4)] flex items-center gap-2">
+          <a :href="t.wikiLink" class="px-8 py-4 bg-kuka-orange hover:bg-orange-600 text-white font-bold rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(255,102,0,0.4)] flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            {{ t.openWiki }}
+          </a>
+          <a href="#pricing" class="px-8 py-4 bg-kuka-gray hover:bg-gray-800 text-white font-bold rounded-lg border border-kuka-border transition-all duration-200 hover:border-kuka-orange flex items-center gap-2">
             {{ t.getProKey }}
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <svg class="w-5 h-5 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
           </a>
           <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl" target="_blank" class="px-8 py-4 bg-kuka-gray hover:bg-gray-800 text-white font-medium rounded-lg border border-kuka-border transition-all duration-200 flex items-center gap-2">
             {{ t.downloadFree }}
@@ -237,6 +241,8 @@ const translations = {
     heroBadge: "KUKA KRL Professional v1.8.5 Pro Hub",
     heroTitle: `The Definitive Industrial <br class="hidden md:block"/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-kuka-orange to-[#FF9900]">Development Suite</span>`,
     heroSubtitle: 'Professional-grade IDE & LSP support built for KRC4 & KRC5 robotics. <br class="hidden sm:block"/> Engineered for speed, safety, and zero downtime.',
+    openWiki: "📚 Explore Features Wiki (26 Features)",
+    wikiLink: "/guide/features.html",
     getProKey: "Get Pro Key",
     downloadFree: "Download Free",
     secure100: "100% Secure",
@@ -308,6 +314,8 @@ const translations = {
     heroBadge: "KUKA KRL Professional v1.8.5 Pro Hub",
     heroTitle: `Эталонная среда разработки <br class="hidden md:block"/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-kuka-orange to-[#FF9900]">для промышленной робототехники</span>`,
     heroSubtitle: 'Профессиональная поддержка LSP и IDE для роботов KRC4 и KRC5. <br class="hidden sm:block"/> Создано для скорости, безопасности и работы без простоев.',
+    openWiki: "📚 Открыть Вики (26 функций)",
+    wikiLink: "/ru/guide/features.html",
     getProKey: "Купить Pro Ключ",
     downloadFree: "Скачать Бесплатно",
     secure100: "100% Безопасно",

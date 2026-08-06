@@ -1,31 +1,26 @@
-# Installation
+# Installation & Setup Guide
 
-KUKA KRL Professional is distributed as a standard VS Code extension (`.vsix` file). 
+Quick start guide for installing and configuring KUKA KRL Professional.
 
-## Prerequisites
+## 1. Install via VS Code Marketplace
+1. Open VS Code.
+2. Go to the Extensions view (`Ctrl + Shift + X`).
+3. Search for `KUKA KRL Professional`.
+4. Click **Install**.
 
-- Visual Studio Code or Cursor (version 1.85.0 or higher)
-- No internet connection required for day-to-day use (offline-first).
+## 2. Install from VSIX (Offline Installation)
+1. Download the `kuka-krl-extension-1.7.3.vsix` file.
+2. In VS Code, click the `...` menu in the top-right corner of the Extensions panel.
+3. Select **Install from VSIX...** and choose the `.vsix` file.
 
-## How to Install
+## 3. Selecting a KUKA Theme
+1. Press `Ctrl + K`, then `Ctrl + T`.
+2. Select one of the 6 signature themes: **Industrial Dark**, **WorkVisual Dark**, **WorkVisual Light**, **Midnight OLED**, **Blueprint**, **Industrial Light**.
 
-1. Download the latest `.vsix` release from our GitHub or Lemon Squeezy portal.
-2. Open VS Code or Cursor.
-3. Go to the **Extensions** view (`Ctrl+Shift+X`).
-4. Click the `...` menu in the top right corner of the Extensions view.
-5. Select **Install from VSIX...**
-6. Select the downloaded `.vsix` file.
+## 4. Activating Pro License
+1. Open the **KUKA Control Center** by clicking the KUKA icon in the Activity Bar or running `KRL: Open Control Center`.
+2. Click **Enter License Key**.
+3. Paste your Lemon Squeezy key and click **Activate**.
 
-## Licensing
-
-The extension operates in two modes:
-
-* **Community Edition**: Free forever. Includes syntax highlighting, basic autocomplete, and our signature industrial themes.
-* **Pro Edition**: Requires a valid license key. Unlocks the Interactive Flowchart, Industrial Diagnostics, Dead-Code analysis, and more.
-
-### Activating Pro
-
-1. Purchase a license key via [Lemon Squeezy](https://liskin.lemonsqueezy.com).
-2. In VS Code, open the Command Palette (`Ctrl+Shift+P`).
-3. Run `KRL: Activate Pro License`.
-4. Paste your license key. The extension will securely cache the activation state. You are now free to work completely offline on the factory floor!
+## 5. Telegram Engineering Support
+For technical support, connect with us using the embedded support panel or via our Telegram bot **`@kukakrlbot`**.

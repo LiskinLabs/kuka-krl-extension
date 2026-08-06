@@ -4,7 +4,7 @@
 
 Ensure your code meets the high standards of automotive manufacturers (VASS, BMW, Stellantis). Industrial standards require clean, optimized codebases with zero unused variables.
 
-![Dead Code Analysis Demo](/media/dead-code.gif)
+![Dead Code Analysis Demo](/media/kuka_commands.gif)
 
 ## How It Works
 

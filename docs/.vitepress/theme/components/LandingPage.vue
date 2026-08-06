@@ -234,7 +234,7 @@ const { lang } = useData()
 
 const translations = {
   en: {
-    heroBadge: "Industrial Edition v6.0 Available",
+    heroBadge: "KUKA KRL Professional v1.8.5 Pro Hub",
     heroTitle: `The Definitive Industrial <br class="hidden md:block"/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-kuka-orange to-[#FF9900]">Development Suite</span>`,
     heroSubtitle: 'Professional-grade IDE & LSP support built for KRC4 & KRC5 robotics. <br class="hidden sm:block"/> Engineered for speed, safety, and zero downtime.',
     getProKey: "Get Pro Key",
@@ -305,7 +305,7 @@ const translations = {
     ]
   },
   ru: {
-    heroBadge: "Industrial Edition v6.0 Доступна",
+    heroBadge: "KUKA KRL Professional v1.8.5 Pro Hub",
     heroTitle: `Эталонная среда разработки <br class="hidden md:block"/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-kuka-orange to-[#FF9900]">для промышленной робототехники</span>`,
     heroSubtitle: 'Профессиональная поддержка LSP и IDE для роботов KRC4 и KRC5. <br class="hidden sm:block"/> Создано для скорости, безопасности и работы без простоев.',
     getProKey: "Купить Pro Ключ",

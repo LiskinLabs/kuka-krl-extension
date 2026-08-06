@@ -1,0 +1,1 @@
+const e="/kuka-krl-extension/media/syntax_before.png",k="/kuka-krl-extension/media/kuka_theme_2.png",a="/kuka-krl-extension/media/kuka_theme_3.png",n="/kuka-krl-extension/media/kuka_theme_4.png";export{e as _,k as a,a as b,n as c};

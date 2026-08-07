@@ -27,6 +27,8 @@
     "command.openTelegramChat": "Чат поддержки с разработчиком (Telegram @kukakrlbot)",
     "command.sendLogsToDeveloper": "Отправить логи диагностик разработчику в Telegram",
     "command.sendFileToDeveloper": "Отправить файл/KRL код разработчику в Telegram",
+    "command.exportBackupZip": "Выгрузить бэкап проекта KRL (.zip)",
+    "command.sendAiDiagnostics": "Запустить AI автодиагностику KRL",
     "command.findReferences": "Найти все ссылки (Go to References)",
     "config.title": "KUKA KRL Extension",
     "config.autoFold.description": "Автоматически сворачивать все регионы при открытии KRL файла",

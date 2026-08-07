@@ -27,6 +27,8 @@
   "command.openTelegramChat": "Live Support Chat with Developer (Telegram @kukakrlbot)",
   "command.sendLogsToDeveloper": "Send Extension Diagnostic Logs to Developer via Telegram",
   "command.sendFileToDeveloper": "Send File/KRL Code to Developer via Telegram",
+  "command.exportBackupZip": "Export Project KRL Backup (.zip)",
+  "command.sendAiDiagnostics": "Run AI KRL Auto-Diagnostics",
   "command.findReferences": "Find All References (Go to References)",
   "config.title": "KUKA KRL Extension",
   "config.autoFold.description": "Automatically fold all regions when opening a KRL file",

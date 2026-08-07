@@ -27,6 +27,8 @@
     "command.openTelegramChat": "Geliştirici ile Canlı Destek Sohbeti (Telegram @kukakrlbot)",
     "command.sendLogsToDeveloper": "Teşhis Günlüklerini Telegram Üzerinden Geliştiriciye Gönder",
     "command.sendFileToDeveloper": "Dosyayı/KRL Kodunu Telegram Üzerinden Geliştiriciye Gönder",
+    "command.exportBackupZip": "KRL Proje Yedeğini Dışa Aktar (.zip)",
+    "command.sendAiDiagnostics": "Yapay Zeka KRL Otomatik Teşhisini Çalıştır",
     "command.findReferences": "Tüm Referansları Bul",
     "config.title": "KUKA KRL Uzantısı",
     "config.autoFold.description": "KRL dosyası açıldığında tüm bölgeleri otomatik olarak katla",

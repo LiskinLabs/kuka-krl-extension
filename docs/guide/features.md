@@ -1,4 +1,4 @@
-# KUKA KRL Professional — Features Wiki & Complete Encyclopedia (v1.8.5 Pro Hub)
+# KUKA KRL Professional — Features Wiki & Complete Encyclopedia (v1.7.3 Pro Hub)
 
 Welcome to the official feature wiki for **KUKA KRL Professional Extension** for VS Code.
 
@@ -168,7 +168,7 @@ Designed for system integrators, robotics leads, and safety compliance audits.
 
 ---
 
-### 16. KUKA Control Center Dashboard (v1.8.5 Pro Hub)
+### 16. KUKA Control Center Dashboard (v1.7.3 Pro Hub)
 
 * **Purpose & Usage:** Centralized Fluent UI dashboard (`krl.openControlCenter`) providing 1-click access to all Pro tools, workspace health metrics, license manager, and Telegram support.
 * **Demonstration:**

@@ -698,6 +698,19 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.end_headers()
             self.wfile.write(b"OK")
+        elif self.path.startswith("/api/poll_for_vscode"):
+            query = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+            session_id = query.get("session_id", [None])[0]
+            dev_msgs = []
+            if session_id and session_id in store["sessions"]:
+                msgs = store["sessions"][session_id].get("messages", [])
+                for m in msgs:
+                    if m.get("sender") == "developer":
+                        dev_msgs.append(m)
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps({"messages": dev_msgs}, ensure_ascii=False).encode("utf-8"))
         else:
             self.send_response(404)
             self.end_headers()
@@ -724,6 +737,49 @@ class RequestHandler(BaseHTTPRequestHandler):
                     })
                     store["sessions"][active_id]["lastTime"] = int(time.time() * 1000)
                     save_db(store)
+
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"OK")
+
+        elif self.path == "/api/post_from_vscode":
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+            body = json.loads(post_data.decode('utf-8'))
+            
+            session_id = body.get("sessionId")
+            text = body.get("text", "").strip()
+            hostname = body.get("hostname", "ПК Инженера")
+            role = body.get("role", "⭐ PRO")
+            active_file = body.get("activeFile", "Нет")
+
+            if session_id:
+                if session_id not in store["sessions"]:
+                    store["sessions"][session_id] = {
+                        "hostname": hostname,
+                        "role": role,
+                        "activeFile": active_file,
+                        "lastPingTime": int(time.time() * 1000),
+                        "lastTime": int(time.time() * 1000),
+                        "messages": []
+                    }
+                else:
+                    store["sessions"][session_id]["hostname"] = hostname
+                    store["sessions"][session_id]["role"] = role
+                    store["sessions"][session_id]["activeFile"] = active_file
+                    store["sessions"][session_id]["lastPingTime"] = int(time.time() * 1000)
+
+                if text:
+                    store["sessions"][session_id]["messages"].append({
+                        "sender": "user",
+                        "text": text,
+                        "timestamp": int(time.time() * 1000)
+                    })
+                    store["sessions"][session_id]["lastTime"] = int(time.time() * 1000)
+
+                if not store.get("activeSessionId"):
+                    store["activeSessionId"] = session_id
+                save_db(store)
 
             self.send_response(200)
             self.end_headers()

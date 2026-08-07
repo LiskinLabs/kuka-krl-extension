@@ -356,19 +356,10 @@ export class TelegramChatService {
   }
 
   /**
-   * Sends a message from VS Code to the Telegram Bot / Developer.
+   * Sends a message from VS Code to the Telegram Bot / Admin App.
    */
   public async sendMessage(userText: string): Promise<boolean> {
     try {
-      if (!this.devChatId) {
-        await this.fetchUpdatesAndDiscoverChatId();
-      }
-
-      if (!this.devChatId) {
-        this.notifyDevNotConnected();
-        return false;
-      }
-
       // Add to local history for current session
       const userMsg: ChatMessage = {
         sender: "user",
@@ -384,56 +375,125 @@ export class TelegramChatService {
       this.onMessageEmitter.fire(userMsg);
       this.logToOutput(`[Пользователь]: ${userText}`);
 
-      // Format Telegram Markdown Message
-      const userRole = isPremium() ? "⭐ PRO (Industrial)" : "🆓 Community";
-      const payloadText =
-        `💬 *Новое сообщение из VS Code*\n\n` +
-        `👤 *От:* Инженер KRL (${userRole})\n` +
-        `💻 *ПК:* \`${os.hostname()}\` | *Сессия:* \`#${this.sessionId}\`\n\n` +
-        `📝 *Текст:*\n${this.escapeMarkdown(userText)}\n\n` +
-        `✍️ _Ответьте на это сообщение в Telegram, чтобы передать ответ в VS Code!_`;
-
-      const response = await fetch(`${TELEGRAM_API_BASE}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: this.devChatId,
-          text: payloadText,
-          parse_mode: "Markdown",
-        }),
-      });
-
-      const data = (await response.json()) as { ok: boolean };
-      if (data.ok) {
-        vscode.window.showInformationMessage(t("cc.notify.telegramSent"));
-        return true;
-      } else {
-        vscode.window.showErrorMessage(t("cc.notify.telegramFallback"));
-        return false;
+      try {
+        await fetch("http://127.0.0.1:8999/api/post_from_vscode", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            sessionId: this.sessionId,
+            text: userText,
+            hostname: os.hostname(),
+            role: isPremium() ? "⭐ PRO" : "🆓 Community",
+            activeFile: vscode.window.activeTextEditor
+              ? path.basename(vscode.window.activeTextEditor.document.fileName)
+              : "Нет",
+          }),
+        });
+      } catch {
+        /* Admin App not running locally */
       }
+
+      // 2. Broadcast via Telegram Bot API
+      if (!this.devChatId) {
+        await this.fetchUpdatesAndDiscoverChatId();
+      }
+
+      if (this.devChatId) {
+        const userRole = isPremium() ? "⭐ PRO (Industrial)" : "🆓 Community";
+        const payloadText =
+          `💬 *Новое сообщение из VS Code*\n\n` +
+          `👤 *От:* Инженер KRL (${userRole})\n` +
+          `💻 *ПК:* \`${os.hostname()}\` | *Сессия:* \`#${this.sessionId}\`\n\n` +
+          `📝 *Текст:*\n${this.escapeMarkdown(userText)}\n\n` +
+          `✍️ _Ответьте на это сообщение в Telegram или в Admin Helpdesk!_`;
+
+        await fetch(`${TELEGRAM_API_BASE}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: this.devChatId,
+            text: payloadText,
+            parse_mode: "Markdown",
+          }),
+        });
+      }
+
+      vscode.window.showInformationMessage(t("cc.notify.telegramSent"));
+      return true;
     } catch (e) {
-      vscode.window.showErrorMessage(`Ошибка отправки в Telegram: ${e}`);
+      vscode.window.showErrorMessage(`Ошибка отправки сообщения: ${e}`);
       return false;
     }
   }
 
   /**
-   * Periodically polls Telegram getUpdates for replies or commands from Developer.
+   * Periodically polls Telegram getUpdates and Local Admin App for replies.
    */
   private startPolling(context: vscode.ExtensionContext) {
     if (this.pollingTimer) return;
 
     const poll = async () => {
       try {
+        await this.pollLocalAdminSync();
         await this.fetchUpdatesAndProcessReplies(context);
       } catch {
         /* ignore polling network glitches */
       } finally {
-        this.pollingTimer = setTimeout(poll, 3500); // Check every 3.5 seconds
+        this.pollingTimer = setTimeout(poll, 2500); // Check every 2.5 seconds
       }
     };
 
     poll();
+  }
+
+  private async pollLocalAdminSync() {
+    try {
+      const resp = await fetch(
+        `http://127.0.0.1:8999/api/poll_for_vscode?session_id=${this.sessionId}`,
+      );
+      if (resp.ok) {
+        const data = (await resp.json()) as {
+          messages?: Array<{ text: string; timestamp: number }>;
+        };
+        if (data && data.messages && data.messages.length > 0) {
+          for (const m of data.messages) {
+            const exists = (this.sessions[this.sessionId] || []).some(
+              (x) => x.timestamp === m.timestamp && x.text === m.text,
+            );
+            if (!exists) {
+              const devMsg: ChatMessage = {
+                sender: "developer",
+                text: m.text,
+                timestamp: m.timestamp || Date.now(),
+              };
+              if (!this.sessions[this.sessionId]) {
+                this.sessions[this.sessionId] = [];
+              }
+              this.sessions[this.sessionId].push(devMsg);
+              this.saveSessions();
+              this.onMessageEmitter.fire(devMsg);
+
+              const replyBtn = t("chat.btn.reply");
+              vscode.window
+                .showInformationMessage(
+                  t("chat.notify.devMessage", m.text),
+                  replyBtn,
+                )
+                .then((selection) => {
+                  if (selection === replyBtn && this.extensionContext) {
+                    TelegramChatPanel.createOrShow(
+                      this.extensionContext.extensionUri,
+                      this.extensionContext,
+                    );
+                  }
+                });
+            }
+          }
+        }
+      }
+    } catch {
+      /* Admin app not active */
+    }
   }
 
   private async fetchUpdatesAndDiscoverChatId() {

@@ -317,16 +317,16 @@ const { setLocale, t } = require('../server/out/lib/i18n.js');
 
 test('i18n engine correctly resolves EN, RU, and TR translations', () => {
     setLocale('en');
-    const enText = t('diag.highVelocity');
-    assertTrue(typeof enText === 'string' && enText.length > 0, 'EN translation should return string');
+    const enText = t('diag.velocityTooHigh', '3.5');
+    assertTrue(enText.includes('exceeds'), 'EN translation should contain "exceeds"');
 
     setLocale('ru');
-    const ruText = t('diag.highVelocity');
-    assertTrue(typeof ruText === 'string' && ruText.length > 0, 'RU translation should return string');
+    const ruText = t('diag.velocityTooHigh', '3.5');
+    assertTrue(ruText.includes('превышает'), 'RU translation should contain "превышает"');
 
     setLocale('tr');
-    const trText = t('diag.highVelocity');
-    assertTrue(typeof trText === 'string' && trText.length > 0, 'TR translation should return string');
+    const trText = t('diag.velocityTooHigh', '3.5');
+    assertTrue(trText.includes('aşıyor'), 'TR translation should contain "aşıyor"');
 });
 
 // ----------------------------------------------------

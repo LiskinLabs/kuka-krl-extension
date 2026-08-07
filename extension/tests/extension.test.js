@@ -33,10 +33,43 @@ function assertTrue(condition, msg) {
     }
 }
 
+const { execSync } = require('child_process');
+
 console.log('=== KRL Extension Tests ===\n');
 
+// Test 0: TypeScript Strict Type Check & Linter
+console.log('--- Static Type & Linting Checks ---');
+
+test('Server TypeScript compilation (tsc --noEmit) passes with 0 errors', () => {
+    const serverDir = path.join(__dirname, '..', 'server');
+    execSync('npx tsc --noEmit', { cwd: serverDir, stdio: 'pipe' });
+});
+
+test('Client TypeScript compilation (tsc --noEmit) passes with 0 errors', () => {
+    const clientDir = path.join(__dirname, '..', 'client');
+    execSync('npx tsc --noEmit', { cwd: clientDir, stdio: 'pipe' });
+});
+
+test('Codicons in package.json match valid VS Code icon set', () => {
+    const VALID_CODICONS = new Set([
+        'check-all', 'fold', 'unfold', 'code', 'whitespace', 'clear-all',
+        'list-ordered', 'symbol-namespace', 'refresh', 'trash', 'symbol-numeric',
+        'edit', 'beaker', 'report', 'git-merge', 'key', 'lock', 'info',
+        'file-code', 'symbol-interface', 'list-flat', 'shield', 'widget',
+        'diff', 'comment-discussion', 'dashboard', 'references', 'output', 'file-submodule'
+    ]);
+    const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
+    const commands = pkg.contributes.commands || [];
+    commands.forEach(cmd => {
+        if (cmd.icon && cmd.icon.startsWith('$(') && cmd.icon.endsWith(')')) {
+            const iconName = cmd.icon.substring(2, cmd.icon.length - 1);
+            assertTrue(VALID_CODICONS.has(iconName), `Invalid or unknown Codicon "${iconName}" in command ${cmd.command}`);
+        }
+    });
+});
+
 // Test 1: Grammar file structure
-console.log('--- Grammar Tests ---');
+console.log('\n--- Grammar Tests ---');
 
 test('Grammar file exists', () => {
     const grammarPath = path.join(__dirname, '..', 'client', 'syntaxes', 'krl.tmLanguage.json');
@@ -189,9 +222,76 @@ test('Wonderlib contains expected functions', () => {
 console.log('\n--- Licensing Tests ---');
 
 test('Control Center has the correct Lemon Squeezy Checkout URL', () => {
+    const licensePath = path.join(__dirname, '..', 'client', 'src', 'features', 'license.ts');
+    const licenseContent = fs.readFileSync(licensePath, 'utf8');
+    assertTrue(licenseContent.includes('https://liskin.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7'), 'Checkout URL is missing or incorrect in license.ts');
+
     const controlCenterPath = path.join(__dirname, '..', 'client', 'src', 'features', 'controlCenter.ts');
-    const content = fs.readFileSync(controlCenterPath, 'utf8');
-    assertTrue(content.includes('https://liskin.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7'), 'Checkout URL is missing or incorrect in controlCenter.ts');
+    const ccContent = fs.readFileSync(controlCenterPath, 'utf8');
+    assertTrue(ccContent.includes('LEMON_SQUEEZY_CHECKOUT_URL'), 'LEMON_SQUEEZY_CHECKOUT_URL missing in controlCenter.ts');
+});
+
+test('Lemon Squeezy Store ID (393141) and Product ID (1103272) exist in license.ts', () => {
+    const licensePath = path.join(__dirname, '..', 'client', 'src', 'features', 'license.ts');
+    const content = fs.readFileSync(licensePath, 'utf8');
+    assertTrue(content.includes('LEMON_SQUEEZY_STORE_ID = 393141'), 'LEMON_SQUEEZY_STORE_ID 393141 missing in license.ts');
+    assertTrue(content.includes('LEMON_SQUEEZY_PRODUCT_ID = 1103272'), 'LEMON_SQUEEZY_PRODUCT_ID 1103272 missing in license.ts');
+});
+
+test('PRICING_PLANS contains Monthly and Annual subscription tiers', () => {
+    const licensePath = path.join(__dirname, '..', 'client', 'src', 'features', 'license.ts');
+    const content = fs.readFileSync(licensePath, 'utf8');
+    assertTrue(content.includes('pro_monthly'), 'pro_monthly tier missing in PRICING_PLANS');
+    assertTrue(content.includes('pro_annual'), 'pro_annual tier missing in PRICING_PLANS');
+});
+
+test('Lemon Squeezy API calls use application/x-www-form-urlencoded specification', () => {
+    const licensePath = path.join(__dirname, '..', 'client', 'src', 'features', 'license.ts');
+    const content = fs.readFileSync(licensePath, 'utf8');
+    assertTrue(content.includes('application/x-www-form-urlencoded'), 'x-www-form-urlencoded Content-Type missing in license.ts');
+    assertTrue(content.includes('callLemonSqueezyApi'), 'callLemonSqueezyApi helper missing in license.ts');
+});
+
+// Test 7: Multilingual i18n Symmetry
+console.log('\n--- i18n Symmetry Tests ---');
+
+test('Client and Server i18n locales are symmetric for EN, RU, and TR', () => {
+    function extractLocaleKeys(filePath, localeName) {
+        const content = fs.readFileSync(filePath, 'utf8');
+        const localeBlockRegex = new RegExp(`const ${localeName}:\\s*(?:Messages|ServerMessages)\\s*=\\s*\\{([\\s\\S]*?)\\};`, 'm');
+        const match = content.match(localeBlockRegex);
+        if (!match) return new Set();
+        const block = match[1];
+        const keys = new Set();
+        const keyMatches = block.matchAll(/"([^"]+)":/g);
+        for (const k of keyMatches) {
+            keys.add(k[1]);
+        }
+        return keys;
+    }
+
+    const clientPath = path.join(__dirname, '..', 'client', 'src', 'i18n.ts');
+    const clientEn = extractLocaleKeys(clientPath, 'en');
+    const clientRu = extractLocaleKeys(clientPath, 'ru');
+    const clientTr = extractLocaleKeys(clientPath, 'tr');
+
+    assertEqual(clientEn.size, clientRu.size, 'Client EN and RU key counts must match');
+    assertEqual(clientEn.size, clientTr.size, 'Client EN and TR key counts must match');
+
+    const serverPath = path.join(__dirname, '..', 'server', 'src', 'lib', 'i18n.ts');
+    const serverEn = extractLocaleKeys(serverPath, 'en');
+    const serverRu = extractLocaleKeys(serverPath, 'ru');
+    const serverTr = extractLocaleKeys(serverPath, 'tr');
+
+    assertEqual(serverEn.size, serverRu.size, 'Server EN and RU key counts must match');
+    assertEqual(serverEn.size, serverTr.size, 'Server EN and TR key counts must match');
+
+    const nlsEn = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.nls.json'), 'utf8'));
+    const nlsRu = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.nls.ru.json'), 'utf8'));
+    const nlsTr = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.nls.tr.json'), 'utf8'));
+
+    assertEqual(Object.keys(nlsEn).length, Object.keys(nlsRu).length, 'Package NLS EN and RU key counts must match');
+    assertEqual(Object.keys(nlsEn).length, Object.keys(nlsTr).length, 'Package NLS EN and TR key counts must match');
 });
 
 // Summary

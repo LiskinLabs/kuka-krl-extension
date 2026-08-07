@@ -22,6 +22,23 @@ function getOutputChannel(): vscode.OutputChannel {
   return outputChannel;
 }
 
+function cleanOldBackupTempFiles(tempDir: string) {
+  try {
+    if (fs.existsSync(tempDir)) {
+      const files = fs.readdirSync(tempDir);
+      for (const file of files) {
+        const filePath = path.join(tempDir, file);
+        const stat = fs.statSync(filePath);
+        if (Date.now() - stat.mtimeMs > 3600 * 1000) {
+          fs.unlinkSync(filePath);
+        }
+      }
+    }
+  } catch {
+    /* ignore */
+  }
+}
+
 /**
  * Registers KRC Backup Diff & Compare feature commands in VS Code.
  */
@@ -53,7 +70,7 @@ export function initKrcBackupDiff(context: vscode.ExtensionContext) {
             "KRC Zip Backup (*.zip)": ["zip"],
             "All Files": ["*"],
           },
-          openLabel: "Select KRC Backup (.zip)",
+          openLabel: t("backup.picker.title"),
         });
 
         if (!zipUris || zipUris.length === 0) return;
@@ -64,9 +81,7 @@ export function initKrcBackupDiff(context: vscode.ExtensionContext) {
         const extractResult = extractFileFromZipBackup(zipPath, fileName);
 
         if (!extractResult.found || !extractResult.content) {
-          vscode.window.showErrorMessage(
-            `❌ File "${fileName}" was not found inside the selected KRC Backup archive.`,
-          );
+          vscode.window.showErrorMessage(t("backup.error.notFound", fileName));
           return;
         }
 
@@ -75,6 +90,7 @@ export function initKrcBackupDiff(context: vscode.ExtensionContext) {
         if (!fs.existsSync(tempDir)) {
           fs.mkdirSync(tempDir, { recursive: true });
         }
+        cleanOldBackupTempFiles(tempDir);
 
         const tempBackupFilePath = path.join(tempDir, `BACKUP_${fileName}`);
         fs.writeFileSync(tempBackupFilePath, extractResult.content, "utf8");
@@ -117,7 +133,7 @@ export function initKrcBackupDiff(context: vscode.ExtensionContext) {
               "✅ All points and coordinates are 100% IDENTICAL!",
             );
             vscode.window.showInformationMessage(
-              `✅ KRC Backup Compare: ${fileName} points are 100% identical to backup!`,
+              t("backup.notify.identical", fileName),
             );
           } else {
             channel.appendLine(

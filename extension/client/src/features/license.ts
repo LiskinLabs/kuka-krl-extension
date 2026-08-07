@@ -1,10 +1,59 @@
 import * as vscode from "vscode";
 import * as crypto from "crypto";
 import * as os from "os";
+import { t } from "../i18n";
 
 const LEMON_SQUEEZY_API = "https://api.lemonsqueezy.com/v1/licenses";
 const SECRET_STORAGE_KEY = "krl_license_signed_cache_v2";
 const OLD_GLOBAL_STATE_KEY = "krl_license_cache";
+
+/**
+ * Стандартный URL магазина и оформления заказа Lemon Squeezy.
+ */
+export const LEMON_SQUEEZY_CHECKOUT_URL =
+  "https://liskin.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7";
+export const LEMON_SQUEEZY_PORTAL_URL = "https://my.lemonsqueezy.com/billing";
+
+export const LEMON_SQUEEZY_STORE_ID = 393141;
+export const LEMON_SQUEEZY_PRODUCT_ID = 1103272;
+
+/**
+ * Варианты покупки и тарифные планы расширения KUKA KRL Professional.
+ */
+export interface PricingPlanOption {
+  id: string;
+  name: string;
+  price: string;
+  period: string;
+  description: string;
+  checkoutUrl: string;
+  badge?: string;
+}
+
+export const PRICING_PLANS: PricingPlanOption[] = [
+  {
+    id: "pro_monthly",
+    name: "Pro Monthly",
+    price: "$3.99",
+    period: "/ месяц (14 дней бесплатный триал)",
+    description:
+      "Полная профессиональная лицензия для инженеров-наладчиков KUKA. Доступ ко всем премиум-инструментам (3 ПК).",
+    checkoutUrl:
+      "https://liskin.lemonsqueezy.com/checkout/buy/ab34799e-42d7-49b0-ad33-94b2d4fe0a7d",
+    badge: "POPULAR",
+  },
+  {
+    id: "pro_annual",
+    name: "Pro Annual",
+    price: "$39.99",
+    period: "/ год (выгода 20%)",
+    description:
+      "Годовой профессиональный абонемент. Включает приоритетные обновления, поддержку KRC4/KRC5 и EKI валидатор.",
+    checkoutUrl:
+      "https://liskin.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7",
+    badge: "BEST VALUE",
+  },
+];
 
 /**
  * Период офлайн-валидации (30 дней в миллисекундах).
@@ -30,6 +79,9 @@ export interface LicenseCacheData {
   customerEmail?: string;
   productName?: string;
   variantName?: string;
+  storeId?: number | string;
+  productId?: number | string;
+  variantId?: number | string;
   subscriptionStatus?: string;
   subscriptionEndsAt?: string | null;
   activationLimit?: number;
@@ -48,6 +100,47 @@ let isPremiumCached = false;
 
 const licenseEmitter = new vscode.EventEmitter<void>();
 export const onLicenseChanged = licenseEmitter.event;
+
+/**
+ * Вспомогательная функция отправки запросов в Lemon Squeezy License API.
+ * Использует Content-Type: application/x-www-form-urlencoded согласно официальной спецификации API.
+ */
+async function callLemonSqueezyApi(
+  endpoint: "activate" | "validate" | "deactivate",
+  params: Record<string, string>,
+): Promise<Record<string, unknown>> {
+  const body = new URLSearchParams(params).toString();
+  const res = await fetch(`${LEMON_SQUEEZY_API}/${endpoint}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Accept: "application/json",
+    },
+    body,
+  });
+  return (await res.json()) as Record<string, unknown>;
+}
+
+/**
+ * Генерирует персональную ссылку на оформление заказа в Lemon Squeezy с предзаполненными параметрами.
+ */
+export function getLemonSqueezyCheckoutUrl(options?: {
+  email?: string;
+  name?: string;
+  discountCode?: string;
+}): string {
+  const url = new URL(LEMON_SQUEEZY_CHECKOUT_URL);
+  if (options?.email) {
+    url.searchParams.set("checkout[email]", options.email);
+  }
+  if (options?.name) {
+    url.searchParams.set("checkout[name]", options.name);
+  }
+  if (options?.discountCode) {
+    url.searchParams.set("checkout[discount_code]", options.discountCode);
+  }
+  return url.toString();
+}
 
 /**
  * Генерирует стабильный Hardware ID устройства (устойчив к обновлениям VS Code и смене профилей).
@@ -252,11 +345,26 @@ async function backgroundRevalidate(
       if (res.meta) {
         const licKey = res.license_key || {};
         const sub = res.license_subscription || {};
-        
-        updatedCache.subscriptionStatus = String(sub.status || licKey.status || cache.subscriptionStatus || "active");
-        updatedCache.subscriptionEndsAt = (sub.ends_at || sub.renews_at || licKey.expires_at || null) as string | null;
-        updatedCache.activationLimit = Number(licKey.activation_limit || cache.activationLimit);
-        updatedCache.activationUsage = Number(licKey.activation_usage || cache.activationUsage);
+
+        updatedCache.subscriptionStatus = String(
+          sub.status || licKey.status || cache.subscriptionStatus || "active",
+        );
+        updatedCache.subscriptionEndsAt = (sub.ends_at ||
+          sub.renews_at ||
+          licKey.expires_at ||
+          null) as string | null;
+        updatedCache.activationLimit = Number(
+          licKey.activation_limit || cache.activationLimit,
+        );
+        updatedCache.activationUsage = Number(
+          licKey.activation_usage || cache.activationUsage,
+        );
+        if (res.meta.store_id)
+          updatedCache.storeId = res.meta.store_id as number | string;
+        if (res.meta.product_id)
+          updatedCache.productId = res.meta.product_id as number | string;
+        if (res.meta.variant_id)
+          updatedCache.variantId = res.meta.variant_id as number | string;
       }
 
       await saveLicenseCache(context, updatedCache);
@@ -293,20 +401,20 @@ export function ensurePremium<T extends (...args: unknown[]) => unknown>(
     if (isPremium()) {
       return callback(...args) as ReturnType<T>;
     } else {
+      const buyText = t("license.btn.buy");
+      const enterText = t("license.btn.enterKey");
       vscode.window
         .showWarningMessage(
-          "Эта функция доступна только в Premium-версии. Пожалуйста, активируйте лицензию.",
-          "Купить лицензию",
-          "Ввести ключ",
+          t("license.warning.premiumOnly"),
+          buyText,
+          enterText,
         )
         .then((selection) => {
-          if (selection === "Купить лицензию") {
+          if (selection === buyText) {
             vscode.env.openExternal(
-              vscode.Uri.parse(
-                "https://liskin.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7",
-              ),
+              vscode.Uri.parse(LEMON_SQUEEZY_CHECKOUT_URL),
             );
-          } else if (selection === "Ввести ключ") {
+          } else if (selection === enterText) {
             vscode.commands.executeCommand("krl.activateLicense");
           }
         });
@@ -315,11 +423,11 @@ export function ensurePremium<T extends (...args: unknown[]) => unknown>(
 }
 
 /**
- * Команда активации лицензии.
+ * Команда активации лицензии через Lemon Squeezy API.
  */
 async function activateLicenseCommand(context: vscode.ExtensionContext) {
   const key = await vscode.window.showInputBox({
-    prompt: "Введите ваш лицензионный ключ KRL Extension (Lemon Squeezy)",
+    prompt: t("license.prompt.key"),
     placeHolder: "XXXX-XXXX-XXXX-XXXX",
     ignoreFocusOut: true,
   });
@@ -329,7 +437,7 @@ async function activateLicenseCommand(context: vscode.ExtensionContext) {
   await vscode.window.withProgress(
     {
       location: vscode.ProgressLocation.Notification,
-      title: "Активация лицензии...",
+      title: t("license.progress.activating"),
       cancellable: false,
     },
     async () => {
@@ -361,26 +469,17 @@ async function activateLicenseCommand(context: vscode.ExtensionContext) {
           isPremiumCached = true;
 
           vscode.window.showInformationMessage(
-            "🚀 Промышленная лицензия Teknorob Lead Pro успешно активирована!",
+            t("license.notify.leadActivated"),
           );
           return;
         }
 
-        const response = await fetch(`${LEMON_SQUEEZY_API}/activate`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            license_key: trimmedKey,
-            instance_name: getStableHardwareId(),
-          }),
+        const data = await callLemonSqueezyApi("activate", {
+          license_key: trimmedKey,
+          instance_name: getStableHardwareId(),
         });
 
-        const data = (await response.json()) as Record<string, unknown>;
-
-        if (response.ok && data.activated) {
+        if (data.activated === true) {
           const instanceId = (
             data.instance as Record<string, unknown> | undefined
           )?.id;
@@ -394,7 +493,7 @@ async function activateLicenseCommand(context: vscode.ExtensionContext) {
           const now = Date.now();
 
           const cacheData: LicenseCacheData = {
-            key: key.trim(),
+            key: trimmedKey,
             instanceId: String(instanceId),
             lastValidated: now,
             expiresAt: now + OFFLINE_TTL_MS,
@@ -404,6 +503,9 @@ async function activateLicenseCommand(context: vscode.ExtensionContext) {
             customerEmail: String(meta.customer_email || ""),
             productName: String(meta.product_name || "KUKA KRL Professional"),
             variantName: String(meta.variant_name || "Pro Edition"),
+            storeId: meta.store_id as number | string | undefined,
+            productId: meta.product_id as number | string | undefined,
+            variantId: meta.variant_id as number | string | undefined,
             subscriptionStatus: String(sub.status || licKey.status || "active"),
             subscriptionEndsAt: (sub.ends_at ||
               sub.renews_at ||
@@ -415,61 +517,54 @@ async function activateLicenseCommand(context: vscode.ExtensionContext) {
           await saveLicenseCache(context, cacheData);
           isPremiumCached = true;
 
-          vscode.window.showInformationMessage(
-            "🎉 Лицензия успешно активирована! Доступ ко всем премиум-функциям разблокирован. Офлайн-период: 30 дней.",
-          );
+          vscode.window.showInformationMessage(t("license.notify.activated"));
         } else {
           const errorMsg =
-            data.error || "Неверный ключ или превышен лимит устройств.";
-          vscode.window.showErrorMessage(`Ошибка активации: ${errorMsg}`);
+            data.error || "Invalid key or device activation limit exceeded.";
+          vscode.window.showErrorMessage(
+            t("license.error.activate", String(errorMsg)),
+          );
         }
       } catch (err: unknown) {
         const errMessage = err instanceof Error ? err.message : String(err);
-        vscode.window.showErrorMessage(
-          `Сетевая ошибка при активации: ${errMessage}`,
-        );
+        vscode.window.showErrorMessage(t("license.error.network", errMessage));
       }
     },
   );
 }
 
 /**
- * Команда деактивации лицензии.
+ * Команда деактивации лицензии через Lemon Squeezy API.
  */
 async function deactivateLicenseCommand(context: vscode.ExtensionContext) {
   const cache = await loadLicenseCache(context);
 
   if (!cache || !cache.key || !cache.instanceId) {
-    vscode.window.showInformationMessage("Активная лицензия не найдена.");
+    vscode.window.showInformationMessage(t("license.info.noKey"));
     return;
   }
 
+  const yesText = t("license.btn.yes");
+  const noText = t("license.btn.no");
   const confirm = await vscode.window.showWarningMessage(
-    "Вы уверены, что хотите деактивировать лицензию на этом устройстве?",
-    "Да",
-    "Нет",
+    t("license.confirm.deactivate"),
+    yesText,
+    noText,
   );
 
-  if (confirm !== "Да") return;
+  if (confirm !== yesText) return;
 
   await vscode.window.withProgress(
     {
       location: vscode.ProgressLocation.Notification,
-      title: "Деактивация лицензии...",
+      title: t("license.progress.deactivating"),
       cancellable: false,
     },
     async () => {
       try {
-        await fetch(`${LEMON_SQUEEZY_API}/deactivate`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            license_key: cache.key,
-            instance_id: cache.instanceId,
-          }),
+        await callLemonSqueezyApi("deactivate", {
+          license_key: cache.key,
+          instance_id: cache.instanceId,
         });
       } catch {
         // Даже при ошибке сети сбрасываем локально
@@ -478,9 +573,7 @@ async function deactivateLicenseCommand(context: vscode.ExtensionContext) {
       await clearLicenseCache(context);
       isPremiumCached = false;
 
-      vscode.window.showInformationMessage(
-        "Лицензия успешно деактивирована для этого устройства.",
-      );
+      vscode.window.showInformationMessage(t("license.notify.deactivated"));
     },
   );
 }
@@ -492,9 +585,7 @@ async function checkLicenseStatusCommand(context: vscode.ExtensionContext) {
   const cache = await loadLicenseCache(context);
 
   if (!cache || !cache.key) {
-    vscode.window.showInformationMessage(
-      "Используется бесплатная базовая версия (Community Edition).",
-    );
+    vscode.window.showInformationMessage(t("license.info.freeEdition"));
     return;
   }
 
@@ -504,23 +595,28 @@ async function checkLicenseStatusCommand(context: vscode.ExtensionContext) {
       0,
       Math.ceil((cache.expiresAt - now) / (24 * 60 * 60 * 1000)),
     );
-    const lastCheck = new Date(cache.lastValidated).toLocaleDateString();
 
-    let subText = "Пожизненная (Lifetime)";
+    let subText = "Lifetime";
     if (cache.subscriptionEndsAt) {
       const subEnd = new Date(cache.subscriptionEndsAt);
       const msLeft = subEnd.getTime() - now;
       const subDays = Math.max(0, Math.ceil(msLeft / (24 * 60 * 60 * 1000)));
-      subText = `до ${subEnd.toLocaleDateString()} (${subDays} дн. осталось)`;
+      subText = `${subEnd.toLocaleDateString()} (${subDays}d remaining)`;
     }
 
+    const usageInfo = cache.activationLimit
+      ? ` | Devices: ${cache.activationUsage || 1}/${cache.activationLimit}`
+      : "";
+
     vscode.window.showInformationMessage(
-      `В лицензии активно (Premium). Подписка: ${subText}. Оффлайн-буфер: ${offlineDaysRemaining} дн. (посл. пров: ${lastCheck})`,
+      t(
+        "license.info.activePro",
+        `${subText}${usageInfo}`,
+        offlineDaysRemaining,
+      ),
     );
   } else {
-    vscode.window.showWarningMessage(
-      "Лицензия неактивна или истёк офлайн-период. Подключитесь к интернету для ре-валидации.",
-    );
+    vscode.window.showWarningMessage(t("license.warning.expired"));
   }
 }
 
@@ -531,43 +627,34 @@ async function checkLicenseStatusCommand(context: vscode.ExtensionContext) {
 async function validateLicenseOnline(
   key: string,
   instanceId: string,
-): Promise<{ 
+): Promise<{
   status: "VALID" | "REVOKED" | "NETWORK_ERROR";
   meta?: Record<string, unknown>;
   license_key?: Record<string, unknown>;
   license_subscription?: Record<string, unknown>;
 }> {
-  if (key === "TEKNOROB-DEV-MODE" || key.startsWith("TEKNOROB")) {
+  if (
+    key === "TEKNOROB-DEV-MODE" ||
+    key === "TEKNOROB-INDUSTRIAL-LEAD-PRO" ||
+    key === "TEKNOROB-LEAD"
+  ) {
     return { status: "VALID" };
   }
 
   try {
-    const response = await fetch(`${LEMON_SQUEEZY_API}/validate`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        license_key: key,
-        instance_id: instanceId,
-      }),
+    const data = await callLemonSqueezyApi("validate", {
+      license_key: key,
+      instance_id: instanceId,
     });
 
-    const data = (await response.json()) as { 
-      valid?: boolean; 
-      error?: string;
-      meta?: Record<string, unknown>;
-      license_key?: Record<string, unknown>;
-      license_subscription?: Record<string, unknown>;
-    };
-
-    if (response.ok && data.valid === true) {
-      return { 
-        status: "VALID", 
-        meta: data.meta, 
-        license_key: data.license_key, 
-        license_subscription: data.license_subscription 
+    if (data.valid === true) {
+      return {
+        status: "VALID",
+        meta: data.meta as Record<string, unknown> | undefined,
+        license_key: data.license_key as Record<string, unknown> | undefined,
+        license_subscription: data.license_subscription as
+          | Record<string, unknown>
+          | undefined,
       };
     }
 

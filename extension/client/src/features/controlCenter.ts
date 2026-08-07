@@ -5,8 +5,12 @@ import {
   getDeviceDetails,
   onLicenseChanged,
   LicenseCacheData,
+  LEMON_SQUEEZY_CHECKOUT_URL,
+  LEMON_SQUEEZY_PORTAL_URL,
+  PRICING_PLANS,
 } from "./license";
 import { t } from "../i18n";
+import { TelegramChatService } from "./telegramService";
 
 let currentPanel: vscode.WebviewPanel | undefined = undefined;
 
@@ -72,35 +76,27 @@ async function openControlCenterPanel(context: vscode.ExtensionContext) {
           break;
         case "openCustomerPortal":
         case "downloadInvoice":
-          vscode.env.openExternal(
-            vscode.Uri.parse("https://my.lemonsqueezy.com/"),
-          );
-          vscode.window.showInformationMessage(
-            "🔗 Открыт официальный портал покупателя Lemon Squeezy (управление подписками и инвойсами).",
-          );
+          vscode.env.openExternal(vscode.Uri.parse(LEMON_SQUEEZY_PORTAL_URL));
+          vscode.window.showInformationMessage(t("cc.notify.portalOpened"));
           break;
         case "buyLicense":
-          vscode.env.openExternal(
-            vscode.Uri.parse("https://liskin.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7"),
-          );
-          vscode.window.showInformationMessage(
-            "🛒 Открыт официальный магазин лицензий KUKA KRL Professional.",
-          );
+        case "buyPlan":
+          {
+            const targetUrl = message.url || LEMON_SQUEEZY_CHECKOUT_URL;
+            vscode.env.openExternal(vscode.Uri.parse(targetUrl));
+            vscode.window.showInformationMessage(t("cc.notify.storeOpened"));
+          }
           break;
         case "copyKey":
           if (message.key) {
             await vscode.env.clipboard.writeText(message.key);
-            vscode.window.showInformationMessage(
-              "📋 Лицензионный ключ скопирован в буфер обмена!",
-            );
+            vscode.window.showInformationMessage(t("cc.notify.keyCopied"));
           }
           break;
         case "sendFeedback":
           const feedback = await vscode.window.showInputBox({
-            prompt:
-              "Отправить прямое сообщение ведущему инженеру Silvestr Liskin",
-            placeHolder:
-              "Опишите ваш вопрос, запрос на функцию или техническую проблему KRL...",
+            prompt: t("cc.prompt.email"),
+            placeHolder: t("cc.prompt.emailPlaceholder"),
             ignoreFocusOut: true,
           });
           if (feedback && feedback.trim()) {
@@ -109,30 +105,30 @@ async function openControlCenterPanel(context: vscode.ExtensionContext) {
               "KUKA KRL Extension — Direct Engineering Support Request",
             );
             const body = encodeURIComponent(
-              `Здравствуйте, Сильвестр!\n\n` +
-                `Сообщение пользователя:\n${feedback.trim()}\n\n` +
+              `Dear Silvestr!\n\n` +
+                `User feedback / question:\n${feedback.trim()}\n\n` +
                 `----------------------------------------\n` +
-                `Технические данные окружения:\n` +
-                `• Версия расширения: v1.7.3 Industrial Edition\n` +
-                `• Устройство: ${dev.hostname} (${dev.platform} ${dev.arch})\n` +
+                `Technical Environment:\n` +
+                `• Extension Version: v1.7.3 Industrial Edition\n` +
+                `• Device Hostname: ${dev.hostname} (${dev.platform} ${dev.arch})\n` +
                 `• Hardware ID: ${dev.hardwareId}\n` +
-                `• Лицензия: ${isPremium() ? "ACTIVE (PRO)" : "COMMUNITY EDITION"}\n`,
+                `• License Tier: ${isPremium() ? "ACTIVE (PRO)" : "COMMUNITY EDITION"}\n`,
             );
             const mailtoUrl = `mailto:silvestr.liskin@teknorob.com?subject=${subject}&body=${body}`;
             await vscode.env.openExternal(vscode.Uri.parse(mailtoUrl));
             vscode.window.showInformationMessage(
-              "✉️ Почтовый клиент открыт с вашим сообщением для silvestr.liskin@teknorob.com!",
+              t("cc.notify.emailClientOpened"),
             );
           }
           break;
         case "openTelegram":
-          vscode.env.openExternal(
-            vscode.Uri.parse("https://t.me/SilvestrLiskin"),
-          );
+          await TelegramChatService.getInstance().promptAndSendMessage();
           break;
         case "openGitHub":
           vscode.env.openExternal(
-            vscode.Uri.parse("https://github.com/LiskinLabs/kuka-krl-extension-core/issues"),
+            vscode.Uri.parse(
+              "https://github.com/LiskinLabs/kuka-krl-extension-core/issues",
+            ),
           );
           break;
       }
@@ -201,12 +197,21 @@ function getControlCenterHtml(
       )
     : 30;
 
-  let onlineExpiry = "Lifetime / Permanent License";
-  if (licenseCache?.subscriptionEndsAt) {
+  const isMasterKey =
+    licenseKey === "TEKNOROB-DEV-MODE" ||
+    licenseKey === "TEKNOROB-INDUSTRIAL-LEAD-PRO" ||
+    licenseKey === "TEKNOROB-LEAD";
+
+  let onlineExpiry = "No Active Subscription";
+  if (isMasterKey) {
+    onlineExpiry = "Master Engineering Pro License (Permanent / Lead Access)";
+  } else if (licenseCache?.subscriptionEndsAt) {
     const expDate = new Date(licenseCache.subscriptionEndsAt);
     const msLeft = expDate.getTime() - now;
     const daysLeft = Math.max(0, Math.ceil(msLeft / (24 * 60 * 60 * 1000)));
-    onlineExpiry = `${expDate.toLocaleDateString()} (${daysLeft} Days Remaining)`;
+    onlineExpiry = `Active Subscription (Renews: ${expDate.toLocaleDateString()} — ${daysLeft} Days Left)`;
+  } else if (isPremium()) {
+    onlineExpiry = "Lemon Squeezy Pro License (Active / Verified)";
   }
 
   const logoUri = webview.asWebviewUri(
@@ -485,17 +490,6 @@ function getControlCenterHtml(
       </div>
       <button class="card-btn">${t("cc.btn.generateReport")}</button>
     </div>
-
-    <div class="card" onclick="exec('krl.aiGetIoMatrix')">
-      <div>
-        <div class="card-header">
-          <span class="card-icon">🔌</span>
-          <span class="card-title">${t("command.aiGetIoMatrix")}</span>
-        </div>
-        <div class="card-desc">${t("command.aiGetIoMatrix.tooltip")}</div>
-      </div>
-      <button class="card-btn">${t("cc.btn.extractIoMatrix")}</button>
-    </div>
   </div>
 
   <div class="section-title">👤 ${t("cc.accountHub")}</div>
@@ -520,15 +514,15 @@ function getControlCenterHtml(
         <span class="info-val" style="font-family:monospace;">${maskedKey} ${isPremium() && licenseKey !== "NO-KEY" ? `<button class="card-btn" style="padding:2px 8px; font-size:11px; margin-left:8px;" onclick="copyKey('${licenseKey}')">Copy Key</button>` : ""}</span>
       </div>
       <div class="info-row"><span class="info-label">Online Expiry / Renewal:</span><span class="info-val">${onlineExpiry}</span></div>
-      <div class="info-row"><span class="info-label">Offline Validation Cache:</span><span class="info-val">${offlineDaysLeft} Days Remaining</span></div>
+      <div class="info-row"><span class="info-label">Offline Validation Cache:</span><span class="info-val">${offlineDaysLeft} Days Remaining (Auto-synced online)</span></div>
       
       <div style="margin-top:16px; display:flex; gap:10px;">
         ${
           isPremium()
-            ? `<button class="card-btn" style="background:#dc3545;" onclick="deactivate()">🔴 Выйти из учетной записи / Деактивировать ключ</button>
-               <button class="card-btn" style="background:#444;" onclick="checkStatus()">🔄 Проверить онлайн-статус</button>`
-            : `<button class="card-btn" style="background:#28a745;" onclick="activate()">🔑 Ввести активационный ключ (License Key)</button>
-               <button class="card-btn" style="background:#007acc;" onclick="buyLicense()">🛒 Купить Pro лицензию</button>`
+            ? `<button class="card-btn" style="background:#dc3545;" onclick="deactivate()">${t("cc.profile.deactivate")}</button>
+               <button class="card-btn" style="background:#444;" onclick="checkStatus()">${t("cc.profile.checkStatus")}</button>`
+            : `<button class="card-btn" style="background:#28a745;" onclick="activate()">${t("cc.profile.activateKey")}</button>
+               <button class="card-btn" style="background:#007acc;" onclick="buyLicense()">${t("cc.profile.buyPro")}</button>`
         }
       </div>
     </div>
@@ -540,27 +534,46 @@ function getControlCenterHtml(
       <div class="info-row"><span class="info-label">Hardware Fingerprint:</span><span class="info-val" style="font-family:monospace; font-size:11px;">${device.hardwareId.slice(0, 24)}...</span></div>
       <div class="info-row"><span class="info-label">Slot Usage:</span><span class="info-val">${activations}</span></div>
       <div style="margin-top:14px; display:flex; gap:10px;">
-        <button class="card-btn" style="background:#dc3545;" onclick="exec('krl.deactivateLicense')">🔓 Deactivate Current PC</button>
-        <button class="card-btn" style="background:#444;" onclick="exec('krl.checkLicenseStatus')">🔄 Sync Device Status</button>
+        <button class="card-btn" style="background:#dc3545;" onclick="exec('krl.deactivateLicense')">${t("cc.devices.deactivatePc")}</button>
+        <button class="card-btn" style="background:#444;" onclick="exec('krl.checkLicenseStatus')">${t("cc.devices.syncStatus")}</button>
       </div>
     </div>
 
     <!-- TAB 3: Subscription & Billing -->
     <div id="tab-billing" class="tab-content">
-      <div style="font-weight:600; margin-bottom:10px; font-size:14px;">💳 Lemon Squeezy Merchant Billing & Invoices</div>
-      <p style="font-size:12px; opacity:0.8; margin-bottom:14px;">Управление чеками, покупками и бухгалтерскими инвойсами (с НДС) через защищённый портал покупателя Lemon Squeezy.</p>
+      <div style="font-weight:600; margin-bottom:10px; font-size:14px;">💳 ${t("cc.billing.title")}</div>
+      <p style="font-size:12px; opacity:0.8; margin-bottom:14px;">${t("cc.billing.desc")}</p>
       
       <div style="display:flex; gap:10px; margin-bottom:16px;">
-        <button class="card-btn" style="background:#FF6600;" onclick="openPortal()">🔗 Открыть кабинет покупателя Lemon Squeezy</button>
-        <button class="card-btn" style="background:#444;" onclick="downloadInvoice()">📥 Скачать инвойсы и акты (PDF)</button>
+        <button class="card-btn" style="background:#FF6600;" onclick="openPortal()">${t("cc.billing.btn.portal")}</button>
+        <button class="card-btn" style="background:#444;" onclick="downloadInvoice()">${t("cc.billing.btn.invoice")}</button>
+      </div>
+
+      <div style="font-weight:700; margin-top:20px; margin-bottom:12px; font-size:14px; color:var(--accent);">${t("cc.billing.plansTitle")}</div>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap:12px; margin-bottom:20px;">
+        ${PRICING_PLANS.map(
+          (plan) => `
+          <div class="card" style="border: 1px solid rgba(255,102,0,0.3); background: rgba(255,102,0,0.02);">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <span style="font-weight:700; font-size:14px;">${plan.name}</span>
+                ${plan.badge ? `<span class="badge" style="font-size:9px; background:var(--accent);">${plan.badge}</span>` : ""}
+              </div>
+              <div style="font-size:18px; font-weight:800; color:var(--accent); margin-bottom:4px;">${plan.price} <span style="font-size:11px; font-weight:normal; opacity:0.8;">${plan.period}</span></div>
+              <div class="card-desc" style="font-size:11px; margin-bottom:12px;">${plan.description}</div>
+            </div>
+            <button class="card-btn" style="width:100%; text-align:center;" onclick="buyPlan('${plan.checkoutUrl}')">${t("cc.billing.btn.buyPlan", plan.name)}</button>
+          </div>
+        `,
+        ).join("")}
       </div>
 
       <div style="padding: 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--card-border); border-radius: 6px; font-size: 12px; line-height: 1.6;">
-        <div style="font-weight:700; margin-bottom:6px; color:var(--accent);">📌 Информация для юридических лиц и бухгалтерии:</div>
+        <div style="font-weight:700; margin-bottom:6px; color:var(--accent);">${t("cc.billing.legalNotice")}</div>
         <ul style="margin: 0 0 0 18px; padding: 0; opacity: 0.9;">
-          <li>Lemon Squeezy является официальным регистрирующим продавцом (Merchant of Record) для решений Liskin Labs.</li>
-          <li>Кассовые чеки и инвойсы с указанием НДС (VAT ID) автоматически высылаются на ваш контактный email при покупке.</li>
-          <li>Для изменения платежных реквизитов организации или выгрузки истории транзакций используйте <em>Кабинет покупателя</em>.</li>
+          <li>${t("cc.billing.legalItem1")}</li>
+          <li>${t("cc.billing.legalItem2")}</li>
+          <li>${t("cc.billing.legalItem3")}</li>
         </ul>
       </div>
     </div>
@@ -568,11 +581,13 @@ function getControlCenterHtml(
     <!-- TAB 4: Support & Feedback -->
     <div id="tab-support" class="tab-content">
       <div style="font-weight:600; margin-bottom:10px; font-size:14px;">🛟 Direct Engineering Support</div>
-      <p style="font-size:12px; opacity:0.8; margin-bottom:14px;">Have questions, feature requests, or encountered an industrial KRL issue? Contact Lead Engineer Silvestr Liskin directly.</p>
-      <div style="display:flex; flex-direction:column; gap:10px; max-width:400px;">
-        <button class="card-btn" style="background:#2AABEE;" onclick="openTelegram()">💬 Написать в Telegram Bot</button>
-        <button class="card-btn" style="background:#333;" onclick="openGitHub()">🐛 Сообщить о баге на GitHub</button>
-        <button class="card-btn" style="background:#007acc;" onclick="sendFeedback()">✉️ Отправить письмо (Email)</button>
+      <p style="font-size:12px; opacity:0.8; margin-bottom:14px;">${t("cc.support.desc")}</p>
+      <div style="display:flex; flex-direction:column; gap:10px; max-width:420px;">
+        <button class="card-btn" style="background:#2AABEE;" onclick="openTelegram()">${t("cc.support.btn.chat")}</button>
+        <button class="card-btn" style="background:#FF6600;" onclick="exec('krl.sendLogsToDeveloper')">${t("cc.support.btn.sendLogs")}</button>
+        <button class="card-btn" style="background:#28a745;" onclick="exec('krl.sendFileToDeveloper')">${t("cc.support.btn.sendFile")}</button>
+        <button class="card-btn" style="background:#333;" onclick="openGitHub()">${t("cc.support.btn.github")}</button>
+        <button class="card-btn" style="background:#007acc;" onclick="sendFeedback()">${t("cc.support.btn.email")}</button>
       </div>
     </div>
   </div>
@@ -600,6 +615,9 @@ function getControlCenterHtml(
     }
     function buyLicense() {
       vscode.postMessage({ command: 'buyLicense' });
+    }
+    function buyPlan(u) {
+      vscode.postMessage({ command: 'buyPlan', url: u });
     }
     function copyKey(k) {
       vscode.postMessage({ command: 'copyKey', key: k });

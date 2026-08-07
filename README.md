@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="extension/logo.png" width="160" alt="KUKA KRL Professional" />
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension-core/main/logo.png" width="160" alt="KUKA KRL Professional" />
 </p>
 
 <h1 align="center">KUKA KRL Professional</h1>
@@ -10,23 +10,14 @@
 </p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/v/LiskinLabs.kuka-krl-extension?style=for-the-badge&label=VS%20Marketplace&color=FF6600" alt="VS Code Version" /></a>
-  <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=for-the-badge&label=Open%20VSX&color=007ACC" alt="Open VSX Version" /></a>
-</p>
-
-<p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/i/LiskinLabs.kuka-krl-extension?style=for-the-badge&logo=visual-studio-code&label=VS%20Installs" alt="VS Code Installs" /></a>
-  <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/dt/LiskinLabs/kuka-krl-extension?style=for-the-badge&logo=eclipse-che&label=Open%20VSX%20Installs" alt="Open VSX Installs" /></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/v/LiskinLabs.kuka-krl-extension?style=for-the-badge&label=Marketplace&color=FF6600" alt="Version" /></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/i/LiskinLabs.kuka-krl-extension?style=for-the-badge&logo=visual-studio-code&label=Installs" alt="Installs" /></a>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Language-KRL-orange?style=flat-square" />
-  <img src="https://img.shields.io/badge/Compatible%20with-VS%20Code-007ACC?logo=visual-studio-code&style=flat-square" />
-  <img src="https://img.shields.io/badge/Compatible%20with-Cursor-00c1ff?style=flat-square" />
-  <img src="https://img.shields.io/badge/Compatible%20with-Antigravity-black?style=flat-square" />
-  <img src="https://img.shields.io/github/license/LiskinLabs/kuka-krl-extension?style=flat-square&color=blue" />
-  <img src="https://img.shields.io/github/last-commit/LiskinLabs/kuka-krl-extension?style=flat-square" />
-  <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" />
+  <img src="https://img.shields.io/badge/Offline--First-Ready-green?style=flat-square" />
+  <img src="https://img.shields.io/badge/Localization-EN%20|%20RU%20|%20TR-blue?style=flat-square" />
 </p>
 
 ---
@@ -47,9 +38,7 @@ We offer two editions tailored to your workflow:
 
 Investing in a **KRL Pro License** is a game-changer for commissioning engineers. By catching a single syntax error or coordinate mismatch before it reaches the robot pendant, the extension **pays for itself instantly** in saved factory downtime.
 
-We offer flexible, industrial-grade licensing through our official merchant, **Lemon Squeezy**. All payments are secure and support Credit Cards, PayPal, and corporate invoices.
-
-### 💳 Pricing & Plans:
+We offer flexible, industrial-grade licensing through our official merchant, **Lemon Squeezy**:
 
 | Plan | Price | Best For | License Type |
 |:---|:---:|:---|:---|
@@ -68,29 +57,7 @@ We offer flexible, industrial-grade licensing through our official merchant, **L
 
 ---
 
-## 📊 Feature Comparison
-
-| Feature | Community (Free) | Pro (Premium) |
-| :--- | :---: | :---: |
-| **KRL Syntax Highlighting** (`.src`, `.dat`, `.sub`) | ✅ | ✅ |
-| **Exclusive KUKA Themes** (Midnight OLED, Industrial, WorkVisual) | ✅ | ✅ |
-| **Contextual Autocomplete & Smart Folds** | ✅ | ✅ |
-| **Trilingual Localization** (EN, RU, TR) | ✅ | ✅ |
-| **KUKA Control Center Pro Dashboard** (v1.8.5 Pro Hub & Merchant Portal) | ❌ | **✅ Pro** |
-| **Interactive Flowchart Viewer** (Logic mapping & navigation) | ❌ | **✅ Pro** |
-| **KRC Backup Diff & Point Delta Inspector** (Zip Backup vs DAT deltas) | ❌ | **✅ Pro** |
-| **Motion Diagrams & Spline Snippet Builder** (SVG TCP Trajectory Diagrams) | ❌ | **✅ Pro** |
-| **EthernetKRL (EKI) Suite & Generator** (XML Validator & Handler Generator) | ❌ | **✅ Pro** |
-| **Integrated KUKA Frame Calculator** (3-Point Method) | ❌ | **✅ Pro** |
-| **Advanced Safety & Velocity Diagnostics** (`$VEL.CP > 3.0`, uninit tools) | ❌ | **✅ Pro** |
-| **AI-Supportive Context Tools** (`@kuka /get-io-matrix`, `@kuka /check-safety`) | ❌ | **✅ Pro** |
-| **WorkVisual Git Metadata Cleaner** (`&ACCESS`, `&REL`, `&PARAM`) | ❌ | **✅ Pro** |
-| **Workspace-wide Dead-Code Analysis** (`GLOBAL DEF` checker) | ❌ | **✅ Pro** |
-| **Automated Code Quality Report Generator** | ❌ | **✅ Pro** |
-
----
-
-## 🧠 Pro Features Deep-Dive
+## 🚀 Key Professional Features
 
 ### 1. 🗺️ Interactive Flowchart Viewer
 *Stop tracing nested logic by hand.* Turn massive, complex `.src` programs into visual, clean control-flow diagrams.
@@ -99,43 +66,37 @@ We offer flexible, industrial-grade licensing through our official merchant, **L
 * **Detailed Info-mode**: Toggle flags, timers, and I/O states directly on the flowchart blocks with color indicators.
 * **SVG Export**: Export vector graphics of your subprograms in one click to embed directly into client documentation.
 
-*Preview:*
-<div align="center">
-  <img src="extension/media/dead-code-demo.gif" width="600" alt="Flowchart Viewer Demo" />
-</div>
+### 2. 🛡️ Industrial Safety & Deep Logic Analyzer
+*Catch syntax crashes, deadlocks, and physical collision risks before you run code on KRC.*
+* **10-Point Industrial Inspection**: Scans for cartesian speed violations (`$VEL.CP > 2.0 m/s`), uninitialized motion calls (`LIN`/`PTP` without `$TOOL`/`$BASE`), infinite loops (`LOOP` without `EXIT`), sensor deadlocks (`WAIT FOR` without timers), and non-ASCII Cyrillic blockers.
+* **VS Code Problems Integration**: Publishes all detected risks directly to the VS Code **Problems panel (`Ctrl+Shift+M`)** with one-click navigation to lines.
 
-### 2. 🛡️ Industrial-Grade Safety & Diagnostics
-*Catch syntax crashes and physical collision risks before you run the code.*
-* **Strict Block Balance**: Flags missing or orphaned block endings (`IF/ENDIF`, `FOR/ENDFOR`, `LOOP/ENDLOOP`). Handles complex KRL syntax without false positives.
-* **Collision Guard (Tool/Base Check)**: Warns you if movements (`PTP`, `LIN`, `CIRC`) are declared before active `$TOOL` or `$BASE` values have been initialized in the current routine.
-* **High Velocity Warning**: Alerts you when speed settings exceed safe commissioning levels (e.g., `$VEL.CP` exceeding 3.0 m/s) to prevent manual test-run accidents.
-* **Silent Error Blocker (Non-ASCII)**: Cyrillic comments or invisible non-ASCII characters inside executable lines cause quiet compiler failures on older KRC software. Pro checks detect and pinpoint them immediately.
+### 3. 📡 EthernetKRL (EKI) Suite & Smart XML Validator
+*Seamless EthernetKRL network setup for vision systems and PLC communication.*
+* **Smart XML Schema Validator**: Auto-detects `ETHERNETKRL` XML config files in your workspace and validates schema elements (`<CONFIGURATION>`, `<RECEIVE>`, `<SEND>`).
+* **EKI Handler Generator**: Generates clean, ready-to-use KRL communication routines (`EKI_Init`, `EKI_Open`, `EKI_Get*`, `EKI_Send*`) in one click.
 
-*Preview:*
-<div align="center">
-  <img src="extension/media/type-validation-demo.gif" width="600" alt="Diagnostics Demo" />
-</div>
-
-### 3. 📐 KUKA Frame Calculator
+### 4. 📐 KUKA Frame Calculator
 Calculate coordinate system transformations using the classic **3-Point Method** directly inside VS Code.
 * No need to export coordinates to external spreadsheets or compute matrices on paper.
 * Calculate `TOOL` offset or `BASE` origin transformations using measured points.
 * Insert computed coordinates directly into your `.dat` files with a single click.
 
-### 4. 📦 KRC Backup Diff & Point Delta Inspector
+### 5. 📦 KRC Backup Diff & Point Delta Inspector
 Inspect and compare `.src` and `.dat` files and $E6POS/POS/E6AXIS$ point coordinates directly against `.zip` backup archives from KRC4/KRC5 SmartPAD controllers.
 * Calculate exact coordinate deltas ($\Delta X, \Delta Y, \Delta Z, \Delta A, \Delta B, \Delta C$).
 * Graphical Side-by-Side Diff Viewer with Output Channel logs.
 
-### 5. 🗺️ Motion Diagrams & KSS 8.3+ Spline Snippet Generator
+### 6. 🗺️ Motion Diagrams & KSS 8.3+ Spline Snippet Generator
 Generate clean KRL code for `PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`, and `SPLINE Path Blocks` with real-time SVG Motion Scheme diagrams.
 * Visualizes TCP path trajectories, velocity vectors, and Jerk-Control ($SGEAR_JERK$).
 * Interactive selection for $C\_PTP$, $C\_DIS$, and $C\_Spl$ blending parameters.
 
-### 6. 📋 Automated Code Quality Reports
-Ensure your code meets the high standards of automotive manufacturers (VASS, BMW, Stellantis).
-* Scan the workspace for unused local variables and dead global subroutines.
-* Generate a structured codebase health report to show your client or lead engineer that the code is optimized, clean, and safe.
+---
+
+## 🌐 Full Trilingual NLS Localization (EN / RU / TR)
+
+KUKA KRL Professional natively supports **English**, **Russian**, and **Turkish** across all UI elements, Control Center dashboard, Telegram chat, Flowchart viewer, motion descriptions, and popup notifications.
 
 ---
 
@@ -155,7 +116,7 @@ Our licensing module is built with an **Offline-First Architecture**:
 Configure extension behaviors in your `settings.json`:
 
 | Setting | Default | Description |
-|:---|:---:|:---|
+|:---|:---:---|:---|
 | `krl.indentWidth` | `3` | Adjust indentation size (3 spaces is the KUKA standard). |
 | `krl.alignAssignments` | `true` | Auto-align `=` symbols in `.dat` files for clean matrices. |
 | `krl.errorLens.enabled` | `true` | Show diagnostic errors as inline text at the end of lines. |
@@ -166,9 +127,19 @@ Configure extension behaviors in your `settings.json`:
 
 ## 📄 License & Credits
 
-* **Publisher & Developer**: [Liskin Labs](https://github.com/LiskinLabs) / [Silvestr Liskin](https://www.linkedin.com/in/silvestr-liskin-ab712920b/)
+* **Publisher & Developer**: [Liskin Labs](https://gitlab.com/LiskinLabs) / [Silvestr Liskin](https://www.linkedin.com/in/silvestr-liskin-ab712920b/)
+* **Themes**: 100% original KUKA-inspired themes (Industrial Dark, Midnight OLED, Blueprint)
 * **Data Sources**: KRL grammar references based on [OpenKuka](https://github.com/openkuka)
-* **Design**: 100% original KUKA-inspired themes (Industrial Dark, Midnight OLED, Blueprint)
 
 **Licensed under a Proprietary EULA.**  
 The Community Edition is free for personal and commercial use. Reverse-engineering, decompiling, or redistributing the extension or its Premium features is strictly prohibited. See the `LICENSE` file for full terms.
+
+---
+
+## 📅 Changelog
+
+### v1.7.3 (Industrial Edition Update)
+* 🌐 **Full Trilingual Localization**: Added 100% symmetric i18n support across EN, RU, and TR for Control Center, Flowchart viewer, EKI tools, Telegram chat, and VS Code notifications.
+* 🛡️ **Deep Industrial Logic & Safety Inspection**: Expanded safety analyzer to detect 10 critical KRC risks including infinite loops, unbounded sensor WAITs, unchecked actuator motions, and backward GOTOs with direct publication to VS Code **Problems panel**.
+* 📡 **Smart EKI XML Suite**: Auto-detects EthernetKRL XML files in workspace with QuickPick selection and instant KRL handler code generation.
+* 💬 **Telegram Support Chat Session Manager**: Added native VS Code dialog confirmation for session deletion and full history cleanup with webview auto-reload.

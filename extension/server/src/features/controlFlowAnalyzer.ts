@@ -238,6 +238,7 @@ export function analyzeControlFlow(
 
     // --- IF ---
     if ((m = code.match(RE_IF))) {
+      const afterThen = code.substring((m.index || 0) + m[0].length).trim();
       const condId = makeId();
       const cond = m[1]
         .trim()
@@ -250,16 +251,34 @@ export function analyzeControlFlow(
         line: i,
       });
       connectLast(condId);
-      blockStack.push({
-        type: "if",
-        condNodeId: condId,
-        bodyStartNodeId: "",
-        hasBody: false,
-        line: i,
-      });
+
+      if (afterThen.length === 0) {
+        blockStack.push({
+          type: "if",
+          condNodeId: condId,
+          bodyStartNodeId: "",
+          hasBody: false,
+          line: i,
+        });
+      } else {
+        const stmtId = makeId();
+        addNode({
+          id: stmtId,
+          label:
+            afterThen.length > 30
+              ? afterThen.substring(0, 27) + "..."
+              : afterThen,
+          type: "process",
+          line: i,
+        });
+        addEdge(condId, stmtId, "TRUE");
+        addEdge(condId, stmtId, "FALSE");
+        lastNodeId = stmtId;
+        terminated = false;
+        continue;
+      }
       lastNodeId = condId;
       terminated = false;
-      // TRUE branch starts from condId
       continue;
     }
 

@@ -63,10 +63,9 @@ function log(msg: string) {
 
 log(`Sunucu başlatılıyor. PID: ${process.pid}`);
 
-// Hata yakalama
+// Hata yakalama (устойчивость к сбоям)
 process.on("uncaughtException", (err) => {
-  log("Yakalanmamış Hata: " + err.toString());
-  process.exit(1);
+  log("Uncaught Exception: " + err.toString());
 });
 
 // Bağlantı oluştur
@@ -87,6 +86,7 @@ const state: ServerState = {
 // Конфигурация
 let serverConfig = {
   validateNonAscii: true,
+  maxCartesianVelocity: 3.0,
   separateBeforeBlocks: false,
   separateAfterBlocks: false,
   inlayHintsEnabled: true,
@@ -156,10 +156,12 @@ connection.onInitialize((params: InitializeParams): InitializeResult => {
       codeActionProvider: { codeActionKinds: ["quickfix", "refactor.extract"] },
       completionProvider: {
         triggerCharacters: [
+          "$",
           ".",
+          ":",
+          "#",
           "(",
           ",",
-          " ",
           "=",
           "+",
           "-",
@@ -317,16 +319,25 @@ async function validateDocument(document: TextDocument): Promise<void> {
     }
     const isDat = document.uri.toLowerCase().endsWith(".dat");
     const isSrc = document.uri.toLowerCase().endsWith(".src");
-    if (isDat) allDiagnostics.push(...diagnostics.validateDatFile(document));
+    if (isDat)
+      allDiagnostics.push(
+        ...diagnostics.validateDatFile(document, serverConfig.validateNonAscii),
+      );
     if (isSrc || isDat) {
       allDiagnostics.push(
-        ...diagnostics.validateKrlConstraints(document),
+        ...diagnostics.validateKrlConstraints(
+          document,
+          serverConfig.validateNonAscii,
+        ),
         ...diagnostics.validateGeneralSyntax(document),
       );
     }
     if (isSrc) {
       allDiagnostics.push(
-        ...diagnostics.validateSafetySpeeds(document),
+        ...diagnostics.validateSafetySpeeds(
+          document,
+          serverConfig.maxCartesianVelocity,
+        ),
         ...diagnostics.validateToolBaseInit(document),
         ...diagnostics.validateBlockBalance(document),
         ...diagnostics.validateDuplicateNames(document),

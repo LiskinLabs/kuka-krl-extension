@@ -24,6 +24,7 @@ import { initEkiValidator } from "./features/ekiValidator";
 import { initAiTools } from "./features/aiTools";
 import { initKrcBackupDiff } from "./features/krcBackupDiff";
 import { initControlCenter } from "./features/controlCenter";
+import { TelegramChatService } from "./features/telegramService";
 
 // KRL tanılama koleksiyonu
 const krlDiagnostics = vscode.languages.createDiagnosticCollection("krl");
@@ -36,11 +37,12 @@ export function activate(context: vscode.ExtensionContext) {
   // Initialize Error Lens
   initErrorLens(context);
 
-  // Initialize EthernetKRL Validator, AI Tools, KRC Backup Diff & Control Center
+  // Initialize EthernetKRL Validator, AI Tools, KRC Backup Diff, Control Center & Telegram Chat
   initEkiValidator(context);
   initAiTools(context);
   initKrcBackupDiff(context);
   initControlCenter(context);
+  TelegramChatService.getInstance().init(context);
 
   // Sunucu yolunu belirle
   const serverPath = context.asAbsolutePath(
@@ -136,7 +138,6 @@ export function activate(context: vscode.ExtensionContext) {
     }),
   );
 
-
   // Belgeyi biçimlendir komutu
   context.subscriptions.push(
     vscode.commands.registerCommand("krl.formatDocument", async () => {
@@ -200,9 +201,12 @@ export function activate(context: vscode.ExtensionContext) {
       vscode.commands.registerCommand("krl.unfoldAll", () =>
         vscode.commands.executeCommand("editor.unfoldAll"),
       ),
+      vscode.commands.registerCommand("krl.findReferences", () =>
+        vscode.commands.executeCommand("editor.action.referenceSearch.trigger"),
+      ),
     );
-  } catch (e) {
-    console.warn("Fold commands already registered");
+  } catch {
+    /* Fold commands already registered */
   }
   context.subscriptions.push(
     vscode.commands.registerCommand("krl.cleanGitMetadata", async () => {
@@ -258,7 +262,7 @@ export function activate(context: vscode.ExtensionContext) {
   const commandsTreeProvider = new CommandsTreeProvider();
   vscode.window.registerTreeDataProvider("krlCommands", commandsTreeProvider);
 
-  // Bildirimleri sırala komutu
+  // Smart Declaration Sorter for KRL .dat files (Pro Industrial Edition)
   context.subscriptions.push(
     vscode.commands.registerCommand("krl.sortDeclarations", async () => {
       const editor = vscode.window.activeTextEditor;
@@ -271,81 +275,240 @@ export function activate(context: vscode.ExtensionContext) {
       const text = document.getText();
       const lines = text.split(/\r?\n/);
 
-      // DEFDAT bloğunu bul
       let defdatStart = -1;
       let defdatEnd = -1;
-      const declarations: { type: string; line: string; index: number }[] = [];
 
       for (let i = 0; i < lines.length; i++) {
-        if (/^\s*DEFDAT\b/i.test(lines[i])) {
-          defdatStart = i;
-        } else if (/^\s*ENDDAT\b/i.test(lines[i])) {
+        if (/^\s*DEFDAT\b/i.test(lines[i])) defdatStart = i;
+        else if (/^\s*ENDDAT\b/i.test(lines[i])) {
           defdatEnd = i;
           break;
-        } else if (defdatStart !== -1 && defdatEnd === -1) {
-          // DECL satırlarını topla
-          const match = lines[i].match(
-            /^\s*(?:GLOBAL\s+)?(?:DECL\s+)?(?:GLOBAL\s+)?(\w+)\s+/i,
-          );
-          if (match) {
-            declarations.push({
-              type: match[1].toUpperCase(),
-              line: lines[i],
-              index: i,
-            });
-          }
         }
       }
 
-      if (declarations.length === 0) {
+      if (
+        defdatStart === -1 ||
+        defdatEnd === -1 ||
+        defdatEnd <= defdatStart + 1
+      ) {
         vscode.window.showInformationMessage(t("info.noDeclarationsToSort"));
         return;
       }
 
-      // Tür önceliğine göre sırala
-      const typeOrder = [
-        "INT",
-        "REAL",
-        "BOOL",
-        "CHAR",
-        "STRING",
-        "FRAME",
-        "POS",
-        "E6POS",
-        "AXIS",
-        "E6AXIS",
-        "LOAD",
-      ];
-      declarations.sort((a, b) => {
-        const orderA = typeOrder.indexOf(a.type);
-        const orderB = typeOrder.indexOf(b.type);
-        const priorityA = orderA === -1 ? 999 : orderA;
-        const priorityB = orderB === -1 ? 999 : orderB;
-        if (priorityA !== priorityB) return priorityA - priorityB;
-        return a.line.localeCompare(b.line);
-      });
+      interface DeclBlock {
+        type: string;
+        category: number; // 0: SIGNAL, 1: Primitive, 2: Geometry/Complex/Struct
+        varName: string;
+        channelNum: number;
+        startIndex: number;
+        endIndex: number;
+        lines: string[];
+      }
 
-      // Sıralanmış satırları uygula
-      const sortedLines = declarations.map((d) => d.line);
-      const originalIndices = declarations
-        .map((d) => d.index)
-        .sort((a, b) => a - b);
+      const sortedEdits: { start: number; end: number; content: string }[] = [];
+      let pendingComments: { text: string; index: number }[] = [];
+      let currentSectionBlocks: DeclBlock[] = [];
+      let foldDepth = 0;
+
+      const flushCurrentSection = () => {
+        if (currentSectionBlocks.length < 2) {
+          currentSectionBlocks = [];
+          return;
+        }
+
+        const typePriority = [
+          "ENUM",
+          "STRUC",
+          "INT",
+          "REAL",
+          "BOOL",
+          "CHAR",
+          "STRING",
+          "FRAME",
+          "POS",
+          "E6POS",
+          "AXIS",
+          "E6AXIS",
+          "LOAD",
+          "PDAT",
+          "LDAT",
+          "FDAT",
+          "ODAT",
+          "ADAT",
+        ];
+
+        currentSectionBlocks.sort((a, b) => {
+          if (a.category !== b.category) return a.category - b.category;
+          if (a.category === 0) return a.channelNum - b.channelNum; // SIGNAL by I/O channel number
+
+          const prioA = typePriority.indexOf(a.type);
+          const prioB = typePriority.indexOf(b.type);
+          if (prioA !== prioB && prioA !== -1 && prioB !== -1)
+            return prioA - prioB;
+
+          return a.varName.localeCompare(b.varName);
+        });
+
+        const firstIdx = currentSectionBlocks[0].startIndex;
+        const lastIdx =
+          currentSectionBlocks[currentSectionBlocks.length - 1].endIndex;
+        const content = currentSectionBlocks
+          .map((b) => b.lines.join("\n"))
+          .join("\n\n");
+
+        sortedEdits.push({ start: firstIdx, end: lastIdx, content });
+        currentSectionBlocks = [];
+      };
+
+      for (let i = defdatStart + 1; i < defdatEnd; i++) {
+        const line = lines[i];
+        const trimmed = line.trim();
+
+        // Track FOLD blocks to avoid messing up KSS internal system FOLDs
+        if (trimmed.toUpperCase().startsWith(";FOLD")) {
+          foldDepth++;
+          flushCurrentSection();
+          pendingComments = [];
+          continue;
+        }
+        if (trimmed.toUpperCase().startsWith(";ENDFOLD")) {
+          if (foldDepth > 0) foldDepth--;
+          flushCurrentSection();
+          pendingComments = [];
+          continue;
+        }
+
+        // Inside protected FOLD block, skip sorting to preserve KSS system integrity
+        if (foldDepth > 0) {
+          continue;
+        }
+
+        if (trimmed.startsWith(";")) {
+          pendingComments.push({ text: line, index: i });
+          continue;
+        }
+
+        if (!trimmed) {
+          flushCurrentSection();
+          pendingComments = [];
+          continue;
+        }
+
+        // Broad Declaration Regexp supporting built-in and custom structs/enums/signals
+        const declMatch = trimmed.match(
+          /^\s*(?:GLOBAL\s+)?(?:DECL\s+)?(?:GLOBAL\s+)?([a-zA-Z0-9_]+)\s+([a-zA-Z0-9_]+)/i,
+        );
+
+        const isSignal = trimmed.toUpperCase().startsWith("SIGNAL");
+        const isStrucOrEnum = /^\s*(?:STRUC|ENUM|EXT)\b/i.test(trimmed);
+
+        if (declMatch || isSignal || isStrucOrEnum) {
+          let type = declMatch ? declMatch[1].toUpperCase() : "DECL";
+          let varName = declMatch ? declMatch[2] : "";
+
+          if (isSignal) {
+            type = "SIGNAL";
+            const sigNameMatch = trimmed.match(/^SIGNAL\s+([a-zA-Z0-9_]+)/i);
+            if (sigNameMatch) varName = sigNameMatch[1];
+          } else if (isStrucOrEnum) {
+            const strucMatch = trimmed.match(
+              /^(?:STRUC|ENUM|EXT)\s+([a-zA-Z0-9_]+)/i,
+            );
+            if (strucMatch) {
+              type = trimmed.split(/\s+/)[0].toUpperCase();
+              varName = strucMatch[1];
+            }
+          }
+
+          let category = 1;
+          if (type === "SIGNAL") category = 0;
+          else if (
+            [
+              "FRAME",
+              "POS",
+              "E6POS",
+              "AXIS",
+              "E6AXIS",
+              "LOAD",
+              "PDAT",
+              "LDAT",
+              "FDAT",
+              "ODAT",
+            ].includes(type)
+          )
+            category = 2;
+
+          let channelNum = 0;
+          if (type === "SIGNAL") {
+            const inMatch = trimmed.match(/\$IN\[(\d+)\]/i);
+            const outMatch = trimmed.match(/\$OUT\[(\d+)\]/i);
+            if (inMatch) channelNum = parseInt(inMatch[1], 10);
+            else if (outMatch) channelNum = 100000 + parseInt(outMatch[1], 10);
+          }
+
+          const blockLines: string[] = [];
+          const blockStartIndex =
+            pendingComments.length > 0 ? pendingComments[0].index : i;
+
+          pendingComments.forEach((c) => blockLines.push(c.text));
+          pendingComments = [];
+
+          blockLines.push(line);
+
+          // Collect array / struct element initializations (e.g. BASE_DATA[1]={...})
+          let j = i + 1;
+          while (j < defdatEnd && varName) {
+            const nextLine = lines[j].trim();
+            if (nextLine.startsWith(";") || !nextLine) break;
+            const initMatch = nextLine.match(new RegExp(`^${varName}\\[`, "i"));
+            if (initMatch) {
+              blockLines.push(lines[j]);
+              j++;
+            } else {
+              break;
+            }
+          }
+
+          const blockEndIndex = j - 1;
+          i = blockEndIndex;
+
+          currentSectionBlocks.push({
+            type,
+            category,
+            varName,
+            channelNum,
+            startIndex: blockStartIndex,
+            endIndex: blockEndIndex,
+            lines: blockLines,
+          });
+        } else {
+          flushCurrentSection();
+          pendingComments = [];
+        }
+      }
+
+      flushCurrentSection();
+
+      if (sortedEdits.length === 0) {
+        vscode.window.showInformationMessage(t("info.noDeclarationsToSort"));
+        return;
+      }
 
       const edit = new vscode.WorkspaceEdit();
-      for (let i = 0; i < originalIndices.length; i++) {
-        const lineNum = originalIndices[i];
+      // Apply edits in reverse order so line offsets stay accurate
+      sortedEdits.reverse().forEach((se) => {
         const range = new vscode.Range(
-          lineNum,
+          se.start,
           0,
-          lineNum,
-          lines[lineNum].length,
+          se.end,
+          lines[se.end].length,
         );
-        edit.replace(document.uri, range, sortedLines[i]);
-      }
+        edit.replace(document.uri, range, se.content);
+      });
 
       await vscode.workspace.applyEdit(edit);
       vscode.window.showInformationMessage(
-        t("info.declarationsSorted", declarations.length),
+        t("info.declarationsSorted", sortedEdits.length),
       );
     }),
   );

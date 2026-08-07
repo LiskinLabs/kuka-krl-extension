@@ -40,7 +40,53 @@ export class AutoCompleter {
     const line = lines[params.position.line];
     const textBefore = line.substring(0, params.position.character);
 
-    // Nokta sonrası - struct üyelerini öner
+    // 0. Если перед курсором находится пробел или табуляция, отменяем автодополнение (Space = Cancel)
+    if (/\s$/.test(textBefore)) {
+      return [];
+    }
+
+    // === System Variables ($ Trigger) ===
+    const currentWordMatch = textBefore.match(/[\$a-zA-Z0-9_#]+$/);
+    const currentWord = currentWordMatch ? currentWordMatch[0] : "";
+
+    if (currentWord.startsWith("$")) {
+      const upperWord = currentWord.toUpperCase();
+      const definedSysVars = Object.keys(krlData.systemVariables);
+      const allSysVars = Array.from(
+        new Set([...KSS_87_SYSTEM_VARS, ...definedSysVars]),
+      );
+      const sysVarMap = krlData.systemVariables as Record<
+        string,
+        { description?: string; type?: string; "data-type"?: string }
+      >;
+
+      return allSysVars
+        .map((v) => {
+          const cleanName = v.startsWith("$") ? v : "$" + v;
+          const lookupName = v.startsWith("$") ? v.substring(1) : v;
+          const data = sysVarMap[cleanName] || sysVarMap[lookupName];
+
+          // Strip leading $ from insertText so selecting $ACC_C after typing $ results in $ACC_C (not $$ACC_C)
+          const insertValue = cleanName.startsWith("$")
+            ? cleanName.substring(1)
+            : cleanName;
+
+          return {
+            label: cleanName,
+            kind: CompletionItemKind.Variable,
+            detail: data ? data.description : t("completion.systemVariable"),
+            documentation: data
+              ? `Type: ${data["data-type"] || data.type}`
+              : undefined,
+            sortText: "0_" + cleanName,
+            filterText: cleanName,
+            insertText: insertValue,
+          };
+        })
+        .filter((item) => item.label.toUpperCase().includes(upperWord));
+    }
+
+    // Dot match for struct members
     const dotMatch = textBefore.match(/(\w+)\.$/);
     if (dotMatch) {
       const varName = dotMatch[1];
@@ -86,17 +132,16 @@ export class AutoCompleter {
     }
 
     // === 2. Keywords ===
-    const currentWord =
-      textBefore.trim().split(/\s+/).pop()?.toUpperCase() || "";
+    const keywordPrefix = currentWord.toUpperCase();
 
     const filteredKeywords = this.filterKeywordsByContext(
       CODE_KEYWORDS,
       context,
     )
-      .filter((kw) => kw.includes(currentWord))
+      .filter((kw) => kw.includes(keywordPrefix))
       .sort((a, b) => {
-        const aStarts = a.startsWith(currentWord);
-        const bStarts = b.startsWith(currentWord);
+        const aStarts = a.startsWith(keywordPrefix);
+        const bStarts = b.startsWith(keywordPrefix);
         if (aStarts && !bStarts) return -1;
         if (!aStarts && bStarts) return 1;
         return a.localeCompare(b);
@@ -148,6 +193,11 @@ export class AutoCompleter {
 
         const data = sysVarMap[cleanName] || sysVarMap[lookupName];
 
+        const insertValue =
+          currentWord.startsWith("$") && cleanName.startsWith("$")
+            ? cleanName.substring(1)
+            : cleanName;
+
         return {
           label: cleanName,
           kind: CompletionItemKind.Variable,
@@ -157,6 +207,7 @@ export class AutoCompleter {
             : undefined,
           sortText: cleanName,
           filterText: cleanName,
+          insertText: insertValue,
         };
       });
     }

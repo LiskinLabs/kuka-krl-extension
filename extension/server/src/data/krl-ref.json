@@ -1,5 +1,77 @@
 {
   "systemVariables": {
+    "$ACC.CP": {
+      "name": "$ACC.CP",
+      "type": "REAL",
+      "description": "CP path acceleration of TCP in m/s^2 (Standard range: 0.001 to max machine limit)",
+      "readOnly": false
+    },
+    "$ACC.ORI1": {
+      "name": "$ACC.ORI1",
+      "type": "REAL",
+      "description": "Swivel orientation acceleration in deg/s^2",
+      "readOnly": false
+    },
+    "$ACC.ORI2": {
+      "name": "$ACC.ORI2",
+      "type": "REAL",
+      "description": "Rotational orientation acceleration in deg/s^2",
+      "readOnly": false
+    },
+    "$ACC.RAX": {
+      "name": "$ACC.RAX",
+      "type": "REAL",
+      "description": "Rotational axis acceleration in deg/s^2",
+      "readOnly": false
+    },
+    "$VEL.CP": {
+      "name": "$VEL.CP",
+      "type": "REAL",
+      "description": "CP path velocity of TCP in m/s (Standard commissioning speed limit: 3.0 m/s)",
+      "readOnly": false
+    },
+    "$VEL.ORI1": {
+      "name": "$VEL.ORI1",
+      "type": "REAL",
+      "description": "Swivel orientation velocity in deg/s",
+      "readOnly": false
+    },
+    "$VEL.ORI2": {
+      "name": "$VEL.ORI2",
+      "type": "REAL",
+      "description": "Rotational orientation velocity in deg/s",
+      "readOnly": false
+    },
+    "$VEL.RAX": {
+      "name": "$VEL.RAX",
+      "type": "REAL",
+      "description": "Rotational axis velocity in deg/s",
+      "readOnly": false
+    },
+    "$APO.CDIS": {
+      "name": "$APO.CDIS",
+      "type": "REAL",
+      "description": "Distance approximation parameter for LIN and CIRC motions in mm",
+      "readOnly": false
+    },
+    "$APO.CPTP": {
+      "name": "$APO.CPTP",
+      "type": "INT",
+      "description": "Percentage approximation parameter for PTP motions in %",
+      "readOnly": false
+    },
+    "$APO.CORI": {
+      "name": "$APO.CORI",
+      "type": "REAL",
+      "description": "Orientation approximation angle parameter in deg",
+      "readOnly": false
+    },
+    "$APO.CVEL": {
+      "name": "$APO.CVEL",
+      "type": "INT",
+      "description": "Velocity approximation parameter in %",
+      "readOnly": false
+    },
     "$MODE_OP": {
       "name": "$MODE_OP",
       "type": "MODE_OP",

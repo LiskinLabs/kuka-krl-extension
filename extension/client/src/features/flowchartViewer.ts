@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import { LanguageClient } from "vscode-languageclient/node";
 import * as path from "path";
+import * as fs from "fs";
 import { t } from "../i18n";
 
 interface FlowGraphError {
@@ -335,13 +336,13 @@ function getWebviewContent(
             return `<div class="error-item" onclick="goToLine(${e.line})" data-type="${escHtml(e.type)}">
         <div class="error-badge-row">
           <span class="error-type badge-${escHtml(e.type)}">${escHtml(typeText)}</span>
-          <span class="error-line">Строка ${e.line + 1}</span>
+          <span class="error-line">${escHtml(t("flow.ui.line", e.line + 1))}</span>
         </div>
         <div class="error-msg">${escHtml(msgText)}</div>
       </div>`;
           })
           .join("")
-      : '<div class="no-errors">✅ Ошибок логики не обнаружено</div>';
+      : `<div class="no-errors">${escHtml(t("flow.ui.noErrors"))}</div>`;
 
   return `<!DOCTYPE html>
 <html lang="ru">
@@ -566,22 +567,22 @@ function getWebviewContent(
         <h3>📊 ${escHtml(fileName)}</h3>
         
         <div class="controls-group">
-            <button class="btn btn-icon" onclick="zoomOut()" title="Уменьшить">➖</button>
-            <button class="btn" onclick="zoomReset()" title="Вписать в экран">🔄 Вписать</button>
-            <button class="btn btn-icon" onclick="zoomIn()" title="Увеличить">➕</button>
+            <button class="btn btn-icon" onclick="zoomOut()" title="${t("flow.ui.zoomOut")}">➖</button>
+            <button class="btn" onclick="zoomReset()" title="${t("flow.ui.zoomReset")}">🔄 ${t("flow.ui.zoomReset")}</button>
+            <button class="btn btn-icon" onclick="zoomIn()" title="${t("flow.ui.zoomIn")}">➕</button>
             
             <div class="divider"></div>
             
-            <button class="btn btn-primary" onclick="downloadSvg()" title="Скачать в формате SVG">
-                📥 Скачать
+            <button class="btn btn-primary" onclick="downloadSvg()" title="${t("flow.ui.downloadTitle")}">
+                📥 ${t("flow.ui.downloadSvg")}
             </button>
         </div>
 
         <div class="controls-group">
-            <button class="btn" onclick="toggleDetailed()" title="Переключить детальный вид">
-                ${isDetailed ? "🔍 Детальный: ВКЛ" : "🔍 Детальный: ВЫКЛ"}
+            <button class="btn" onclick="toggleDetailed()" title="${t("flow.ui.toggleDetailed")}">
+                ${isDetailed ? t("flow.ui.detailedOn") : t("flow.ui.detailedOff")}
             </button>
-            <button class="btn" onclick="changeFile()">🏠 Главная программа</button>
+            <button class="btn" onclick="changeFile()">${t("flow.ui.mainProgram")}</button>
         </div>
     </div>
 
@@ -593,7 +594,7 @@ function getWebviewContent(
 
     <div class="errors-panel">
         <div class="errors-header">
-            Ошибки логики <span class="badge ${errors.length === 0 ? "badge-zero" : ""}">${errors.length}</span>
+            ${t("flow.ui.logicErrors")} <span class="badge ${errors.length === 0 ? "badge-zero" : ""}">${errors.length}</span>
         </div>
         <div class="error-list">
             ${errorListHtml}

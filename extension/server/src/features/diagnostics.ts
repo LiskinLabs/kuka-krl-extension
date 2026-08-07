@@ -146,6 +146,12 @@ for (const kw of Object.keys(CLOSE_TO_OPEN)) {
   BLOCK_CLOSE_REGEXES[kw] = new RegExp(`\\b${kw}\\b`, "i");
 }
 
+const INTERNAL_KEYWORD_SPECS = [
+  { kw: "ELSE", regex: /\bELSE\b/i, expectedParent: "IF" },
+  { kw: "CASE", regex: /\bCASE\b/i, expectedParent: "SWITCH" },
+  { kw: "DEFAULT", regex: /\bDEFAULT\b/i, expectedParent: "SWITCH" },
+];
+
 /**
  * Удаляет невидимые Unicode-символы.
  * Эти символы могут появляться при копировании из веб-страниц или документов
@@ -748,7 +754,10 @@ export class DiagnosticsProvider {
    * Проверяет безопасные скорости в SRC файлах.
    * Warning для $VEL.CP > 3 m/s и $VEL_PTP > 100%
    */
-  public validateSafetySpeeds(document: TextDocument): Diagnostic[] {
+  public validateSafetySpeeds(
+    document: TextDocument,
+    maxVelocity: number = 3.0,
+  ): Diagnostic[] {
     // SİSTEM DOSYALARINI ATLA
     if (isSystemFile(document.uri)) {
       return [];
@@ -772,7 +781,7 @@ export class DiagnosticsProvider {
       velCpRegex.lastIndex = 0;
       while ((match = velCpRegex.exec(codePart)) !== null) {
         const velocity = parseFloat(match[1]);
-        if (velocity > 3) {
+        if (velocity > maxVelocity) {
           diagnostics.push({
             severity: DiagnosticSeverity.Warning,
             range: {
@@ -902,7 +911,6 @@ export class DiagnosticsProvider {
     }
 
     const blockStack: BlockInfo[] = [];
-    const internalKeywords = ["ELSE", "CASE", "DEFAULT"];
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
@@ -946,25 +954,20 @@ export class DiagnosticsProvider {
       }
 
       // Check for ELSE, CASE, DEFAULT (Context check)
-      for (const kw of internalKeywords) {
-        const regex = new RegExp(`\\b${kw}\\b`, "i");
-        const match = regex.exec(codePart);
+      for (const spec of INTERNAL_KEYWORD_SPECS) {
+        const match = spec.regex.exec(codePart);
         if (match) {
-          let expectedParent = "";
-          if (kw === "ELSE") expectedParent = "IF";
-          if (kw === "CASE" || kw === "DEFAULT") expectedParent = "SWITCH";
-
           if (
             blockStack.length === 0 ||
-            blockStack[blockStack.length - 1].type !== expectedParent
+            blockStack[blockStack.length - 1].type !== spec.expectedParent
           ) {
             diagnostics.push({
               severity: DiagnosticSeverity.Error,
               range: {
                 start: { line: i, character: match.index },
-                end: { line: i, character: match.index + kw.length },
+                end: { line: i, character: match.index + spec.kw.length },
               },
-              message: t("diag.orphanBlock", kw, expectedParent),
+              message: t("diag.orphanBlock", spec.kw, spec.expectedParent),
               source: "krl-language-support",
             });
           }
@@ -1579,7 +1582,10 @@ export class DiagnosticsProvider {
    * 3. Ключи сообщений (KEY[]) <= 26 символов.
    * 4. Имя отправителя (MODUL[]) <= 24 символов.
    */
-  public validateKrlConstraints(document: TextDocument): Diagnostic[] {
+  public validateKrlConstraints(
+    document: TextDocument,
+    validateNonAscii: boolean = true,
+  ): Diagnostic[] {
     const diagnostics: Diagnostic[] = [];
     const text = document.getText();
     const lines = text.split(/\r?\n/);
@@ -1594,24 +1600,26 @@ export class DiagnosticsProvider {
       const line = lines[i];
       const codePart = getLineWithoutComment(line);
 
-      // 0. Check Non-ASCII (Strict Mode: Warn on any non-ASCII in code)
-      const nonAsciiMatch = codePart.match(REGEX_NON_ASCII);
-      if (nonAsciiMatch) {
-        for (let j = 0; j < codePart.length; j++) {
-          const charCode = codePart.charCodeAt(j);
-          if (charCode > 127) {
-            if (charCode === 0xfeff) continue;
-            diagnostics.push({
-              severity: DiagnosticSeverity.Error,
-              tags: [DiagnosticTag.Deprecated],
-              code: "nonAscii",
-              range: {
-                start: { line: i, character: j },
-                end: { line: i, character: j + 1 },
-              },
-              message: t("diag.nonAsciiChar", codePart[j]),
-              source: "krl-language-support",
-            });
+      // 0. Check Non-ASCII (Strict Mode: Warn on any non-ASCII in code if enabled)
+      if (validateNonAscii) {
+        const nonAsciiMatch = codePart.match(REGEX_NON_ASCII);
+        if (nonAsciiMatch) {
+          for (let j = 0; j < codePart.length; j++) {
+            const charCode = codePart.charCodeAt(j);
+            if (charCode > 127) {
+              if (charCode === 0xfeff) continue;
+              diagnostics.push({
+                severity: DiagnosticSeverity.Error,
+                tags: [DiagnosticTag.Deprecated],
+                code: "nonAscii",
+                range: {
+                  start: { line: i, character: j },
+                  end: { line: i, character: j + 1 },
+                },
+                message: t("diag.nonAsciiChar", codePart[j]),
+                source: "krl-language-support",
+              });
+            }
           }
         }
       }
@@ -1624,8 +1632,7 @@ export class DiagnosticsProvider {
       if (msgMatch) {
         const field = msgMatch[1].toUpperCase(); // KEY, MODUL, ORIGINATOR
         const content = msgMatch[3]; // Строка внутри кавычек
-        const valueStartIndex =
-          matchStartIndex(codePart, msgMatch[0]) + msgMatch[0].indexOf(content);
+        const valueStartIndex = msgMatch.index + msgMatch[0].indexOf(content);
 
         // KEY[] limit: 26 chars
         if (field === "KEY" && content.length > 26) {
@@ -1768,17 +1775,15 @@ export class DiagnosticsProvider {
   }
 }
 
-// Вспомогательная функция для поиска индекса (если нет в классе)
-function matchStartIndex(text: string, substring: string): number {
-  return text.indexOf(substring);
-}
-
 /**
  * Расстояние Левенштейна для поиска похожих имен.
+ * Оптимизировано с быстрой проверкой разницы длин.
  */
 function levenshteinDistance(s1: string, s2: string): number {
   const len1 = s1.length;
   const len2 = s2.length;
+  if (Math.abs(len1 - len2) >= 3) return 99;
+
   const matrix: number[][] = [];
 
   for (let i = 0; i <= len1; i++) {

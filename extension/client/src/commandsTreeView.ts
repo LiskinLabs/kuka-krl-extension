@@ -30,7 +30,7 @@ export class CommandsTreeProvider implements vscode.TreeDataProvider<CommandItem
       new CommandItem(
         t("command.openControlCenter"),
         "krl.openControlCenter",
-        "widget",
+        "dashboard",
         t("command.openControlCenter.tooltip"),
       ),
       new CommandItem(
@@ -46,28 +46,28 @@ export class CommandsTreeProvider implements vscode.TreeDataProvider<CommandItem
         t("command.compareKrcBackup.tooltip"),
       ),
       new CommandItem(
-        t("command.openSnippetGenerator"),
-        "krl.openSnippetGenerator",
-        "beaker",
-        t("command.openSnippetGenerator.tooltip"),
-      ),
-      new CommandItem(
         t("command.calculator"),
         "krl.showCalculator",
         "symbol-numeric",
         t("command.calculator.tooltip"),
       ),
       new CommandItem(
+        t("command.openSnippetGenerator"),
+        "krl.openSnippetGenerator",
+        "beaker",
+        t("command.openSnippetGenerator.tooltip"),
+      ),
+      new CommandItem(
+        t("command.findReferences"),
+        "krl.findReferences",
+        "references",
+        t("command.findReferences.tooltip"),
+      ),
+      new CommandItem(
         t("command.aiCheckSafety"),
         "krl.aiCheckSafety",
         "shield",
         t("command.aiCheckSafety.tooltip"),
-      ),
-      new CommandItem(
-        t("command.aiGetIoMatrix"),
-        "krl.aiGetIoMatrix",
-        "list-flat",
-        t("command.aiGetIoMatrix.tooltip"),
       ),
       new CommandItem(
         t("command.validateEkiXml"),
@@ -82,16 +82,22 @@ export class CommandsTreeProvider implements vscode.TreeDataProvider<CommandItem
         t("command.generateEkiCode.tooltip"),
       ),
       new CommandItem(
+        t("command.formatDocument"),
+        "krl.formatDocument",
+        "code",
+        t("command.formatDocument.tooltip"),
+      ),
+      new CommandItem(
         t("command.cleanGitMetadata"),
         "krl.cleanGitMetadata",
         "clear-all",
         t("command.cleanGitMetadata.tooltip"),
       ),
       new CommandItem(
-        t("command.generateReport"),
-        "krl.generateReport",
-        "report",
-        t("command.generateReport.tooltip"),
+        t("command.sortDeclarations"),
+        "krl.sortDeclarations",
+        "list-ordered",
+        t("command.sortDeclarations.tooltip"),
       ),
       new CommandItem(
         t("command.cleanup"),
@@ -100,16 +106,22 @@ export class CommandsTreeProvider implements vscode.TreeDataProvider<CommandItem
         t("command.cleanup.tooltip"),
       ),
       new CommandItem(
-        t("command.formatDocument"),
-        "krl.formatDocument",
-        "code",
-        t("command.formatDocument.tooltip"),
+        t("command.generateReport"),
+        "krl.generateReport",
+        "report",
+        t("command.generateReport.tooltip"),
       ),
       new CommandItem(
-        t("command.sortDeclarations"),
-        "krl.sortDeclarations",
-        "list-ordered",
-        t("command.sortDeclarations.tooltip"),
+        t("command.sendLogsToDeveloper"),
+        "krl.sendLogsToDeveloper",
+        "output",
+        t("command.sendLogsToDeveloper.tooltip"),
+      ),
+      new CommandItem(
+        t("command.sendFileToDeveloper"),
+        "krl.sendFileToDeveloper",
+        "file-submodule",
+        t("command.sendFileToDeveloper.tooltip"),
       ),
       new CommandItem(
         t("command.foldAll"),
@@ -128,6 +140,12 @@ export class CommandsTreeProvider implements vscode.TreeDataProvider<CommandItem
         "krl.refreshIOView",
         "refresh",
         t("command.refreshIOView.tooltip"),
+      ),
+      new CommandItem(
+        "Telegram Support Chat (@kukakrlbot)",
+        "krl.openTelegramChat",
+        "comment-discussion",
+        "Send & receive live messages with developer directly in VS Code",
       ),
     ];
   }

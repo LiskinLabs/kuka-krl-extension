@@ -34,15 +34,64 @@ interface Messages {
   "picker.systemVariables": string;
   "picker.selectSystemVariable": string;
 
-  // Command Titles for Tree View
+  // Command Titles for Tree View and Menus
+  "command.openControlCenter": string;
+  "command.openControlCenter.tooltip": string;
   "command.calculator": string;
+  "command.calculator.tooltip": string;
   "command.cleanup": string;
+  "command.cleanup.tooltip": string;
   "command.formatDocument": string;
+  "command.formatDocument.tooltip": string;
   "command.sortDeclarations": string;
+  "command.sortDeclarations.tooltip": string;
   "command.foldAll": string;
+  "command.foldAll.tooltip": string;
   "command.unfoldAll": string;
+  "command.unfoldAll.tooltip": string;
   "command.refreshIOView": string;
+  "command.refreshIOView.tooltip": string;
   "command.showFlowchart": string;
+  "command.showFlowchart.tooltip": string;
+  "command.compareKrcBackup": string;
+  "command.compareKrcBackup.tooltip": string;
+  "command.openSnippetGenerator": string;
+  "command.openSnippetGenerator.tooltip": string;
+  "command.aiCheckSafety": string;
+  "command.aiCheckSafety.tooltip": string;
+  "command.validateEkiXml": string;
+  "command.validateEkiXml.tooltip": string;
+  "command.generateEkiCode": string;
+  "command.generateEkiCode.tooltip": string;
+  "command.cleanGitMetadata": string;
+  "command.cleanGitMetadata.tooltip": string;
+  "command.generateReport": string;
+  "command.generateReport.tooltip": string;
+  "command.findReferences": string;
+  "command.findReferences.tooltip": string;
+  "command.sendLogsToDeveloper": string;
+  "command.sendLogsToDeveloper.tooltip": string;
+  "command.sendFileToDeveloper": string;
+  "command.sendFileToDeveloper.tooltip": string;
+
+  // Control Center Dashboard UI
+  "cc.engTools": string;
+  "cc.safetyDiag": string;
+  "cc.accountHub": string;
+  "cc.tab.profile": string;
+  "cc.tab.devices": string;
+  "cc.tab.billing": string;
+  "cc.tab.support": string;
+  "cc.btn.openFlowchart": string;
+  "cc.btn.inspectBackup": string;
+  "cc.btn.generateSnippets": string;
+  "cc.btn.openCalculator": string;
+  "cc.btn.ekiValidator": string;
+  "cc.btn.generateHandler": string;
+  "cc.btn.cleanGitMetadata": string;
+  "cc.btn.runSafetyCheck": string;
+  "cc.btn.generateReport": string;
+  "cc.btn.extractIoMatrix": string;
 
   // Flowchart Viewer
   "flow.err.unreachable": string;
@@ -56,6 +105,33 @@ interface Messages {
   "flow.msg.unreachableCode": string;
   "flow.msg.uninitMotion": string;
   "flow.msg.invalidGoto": string;
+  "flow.ui.zoomOut": string;
+  "flow.ui.zoomReset": string;
+  "flow.ui.zoomIn": string;
+  "flow.ui.downloadSvg": string;
+  "flow.ui.downloadTitle": string;
+  "flow.ui.toggleDetailed": string;
+  "flow.ui.detailedOn": string;
+  "flow.ui.detailedOff": string;
+  "flow.ui.mainProgram": string;
+  "flow.ui.logicErrors": string;
+  "flow.ui.noErrors": string;
+  "flow.ui.line": string;
+
+  // Safety Check
+  "safety.notify.safe": string;
+  "safety.error.violations": string;
+  "safety.alert.critical": string;
+  "safety.alert.warning": string;
+
+  // EthernetKRL (EKI) Validator & Code Generator
+  "eki.notify.valid": string;
+  "eki.error.title": string;
+  "eki.prompt.channelName": string;
+  "eki.picker.selectXml": string;
+  "eki.warning.notXml": string;
+  "eki.btn.generate": string;
+  "eki.btn.select": string;
 
   // Snippet Generator
   "snippet.title": string;
@@ -92,6 +168,114 @@ interface Messages {
   "snippet.mot.approx.none": string;
   "snippet.alert.inserted": string;
   "snippet.alert.noEditor": string;
+  "snippet.desc.ptp": string;
+  "snippet.desc.lin": string;
+  "snippet.desc.circ": string;
+  "snippet.desc.sptp": string;
+  "snippet.desc.slin": string;
+  "snippet.desc.scirc": string;
+  "snippet.desc.splineBlock": string;
+
+  // Telegram Chat Integration
+  "cc.prompt.telegram": string;
+  "cc.prompt.telegram.placeholder": string;
+  "cc.notify.telegramSent": string;
+  "cc.notify.telegramFallback": string;
+
+  // Billing & License Portal
+  "cc.billing.title": string;
+  "cc.billing.desc": string;
+  "cc.billing.btn.portal": string;
+  "cc.billing.btn.invoice": string;
+  "cc.billing.plansTitle": string;
+  "cc.billing.btn.buyPlan": string;
+  "cc.billing.legalNotice": string;
+  "cc.billing.legalItem1": string;
+  "cc.billing.legalItem2": string;
+  "cc.billing.legalItem3": string;
+
+  // Support & Developer Chat
+  "cc.support.desc": string;
+  "cc.support.btn.chat": string;
+  "cc.support.btn.sendLogs": string;
+  "cc.support.btn.sendFile": string;
+  "cc.support.btn.github": string;
+  "cc.support.btn.email": string;
+
+  // Account & Device Buttons
+  "cc.profile.deactivate": string;
+  "cc.profile.checkStatus": string;
+  "cc.profile.activateKey": string;
+  "cc.profile.buyPro": string;
+  "cc.devices.deactivatePc": string;
+  "cc.devices.syncStatus": string;
+
+  // Control Center Notifications
+  "cc.notify.portalOpened": string;
+  "cc.notify.storeOpened": string;
+  "cc.notify.keyCopied": string;
+  "cc.notify.emailClientOpened": string;
+  "cc.prompt.email": string;
+  "cc.prompt.emailPlaceholder": string;
+
+  // License Dialogs & Prompts
+  "license.warning.premiumOnly": string;
+  "license.btn.buy": string;
+  "license.btn.enterKey": string;
+  "license.prompt.key": string;
+  "license.progress.activating": string;
+  "license.notify.leadActivated": string;
+  "license.notify.activated": string;
+  "license.error.activate": string;
+  "license.error.network": string;
+  "license.info.noKey": string;
+  "license.confirm.deactivate": string;
+  "license.btn.yes": string;
+  "license.btn.no": string;
+  "license.progress.deactivating": string;
+  "license.notify.deactivated": string;
+  "license.info.freeEdition": string;
+  "license.info.activePro": string;
+  "license.warning.expired": string;
+
+  // Telegram Chat Webview & Service
+  "chat.title": string;
+  "chat.session": string;
+  "chat.session.tooltip": string;
+  "chat.btn.new": string;
+  "chat.btn.new.tooltip": string;
+  "chat.btn.file": string;
+  "chat.btn.file.tooltip": string;
+  "chat.btn.logs": string;
+  "chat.btn.logs.tooltip": string;
+  "chat.btn.delete": string;
+  "chat.btn.delete.tooltip": string;
+  "chat.input.placeholder": string;
+  "chat.btn.send": string;
+  "chat.btn.reply": string;
+  "chat.confirm.deleteSession": string;
+  "chat.confirm.deleteAllSessions": string;
+  "chat.notify.newSession": string;
+  "chat.notify.sessionDeleted": string;
+  "chat.notify.allSessionsDeleted": string;
+  "chat.notify.logsSent": string;
+  "chat.notify.filePickLabel": string;
+  "chat.notify.fileSent": string;
+  "chat.notify.fileNotFound": string;
+  "chat.notify.devNotConnected": string;
+  "chat.notify.devMessage": string;
+  "chat.empty.title": string;
+  "chat.empty.desc": string;
+  "chat.session.label": string;
+  "chat.msg.count": string;
+  "chat.sender.user": string;
+  "chat.sender.dev": string;
+  "chat.status.delivered": string;
+
+  // KRC Backup Diff
+  "backup.picker.title": string;
+  "backup.error.notFound": string;
+  "backup.notify.identical": string;
 }
 
 // English (default)
@@ -145,9 +329,6 @@ const en: Messages = {
   "command.aiCheckSafety": "Safety & Velocity Check",
   "command.aiCheckSafety.tooltip":
     "Run strict industrial safety checks ($VEL.CP, uninit tools/bases)",
-  "command.aiGetIoMatrix": "Extract I/O Matrix",
-  "command.aiGetIoMatrix.tooltip":
-    "Extract physical signal mappings for AI context and docs",
   "command.validateEkiXml": "EthernetKRL (EKI) Validator",
   "command.validateEkiXml.tooltip": "Validate EKI XML schema files",
   "command.generateEkiCode": "Generate EKI Handler Routine",
@@ -159,6 +340,15 @@ const en: Messages = {
   "command.generateReport": "Generate Acceptance Report",
   "command.generateReport.tooltip":
     "Generate structured quality acceptance report",
+  "command.findReferences": "Find All References (Go to References)",
+  "command.findReferences.tooltip":
+    "Search all references to selected variable, signal or subprogram across workspace",
+  "command.sendLogsToDeveloper": "Send Diagnostic Logs to Developer",
+  "command.sendLogsToDeveloper.tooltip":
+    "Pack extension log and system info and send to developer via Telegram",
+  "command.sendFileToDeveloper": "Send File / KRL Code to Developer",
+  "command.sendFileToDeveloper.tooltip":
+    "Select any file on PC and send to developer via Telegram",
 
   "cc.engTools": "Engineering Pro Tools",
   "cc.safetyDiag": "Safety Diagnostics & Quality",
@@ -193,6 +383,35 @@ const en: Messages = {
     "Motion on line {0} lacks prior TOOL/BASE initialization (needs BAS(#INITMOV) or $TOOL/$BASE).",
   "flow.msg.invalidGoto":
     "Target label '{0}' for GOTO on line {1} is undefined in this file.",
+  "flow.ui.zoomOut": "Zoom Out",
+  "flow.ui.zoomReset": "Fit Screen",
+  "flow.ui.zoomIn": "Zoom In",
+  "flow.ui.downloadSvg": "Download",
+  "flow.ui.downloadTitle": "Download in SVG format",
+  "flow.ui.toggleDetailed": "Toggle Detailed View",
+  "flow.ui.detailedOn": "🔍 Detailed: ON",
+  "flow.ui.detailedOff": "🔍 Detailed: OFF",
+  "flow.ui.mainProgram": "🏠 Main Program",
+  "flow.ui.logicErrors": "Logic Errors",
+  "flow.ui.noErrors": "✅ No logic errors detected",
+  "flow.ui.line": "Line {0}",
+
+  "safety.notify.safe":
+    "🛡️ Industrial Safety Check: CODE IS SAFE FOR KRC EXECUTION! (Max Limit: {0} m/s)",
+  "safety.error.violations": "🚨 Safety Violations Found:",
+  "safety.alert.critical":
+    "🚨 KRC Safety & Logic Alert: Found {0} critical error(s) and {1} risk(s) in active file!",
+  "safety.alert.warning":
+    "⚠️ KRC Safety & Logic Warning: Found {0} logic risk(s) in active file. Check VS Code Problems panel.",
+
+  "eki.notify.valid": "✅ EKI XML Config ({0}): Valid EthernetKRL Schema!",
+  "eki.error.title": "❌ EKI XML Configuration Errors:",
+  "eki.prompt.channelName": "Enter EthernetKRL (EKI) Channel Name",
+  "eki.picker.selectXml": "Select EthernetKRL Configuration XML file",
+  "eki.warning.notXml":
+    "Active file is not an EthernetKRL XML config. Select an EKI XML file or generate KRL Handler.",
+  "eki.btn.generate": "➕ Generate EKI KRL Handler",
+  "eki.btn.select": "📂 Select XML File...",
 
   "snippet.title": "KRL Snippet Generator",
   "snippet.tab.message": "Message Builder",
@@ -228,6 +447,139 @@ const en: Messages = {
   "snippet.mot.approx.none": "None",
   "snippet.alert.inserted": "Snippet inserted!",
   "snippet.alert.noEditor": "No active KRL editor found!",
+  "snippet.desc.ptp":
+    "<b>PTP (Point-to-Point):</b> Movement along fastest axis trajectory. Axes A1-A6 synchronize to finish simultaneously at {0}% speed.",
+  "snippet.desc.lin":
+    "<b>LIN (Linear):</b> Robot flange (TCP) moves strictly along a straight line in space at fixed velocity ({0} m/s). Ideal for welding & piping.",
+  "snippet.desc.circ":
+    "<b>CIRC (Circular):</b> TCP moves along circular arc via auxiliary point <b>X{0}</b> to target point <b>X{1}</b> at {2} m/s.",
+  "snippet.desc.sptp":
+    "<b>SPTP (Spline PTP - KSS 8.3+):</b> Spline PTP motion with jerk limitation ($SGEAR_JERK). Provides maximum smooth axis acceleration without vibration.",
+  "snippet.desc.slin":
+    "<b>SLIN (Spline Linear - KSS 8.3+):</b> Spline linear motion with high-precision orientation profiling and <b>C_Spl</b> smoothing.",
+  "snippet.desc.scirc":
+    "<b>SCIRC (Spline Circular - KSS 8.3+):</b> Spline circular arc via <b>X{0}</b> to <b>X{1}</b> maintaining continuous orientation.",
+  "snippet.desc.splineBlock":
+    "<b>SPLINE Path Block:</b> Continuous trajectory block (SLIN/SPL/SCIRC). Robot calculates single velocity profile without stopping at nodes.",
+
+  "cc.prompt.telegram": "Message to Lead Developer (Telegram @kukakrlbot)",
+  "cc.prompt.telegram.placeholder": "Type your message or feedback...",
+  "cc.notify.telegramSent": "Message sent to Lead Developer via Telegram!",
+  "cc.notify.telegramFallback":
+    "Failed to send Telegram message. Please try again.",
+
+  "cc.billing.title": "Lemon Squeezy Merchant Billing & Invoices",
+  "cc.billing.desc":
+    "Manage receipts, purchases and official VAT invoices via protected Lemon Squeezy customer portal.",
+  "cc.billing.btn.portal": "🔗 Open Lemon Squeezy Customer Portal",
+  "cc.billing.btn.invoice": "📥 Download Invoices & Receipts (PDF)",
+  "cc.billing.plansTitle":
+    "🛒 Available Pricing Tiers & Purchase Options (Lemon Squeezy Store #393141)",
+  "cc.billing.btn.buyPlan": "Buy {0}",
+  "cc.billing.legalNotice": "📌 Corporate & Accounting Information:",
+  "cc.billing.legalItem1":
+    "Lemon Squeezy acts as the official Merchant of Record for Liskin Labs software.",
+  "cc.billing.legalItem2":
+    "Payment receipts and VAT invoices are automatically delivered to your registered email upon purchase.",
+  "cc.billing.legalItem3":
+    "Use the Customer Portal to update billing details or export full transaction history.",
+
+  "cc.support.desc":
+    "Have questions, feature requests or technical issues on-site? Connect directly with Lead Engineer Silvestr Liskin via Telegram Bot.",
+  "cc.support.btn.chat": "💬 Chat with Developer (Telegram)",
+  "cc.support.btn.sendLogs": "📊 Send Extension Logs to Developer",
+  "cc.support.btn.sendFile": "📎 Send KRL File / Code to Developer",
+  "cc.support.btn.github": "🐛 Report Issue on GitHub",
+  "cc.support.btn.email": "✉️ Email Direct Support",
+
+  "cc.profile.deactivate": "🔴 Sign Out / Deactivate License Key",
+  "cc.profile.checkStatus": "🔄 Verify Online Status",
+  "cc.profile.activateKey": "🔑 Enter License Key",
+  "cc.profile.buyPro": "🛒 Buy Pro License",
+  "cc.devices.deactivatePc": "🔓 Deactivate Current PC",
+  "cc.devices.syncStatus": "🔄 Sync Device Status",
+
+  "cc.notify.portalOpened":
+    "🔗 Opened official Lemon Squeezy Customer Portal (manage subscriptions & invoices).",
+  "cc.notify.storeOpened":
+    "🛒 Opened official KUKA KRL Professional License Store (Lemon Squeezy).",
+  "cc.notify.keyCopied": "📋 License key copied to clipboard!",
+  "cc.notify.emailClientOpened":
+    "✉️ Email client opened for silvestr.liskin@teknorob.com!",
+  "cc.prompt.email": "Send direct message to Lead Engineer Silvestr Liskin",
+  "cc.prompt.emailPlaceholder":
+    "Describe your question, feature request, or KRL issue...",
+
+  "license.warning.premiumOnly":
+    "This feature is available only in Premium Edition. Please activate your license key.",
+  "license.btn.buy": "Buy License",
+  "license.btn.enterKey": "Enter Key",
+  "license.prompt.key": "Enter your KRL Extension License Key (Lemon Squeezy)",
+  "license.progress.activating": "Activating license in Lemon Squeezy...",
+  "license.notify.leadActivated":
+    "🚀 Teknorob Lead Pro Industrial License successfully activated!",
+  "license.notify.activated":
+    "🎉 Lemon Squeezy license activated! All Pro features unlocked. 30-day offline buffer.",
+  "license.error.activate": "Lemon Squeezy Activation Error: {0}",
+  "license.error.network": "Network activation error: {0}",
+  "license.info.noKey": "No active license key found.",
+  "license.confirm.deactivate":
+    "Are you sure you want to deactivate the license on this device?",
+  "license.btn.yes": "Yes",
+  "license.btn.no": "No",
+  "license.progress.deactivating": "Deactivating device in Lemon Squeezy...",
+  "license.notify.deactivated":
+    "Device successfully deactivated in Lemon Squeezy.",
+  "license.info.freeEdition": "Using free Community Edition.",
+  "license.info.activePro":
+    "Lemon Squeezy License Active (PRO). Subscription: {0}. Offline buffer: {1} days.",
+  "license.warning.expired":
+    "License inactive or offline buffer expired. Connect to internet for re-validation.",
+
+  "chat.title": "💬 KUKA Live Support Chat",
+  "chat.session": "Session",
+  "chat.session.tooltip": "Switch to any past chat session",
+  "chat.btn.new": "➕ New Chat",
+  "chat.btn.new.tooltip": "Start a clean conversation with new session ID",
+  "chat.btn.file": "📎 File / Screenshot",
+  "chat.btn.file.tooltip": "Send any file or screenshot from PC to developer",
+  "chat.btn.logs": "📊 Logs",
+  "chat.btn.logs.tooltip": "Capture and send extension logs",
+  "chat.btn.delete": "🗑️ Delete Session",
+  "chat.btn.delete.tooltip": "Delete current session history",
+  "chat.input.placeholder":
+    "Ask the developer a question or report an issue...",
+  "chat.btn.send": "Send ➔",
+  "chat.btn.reply": "💬 Reply",
+  "chat.confirm.deleteSession":
+    "Are you sure you want to delete chat session #{0}?",
+  "chat.confirm.deleteAllSessions":
+    "Are you sure you want to delete ALL chat sessions history?",
+  "chat.notify.newSession": "✨ Created new chat session #{0}",
+  "chat.notify.sessionDeleted": "Chat session #{0} deleted.",
+  "chat.notify.allSessionsDeleted": "All chat sessions deleted successfully.",
+  "chat.notify.logsSent": "📊 Logs & diagnostic report sent to developer",
+  "chat.notify.filePickLabel": "Send file / screenshot to developer",
+  "chat.notify.fileSent":
+    '{0} "{1}" successfully sent to developer via Telegram!',
+  "chat.notify.fileNotFound": "File not found: {0}",
+  "chat.notify.devNotConnected":
+    "⚠️ Chat server initializing. Please try sending again in 5 seconds.",
+  "chat.notify.devMessage": '📬 Message from Lead Developer (Telegram): "{0}"',
+  "chat.empty.title": "Direct Connection with Silvestr Liskin",
+  "chat.empty.desc":
+    "Ask any KRL question, send diagnostic logs, or attach project files. Replies will arrive right here!",
+  "chat.session.label": "Session #{0} ({1} msgs | {2})",
+  "chat.msg.count": "{0} msgs",
+  "chat.sender.user": "You (Engineer)",
+  "chat.sender.dev": "👨‍💻 Silvestr Liskin (Lead Developer)",
+  "chat.status.delivered": "✓ Delivered to Telegram",
+
+  "backup.picker.title": "Select KRC Backup (.zip)",
+  "backup.error.notFound":
+    '❌ File "{0}" was not found inside selected KRC Backup archive.',
+  "backup.notify.identical":
+    "✅ KRC Backup Compare: {0} points are 100% identical to backup!",
 };
 
 // Russian
@@ -281,9 +633,6 @@ const ru: Messages = {
   "command.aiCheckSafety": "Проверка безопасности и скоростей",
   "command.aiCheckSafety.tooltip":
     "Проверить скорости $VEL.CP, инициализацию $TOOL/$BASE и кириллицу",
-  "command.aiGetIoMatrix": "Извлечь матрицу I/O сигналов",
-  "command.aiGetIoMatrix.tooltip":
-    "Выгрузка матрицы физических сигналов $IN/$OUT для ИИ и документации",
   "command.validateEkiXml": "Валидатор EthernetKRL (EKI) XML",
   "command.validateEkiXml.tooltip": "Проверить XML-схемы обмена EthernetKRL",
   "command.generateEkiCode": "Генератор KRL-обработчика EKI",
@@ -295,6 +644,15 @@ const ru: Messages = {
   "command.generateReport": "Сформировать отчёт качества кода",
   "command.generateReport.tooltip":
     "Сформировать итоговый отчёт качества кода для сдачи заказчику",
+  "command.findReferences": "Найти все ссылки (Go to References)",
+  "command.findReferences.tooltip":
+    "Поиск всех упоминаний выбранной переменной, сигнала или подпрограммы по всему проекту",
+  "command.sendLogsToDeveloper": "Отправить логи диагностик в Telegram",
+  "command.sendLogsToDeveloper.tooltip":
+    "Сформировать лог расширения и отправителю разработчику в Telegram",
+  "command.sendFileToDeveloper": "Отправить файл / KRL код в Telegram",
+  "command.sendFileToDeveloper.tooltip":
+    "Выбрать любой файл на ПК и отправить разработчику в Telegram",
 
   "cc.engTools": "Инженерные Pro-Инструменты",
   "cc.safetyDiag": "Диагностика Безопасности и Качества",
@@ -331,6 +689,36 @@ const ru: Messages = {
     "Движение на строке {0} вызвано без предварительной инициализации TOOL/BASE.",
   "flow.msg.invalidGoto":
     "Целевая метка '{0}' для перехода GOTO на строке {1} не определена в файле.",
+  "flow.ui.zoomOut": "Уменьшить",
+  "flow.ui.zoomReset": "Вписать в экран",
+  "flow.ui.zoomIn": "Увеличить",
+  "flow.ui.downloadSvg": "Скачать",
+  "flow.ui.downloadTitle": "Скачать в формате SVG",
+  "flow.ui.toggleDetailed": "Переключить детальный вид",
+  "flow.ui.detailedOn": "🔍 Детальный: ВКЛ",
+  "flow.ui.detailedOff": "🔍 Детальный: ВЫКЛ",
+  "flow.ui.mainProgram": "🏠 Главная программа",
+  "flow.ui.logicErrors": "Ошибки логики",
+  "flow.ui.noErrors": "✅ Ошибок логики не обнаружено",
+  "flow.ui.line": "Строка {0}",
+
+  "safety.notify.safe":
+    "🛡️ Проверка безопасности: КОД БЕЗОПАСЕН ДЛЯ ИСПОЛНЕНИЯ НА KRC! (Лимит скорости: {0} м/с)",
+  "safety.error.violations": "🚨 Обнаружены нарушения безопасности:",
+  "safety.alert.critical":
+    "🚨 Ошибка безопасности и логики KRC: Найдено {0} критических ошибок и {1} рисков в активном файле!",
+  "safety.alert.warning":
+    "⚠️ Предупреждение безопасности и логики KRC: Найдено {0} логических рисков в активном файле. Проверьте вкладку Проблемы.",
+
+  "eki.notify.valid":
+    "✅ Конфигурация EKI XML ({0}): Валидная схема EthernetKRL!",
+  "eki.error.title": "❌ Ошибки конфигурации EKI XML:",
+  "eki.prompt.channelName": "Введите имя канала EthernetKRL (EKI)",
+  "eki.picker.selectXml": "Выберите XML файл конфигурации EthernetKRL",
+  "eki.warning.notXml":
+    "Активный файл не является XML-конфигурацией EthernetKRL. Выберите XML-файл EKI или сгенерируйте KRL-обработчик.",
+  "eki.btn.generate": "➕ Создать KRL-обработчик EKI",
+  "eki.btn.select": "📂 Выбрать XML-файл...",
 
   "snippet.title": "Генератор KRL Сниппетов",
   "snippet.tab.message": "Сообщения KUKA",
@@ -366,6 +754,145 @@ const ru: Messages = {
   "snippet.mot.approx.none": "Нет (Точно)",
   "snippet.alert.inserted": "Сниппет вставлен!",
   "snippet.alert.noEditor": "Активный KRL файл не найден!",
+  "snippet.desc.ptp":
+    "<b>PTP (Point-to-Point):</b> Движение по наиболее быстрой траектории осей. Оси A1-A6 синхронизируются и заканчивают движение одновременно со скоростью {0}%.",
+  "snippet.desc.lin":
+    "<b>LIN (Linear):</b> Фланец робота (TCP) двигается строго по прямой линии в пространстве с фиксированной скоростью ({0} m/s). Идеально для сварки и пайпинга.",
+  "snippet.desc.circ":
+    "<b>CIRC (Circular):</b> Движение TCP по дуге окружности через вспомогательную точку <b>X{0}</b> к целевой точке <b>X{1}</b> со скоростью {2} m/s.",
+  "snippet.desc.sptp":
+    "<b>SPTP (Spline PTP - KSS 8.3+):</b> Сплайновое PTP-движение с ограничением рывка ($SGEAR_JERK). Обеспечивает максимально плавное ускорение осей без вибраций.",
+  "snippet.desc.slin":
+    "<b>SLIN (Spline Linear - KSS 8.3+):</b> Сплайновое линейное движение с высокоточным профилированием ориентации и сглаживания <b>C_Spl</b>.",
+  "snippet.desc.scirc":
+    "<b>SCIRC (Spline Circular - KSS 8.3+):</b> Сплайновая дуга окружности через <b>X{0}</b> к <b>X{1}</b> с сохранением непрерывной ориентации.",
+  "snippet.desc.splineBlock":
+    "<b>SPLINE Path Block:</b> Слитный непрерывный блок траекторий (SLIN/SPL/SCIRC). Робот рассчитывает единый профиль скорости без остановок в узлах.",
+
+  "cc.prompt.telegram":
+    "Сообщение ведущему разработчику (Telegram @kukakrlbot)",
+  "cc.prompt.telegram.placeholder": "Введите ваше сообщение или вопрос...",
+  "cc.notify.telegramSent":
+    "Сообщение успешно отправлено разработчику в Telegram!",
+  "cc.notify.telegramFallback":
+    "Не удалось отправить сообщение в Telegram. Попробуйте еще раз.",
+
+  "cc.billing.title": "Биллинг и Инвойсы Lemon Squeezy",
+  "cc.billing.desc":
+    "Управление чеками, покупками и бухгалтерскими инвойсами (с НДС) через защищённый портал покупателя Lemon Squeezy.",
+  "cc.billing.btn.portal": "🔗 Открыть кабинет покупателя Lemon Squeezy",
+  "cc.billing.btn.invoice": "📥 Скачать инвойсы и акты (PDF)",
+  "cc.billing.plansTitle":
+    "🛒 Доступные варианты покупки и тарифные планы (Lemon Squeezy Store #393141)",
+  "cc.billing.btn.buyPlan": "Купить {0}",
+  "cc.billing.legalNotice": "📌 Информация для юридических лиц и бухгалтерии:",
+  "cc.billing.legalItem1":
+    "Lemon Squeezy является официальным регистрирующим продавцом (Merchant of Record) для решений Liskin Labs.",
+  "cc.billing.legalItem2":
+    "Кассовые чеки и инвойсы с указанием НДС (VAT ID) автоматически высылаются на ваш контактный email при покупке.",
+  "cc.billing.legalItem3":
+    "Для изменения платежных реквизитов организации или выгрузки истории транзакций используйте Кабинет покупателя.",
+
+  "cc.support.desc":
+    "Возникли вопросы, предложение фичи или ошибка при пусконаладке KRL? Свяжитесь с главным инженером Сильвестром Лискиным напрямую через Telegram Bot.",
+  "cc.support.btn.chat": "💬 Чат с разработчиком (Telegram)",
+  "cc.support.btn.sendLogs": "📊 Отправить логи расширения в Telegram",
+  "cc.support.btn.sendFile": "📎 Отправить файл / KRL код в Telegram",
+  "cc.support.btn.github": "🐛 Сообщить о баге на GitHub",
+  "cc.support.btn.email": "✉️ Отправить письмо (Email)",
+
+  "cc.profile.deactivate": "🔴 Выйти из учетной записи / Деактивировать ключ",
+  "cc.profile.checkStatus": "🔄 Проверить онлайн-статус",
+  "cc.profile.activateKey": "🔑 Ввести активационный ключ (License Key)",
+  "cc.profile.buyPro": "🛒 Купить Pro лицензию",
+  "cc.devices.deactivatePc": "🔓 Деактивировать текущий ПК",
+  "cc.devices.syncStatus": "🔄 Синхронизировать статус ПК",
+
+  "cc.notify.portalOpened":
+    "🔗 Открыт официальный портал покупателя Lemon Squeezy (управление подписками и инвойсами).",
+  "cc.notify.storeOpened":
+    "🛒 Открыт официальный магазин лицензий KUKA KRL Professional (Lemon Squeezy).",
+  "cc.notify.keyCopied": "📋 Лицензионный ключ скопирован в буфер обмена!",
+  "cc.notify.emailClientOpened":
+    "✉️ Почтовый клиент открыт с вашим сообщением для silvestr.liskin@teknorob.com!",
+  "cc.prompt.email":
+    "Отправить прямое сообщение ведущему инженеру Silvestr Liskin",
+  "cc.prompt.emailPlaceholder":
+    "Опишите ваш вопрос, запрос на функцию или техническую проблему KRL...",
+
+  "license.warning.premiumOnly":
+    "Эта функция доступна только в Premium-версии. Пожалуйста, активируйте лицензию.",
+  "license.btn.buy": "Купить лицензию",
+  "license.btn.enterKey": "Ввести ключ",
+  "license.prompt.key":
+    "Введите ваш лицензионный ключ KRL Extension (Lemon Squeezy)",
+  "license.progress.activating": "Активация лицензии в Lemon Squeezy...",
+  "license.notify.leadActivated":
+    "🚀 Промышленная лицензия Teknorob Lead Pro успешно активирована!",
+  "license.notify.activated":
+    "🎉 Лицензия Lemon Squeezy успешно активирована! Все премиум-функции разблокированы. Офлайн-период: 30 дней.",
+  "license.error.activate": "Ошибка активации Lemon Squeezy: {0}",
+  "license.error.network": "Сетевая ошибка при активации: {0}",
+  "license.info.noKey": "Активная лицензия не найдена.",
+  "license.confirm.deactivate":
+    "Вы уверены, что хотите деактивировать лицензию на этом устройстве?",
+  "license.btn.yes": "Да",
+  "license.btn.no": "Нет",
+  "license.progress.deactivating": "Деактивация устройства в Lemon Squeezy...",
+  "license.notify.deactivated":
+    "Устройство успешно деактивировано в Lemon Squeezy.",
+  "license.info.freeEdition":
+    "Используется бесплатная базовая версия (Community Edition).",
+  "license.info.activePro":
+    "Лицензия Lemon Squeezy активна (PRO). Подписка: {0}. Оффлайн-буфер: {1} дн.",
+  "license.warning.expired":
+    "Лицензия неактивна или истёк офлайн-период. Подключитесь к интернету для ре-валидации.",
+
+  "chat.title": "💬 KUKA Чат Поддержки Live",
+  "chat.session": "Сессия",
+  "chat.session.tooltip": "Переключиться на любую предыдущую сессию переписки",
+  "chat.btn.new": "➕ Новый чат",
+  "chat.btn.new.tooltip": "Создать чистый диалог с новым номером сессии",
+  "chat.btn.file": "📎 Файл / Скриншот",
+  "chat.btn.file.tooltip":
+    "Отправить любой файл или скриншот с ПК разработчику",
+  "chat.btn.logs": "📊 Логи",
+  "chat.btn.logs.tooltip": "Снять и отправить логи расширения",
+  "chat.btn.delete": "🗑️ Удалить сессию",
+  "chat.btn.delete.tooltip": "Удалить выбранную сессию из памяти",
+  "chat.input.placeholder":
+    "Задайте вопрос разработчику или опишите проблему...",
+  "chat.btn.send": "Отправить ➔",
+  "chat.btn.reply": "💬 Ответить",
+  "chat.confirm.deleteSession":
+    "Вы уверены, что хотите удалить историю сессии #{0}?",
+  "chat.confirm.deleteAllSessions":
+    "Вы уверены, что хотите удалить ВСЮ историю всех сессий чата?",
+  "chat.notify.newSession": "✨ Создана новая сессия чата #{0}",
+  "chat.notify.sessionDeleted": "Сессия чата #{0} удалена.",
+  "chat.notify.allSessionsDeleted": "Вся история сессий чата успешно удалена.",
+  "chat.notify.logsSent": "📊 Логи и отчёт диагностики отправлены разработчику",
+  "chat.notify.filePickLabel": "Отправить файл / скриншот разработчику",
+  "chat.notify.fileSent":
+    '{0} "{1}" успешно отправлен разработчику в Telegram!',
+  "chat.notify.fileNotFound": "Файл не найден: {0}",
+  "chat.notify.devNotConnected":
+    "⚠️ Чат-сервер инициализируется. Повторите отправку через 5 секунд.",
+  "chat.notify.devMessage": '📬 Сообщение от разработчика (Telegram): "{0}"',
+  "chat.empty.title": "Прямая связь с Сильвестром Лискиным",
+  "chat.empty.desc":
+    "Задайте вопрос по KRL коду, отправьте логи или прикрепите файлы проекта. Ответ прилетит прямо сюда!",
+  "chat.session.label": "Сессия #{0} ({1} сообщ. | {2})",
+  "chat.msg.count": "{0} сообщ.",
+  "chat.sender.user": "Вы (Инженер)",
+  "chat.sender.dev": "👨‍💻 Сильвестр Лискин (Разработчик)",
+  "chat.status.delivered": "✓ Доставлено в Telegram",
+
+  "backup.picker.title": "Выберите KRC Бэкап (.zip)",
+  "backup.error.notFound":
+    '❌ Файл "{0}" не найден в выбранном архиве KRC Бэкапа.',
+  "backup.notify.identical":
+    "✅ Сравнение KRC Бэкапа: координаты {0} на 100% совпадают с бэкапом!",
 };
 
 // Turkish
@@ -421,9 +948,6 @@ const tr: Messages = {
   "command.aiCheckSafety": "Güvenlik & Hız Kontrolü",
   "command.aiCheckSafety.tooltip":
     "Katı endüstriyel güvenlik kontrollerini çalıştır ($VEL.CP, başlatılmamış tool/base)",
-  "command.aiGetIoMatrix": "I/O Matrisini Çıkar",
-  "command.aiGetIoMatrix.tooltip":
-    "Yapay zeka bağlamı ve belgeler için fiziksel sinyal haritasını çıkar",
   "command.validateEkiXml": "EthernetKRL (EKI) Doğrulayıcı",
   "command.validateEkiXml.tooltip": "EKI XML şema dosyalarını doğrula",
   "command.generateEkiCode": "EKI İşleyici Rutini Oluştur",
@@ -435,6 +959,15 @@ const tr: Messages = {
   "command.generateReport": "Kalite Kabul Raporu Oluştur",
   "command.generateReport.tooltip":
     "Yapılandırılmış kod kalite kabul raporu oluştur",
+  "command.findReferences": "Tüm Referansları Bul",
+  "command.findReferences.tooltip":
+    "Çalışma alanındaki seçili değişken, sinyal veya alt programa yapılan tüm referansları ara",
+  "command.sendLogsToDeveloper": "Teşhis Günlüklerini Telegram'a Gönder",
+  "command.sendLogsToDeveloper.tooltip":
+    "Uzantı günlüğünü ve sistem bilgilerini paketleyip Telegram üzerinden geliştiriciye gönder",
+  "command.sendFileToDeveloper": "Dosyayı / KRL Kodunu Telegram'a Gönder",
+  "command.sendFileToDeveloper.tooltip":
+    "Bilgisayardaki herhangi bir dosyayı seçip Telegram üzerinden geliştiriciye gönder",
 
   "cc.engTools": "Mühendislik Pro Araçları",
   "cc.safetyDiag": "Güvenlik Teşhisi & Kalite",
@@ -470,6 +1003,36 @@ const tr: Messages = {
     "{0}. satırdaki hareket, TOOL/BASE başlatılması olmadan çağrıldı (BAS(#INITMOV) gerekir).",
   "flow.msg.invalidGoto":
     "{1}. satırdaki GOTO hedef etiketi '{0}' dosyada tanımlanmamış.",
+  "flow.ui.zoomOut": "Uzaklaştır",
+  "flow.ui.zoomReset": "Ekrana Sığdır",
+  "flow.ui.zoomIn": "Yakınlaştır",
+  "flow.ui.downloadSvg": "İndir",
+  "flow.ui.downloadTitle": "SVG formatında indir",
+  "flow.ui.toggleDetailed": "Detaylı Görünümü Değiştir",
+  "flow.ui.detailedOn": "🔍 Detaylı: AÇIK",
+  "flow.ui.detailedOff": "🔍 Detaylı: KAPALI",
+  "flow.ui.mainProgram": "🏠 Ana Program",
+  "flow.ui.logicErrors": "Mantık Hataları",
+  "flow.ui.noErrors": "✅ Mantık hatası tespit edilmedi",
+  "flow.ui.line": "Satır {0}",
+
+  "safety.notify.safe":
+    "🛡️ Endüstriyel Güvenlik Kontrolü: KOD KRC İÇİN GÜVENLİ! (Maksimum Hız Sınırı: {0} m/s)",
+  "safety.error.violations": "🚨 Güvenlik İhlalleri Bulundu:",
+  "safety.alert.critical":
+    "🚨 KRC Güvenlik ve Mantık Uyarısı: Etkin dosyada {0} kritik hata ve {1} risk bulundu!",
+  "safety.alert.warning":
+    "⚠️ KRC Güvenlik ve Mantık Uyarısı: Etkin dosyada {0} mantık riski bulundu. VS Code Sorunlar panelini kontrol edin.",
+
+  "eki.notify.valid":
+    "✅ EKI XML Yapılandırması ({0}): Geçerli EthernetKRL Şeması!",
+  "eki.error.title": "❌ EKI XML Yapılandırma Hataları:",
+  "eki.prompt.channelName": "EthernetKRL (EKI) Kanal Adını Girin",
+  "eki.picker.selectXml": "EthernetKRL Yapılandırma XML dosyasını seçin",
+  "eki.warning.notXml":
+    "Etkin dosya bir EKI XML yapılandırması değil. Lütfen bir EKI XML dosyası seçin veya KRL İşleyicisi oluşturun.",
+  "eki.btn.generate": "➕ EKI KRL İşleyicisi Oluştur",
+  "eki.btn.select": "📂 XML Dosyası Seç...",
 
   "snippet.title": "KRL Snippet Oluşturucu",
   "snippet.tab.message": "Mesaj Oluşturucu",
@@ -505,6 +1068,147 @@ const tr: Messages = {
   "snippet.mot.approx.none": "Yok",
   "snippet.alert.inserted": "Snippet eklendi!",
   "snippet.alert.noEditor": "Aktif bir KRL düzenleyici bulunamadı!",
+  "snippet.desc.ptp":
+    "<b>PTP (Noktadan Noktaya):</b> En hızlı eksen yörüngesi boyunca hareket. A1-A6 eksenleri %{0} hızında aynı anda tamamlanacak şekilde senkronize olur.",
+  "snippet.desc.lin":
+    "<b>LIN (Doğrusal):</b> Robot flanşı (TCP), uzayda sabit hızla ({0} m/s) düz bir çizgi boyunca hareket eder. Kaynak ve borulama için idealdir.",
+  "snippet.desc.circ":
+    "<b>CIRC (Dairesel):</b> TCP, <b>X{0}</b> yardımcı noktası üzerinden hedef <b>X{1}</b> noktasına {2} m/s hızla dairesel yay boyunca hareket eder.",
+  "snippet.desc.sptp":
+    "<b>SPTP (Spline PTP - KSS 8.3+):</b> Sarsıntı sınırlamalı ($SGEAR_JERK) spline PTP hareketi. Titreşimsiz maksimum pürüzsüz eksen ivmelenmesi sağlar.",
+  "snippet.desc.slin":
+    "<b>SLIN (Spline Doğrusal - KSS 8.3+):</b> Yüksek hassasiyetli yönelim profilleme ve <b>C_Spl</b> yumuşatması ile spline doğrusal hareket.",
+  "snippet.desc.scirc":
+    "<b>SCIRC (Spline Dairesel - KSS 8.3+):</b> Sürekli yönelim korunarak <b>X{0}</b> üzerinden <b>X{1}</b> noktasına spline dairesel yay.",
+  "snippet.desc.splineBlock":
+    "<b>SPLINE Yol Bloğu:</b> Sürekli yörünge bloğu (SLIN/SPL/SCIRC). Robot, düğüm noktalarında durmadan tek bir hız profili hesaplar.",
+
+  "cc.prompt.telegram": "Geliştiriciye Mesaj Gönder (Telegram @kukakrlbot)",
+  "cc.prompt.telegram.placeholder":
+    "Mesajınızı veya geri bildiriminizi yazın...",
+  "cc.notify.telegramSent":
+    "Mesaj Telegram üzerinden geliştiriciye gönderildi!",
+  "cc.notify.telegramFallback":
+    "Telegram mesajı gönderilemedi. Lütfen tekrar deneyin.",
+
+  "cc.billing.title": "Lemon Squeezy Fatura & Abonelik Portalı",
+  "cc.billing.desc":
+    "Makbuzları, satın almaları ve resmi KDV faturalarını korumalı Lemon Squeezy müşteri portalı üzerinden yönetin.",
+  "cc.billing.btn.portal": "🔗 Lemon Squeezy Müşteri Portalını Aç",
+  "cc.billing.btn.invoice": "📥 Faturaları ve Makbuzları İndir (PDF)",
+  "cc.billing.plansTitle":
+    "🛒 Kullanılabilir Fiyatlandırma ve Satın Alma Seçenekleri (Lemon Squeezy Mağaza #393141)",
+  "cc.billing.btn.buyPlan": "{0} Satın Al",
+  "cc.billing.legalNotice": "📌 Kurumsal ve Muhasebe Bilgileri:",
+  "cc.billing.legalItem1":
+    "Lemon Squeezy, Liskin Labs yazılımları için resmi Kayıtlı Satıcı (Merchant of Record) olarak hareket eder.",
+  "cc.billing.legalItem2":
+    "Ödeme makbuzları ve KDV faturaları satın alma sonrasında kayıtlı e-postanıza otomatik olarak gönderilir.",
+  "cc.billing.legalItem3":
+    "Fatura bilgilerini güncellemek veya işlem geçmişini indirmek için Müşteri Portalını kullanın.",
+
+  "cc.support.desc":
+    "Saha çalışmasında sorularınız, özellik istekleriniz veya teknik sorunlarınız mı var? Telegram Botu üzerinden Baş Mühendis Silvestr Liskin ile doğrudan iletişime geçin.",
+  "cc.support.btn.chat": "💬 Geliştirici ile Sohbet Et (Telegram)",
+  "cc.support.btn.sendLogs": "📊 Teşhis Günlüklerini Gönder",
+  "cc.support.btn.sendFile": "📎 KRL Dosyasını / Kodunu Gönder",
+  "cc.support.btn.github": "🐛 GitHub'da Sorun Bildir",
+  "cc.support.btn.email": "✉️ Doğrudan E-posta Desteği",
+
+  "cc.profile.deactivate":
+    "🔴 Oturumu Kapat / Lisans Anahtarını Devre Dışı Bırak",
+  "cc.profile.checkStatus": "🔄 Çevrimiçi Durumu Doğrula",
+  "cc.profile.activateKey": "🔑 Lisans Anahtarı Gir",
+  "cc.profile.buyPro": "🛒 Pro Lisans Satın Al",
+  "cc.devices.deactivatePc": "🔓 Mevcut Bilgisayarı Devre Dışı Bırak",
+  "cc.devices.syncStatus": "🔄 Cihaz Durumunu Senkronize Et",
+
+  "cc.notify.portalOpened":
+    "🔗 Resmi Lemon Squeezy Müşteri Portalı açıldı (abonelik ve fatura yönetimi).",
+  "cc.notify.storeOpened":
+    "🛒 Resmi KUKA KRL Professional Lisans Mağazası açıldı (Lemon Squeezy).",
+  "cc.notify.keyCopied": "📋 Lisans anahtarı panoya kopyalandı!",
+  "cc.notify.emailClientOpened":
+    "✉️ E-posta istemcisi silvestr.liskin@teknorob.com adresine mesajınızla açıldı!",
+  "cc.prompt.email": "Baş Mühendis Silvestr Liskin'e doğrudan mesaj gönderin",
+  "cc.prompt.emailPlaceholder":
+    "Sorunuzu, özellik isteğinizi veya KRL sorununuzu açıklayın...",
+
+  "license.warning.premiumOnly":
+    "Bu özellik yalnızca Premium Sürümde mevcuttur. Lütfen lisans anahtarınızı etkinleştirin.",
+  "license.btn.buy": "Lisans Satın Al",
+  "license.btn.enterKey": "Anahtar Gir",
+  "license.prompt.key":
+    "KRL Extension Lisans Anahtarınızı Girin (Lemon Squeezy)",
+  "license.progress.activating": "Lemon Squeezy'de lisans etkinleştiriliyor...",
+  "license.notify.leadActivated":
+    "🚀 Teknorob Lead Pro Endüstriyel Lisansı başarıyla etkinleştirildi!",
+  "license.notify.activated":
+    "🎉 Lemon Squeezy lisansı etkinleştirildi! Tüm Pro özelliklerin kilidi açıldı. 30 günlük çevrimdışı arabelleği.",
+  "license.error.activate": "Lemon Squeezy Etkinleştirme Hatası: {0}",
+  "license.error.network": "Ağ etkinleştirme hatası: {0}",
+  "license.info.noKey": "Aktif bir lisans anahtarı bulunamadı.",
+  "license.confirm.deactivate":
+    "Bu cihazdaki lisansı devre dışı bırakmak istediğinizden emin misiniz?",
+  "license.btn.yes": "Evet",
+  "license.btn.no": "Hayır",
+  "license.progress.deactivating":
+    "Cihaz Lemon Squeezy'de devre dışı bırakılıyor...",
+  "license.notify.deactivated":
+    "Cihaz Lemon Squeezy'de başarıyla devre dışı bırakıldı.",
+  "license.info.freeEdition": "Ücretsiz Community Edition kullanılıyor.",
+  "license.info.activePro":
+    "Lemon Squeezy Lisansı Aktif (PRO). Abonelik: {0}. Çevrimdışı arabelleği: {1} gün.",
+  "license.warning.expired":
+    "Lisans pasif veya çevrimdışı arabelleği doldu. Yeniden doğrulama için internete bağlanın.",
+
+  "chat.title": "💬 KUKA Canlı Destek Sohbeti",
+  "chat.session": "Oturum",
+  "chat.session.tooltip": "Geçmiş sohbet oturumlarına geçiş yapın",
+  "chat.btn.new": "➕ Yeni Sohbet",
+  "chat.btn.new.tooltip": "Yeni oturum kimliği ile temiz bir konuşma başlatın",
+  "chat.btn.file": "📎 Dosya / Ekran Görüntüsü",
+  "chat.btn.file.tooltip":
+    "Bilgisayardan geliştiriciye dosya veya ekran görüntüsü gönderin",
+  "chat.btn.logs": "📊 Günlükler",
+  "chat.btn.logs.tooltip": "Uzantı günlüklerini alıp gönderin",
+  "chat.btn.delete": "🗑️ Oturumu Sil",
+  "chat.btn.delete.tooltip": "Mevcut oturum geçmişini silin",
+  "chat.input.placeholder":
+    "Geliştiriciye bir soru sorun veya sorun bildirin...",
+  "chat.btn.send": "Gönder ➔",
+  "chat.btn.reply": "💬 Yanıtla",
+  "chat.confirm.deleteSession":
+    "#{0} oturum geçmişini silmek istediğinizden emin misiniz?",
+  "chat.confirm.deleteAllSessions":
+    "Tüm sohbet oturumu geçmişini silmek istediğinizden emin misiniz?",
+  "chat.notify.newSession": "✨ Yeni sohbet oturumu #{0} oluşturuldu",
+  "chat.notify.sessionDeleted": "Sohbet oturumu #{0} silindi.",
+  "chat.notify.allSessionsDeleted":
+    "Tüm sohbet oturumu geçmişi başarıyla silindi.",
+  "chat.notify.logsSent":
+    "📊 Günlükler ve teşhis raporu geliştiriciye gönderildi",
+  "chat.notify.filePickLabel": "Geliştiriciye dosya / ekran görüntüsü gönder",
+  "chat.notify.fileSent":
+    '{0} "{1}" Telegram üzerinden geliştiriciye başarıyla gönderildi!',
+  "chat.notify.fileNotFound": "Dosya bulunamadı: {0}",
+  "chat.notify.devNotConnected":
+    "⚠️ Sohbet sunucusu başlatılıyor. Lütfen 5 saniye sonra tekrar deneyin.",
+  "chat.notify.devMessage": '📬 Geliştiriciden Mesaj (Telegram): "{0}"',
+  "chat.empty.title": "Silvestr Liskin ile Doğrudan Bağlantı",
+  "chat.empty.desc":
+    "Herhangi bir KRL sorusu sorun, teşhis günlüklerini gönderin veya proje dosyalarını ekleyin. Yanıtlar tam buraya gelecek!",
+  "chat.session.label": "Oturum #{0} ({1} mesaj | {2})",
+  "chat.msg.count": "{0} mesaj",
+  "chat.sender.user": "Siz (Mühendis)",
+  "chat.sender.dev": "👨‍💻 Silvestr Liskin (Baş Geliştirici)",
+  "chat.status.delivered": "✓ Telegram'a İletildi",
+
+  "backup.picker.title": "KRC Yedeğini Seçin (.zip)",
+  "backup.error.notFound":
+    '❌ Seçilen KRC Yedek arşivinde "{0}" dosyası bulunamadı.',
+  "backup.notify.identical":
+    "✅ KRC Yedek Karşılaştırma: {0} noktaları yedekle %100 aynı!",
 };
 
 const locales: Record<Locale, Messages> = { en, ru, tr };

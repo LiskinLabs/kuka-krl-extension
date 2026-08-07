@@ -53,34 +53,6 @@ We offer flexible, industrial-grade licensing through our official merchant, **L
     </kbd>
   </a>
   <p style="margin-top: 12px; font-size: 0.95em; color: #555;">Instant activation key delivery via <b>Lemon Squeezy</b> (Merchant of Record)</p>
-</div>
-
----
-
-## 📊 Feature Comparison
-
-| Feature | Community (Free) | Pro (Premium) |
-| :--- | :---: | :---: |
-| **KRL Syntax Highlighting** (`.src`, `.dat`, `.sub`) | ✅ | ✅ |
-| **Exclusive KUKA Themes** (Midnight OLED, Industrial, WorkVisual) | ✅ | ✅ |
-| **Contextual Autocomplete & Smart Folds** | ✅ | ✅ |
-| **Trilingual Localization** (EN, RU, TR) | ✅ | ✅ |
-| **KUKA Control Center Pro Dashboard** (v1.8.5 Pro Hub & Merchant Portal) | ❌ | **✅ Pro** |
-| **Interactive Flowchart Viewer** (Logic mapping & navigation) | ❌ | **✅ Pro** |
-| **KRC Backup Diff & Point Delta Inspector** (Zip Backup vs DAT deltas) | ❌ | **✅ Pro** |
-| **Motion Diagrams & Spline Snippet Builder** (SVG TCP Trajectory Diagrams) | ❌ | **✅ Pro** |
-| **EthernetKRL (EKI) Suite & Generator** (XML Validator & Handler Generator) | ❌ | **✅ Pro** |
-| **Integrated KUKA Frame Calculator** (3-Point Method) | ❌ | **✅ Pro** |
-| **Advanced Safety & Velocity Diagnostics** (`$VEL.CP > 3.0`, uninit tools) | ❌ | **✅ Pro** |
-| **AI-Supportive Context Tools** (`@kuka /get-io-matrix`, `@kuka /check-safety`) | ❌ | **✅ Pro** |
-| **WorkVisual Git Metadata Cleaner** (`&ACCESS`, `&REL`, `&PARAM`) | ❌ | **✅ Pro** |
-| **Workspace-wide Dead-Code Analysis** (`GLOBAL DEF` checker) | ❌ | **✅ Pro** |
-| **Automated Code Quality Report Generator** | ❌ | **✅ Pro** |
-
----
-
-## 🧠 Pro Features Deep-Dive
-
 ### 1. 🗺️ Interactive Flowchart Viewer
 *Stop tracing nested logic by hand.* Turn massive, complex `.src` programs into visual, clean control-flow diagrams.
 * **Bi-directional Navigation**: Click any block in the flowchart to jump to the exact line of code in the editor.

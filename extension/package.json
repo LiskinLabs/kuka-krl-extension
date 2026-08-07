@@ -147,7 +147,7 @@
       },
       {
         "command": "krl.cleanGitMetadata",
-        "title": "Clean KUKA Git Metadata",
+        "title": "%command.cleanGitMetadata%",
         "category": "KRL",
         "icon": "$(clear-all)"
       },
@@ -179,7 +179,7 @@
         "command": "krl.showCalculator",
         "title": "%command.showCalculator%",
         "category": "KRL",
-        "icon": "$(calculator)"
+        "icon": "$(symbol-numeric)"
       },
       {
         "command": "krl.renameSignal",
@@ -189,75 +189,99 @@
       },
       {
         "command": "krl.openSnippetGenerator",
-        "title": "KRL Snippet Generator",
+        "title": "%command.openSnippetGenerator%",
         "category": "KRL",
         "icon": "$(beaker)"
       },
       {
         "command": "krl.generateReport",
-        "title": "Generate Analysis Report",
+        "title": "%command.generateReport%",
         "category": "KRL",
         "icon": "$(report)"
       },
       {
         "command": "krl.showFlowchart",
-        "title": "Show Control Flow Graph",
+        "title": "%command.showFlowchart%",
         "category": "KRL",
         "icon": "$(git-merge)"
       },
       {
         "command": "krl.activateLicense",
-        "title": "Activate Pro License",
+        "title": "%command.activateLicense%",
         "category": "KRL",
         "icon": "$(key)"
       },
       {
         "command": "krl.deactivateLicense",
-        "title": "Deactivate Pro License",
+        "title": "%command.deactivateLicense%",
         "category": "KRL",
         "icon": "$(lock)"
       },
       {
         "command": "krl.checkLicenseStatus",
-        "title": "Check License Status",
+        "title": "%command.checkLicenseStatus%",
         "category": "KRL",
         "icon": "$(info)"
       },
       {
         "command": "krl.validateEkiXml",
-        "title": "Validate EthernetKRL (EKI) XML Schema",
+        "title": "%command.validateEkiXml%",
         "category": "KRL",
         "icon": "$(file-code)"
       },
       {
         "command": "krl.generateEkiCode",
-        "title": "Generate EthernetKRL Communication Handler",
+        "title": "%command.generateEkiCode%",
         "category": "KRL",
         "icon": "$(symbol-interface)"
       },
       {
         "command": "krl.aiGetIoMatrix",
-        "title": "Extract I/O Matrix for AI Context",
+        "title": "%command.aiGetIoMatrix%",
         "category": "KRL",
         "icon": "$(list-flat)"
       },
       {
         "command": "krl.aiCheckSafety",
-        "title": "Run AI Safety & Velocity Diagnostic Check",
+        "title": "%command.aiCheckSafety%",
         "category": "KRL",
         "icon": "$(shield)"
       },
       {
         "command": "krl.openControlCenter",
-        "title": "Open KUKA Control Center",
+        "title": "%command.openControlCenter%",
         "category": "KRL",
-        "icon": "$(widget)"
+        "icon": "$(dashboard)"
       },
       {
         "command": "krl.compareKrcBackup",
-        "title": "Compare File & Point Deltas with KRC Backup Archive (.zip)",
+        "title": "%command.compareKrcBackup%",
         "category": "KRL",
         "icon": "$(diff)"
+      },
+      {
+        "command": "krl.openTelegramChat",
+        "title": "%command.openTelegramChat%",
+        "category": "KRL",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "krl.sendLogsToDeveloper",
+        "title": "%command.sendLogsToDeveloper%",
+        "category": "KRL",
+        "icon": "$(output)"
+      },
+      {
+        "command": "krl.sendFileToDeveloper",
+        "title": "%command.sendFileToDeveloper%",
+        "category": "KRL",
+        "icon": "$(file-submodule)"
+      },
+      {
+        "command": "krl.findReferences",
+        "title": "%command.findReferences%",
+        "category": "KRL",
+        "icon": "$(references)"
       }
     ],
     "viewsContainers": {
@@ -306,8 +330,18 @@
           "when": "resourceLangId == krl"
         },
         {
-          "command": "krl.validateWorkspace",
+          "command": "krl.foldAll",
           "group": "navigation@3",
+          "when": "resourceLangId == krl"
+        },
+        {
+          "command": "krl.unfoldAll",
+          "group": "navigation@4",
+          "when": "resourceLangId == krl"
+        },
+        {
+          "command": "krl.validateWorkspace",
+          "group": "navigation@5",
           "when": "resourceLangId == krl"
         }
       ],
@@ -328,52 +362,76 @@
           "group": "1_main@2"
         },
         {
-          "command": "krl.validateWorkspace",
+          "command": "krl.compareKrcBackup",
           "group": "1_main@3"
         },
         {
-          "command": "krl.formatDocument",
-          "group": "2_code@1"
-        },
-        {
-          "command": "krl.removeTrailingWhitespace",
-          "group": "2_code@2"
-        },
-        {
-          "command": "krl.cleanGitMetadata",
-          "group": "2_code@3"
-        },
-        {
-          "command": "krl.sortDeclarations",
-          "group": "2_code@4"
-        },
-        {
-          "command": "krl.insertFold",
-          "group": "2_code@5"
-        },
-        {
-          "command": "krl.cleanupUnusedVariables",
-          "group": "2_code@6"
-        },
-        {
           "command": "krl.showCalculator",
-          "group": "3_tools@1"
+          "group": "1_main@4"
         },
         {
           "command": "krl.openSnippetGenerator",
-          "group": "3_tools@2"
+          "group": "1_main@5"
+        },
+        {
+          "command": "krl.findReferences",
+          "group": "1_main@6"
+        },
+        {
+          "command": "krl.sendLogsToDeveloper",
+          "group": "1_main@7"
+        },
+        {
+          "command": "krl.sendFileToDeveloper",
+          "group": "1_main@8"
+        },
+        {
+          "command": "krl.aiCheckSafety",
+          "group": "2_safety@1"
         },
         {
           "command": "krl.validateEkiXml",
-          "group": "3_tools@3"
+          "group": "2_safety@2"
         },
         {
-          "command": "krl.compareKrcBackup",
-          "group": "3_tools@4"
+          "command": "krl.generateEkiCode",
+          "group": "2_safety@3"
+        },
+        {
+          "command": "krl.formatDocument",
+          "group": "3_code@1"
+        },
+        {
+          "command": "krl.removeTrailingWhitespace",
+          "group": "3_code@2"
+        },
+        {
+          "command": "krl.cleanGitMetadata",
+          "group": "3_code@3"
+        },
+        {
+          "command": "krl.sortDeclarations",
+          "group": "3_code@4"
+        },
+        {
+          "command": "krl.insertFold",
+          "group": "3_code@5"
+        },
+        {
+          "command": "krl.cleanupUnusedVariables",
+          "group": "3_code@6"
         },
         {
           "command": "krl.renameSignal",
-          "group": "3_tools@5"
+          "group": "3_code@7"
+        },
+        {
+          "command": "krl.generateReport",
+          "group": "4_report@1"
+        },
+        {
+          "command": "krl.validateWorkspace",
+          "group": "4_report@2"
         }
       ],
       "view/title": [
@@ -475,6 +533,13 @@
           "type": "boolean",
           "default": true,
           "description": "Highlight occurrences of the same variable/function in the document."
+        },
+        "krl.maxCartesianVelocity": {
+          "type": "number",
+          "default": 3.0,
+          "minimum": 0.1,
+          "maximum": 5.0,
+          "description": "Maximum safe Cartesian velocity limit for $VEL.CP (m/s)."
         }
       }
     }

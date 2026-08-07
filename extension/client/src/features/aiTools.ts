@@ -7,52 +7,79 @@ import {
 
 export { extractIoMatrixForAi, performAiSafetyCheck };
 
+const safetyDiagnosticCollection =
+  vscode.languages.createDiagnosticCollection("krl-safety");
+
 /**
  * Registers AI Supportive Commands & Language Model Tools in VS Code.
  */
 export function initAiTools(context: vscode.ExtensionContext) {
-  // Command 1: Extract I/O Matrix for AI Prompt
-  context.subscriptions.push(
-    vscode.commands.registerCommand("krl.aiGetIoMatrix", async () => {
-      const editor = vscode.window.activeTextEditor;
-      if (!editor) {
-        vscode.window.showWarningMessage(t("No active editor found"));
-        return;
-      }
+  context.subscriptions.push(safetyDiagnosticCollection);
 
-      const signals = extractIoMatrixForAi(editor.document.getText());
-      const summary =
-        signals.length > 0
-          ? JSON.stringify(signals, null, 2)
-          : "No explicit I/O signals found in document.";
-
-      await vscode.env.clipboard.writeText(summary);
-      vscode.window.showInformationMessage(
-        `📋 I/O Matrix extracted to clipboard (${signals.length} signals)!`,
-      );
-    }),
-  );
-
-  // Command 2: Execute Safety Check for AI Diagnostic
+  // Command 1: Execute Industrial Safety & Logic Check
   context.subscriptions.push(
     vscode.commands.registerCommand("krl.aiCheckSafety", async () => {
       const editor = vscode.window.activeTextEditor;
       if (!editor) {
-        vscode.window.showWarningMessage(t("No active editor found"));
+        vscode.window.showWarningMessage(t("warning.noActiveKrlFile"));
         return;
       }
 
+      const doc = editor.document;
       const config = vscode.workspace.getConfiguration("krl");
       const maxSpeed = config.get<number>("maxCartesianVelocity", 2.0);
-      const result = performAiSafetyCheck(editor.document.getText(), maxSpeed);
-      if (result.safe) {
-        vscode.window.showInformationMessage(
-          `🛡️ Industrial Safety Check: CODE IS SAFE FOR KRC EXECUTION! (Max Limit: ${maxSpeed} m/s)`,
-        );
+
+      const result = performAiSafetyCheck(doc.getText(), maxSpeed);
+
+      // Publish diagnostics to VS Code Problems Panel
+      const diagnostics: vscode.Diagnostic[] = result.detailedIssues.map(
+        (issue) => {
+          const lineIdx = Math.max(0, issue.line - 1);
+          const lineText = doc.lineAt(lineIdx).text;
+          const range = new vscode.Range(lineIdx, 0, lineIdx, lineText.length);
+
+          let severity = vscode.DiagnosticSeverity.Warning;
+          if (issue.severity === "error") {
+            severity = vscode.DiagnosticSeverity.Error;
+          } else if (issue.severity === "info") {
+            severity = vscode.DiagnosticSeverity.Information;
+          }
+
+          const diag = new vscode.Diagnostic(range, issue.message, severity);
+          diag.source = "KRC Industrial Safety & Logic Analyzer";
+          diag.code = issue.code;
+          return diag;
+        },
+      );
+
+      safetyDiagnosticCollection.set(doc.uri, diagnostics);
+
+      const errorsCount = result.detailedIssues.filter(
+        (i) => i.severity === "error",
+      ).length;
+      const warningsCount = result.detailedIssues.filter(
+        (i) => i.severity === "warning",
+      ).length;
+      const infoCount = result.detailedIssues.filter(
+        (i) => i.severity === "info",
+      ).length;
+      const totalRisks = warningsCount + infoCount;
+
+      if (errorsCount === 0 && totalRisks === 0) {
+        vscode.window.showInformationMessage(t("safety.notify.safe", maxSpeed));
       } else {
-        vscode.window.showErrorMessage(
-          `🚨 Safety Violations Found:\n${result.issues.join("\n")}`,
-        );
+        const flowBtn = t("cc.btn.openFlowchart");
+        let msg = "";
+        if (errorsCount > 0) {
+          msg = t("safety.alert.critical", errorsCount, totalRisks);
+        } else {
+          msg = t("safety.alert.warning", totalRisks);
+        }
+
+        const choice = await vscode.window.showErrorMessage(msg, flowBtn);
+        if (choice === flowBtn) {
+          vscode.commands.executeCommand("krl.showFlowchart");
+        }
       }
     }),
   );

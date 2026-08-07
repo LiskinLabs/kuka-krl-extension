@@ -16,9 +16,13 @@
         <p class="mt-4 max-w-2xl text-xl text-gray-400 mx-auto mb-10" v-html="t.heroSubtitle"></p>
         
         <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-          <a href="#pricing" class="px-8 py-4 bg-kuka-orange hover:bg-orange-600 text-white font-bold rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(255,102,0,0.4)] flex items-center gap-2">
+          <a :href="t.wikiLink" class="px-8 py-4 bg-kuka-orange hover:bg-orange-600 text-white font-bold rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(255,102,0,0.4)] flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            {{ t.openWiki }}
+          </a>
+          <a href="#pricing" class="px-8 py-4 bg-kuka-gray hover:bg-gray-800 text-white font-bold rounded-lg border border-kuka-border transition-all duration-200 hover:border-kuka-orange flex items-center gap-2">
             {{ t.getProKey }}
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <svg class="w-5 h-5 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
           </a>
           <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl" target="_blank" class="px-8 py-4 bg-kuka-gray hover:bg-gray-800 text-white font-medium rounded-lg border border-kuka-border transition-all duration-200 flex items-center gap-2">
             {{ t.downloadFree }}
@@ -66,9 +70,7 @@
           <div class="glass-panel p-2 rounded-2xl overflow-hidden shadow-2xl relative group transform transition-transform hover:-translate-y-2">
             <div class="absolute inset-0 bg-gradient-to-r from-kuka-orange/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <div class="aspect-video bg-[#1e1e1e] rounded-xl flex flex-col items-center justify-center border border-kuka-border/50 relative overflow-hidden">
-              <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CiAgPGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiNmZmYiLz4KPC9zdmc+')]"></div>
-              <svg class="w-12 h-12 text-kuka-orange mb-3 opacity-50 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
-              <span class="text-gray-500 font-mono text-sm relative z-10">[Insert Interactive_Flowchart_Demo.gif here]</span>
+              <img src="/media/control_flow_graph.gif" alt="Interactive Flowchart Demo" class="w-full h-full object-cover rounded-xl" />
             </div>
           </div>
         </div>
@@ -92,9 +94,7 @@
           <div class="glass-panel p-2 rounded-2xl overflow-hidden shadow-2xl relative group transform transition-transform hover:-translate-y-2">
              <div class="absolute inset-0 bg-gradient-to-r from-red-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
              <div class="aspect-video bg-[#1e1e1e] rounded-xl flex flex-col items-center justify-center border border-kuka-border/50 relative overflow-hidden">
-               <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CiAgPGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiNmZmYiLz4KPC9zdmc+')]"></div>
-               <svg class="w-12 h-12 text-kuka-orange mb-3 opacity-50 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
-              <span class="text-gray-500 font-mono text-sm relative z-10">[Insert Diagnostics_Safety_Demo.gif here]</span>
+              <img src="/media/kuka_control_center.gif" alt="Diagnostics and Safety Demo" class="w-full h-full object-cover rounded-xl" />
             </div>
           </div>
         </div>
@@ -118,9 +118,7 @@
           <div class="glass-panel p-2 rounded-2xl overflow-hidden shadow-2xl relative group transform transition-transform hover:-translate-y-2">
             <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <div class="aspect-video bg-[#1e1e1e] rounded-xl flex flex-col items-center justify-center border border-kuka-border/50 relative overflow-hidden">
-               <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CiAgPGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiNmZmYiLz4KPC9zdmc+')]"></div>
-               <svg class="w-12 h-12 text-kuka-orange mb-3 opacity-50 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
-              <span class="text-gray-500 font-mono text-sm relative z-10">[Insert Code_Quality_Report.gif here]</span>
+              <img src="/media/krc_backup_diff.gif" alt="KRC Backup Diff & Delta Inspector" class="w-full h-full object-cover rounded-xl" />
             </div>
           </div>
         </div>
@@ -240,9 +238,11 @@ const { lang } = useData()
 
 const translations = {
   en: {
-    heroBadge: "Industrial Edition v6.0 Available",
+    heroBadge: "KUKA KRL Professional v1.8.5 Pro Hub",
     heroTitle: `The Definitive Industrial <br class="hidden md:block"/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-kuka-orange to-[#FF9900]">Development Suite</span>`,
     heroSubtitle: 'Professional-grade IDE & LSP support built for KRC4 & KRC5 robotics. <br class="hidden sm:block"/> Engineered for speed, safety, and zero downtime.',
+    openWiki: "📚 Explore Features Wiki (26 Features)",
+    wikiLink: "/guide/features.html",
     getProKey: "Get Pro Key",
     downloadFree: "Download Free",
     secure100: "100% Secure",
@@ -311,9 +311,11 @@ const translations = {
     ]
   },
   ru: {
-    heroBadge: "Industrial Edition v6.0 Доступна",
+    heroBadge: "KUKA KRL Professional v1.8.5 Pro Hub",
     heroTitle: `Эталонная среда разработки <br class="hidden md:block"/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-kuka-orange to-[#FF9900]">для промышленной робототехники</span>`,
     heroSubtitle: 'Профессиональная поддержка LSP и IDE для роботов KRC4 и KRC5. <br class="hidden sm:block"/> Создано для скорости, безопасности и работы без простоев.',
+    openWiki: "📚 Открыть Вики (26 функций)",
+    wikiLink: "/ru/guide/features.html",
     getProKey: "Купить Pro Ключ",
     downloadFree: "Скачать Бесплатно",
     secure100: "100% Безопасно",

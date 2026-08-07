@@ -19,13 +19,32 @@ export default defineConfig({
         nav: [
           { text: 'Home', link: '/' },
           { text: 'Features Wiki', link: '/guide/features' },
+          { text: 'Community', link: '/guide/community-features' },
+          { text: 'Pro Features', link: '/guide/pro-features' },
           { text: 'Buy Pro License', link: 'https://liskin.lemonsqueezy.com' }
         ],
         sidebar: [
           {
-            text: 'Documentation',
+            text: 'Getting Started',
             items: [
-              { text: 'Full Features Wiki', link: '/guide/features' }
+              { text: 'Installation & Setup', link: '/guide/installation' }
+            ]
+          },
+          {
+            text: 'Features Wiki',
+            items: [
+              { text: 'Full Features Wiki (26 Features)', link: '/guide/features' },
+              { text: 'Community Features (Free)', link: '/guide/community-features' },
+              { text: 'Pro & Industrial Features', link: '/guide/pro-features' }
+            ]
+          },
+          {
+            text: 'Pro Deep-Dives',
+            items: [
+              { text: 'Interactive Flowchart', link: '/guide/flowchart' },
+              { text: 'Industrial Diagnostics & Safety', link: '/guide/diagnostics' },
+              { text: 'KRC Backup Diff & Delta Inspector', link: '/guide/backup-diff' },
+              { text: 'Real-time Inlay Hints', link: '/guide/inlay-hints' }
             ]
           }
         ],
@@ -43,14 +62,33 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Главная', link: '/ru/' },
-          { text: 'Вики (Функции)', link: '/ru/guide/features' },
+          { text: 'Вики (26 функций)', link: '/ru/guide/features' },
+          { text: 'Бесплатные (Community)', link: '/ru/guide/community-features' },
+          { text: 'Pro функции', link: '/ru/guide/pro-features' },
           { text: 'Купить Pro', link: 'https://liskin.lemonsqueezy.com' }
         ],
         sidebar: [
           {
-            text: 'Документация',
+            text: 'Быстрый старт',
             items: [
-              { text: 'Полный список функций', link: '/ru/guide/features' }
+              { text: 'Установка и настройка', link: '/ru/guide/installation' }
+            ]
+          },
+          {
+            text: 'Вики функций (Wiki)',
+            items: [
+              { text: 'Полный справочник (26 функций)', link: '/ru/guide/features' },
+              { text: 'Бесплатные функции (Community)', link: '/ru/guide/community-features' },
+              { text: 'Промышленные Pro-функции', link: '/ru/guide/pro-features' }
+            ]
+          },
+          {
+            text: 'Обзор Pro-модулей',
+            items: [
+              { text: 'Интерактивные блок-схемы', link: '/ru/guide/flowchart' },
+              { text: 'Диагностика и безопасность', link: '/ru/guide/diagnostics' },
+              { text: 'Сравнение бэкапов KRC Diff', link: '/ru/guide/backup-diff' },
+              { text: 'Подсказки сигналов Inlay Hints', link: '/ru/guide/inlay-hints' }
             ]
           }
         ],
@@ -73,9 +111,15 @@ export default defineConfig({
         ],
         sidebar: [
           {
-            text: 'Dokümantasyon',
+            text: 'Başlangıç',
             items: [
-              { text: 'Tüm Özellikler Listesi', link: '/tr/guide/features' }
+              { text: 'Kurulum ve Ayarlar', link: '/tr/guide/installation' }
+            ]
+          },
+          {
+            text: 'Özellikler Wiki',
+            items: [
+              { text: 'Tüm Özellikler Listesi (26 Özellik)', link: '/tr/guide/features' }
             ]
           }
         ],

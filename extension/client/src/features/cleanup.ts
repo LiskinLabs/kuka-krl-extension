@@ -8,12 +8,7 @@ import { t } from "../i18n";
  * Example: "DECL INT a, b[5], c" -> ["a", "b", "c"]
  */
 function extractVariableNames(declLine: string): string[] {
-  // Remove DECL, types, GLOBAL, etc. to get the variable list
-  // This is a simplified approach. A full parser would be better but regex suffices for KRL.
-  // Regex from collector.ts:
-  // /^\s*(?:(?:GLOBAL\s+)?(?:CONST\s+)?DECL\s+(?:GLOBAL\s+)?(?:CONST\s+)?(\w+)|(?:GLOBAL\s+)?(?:CONST\s+)?(INT|REAL|...))\s+([^\r\n;]+)/gim;
-
-  const parts = declLine.split(";"); // Remove comments
+  const parts = declLine.split(";"); // Remove comments after semicolon unless inside FOLD metadata
   let content = parts[0].trim();
 
   // Remove keywords
@@ -22,26 +17,12 @@ function extractVariableNames(declLine: string): string[] {
     "",
   );
 
-  // Now we might have 'INT a, b' or just 'a, b' if type was removed differently?
-  // Actually the previous regex matched the type and the rest.
-  // Let's try to match the list part.
-  const match = content.match(/^(?:(?:\w+|\[\])\s+)?(.+)$/);
-  if (!match) return [];
+  const spaceMatch = content.match(/\s+/);
+  if (!spaceMatch || spaceMatch.index === undefined) return [];
 
-  // If there is a type at the beginning (INT, REAL, etc), remove it
-  // But struct types can be anything.
-  // So we just take everything after the first space if it matches a type pattern?
-  // This is risky.
-
-  // Let's use the collector approach: Split by comma respecting brackets.
-  // But we need to isolate the variable list first.
-
-  // Easier: Just look for the variable list.
-  // If the line starts with DECL/INT.., usually the first word is the type, the rest is vars.
-  const firstSpace = content.indexOf(" ");
-  if (firstSpace === -1) return []; // No variables? "DECL INT" ?
-
-  const varListStr = content.substring(firstSpace).trim();
+  const varListStr = content
+    .substring(spaceMatch.index + spaceMatch[0].length)
+    .trim();
 
   const variables: string[] = [];
   let current = "";
@@ -81,17 +62,14 @@ export async function cleanupUnusedVariables() {
   const doc = editor.document;
   const ext = path.extname(doc.fileName).toLowerCase();
 
-  let srcPath: string;
-  let datPath: string;
-
   const isKrlFile = [".src", ".dat", ".sub", ".krl", ".up"].includes(ext);
   if (!isKrlFile) {
     vscode.window.showWarningMessage(t("warning.noActiveKrlFile"));
     return;
   }
 
-  srcPath = doc.fileName;
-  datPath = doc.fileName;
+  let srcPath = doc.fileName;
+  let datPath = doc.fileName;
 
   if (ext === ".src" || ext === ".sub" || ext === ".krl" || ext === ".up") {
     const candidateDat = doc.fileName.replace(/\.[^.]+$/i, ".dat");
@@ -106,23 +84,45 @@ export async function cleanupUnusedVariables() {
   }
 
   const datDoc = await vscode.workspace.openTextDocument(datPath);
-  const srcDoc = await vscode.workspace.openTextDocument(srcPath); // Might be same if opened? No, file system
+  const srcDoc = await vscode.workspace.openTextDocument(srcPath);
 
   const datText = datDoc.getText();
-  const srcText = srcDoc.getText();
+  const rawSrcText = srcDoc.getText();
+
+  // IMPORTANT FIX: Keep KUKA Inline Forms (;FOLD / ;ENDFOLD) intact in srcText
+  // Only strip plain non-FOLD comments to prevent false positive deletions of motion points like P1, P2
+  const srcLines = rawSrcText.split(/\r?\n/);
+  const cleanSrcText = srcLines
+    .map((l) => {
+      const trimmed = l.trim();
+      if (
+        trimmed.toUpperCase().startsWith(";FOLD") ||
+        trimmed.toUpperCase().startsWith(";ENDFOLD")
+      ) {
+        return l; // Preserve Inline Form metadata containing point names!
+      }
+      return l.split(";")[0]; // Strip regular user comments
+    })
+    .join("\n");
 
   const lines = datText.split(/\r?\n/);
-  const unusedDecls: { lineIndex: number; varNames: string[] }[] = [];
+  const unusedDecls: {
+    lineIndex: number;
+    foldStartIndex?: number;
+    foldEndIndex?: number;
+    varNames: string[];
+  }[] = [];
 
   // 1. Find all declarations in DAT
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     const trimLine = line.trim();
 
-    // Skip comments
-    if (trimLine.startsWith(";")) continue;
+    // Skip plain comments that are not FOLD lines
+    if (trimLine.startsWith(";") && !trimLine.toUpperCase().startsWith(";FOLD"))
+      continue;
 
-    // Skip GLOBAL declarations - unsafe to remove as they might be used in other files
+    // Skip GLOBAL declarations - unsafe to remove as they might be used in external modules
     if (/\bGLOBAL\b/i.test(trimLine)) continue;
 
     // Check if it is a DECL
@@ -134,38 +134,25 @@ export async function cleanupUnusedVariables() {
       continue;
     }
 
-    // Exclude specific KUKA lines like "&ACCESS" or simple key-values if any
+    // Exclude WorkVisual metadata headers like &ACCESS, &REL, &PARAM
     if (trimLine.startsWith("&")) continue;
 
     const vars = extractVariableNames(trimLine);
     if (vars.length === 0) continue;
 
-    // Check usages in SRC (and DAT itself!)
-    // Simple string search.
-    // We must ensure we match whole words.
     let isUsed = false;
 
     for (const v of vars) {
       const escapedV = v.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      const regex = new RegExp(`\\b${escapedV}\\b`, "i"); // Case insensitive? KRL is case insensitive.
+      const regex = new RegExp(`\\b${escapedV}\\b`, "i");
 
-      // Check in SRC
-      if (regex.test(srcText)) {
+      // Check usage in SRC (including Inline Form FOLD headers!)
+      if (regex.test(cleanSrcText)) {
         isUsed = true;
         break;
       }
 
-      // Check in DAT (excluding the declaration line itself)
-      // We need to match in DAT carefully.
-      // Issues: internal DAT references?
-      // e.g. DECL INT a = 5
-      // DECL INT b = a -- usage!
-
-      // For simplicity, let's regex the WHOLE dat text.
-      // But we need to exclude the current declaration instance.
-      // If the variable appears MORE than once in DAT, it's used?
-      // Or better: Remove the current line from DAT text, then check.
-
+      // Check usage in DAT outside current line
       const datWithoutLine = lines.filter((_, idx) => idx !== i).join("\n");
       if (regex.test(datWithoutLine)) {
         isUsed = true;
@@ -174,79 +161,112 @@ export async function cleanupUnusedVariables() {
     }
 
     if (!isUsed) {
-      unusedDecls.push({ lineIndex: i, varNames: vars });
+      // Detect if this line is wrapped inside a KUKA ;FOLD / ;ENDFOLD block in .dat
+      let foldStart: number | undefined = undefined;
+      let foldEnd: number | undefined = undefined;
+
+      if (i > 0 && lines[i - 1].trim().toUpperCase().startsWith(";FOLD")) {
+        foldStart = i - 1;
+      }
+      if (
+        i < lines.length - 1 &&
+        lines[i + 1].trim().toUpperCase().startsWith(";ENDFOLD")
+      ) {
+        foldEnd = i + 1;
+      }
+
+      unusedDecls.push({
+        lineIndex: i,
+        foldStartIndex: foldStart,
+        foldEndIndex: foldEnd,
+        varNames: vars,
+      });
     }
   }
 
   if (unusedDecls.length === 0) {
-    vscode.window.showInformationMessage("No unused variables found.");
+    vscode.window.showInformationMessage(
+      "✅ Все переменные используются! Неиспользуемых объявлений не найдено.",
+    );
     return;
   }
 
-  // 1. Preview: Let user select variable lines to clean
+  // 2. Interactive Selection Preview
   const items: vscode.QuickPickItem[] = unusedDecls.map((decl) => {
     const lineContent = lines[decl.lineIndex].trim();
+    const hasFold =
+      decl.foldStartIndex !== undefined && decl.foldEndIndex !== undefined;
     return {
       label: decl.varNames.join(", "),
-      description: `Line ${decl.lineIndex + 1}: ${lineContent}`,
-      detail: "Unused",
-      picked: true, // Select all by default
-      // Store index in 'data' if custom property allowed, but we can index by arrays
+      description: `Строка ${decl.lineIndex + 1}: ${lineContent}`,
+      detail: hasFold
+        ? "Блок ;FOLD будет очищен полностью"
+        : "Неиспользуемая переменная",
+      picked: true,
     };
   });
 
   const selectedItems = await vscode.window.showQuickPick(items, {
-    placeHolder: `Found ${unusedDecls.length} unused lines. Select items to clean.`,
+    placeHolder: `Найдено неиспользуемых строк: ${unusedDecls.length}. Выберите строки для очистки:`,
     canPickMany: true,
   });
 
   if (!selectedItems || selectedItems.length === 0) {
-    return; // Cancelled or cleared
+    return;
   }
 
-  // Filter original list based on selection
-  // Matching by description/label is risky if duplicates?
-  // Proper way: map selected items back to indices.
   const selectedIndices = new Set<number>();
   selectedItems.forEach((item) => {
-    // Find index in original 'items' array
-    // Since map preserves order:
     const idx = items.indexOf(item);
     if (idx !== -1) selectedIndices.add(idx);
   });
 
   const finalDecls = unusedDecls.filter((_, idx) => selectedIndices.has(idx));
 
-  // 2. Action: Delete or Comment
+  // 3. Choice of Action: Delete or Comment Out
   const action = await vscode.window.showQuickPick(
     [
-      { label: "$(trash) Delete", description: "Permanently remove lines" },
       {
-        label: "$(comment) Comment Out",
-        description: "Safe Mode: Comment lines (; DECL ...)",
+        label: "$(trash) Удалить",
+        description: "Полностью удалить неиспользуемые переменные и FOLD блоки",
+      },
+      {
+        label: "$(comment) Закомментировать",
+        description: "Безопасный режим: закомментировать (; DECL ...)",
       },
     ],
-    { placeHolder: "Choose cleaning action" },
+    { placeHolder: "Выберите действие по очистке:" },
   );
 
   if (!action) return;
 
-  const isDelete = action.label.includes("Delete");
+  const isDelete = action.label.includes("Удалить");
   const edit = new vscode.WorkspaceEdit();
 
   for (const decl of finalDecls) {
-    const line = datDoc.lineAt(decl.lineIndex);
-    if (isDelete) {
-      edit.delete(datDoc.uri, line.rangeIncludingLineBreak);
-    } else {
-      // Comment out: Insert ; at start of line (handling indentation?)
-      // Or just replace text with "; " + text
-      edit.replace(datDoc.uri, line.range, `; ${line.text}`);
+    let startLine = decl.lineIndex;
+    let endLine = decl.lineIndex;
+
+    // If wrapped in FOLD/ENDFOLD, expand range to include FOLD envelope
+    if (decl.foldStartIndex !== undefined && decl.foldEndIndex !== undefined) {
+      startLine = decl.foldStartIndex;
+      endLine = decl.foldEndIndex;
+    }
+
+    for (let l = startLine; l <= endLine; l++) {
+      const lineObj = datDoc.lineAt(l);
+      if (isDelete) {
+        edit.delete(datDoc.uri, lineObj.rangeIncludingLineBreak);
+      } else {
+        if (!lineObj.text.trim().startsWith(";")) {
+          edit.replace(datDoc.uri, lineObj.range, `; ${lineObj.text}`);
+        }
+      }
     }
   }
 
   await vscode.workspace.applyEdit(edit);
   vscode.window.showInformationMessage(
-    `${isDelete ? "Deleted" : "Commented out"} ${finalDecls.length} lines.`,
+    `Успешно ${isDelete ? "удалено" : "закомментировано"} строк: ${finalDecls.length}.`,
   );
 }

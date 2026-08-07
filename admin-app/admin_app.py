@@ -701,12 +701,23 @@ class RequestHandler(BaseHTTPRequestHandler):
         elif self.path.startswith("/api/poll_for_vscode"):
             query = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
             session_id = query.get("session_id", [None])[0]
+            hostname = query.get("hostname", [None])[0]
+
             dev_msgs = []
             if session_id and session_id in store["sessions"]:
                 msgs = store["sessions"][session_id].get("messages", [])
                 for m in msgs:
                     if m.get("sender") == "developer":
                         dev_msgs.append(m)
+
+            # Check matching offline messages for host
+            if hostname:
+                for sid, sess in store.get("sessions", {}).items():
+                    if sess.get("hostname") == hostname and sid != session_id:
+                        for m in sess.get("messages", []):
+                            if m.get("sender") == "developer" and m not in dev_msgs:
+                                dev_msgs.append(m)
+
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()

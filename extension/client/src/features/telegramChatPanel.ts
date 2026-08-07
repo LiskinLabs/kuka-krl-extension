@@ -111,6 +111,14 @@ export class TelegramChatPanel {
             service.clearHistory();
             this.update();
             break;
+
+          case "exportBackup":
+            await vscode.commands.executeCommand("krl.exportBackupZip");
+            break;
+
+          case "sendAiDiag":
+            await vscode.commands.executeCommand("krl.sendAiDiagnostics");
+            break;
         }
       },
       null,

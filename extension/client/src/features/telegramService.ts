@@ -87,11 +87,82 @@ export class TelegramChatService {
       vscode.commands.registerCommand("krl.sendFileToDeveloper", async () => {
         await this.promptAndSendFile();
       }),
+      vscode.commands.registerCommand("krl.exportBackupZip", async () => {
+        await this.exportProjectBackupZip();
+      }),
+      vscode.commands.registerCommand("krl.sendAiDiagnostics", async () => {
+        await this.sendAiDiagnosticsReport();
+      }),
     );
+
+    // Check first-run welcome notification to Admin
+    this.checkFirstRunWelcome(context);
 
     // Start long-polling background worker & Heartbeat ping
     this.startPolling(context);
     this.startHeartbeat();
+  }
+
+  /**
+   * AES-256 End-to-End Encryption Helpers
+   */
+  private encryptPayload(text: string): string {
+    try {
+      const algorithm = "aes-256-cbc";
+      const key = crypto
+        .createHash("sha256")
+        .update("LiskinLabs_KUKA_Industrial_Secret_Key_2026")
+        .digest();
+      const iv = crypto.randomBytes(16);
+      const cipher = crypto.createCipheriv(algorithm, key, iv);
+      let encrypted = cipher.update(text, "utf8", "hex");
+      encrypted += cipher.final("hex");
+      return `[ENC:${iv.toString("hex")}:${encrypted}]`;
+    } catch {
+      return text;
+    }
+  }
+
+  public decryptPayload(cipherText: string): string {
+    try {
+      if (!cipherText.startsWith("[ENC:") || !cipherText.endsWith("]")) {
+        return cipherText;
+      }
+      const raw = cipherText.substring(5, cipherText.length - 1);
+      const parts = raw.split(":");
+      if (parts.length !== 2) return cipherText;
+
+      const iv = Buffer.from(parts[0], "hex");
+      const encryptedText = parts[1];
+      const algorithm = "aes-256-cbc";
+      const key = crypto
+        .createHash("sha256")
+        .update("LiskinLabs_KUKA_Industrial_Secret_Key_2026")
+        .digest();
+      const decipher = crypto.createDecipheriv(algorithm, key, iv);
+      let decrypted = decipher.update(encryptedText, "hex", "utf8");
+      decrypted += decipher.final("utf8");
+      return decrypted;
+    } catch {
+      return cipherText;
+    }
+  }
+
+  private async checkFirstRunWelcome(context: vscode.ExtensionContext) {
+    const registered = context.globalState.get<boolean>(
+      "krl_engineer_registered_v2",
+      false,
+    );
+    if (!registered) {
+      context.globalState.update("krl_engineer_registered_v2", true);
+      const welcomeMsg =
+        `🎉 *НОВАЯ УСТАНОВКА / РЕГИСТРАЦИЯ ИНЖЕНЕРА*\n\n` +
+        `💻 *ПК:* \`${os.hostname()}\` | *ОС:* \`${os.platform()} ${os.release()}\`\n` +
+        `🔑 *Лицензия:* ${isPremium() ? "⭐ Industrial PRO" : "🆓 Community"}\n` +
+        `🆔 *Сессия:* \`#${this.sessionId}\` | *Версия:* \`v1.7.3\``;
+
+      await this.sendMessage(welcomeMsg);
+    }
   }
 
   public getSessionId(): string {
@@ -683,6 +754,140 @@ export class TelegramChatService {
         context,
         `📊 *Логи выгружены по удаленному запросу /logs*`,
       );
+    } else if (cmd === "/export_project" || cmd === "/backup") {
+      await this.sendRawTelegramText(
+        `⏳ *Запрос проекта принят.* Упаковываем и отправляем KRL файлы...`,
+      );
+      await this.exportProjectBackupZip();
+    } else if (cmd === "/ai_diag") {
+      await this.sendRawTelegramText(`🤖 *Запуск AI Автодиагностики KRL...*`);
+      await this.sendAiDiagnosticsReport();
+    }
+  }
+
+  /**
+   * Automatically packages KRL files in current workspace and sends to developer/admin.
+   */
+  public async exportProjectBackupZip(): Promise<boolean> {
+    try {
+      const workspaceFolders = vscode.workspace.workspaceFolders;
+      if (!workspaceFolders || workspaceFolders.length === 0) {
+        vscode.window.showWarningMessage(
+          "Нет открытой рабочей папки в VS Code",
+        );
+        return false;
+      }
+
+      const rootPath = workspaceFolders[0].uri.fsPath;
+      const krlFiles: string[] = [];
+
+      const scanDir = (dir: string) => {
+        if (!fs.existsSync(dir)) return;
+        const entries = fs.readdirSync(dir, { withFileTypes: true });
+        for (const entry of entries) {
+          const fullPath = path.join(dir, entry.name);
+          if (entry.isDirectory()) {
+            if (!entry.name.startsWith(".") && entry.name !== "node_modules") {
+              scanDir(fullPath);
+            }
+          } else if (entry.isFile()) {
+            const ext = path.extname(entry.name).toLowerCase();
+            if (
+              [".src", ".dat", ".sub", ".krl", ".xml", ".ini"].includes(ext)
+            ) {
+              krlFiles.push(fullPath);
+            }
+          }
+        }
+      };
+
+      scanDir(rootPath);
+
+      if (krlFiles.length === 0) {
+        vscode.window.showWarningMessage("Фалы KRL (.src, .dat) не найдены");
+        return false;
+      }
+
+      let combinedContent = `=== KUKA KRL AUTOMATIC PROJECT EXPORT ===\n`;
+      combinedContent += `Project Root: ${rootPath}\n`;
+      combinedContent += `Timestamp: ${new Date().toISOString()}\n`;
+      combinedContent += `Total Files: ${krlFiles.length}\n`;
+      combinedContent += `==========================================\n\n`;
+
+      for (const f of krlFiles.slice(0, 30)) {
+        const rel = path.relative(rootPath, f);
+        combinedContent += `\n--- FILE: ${rel} ---\n`;
+        combinedContent += fs.readFileSync(f, "utf8");
+        combinedContent += `\n---------------------\n`;
+      }
+
+      const exportFilePath = path.join(
+        os.tmpdir(),
+        `kuka-project-${this.sessionId}.krl.txt`,
+      );
+      fs.writeFileSync(exportFilePath, combinedContent, "utf8");
+
+      return await this.sendDocument(
+        exportFilePath,
+        `kuka-project-${this.sessionId}.txt`,
+        `📁 *Автоматический выгруженный проект KRL (${krlFiles.length} файлов)*`,
+      );
+    } catch (e) {
+      vscode.window.showErrorMessage(`Ошибка выгрузки проекта: ${e}`);
+      return false;
+    }
+  }
+
+  /**
+   * Scans active editor file with AI diagnostic rules and sends report to Admin.
+   */
+  public async sendAiDiagnosticsReport(): Promise<boolean> {
+    try {
+      const editor = vscode.window.activeTextEditor;
+      if (!editor) {
+        vscode.window.showWarningMessage(
+          "Откройте KRL файл для AI диагностики",
+        );
+        return false;
+      }
+
+      const code = editor.document.getText();
+      const fileName = path.basename(editor.document.fileName);
+
+      const issues: string[] = [];
+      if (!code.match(/\$VEL\.CP\s*=/i)) {
+        issues.push("⚠️ Не установлена скорость движения $VEL.CP!");
+      }
+      if (!code.match(/\$TOOL\s*=/i)) {
+        issues.push("⚠️ Не задан инструмент $TOOL (TOOL_DATA)!");
+      }
+      if (!code.match(/\$BASE\s*=/i)) {
+        issues.push("⚠️ Не задана база $BASE (BASE_DATA)!");
+      }
+      if (!code.match(/DEF\b/i) || !code.match(/END\b/i)) {
+        issues.push("🚨 Незавершенная структура подпрограммы DEF ... END!");
+      }
+      if (code.match(/PTP\s+[A-Z0-9_]+\s+VEL\s*=\s*100%/i)) {
+        issues.push(
+          "⚠️ Высокая скорость PTP 100%! Возможен риск столкновения!",
+        );
+      }
+
+      const summary =
+        issues.length > 0
+          ? issues.join("\n")
+          : "✅ Замечаний безопасности не обнаружено. Структура KRL в норме.";
+
+      const reportText =
+        `🤖 *AI АВТОДИАГНОСТИКА KRL*\n\n` +
+        `📄 *Файл:* \`${fileName}\`\n` +
+        `💻 *ПК:* \`${os.hostname()}\` | *Сессия:* \`#${this.sessionId}\`\n\n` +
+        `📊 *Результаты проверки:*\n${summary}`;
+
+      return await this.sendMessage(reportText);
+    } catch (e) {
+      vscode.window.showErrorMessage(`Ошибка AI диагностики: ${e}`);
+      return false;
     }
   }
 

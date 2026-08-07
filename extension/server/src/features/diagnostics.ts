@@ -29,7 +29,7 @@ const REGEX_STARTS_WITH_DIGIT = /^\d/;
 
 const REGEX_VARIABLE = /\b([a-zA-Z_]\w*)\b/g;
 const REGEX_LOCAL_DECL =
-  /^\s*(?:GLOBAL\s+)?(?:DECL\s+)?\w+\s+([a-zA-Z_]\w*[^;\r\n]*)/gim;
+  /^\s*(?:GLOBAL\s+)?(?:DECL\s+(?:\w+\s+)?|(?:INT|REAL|BOOL|CHAR|STRING|FRAME|POS|E6POS|AXIS|E6AXIS|LOAD|SIGNAL|STRUC|ENUM)\s+)([a-zA-Z_]\w*[^;\r\n]*)/gim;
 const REGEX_ARRAY_BRACKETS = /\[.*?\]/g;
 const REGEX_VALID_VAR_NAME = /^[a-zA-Z_]\w*$/;
 const REGEX_SKIP_DECL_STRUC_SIGNAL =
@@ -733,8 +733,11 @@ export class DiagnosticsProvider {
           }
         }
 
-        // Değişken listesinde tanımlı mı kontrol et
-        if (validatedNames.has(varName.toUpperCase())) continue;
+        // Değişken listesinde tanımlı mı kontrol et (KRL motion point prefixes P1 <-> xP1)
+        const upperVar = varName.toUpperCase();
+        if (validatedNames.has(upperVar)) continue;
+        if (!upperVar.startsWith("X") && validatedNames.has("X" + upperVar)) continue;
+        if (upperVar.startsWith("X") && upperVar.length > 1 && validatedNames.has(upperVar.substring(1))) continue;
 
         // Fonksiyon mu kontrol et (önbellekten)
         if (functionNamesCache.has(varName.toUpperCase())) continue;

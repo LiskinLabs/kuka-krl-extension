@@ -48,6 +48,28 @@ export class CodeActionsProvider {
       if (matchesDiagnosticPattern(diagnostic.message, "variableNotDefined")) {
         const varName = extractVariableFromMessage(diagnostic.message);
         if (varName) {
+          // Point / E6POS / POS quick fixes
+          const targetPointName = varName.toUpperCase().startsWith("X")
+            ? varName
+            : "x" + varName;
+          actions.push(
+            this.createDeclareVariableAction(
+              doc,
+              diagnostic,
+              targetPointName,
+              "E6POS",
+              "={X 0.0,Y 0.0,Z 0.0,A 0.0,B 0.0,C 0.0,S 0,T 0}"
+            )
+          );
+          actions.push(
+            this.createDeclareVariableAction(
+              doc,
+              diagnostic,
+              varName,
+              "POS",
+              "={X 0.0,Y 0.0,Z 0.0,A 0.0,B 0.0,C 0.0}"
+            )
+          );
           // INT olarak tanımla
           actions.push(
             this.createDeclareVariableAction(doc, diagnostic, varName, "INT"),
@@ -211,6 +233,7 @@ export class CodeActionsProvider {
     diagnostic: Diagnostic,
     varName: string,
     varType: string,
+    initialValue: string = "",
   ): CodeAction {
     const lines = doc.getText().split(/\r?\n/);
 
@@ -229,7 +252,7 @@ export class CodeActionsProvider {
     }
 
     const indent = this.getIndent(lines[insertLine] || "");
-    const newDecl = `${indent}DECL ${varType} ${varName}\n`;
+    const newDecl = `${indent}DECL ${varType} ${varName}${initialValue}\n`;
 
     return {
       title: t("action.declareAs", varName, varType),

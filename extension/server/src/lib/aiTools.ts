@@ -1,47 +1,8 @@
-export interface KrlIoSignalInfo {
-  type: "$IN" | "$OUT" | "SIGNAL";
-  index?: number;
-  name: string;
-  comment?: string;
-}
-
 export interface KrlSafetyIssue {
   severity: "error" | "warning" | "info";
   line: number; // 1-based
   code: string;
   message: string;
-}
-
-/**
- * Extracts all I/O Signals ($IN, $OUT, SIGNAL) from active document or text for AI Context.
- */
-export function extractIoMatrixForAi(text: string): KrlIoSignalInfo[] {
-  const signals: KrlIoSignalInfo[] = [];
-
-  // Match SIGNAL declarations: SIGNAL doGripperOpen $OUT[16]
-  const signalRegex =
-    /SIGNAL\s+([A-Za-z0-9_]+)\s+\$(IN|OUT)\[(\d+)\](?:\s*TO\s*\$(IN|OUT)\[(\d+)\])?/gi;
-  let match;
-
-  while ((match = signalRegex.exec(text)) !== null) {
-    signals.push({
-      name: match[1],
-      type: (`$` + match[2].toUpperCase()) as "$IN" | "$OUT",
-      index: parseInt(match[3], 10),
-    });
-  }
-
-  // Match raw $IN[x] or $OUT[x] assignments
-  const rawIoRegex = /\$(IN|OUT)\[(\d+)\]\s*=\s*(TRUE|FALSE|[A-Za-z0-9_]+)/gi;
-  while ((match = rawIoRegex.exec(text)) !== null) {
-    signals.push({
-      name: `Physical ${match[1].toUpperCase()}[${match[2]}]`,
-      type: (`$` + match[1].toUpperCase()) as "$IN" | "$OUT",
-      index: parseInt(match[2], 10),
-    });
-  }
-
-  return signals;
 }
 
 /**

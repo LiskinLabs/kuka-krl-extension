@@ -372,20 +372,7 @@ test('EKI KRL Code Generator outputs syntactically valid EKI handler subprogram'
 // ----------------------------------------------------
 console.log('\n🤖 SECTION 13: AI-Supportive Domain Context Tools');
 
-const { extractIoMatrixForAi, performAiSafetyCheck } = require('../server/out/lib/aiTools.js');
-
-test('AI I/O Matrix Extractor parses signal definitions and raw physical I/O', () => {
-    const krlCode = `
-SIGNAL doGripperOpen $OUT[16]
-SIGNAL diPartPresent $IN[32]
-$OUT[10] = TRUE
-`;
-
-    const signals = extractIoMatrixForAi(krlCode);
-    assertTrue(signals.length === 3, 'Should extract 3 I/O signals');
-    assertTrue(signals.some(s => s.name === 'doGripperOpen' && s.index === 16), 'Should extract SIGNAL doGripperOpen');
-    assertTrue(signals.some(s => s.name === 'diPartPresent' && s.index === 32), 'Should extract SIGNAL diPartPresent');
-});
+const { performAiSafetyCheck } = require('../server/out/lib/aiTools.js');
 
 test('AI Industrial Safety Check detects high velocity and structural errors', () => {
     const safeCode = `DEF main()\n   $VEL.CP = 1.5\n   ;FOLD Motion\n   PTP xHome\n   ;ENDFOLD\nEND`;

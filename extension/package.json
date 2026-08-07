@@ -236,12 +236,6 @@
         "icon": "$(symbol-interface)"
       },
       {
-        "command": "krl.aiGetIoMatrix",
-        "title": "%command.aiGetIoMatrix%",
-        "category": "KRL",
-        "icon": "$(list-flat)"
-      },
-      {
         "command": "krl.aiCheckSafety",
         "title": "%command.aiCheckSafety%",
         "category": "KRL",

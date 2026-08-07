@@ -21,7 +21,6 @@
     "command.checkLicenseStatus": "Lisans Durumunu Kontrol Et",
     "command.validateEkiXml": "EthernetKRL (EKI) XML Şemasını Doğrula",
     "command.generateEkiCode": "EthernetKRL İletişim İşleyicisi Oluştur",
-    "command.aiGetIoMatrix": "Yapay Zeka İçin I/O Matrisini Çıkar",
     "command.aiCheckSafety": "Güvenlik & Hız Teşhis Kontrolünü Çalıştır",
     "command.openControlCenter": "KUKA Control Center'ı Aç",
     "command.compareKrcBackup": "KRC Yedek Arşivi (.zip) ile Dosya ve Nokta Farklarını Karşılaştır",

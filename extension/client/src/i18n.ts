@@ -91,7 +91,6 @@ interface Messages {
   "cc.btn.cleanGitMetadata": string;
   "cc.btn.runSafetyCheck": string;
   "cc.btn.generateReport": string;
-  "cc.btn.extractIoMatrix": string;
 
   // Flowchart Viewer
   "flow.err.unreachable": string;
@@ -366,7 +365,6 @@ const en: Messages = {
   "cc.btn.cleanGitMetadata": "Clean Git Metadata",
   "cc.btn.runSafetyCheck": "Run Safety Check",
   "cc.btn.generateReport": "Generate Report",
-  "cc.btn.extractIoMatrix": "Extract I/O Matrix",
 
   "flow.err.unreachable": "Unreachable Code",
   "flow.err.infiniteLoop": "Infinite Loop",
@@ -670,7 +668,6 @@ const ru: Messages = {
   "cc.btn.cleanGitMetadata": "Очистить Git-метаданные",
   "cc.btn.runSafetyCheck": "Проверить безопасность",
   "cc.btn.generateReport": "Сформировать отчёт",
-  "cc.btn.extractIoMatrix": "Извлечь матрицу I/O",
 
   "flow.err.unreachable": "Недостижимый код",
   "flow.err.infiniteLoop": "Бесконечный цикл",
@@ -985,7 +982,6 @@ const tr: Messages = {
   "cc.btn.cleanGitMetadata": "Git Üst Bilgilerini Temizle",
   "cc.btn.runSafetyCheck": "Güvenlik Kontrolünü Çalıştır",
   "cc.btn.generateReport": "Rapor Oluştur",
-  "cc.btn.extractIoMatrix": "I/O Matrisini Çıkar",
 
   "flow.err.unreachable": "Ulaşılamayan Kod",
   "flow.err.infiniteLoop": "Sonsuz Döngü",

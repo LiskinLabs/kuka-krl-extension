@@ -1,11 +1,8 @@
 import * as vscode from "vscode";
 import { t } from "../i18n";
-import {
-  extractIoMatrixForAi,
-  performAiSafetyCheck,
-} from "../../../server/src/lib/aiTools";
+import { performAiSafetyCheck } from "../../../server/src/lib/aiTools";
 
-export { extractIoMatrixForAi, performAiSafetyCheck };
+export { performAiSafetyCheck };
 
 const safetyDiagnosticCollection =
   vscode.languages.createDiagnosticCollection("krl-safety");
@@ -104,16 +101,6 @@ export function initAiTools(context: vscode.ExtensionContext) {
           const editor = vscode.window.activeTextEditor;
           const text = editor ? editor.document.getText() : options.input || "";
           const res = performAiSafetyCheck(text);
-          return new vscLm.LanguageModelToolResult([
-            new vscLm.LanguageModelTextPart(JSON.stringify(res, null, 2)),
-          ]);
-        },
-      });
-      vscLm.registerTool("krl_io_matrix", {
-        async invoke(options: { input?: string }) {
-          const editor = vscode.window.activeTextEditor;
-          const text = editor ? editor.document.getText() : options.input || "";
-          const res = extractIoMatrixForAi(text);
           return new vscLm.LanguageModelToolResult([
             new vscLm.LanguageModelTextPart(JSON.stringify(res, null, 2)),
           ]);

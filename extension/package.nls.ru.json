@@ -21,7 +21,6 @@
     "command.checkLicenseStatus": "Проверить статус лицензии",
     "command.validateEkiXml": "Валидатор XML-схем EthernetKRL (EKI)",
     "command.generateEkiCode": "Генератор KRL-обработчика EthernetKRL",
-    "command.aiGetIoMatrix": "Извлечь матрицу I/O для ИИ-контекста",
     "command.aiCheckSafety": "Запустить диагностику безопасности и скоростей",
     "command.openControlCenter": "Открыть KUKA Control Center",
     "command.compareKrcBackup": "Сравнить файлы и координаты с бэкапом KRC (.zip)",

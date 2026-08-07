@@ -21,7 +21,6 @@
   "command.checkLicenseStatus": "Check License Status",
   "command.validateEkiXml": "Validate EthernetKRL (EKI) XML Schema",
   "command.generateEkiCode": "Generate EthernetKRL Communication Handler",
-  "command.aiGetIoMatrix": "Extract I/O Matrix for AI Context",
   "command.aiCheckSafety": "Run AI Safety & Velocity Diagnostic Check",
   "command.openControlCenter": "Open KUKA Control Center",
   "command.compareKrcBackup": "Compare File & Point Deltas with KRC Backup Archive (.zip)",

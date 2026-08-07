@@ -3,9 +3,10 @@ name: Deploy VitePress site to Pages
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -14,34 +15,43 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
       - name: Install dependencies
         run: cd docs && npm install
+
       - name: Build with VitePress
         run: cd docs && npx vitepress build
-      - name: Upload artifact
+
+      - name: Ensure .nojekyll in public
+        run: |
+          touch public/.nojekyll
+          touch docs/public/.nojekyll
+
+      - name: Upload artifact for GitHub Actions Pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: public
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    name: Deploy
-    steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages (Actions mode)
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Deploy to gh-pages branch (Branch fallback mode)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          force_orphan: true

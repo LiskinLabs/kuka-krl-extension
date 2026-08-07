@@ -1,70 +1,81 @@
-# KUKA KRL Professional - Özellikler Wiki
+# KUKA KRL Professional — Özellikler Wiki Listesi (v1.8.5 Pro Hub)
 
-**KUKA KRL Professional** için resmi özellik dokümantasyonuna hoş geldiniz.
-
-## 🟢 Community Edition (Ücretsiz)
-
-Bu özellikler standart robotik geliştirmeyi hızlandırmak için tamamen ücretsizdir.
-
-### 1. Sözdizimi Vurgulama (Syntax Highlighting)
-KUKA KRC spesifikasyonlarına sıkı sıkıya bağlı kalarak `.src` ve `.dat` dosyalarının tam ayrıştırılması ve renklendirilmesi.
-
-### 2. KUKA Özel Temaları
-Mühendisler için özel olarak tasarlanmış üç özel karanlık tema:
-- **Industrial Dark**
-- **Midnight OLED** 
-- **Blueprint**
-
-### 3. Akıllı Otomatik Tamamlama
-Tüm KUKA sistem değişkenlerinin veri tipleri ve açıklamalarıyla birlikte açılır listesini anında almak için `$` yazın.
-
-### 4. Üç Dilli Yerelleştirme (EN/RU/TR)
-Vurgulu bilgiler ve hata mesajları dahil olmak üzere tüm uzantı İngilizce, Rusça ve Türkçe'ye tamamen çevrilmiştir.
-
-### 5. Gömülü İpuçları (Inlay Hints)
-Donanım sinyallerinin yanında (ör. `$IN[1]`), dosyayı değiştirmeden gerçek isimlerini gösteren sanal metin görünür.
-
-### 6. Üzerine Gelme Bilgisi (Hover Info)
-KUKA dokümantasyonuna anında erişmek için farenizi herhangi bir sistem değişkeninin (ör. `$VEL.CP`) üzerine getirin.
-
-### 7. Dosyalar Arası Tanıma Gitme (Go-to-Definition)
-`Ctrl` tuşunu basılı tutun ve mantığınızdaki herhangi bir değişkene tıklayarak `.dat` dosyasındaki bildirimine anında atlayın.
-
-### 8. Genel Biçimlendirici (Formatter)
-Dağınık kodu anında biçimlendirmek için `Shift + Alt + F` tuşlarına basın. Matrislerdeki `=` işaretlerini otomatik hizalar.
-
-### 9. Görsel Snippet Oluşturucu
-Dahili GUI paneli (Fluent UI), PTP/LIN hareketlerini veya mantığı metin yazmadan görsel olarak oluşturmanıza olanak tanır.
+VS Code için **KUKA KRL Professional Extension** resmi teknik wiki kılavuzuna hoş geldiniz.
 
 ---
 
-## 👑 Industrial Edition (Pro)
+## 🟢 1. Topluluk Sürümü (Ücretsiz Temel Özellikler)
 
-Industrial Edition, tüm proje çalışma alanınız için katı bir statik analizör ve güvenlik müfettişi olarak çalışır.
+1. **KRL Sözdizimi Vurgulama (Syntax Highlighting)**
+   * `.src`, `.dat` ve `.sub` dosyalarının tam sözdizimi ayrıştırması ve renklendirmesi.
+   ![Syntax Highlighting](/media/syntax_after.png)
 
-### 10. Etkileşimli Akış Şeması Görüntüleyici
-Karmaşık `.src` programlarını temiz Mermaid SVG kontrol akışı diyagramlarına dönüştürür. Alt programlara tıklayarak detaylara inebilirsiniz.
+2. **6 Özel KUKA Teması (6 KUKA Themes)**
+   * Endüstriyel ortamlar ve SmartPAD için tasarlanmış 6 özel renk teması.
+   ![Theme 1](/media/kuka_theme_1.png)
 
-### 11. Blok Denge Teşhisi
-Eksik `ENDIF` veya `ENDFOR` sorununu çözer. Analizör blok yapılarınızı sürekli haritalandırır ve eksik olan kapanış etiketini anında kırmızı ile çizer.
+3. **Akıllı Otomatik Tamamlama (Smart Autocomplete & KSS 8.7)**
+   * KSS 8.7 sistem değişkenleri ve kullanıcı alt programları için anında açılır liste.
+   ![Smart Autocomplete](/media/smart_autocomplete.gif)
 
-### 12. Güvenli Hız Uyarıları
-`$VEL.CP = 5.0` yazmak derhal bir uyarı tetikleyecektir. Kodlanmış hızlar devreye alma güvenlik sınırlarını aşarsa analizör sizi uyarır.
+4. **Üç Dilli Yerelleştirme (EN / RU / TR)**
+   * Tüm arayüz ve ipuçları İngilizce, Rusça ve Türkçe dillerini destekler.
 
-### 13. Tool/Base Başlatma Kontrolü
-Aktif `$TOOL` ve `$BASE` başlatılmadan hareket komutu (ör. `PTP P1`) çalıştırma girişimi anında yakalanır. Çarpışmaları önler.
+5. **Donanım Sinyal İpuçları (Inlay Hints)**
+   * Sinyal adlarını kod içinde doğrudan görüntüler (`$IN[1]` `: diPartReady`).
+   ![Inlay Hints](/media/inlay_hints.gif)
 
-### 14. Sessiz Hata / ASCII Olmayan Engelleyici
-Çalıştırılabilir kod satırlarında ASCII olmayan (ör. Kiril veya Türkçe karakterler) varsa KRC derleyicisi sessizce başarısız olur. Engelleyicimiz bunu gerçek zamanlı yakalar.
+6. **İmleç Bilgisi (Hover Info & Read/Write Status)**
+   * Sistem değişkenlerinin veri tiplerini ve okuma/yazma izinlerini görüntüler.
+   ![Hover Info](/media/hover_info.gif)
 
-### 15. Çalışma Alanı Ölü Kod Analizi
-Tüm klasördeki dosyaları tarar. Hiç çağrılmayan `GLOBAL DEF` fonksiyonları veya değişkenleri gri renkle vurgulanır.
+7. **Dosyalar Arası Gezinme (.src ↔ .dat Go-to-Definition)**
+   * `F12` veya `Ctrl+Click` ile `.src` mantığından `.dat` bildirimine anında geçiş.
+   ![Go-to-Definition](/media/goto_definition.gif)
 
-### 16. WorkVisual Üstveri Temizleyici
-WorkVisual tarafından oluşturulan çöp metadataları (ör. `&ACCESS`) tek tıklamayla temizler. Git taahhütlerinizi temiz tutar.
+8. **Tüm Referansları Bul (Find All References)**
+   * Projedeki tüm değişken ve fonksiyon çağrılarını listeler.
+   ![Find All References](/media/find_all_references.gif)
 
-### 17. KUKA Frame Hesaplayıcı
-Dahili 3D geometri aracı. 3 nokta koordinatı (Orijin, X-ekseni, XY-düzlemi) girin, `BASE_DATA` çerçeve açılarını (A, B, C) anında hesaplar.
+9. **KRL Kod Biçimlendirici (Code Formatter)**
+   * `Shift + Alt + F` ile otomatik kod hizalama.
+   ![Code Formatter](/media/code_formatter.gif)
 
-### 18. Kod Kalitesi Rapor Oluşturucu
-Tüm projenizin kapsamlı bir HTML/JSON raporunu oluşturun. Ele alınmayan hataları, uyarıları ve ölü kod yüzdesini anında görün.
+10. **Hızlı FOLD Daraltma / Genişletme (Quick Fold Toolbar)**
+    * FOLD bloklarını tek tıkla daraltma/genişletme.
+    ![Quick Fold](/media/quick_fold_toolbar.gif)
+
+11. **KUKA COMMANDS Paneli**
+    ![KUKA COMMANDS](/media/kuka_commands.gif)
+
+12. **KRL I/O Sinyalleri Paneli**
+    ![KRL IO Signals](/media/krl_io_signals.gif)
+
+13. **Kullanılmayan Değişken Temizleyici**
+14. **WorkVisual Git Üstbilgi Temizleyici**
+    ![Git Cleaner](/media/git_metadata_cleaner.gif)
+15. **Bildirimleri Sıralama (Sort Declarations)**
+    ![Sort Declarations](/media/sort_declarations.gif)
+
+---
+
+## 👑 2. Endüstriyel Sürüm (Pro Özellikler)
+
+16. **KUKA Control Center Paneli**
+    ![Control Center](/media/kuka_control_center.gif)
+
+17. **VS Code Telegram Destek Sohbeti**
+18. **Bağımsız Destek Yöneticisi Uygulaması (`KukaAdminHelpdesk.exe`)**
+19. **KRC Backup Diff ve Nokta Delta İnceleyicisi**
+    ![KRC Backup Diff](/media/krc_backup_diff.gif)
+
+20. **Etkileşimli Hareket Yörüngesi Oluşturucu**
+21. **Etkileşimli Akış Şeması Görüntüleyici (Flowchart Viewer)**
+    ![Control Flow Graph](/media/control_flow_graph.gif)
+    ![Cell Flowchart SVG](/media/cell_flowchart.svg)
+
+22. **EthernetKRL (EKI) Paketi ve Kod Oluşturucu**
+23. **Endüstriyel Güvenlik ve Hız Denetimi**
+24. **Yapay Zeka Etki Alanı Bağlam Araçları (`@kuka /get-io-matrix`, `@kuka /check-safety`)**
+25. **3 Noktalı Çerçeve Hesaplayıcı (Frame Calculator)**
+26. **Kabul Raporu Oluşturucu (Quality Report)**

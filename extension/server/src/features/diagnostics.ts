@@ -79,6 +79,42 @@ const VALID_DECL_STARTS = new Set([
 // Pre-compiled regexes for optimization
 const REGEX_LABEL_DECL = /^\s*([a-zA-Z_]\w*)\s*:/gim;
 
+const STRUCTURE_COMPONENT_KEYWORDS = new Set([
+  "X",
+  "Y",
+  "Z",
+  "A",
+  "B",
+  "C",
+  "S",
+  "T",
+  "A1",
+  "A2",
+  "A3",
+  "A4",
+  "A5",
+  "A6",
+  "E1",
+  "E2",
+  "E3",
+  "E4",
+  "E5",
+  "E6",
+]);
+
+function isInsideStructureLiteral(line: string, offset: number): boolean {
+  let openBraces = 0;
+  let inString = false;
+  for (let i = 0; i < offset && i < line.length; i++) {
+    if (line[i] === '"') inString = !inString;
+    else if (!inString) {
+      if (line[i] === "{") openBraces++;
+      else if (line[i] === "}") openBraces--;
+    }
+  }
+  return openBraces > 0;
+}
+
 /**
  * Returns the line content up to the first ';' that is NOT inside a string.
  * This correctly strips out KRL comments while preserving string contents.
@@ -644,6 +680,7 @@ export class DiagnosticsProvider {
 
     for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
       const line = lines[lineIndex];
+      variableRegex.lastIndex = 0;
 
       // Bildirim veya struct veya sinyal satırlarını atla
       if (REGEX_SKIP_DECL_STRUC_SIGNAL.test(line)) {
@@ -661,9 +698,8 @@ export class DiagnosticsProvider {
       while ((match = variableRegex.exec(processedLine)) !== null) {
         const varName = match[1];
 
-        // '&' ile başlayan parametreleri atla
-        const lineBeforeMatch = processedLine.substring(0, match.index);
-        if (lineBeforeMatch.includes("&")) continue;
+        // Skip WorkVisual header lines starting with '&' (e.g. &ACCESS, &REL, &PARAM)
+        if (processedLine.trimStart().startsWith("&")) break;
 
         // '$' veya '#' ile başlayan sistem değişkenlerini atla
         // NOT: processedLine üzerinde kontrol yapılmalı!
@@ -689,6 +725,13 @@ export class DiagnosticsProvider {
 
         // Anahtar kelimeleri atla
         if (CODE_KEYWORDS.includes(varName.toUpperCase())) continue;
+
+        // Structure component names (X, Y, Z, A, B, C, S, T, A1..E6) are skipped ONLY inside structure literals {...}
+        if (STRUCTURE_COMPONENT_KEYWORDS.has(varName.toUpperCase())) {
+          if (isInsideStructureLiteral(processedLine, match.index)) {
+            continue;
+          }
+        }
 
         // Değişken listesinde tanımlı mı kontrol et
         if (validatedNames.has(varName.toUpperCase())) continue;

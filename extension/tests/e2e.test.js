@@ -241,6 +241,14 @@ test('Diagnostics detects unclosed blocks, high velocity, collision guard & non-
     const singleLineIfDoc = new MockTextDocument('file:///test.src', 'DEF test()\nIF $IN[1] THEN PTP P1\nMsgNotify("IF error THEN")\nEND');
     const blockBalanceDiags = diagProvider.validateBlockBalance(singleLineIfDoc);
     assertTrue(blockBalanceDiags.length === 0, 'Single-line IF and string keywords should not produce false positive block balance errors');
+
+    // Standalone single letter typo detection (y, t, s) vs structure literals
+    const typoDoc = new MockTextDocument('file:///test.src', 'DEF test()\nP00 (#EXT_PGNO,#PGNO_GET,DMY[],0 )y\nP00 (#EXT_PGNO,#PGNO_GET,DMY[],0 )t\nP00 (#EXT_PGNO,#PGNO_GET,DMY[],0 )s\nPTP {X 100, Y 200, Z 300, A 0, B 0, C 0, S 6, T 35}\nEND');
+    const usageDiags = diagProvider.validateVariablesUsage(typoDoc, []);
+    assertTrue(usageDiags.some(d => d.message.includes('"y"') || d.message.includes("'y'")), 'Should flag standalone trailing "y" typo as undeclared variable');
+    assertTrue(usageDiags.some(d => d.message.includes('"t"') || d.message.includes("'t'")), 'Should flag standalone trailing "t" typo as undeclared variable');
+    assertTrue(usageDiags.some(d => d.message.includes('"s"') || d.message.includes("'s'")), 'Should flag standalone trailing "s" typo as undeclared variable');
+    assertTrue(!usageDiags.some(d => d.range.start.line === 4), 'Structure literal {X 100, Y 200, Z 300, A 0, B 0, C 0, S 6, T 35} should not produce false positives');
 });
 
 // ----------------------------------------------------
@@ -445,7 +453,7 @@ console.log('\n🤖 SECTION 13: AI-Supportive Domain Context Tools');
 const { performAiSafetyCheck } = require('../server/out/lib/aiTools.js');
 
 test('AI Industrial Safety Check detects high velocity and structural errors', () => {
-    const safeCode = `DEF main()\n   $VEL.CP = 1.5\n   ;FOLD Motion\n   PTP xHome\n   ;ENDFOLD\nEND`;
+    const safeCode = `DEF main()\n   DECL POS xHome\n   BAS(#INITMOV)\n   $VEL.CP = 1.5\n   ;FOLD Motion\n   PTP xHome\n   ;ENDFOLD\nEND`;
     const dangerousCode = `DEF main()\n   $VEL.CP = 4.5\n   ;FOLD Motion\n   PTP xHome\nEND`;
 
     const safeRes = performAiSafetyCheck(safeCode);

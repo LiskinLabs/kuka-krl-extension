@@ -40,8 +40,8 @@ export class AutoCompleter {
     const line = lines[params.position.line];
     const textBefore = line.substring(0, params.position.character);
 
-    // 0. Если перед курсором находится пробел или табуляция, отменяем автодополнение (Space = Cancel)
-    if (/\s$/.test(textBefore)) {
+    // 0. Если перед курсором находится пробел после слова, отменяем автодополнение
+    if (/\w\s+$/.test(textBefore)) {
       return [];
     }
 

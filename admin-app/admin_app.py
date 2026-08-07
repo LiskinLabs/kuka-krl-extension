@@ -856,16 +856,30 @@ def poll_telegram_updates():
                             save_db(store)
                         continue
 
-                    # Handle regular messages
+                    # Ultra-resilient Session Matcher & Markdown Text Cleaner
                     match_session = None
-                    m = re.search(r"Сессия:\s*`?#?([a-f0-9]{6})`?", text, re.IGNORECASE) or re.search(r"#([a-f0-9]{6})\b", text, re.IGNORECASE)
+                    m = (
+                        re.search(r"Сессия:\s*`?#?([a-f0-9]{6})`?", text, re.IGNORECASE) or
+                        re.search(r"session:\s*`?#?([a-f0-9]{6})`?", text, re.IGNORECASE) or
+                        re.search(r"#([a-f0-9]{6})\b", text, re.IGNORECASE)
+                    )
                     if m:
                         match_session = m.group(1).lower()
 
+                    if not match_session and store.get("sessions") and len(store["sessions"]) == 1:
+                        match_session = list(store["sessions"].keys())[0]
+
                     if match_session:
+                        # Extract host & user text if coming from VS Code Telegram payload
+                        host_m = re.search(r"ПК:\s*`([^`]+)`", text)
+                        clean_host = host_m.group(1) if host_m else "ПК Инженера"
+
+                        body_m = re.search(r"Текст:\*\s*\n(.*)$", text, re.DOTALL) or re.search(r"Текст:\s*\n(.*)$", text, re.DOTALL)
+                        clean_user_text = body_m.group(1).strip() if body_m else text.strip()
+
                         if match_session not in store["sessions"]:
                             store["sessions"][match_session] = {
-                                "hostname": "ПК Инженера",
+                                "hostname": clean_host,
                                 "role": "⭐ PRO",
                                 "activeFile": "Неизвестен",
                                 "lastPingTime": int(time.time() * 1000),
@@ -873,20 +887,27 @@ def poll_telegram_updates():
                                 "messages": []
                             }
 
-                        store["sessions"][match_session]["messages"].append({
-                            "sender": "user",
-                            "text": text,
-                            "timestamp": int(time.time() * 1000)
-                        })
-                        store["sessions"][match_session]["lastTime"] = int(time.time() * 1000)
-                        store["sessions"][match_session]["lastPingTime"] = int(time.time() * 1000)
-                        
-                        if not store.get("activeSessionId"):
-                            store["activeSessionId"] = match_session
-                        save_db(store)
+                        # Avoid duplicate insertion
+                        curr_msgs = store["sessions"][match_session]["messages"]
+                        exists = any(
+                            x.get("text") == clean_user_text and abs(x.get("timestamp", 0) - int(time.time() * 1000)) < 4000
+                            for x in curr_msgs
+                        )
+                        if not exists:
+                            store["sessions"][match_session]["messages"].append({
+                                "sender": "user",
+                                "text": clean_user_text,
+                                "timestamp": int(time.time() * 1000)
+                            })
+                            store["sessions"][match_session]["lastTime"] = int(time.time() * 1000)
+                            store["sessions"][match_session]["lastPingTime"] = int(time.time() * 1000)
+                            if not store.get("activeSessionId"):
+                                store["activeSessionId"] = match_session
+                            save_db(store)
+                            print(f"📥 [Telegram Received] Session #{match_session}: {clean_user_text[:40]}")
 
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"Error in poll_telegram_updates: {e}")
 
 def telegram_poller():
     while True:

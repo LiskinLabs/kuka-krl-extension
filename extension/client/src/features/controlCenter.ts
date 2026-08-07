@@ -10,7 +10,6 @@ import {
   PRICING_PLANS,
 } from "./license";
 import { t } from "../i18n";
-import { TelegramChatService } from "./telegramService";
 
 let currentPanel: vscode.WebviewPanel | undefined = undefined;
 
@@ -122,7 +121,7 @@ async function openControlCenterPanel(context: vscode.ExtensionContext) {
           }
           break;
         case "openTelegram":
-          await TelegramChatService.getInstance().promptAndSendMessage();
+          await vscode.commands.executeCommand("krl.openTelegramChat");
           break;
         case "openGitHub":
           vscode.env.openExternal(

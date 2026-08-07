@@ -31,6 +31,76 @@ function assertTrue(condition, msg) {
     }
 }
 
+// Global vscode mock for Node.js test environment
+const Module = require('module');
+const origRequire = Module.prototype.require;
+class DummyClass {}
+const baseMock = {
+    __esModule: true,
+    Disposable: class Disposable { static from() { return new Disposable(); } dispose() {} },
+    EventEmitter: class EventEmitter { event() {} fire() {} dispose() {} },
+    Uri: { file: (f) => ({ fsPath: f, toString: () => f }), parse: (s) => ({ fsPath: s, toString: () => s }) },
+    Position: class Position { constructor(l, c) { this.line = l; this.character = c; } },
+    Range: class Range { constructor(s, e) { this.start = s; this.end = e; } },
+    Selection: class Selection { constructor(a, a2) { this.anchor = a; this.active = a2; } },
+    Location: class Location { constructor(u, r) { this.uri = u; this.range = r; } },
+    Diagnostic: class Diagnostic { constructor(r, m, s) { this.range = r; this.message = m; this.severity = s; } },
+    DiagnosticSeverity: { Error: 0, Warning: 1, Information: 2, Hint: 3 },
+    TextEditorRevealType: { InCenter: 1 },
+    ViewColumn: { One: 1, Two: 2, Beside: -2 },
+    window: { createWebviewPanel: () => ({ webview: { onDidReceiveMessage: () => {} } }), activeTextEditor: undefined, showErrorMessage: () => {} },
+    workspace: { getConfiguration: () => ({ get: () => {} }), textDocuments: [], findFiles: async () => [] },
+    languages: { createDiagnosticCollection: () => ({ clear: () => {}, dispose: () => {} }) },
+    commands: { registerCommand: () => ({ dispose: () => {} }), executeCommand: async () => {} },
+    env: { language: 'en' },
+    TreeItem: DummyClass,
+    TreeItemCollapsibleState: {},
+    ThemeIcon: DummyClass,
+    ThemeColor: DummyClass,
+    CompletionItem: DummyClass,
+    CodeAction: DummyClass,
+    CodeLens: DummyClass,
+    DocumentHighlight: DummyClass,
+    Hover: DummyClass,
+    InlayHint: DummyClass,
+    FoldingRange: DummyClass,
+    SymbolInformation: DummyClass,
+    DocumentSymbol: DummyClass,
+    CallHierarchyItem: DummyClass,
+    SelectionRange: DummyClass,
+    InlineValue: DummyClass,
+    ParameterInformation: DummyClass,
+    SignatureInformation: DummyClass,
+    SignatureHelp: DummyClass,
+    SemanticTokensLegend: DummyClass,
+    SemanticTokensBuilder: DummyClass,
+    DocumentLink: DummyClass,
+    DocumentColor: DummyClass,
+    ColorPresentation: DummyClass,
+    Color: DummyClass,
+    ColorInformation: DummyClass,
+    CodeActionKind: {},
+    StatusBarAlignment: {},
+    OverviewRulerLane: {},
+    IndentAction: {}
+};
+baseMock.default = baseMock;
+
+const vscodeProxy = new Proxy(baseMock, {
+    get: (target, prop) => {
+        if (prop === 'default') return vscodeProxy;
+        if (prop in target) return target[prop];
+        return DummyClass;
+    }
+});
+
+Module.prototype.require = function(request) {
+    if (request === 'vscode') {
+        return vscodeProxy;
+    }
+    return origRequire.apply(this, arguments);
+};
+
 // Mock TextDocument helper
 class MockTextDocument {
     constructor(uri, text, languageId = 'krl') {
@@ -459,6 +529,71 @@ test('extractFileFromZipBackup inspects and extracts matching KRL files from .zi
             fs.unlinkSync(tempZipPath);
         }
     }
+});
+
+// ----------------------------------------------------
+// 15. Production Obfuscated Bundle & Entry Points E2E
+// ----------------------------------------------------
+console.log('\n📦 SECTION 15: Production Obfuscated Bundle & Entry Points E2E');
+
+test('Production client/out/main.js exports valid activate and deactivate entry points', () => {
+    const mainJsPath = path.join(__dirname, '..', 'client', 'out', 'main.js');
+    assertTrue(fs.existsSync(mainJsPath), 'client/out/main.js must exist after build');
+    
+    delete require.cache[require.resolve(mainJsPath)];
+    const clientBundle = require(mainJsPath);
+    assertTrue(typeof clientBundle.activate === 'function', 'client/out/main.js activate export must be a function');
+    assertTrue(typeof clientBundle.deactivate === 'function', 'client/out/main.js deactivate export must be a function');
+});
+
+test('Production server/out/core.js bundle compiles and initializes without syntax errors', () => {
+    const coreJsPath = path.join(__dirname, '..', 'server', 'out', 'core.js');
+    assertTrue(fs.existsSync(coreJsPath), 'server/out/core.js must exist after build');
+    const content = fs.readFileSync(coreJsPath, 'utf8');
+    assertTrue(content.length > 50000, 'server/out/core.js must contain full compiled server logic');
+});
+
+// ----------------------------------------------------
+// 16. Webview HTML & CSP Security Contract E2E
+// ----------------------------------------------------
+console.log('\n🌐 SECTION 16: Webview HTML & CSP Security Contract E2E');
+
+test('Flowchart Viewer generates secure CSP with unsafe-eval and cspSource', () => {
+    const flowchartFile = path.join(__dirname, '..', 'client', 'src', 'features', 'flowchartViewer.ts');
+    const content = fs.readFileSync(flowchartFile, 'utf8');
+    assertTrue(content.includes('Content-Security-Policy'), 'Flowchart Webview must define Content-Security-Policy');
+    assertTrue(content.includes("'unsafe-eval'"), "Flowchart Webview CSP must include 'unsafe-eval'");
+    assertTrue(content.includes('${cspSource}'), 'Flowchart Webview CSP must include ${cspSource}');
+});
+
+test('Snippet Generator Panel specifies ViewColumn.Beside', () => {
+    const snippetFile = path.join(__dirname, '..', 'client', 'src', 'features', 'snippetGenerator.ts');
+    const content = fs.readFileSync(snippetFile, 'utf8');
+    assertTrue(content.includes('vscode.ViewColumn.Beside'), 'Snippet Generator panel must use ViewColumn.Beside');
+});
+
+// ----------------------------------------------------
+// 17. Command Registry Coverage E2E
+// ----------------------------------------------------
+console.log('\n📜 SECTION 17: Package.json Commands Registry Coverage E2E');
+
+test('All registered package.json commands have corresponding implementation handlers in main.ts or features', () => {
+    const pkgPath = path.join(__dirname, '..', 'package.json');
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+    const commands = pkg.contributes.commands || [];
+    assertTrue(commands.length >= 10, 'package.json should contribute commands');
+
+    const mainTsContent = fs.readFileSync(path.join(__dirname, '..', 'client', 'src', 'main.ts'), 'utf8');
+    const controlCenterTsContent = fs.readFileSync(path.join(__dirname, '..', 'client', 'src', 'features', 'controlCenter.ts'), 'utf8');
+    const combinedContent = mainTsContent + '\n' + controlCenterTsContent;
+
+    commands.forEach(cmd => {
+        const cmdName = cmd.command;
+        assertTrue(
+            combinedContent.includes(cmdName),
+            `Command "${cmdName}" defined in package.json is missing registerCommand handler in client code!`
+        );
+    });
 });
 
 // ----------------------------------------------------

@@ -168,6 +168,8 @@ export function analyzeControlFlow(
     caseNodes?: string[];
     afterNodeId?: string; // for connecting after block ends
     line: number;
+    ifTerminated?: boolean; // true if IF branch ends with RETURN/HALT/EXIT
+    elseTerminated?: boolean; // true if ELSE branch ends with RETURN/HALT/EXIT
   }
   const blockStack: BlockCtx[] = [];
 
@@ -286,8 +288,9 @@ export function analyzeControlFlow(
     if (RE_ELSE.test(code)) {
       const ctx = blockStack[blockStack.length - 1];
       if (ctx && ctx.type === "if") {
-        // Save where TRUE branch ended
+        // Save where TRUE branch ended and whether it was terminated
         ctx.elseNodeId = lastNodeId;
+        ctx.ifTerminated = terminated;
         ctx.hasBody = ctx.hasBody || !!ctx.bodyStartNodeId;
         // FALSE branch starts from condId
         lastNodeId = ctx.condNodeId;
@@ -300,6 +303,8 @@ export function analyzeControlFlow(
     if (RE_ENDIF.test(code)) {
       const ctx = blockStack.pop();
       if (ctx && ctx.type === "if") {
+        // Save ELSE branch termination state (current branch at ENDIF is ELSE branch, or IF-only)
+        ctx.elseTerminated = terminated;
         const joinId = makeId();
         addNode({ id: joinId, label: "ENDIF", type: "process", line: i });
 
@@ -339,7 +344,11 @@ export function analyzeControlFlow(
           }
         }
         lastNodeId = joinId;
-        terminated = false;
+        // Only reset terminated if not all branches were terminated
+        // If both IF and ELSE branches had RETURN/HALT, code after ENDIF is still unreachable
+        if (!ctx.ifTerminated || !ctx.elseTerminated) {
+          terminated = false;
+        }
       }
       continue;
     }
@@ -641,8 +650,10 @@ export function analyzeControlFlow(
         };
         errors.push(err);
         nodes[nodes.length - 1].error = err;
+      } else {
+        connectLast(id);
+        lastNodeId = id;
       }
-      terminated = false;
       continue;
     }
 
@@ -676,7 +687,10 @@ export function analyzeControlFlow(
       }
 
       lastNodeId = id;
-      terminated = false;
+      // Don't reset terminated — unreachable motion stays unreachable
+      if (!terminated) {
+        lastNodeId = id;
+      }
       continue;
     }
 
@@ -713,8 +727,10 @@ export function analyzeControlFlow(
           connectLast(id);
         }
 
-        lastNodeId = id;
-        terminated = false;
+        // Don't reset terminated — unreachable call stays unreachable
+        if (!terminated) {
+          lastNodeId = id;
+        }
         continue;
       }
     }
@@ -758,8 +774,10 @@ export function analyzeControlFlow(
       } else {
         connectLast(id);
       }
-      lastNodeId = id;
-      terminated = false;
+      // Don't reset terminated — unreachable statements stay unreachable
+      if (!terminated) {
+        lastNodeId = id;
+      }
     }
     // Skip other simple statements to avoid cluttering the graph
   }

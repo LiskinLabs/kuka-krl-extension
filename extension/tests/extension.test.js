@@ -294,6 +294,49 @@ test('Client and Server i18n locales are symmetric for EN, RU, and TR', () => {
     assertEqual(Object.keys(nlsEn).length, Object.keys(nlsTr).length, 'Package NLS EN and TR key counts must match');
 });
 
+// Test 9: Webview CSP & Panel ViewColumns Architecture
+console.log('\n--- Webview & Panel Architecture Tests ---');
+
+test('Flowchart Webview CSP contains unsafe-eval and cspSource', () => {
+    const flowchartPath = path.join(__dirname, '..', 'client', 'src', 'features', 'flowchartViewer.ts');
+    const content = fs.readFileSync(flowchartPath, 'utf8');
+    assertTrue(content.includes("'unsafe-eval'"), "flowchartViewer.ts CSP missing 'unsafe-eval'");
+    assertTrue(content.includes('${cspSource}'), "flowchartViewer.ts CSP missing ${cspSource}");
+    assertTrue(content.includes('flowchartRenderDiv'), "flowchartViewer.ts missing flowchartRenderDiv isolated container");
+});
+
+test('Snippet Generator Panel uses ViewColumn.Beside for side-by-side split view', () => {
+    const snippetPath = path.join(__dirname, '..', 'client', 'src', 'features', 'snippetGenerator.ts');
+    const content = fs.readFileSync(snippetPath, 'utf8');
+    assertTrue(content.includes('vscode.ViewColumn.Beside'), 'snippetGenerator.ts must use ViewColumn.Beside to open beside active editor');
+    assertTrue(!content.includes('column || vscode.ViewColumn.One'), 'snippetGenerator.ts must not replace active tab column');
+});
+
+// Test 10: Obfuscator & Build Settings Safety
+console.log('\n--- Obfuscator Config Safety Tests ---');
+
+test('esbuild.js obfuscator settings are safe for VS Code extension architecture', () => {
+    const esbuildPath = path.join(__dirname, '..', 'esbuild.js');
+    const content = fs.readFileSync(esbuildPath, 'utf8');
+    assertTrue(content.includes('renameGlobals: false'), 'esbuild.js renameGlobals must be false');
+    assertTrue(content.includes('debugProtection: false'), 'esbuild.js debugProtection must be false');
+    assertTrue(content.includes('selfDefending: false'), 'esbuild.js selfDefending must be false');
+    assertTrue(content.includes('reservedNames:'), 'esbuild.js reservedNames missing');
+    assertTrue(content.includes('^activate$'), 'esbuild.js reservedNames must protect activate entry point');
+    assertTrue(content.includes('^deactivate$'), 'esbuild.js reservedNames must protect deactivate entry point');
+});
+
+// Test 11: Extension Activation & Async Lifecycle Safety
+console.log('\n--- Activation & Async Lifecycle Safety Tests ---');
+
+test('main.ts exports async activate and awaits initLicense', () => {
+    const mainTsPath = path.join(__dirname, '..', 'client', 'src', 'main.ts');
+    const content = fs.readFileSync(mainTsPath, 'utf8');
+    assertTrue(content.includes('export async function activate'), 'main.ts activate function must be async');
+    assertTrue(content.includes('await initLicense(context)'), 'main.ts must await initLicense(context) to avoid race condition');
+    assertTrue(content.includes('.catch(('), 'main.ts lsClient.start() must have .catch() error handler');
+});
+
 // Summary
 console.log('\n=== Test Summary ===');
 console.log(`Passed: ${passed}`);

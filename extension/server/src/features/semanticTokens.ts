@@ -51,9 +51,8 @@ export class SemanticTokensProvider {
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
 
-      // Пропускаем комментарии KRL
-      const commentIdx = line.indexOf(";");
-      const searchLine = commentIdx >= 0 ? line.substring(0, commentIdx) : line;
+      // Пропускаем комментарии KRL (учитываем ; внутри строковых литералов)
+      const searchLine = this.stripKrlComment(line);
 
       let match;
       wordRegex.lastIndex = 0;
@@ -122,5 +121,22 @@ export class SemanticTokensProvider {
 
   private isKrlKeyword(word: string): boolean {
     return CODE_KEYWORDS.includes(word.toUpperCase());
+  }
+
+  /**
+   * Убирает комментарий из строки KRL, учитывая строковые литералы.
+   * Символ `;` внутри `"..."` не считается началом комментария.
+   */
+  private stripKrlComment(line: string): string {
+    let inString = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        inString = !inString;
+      } else if (ch === ";" && !inString) {
+        return line.substring(0, i);
+      }
+    }
+    return line;
   }
 }

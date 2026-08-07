@@ -30,9 +30,9 @@ import { TelegramChatService } from "./features/telegramService";
 const krlDiagnostics = vscode.languages.createDiagnosticCollection("krl");
 let lsClient: LanguageClient;
 
-export function activate(context: vscode.ExtensionContext) {
-  // Initialize License System
-  initLicense(context);
+export async function activate(context: vscode.ExtensionContext) {
+  // Initialize License System (await ensures isPremiumCached is set before commands are used)
+  await initLicense(context);
 
   // Initialize Error Lens
   initErrorLens(context);
@@ -680,6 +680,11 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Validate workspace immediately on startup
     lsClient.sendNotification("custom/validateWorkspace");
+  }).catch((err) => {
+    const msg = err instanceof Error ? err.message : String(err);
+    vscode.window.showErrorMessage(
+      `KRL Language Server failed to start: ${msg}`,
+    );
   });
 
   context.subscriptions.push(krlDiagnostics);

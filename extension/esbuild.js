@@ -9,16 +9,16 @@ const production = process.argv.includes("--production");
 const obfuscatorOptions = {
   compact: true,
   controlFlowFlattening: true,
-  controlFlowFlatteningThreshold: 0.75,
+  controlFlowFlatteningThreshold: 0.3, // Reduced from 0.75 — high values cripple LSP server performance
   deadCodeInjection: true,
-  deadCodeInjectionThreshold: 0.4,
-  debugProtection: true,
-  disableConsoleOutput: true,
+  deadCodeInjectionThreshold: 0.2, // Reduced from 0.4 — too much dead code bloats bundle and slows execution
+  debugProtection: false,
+  disableConsoleOutput: false,
   identifierNamesGenerator: "hexadecimal",
   log: false,
   numbersToExpressions: true,
-  renameGlobals: true,
-  selfDefending: true,
+  renameGlobals: false,
+  selfDefending: false,
   simplify: true,
   splitStrings: true,
   splitStringsChunkLength: 10,
@@ -36,6 +36,8 @@ const obfuscatorOptions = {
   stringArrayWrappersType: "variable",
   stringArrayThreshold: 0.75,
   unicodeEscapeSequence: false,
+  // Protect VS Code extension entry points from being renamed
+  reservedNames: ["^activate$", "^deactivate$"],
 };
 
 async function obfuscateFile(filePath) {

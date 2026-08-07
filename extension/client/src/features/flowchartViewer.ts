@@ -66,6 +66,7 @@ export async function showFlowchartViewer(
   );
 
   panel.webview.html = getWebviewContent(
+    panel.webview.cspSource,
     mermaidUri.toString(),
     result.mermaid,
     result.graph.errors || [],
@@ -126,6 +127,7 @@ export async function showFlowchartViewer(
               panel.title =
                 "KRL Flowchart: " + path.basename(currentUri.fsPath);
               panel.webview.html = getWebviewContent(
+                panel.webview.cspSource,
                 mermaidUri.toString(),
                 r.mermaid,
                 r.graph.errors || [],
@@ -155,6 +157,7 @@ export async function showFlowchartViewer(
             currentUri = newUri;
             panel.title = "KRL Flowchart: " + path.basename(currentUri.fsPath);
             panel.webview.html = getWebviewContent(
+              panel.webview.cspSource,
               mermaidUri.toString(),
               r.mermaid,
               r.graph.errors || [],
@@ -196,6 +199,7 @@ export async function showFlowchartViewer(
             );
             const r = newResult as CfgResult;
             panel.webview.html = getWebviewContent(
+              panel.webview.cspSource,
               mermaidUri.toString(),
               r.mermaid,
               r.graph.errors || [],
@@ -287,6 +291,7 @@ async function selectMainFile(): Promise<vscode.Uri | undefined> {
 }
 
 function getWebviewContent(
+  cspSource: string,
   mermaidSrc: string,
   mermaidCode: string,
   errors: FlowGraphError[],
@@ -349,6 +354,7 @@ function getWebviewContent(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${cspSource} data:; script-src ${cspSource} 'unsafe-inline' 'unsafe-eval'; style-src ${cspSource} 'unsafe-inline'; font-src ${cspSource} 'unsafe-inline';">
     <title>KRL Flowchart</title>
     <style>
         body {
@@ -606,16 +612,7 @@ function getWebviewContent(
     </script>
     <script src="${mermaidSrc}"></script>
     <script>
-        const vscode = acquireVsCodeApi();
-
-        // Mermaid configuration
-        mermaid.initialize({
-            startOnLoad: false,
-            theme: document.body.classList.contains('vscode-light') ? 'default' : 'dark',
-            flowchart: { curve: 'basis', useMaxWidth: false },
-            securityLevel: 'loose'
-        });
-
+        // Mermaid is initialized below before renderChart()
         // Pan & Zoom Logic
         let scale = 1;
         let posX = 0;
@@ -749,18 +746,25 @@ function getWebviewContent(
             updateTransform();
         }
 
-        mermaid.initialize({
-            startOnLoad: false,
-            theme: document.body.classList.contains('vscode-light') ? 'default' : 'dark',
-            maxTextSize: 9000000,
-            securityLevel: 'loose'
-        });
+        const vscode = acquireVsCodeApi();
 
         async function renderChart() {
             const chart = document.getElementById('chart');
             const mermaidCode = ${JSON.stringify(mermaidCode)};
+            if (typeof mermaid === 'undefined') {
+                chart.innerHTML = '<div style="color:#f48771; padding:20px;"><h3>Mermaid.js not loaded</h3><p>Could not load diagram renderer script.</p></div>';
+                return;
+            }
             try {
-                const { svg, bindFunctions } = await mermaid.render('flowchart', mermaidCode);
+                mermaid.initialize({
+                    startOnLoad: false,
+                    theme: document.body.classList.contains('vscode-light') ? 'default' : 'dark',
+                    maxTextSize: 9000000,
+                    maxEdges: 100000,
+                    flowchart: { curve: 'basis', useMaxWidth: false },
+                    securityLevel: 'loose'
+                });
+                const { svg, bindFunctions } = await mermaid.render('flowchartRenderDiv', mermaidCode);
                 chart.innerHTML = svg;
                 
                 // Fix for blurry SVGs: remove CSS scaling and force native vector dimensions

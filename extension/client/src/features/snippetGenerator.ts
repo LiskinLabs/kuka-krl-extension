@@ -37,19 +37,15 @@ export class SnippetGeneratorPanel {
   }
 
   public static createOrShow(extensionUri: vscode.Uri) {
-    const column = vscode.window.activeTextEditor
-      ? vscode.window.activeTextEditor.viewColumn
-      : undefined;
-
     if (SnippetGeneratorPanel.currentPanel) {
-      SnippetGeneratorPanel.currentPanel.panel.reveal(column);
+      SnippetGeneratorPanel.currentPanel.panel.reveal(vscode.ViewColumn.Beside);
       return;
     }
 
     const panel = vscode.window.createWebviewPanel(
       "krlSnippetGenerator",
       t("snippet.title"),
-      column || vscode.ViewColumn.One,
+      vscode.ViewColumn.Beside,
       {
         enableScripts: true,
         retainContextWhenHidden: true,

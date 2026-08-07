@@ -183,13 +183,7 @@ Designed for system integrators, robotics leads, and safety compliance audits.
 
 ---
 
-### 18. Autonomous Helpdesk App (`KukaAdminHelpdesk.exe`)
-
-* **Purpose & Usage:** Standalone Windows admin console for automation team leads to monitor engineer workspace statuses (🟢 ONLINE / 🟡 IDLE / 🔴 OFFLINE).
-
----
-
-### 19. KRC Backup Diff & Point Delta Inspector
+### 18. KRC Backup Diff & Point Delta Inspector
 
 * **Purpose & Usage:** Loads SmartPAD KRC4/KRC5 `.zip` backup archives, compares them against local files, and calculates physical coordinate deltas ($\Delta X, \Delta Y, \Delta Z, \Delta A, \Delta B, \Delta C$) for points.
 * **Field Benefit:** Prevents robot collisions caused by manual point touch-ups on the SmartPAD.
@@ -199,13 +193,13 @@ Designed for system integrators, robotics leads, and safety compliance audits.
 
 ---
 
-### 20. Interactive Motion Trajectory & Snippet Generator
+### 19. Interactive Motion Trajectory & Snippet Generator
 
 * **Purpose & Usage:** 2-column GUI builder for KUKA motions (`PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`, `SPLINE`). Generates real-time vector SVG scheme diagrams with TCP jerk profiles (`$SGEAR_JERK`) and blending parameters (`C_PTP`, `C_DIS`, `C_Spl`).
 
 ---
 
-### 21. Interactive Flowchart Viewer (Control Flow Graph)
+### 20. Interactive Flowchart Viewer (Control Flow Graph)
 
 * **Purpose & Usage:** Converts `.src` program logic into clean Mermaid SVG control flow graphs (`krl.showFlowchart`). Click subprograms to drill down. SVG export enabled.
 * **Demonstration:**
@@ -217,13 +211,13 @@ Designed for system integrators, robotics leads, and safety compliance audits.
 
 ---
 
-### 22. EthernetKRL (EKI) XML Suite & Handler Generator
+### 21. EthernetKRL (EKI) XML Suite & Handler Generator
 
 * **Purpose & Usage:** Validates EthernetKRL XML communication schemas and automatically generates KRL networking modules (`EKI_Init`, `EKI_Open`, `EKI_Get*`, `EKI_Send*`).
 
 ---
 
-### 23. Industrial Safety & Velocity Diagnostics
+### 22. Industrial Safety & Velocity Diagnostics
 
 * **Purpose & Usage:** Automated safety inspector (`KRL: Run Safety Check`) alerting on:
   1. Excessive Cartesian velocity (`$VEL.CP > 3.0 m/s`).
@@ -232,21 +226,16 @@ Designed for system integrators, robotics leads, and safety compliance audits.
 
 ---
 
-### 24. AI-Supportive Domain Context Tools (`@kuka /get-io-matrix`, `@kuka /check-safety`)
-
-* **Purpose & Usage:** Grounding tools for AI assistants (Google Antigravity IDE / Copilot) providing exact KSS 8.7 AST, I/O matrices, and safety audit reports.
-
----
-
-### 25. 3-Point Frame Calculator (BASE & TOOL Math)
+### 23. 3-Point Frame Calculator (BASE & TOOL Math)
 
 * **Purpose & Usage:** 3D geometric frame transformation tool (`krl.showCalculator`). Computes `BASE_DATA[x]` Euler angles (A, B, C) from 3 recorded points (Origin, X-Axis, XY-Plane).
 
 ---
 
-### 26. Quality Acceptance Report Generator
+### 24. Quality Acceptance Report Generator
 
 * **Purpose & Usage:** Generates comprehensive HTML/JSON project quality reports for client acceptance sign-off.
+
 
 ---
 

@@ -65,17 +65,15 @@ VS Code için **KUKA KRL Professional Extension** resmi teknik wiki kılavuzuna 
     ![Control Center](/media/kuka_control_center.gif)
 
 17. **VS Code Telegram Destek Sohbeti**
-18. **Bağımsız Destek Yöneticisi Uygulaması (`KukaAdminHelpdesk.exe`)**
-19. **KRC Backup Diff ve Nokta Delta İnceleyicisi**
+18. **KRC Backup Diff ve Nokta Delta İnceleyicisi**
     ![KRC Backup Diff](/media/krc_backup_diff.gif)
 
-20. **Etkileşimli Hareket Yörüngesi Oluşturucu**
-21. **Etkileşimli Akış Şeması Görüntüleyici (Flowchart Viewer)**
+19. **Etkileşimli Hareket Yörüngesi Oluşturucu**
+20. **Etkileşimli Akış Şeması Görüntüleyici (Flowchart Viewer)**
     ![Control Flow Graph](/media/control_flow_graph.gif)
     ![Cell Flowchart SVG](/media/cell_flowchart.svg)
 
-22. **EthernetKRL (EKI) Paketi ve Kod Oluşturucu**
-23. **Endüstriyel Güvenlik ve Hız Denetimi**
-24. **Yapay Zeka Etki Alanı Bağlam Araçları (`@kuka /get-io-matrix`, `@kuka /check-safety`)**
-25. **3 Noktalı Çerçeve Hesaplayıcı (Frame Calculator)**
-26. **Kabul Raporu Oluşturucu (Quality Report)**
+21. **EthernetKRL (EKI) Paketi ve Kod Oluşturucu**
+22. **Endüstriyel Güvenlik ve Hız Denetimi**
+23. **3 Noktalı Çerçeve Hesaplayıcı (Frame Calculator)**
+24. **Kabul Raporu Oluşturucu (Quality Report)**

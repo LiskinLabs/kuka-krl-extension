@@ -16,24 +16,19 @@ Embedded support chat window (`krl.openTelegramChat`) linked with **`@kukakrlbot
 
 ---
 
-### 18. Autonomous Helpdesk App (`KukaAdminHelpdesk.exe`)
-Standalone Windows app for monitoring engineer workspace statuses.
-
----
-
-### 19. KRC Backup Diff & Point Delta Inspector
+### 18. KRC Backup Diff & Point Delta Inspector
 Compare SmartPAD `.zip` backups and calculate point deltas ($\Delta X, \Delta Y, \Delta Z, \Delta A, \Delta B, \Delta C$).
 
 ![KRC Backup Diff Demo](/media/krc_backup_diff.gif)
 
 ---
 
-### 20. Interactive Motion Trajectory & Snippet Generator
+### 19. Interactive Motion Trajectory & Snippet Generator
 Visual builder for KUKA motions (`PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`, `SPLINE Block`) with dynamic SVG vector diagrams.
 
 ---
 
-### 21. Interactive Flowchart Viewer (Control Flow Graph)
+### 20. Interactive Flowchart Viewer (Control Flow Graph)
 Transforms `.src` code into interactive Mermaid SVG flowchart diagrams.
 
 ![Control Flow Graph Demo](/media/control_flow_graph.gif)
@@ -41,25 +36,20 @@ Transforms `.src` code into interactive Mermaid SVG flowchart diagrams.
 
 ---
 
-### 22. EthernetKRL (EKI) Suite & Handler Generator
+### 21. EthernetKRL (EKI) Suite & Handler Generator
 Validates EKI XML schemas and auto-generates KRL network handlers.
 
 ---
 
-### 23. Industrial Safety & Velocity Diagnostics
+### 22. Industrial Safety & Velocity Diagnostics
 Automated inspector (`KRL: Run Safety Check`) flagging high speeds (`$VEL.CP > 3.0 m/s`), uninitialized `$TOOL`/`$BASE`, and non-ASCII characters.
 
 ---
 
-### 24. AI-Supportive Domain Context Tools (`@kuka /get-io-matrix`, `@kuka /check-safety`)
-Context providers for AI assistants (Google Antigravity IDE / Copilot).
-
----
-
-### 25. 3-Point Frame Calculator (BASE & TOOL Math)
+### 23. 3-Point Frame Calculator (BASE & TOOL Math)
 3D frame transformation calculator (`krl.showCalculator`) for `BASE_DATA[x]` Euler angles.
 
 ---
 
-### 26. Quality Acceptance Report Generator
+### 24. Quality Acceptance Report Generator
 Generates comprehensive HTML/JSON code quality reports for client sign-off.

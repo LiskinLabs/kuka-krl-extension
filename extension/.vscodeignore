@@ -1,46 +1,54 @@
-# Geliştirme dosyaları - VS Code'un pakete dahil etmemesi gereken dosyalar
+# VS Code & Git configuration
 .vscode/**
 .gitignore
 tsconfig.json
-**/tsconfig.json
+**/tsconfig*.json
 **/tsconfig.tsbuildinfo
 
-# Demo examples (only for GitHub, not needed in package)
+# Demo examples
 examples/**
+demo-workspace/**
 
-# Kaynak dosyalar (derlenmış JS dosyaları kullanılacak)
+# Source & TypeScript files
 **/src/**
 **/*.ts
-!**/*.d.ts
-
-# Haritalar ve günlükler
+**/*.d.ts
 **/*.map
 **/*.log
 
-# Belgeler
+# Unbundled compiler artifacts (only bundle entries client/out/main.js & server/out/core.js are needed)
+client/out/**
+!client/out/main.js
+server/out/**
+!server/out/core.js
+client/package.json
+server/package.json
+
+# Documentation
 *.pdf
 *.md
+!README.md
 !readme.md
 
-# Eski VSIX dosyaları
+# Package & Lock files
 *.vsix
-
-# Gereksiz dosyalar
 check_tmp.js
 eslint.config.js
 **/package-lock.json
+esbuild.js
+.prettierrc
 
-# node_modules
+# Node modules
 node_modules/**
 **/node_modules/**
 
-# Test files and scripts
+# Test files & scripts
 tests/**
 test_krl_extension.src
 validate-json.js
 *.test.js
 
-# Heavy demo GIFs (hosted externally in README)
+# Heavy demo media (hosted externally on GitHub)
+media/*.gif
 media/**/*.gif
-esbuild.js
-.prettierrc
+media/1.1.*/**

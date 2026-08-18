@@ -224,7 +224,7 @@ console.log('\n--- Licensing Tests ---');
 test('Control Center has the correct Lemon Squeezy Checkout URL', () => {
     const licensePath = path.join(__dirname, '..', 'client', 'src', 'features', 'license.ts');
     const licenseContent = fs.readFileSync(licensePath, 'utf8');
-    assertTrue(licenseContent.includes('https://liskin.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7'), 'Checkout URL is missing or incorrect in license.ts');
+    assertTrue(licenseContent.includes('https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7'), 'Checkout URL is missing or incorrect in license.ts');
 
     const controlCenterPath = path.join(__dirname, '..', 'client', 'src', 'features', 'controlCenter.ts');
     const ccContent = fs.readFileSync(controlCenterPath, 'utf8');

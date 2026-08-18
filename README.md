@@ -12,12 +12,14 @@
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/v/LiskinLabs.kuka-krl-extension?style=for-the-badge&label=Marketplace&color=FF6600" alt="Version" /></a>
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/i/LiskinLabs.kuka-krl-extension?style=for-the-badge&logo=visual-studio-code&label=Installs" alt="Installs" /></a>
+  <a href="https://secure.software/vscode/LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=for-the-badge&logo=shield" alt="ReversingLabs Security Score" /></a>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Language-KRL-orange?style=flat-square" />
   <img src="https://img.shields.io/badge/Offline--First-Ready-green?style=flat-square" />
   <img src="https://img.shields.io/badge/Localization-EN%20|%20RU%20|%20TR-blue?style=flat-square" />
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Documentation-Wiki-FF6600?style=flat-square" alt="Documentation Wiki" /></a>
 </p>
 
 ---

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension-core/main/logo.png" width="160" alt="KUKA KRL Professional" />
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension-core/main/extension/logo.png" width="160" alt="KUKA KRL Professional" />
 </p>
 
 <h1 align="center">KUKA KRL Professional</h1>
@@ -117,6 +117,60 @@ Every commissioning robotics engineer knows the pain:
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension-core/main/extension/media/code_formatter.gif" width="720" alt="Code Formatter Demo" />
+</p>
+
+---
+
+### 7. 💡 Smart Context Autocomplete & Snippets
+*Type at the speed of thought.* Instant code completion across 350+ KSS system variables, motion commands, structured types, and subroutines.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension-core/main/extension/media/smart_autocomplete.gif" width="720" alt="Smart Autocomplete Demo" />
+</p>
+
+---
+
+### 8. 🔎 Go-to-Definition & Find All References
+*Instant AST-level indexing across your entire project folder.* Jump from any function or variable call straight to its declaration across separate `.src` and `.dat` files.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension-core/main/extension/media/goto_definition.gif" width="720" alt="Go to Definition Demo" />
+</p>
+
+---
+
+### 9. ℹ️ Rich Hover Documentation & Read/Write Status
+*Get instant parameter explanations and safety warnings.* Hover over any KSS system variable to see its physical units, read/write permissions, and KSS manual descriptions.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension-core/main/extension/media/hover_info.gif" width="720" alt="Hover Info Demo" />
+</p>
+
+---
+
+### 10. 🧹 Clean Git Metadata & WorkVisual Header Stripper
+*Keep version control clean.* Strip WorkVisual headers (`&ACCESS`, `&REL`, `&PARAM`) with one click to prevent noisy git diffs on automated commits.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension-core/main/extension/media/git_metadata_cleaner.gif" width="720" alt="Git Metadata Cleaner Demo" />
+</p>
+
+---
+
+### 11. 🗂️ Quick Fold Toolbar & Sort Declarations
+*Manage massive programs with ease.* One-click folding of FOLD blocks, subprograms, and automatic sorting of variable declarations.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension-core/main/extension/media/quick_fold_toolbar.gif" width="720" alt="Quick Fold Toolbar Demo" />
+</p>
+
+---
+
+### 12. 💀 Dead Code & Unused Global Function Analysis
+*Prevent code bloat and leftover test routines.* Identify uncalled subroutines, unused variables, and unreachable code branches across your entire workspace.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension-core/main/extension/media/dead-code-demo.gif" width="720" alt="Dead Code Analysis Demo" />
 </p>
 
 ---

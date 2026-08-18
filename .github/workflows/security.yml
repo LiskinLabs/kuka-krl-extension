@@ -9,6 +9,12 @@ on:
     - cron: '0 4 * * 1' # Weekly security scan on Monday at 04:00 UTC
   workflow_dispatch:
 
+permissions:
+  contents: read
+  security-events: write
+  statuses: write
+  actions: read
+
 jobs:
   security-audit:
     name: Security & Supply Chain Audit
@@ -53,10 +59,11 @@ jobs:
 
       - name: ReversingLabs Spectra Assure Security Scan
         uses: reversinglabs/gh-action-rl-scanner-composite@v1
-        continue-on-error: true # Allows non-blocking report generation if RL credentials are not yet set
+        continue-on-error: true
         with:
-          artifact-path: "extension/kuka-krl-extension-1.7.3.vsix"
+          artifact-to-scan: "extension/kuka-krl-extension-1.7.3.vsix"
           report-path: "reports"
+          rl-verbose: true
         env:
           RL_TOKEN: ${{ secrets.RL_PORTAL_TOKEN }}
           RL_PORTAL_SERVER: ${{ secrets.RL_PORTAL_SERVER || 'https://my.secure.software' }}

@@ -35,12 +35,6 @@ jobs:
         working-directory: extension
         run: npm ci --legacy-peer-deps || npm install --legacy-peer-deps
 
-      - name: Build TypeScript Modules
-        working-directory: extension
-        run: |
-          npx tsc -p server --noEmit
-          npx tsc -p client --noEmit
-
       - name: Compile Production Extension
         working-directory: extension
         run: npm run compile

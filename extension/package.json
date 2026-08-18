@@ -552,8 +552,9 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "node esbuild.js --production",
-    "compile": "node esbuild.js --production",
+    "vscode:prepublish": "npm run compile",
+    "build:ts": "tsc -p server && tsc -p client",
+    "compile": "npm run build:ts && node esbuild.js --production",
     "watch": "node esbuild.js --watch",
     "lint": "eslint .",
     "package": "vsce package --no-dependencies",

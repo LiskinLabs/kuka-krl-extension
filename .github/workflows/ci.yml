@@ -31,12 +31,6 @@ jobs:
         working-directory: extension
         run: npm run lint
 
-      - name: Build TypeScript Modules
-        working-directory: extension
-        run: |
-          npx tsc -p server --noEmit
-          npx tsc -p client --noEmit
-
       - name: Compile Production Bundle
         working-directory: extension
         run: npm run compile

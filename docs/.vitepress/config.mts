@@ -21,7 +21,7 @@ export default defineConfig({
           { text: 'Features Wiki', link: '/guide/features' },
           { text: 'Community', link: '/guide/community-features' },
           { text: 'Pro Features', link: '/guide/pro-features' },
-          { text: 'Buy Pro License', link: 'https://liskin.lemonsqueezy.com' }
+          { text: 'Buy Pro License', link: 'https://liskinlabs.lemonsqueezy.com' }
         ],
         sidebar: [
           {
@@ -65,7 +65,7 @@ export default defineConfig({
           { text: 'Вики (26 функций)', link: '/ru/guide/features' },
           { text: 'Бесплатные (Community)', link: '/ru/guide/community-features' },
           { text: 'Pro функции', link: '/ru/guide/pro-features' },
-          { text: 'Купить Pro', link: 'https://liskin.lemonsqueezy.com' }
+          { text: 'Купить Pro', link: 'https://liskinlabs.lemonsqueezy.com' }
         ],
         sidebar: [
           {
@@ -107,7 +107,7 @@ export default defineConfig({
         nav: [
           { text: 'Ana Sayfa', link: '/tr/' },
           { text: 'Özellikler Wiki', link: '/tr/guide/features' },
-          { text: 'Pro Satın Al', link: 'https://liskin.lemonsqueezy.com' }
+          { text: 'Pro Satın Al', link: 'https://liskinlabs.lemonsqueezy.com' }
         ],
         sidebar: [
           {

@@ -35,7 +35,12 @@ build_extension:
 pages:
   stage: deploy
   script:
-    - if [ -d "docs" ] && [ -f "docs/package.json" ]; then cd docs && (npm ci --legacy-peer-deps || npm install --legacy-peer-deps) && npx vitepress build && cd ..; fi
+    - cd docs
+    - npm ci --legacy-peer-deps || npm install --legacy-peer-deps
+    - npx vitepress build
+    - cd ..
+    - mkdir -p public
+    - if [ -d "docs/.vitepress/dist" ]; then cp -r docs/.vitepress/dist/* public/; fi
   artifacts:
     paths:
       - public

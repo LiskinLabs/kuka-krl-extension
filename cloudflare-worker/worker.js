@@ -8,10 +8,13 @@ export default {
     const url = new URL(request.url);
     const BOT_TOKEN = env.BOT_TOKEN;
 
-    // Dynamic Admin Chat ID lookup (from env var or KV memory)
+    // Dynamic Admin Chat ID lookup (from env var or KV memory, with fallback to default support chat)
     let CHAT_ID = env.ADMIN_CHAT_ID;
     if (!CHAT_ID && env.CHAT_KV) {
       CHAT_ID = await env.CHAT_KV.get("config:admin_chat_id");
+    }
+    if (!CHAT_ID) {
+      CHAT_ID = "-1004437378910";
     }
 
     // CORS headers for VS Code Webview / fetch
@@ -317,11 +320,45 @@ export default {
             currentData.isClosed = true;
             currentData.closedAt = Date.now();
             await env.CHAT_KV.put(key, JSON.stringify(currentData), { expirationTtl: 86400 * 7 });
+
+            // Clear from last active session if matches
+            const lastActive = await env.CHAT_KV.get("config:last_active_session");
+            if (lastActive === sessionId) {
+              await env.CHAT_KV.delete("config:last_active_session");
+            }
           }
 
+          // 1. Rename forum topic and close it in Telegram (if forum supergroup)
+          if (threadId) {
+            try {
+              const closedName = `[ЗАКРЫТ 🗑️] ${hostname || "PC"} (#${sessionId})`;
+              await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/editForumTopic`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  chat_id: CHAT_ID,
+                  message_thread_id: parseInt(threadId, 10),
+                  name: closedName.substring(0, 120),
+                }),
+              });
+              await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/closeForumTopic`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  chat_id: CHAT_ID,
+                  message_thread_id: parseInt(threadId, 10),
+                }),
+              });
+            } catch {
+              /* ignore non-forum supergroups */
+            }
+          }
+
+          // 2. Send explicit alert notice to Telegram
           const closeNotice =
-            `🗑️ *[KRL Support] Инженер ${action || "удалил сессию"}* (\`#${sessionId}\` на ПК \`${hostname || "PC"}\`)\n` +
-            `⚠️ _Диалог закрыт на стороне пользователя в VS Code. Ответы в этот чат больше не будут доставлены._`;
+            `🗑️ *[KRL Support] Инженер ${action || "удалил сессию"}* (\`#${sessionId}\` на ПК \`${hostname || "PC"}\`)\n\n` +
+            `⚠️ _Диалог закрыт на стороне пользователя в VS Code. История удалена._\n` +
+            `❌ _Сообщения, отправленные в эту тему, больше не будут доставлены._`;
 
           await sendTelegramMessage(CHAT_ID, closeNotice, threadId);
         }
@@ -361,6 +398,19 @@ export default {
             if (targetSessionId && env.CHAT_KV) {
               const key = `session:${targetSessionId}`;
               const currentData = (await env.CHAT_KV.get(key, "json")) || { messages: [], lastTime: Date.now() };
+
+              // Guard: If session was closed/deleted by user
+              if (currentData.isClosed) {
+                await answerCallbackQuery(cb.id, `❌ Сессия #${targetSessionId} удалена пользователем в VS Code`);
+                if (BOT_TOKEN && cbChatId) {
+                  await sendTelegramMessage(
+                    cbChatId,
+                    `🚫 *Сессия закрыта:* Инженер удалил сессию \`#${targetSessionId}\` в VS Code. Команда \`${command}\` не может быть выполнена.`,
+                    threadId
+                  );
+                }
+                return new Response("OK", { status: 200 });
+              }
 
               currentData.messages.push({
                 sender: "developer",
@@ -461,6 +511,20 @@ export default {
               const key = `session:${targetSessionId}`;
               const currentData = (await env.CHAT_KV.get(key, "json")) || { messages: [], lastTime: Date.now() };
               const cleanText = msg.text.replace(/^#[a-f0-9]{6}\s*/i, "").trim();
+
+              // Guard: If session was closed/deleted by user in VS Code
+              if (currentData.isClosed) {
+                if (BOT_TOKEN && incomingChatId) {
+                  await sendTelegramMessage(
+                    incomingChatId,
+                    `🚫 *Ошибка отправки:* Сессия \`#${targetSessionId}\` была *удалена пользователем* в VS Code!\n\n` +
+                      `⚠️ _Чат с инженером закрыт. Ваше сообщение:_ \`${cleanText.substring(0, 100)}\` _не может быть доставлено._\n` +
+                      `💡 _Дождитесь, пока пользователь создаст новое обращение._`,
+                    msg.message_thread_id
+                  );
+                }
+                return new Response("OK", { status: 200 });
+              }
 
               const isRemoteCommand = cleanText.startsWith("/");
               const command = isRemoteCommand ? cleanText.split(" ")[0].toLowerCase() : undefined;

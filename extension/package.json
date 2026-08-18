@@ -15,8 +15,16 @@
     "url": "https://github.com/LiskinLabs/kuka-krl-extension-core.git"
   },
   "license": "SEE LICENSE IN LICENSE.txt",
+  "pricing": "Free",
+  "badges": [
+    {
+      "url": "https://img.shields.io/badge/Pro_Store-Lemon_Squeezy-FF6600?style=flat-square",
+      "href": "https://liskin.lemonsqueezy.com/",
+      "description": "Buy KRL Extension Pro License"
+    }
+  ],
   "sponsor": {
-    "url": "https://github.com/LiskinLabs/kuka-krl-extension-core#support-the-project"
+    "url": "https://liskin.lemonsqueezy.com/"
   },
   "homepage": "https://github.com/LiskinLabs/kuka-krl-extension-core",
   "bugs": {

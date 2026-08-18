@@ -42,9 +42,8 @@ We offer flexible, industrial-grade licensing through our official merchant, **L
 
 | Plan | Price | Best For | License Type |
 |:---|:---:|:---|:---|
-| ⏱️ **Pro Monthly** | **$19** / mo | Short-term commissioning trips | Subscription (Cancel anytime) |
-| 📅 **Pro Annual** | **$149** / yr | Full-time robotics engineers *(Save ~35%)* | Subscription |
-| ♾️ **Pro Lifetime** | **$399** | Enterprises & long-term ownership | One-time payment (Yours forever) |
+| ⏱️ **Pro Monthly** | **$3.99** / mo | Short-term commissioning & trial | Subscription (14-day free trial, 3 PCs) |
+| 📅 **Pro Annual** | **$39.99** / yr | Full-time robotics engineers *(Save 20%)* | Subscription (Priority updates, 3 PCs) |
 
 <div align="center" style="margin: 30px 0;">
   <a href="https://liskin.lemonsqueezy.com/" style="text-decoration:none;">
@@ -53,6 +52,12 @@ We offer flexible, industrial-grade licensing through our official merchant, **L
     </kbd>
   </a>
   <p style="margin-top: 12px; font-size: 0.95em; color: #555;">Instant activation key delivery via <b>Lemon Squeezy</b> (Merchant of Record)</p>
+</div>
+
+---
+
+## 🚀 Key Professional Features
+
 ### 1. 🗺️ Interactive Flowchart Viewer
 *Stop tracing nested logic by hand.* Turn massive, complex `.src` programs into visual, clean control-flow diagrams.
 * **Bi-directional Navigation**: Click any block in the flowchart to jump to the exact line of code in the editor.
@@ -60,43 +65,37 @@ We offer flexible, industrial-grade licensing through our official merchant, **L
 * **Detailed Info-mode**: Toggle flags, timers, and I/O states directly on the flowchart blocks with color indicators.
 * **SVG Export**: Export vector graphics of your subprograms in one click to embed directly into client documentation.
 
-*Preview:*
-<div align="center">
-  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension-core/main/media/dead-code-demo.gif" width="600" alt="Flowchart Viewer Demo" />
-</div>
+### 2. 🛡️ Industrial Safety & Deep Logic Analyzer
+*Catch syntax crashes, deadlocks, and physical collision risks before you run code on KRC.*
+* **10-Point Industrial Inspection**: Scans for cartesian speed violations (`$VEL.CP > 2.0 m/s`), uninitialized motion calls (`LIN`/`PTP` without `$TOOL`/`$BASE`), infinite loops (`LOOP` without `EXIT`), sensor deadlocks (`WAIT FOR` without timers), and non-ASCII Cyrillic blockers.
+* **VS Code Problems Integration**: Publishes all detected risks directly to the VS Code **Problems panel (`Ctrl+Shift+M`)** with one-click navigation to lines.
 
-### 2. 🛡️ Industrial-Grade Safety & Diagnostics
-*Catch syntax crashes and physical collision risks before you run the code.*
-* **Strict Block Balance**: Flags missing or orphaned block endings (`IF/ENDIF`, `FOR/ENDFOR`, `LOOP/ENDLOOP`). Handles complex KRL syntax without false positives.
-* **Collision Guard (Tool/Base Check)**: Warns you if movements (`PTP`, `LIN`, `CIRC`) are declared before active `$TOOL` or `$BASE` values have been initialized in the current routine.
-* **High Velocity Warning**: Alerts you when speed settings exceed safe commissioning levels (e.g., `$VEL.CP` exceeding 3.0 m/s) to prevent manual test-run accidents.
-* **Silent Error Blocker (Non-ASCII)**: Cyrillic comments or invisible non-ASCII characters inside executable lines cause quiet compiler failures on older KRC software. Pro checks detect and pinpoint them immediately.
+### 3. 📡 EthernetKRL (EKI) Suite & Smart XML Validator
+*Seamless EthernetKRL network setup for vision systems and PLC communication.*
+* **Smart XML Schema Validator**: Auto-detects `ETHERNETKRL` XML config files in your workspace and validates schema elements (`<CONFIGURATION>`, `<RECEIVE>`, `<SEND>`).
+* **EKI Handler Generator**: Generates clean, ready-to-use KRL communication routines (`EKI_Init`, `EKI_Open`, `EKI_Get*`, `EKI_Send*`) in one click.
 
-*Preview:*
-<div align="center">
-  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension-core/main/media/type-validation-demo.gif" width="600" alt="Diagnostics Demo" />
-</div>
-
-### 3. 📐 KUKA Frame Calculator
+### 4. 📐 KUKA Frame Calculator
 Calculate coordinate system transformations using the classic **3-Point Method** directly inside VS Code.
 * No need to export coordinates to external spreadsheets or compute matrices on paper.
 * Calculate `TOOL` offset or `BASE` origin transformations using measured points.
 * Insert computed coordinates directly into your `.dat` files with a single click.
 
-### 4. 📦 KRC Backup Diff & Point Delta Inspector
+### 5. 📦 KRC Backup Diff & Point Delta Inspector
 Inspect and compare `.src` and `.dat` files and $E6POS/POS/E6AXIS$ point coordinates directly against `.zip` backup archives from KRC4/KRC5 SmartPAD controllers.
 * Calculate exact coordinate deltas ($\Delta X, \Delta Y, \Delta Z, \Delta A, \Delta B, \Delta C$).
 * Graphical Side-by-Side Diff Viewer with Output Channel logs.
 
-### 5. 🗺️ Motion Diagrams & KSS 8.3+ Spline Snippet Generator
+### 6. 🗺️ Motion Diagrams & KSS 8.3+ Spline Snippet Generator
 Generate clean KRL code for `PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`, and `SPLINE Path Blocks` with real-time SVG Motion Scheme diagrams.
 * Visualizes TCP path trajectories, velocity vectors, and Jerk-Control ($SGEAR_JERK$).
 * Interactive selection for $C\_PTP$, $C\_DIS$, and $C\_Spl$ blending parameters.
 
-### 6. 📋 Automated Code Quality Reports
-Ensure your code meets the high standards of automotive manufacturers (VASS, BMW, Stellantis).
-* Scan the workspace for unused local variables and dead global subroutines.
-* Generate a structured codebase health report to show your client or lead engineer that the code is optimized, clean, and safe.
+---
+
+## 🌐 Full Trilingual NLS Localization (EN / RU / TR)
+
+KUKA KRL Professional natively supports **English**, **Russian**, and **Turkish** across all UI elements, Control Center dashboard, Telegram chat, Flowchart viewer, motion descriptions, and popup notifications.
 
 ---
 
@@ -138,9 +137,8 @@ The Community Edition is free for personal and commercial use. Reverse-engineeri
 
 ## 📅 Changelog
 
-### v1.7.3 (Industrial Edition Hotfix)
-* 🚀 **Critical Fix**: Resolved an Extension Host crash (command not found) during activation caused by missing AI tools declarations.
-* 🚀 **Critical Fix**: Resolved a duplicate command registration crash (Error: command 'krl.foldAll' already exists) that aborted extension loading.
-* 🧠 **Smart Inlay Hints**: Ported the improved $config.dat global signal resolving logic from v1.8.5. Inlay Hints now correctly display names for $IN[] and $OUT[] across the entire workspace by utilizing workspaceFolders instead of deprecated LSP variables.
-* 🛠️ **Build Optimization**: Cleaned up the sbuild process and removed unnecessary developer scripts for a cleaner production .vsix.
-
+### v1.7.3 (Industrial Edition Update)
+* 🌐 **Full Trilingual Localization**: Added 100% symmetric i18n support across EN, RU, and TR for Control Center, Flowchart viewer, EKI tools, Telegram chat, and VS Code notifications.
+* 🛡️ **Deep Industrial Logic & Safety Inspection**: Expanded safety analyzer to detect 10 critical KRC risks including infinite loops, unbounded sensor WAITs, unchecked actuator motions, and backward GOTOs with direct publication to VS Code **Problems panel**.
+* 📡 **Smart EKI XML Suite**: Auto-detects EthernetKRL XML files in workspace with QuickPick selection and instant KRL handler code generation.
+* 💬 **Telegram Support Chat Session Manager**: Added native VS Code dialog confirmation for session deletion and full history cleanup with webview auto-reload.

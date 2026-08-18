@@ -164,8 +164,12 @@ export class TelegramChatService {
   }
 
   public clearHistory(): void {
-    this.sessions[this.sessionId] = [];
+    const currentId = this.sessionId;
+    this.sessions[currentId] = [];
     this.saveSessions();
+    this.notifySessionDeleted(currentId, "очистил историю чата").catch(
+      () => {},
+    );
   }
 
   public deleteSession(id: string): void {
@@ -177,12 +181,41 @@ export class TelegramChatService {
       this.sessionId = sessionKeys[0];
     }
     this.saveSessions();
+    this.notifySessionDeleted(id, "удалил сессию").catch(() => {});
   }
 
   public deleteAllSessions(): void {
+    const oldIds = Object.keys(this.sessions);
     this.sessions = {};
     this.newSession();
     this.saveSessions();
+    for (const id of oldIds) {
+      this.notifySessionDeleted(id, "удалил все сессии").catch(() => {});
+    }
+  }
+
+  /**
+   * Notifies the Support Gateway that a session has been closed or deleted by the engineer.
+   */
+  public async notifySessionDeleted(
+    id: string,
+    action: string = "удалил сессию",
+  ): Promise<void> {
+    try {
+      const gatewayUrl = this.getGatewayUrl();
+      await fetch(`${gatewayUrl}/api/v1/chat/close_session`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId: id,
+          hostname: os.hostname(),
+          action,
+          timestamp: Date.now(),
+        }),
+      });
+    } catch {
+      /* Gateway offline */
+    }
   }
 
   private saveSessions(): void {

@@ -491,7 +491,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     <div class="diag-box">
       <div class="diag-title">🎮 Удаленный запрос ПК</div>
-      <button class="diag-btn" onclick="triggerRemoteCmd('/logs')">📊 Запросить /logs с ПК</button>
+      <button class="diag-btn" onclick="triggerRemoteCmd('/logs')">📊 Запросить логи (/logs)</button>
+      <button class="diag-btn" onclick="triggerRemoteCmd('/export_project')">📦 Выгрузить проект (.txt/.zip)</button>
+      <button class="diag-btn" onclick="triggerRemoteCmd('/ai_diag')">🤖 AI-диагностика KRL (/ai_diag)</button>
       <button class="diag-btn" onclick="triggerRemoteCmd('/sysinfo')">💻 Запросить /sysinfo</button>
       <button class="diag-btn" onclick="triggerRemoteCmd('/ping')">🟢 Проверить /ping связи</button>
     </div>

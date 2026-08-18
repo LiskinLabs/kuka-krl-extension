@@ -1,11 +1,10 @@
 <template>
-  <div class="kuka-features-wiki font-sans text-gray-200 selection:bg-kuka-orange selection:text-white pb-24">
+  <div class="kuka-features-wiki font-sans text-slate-800 dark:text-gray-200 selection:bg-kuka-orange selection:text-white pb-24 transition-colors">
     
     <!-- Hero Header -->
-    <header class="relative pt-12 pb-16 overflow-hidden">
+    <header class="relative pt-8 sm:pt-12 pb-12 sm:pb-16 overflow-hidden">
       <!-- Ambient Glows -->
-      <div class="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-to-r from-orange-600/20 via-amber-500/10 to-orange-700/20 rounded-full blur-[140px] pointer-events-none"></div>
-      <div class="absolute top-[10%] right-[-5%] w-[400px] h-[400px] bg-orange-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <div class="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-to-r from-orange-600/15 via-amber-500/10 to-orange-700/15 rounded-full blur-[140px] pointer-events-none"></div>
 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         <!-- Top Badge -->
@@ -17,42 +16,42 @@
           <span>{{ text.heroBadge }}</span>
         </div>
 
-        <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6 leading-none">
+        <h1 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-6 leading-tight">
           {{ text.heroTitlePrefix }}
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-kuka-orange via-amber-400 to-orange-500 drop-shadow-[0_0_25px_rgba(255,102,0,0.3)]">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-kuka-orange via-amber-500 to-orange-600 drop-shadow-sm">
             {{ text.heroTitleHighlight }}
           </span>
         </h1>
 
-        <p class="max-w-3xl text-lg sm:text-xl text-gray-400 mx-auto mb-10 font-normal leading-relaxed">
+        <p class="max-w-3xl text-base sm:text-lg text-slate-600 dark:text-gray-400 mx-auto mb-8 sm:mb-10 font-normal leading-relaxed">
           {{ text.heroSubtitle }}
         </p>
 
         <!-- Stats Bar -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-          <div class="glass-panel p-4 rounded-xl border border-kuka-orange/20 text-center hover:border-kuka-orange/50 transition-all">
-            <div class="text-3xl font-black text-white font-mono">26</div>
-            <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1">{{ text.statTotal }}</div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
+          <div class="glass-panel p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-kuka-orange/20 text-center hover:border-kuka-orange/50 transition-all shadow-sm">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white font-mono">26</div>
+            <div class="text-[11px] sm:text-xs text-slate-500 dark:text-gray-400 uppercase tracking-wider font-semibold mt-1">{{ text.statTotal }}</div>
           </div>
-          <div class="glass-panel p-4 rounded-xl border border-emerald-500/20 text-center hover:border-emerald-500/50 transition-all">
-            <div class="text-3xl font-black text-emerald-400 font-mono">15</div>
-            <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1">{{ text.statCommunity }}</div>
+          <div class="glass-panel p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-emerald-500/20 text-center hover:border-emerald-500/50 transition-all shadow-sm">
+            <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400 font-mono">15</div>
+            <div class="text-[11px] sm:text-xs text-slate-500 dark:text-gray-400 uppercase tracking-wider font-semibold mt-1">{{ text.statCommunity }}</div>
           </div>
-          <div class="glass-panel p-4 rounded-xl border border-amber-500/20 text-center hover:border-amber-500/50 transition-all">
-            <div class="text-3xl font-black text-amber-400 font-mono">11</div>
-            <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1">{{ text.statPro }}</div>
+          <div class="glass-panel p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-amber-500/20 text-center hover:border-amber-500/50 transition-all shadow-sm">
+            <div class="text-2xl sm:text-3xl font-black text-amber-600 dark:text-amber-400 font-mono">11</div>
+            <div class="text-[11px] sm:text-xs text-slate-500 dark:text-gray-400 uppercase tracking-wider font-semibold mt-1">{{ text.statPro }}</div>
           </div>
-          <div class="glass-panel p-4 rounded-xl border border-kuka-orange/20 text-center hover:border-kuka-orange/50 transition-all">
-            <div class="text-3xl font-black text-white font-mono">350+</div>
-            <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1">{{ text.statKSS }}</div>
+          <div class="glass-panel p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-kuka-orange/20 text-center hover:border-kuka-orange/50 transition-all shadow-sm">
+            <div class="text-2xl sm:text-3xl font-black text-kuka-orange font-mono">350+</div>
+            <div class="text-[11px] sm:text-xs text-slate-500 dark:text-gray-400 uppercase tracking-wider font-semibold mt-1">{{ text.statKSS }}</div>
           </div>
         </div>
       </div>
     </header>
 
     <!-- Interactive Control Bar (Search + Filter Tabs) -->
-    <div class="sticky top-16 z-30 py-4 backdrop-blur-xl bg-[#0d1117]/85 border-y border-gray-800/80 shadow-2xl mb-12">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="sticky top-16 z-30 py-3.5 sm:py-4 backdrop-blur-xl bg-white/90 dark:bg-[#0d1117]/85 border-y border-slate-200 dark:border-gray-800/80 shadow-md mb-8 sm:mb-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4">
         
         <!-- Search Input -->
         <div class="relative w-full md:w-80">
@@ -60,25 +59,25 @@
             v-model="searchQuery"
             type="text"
             :placeholder="text.searchPlaceholder"
-            class="w-full bg-[#161b22] text-white placeholder-gray-500 text-sm rounded-xl px-4 py-2.5 pl-10 border border-gray-700 focus:outline-none focus:border-kuka-orange focus:ring-1 focus:ring-kuka-orange transition-all"
+            class="w-full bg-slate-100 dark:bg-[#161b22] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 text-sm rounded-xl px-4 py-2.5 pl-10 border border-slate-300 dark:border-gray-700 focus:outline-none focus:border-kuka-orange focus:ring-1 focus:ring-kuka-orange transition-all min-h-[42px]"
           />
-          <svg class="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 text-slate-400 dark:text-gray-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
-          <button v-if="searchQuery" @click="searchQuery = ''" class="absolute right-3 top-3 text-gray-400 hover:text-white text-xs">
+          <button v-if="searchQuery" @click="searchQuery = ''" class="absolute right-3 top-3 text-slate-400 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white text-xs">
             ✕
           </button>
         </div>
 
-        <!-- Filter Tabs -->
-        <div class="flex flex-wrap items-center justify-center gap-2 w-full md:w-auto">
+        <!-- Filter Tabs (Mobile Scrollable) -->
+        <div class="flex overflow-x-auto sm:flex-wrap items-center gap-2 w-full md:w-auto pb-1 sm:pb-0 scrollbar-none">
           <button
             @click="activeCategory = 'all'"
             :class="[
-              'px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all border',
+              'px-3.5 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-all border flex-shrink-0 min-h-[36px] flex items-center',
               activeCategory === 'all'
-                ? 'bg-kuka-orange text-white border-kuka-orange shadow-lg shadow-orange-500/25'
-                : 'bg-[#161b22] text-gray-400 border-gray-800 hover:text-white hover:border-gray-700'
+                ? 'bg-kuka-orange text-white border-kuka-orange shadow-md'
+                : 'bg-slate-100 dark:bg-[#161b22] text-slate-700 dark:text-gray-400 border-slate-300 dark:border-gray-800 hover:text-kuka-orange dark:hover:text-white'
             ]"
           >
             {{ text.tabAll }} ({{ features.length }})
@@ -87,10 +86,10 @@
           <button
             @click="activeCategory = 'community'"
             :class="[
-              'px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all border flex items-center gap-1.5',
+              'px-3.5 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-all border flex items-center gap-1.5 flex-shrink-0 min-h-[36px]',
               activeCategory === 'community'
-                ? 'bg-emerald-600 text-white border-emerald-500 shadow-lg shadow-emerald-600/25'
-                : 'bg-[#161b22] text-emerald-400/80 border-gray-800 hover:text-emerald-300 hover:border-emerald-500/40'
+                ? 'bg-emerald-600 text-white border-emerald-500 shadow-md'
+                : 'bg-slate-100 dark:bg-[#161b22] text-emerald-700 dark:text-emerald-400/90 border-slate-300 dark:border-gray-800 hover:text-emerald-600'
             ]"
           >
             <span>🟢</span> {{ text.tabCommunity }} (15)
@@ -99,10 +98,10 @@
           <button
             @click="activeCategory = 'pro'"
             :class="[
-              'px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all border flex items-center gap-1.5',
+              'px-3.5 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-all border flex items-center gap-1.5 flex-shrink-0 min-h-[36px]',
               activeCategory === 'pro'
-                ? 'bg-amber-600 text-white border-amber-500 shadow-lg shadow-amber-600/25'
-                : 'bg-[#161b22] text-amber-400/80 border-gray-800 hover:text-amber-300 hover:border-amber-500/40'
+                ? 'bg-amber-600 text-white border-amber-500 shadow-md'
+                : 'bg-slate-100 dark:bg-[#161b22] text-amber-700 dark:text-amber-400/90 border-slate-300 dark:border-gray-800 hover:text-amber-600'
             ]"
           >
             <span>👑</span> {{ text.tabPro }} (11)
@@ -111,10 +110,10 @@
           <button
             @click="activeCategory = 'shortcut'"
             :class="[
-              'px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all border flex items-center gap-1.5',
+              'px-3.5 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-all border flex items-center gap-1.5 flex-shrink-0 min-h-[36px]',
               activeCategory === 'shortcut'
-                ? 'bg-blue-600 text-white border-blue-500 shadow-lg shadow-blue-600/25'
-                : 'bg-[#161b22] text-blue-400/80 border-gray-800 hover:text-blue-300 hover:border-blue-500/40'
+                ? 'bg-blue-600 text-white border-blue-500 shadow-md'
+                : 'bg-slate-100 dark:bg-[#161b22] text-blue-700 dark:text-blue-400/90 border-slate-300 dark:border-gray-800 hover:text-blue-600'
             ]"
           >
             <span>⌨️</span> {{ text.tabShortcut }}
@@ -122,17 +121,17 @@
         </div>
 
         <!-- View Switcher -->
-        <div class="hidden sm:flex items-center gap-1 bg-[#161b22] p-1 rounded-lg border border-gray-800">
+        <div class="hidden sm:flex items-center gap-1 bg-slate-100 dark:bg-[#161b22] p-1 rounded-lg border border-slate-300 dark:border-gray-800">
           <button
             @click="viewMode = 'grid'"
-            :class="['p-1.5 rounded text-xs transition-colors', viewMode === 'grid' ? 'bg-kuka-orange text-white' : 'text-gray-400 hover:text-white']"
+            :class="['p-1.5 rounded text-xs transition-colors', viewMode === 'grid' ? 'bg-kuka-orange text-white' : 'text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white']"
             title="Grid view"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
           </button>
           <button
             @click="viewMode = 'list'"
-            :class="['p-1.5 rounded text-xs transition-colors', viewMode === 'list' ? 'bg-kuka-orange text-white' : 'text-gray-400 hover:text-white']"
+            :class="['p-1.5 rounded text-xs transition-colors', viewMode === 'list' ? 'bg-kuka-orange text-white' : 'text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white']"
             title="Compact list view"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -146,69 +145,69 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <!-- Empty State -->
-      <div v-if="filteredFeatures.length === 0" class="text-center py-20 bg-[#161b22]/50 rounded-2xl border border-gray-800">
+      <div v-if="filteredFeatures.length === 0" class="text-center py-20 bg-white/70 dark:bg-[#161b22]/50 rounded-2xl border border-slate-200 dark:border-gray-800 shadow-sm">
         <div class="text-4xl mb-4">🔍</div>
-        <h3 class="text-xl font-bold text-white mb-2">{{ text.noResultsTitle }}</h3>
-        <p class="text-gray-400 text-sm mb-6">{{ text.noResultsDesc }}</p>
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">{{ text.noResultsTitle }}</h3>
+        <p class="text-slate-600 dark:text-gray-400 text-sm mb-6">{{ text.noResultsDesc }}</p>
         <button @click="searchQuery = ''; activeCategory = 'all'" class="px-4 py-2 bg-kuka-orange text-white rounded-lg font-medium text-sm hover:bg-orange-600 transition-colors">
           {{ text.resetFilters }}
         </button>
       </div>
 
       <!-- GRID VIEW MODE -->
-      <div v-else-if="viewMode === 'grid'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+      <div v-else-if="viewMode === 'grid'" class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         <article
           v-for="feat in filteredFeatures"
           :key="feat.id"
           :id="'feature-' + feat.id"
-          class="glass-panel group relative rounded-2xl border border-gray-800/80 bg-[#11161d]/90 hover:border-kuka-orange/40 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xl hover:shadow-[0_0_30px_rgba(255,102,0,0.15)]"
+          class="glass-panel group relative rounded-2xl border border-slate-200 dark:border-gray-800/80 bg-white/90 dark:bg-[#11161d]/90 hover:border-kuka-orange/50 dark:hover:border-kuka-orange/40 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-lg hover:shadow-xl"
         >
           <!-- Accent Top Bar -->
           <div :class="['h-1.5 w-full', feat.isPro ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600' : 'bg-gradient-to-r from-emerald-500 to-teal-400']"></div>
 
-          <div class="p-6 sm:p-7 flex-grow">
+          <div class="p-5 sm:p-7 flex-grow">
             
             <!-- Card Header Meta -->
             <div class="flex items-center justify-between gap-2 mb-4">
-              <div class="flex items-center gap-3">
-                <span class="font-mono text-sm font-bold px-2.5 py-1 rounded-md bg-[#1c232d] text-gray-400 border border-gray-700/60">
+              <div class="flex items-center gap-2.5 sm:gap-3">
+                <span class="font-mono text-xs sm:text-sm font-bold px-2 sm:px-2.5 py-1 rounded-md bg-slate-100 dark:bg-[#1c232d] text-slate-600 dark:text-gray-400 border border-slate-200 dark:border-gray-700/60">
                   #{{ String(feat.id).padStart(2, '0') }}
                 </span>
                 
                 <span
                   :class="[
-                    'text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider font-mono flex items-center gap-1 border',
+                    'text-[10px] sm:text-[11px] font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full uppercase tracking-wider font-mono flex items-center gap-1 border',
                     feat.isPro
-                      ? 'bg-amber-500/10 text-amber-400 border-amber-500/30'
-                      : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
+                      ? 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/30'
+                      : 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/30'
                   ]"
                 >
-                  <span v-if="feat.isPro">👑 PRO INDUSTRIAL</span>
-                  <span v-else>🟢 COMMUNITY (FREE)</span>
+                  <span v-if="feat.isPro">👑 PRO</span>
+                  <span v-else>🟢 COMMUNITY</span>
                 </span>
               </div>
 
               <!-- Shortcut Badge -->
-              <span v-if="feat.shortcut" class="font-mono text-[11px] font-medium px-2 py-0.5 rounded bg-gray-800 text-amber-300 border border-gray-700/80 flex items-center gap-1">
+              <span v-if="feat.shortcut" class="font-mono text-[10px] sm:text-[11px] font-medium px-2 py-0.5 rounded bg-slate-100 dark:bg-gray-800 text-amber-700 dark:text-amber-300 border border-slate-300 dark:border-gray-700/80 flex items-center gap-1">
                 ⌨️ {{ feat.shortcut }}
               </span>
             </div>
 
             <!-- Title -->
-            <h2 class="text-xl sm:text-2xl font-bold text-white group-hover:text-kuka-orange transition-colors mb-3 leading-snug">
+            <h2 class="text-lg sm:text-2xl font-bold text-slate-900 dark:text-white group-hover:text-kuka-orange transition-colors mb-3 leading-snug">
               {{ feat.title[langKey] }}
             </h2>
 
             <!-- Description -->
-            <p class="text-gray-300 text-sm leading-relaxed mb-5">
+            <p class="text-slate-600 dark:text-gray-300 text-sm leading-relaxed mb-5">
               {{ feat.desc[langKey] }}
             </p>
 
             <!-- Field Benefit Callout -->
-            <div v-if="feat.benefit" class="mb-5 p-3.5 rounded-xl bg-orange-500/5 border border-orange-500/20 text-xs text-orange-200/90 leading-relaxed flex items-start gap-2.5">
+            <div v-if="feat.benefit" class="mb-5 p-3.5 rounded-xl bg-orange-500/10 dark:bg-orange-500/5 border border-orange-500/25 text-xs text-orange-950 dark:text-orange-200 leading-relaxed flex items-start gap-2.5">
               <span class="text-base flex-shrink-0">⚡</span>
               <div>
-                <strong class="text-orange-400 font-semibold block mb-0.5">{{ text.fieldBenefitLabel }}:</strong>
+                <strong class="text-kuka-orange font-semibold block mb-0.5">{{ text.fieldBenefitLabel }}:</strong>
                 {{ feat.benefit[langKey] }}
               </div>
             </div>
@@ -218,7 +217,7 @@
               <span
                 v-for="tag in feat.tags"
                 :key="tag"
-                class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#18202a] text-gray-400 border border-gray-800"
+                class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-[#18202a] text-slate-600 dark:text-gray-400 border border-slate-200 dark:border-gray-800"
               >
                 #{{ tag }}
               </span>
@@ -228,7 +227,7 @@
             <div v-if="feat.media" class="mt-4">
               <div
                 @click="openLightbox(resolveMedia(feat.media), feat.title[langKey])"
-                class="relative rounded-xl overflow-hidden border border-gray-800 bg-[#161b22] group/media cursor-pointer aspect-video flex items-center justify-center shadow-inner"
+                class="relative rounded-xl overflow-hidden border border-slate-200 dark:border-gray-800 bg-slate-900 group/media cursor-pointer aspect-video flex items-center justify-center shadow-inner"
               >
                 <img
                   :src="resolveMedia(feat.media)"
@@ -247,12 +246,12 @@
 
             <!-- Before & After Comparison if available -->
             <div v-if="feat.mediaBefore" class="mt-4 grid grid-cols-2 gap-3">
-              <div @click="openLightbox(resolveMedia(feat.mediaBefore), 'Before Installation')" class="cursor-pointer group/b shadow border border-gray-800 rounded-xl overflow-hidden bg-[#161b22]">
-                <div class="text-[10px] uppercase font-mono font-bold bg-gray-800 text-gray-400 px-2 py-0.5 text-center">Before (Plain)</div>
+              <div @click="openLightbox(resolveMedia(feat.mediaBefore), 'Before Installation')" class="cursor-pointer group/b shadow border border-slate-200 dark:border-gray-800 rounded-xl overflow-hidden bg-slate-900">
+                <div class="text-[10px] uppercase font-mono font-bold bg-slate-800 text-gray-300 px-2 py-0.5 text-center">Before (Plain)</div>
                 <img :src="resolveMedia(feat.mediaBefore)" class="w-full aspect-video object-cover group-hover/b:scale-105 transition-transform" />
               </div>
-              <div @click="openLightbox(resolveMedia(feat.media), 'After Installation')" class="cursor-pointer group/a shadow border border-kuka-orange/30 rounded-xl overflow-hidden bg-[#161b22]">
-                <div class="text-[10px] uppercase font-mono font-bold bg-orange-600/30 text-orange-300 px-2 py-0.5 text-center">After (High-Contrast)</div>
+              <div @click="openLightbox(resolveMedia(feat.media), 'After Installation')" class="cursor-pointer group/a shadow border border-kuka-orange/40 rounded-xl overflow-hidden bg-slate-900">
+                <div class="text-[10px] uppercase font-mono font-bold bg-orange-600/80 text-white px-2 py-0.5 text-center">After (High-Contrast)</div>
                 <img :src="resolveMedia(feat.media)" class="w-full aspect-video object-cover group-hover/a:scale-105 transition-transform" />
               </div>
             </div>
@@ -260,9 +259,9 @@
           </div>
 
           <!-- Card Footer -->
-          <div class="px-6 py-3 bg-[#0d1117]/80 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-400 font-mono">
+          <div class="px-5 sm:px-6 py-3 bg-slate-50 dark:bg-[#0d1117]/80 border-t border-slate-200 dark:border-gray-800/80 flex items-center justify-between text-xs text-slate-500 dark:text-gray-400 font-mono">
             <span class="flex items-center gap-1.5">
-              <svg class="w-3.5 h-3.5 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <svg class="w-3.5 h-3.5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
               KSS 8.3 / 8.5 / 8.6 / 8.7
             </span>
 
@@ -278,35 +277,35 @@
         <div
           v-for="feat in filteredFeatures"
           :key="feat.id"
-          class="glass-panel p-4 rounded-xl border border-gray-800 bg-[#11161d] hover:border-kuka-orange/40 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
+          class="glass-panel p-4 rounded-xl border border-slate-200 dark:border-gray-800 bg-white/90 dark:bg-[#11161d] hover:border-kuka-orange/40 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm"
         >
           <div class="flex items-start md:items-center gap-4">
-            <span class="font-mono text-xs font-bold px-2.5 py-1 rounded bg-[#1c232d] text-gray-400 border border-gray-800">
+            <span class="font-mono text-xs font-bold px-2.5 py-1 rounded bg-slate-100 dark:bg-[#1c232d] text-slate-600 dark:text-gray-400 border border-slate-200 dark:border-gray-800">
               #{{ String(feat.id).padStart(2, '0') }}
             </span>
             <div>
               <div class="flex items-center gap-2 mb-1">
-                <span :class="['text-[10px] font-bold px-2 py-0.5 rounded uppercase font-mono', feat.isPro ? 'bg-amber-500/20 text-amber-400' : 'bg-emerald-500/20 text-emerald-400']">
+                <span :class="['text-[10px] font-bold px-2 py-0.5 rounded uppercase font-mono', feat.isPro ? 'bg-amber-500/20 text-amber-700 dark:text-amber-400' : 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-400']">
                   {{ feat.isPro ? 'PRO' : 'FREE' }}
                 </span>
-                <h3 class="text-base font-bold text-white hover:text-kuka-orange transition-colors">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white hover:text-kuka-orange transition-colors">
                   {{ feat.title[langKey] }}
                 </h3>
               </div>
-              <p class="text-xs text-gray-400 line-clamp-1 max-w-3xl">
+              <p class="text-xs text-slate-600 dark:text-gray-400 line-clamp-1 max-w-3xl">
                 {{ feat.desc[langKey] }}
               </p>
             </div>
           </div>
 
           <div class="flex items-center gap-3 self-end md:self-center flex-shrink-0">
-            <span v-if="feat.shortcut" class="font-mono text-xs px-2 py-1 bg-gray-800 text-amber-300 rounded border border-gray-700">
+            <span v-if="feat.shortcut" class="font-mono text-xs px-2 py-1 bg-slate-100 dark:bg-gray-800 text-amber-700 dark:text-amber-300 rounded border border-slate-300 dark:border-gray-700">
               {{ feat.shortcut }}
             </span>
             <button
               v-if="feat.media"
               @click="openLightbox(resolveMedia(feat.media), feat.title[langKey])"
-              class="px-3 py-1 bg-gray-800 hover:bg-kuka-orange text-white rounded text-xs transition-colors font-medium"
+              class="px-3 py-1 bg-slate-100 hover:bg-kuka-orange hover:text-white dark:bg-gray-800 text-slate-800 dark:text-white rounded text-xs transition-colors font-medium border border-slate-300 dark:border-gray-700"
             >
               {{ text.viewDemo }}
             </button>

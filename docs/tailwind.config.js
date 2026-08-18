@@ -16,8 +16,8 @@ module.exports = {
         'kuka-border': '#30363D'
       },
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['Roboto Mono', 'ui-monospace', 'monospace']
+        sans: ['Inter', 'Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Roboto Mono', 'ui-monospace', 'monospace']
       }
     },
   },

@@ -7,7 +7,7 @@ export default defineConfig({
   themeConfig: {
     logo: '/logo.png',
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/LiskinLabs/kuka-krl-extension' }
+      { icon: 'github', link: 'https://github.com/LiskinLabs/kuka-krl-extension-core' }
     ],
   },
   locales: {
@@ -33,7 +33,7 @@ export default defineConfig({
           {
             text: 'Features Wiki',
             items: [
-              { text: 'Full Features Wiki (26 Features)', link: '/guide/features' },
+              { text: 'Full Features Wiki (26 Tools)', link: '/guide/features' },
               { text: 'Community Features (Free)', link: '/guide/community-features' },
               { text: 'Pro & Industrial Features', link: '/guide/pro-features' }
             ]
@@ -77,7 +77,7 @@ export default defineConfig({
           {
             text: 'Вики функций (Wiki)',
             items: [
-              { text: 'Полный справочник (26 функций)', link: '/ru/guide/features' },
+              { text: 'Полный справочник (26 инструментов)', link: '/ru/guide/features' },
               { text: 'Бесплатные функции (Community)', link: '/ru/guide/community-features' },
               { text: 'Промышленные Pro-функции', link: '/ru/guide/pro-features' }
             ]
@@ -107,6 +107,8 @@ export default defineConfig({
         nav: [
           { text: 'Ana Sayfa', link: '/tr/' },
           { text: 'Özellikler Wiki', link: '/tr/guide/features' },
+          { text: 'Ücretsiz (Community)', link: '/tr/guide/community-features' },
+          { text: 'Pro Özellikler', link: '/tr/guide/pro-features' },
           { text: 'Pro Satın Al', link: 'https://liskin.lemonsqueezy.com' }
         ],
         sidebar: [
@@ -119,7 +121,18 @@ export default defineConfig({
           {
             text: 'Özellikler Wiki',
             items: [
-              { text: 'Tüm Özellikler Listesi (26 Özellik)', link: '/tr/guide/features' }
+              { text: 'Tüm Özellikler Listesi (26 Araç)', link: '/tr/guide/features' },
+              { text: 'Ücretsiz Topluluk Özellikleri', link: '/tr/guide/community-features' },
+              { text: 'Pro ve Endüstriyel Özellikler', link: '/tr/guide/pro-features' }
+            ]
+          },
+          {
+            text: 'Pro Derinlemesine İncelemeler',
+            items: [
+              { text: 'Etkileşimli Akış Şeması', link: '/tr/guide/flowchart' },
+              { text: 'Endüstriyel Güvenlik ve Teşhisler', link: '/tr/guide/diagnostics' },
+              { text: 'KRC Yedekleme Farkı ve Delta Denetçisi', link: '/tr/guide/backup-diff' },
+              { text: 'Donanım Sinyali İpuçları (Inlay Hints)', link: '/tr/guide/inlay-hints' }
             ]
           }
         ],

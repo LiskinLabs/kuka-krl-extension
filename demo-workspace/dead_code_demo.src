@@ -1,0 +1,29 @@
+&ACCESS RVP
+&REL 2
+&COMMENT Dead Code and Variable Cleanup
+DEF dead_code_demo()
+  ; --- DEMO 1: Unused Variables (Cleanup tool) ---
+  ; These variables are declared but never used.
+  ; They will be highlighted in gray (fade out).
+  ; Run command "KRL: Clean up unused variables" to remove them!
+  DECL INT nTemporaryCounter
+  DECL REAL rCalculatedAngle
+  DECL BOOL bInitialTriggerState
+
+  ; Used variable (should stay)
+  DECL INT nUsedValue
+
+  nUsedValue = 10
+  $VEL.CP = 1.0
+
+  ; Wait based on the used value
+  WAIT SEC nUsedValue
+END
+
+; --- DEMO 2: Workspace Dead-Code Analysis ---
+; Since this is a GLOBAL function, the extension searches the whole folder.
+; Because it is NOT called in main.src or any other file, it is highlighted.
+; Try calling "unusedGlobalUtility()" in main.src to see the warning disappear!
+GLOBAL DEF unusedGlobalUtility()
+  HALT
+END

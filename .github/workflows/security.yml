@@ -29,6 +29,12 @@ jobs:
         working-directory: extension
         run: npm ci || npm install
 
+      - name: Build TypeScript Modules
+        working-directory: extension
+        run: |
+          cd server && npx tsc
+          cd ../client && npx tsc
+
       - name: Static Security & i18n Symmetry Tests
         working-directory: extension
         run: npm test
@@ -49,7 +55,7 @@ jobs:
         uses: reversinglabs/gh-action-rl-scanner-composite@v1
         continue-on-error: true # Allows non-blocking report generation if RL credentials are not yet set
         with:
-          artifact-path: "extension/kuka-krl-extension-*.vsix"
+          artifact-path: "extension/kuka-krl-extension-1.7.3.vsix"
           report-path: "reports"
         env:
           RL_TOKEN: ${{ secrets.RL_PORTAL_TOKEN }}

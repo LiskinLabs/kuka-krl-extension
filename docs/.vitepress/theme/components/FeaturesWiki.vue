@@ -227,11 +227,11 @@
             <!-- Media Preview Block -->
             <div v-if="feat.media" class="mt-4">
               <div
-                @click="openLightbox(feat.media, feat.title[langKey])"
+                @click="openLightbox(resolveMedia(feat.media), feat.title[langKey])"
                 class="relative rounded-xl overflow-hidden border border-gray-800 bg-[#161b22] group/media cursor-pointer aspect-video flex items-center justify-center shadow-inner"
               >
                 <img
-                  :src="feat.media"
+                  :src="resolveMedia(feat.media)"
                   :alt="feat.title[langKey]"
                   class="w-full h-full object-cover group-hover/media:scale-105 transition-transform duration-300"
                   loading="lazy"
@@ -247,13 +247,13 @@
 
             <!-- Before & After Comparison if available -->
             <div v-if="feat.mediaBefore" class="mt-4 grid grid-cols-2 gap-3">
-              <div @click="openLightbox(feat.mediaBefore, 'Before Installation')" class="cursor-pointer group/b shadow border border-gray-800 rounded-xl overflow-hidden bg-[#161b22]">
+              <div @click="openLightbox(resolveMedia(feat.mediaBefore), 'Before Installation')" class="cursor-pointer group/b shadow border border-gray-800 rounded-xl overflow-hidden bg-[#161b22]">
                 <div class="text-[10px] uppercase font-mono font-bold bg-gray-800 text-gray-400 px-2 py-0.5 text-center">Before (Plain)</div>
-                <img :src="feat.mediaBefore" class="w-full aspect-video object-cover group-hover/b:scale-105 transition-transform" />
+                <img :src="resolveMedia(feat.mediaBefore)" class="w-full aspect-video object-cover group-hover/b:scale-105 transition-transform" />
               </div>
-              <div @click="openLightbox(feat.media, 'After Installation')" class="cursor-pointer group/a shadow border border-kuka-orange/30 rounded-xl overflow-hidden bg-[#161b22]">
+              <div @click="openLightbox(resolveMedia(feat.media), 'After Installation')" class="cursor-pointer group/a shadow border border-kuka-orange/30 rounded-xl overflow-hidden bg-[#161b22]">
                 <div class="text-[10px] uppercase font-mono font-bold bg-orange-600/30 text-orange-300 px-2 py-0.5 text-center">After (High-Contrast)</div>
-                <img :src="feat.media" class="w-full aspect-video object-cover group-hover/a:scale-105 transition-transform" />
+                <img :src="resolveMedia(feat.media)" class="w-full aspect-video object-cover group-hover/a:scale-105 transition-transform" />
               </div>
             </div>
 
@@ -266,7 +266,7 @@
               KSS 8.3 / 8.5 / 8.6 / 8.7
             </span>
 
-            <a v-if="feat.deepLink" :href="feat.deepLink" class="text-kuka-orange hover:underline font-sans font-semibold flex items-center gap-1">
+            <a v-if="feat.deepLink" :href="resolveDeepLink(feat.deepLink)" class="text-kuka-orange hover:underline font-sans font-semibold flex items-center gap-1">
               {{ text.deepDiveLink }} →
             </a>
           </div>
@@ -305,7 +305,7 @@
             </span>
             <button
               v-if="feat.media"
-              @click="openLightbox(feat.media, feat.title[langKey])"
+              @click="openLightbox(resolveMedia(feat.media), feat.title[langKey])"
               class="px-3 py-1 bg-gray-800 hover:bg-kuka-orange text-white rounded text-xs transition-colors font-medium"
             >
               {{ text.viewDemo }}
@@ -336,7 +336,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useData } from 'vitepress'
+import { useData, withBase } from 'vitepress'
 
 const { lang } = useData()
 
@@ -345,6 +345,13 @@ const activeCategory = ref('all')
 const viewMode = ref('grid')
 const lightboxImage = ref(null)
 const lightboxTitle = ref('')
+
+const resolveMedia = (path) => path ? withBase(path) : ''
+const resolveDeepLink = (link) => {
+  if (!link) return ''
+  const prefix = langKey.value === 'en' ? '' : `/${langKey.value}`
+  return withBase(`${prefix}${link}`)
+}
 
 const openLightbox = (img, title) => {
   lightboxImage.value = img

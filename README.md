@@ -12,6 +12,7 @@
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/v/LiskinLabs.kuka-krl-extension?style=for-the-badge&label=VS%20Marketplace&color=FF6600" alt="VS Code Version" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=for-the-badge&label=Open%20VSX&color=007ACC" alt="Open VSX Version" /></a>
+  <a href="https://secure.software/vscode/LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=for-the-badge&logo=shield" alt="ReversingLabs Security Score" /></a>
 </p>
 
 <p align="center">
@@ -24,114 +25,81 @@
   <img src="https://img.shields.io/badge/Compatible%20with-VS%20Code-007ACC?logo=visual-studio-code&style=flat-square" />
   <img src="https://img.shields.io/badge/Compatible%20with-Cursor-00c1ff?style=flat-square" />
   <img src="https://img.shields.io/badge/Compatible%20with-Antigravity-black?style=flat-square" />
+  <img src="https://img.shields.io/badge/Security-0%20Malware%20%7C%200%20CVEs-emerald?style=flat-square" />
   <img src="https://img.shields.io/github/license/LiskinLabs/kuka-krl-extension?style=flat-square&color=blue" />
-  <img src="https://img.shields.io/github/last-commit/LiskinLabs/kuka-krl-extension?style=flat-square" />
-  <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" />
 </p>
 
 ---
 
-## ⚡ Engineered for Industrial Speed
+## ⚡ Engineered for Industrial Speed & Zero Downtime
 
 Stop the slow, painful **"WorkVisual-to-Pendant-to-Controller"** iteration cycle. 
 
-**KUKA KRL Professional** transforms VS Code and Cursor into a world-class offline IDE for industrial robot programmers. Write clean, crash-free code with real-time feedback, advanced syntax analytics, mathematical tools, and visual logic flow diagnostics before uploading files to the robot controller.
+**KUKA KRL Professional** transforms VS Code, Cursor, and Antigravity into a world-class offline IDE for industrial robot programmers. Write clean, crash-free code with real-time feedback, advanced syntax analytics, mathematical tools, and visual logic flow diagnostics before uploading files to the robot controller.
 
-We offer two editions tailored to your workflow:
-* 🟢 **Community Edition**: Core syntax support, basic autocompletion, and professional themes (100% free).
-* 👑 **Pro Edition**: Advanced industrial diagnostics, structural visualization, mathematical calculators, and compliance tools designed for field engineers.
+* 🌐 **Interactive Live Documentation Wiki**: [https://liskinlabs.github.io/kuka-krl-extension/](https://liskinlabs.github.io/kuka-krl-extension/)
+* 🇷🇺 **Русская документация**: [https://liskinlabs.github.io/kuka-krl-extension/ru/](https://liskinlabs.github.io/kuka-krl-extension/ru/)
+* 🇹🇷 **Türkçe Dokümantasyon**: [https://liskinlabs.github.io/kuka-krl-extension/tr/](https://liskinlabs.github.io/kuka-krl-extension/tr/)
 
 ---
 
-## 👑 Upgrade to Pro: Pricing & Licensing
+## 🛡️ Enterprise Security Certification
+
+KUKA KRL Professional is certified by **ReversingLabs Spectra Assure** with a **100% Security Health Score**:
+* 🟢 **0 Malware** (Clean binary inspection)
+* 🟢 **0 CVE Vulnerabilities** in all dependencies
+* 🟢 **0 Secret / Token Leaks**
+* 🟢 **0 MITRE ATT&CK Indicators**
+
+Live Security Report: [https://secure.software/vscode/LiskinLabs.kuka-krl-extension](https://secure.software/vscode/LiskinLabs.kuka-krl-extension)
+
+---
+
+## 👑 Pricing & Licensing (Lemon Squeezy Verified)
 
 Investing in a **KRL Pro License** is a game-changer for commissioning engineers. By catching a single syntax error or coordinate mismatch before it reaches the robot pendant, the extension **pays for itself instantly** in saved factory downtime.
 
-We offer flexible, industrial-grade licensing through our official merchant, **Lemon Squeezy**. All payments are secure and support Credit Cards, PayPal, and corporate invoices.
+Payments are securely handled via **Lemon Squeezy** (Merchant of Record). Supports Credit Cards, Apple Pay, Google Pay, and PayPal across 135+ countries with automatic tax/VAT invoices.
 
-### 💳 Pricing & Plans:
+### 💳 Plans:
 
-| Plan | Price | Best For | License Type |
-|:---|:---:|:---|:---|
-| ⏱️ **Pro Monthly** | **$19** / mo | Short-term commissioning trips | Subscription (Cancel anytime) |
-| 📅 **Pro Annual** | **$149** / yr | Full-time robotics engineers *(Save ~35%)* | Subscription |
-| ♾️ **Pro Lifetime** | **$399** | Enterprises & long-term ownership | One-time payment (Yours forever) |
-
-<div align="center" style="margin: 30px 0;">
-  <a href="https://liskin.lemonsqueezy.com/" style="text-decoration:none;">
-    <kbd style="font-size: 1.4em; padding: 14px 28px; background-color: #FF6600; color: white; border-radius: 8px; font-weight: bold; border: 1px solid #d15500; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">
-      🛒 Buy KRL Extension Pro License
-    </kbd>
-  </a>
-  <p style="margin-top: 12px; font-size: 0.95em; color: #555;">Instant activation key delivery via <b>Lemon Squeezy</b> (Merchant of Record)</p>
-</div>
+| Plan | Price | Features | Trial / Discount | Checkout Link |
+|:---|:---:|:---|:---:|:---|
+| 🟢 **Community Edition** | **Free** | Core Syntax, 6 Themes, 350+ KSS Autocomplete, Signal Inlay Hints | 100% Free Forever | [Install Free](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
+| ⏱️ **Pro Monthly** | **$3.99** / mo | All 26 Pro Tools, Flowcharts, Diagnostics, Frame Math, 3 PCs | **14-Day Free Trial** | [Start 14-Day Trial](https://liskinlabs.lemonsqueezy.com/checkout/buy/ab34799e-42d7-49b0-ad33-94b2d4fe0a7d) |
+| 📅 **Pro Annual** | **$39.99** / yr | All 26 Pro Tools, Priority Support & Updates, 3 PCs | **Save 20%** | [Get Annual Pro](https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7) |
 
 ---
 
-## 📊 Feature Comparison
+## 📊 Feature Matrix (26 Industrial Tools)
 
-| Feature | Community (Free) | Pro (Premium) |
-| :--- | :---: | :---: |
-| **KRL Syntax Highlighting** (`.src`, `.dat`, `.sub`) | ✅ | ✅ |
-| **Exclusive KUKA Themes** (Midnight OLED, Industrial, WorkVisual) | ✅ | ✅ |
-| **Contextual Autocomplete & Smart Folds** | ✅ | ✅ |
-| **Trilingual Localization** (EN, RU, TR) | ✅ | ✅ |
-| **Interactive Flowchart Viewer** (Logic mapping & navigation) | ❌ | **✅ Pro** |
-| **Integrated KUKA Frame Calculator** (3-Point Method) | ❌ | **✅ Pro** |
-| **Advanced Syntax & Block Balance Diagnostics** (`IF/LOOP/FOR`) | ❌ | **✅ Pro** |
-| **Safety Velocity & Tool/Base Initialization Warnings** | ❌ | **✅ Pro** |
-| **Workspace-wide Dead-Code Analysis** (`GLOBAL DEF` checker) | ❌ | **✅ Pro** |
-| **Automated Code Quality Report Generator** | ❌ | **✅ Pro** |
-
----
-
-## 🧠 Pro Features Deep-Dive
-
-### 1. 🗺️ Interactive Flowchart Viewer
-*Stop tracing nested logic by hand.* Turn massive, complex `.src` programs into visual, clean control-flow diagrams.
-* **Bi-directional Navigation**: Click any block in the flowchart to jump to the exact line of code in the editor.
-* **Subroutine Drill-Down**: Click subprogram calls (e.g., `GrabPart()`) to instantly load and display their flowcharts.
-* **Detailed Info-mode**: Toggle flags, timers, and I/O states directly on the flowchart blocks with color indicators.
-* **SVG Export**: Export vector graphics of your subprograms in one click to embed directly into client documentation.
-
-*Preview:*
-<div align="center">
-  <img src="docs/public/media/dead-code-demo.gif" width="600" alt="Flowchart Viewer Demo" />
-</div>
-
-### 2. 🛡️ Industrial-Grade Diagnostics
-*Catch syntax crashes and physical collision risks before you run the code.*
-* **Strict Block Balance**: Flags missing or orphaned block endings (`IF/ENDIF`, `FOR/ENDFOR`, `LOOP/ENDLOOP`). Handles complex KRL syntax without false positives.
-* **Collision Guard (Tool/Base Check)**: Warns you if movements (`PTP`, `LIN`, `CIRC`) are declared before active `$TOOL` or `$BASE` values have been initialized in the current routine.
-* **High Velocity Warning**: Alerts you when speed settings exceed safe commissioning levels (e.g., `$VEL.CP` exceeding 3.0 m/s) to prevent manual test-run accidents.
-* **Silent Error Blocker (Non-ASCII)**: Cyrillic comments or invisible non-ASCII characters inside executable lines cause quiet compiler failures on older KRC software. Pro checks detect and pinpoint them immediately.
-
-*Preview:*
-<div align="center">
-  <img src="docs/public/media/type-validation-demo.gif" width="600" alt="Diagnostics Demo" />
-</div>
-
-### 3. 📐 KUKA Frame Calculator
-Calculate coordinate system transformations using the classic **3-Point Method** directly inside VS Code.
-* No need to export coordinates to external spreadsheets or compute matrices on paper.
-* Calculate `TOOL` offset or `BASE` origin transformations using measured points.
-* Insert computed coordinates directly into your `.dat` files with a single click.
-
-### 4. 📋 Automated Code Quality Reports
-Ensure your code meets the high standards of automotive manufacturers (VASS, BMW, Stellantis).
-* Scan the workspace for unused local variables and dead global subroutines.
-* Generate a structured codebase health report to show your client or lead engineer that the code is optimized, clean, and safe.
+| # | Tool Name | Community | Pro Industrial | Description |
+|:---|:---|:---:|:---:|:---|
+| 01 | **KRL Syntax Highlighting** | ✅ | ✅ | Full AST-based coloring for `.src`, `.dat`, `.sub`, `.kfd` |
+| 02 | **Smart Autocomplete** | ✅ | ✅ | 350+ KSS system variables, motion commands, and structures |
+| 03 | **Industrial Contrast Themes** | ✅ | ✅ | 6 themes: Midnight OLED, WorkVisual, Industrial Dark, Blueprint |
+| 04 | **Signal Inlay Hints** | ✅ | ✅ | Shows real-time PLC comment labels next to `$IN[x]`, `$OUT[y]` |
+| 05 | **Hover Documentation** | ✅ | ✅ | Rich parameter signatures and explanations on hover |
+| 06 | **Interactive Flowchart Viewer** | ❌ | **✅ Pro** | Clickable Mermaid SVG logic graphs with 2-way code jumping |
+| 07 | **Block Balance Diagnostic** | ❌ | **✅ Pro** | Catches missing `ENDIF`, `ENDFOR`, `ENDLOOP` before compilation |
+| 08 | **Velocity Safety Inspector** | ❌ | **✅ Pro** | Warns against dangerous test velocities (`$VEL.CP > 3.0 m/s`) |
+| 09 | **Tool / Base Guard** | ❌ | **✅ Pro** | Alerts if motions occur before `$TOOL` / `$BASE` initialization |
+| 10 | **KRC Backup Diff & Delta** | ❌ | **✅ Pro** | Compares active code against SmartPAD `.zip` backups with delta math |
+| 11 | **3-Point Frame Calculator** | ❌ | **✅ Pro** | Computes `BASE_DATA` / `TOOL_DATA` Euler angles directly in editor |
+| 12 | **EthernetKRL (EKI) Suite** | ❌ | **✅ Pro** | XML schema validator, live template generator, and packet simulator |
+| 13 | **Dead Code & Scope Checker** | ❌ | **✅ Pro** | Identifies unused routines and unreferenced variables |
+| 14 | **Offline-First Activation** | ✅ | **✅ Pro** | Secure local OS keychain storage; 100% functional without internet |
 
 ---
 
 ## 🔒 Offline-First Guarantee (For Factory Floors)
 
-We know that automation engineers work in interference-heavy environments, underground cells, and factories with **zero internet connection**. 
+Automation engineers frequently work in underground production lines and secure automotive facilities with **zero internet access**.
 
-Our licensing module is built with an **Offline-First Architecture**:
+Our licensing module is engineered with an **Offline-First Architecture**:
 * **Activation**: Connect once to activate your license key.
-* **Cache**: The verified license state is safely cached on your machine.
-* **Offline Access**: The extension does **not** lock you out if internet connection is lost. It will continue running all Pro features offline, only attempting to sync status silently in the background when connectivity becomes available.
+* **Keychain Cache**: The verified license state is safely cached on your machine.
+* **Zero Lockouts**: The extension will **never** lock you out if network connection drops. It will operate all Pro features offline seamlessly.
 
 ---
 
@@ -152,8 +120,5 @@ Configure extension behaviors in your `settings.json`:
 ## 📄 License & Credits
 
 * **Publisher & Developer**: [Liskin Labs](https://github.com/LiskinLabs) / [Silvestr Liskin](https://www.linkedin.com/in/silvestr-liskin-ab712920b/)
-* **Data Sources**: KRL grammar references based on [OpenKuka](https://github.com/openkuka)
-* **Design**: 100% original KUKA-inspired themes (Industrial Dark, Midnight OLED, Blueprint)
-
-**Licensed under a Proprietary EULA.**  
-The Community Edition is free for personal and commercial use. Reverse-engineering, decompiling, or redistributing the extension or its Premium features is strictly prohibited. See the `LICENSE` file for full terms.
+* **Security Auditor**: [ReversingLabs Spectra Assure](https://secure.software/vscode/LiskinLabs.kuka-krl-extension)
+* **Official Merchant of Record**: [Lemon Squeezy](https://liskinlabs.lemonsqueezy.com/)

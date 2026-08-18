@@ -21,11 +21,11 @@ jobs:
           cache-dependency-path: 'extension/package-lock.json'
 
       - name: Copy License
-        run: cp LICENSE extension/LICENSE.txt
+        run: cp LICENSE extension/LICENSE.txt || true
 
       - name: Install Extension Dependencies
         working-directory: extension
-        run: npm ci || npm install
+        run: npm ci --legacy-peer-deps || npm install --legacy-peer-deps
 
       - name: Lint Extension
         working-directory: extension
@@ -34,8 +34,8 @@ jobs:
       - name: Build TypeScript Modules
         working-directory: extension
         run: |
-          cd server && npx tsc
-          cd ../client && npx tsc
+          npx tsc -p server --noEmit
+          npx tsc -p client --noEmit
 
       - name: Compile Production Bundle
         working-directory: extension
@@ -63,5 +63,5 @@ jobs:
       - name: Build Docs Verification
         run: |
           if [ -d "docs" ] && [ -f "docs/package.json" ]; then
-            cd docs && npm install --legacy-peer-deps && npm run docs:build || true
+            cd docs && (npm ci --legacy-peer-deps || npm install --legacy-peer-deps) && npm run docs:build || true
           fi

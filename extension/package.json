@@ -19,12 +19,12 @@
   "badges": [
     {
       "url": "https://img.shields.io/badge/Pro_Store-Lemon_Squeezy-FF6600?style=flat-square",
-      "href": "https://liskin.lemonsqueezy.com/",
+      "href": "https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7",
       "description": "Buy KRL Extension Pro License"
     }
   ],
   "sponsor": {
-    "url": "https://liskin.lemonsqueezy.com/"
+    "url": "https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7"
   },
   "homepage": "https://github.com/LiskinLabs/kuka-krl-extension-core",
   "bugs": {
@@ -514,39 +514,39 @@
         "krl.inlayHints.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Show descriptive names for I/O signals and system data as inline hints."
+          "description": "%config.inlayHints.enabled%"
         },
         "krl.errorLens.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Show diagnostics as inline text (Error Lens style)."
+          "description": "%config.errorLens.enabled%"
         },
         "krl.codeLens.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Show CodeLens hints for references and documentation."
+          "description": "%config.codeLens.enabled%"
         },
         "krl.callHierarchy.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Enable Call Hierarchy support for functions."
+          "description": "%config.callHierarchy.enabled%"
         },
         "krl.documentHighlights.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Highlight occurrences of the same variable/function in the document."
+          "description": "%config.documentHighlights.enabled%"
         },
         "krl.maxCartesianVelocity": {
           "type": "number",
           "default": 3.0,
           "minimum": 0.1,
           "maximum": 5.0,
-          "description": "Maximum safe Cartesian velocity limit for $VEL.CP (m/s)."
+          "description": "%config.maxCartesianVelocity%"
         },
         "krl.supportGatewayUrl": {
           "type": "string",
           "default": "https://kuka-krl-support-gateway.redminotpro5.workers.dev",
-          "description": "Liskin Labs Support Desk Gateway URL (Relay for Telegram Live Support)."
+          "description": "%config.supportGatewayUrl%"
         }
       }
     }

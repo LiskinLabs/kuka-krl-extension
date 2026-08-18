@@ -62,7 +62,7 @@ async function main() {
     external: ["vscode"],
     format: "cjs",
     platform: "node",
-    target: "node20", // Соответствует VS Code engines.vscode >= 1.85.0
+    target: "node18", // VS Code ^1.85.0 ships with Node.js 18
     minify: production, // Минификация (обфускация) только в продакшн режиме
     sourcemap: !production,
     sourcesContent: false,
@@ -76,7 +76,7 @@ async function main() {
     external: ["vscode"],
     format: "cjs",
     platform: "node",
-    target: "node20",
+    target: "node18",
     minify: production, // Минификация (обфускация) только в продакшн режиме
     sourcemap: !production,
     sourcesContent: false,

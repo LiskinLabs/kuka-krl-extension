@@ -95,11 +95,13 @@ export class SnippetGeneratorPanel {
     <title>${t("snippet.title")}</title>
     <style>
         body {
-            padding: 15px;
-            font-family: var(--vscode-font-family);
-            font-size: var(--vscode-font-size);
-            color: var(--vscode-foreground);
+            padding: 16px;
+            font-family: var(--vscode-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+            font-size: var(--vscode-font-size, 13px);
+            color: var(--vscode-editor-foreground);
             background-color: var(--vscode-editor-background);
+            max-width: 600px;
+            margin: 0 auto;
         }
         .form-group {
             margin-bottom: 12px;
@@ -109,16 +111,22 @@ export class SnippetGeneratorPanel {
             margin-bottom: 4px;
             font-weight: 600;
             font-size: 12px;
+            color: var(--vscode-foreground);
         }
         input, select, textarea {
             width: 100%;
-            padding: 6px 8px;
+            padding: 6px 10px;
             border-radius: 4px;
-            border: 1px solid var(--vscode-input-border, #334155);
-            background: var(--vscode-input-background, #0f172a);
-            color: var(--vscode-input-foreground, #ffffff);
+            border: 1px solid var(--vscode-input-border, rgba(128,128,128,0.25));
+            background: var(--vscode-input-background);
+            color: var(--vscode-input-foreground);
             font-family: inherit;
             box-sizing: border-box;
+            font-size: 12px;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--vscode-focusBorder, #ff6600);
+            outline: none;
         }
         .action-container {
             margin-top: 16px;
@@ -128,18 +136,20 @@ export class SnippetGeneratorPanel {
             color: var(--vscode-button-foreground, #ffffff);
             border: none;
             padding: 8px 16px;
-            border-radius: 6px;
+            border-radius: 4px;
             font-weight: 600;
             cursor: pointer;
+            font-size: 12px;
+            transition: all 0.15s ease;
         }
         .btn-primary:hover {
             background: var(--vscode-button-hoverBackground, #e65c00);
         }
         .tab-buttons {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             margin-bottom: 16px;
-            border-bottom: 1px solid var(--vscode-widget-border, #334155);
+            border-bottom: 1px solid var(--vscode-widget-border, rgba(128,128,128,0.2));
             padding-bottom: 8px;
         }
         .tab-btn {
@@ -150,11 +160,13 @@ export class SnippetGeneratorPanel {
             cursor: pointer;
             border-radius: 4px;
             font-weight: 500;
-            opacity: 0.7;
+            font-size: 12px;
+            opacity: 0.75;
+            transition: all 0.15s ease;
         }
         .tab-btn.active {
-            background: var(--vscode-button-secondaryBackground, rgba(255,102,0,0.2));
-            color: #ff6600;
+            background: var(--vscode-button-secondaryBackground, rgba(255,102,0,0.15));
+            color: var(--vscode-textLink-foreground, #ff6600);
             opacity: 1;
             font-weight: 700;
         }
@@ -165,11 +177,11 @@ export class SnippetGeneratorPanel {
             display: block;
         }
         .diagram-box {
-            background: var(--vscode-sideBar-background, #1e293b);
-            border: 1px solid var(--vscode-widget-border, #334155);
+            background: var(--vscode-textBlockQuote-background, rgba(128,128,128,0.06));
+            border: 1px solid var(--vscode-widget-border, rgba(128,128,128,0.2));
             border-radius: 8px;
             padding: 12px;
-            margin-top: 12px;
+            margin-top: 14px;
         }
         .diagram-header {
             display: flex;
@@ -178,8 +190,8 @@ export class SnippetGeneratorPanel {
             margin-bottom: 8px;
         }
         .badge {
-            background: #ff6600;
-            color: #fff;
+            background: var(--vscode-button-background, #ff6600);
+            color: var(--vscode-button-foreground, #fff);
             font-size: 10px;
             padding: 2px 6px;
             border-radius: 4px;
@@ -194,18 +206,18 @@ export class SnippetGeneratorPanel {
     </style>
 </head>
 <body>
-    <div class="tab-buttons">
-        <button class="tab-btn active" onclick="showTab('msg')">${t("snippet.tab.message")}</button>
-        <button class="tab-btn" onclick="showTab('grid')">${t("snippet.tab.grid")}</button>
-        <button class="tab-btn" onclick="showTab('motion')">${t("snippet.tab.motion")}</button>
+    <div class="tab-buttons" role="tablist">
+        <button id="btn-tab-msg" class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-msg" onclick="showTab('msg')">${t("snippet.tab.message")}</button>
+        <button id="btn-tab-grid" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-grid" onclick="showTab('grid')">${t("snippet.tab.grid")}</button>
+        <button id="btn-tab-motion" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-motion" onclick="showTab('motion')">${t("snippet.tab.motion")}</button>
     </div>
 
     <!-- Message Builder -->
-    <div id="tab-msg" class="tab-content active">
+    <div id="tab-msg" class="tab-content active" role="tabpanel" aria-labelledby="btn-tab-msg">
         <h3>${t("snippet.msg.title")}</h3>
         <p style="font-size:12px; color:var(--vscode-descriptionForeground);">${t("snippet.msg.desc")}</p>
         <div class="form-group">
-            <label>${t("snippet.msg.type")}</label>
+            <label for="msgType">${t("snippet.msg.type")}</label>
             <select id="msgType">
                 <option value="Notify">${t("snippet.msg.type.notify")}</option>
                 <option value="Quit">${t("snippet.msg.type.quit")}</option>
@@ -214,57 +226,57 @@ export class SnippetGeneratorPanel {
             </select>
         </div>
         <div class="form-group">
-            <label>${t("snippet.msg.key")}</label>
+            <label for="msgKey">${t("snippet.msg.key")}</label>
             <input type="text" id="msgKey" placeholder="${t("snippet.msg.key.placeholder")}" value="Msg1">
         </div>
         <div class="form-group">
-            <label>${t("snippet.msg.text")}</label>
+            <label for="msgText">${t("snippet.msg.text")}</label>
             <input type="text" id="msgText" placeholder="${t("snippet.msg.text.placeholder")}" value="Process started">
         </div>
         <div class="form-group">
-            <label>${t("snippet.msg.param1")}</label>
+            <label for="msgP1">${t("snippet.msg.param1")}</label>
             <input type="text" id="msgP1" placeholder="${t("snippet.msg.param1.placeholder")}">
         </div>
         <div class="action-container">
-            <button class="btn-primary" onclick="generateMessage()">${t("snippet.insert")}</button>
+            <button class="btn-primary" onclick="generateMessage()">⚡ ${t("snippet.insert")}</button>
         </div>
     </div>
 
     <!-- Grid Pattern -->
-    <div id="tab-grid" class="tab-content">
+    <div id="tab-grid" class="tab-content" role="tabpanel" aria-labelledby="btn-tab-grid">
         <h3>${t("snippet.grid.title")}</h3>
         <p style="font-size:12px; color:var(--vscode-descriptionForeground);">${t("snippet.grid.desc")}</p>
         <div class="form-group">
-            <label>${t("snippet.grid.base")}</label>
+            <label for="gridBase">${t("snippet.grid.base")}</label>
             <input type="text" id="gridBase" value="xBasePoint">
         </div>
         <div class="form-group">
-            <label>${t("snippet.grid.rows")}</label>
+            <label for="gridRows">${t("snippet.grid.rows")}</label>
             <input type="text" id="gridRows" value="3">
         </div>
         <div class="form-group">
-            <label>${t("snippet.grid.cols")}</label>
+            <label for="gridCols">${t("snippet.grid.cols")}</label>
             <input type="text" id="gridCols" value="2">
         </div>
         <div class="form-group">
-            <label>${t("snippet.grid.spaceX")}</label>
+            <label for="gridSpaceX">${t("snippet.grid.spaceX")}</label>
             <input type="text" id="gridSpaceX" value="100">
         </div>
         <div class="form-group">
-            <label>${t("snippet.grid.spaceY")}</label>
+            <label for="gridSpaceY">${t("snippet.grid.spaceY")}</label>
             <input type="text" id="gridSpaceY" value="100">
         </div>
         <div class="action-container">
-            <button class="btn-primary" onclick="generateGrid()">${t("snippet.insert")}</button>
+            <button class="btn-primary" onclick="generateGrid()">⚡ ${t("snippet.insert")}</button>
         </div>
     </div>
 
     <!-- Motion Builder -->
-    <div id="tab-motion" class="tab-content">
+    <div id="tab-motion" class="tab-content" role="tabpanel" aria-labelledby="btn-tab-motion">
         <h3>${t("snippet.mot.title")}</h3>
         <p style="font-size:12px; color:var(--vscode-descriptionForeground);">${t("snippet.mot.desc")}</p>
         <div class="form-group">
-            <label>${t("snippet.mot.type")}</label>
+            <label for="motionType">${t("snippet.mot.type")}</label>
             <select id="motionType" onchange="updateMotionPreview()">
                 <option value="PTP">PTP (Point-To-Point)</option>
                 <option value="LIN">LIN (Linear Interpolation)</option>
@@ -276,19 +288,19 @@ export class SnippetGeneratorPanel {
             </select>
         </div>
         <div class="form-group">
-            <label>${t("snippet.mot.point")}</label>
+            <label for="motionPoint">${t("snippet.mot.point")}</label>
             <input type="text" id="motionPoint" value="P1" oninput="updateMotionPreview()">
         </div>
         <div class="form-group" id="groupAuxPoint" style="display:none;">
-            <label>Auxiliary Point (CIRC / SCIRC)</label>
+            <label for="motionAuxPoint">Auxiliary Point (CIRC / SCIRC)</label>
             <input type="text" id="motionAuxPoint" value="P_AUX" oninput="updateMotionPreview()">
         </div>
         <div class="form-group">
-            <label>${t("snippet.mot.vel")}</label>
+            <label for="motionVel">${t("snippet.mot.vel")}</label>
             <input type="text" id="motionVel" value="100" oninput="updateMotionPreview()">
         </div>
         <div class="form-group">
-            <label>${t("snippet.mot.approx")}</label>
+            <label for="motionApprox">${t("snippet.mot.approx")}</label>
             <select id="motionApprox" onchange="updateMotionPreview()">
                 <option value="">${t("snippet.mot.approx.none")}</option>
                 <option value="C_PTP">C_PTP (Point approximation)</option>
@@ -307,7 +319,7 @@ export class SnippetGeneratorPanel {
         </div>
 
         <div class="action-container">
-            <button class="btn-primary" onclick="generateMotion()">${t("snippet.insert")}</button>
+            <button class="btn-primary" onclick="generateMotion()">⚡ ${t("snippet.insert")}</button>
         </div>
     </div>
 
@@ -322,18 +334,22 @@ export class SnippetGeneratorPanel {
         const descSplineBlockTpl = ${splineBlockDesc};
 
         function showTab(tabId) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
 
-            if (tabId === 'msg') {
-                document.querySelectorAll('.tab-btn')[0].classList.add('active');
-                document.getElementById('tab-msg').classList.add('active');
-            } else if (tabId === 'grid') {
-                document.querySelectorAll('.tab-btn')[1].classList.add('active');
-                document.getElementById('tab-grid').classList.add('active');
-            } else if (tabId === 'motion') {
-                document.querySelectorAll('.tab-btn')[2].classList.add('active');
-                document.getElementById('tab-motion').classList.add('active');
+            const targetBtn = document.getElementById('btn-tab-' + tabId);
+            const targetContent = document.getElementById('tab-' + tabId);
+            if (targetBtn) {
+                targetBtn.classList.add('active');
+                targetBtn.setAttribute('aria-selected', 'true');
+            }
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+            if (tabId === 'motion') {
                 updateMotionPreview();
             }
         }

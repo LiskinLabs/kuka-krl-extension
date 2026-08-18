@@ -5,6 +5,31 @@ import { WordInfo, FunctionDeclaration } from "../types";
 
 export type ParseMode = "function" | "variable" | "struc";
 
+interface CachedFile {
+  mtime: number;
+  content: string;
+}
+
+const fileContentCache = new Map<string, CachedFile>();
+
+/**
+ * Gets cached file content with automatic mtime invalidation.
+ */
+async function getCachedFileContent(filePath: string): Promise<string> {
+  try {
+    const stats = await fs.promises.stat(filePath);
+    const cached = fileContentCache.get(filePath);
+    if (cached && cached.mtime === stats.mtimeMs) {
+      return cached.content;
+    }
+    const content = await fs.promises.readFile(filePath, "utf8");
+    fileContentCache.set(filePath, { mtime: stats.mtimeMs, content });
+    return content;
+  } catch {
+    return "";
+  }
+}
+
 /**
  * Çalışma alanında bir sembolün tanımlı olup olmadığını kontrol eder.
  */
@@ -43,8 +68,8 @@ export async function isSymbolDeclared(
   for (const filePath of files) {
     let content: string;
     try {
-      content =
-        fileContentOverride ?? (await fs.promises.readFile(filePath, "utf8"));
+      content = fileContentOverride ?? (await getCachedFileContent(filePath));
+      if (!content) continue;
     } catch {
       // File read error - silently ignored
       continue;

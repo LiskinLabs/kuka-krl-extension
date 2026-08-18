@@ -6,7 +6,7 @@
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    const BOT_TOKEN = env.BOT_TOKEN || "8895123367:AAHliBqzJ2Tz6lBSc_zfXRwMGawRzFVfDSU";
+    const BOT_TOKEN = env.BOT_TOKEN;
 
     // Dynamic Admin Chat ID lookup (from env var or KV memory)
     let CHAT_ID = env.ADMIN_CHAT_ID;

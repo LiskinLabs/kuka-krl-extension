@@ -432,15 +432,14 @@ export class TelegramChatPanel {
       color: #ffffff;
     }
 
-    /* Message Bubbles */
     .msg-row {
       display: flex;
       flex-direction: column;
-      max-width: 78%;
-      animation: msgSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      max-width: 82%;
+      animation: msgSlide 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     @keyframes msgSlide {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .msg-row.user {
@@ -467,18 +466,18 @@ export class TelegramChatPanel {
       font-size: 13.5px;
       line-height: 1.5;
       word-break: break-word;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
       position: relative;
     }
     .msg-row.user .msg-bubble {
-      background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-      color: #ffffff;
+      background: var(--vscode-button-background, #007acc);
+      color: var(--vscode-button-foreground, #ffffff);
       border-bottom-right-radius: 2px;
-      border: 1px solid rgba(59, 130, 246, 0.3);
+      border: 1px solid var(--vscode-button-border, rgba(255, 255, 255, 0.15));
     }
     .msg-row.developer .msg-bubble {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      color: #f8fafc;
+      background: var(--vscode-textBlockQuote-background, rgba(128, 128, 128, 0.1));
+      color: var(--vscode-editor-foreground, #f8fafc);
       border-bottom-left-radius: 2px;
       border: 1px solid var(--card-border);
     }
@@ -538,9 +537,9 @@ export class TelegramChatPanel {
     }
     .chat-input {
       flex: 1;
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
+      background: var(--vscode-input-background, rgba(0, 0, 0, 0.2));
+      border: 1px solid var(--vscode-input-border, var(--card-border));
+      color: var(--vscode-input-foreground, var(--text-main));
       padding: 11px 14px;
       border-radius: var(--radius-md);
       font-size: 13px;
@@ -599,7 +598,7 @@ export class TelegramChatPanel {
     </div>
     <div class="header-right">
       <div class="session-selector-wrap" title="${t("chat.session.tooltip")}">
-        <select id="session-select" class="session-select" onchange="switchSession(this.value)">
+        <select id="session-select" class="session-select" aria-label="${t("chat.session.tooltip")}" onchange="switchSession(this.value)">
           ${this.renderSessionOptions(sessions, sessionId)}
         </select>
       </div>
@@ -617,8 +616,8 @@ export class TelegramChatPanel {
 
   <div class="chat-footer">
     <div class="input-row">
-      <textarea id="msg-input" class="chat-input" placeholder="${t("chat.input.placeholder")}" rows="1" onkeydown="handleKeyDown(event)" oninput="autoResize(this)"></textarea>
-      <button class="send-btn" onclick="submitMessage()">
+      <textarea id="msg-input" class="chat-input" aria-label="${t("chat.input.placeholder")}" placeholder="${t("chat.input.placeholder")}" rows="1" onkeydown="handleKeyDown(event)" oninput="autoResize(this)"></textarea>
+      <button class="send-btn" onclick="submitMessage()" aria-label="${t("chat.btn.send")}">
         <span>${t("chat.btn.send")}</span>
       </button>
     </div>
@@ -678,8 +677,12 @@ export class TelegramChatPanel {
     }
 
     function scrollToBottom() {
-      const container = document.getElementById('messages-container');
-      container.scrollTop = container.scrollHeight;
+      requestAnimationFrame(() => {
+        const container = document.getElementById('messages-container');
+        if (container) {
+          container.scrollTop = container.scrollHeight;
+        }
+      });
     }
 
     scrollToBottom();

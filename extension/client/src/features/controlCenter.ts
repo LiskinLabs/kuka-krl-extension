@@ -153,6 +153,15 @@ async function refreshControlCenterPanel(context: vscode.ExtensionContext) {
   );
 }
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 function getControlCenterHtml(
   webview: vscode.Webview,
   context: vscode.ExtensionContext,
@@ -165,14 +174,16 @@ function getControlCenterHtml(
   },
 ): string {
   const premiumStatus = isPremium() ? "ACTIVE (PRO)" : "COMMUNITY EDITION";
-  const statusBadgeColor = isPremium() ? "#28a745" : "#ffc107";
+  const statusBadgeClass = isPremium() ? "badge-active" : "badge-community";
 
-  const ownerName =
+  const ownerName = escapeHtml(
     licenseCache?.customerName ||
-    (isPremium() ? "Silvestr Liskin (Teknorob Lead)" : "Community User");
-  const ownerEmail =
+      (isPremium() ? "Silvestr Liskin (Teknorob Lead)" : "Community User"),
+  );
+  const ownerEmail = escapeHtml(
     licenseCache?.customerEmail ||
-    (isPremium() ? "silvestr.liskin@teknorob.com" : "Not Registered");
+      (isPremium() ? "silvestr.liskin@teknorob.com" : "Not Registered"),
+  );
   const planVariant =
     licenseCache?.variantName ||
     (isPremium()
@@ -278,7 +289,7 @@ function getControlCenterHtml(
     }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-    .info-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed rgba(255,255,255,0.05); font-size: 13px; }
+    .info-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed var(--vscode-panel-border, rgba(128,128,128,0.2)); font-size: 13px; }
     .info-label { opacity: 0.8; }
     .info-val { font-weight: 600; }
     .badge {
@@ -286,10 +297,16 @@ function getControlCenterHtml(
       font-weight: 700;
       padding: 4px 8px;
       border-radius: 4px;
-      background: ${statusBadgeColor};
       color: #fff;
       text-transform: uppercase;
     }
+    .badge-active { background: var(--vscode-charts-green, #28a745); }
+    .badge-community { background: var(--vscode-editorWarning-foreground, #ffc107); }
+    .btn-danger { background: var(--vscode-errorForeground, #dc3545); }
+    .btn-secondary { background: var(--vscode-button-secondaryBackground, #444); color: var(--vscode-button-secondaryForeground, #fff); }
+    .btn-success { background: var(--vscode-charts-green, #28a745); }
+    .btn-info { background: var(--vscode-button-background, #007acc); color: var(--vscode-button-foreground, #fff); }
+    .btn-telegram { background: #2AABEE; }
     .section-title {
       font-size: 16px;
       font-weight: 700;
@@ -388,7 +405,7 @@ function getControlCenterHtml(
     <div>
       <h1 style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.5px;">KUKA KRL Professional Control Center</h1>
       <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
-        <span class="badge">${premiumStatus}</span>
+        <span class="badge ${statusBadgeClass}">${premiumStatus}</span>
         <span style="font-weight: 600; opacity: 0.85; font-size: 13px;">v1.7.3 Industrial Edition</span>
       </div>
     </div>
@@ -451,7 +468,7 @@ function getControlCenterHtml(
       </div>
       <div style="display:flex; gap:6px;">
         <button class="card-btn" onclick="exec('krl.validateEkiXml')">${t("cc.btn.ekiValidator")}</button>
-        <button class="card-btn" style="background:#444;" onclick="exec('krl.generateEkiCode')">${t("cc.btn.generateHandler")}</button>
+        <button class="card-btn btn-secondary" onclick="exec('krl.generateEkiCode')">${t("cc.btn.generateHandler")}</button>
       </div>
     </div>
 
@@ -494,18 +511,18 @@ function getControlCenterHtml(
 
   <div class="section-title">👤 ${t("cc.accountHub")}</div>
   <div class="account-hub">
-    <div class="tab-bar">
-      <button class="tab-btn active" onclick="switchAccountTab('profile')">👤 ${t("cc.tab.profile")}</button>
-      <button class="tab-btn" onclick="switchAccountTab('devices')">💻 ${t("cc.tab.devices")}</button>
-      <button class="tab-btn" onclick="switchAccountTab('billing')">💳 ${t("cc.tab.billing")}</button>
-      <button class="tab-btn" onclick="switchAccountTab('support')">🛟 ${t("cc.tab.support")}</button>
+    <div class="tab-bar" role="tablist">
+      <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-profile" onclick="switchAccountTab('profile')">👤 ${t("cc.tab.profile")}</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-devices" onclick="switchAccountTab('devices')">💻 ${t("cc.tab.devices")}</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-billing" onclick="switchAccountTab('billing')">💳 ${t("cc.tab.billing")}</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-support" onclick="switchAccountTab('support')">🛟 ${t("cc.tab.support")}</button>
     </div>
 
     <!-- TAB 1: Profile & Key -->
     <div id="tab-profile" class="tab-content active">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
         <div style="font-size:16px; font-weight:bold; color:var(--accent);">${ownerName}</div>
-        <span class="badge" style="background:${statusBadgeColor}">${premiumStatus}</span>
+        <span class="badge ${statusBadgeClass}">${premiumStatus}</span>
       </div>
       <div class="info-row"><span class="info-label">Account Email:</span><span class="info-val">${ownerEmail}</span></div>
       <div class="info-row"><span class="info-label">Plan Tier:</span><span class="info-val">${planVariant}</span></div>
@@ -519,10 +536,10 @@ function getControlCenterHtml(
       <div style="margin-top:16px; display:flex; gap:10px;">
         ${
           isPremium()
-            ? `<button class="card-btn" style="background:#dc3545;" onclick="deactivate()">${t("cc.profile.deactivate")}</button>
-               <button class="card-btn" style="background:#444;" onclick="checkStatus()">${t("cc.profile.checkStatus")}</button>`
-            : `<button class="card-btn" style="background:#28a745;" onclick="activate()">${t("cc.profile.activateKey")}</button>
-               <button class="card-btn" style="background:#007acc;" onclick="buyLicense()">${t("cc.profile.buyPro")}</button>`
+            ? `<button class="card-btn btn-danger" onclick="deactivate()">${t("cc.profile.deactivate")}</button>
+               <button class="card-btn btn-secondary" onclick="checkStatus()">${t("cc.profile.checkStatus")}</button>`
+            : `<button class="card-btn btn-success" onclick="activate()">${t("cc.profile.activateKey")}</button>
+               <button class="card-btn btn-info" onclick="buyLicense()">${t("cc.profile.buyPro")}</button>`
         }
       </div>
     </div>
@@ -534,8 +551,8 @@ function getControlCenterHtml(
       <div class="info-row"><span class="info-label">Hardware Fingerprint:</span><span class="info-val" style="font-family:monospace; font-size:11px;">${device.hardwareId.slice(0, 24)}...</span></div>
       <div class="info-row"><span class="info-label">Slot Usage:</span><span class="info-val">${activations}</span></div>
       <div style="margin-top:14px; display:flex; gap:10px;">
-        <button class="card-btn" style="background:#dc3545;" onclick="exec('krl.deactivateLicense')">${t("cc.devices.deactivatePc")}</button>
-        <button class="card-btn" style="background:#444;" onclick="exec('krl.checkLicenseStatus')">${t("cc.devices.syncStatus")}</button>
+        <button class="card-btn btn-danger" onclick="exec('krl.deactivateLicense')">${t("cc.devices.deactivatePc")}</button>
+        <button class="card-btn btn-secondary" onclick="exec('krl.checkLicenseStatus')">${t("cc.devices.syncStatus")}</button>
       </div>
     </div>
 
@@ -545,8 +562,8 @@ function getControlCenterHtml(
       <p style="font-size:12px; opacity:0.8; margin-bottom:14px;">${t("cc.billing.desc")}</p>
       
       <div style="display:flex; gap:10px; margin-bottom:16px;">
-        <button class="card-btn" style="background:#FF6600;" onclick="openPortal()">${t("cc.billing.btn.portal")}</button>
-        <button class="card-btn" style="background:#444;" onclick="downloadInvoice()">${t("cc.billing.btn.invoice")}</button>
+        <button class="card-btn" onclick="openPortal()">${t("cc.billing.btn.portal")}</button>
+        <button class="card-btn btn-secondary" onclick="downloadInvoice()">${t("cc.billing.btn.invoice")}</button>
       </div>
 
       <div style="font-weight:700; margin-top:20px; margin-bottom:12px; font-size:14px; color:var(--accent);">${t("cc.billing.plansTitle")}</div>
@@ -583,11 +600,11 @@ function getControlCenterHtml(
       <div style="font-weight:600; margin-bottom:10px; font-size:14px;">🛟 Direct Engineering Support</div>
       <p style="font-size:12px; opacity:0.8; margin-bottom:14px;">${t("cc.support.desc")}</p>
       <div style="display:flex; flex-direction:column; gap:10px; max-width:420px;">
-        <button class="card-btn" style="background:#2AABEE;" onclick="openTelegram()">${t("cc.support.btn.chat")}</button>
-        <button class="card-btn" style="background:#FF6600;" onclick="exec('krl.sendLogsToDeveloper')">${t("cc.support.btn.sendLogs")}</button>
-        <button class="card-btn" style="background:#28a745;" onclick="exec('krl.sendFileToDeveloper')">${t("cc.support.btn.sendFile")}</button>
-        <button class="card-btn" style="background:#333;" onclick="openGitHub()">${t("cc.support.btn.github")}</button>
-        <button class="card-btn" style="background:#007acc;" onclick="sendFeedback()">${t("cc.support.btn.email")}</button>
+        <button class="card-btn btn-telegram" onclick="openTelegram()">${t("cc.support.btn.chat")}</button>
+        <button class="card-btn" onclick="exec('krl.sendLogsToDeveloper')">${t("cc.support.btn.sendLogs")}</button>
+        <button class="card-btn btn-success" onclick="exec('krl.sendFileToDeveloper')">${t("cc.support.btn.sendFile")}</button>
+        <button class="card-btn btn-secondary" onclick="openGitHub()">${t("cc.support.btn.github")}</button>
+        <button class="card-btn btn-info" onclick="sendFeedback()">${t("cc.support.btn.email")}</button>
       </div>
     </div>
   </div>
@@ -635,12 +652,18 @@ function getControlCenterHtml(
       vscode.postMessage({ command: 'downloadInvoice' });
     }
     function switchAccountTab(tabName) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      });
       document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
       
       const targetBtn = event.currentTarget;
       const targetContent = document.getElementById('tab-' + tabName);
-      if (targetBtn) targetBtn.classList.add('active');
+      if (targetBtn) {
+        targetBtn.classList.add('active');
+        targetBtn.setAttribute('aria-selected', 'true');
+      }
       if (targetContent) targetContent.classList.add('active');
     }
   </script>

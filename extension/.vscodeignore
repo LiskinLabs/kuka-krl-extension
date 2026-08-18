@@ -39,3 +39,8 @@ tests/**
 test_krl_extension.src
 validate-json.js
 *.test.js
+
+# Heavy demo GIFs (hosted externally in README)
+media/**/*.gif
+esbuild.js
+.prettierrc

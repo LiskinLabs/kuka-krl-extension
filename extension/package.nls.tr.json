@@ -41,5 +41,11 @@
     "config.errorLens.enabled": "Hata mesajlarını satır sonunda satır içi göster",
     "config.indentFolds": ";FOLD bloklarının içindeki içeriği girintile",
     "config.alignAssignments": "Ardışık satırlardaki atama operatörlerini (=) hizala",
-    "view.krlIO.welcome": "Çalışma alanında I/O sinyali bulunamadı. Onları burada görmek için KRL kodunuzda $IN[n], $OUT[n] vb. kullanın."
+    "view.krlIO.welcome": "Çalışma alanında I/O sinyali bulunamadı. Onları burada görmek için KRL kodunuzda $IN[n], $OUT[n] vb. kullanın.",
+    "config.inlayHints.enabled": "I/O sinyalleri ve sistem verileri için satır içi ipuçları olarak açıklayıcı adlar göster.",
+    "config.codeLens.enabled": "Referanslar ve belgeler için CodeLens ipuçlarını göster.",
+    "config.callHierarchy.enabled": "Fonksiyonlar için Çağrı Hiyerarşisi desteğini etkinleştir.",
+    "config.documentHighlights.enabled": "Belgede aynı değişken/fonksiyonun oluşumlarını vurgula.",
+    "config.maxCartesianVelocity": "$VEL.CP için maksimum güvenli Kartezyen hız sınırı (m/s).",
+    "config.supportGatewayUrl": "Liskin Labs Destek Masası Ağ Geçidi URL'si (Telegram Canlı Destek Aktarıcısı)."
 }

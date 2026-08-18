@@ -318,90 +318,142 @@ function getWebviewContent(t: typeof translations.en, cspSource: string) {
     <style>
         * { box-sizing: border-box; }
         body { 
-            font-family: var(--vscode-font-family, sans-serif); 
+            font-family: var(--vscode-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif); 
             padding: 16px; 
             color: var(--vscode-editor-foreground); 
             background-color: var(--vscode-editor-background);
-            max-width: 500px;
+            max-width: 640px;
+            margin: 0 auto;
         }
-        h2 { margin: 0 0 8px; font-size: 1.3em; }
+        h2 { 
+            margin: 0 0 6px; 
+            font-size: 1.25em; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--vscode-foreground);
+        }
         .description { 
             color: var(--vscode-descriptionForeground); 
-            margin-bottom: 12px; 
+            margin-bottom: 14px; 
             font-size: 0.9em;
+            line-height: 1.4;
         }
         .help-section {
-            background: var(--vscode-textBlockQuote-background);
-            border-left: 3px solid var(--vscode-textLink-foreground);
-            padding: 8px 12px;
+            background: var(--vscode-textBlockQuote-background, rgba(128,128,128,0.08));
+            border-left: 3px solid var(--vscode-textLink-foreground, #ff6600);
+            border-radius: 0 6px 6px 0;
+            padding: 10px 14px;
             margin-bottom: 16px;
             font-size: 0.85em;
         }
-        .help-section h4 { margin: 0 0 6px; }
+        .help-section h4 { margin: 0 0 6px; font-weight: 600; }
         .help-section ul { margin: 0; padding-left: 18px; }
-        .help-section li { margin: 2px 0; }
-        .frame-input { 
-            margin-bottom: 12px; 
-            padding: 10px; 
-            border: 1px solid var(--vscode-widget-border);
-            border-radius: 4px;
+        .help-section li { margin: 3px 0; color: var(--vscode-descriptionForeground); }
+        .frame-card { 
+            background: var(--vscode-welcomePage-tileBackground, rgba(255, 255, 255, 0.02));
+            margin-bottom: 14px; 
+            padding: 12px 14px; 
+            border: 1px solid var(--vscode-widget-border, rgba(128,128,128,0.2));
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
         }
         .frame-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--vscode-widget-border, rgba(128,128,128,0.15));
         }
-        .frame-header h3 { margin: 0; font-size: 1em; }
-        .row { display: flex; gap: 8px; margin-bottom: 4px; }
-        .field { display: flex; align-items: center; gap: 4px; }
-        .field label { width: 16px; font-weight: bold; }
+        .frame-header h3 { margin: 0; font-size: 0.95em; font-weight: 600; }
+        .frame-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px 12px;
+        }
+        .field { 
+            display: flex; 
+            flex-direction: column;
+            gap: 3px; 
+        }
+        .field label { 
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--vscode-descriptionForeground);
+        }
         .field input { 
-            width: 70px; 
-            padding: 4px 6px;
+            width: 100%;
+            padding: 6px 8px;
             background: var(--vscode-input-background); 
             color: var(--vscode-input-foreground); 
-            border: 1px solid var(--vscode-input-border);
-            border-radius: 2px;
+            border: 1px solid var(--vscode-input-border, rgba(128,128,128,0.25));
+            border-radius: 4px;
+            font-family: var(--vscode-editor-font-family, monospace);
+            font-size: 12px;
+            transition: border-color 0.15s ease;
+        }
+        .field input:focus {
+            border-color: var(--vscode-focusBorder, #ff6600);
+            outline: none;
         }
         .actions { 
             display: flex; 
             gap: 8px; 
-            margin: 12px 0;
+            margin: 14px 0;
             flex-wrap: wrap;
         }
         button { 
             padding: 6px 14px; 
-            background: var(--vscode-button-background); 
-            color: var(--vscode-button-foreground); 
-            border: none; 
+            background: var(--vscode-button-background, #007acc); 
+            color: var(--vscode-button-foreground, #ffffff); 
+            border: 1px solid var(--vscode-button-border, transparent); 
             cursor: pointer;
-            border-radius: 2px;
-            font-size: 0.9em;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s ease;
         }
-        button:hover { background: var(--vscode-button-hoverBackground); }
+        button:hover { background: var(--vscode-button-hoverBackground, #0062a3); }
         button.secondary {
-            background: var(--vscode-button-secondaryBackground);
-            color: var(--vscode-button-secondaryForeground);
+            background: var(--vscode-button-secondaryBackground, rgba(128,128,128,0.15));
+            color: var(--vscode-button-secondaryForeground, var(--vscode-foreground));
+            border: 1px solid var(--vscode-widget-border, rgba(128,128,128,0.2));
+            font-weight: 500;
+            font-size: 11px;
+            padding: 4px 10px;
         }
-        button.secondary:hover { background: var(--vscode-button-secondaryHoverBackground); }
-        .result-frame { background: var(--vscode-textBlockQuote-background); }
-        .result-frame input { font-weight: bold; }
+        button.secondary:hover { background: var(--vscode-button-secondaryHoverBackground, rgba(128,128,128,0.25)); }
+        .result-frame { 
+            background: var(--vscode-textBlockQuote-background, rgba(128,128,128,0.06));
+            border-color: var(--vscode-focusBorder, #ff6600);
+        }
+        .result-frame input { 
+            font-weight: bold; 
+            color: var(--vscode-textLink-foreground, #ff6600);
+        }
         .toast {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--vscode-notificationsInfoIcon-foreground);
-            color: white;
+            bottom: 24px;
+            right: 24px;
+            background: var(--vscode-button-background, #007acc);
+            color: var(--vscode-button-foreground, #ffffff);
             padding: 8px 16px;
-            border-radius: 4px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-weight: 600;
+            font-size: 12px;
             display: none;
+            z-index: 100;
         }
         .toast.show { display: block; }
     </style>
 </head>
 <body>
-    <h2>${t.title}</h2>
+    <h2>📐 ${t.title}</h2>
     <p class="description">${t.description}</p>
     
     <div class="help-section">
@@ -411,146 +463,130 @@ function getWebviewContent(t: typeof translations.en, cspSource: string) {
         </ul>
     </div>
     
-    <div class="frame-input" id="f1">
+    <div class="frame-card" id="f1">
         <div class="frame-header">
-            <h3>${t.frame1}</h3>
-            <button class="secondary" onclick="pickVariable('f1')">${t.loadFromCode}</button>
+            <h3>📍 ${t.frame1}</h3>
+            <button class="secondary" onclick="pickVariable('f1')">📥 ${t.loadFromCode}</button>
         </div>
-        <div class="row">
-            <div class="field"><label>X</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>Y</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>Z</label><input type="number" step="0.001" value="0"></div>
-        </div>
-        <div class="row">
-            <div class="field"><label>A</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>B</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>C</label><input type="number" step="0.001" value="0"></div>
+        <div class="frame-grid">
+            <div class="field"><label for="f1_x">X (mm)</label><input id="f1_x" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="f1_y">Y (mm)</label><input id="f1_y" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="f1_z">Z (mm)</label><input id="f1_z" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="f1_a">A (°)</label><input id="f1_a" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="f1_b">B (°)</label><input id="f1_b" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="f1_c">C (°)</label><input id="f1_c" type="number" step="0.001" value="0"></div>
         </div>
     </div>
 
     <div class="actions">
-        <button onclick="multiply()">${t.multiply}</button>
-        <button onclick="invert()">${t.invert}</button>
+        <button onclick="multiply()">⚡ ${t.multiply}</button>
+        <button onclick="invert()">🔄 ${t.invert}</button>
     </div>
 
-    <div class="frame-input" id="f2">
+    <div class="frame-card" id="f2">
         <div class="frame-header">
-            <h3>${t.frame2}</h3>
-            <button class="secondary" onclick="pickVariable('f2')">${t.loadFromCode}</button>
+            <h3>📍 ${t.frame2}</h3>
+            <button class="secondary" onclick="pickVariable('f2')">📥 ${t.loadFromCode}</button>
         </div>
-        <div class="row">
-            <div class="field"><label>X</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>Y</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>Z</label><input type="number" step="0.001" value="0"></div>
-        </div>
-        <div class="row">
-            <div class="field"><label>A</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>B</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>C</label><input type="number" step="0.001" value="0"></div>
+        <div class="frame-grid">
+            <div class="field"><label for="f2_x">X (mm)</label><input id="f2_x" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="f2_y">Y (mm)</label><input id="f2_y" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="f2_z">Z (mm)</label><input id="f2_z" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="f2_a">A (°)</label><input id="f2_a" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="f2_b">B (°)</label><input id="f2_b" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="f2_c">C (°)</label><input id="f2_c" type="number" step="0.001" value="0"></div>
         </div>
     </div>
 
-    <div class="frame-input result-frame" id="result">
+    <div class="frame-card result-frame" id="result">
         <div class="frame-header">
-            <h3>${t.result}</h3>
-            <button onclick="copyResult('result')">${t.copy}</button>
+            <h3>✨ ${t.result}</h3>
+            <button onclick="copyResult('result')">📋 ${t.copy}</button>
         </div>
-        <div class="row">
-            <div class="field"><label>X</label><input type="number" readonly id="resX"></div>
-            <div class="field"><label>Y</label><input type="number" readonly id="resY"></div>
-            <div class="field"><label>Z</label><input type="number" readonly id="resZ"></div>
-        </div>
-        <div class="row">
-            <div class="field"><label>A</label><input type="number" readonly id="resA"></div>
-            <div class="field"><label>B</label><input type="number" readonly id="resB"></div>
-            <div class="field"><label>C</label><input type="number" readonly id="resC"></div>
+        <div class="frame-grid">
+            <div class="field"><label for="resX">X (mm)</label><input type="number" readonly id="resX"></div>
+            <div class="field"><label for="resY">Y (mm)</label><input type="number" readonly id="resY"></div>
+            <div class="field"><label for="resZ">Z (mm)</label><input type="number" readonly id="resZ"></div>
+            <div class="field"><label for="resA">A (°)</label><input type="number" readonly id="resA"></div>
+            <div class="field"><label for="resB">B (°)</label><input type="number" readonly id="resB"></div>
+            <div class="field"><label for="resC">C (°)</label><input type="number" readonly id="resC"></div>
         </div>
     </div>
 
     <!-- Converter Section -->
-    <hr style="margin: 24px 0; border-color: var(--vscode-widget-border);">
+    <hr style="margin: 24px 0; border: none; border-top: 1px solid var(--vscode-widget-border, rgba(128,128,128,0.2));">
     
-    <h3>${t.converterTitle}</h3>
+    <h2>${t.converterTitle}</h2>
     <p class="description">${t.converterDesc}</p>
 
-    <div class="frame-input" id="srcBase">
+    <div class="frame-card" id="srcBase">
         <div class="frame-header">
-            <h3>${t.sourceBase}</h3>
-            <button class="secondary" onclick="pickVariable('srcBase')">${t.loadFromCode}</button>
+            <h3>📍 ${t.sourceBase}</h3>
+            <button class="secondary" onclick="pickVariable('srcBase')">📥 ${t.loadFromCode}</button>
         </div>
-        <div class="row">
-            <div class="field"><label>X</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>Y</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>Z</label><input type="number" step="0.001" value="0"></div>
-        </div>
-        <div class="row">
-            <div class="field"><label>A</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>B</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>C</label><input type="number" step="0.001" value="0"></div>
+        <div class="frame-grid">
+            <div class="field"><label for="src_x">X (mm)</label><input id="src_x" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="src_y">Y (mm)</label><input id="src_y" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="src_z">Z (mm)</label><input id="src_z" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="src_a">A (°)</label><input id="src_a" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="src_b">B (°)</label><input id="src_b" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="src_c">C (°)</label><input id="src_c" type="number" step="0.001" value="0"></div>
         </div>
     </div>
 
-    <div class="frame-input" id="tgtBase">
+    <div class="frame-card" id="tgtBase">
         <div class="frame-header">
-            <h3>${t.targetBase}</h3>
-            <button class="secondary" onclick="pickVariable('tgtBase')">${t.loadFromCode}</button>
+            <h3>🎯 ${t.targetBase}</h3>
+            <button class="secondary" onclick="pickVariable('tgtBase')">📥 ${t.loadFromCode}</button>
         </div>
-        <div style="margin-bottom: 8px;">
-            <label><input type="checkbox" id="tgtIsWorld" onchange="toggleWorldTarget()"> ${t.world}</label>
+        <div style="margin-bottom: 10px;">
+            <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" id="tgtIsWorld" onchange="toggleWorldTarget()"> ${t.world}</label>
         </div>
-        <div id="tgtBaseFields">
-            <div class="row">
-                <div class="field"><label>X</label><input type="number" step="0.001" value="0"></div>
-                <div class="field"><label>Y</label><input type="number" step="0.001" value="0"></div>
-                <div class="field"><label>Z</label><input type="number" step="0.001" value="0"></div>
-            </div>
-            <div class="row">
-                <div class="field"><label>A</label><input type="number" step="0.001" value="0"></div>
-                <div class="field"><label>B</label><input type="number" step="0.001" value="0"></div>
-                <div class="field"><label>C</label><input type="number" step="0.001" value="0"></div>
-            </div>
+        <div id="tgtBaseFields" class="frame-grid">
+            <div class="field"><label for="tgt_x">X (mm)</label><input id="tgt_x" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="tgt_y">Y (mm)</label><input id="tgt_y" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="tgt_z">Z (mm)</label><input id="tgt_z" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="tgt_a">A (°)</label><input id="tgt_a" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="tgt_b">B (°)</label><input id="tgt_b" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="tgt_c">C (°)</label><input id="tgt_c" type="number" step="0.001" value="0"></div>
         </div>
     </div>
 
-    <div class="frame-input" id="pointConv">
+    <div class="frame-card" id="pointConv">
         <div class="frame-header">
-            <h3>${t.pointToConvert}</h3>
-            <button class="secondary" onclick="pickVariable('pointConv')">${t.loadFromCode}</button>
+            <h3>📌 ${t.pointToConvert}</h3>
+            <button class="secondary" onclick="pickVariable('pointConv')">📥 ${t.loadFromCode}</button>
         </div>
-        <div class="row">
-            <div class="field"><label>X</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>Y</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>Z</label><input type="number" step="0.001" value="0"></div>
-        </div>
-        <div class="row">
-            <div class="field"><label>A</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>B</label><input type="number" step="0.001" value="0"></div>
-            <div class="field"><label>C</label><input type="number" step="0.001" value="0"></div>
+        <div class="frame-grid">
+            <div class="field"><label for="pt_x">X (mm)</label><input id="pt_x" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="pt_y">Y (mm)</label><input id="pt_y" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="pt_z">Z (mm)</label><input id="pt_z" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="pt_a">A (°)</label><input id="pt_a" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="pt_b">B (°)</label><input id="pt_b" type="number" step="0.001" value="0"></div>
+            <div class="field"><label for="pt_c">C (°)</label><input id="pt_c" type="number" step="0.001" value="0"></div>
         </div>
     </div>
 
     <div class="actions">
-        <button onclick="convertCoords()">${t.convert}</button>
+        <button onclick="convertCoords()">🔄 ${t.convert}</button>
     </div>
 
-    <div class="frame-input result-frame" id="convResult">
+    <div class="frame-card result-frame" id="convResult">
         <div class="frame-header">
-            <h3>${t.convertResult}</h3>
-            <button onclick="copyResult('convResult')">${t.copy}</button>
+            <h3>✨ ${t.convertResult}</h3>
+            <button onclick="copyResult('convResult')">📋 ${t.copy}</button>
         </div>
-        <div class="row">
-            <div class="field"><label>X</label><input type="number" readonly></div>
-            <div class="field"><label>Y</label><input type="number" readonly></div>
-            <div class="field"><label>Z</label><input type="number" readonly></div>
-        </div>
-        <div class="row">
-            <div class="field"><label>A</label><input type="number" readonly></div>
-            <div class="field"><label>B</label><input type="number" readonly></div>
-            <div class="field"><label>C</label><input type="number" readonly></div>
+        <div class="frame-grid">
+            <div class="field"><label for="cres_x">X (mm)</label><input id="cres_x" type="number" readonly></div>
+            <div class="field"><label for="cres_y">Y (mm)</label><input id="cres_y" type="number" readonly></div>
+            <div class="field"><label for="cres_z">Z (mm)</label><input id="cres_z" type="number" readonly></div>
+            <div class="field"><label for="cres_a">A (°)</label><input id="cres_a" type="number" readonly></div>
+            <div class="field"><label for="cres_b">B (°)</label><input id="cres_b" type="number" readonly></div>
+            <div class="field"><label for="cres_c">C (°)</label><input id="cres_c" type="number" readonly></div>
         </div>
     </div>
 
-    <div class="toast" id="toast">${t.copied}</div>
+    <div class="toast" id="toast" role="status" aria-live="polite">${t.copied}</div>
 
     <script>
         const vscode = acquireVsCodeApi();

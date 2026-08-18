@@ -139,20 +139,31 @@ export function performAiSafetyCheck(
       upperCode.match(/SIGNAL\s+.*\$OUT/) ||
       upperCode.match(/DO[A-Z0-9_]+\s*=\s*TRUE/);
 
-    if (isOutAssignment && idx + 1 < lines.length) {
-      const nextCodePart = lines[idx + 1].split(";")[0].trim().toUpperCase();
-      const isNextMotion =
-        nextCodePart.startsWith("PTP ") ||
-        nextCodePart.startsWith("LIN ") ||
-        nextCodePart.startsWith("CIRC ");
+    if (isOutAssignment) {
+      // Look ahead to find the next non-empty, non-comment line
+      let nextIdx = idx + 1;
+      while (nextIdx < lines.length) {
+        const nextCode = lines[nextIdx].split(";")[0].trim().toUpperCase();
+        if (nextCode.length > 0) {
+          const isNextMotion =
+            nextCode.startsWith("PTP ") ||
+            nextCode.startsWith("LIN ") ||
+            nextCode.startsWith("CIRC ") ||
+            nextCode.startsWith("SPTP ") ||
+            nextCode.startsWith("SLIN ") ||
+            nextCode.startsWith("SCIRC ");
 
-      if (isNextMotion) {
-        detailedIssues.push({
-          severity: "warning",
-          line: lineNum,
-          code: "UNCHECKED_ACTUATOR",
-          message: `Actuator output set to TRUE on line ${lineNum} with immediate motion on next line without WAIT FOR sensor feedback or WAIT SEC pause. Risk of part drop or clamp collision!`,
-        });
+          if (isNextMotion) {
+            detailedIssues.push({
+              severity: "warning",
+              line: lineNum,
+              code: "UNCHECKED_ACTUATOR",
+              message: `Actuator output set to TRUE on line ${lineNum} with motion on line ${nextIdx + 1} without WAIT FOR sensor feedback or WAIT SEC pause. Risk of part drop or clamp collision!`,
+            });
+          }
+          break; // Stop after first executable statement
+        }
+        nextIdx++;
       }
     }
 

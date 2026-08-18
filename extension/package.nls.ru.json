@@ -41,5 +41,11 @@
     "config.errorLens.enabled": "Показывать сообщения об ошибках в конце строки (Error Lens)",
     "config.indentFolds": "Делать отступ для содержимого внутри ;FOLD",
     "config.alignAssignments": "Выравнивать знаки присваивания (=) по вертикали",
-    "view.krlIO.welcome": "Сигналы ввода/вывода не найдены в рабочей области. Используйте $IN[n], $OUT[n] и т.д. в вашем KRL коде, чтобы увидеть их здесь."
+    "view.krlIO.welcome": "Сигналы ввода/вывода не найдены в рабочей области. Используйте $IN[n], $OUT[n] и т.д. в вашем KRL коде, чтобы увидеть их здесь.",
+    "config.inlayHints.enabled": "Показывать описательные имена для I/O-сигналов и системных данных в виде встроенных подсказок.",
+    "config.codeLens.enabled": "Показывать подсказки CodeLens для ссылок и документации.",
+    "config.callHierarchy.enabled": "Включить поддержку иерархии вызовов для функций.",
+    "config.documentHighlights.enabled": "Подсвечивать вхождения одной и той же переменной/функции в документе.",
+    "config.maxCartesianVelocity": "Максимально допустимая картезианская скорость для $VEL.CP (м/с).",
+    "config.supportGatewayUrl": "URL шлюза поддержки Liskin Labs (Relay для Telegram Live Support)."
 }

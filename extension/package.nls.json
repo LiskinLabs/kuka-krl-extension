@@ -41,5 +41,11 @@
   "config.errorLens.enabled": "Show diagnostic messages inline at the end of lines",
   "config.indentFolds": "Indent content inside ;FOLD blocks",
   "config.alignAssignments": "Align assignment operators (=) in consecutive lines",
-  "view.krlIO.welcome": "No I/O signals found in the current workspace. Use $IN[n], $OUT[n], etc. in your KRL code to see them here."
+  "view.krlIO.welcome": "No I/O signals found in the current workspace. Use $IN[n], $OUT[n], etc. in your KRL code to see them here.",
+  "config.inlayHints.enabled": "Show descriptive names for I/O signals and system data as inline hints.",
+  "config.codeLens.enabled": "Show CodeLens hints for references and documentation.",
+  "config.callHierarchy.enabled": "Enable Call Hierarchy support for functions.",
+  "config.documentHighlights.enabled": "Highlight occurrences of the same variable/function in the document.",
+  "config.maxCartesianVelocity": "Maximum safe Cartesian velocity limit for $VEL.CP (m/s).",
+  "config.supportGatewayUrl": "Liskin Labs Support Desk Gateway URL (Relay for Telegram Live Support)."
 }

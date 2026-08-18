@@ -11,7 +11,7 @@ const OLD_GLOBAL_STATE_KEY = "krl_license_cache";
  * Стандартный URL магазина и оформления заказа Lemon Squeezy.
  */
 export const LEMON_SQUEEZY_CHECKOUT_URL =
-  "https://liskin.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7";
+  "https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7";
 export const LEMON_SQUEEZY_PORTAL_URL = "https://my.lemonsqueezy.com/billing";
 
 export const LEMON_SQUEEZY_STORE_ID = 393141;
@@ -39,7 +39,7 @@ export const PRICING_PLANS: PricingPlanOption[] = [
     description:
       "Полная профессиональная лицензия для инженеров-наладчиков KUKA. Доступ ко всем премиум-инструментам (3 ПК).",
     checkoutUrl:
-      "https://liskin.lemonsqueezy.com/checkout/buy/ab34799e-42d7-49b0-ad33-94b2d4fe0a7d",
+      "https://liskinlabs.lemonsqueezy.com/checkout/buy/ab34799e-42d7-49b0-ad33-94b2d4fe0a7d",
     badge: "POPULAR",
   },
   {
@@ -50,7 +50,7 @@ export const PRICING_PLANS: PricingPlanOption[] = [
     description:
       "Годовой профессиональный абонемент. Включает приоритетные обновления, поддержку KRC4/KRC5 и EKI валидатор.",
     checkoutUrl:
-      "https://liskin.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7",
+      "https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7",
     badge: "BEST VALUE",
   },
 ];

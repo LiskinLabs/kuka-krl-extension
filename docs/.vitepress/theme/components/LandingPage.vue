@@ -1,30 +1,59 @@
 <template>
-  <div class="kuka-landing min-h-screen bg-kuka-dark text-gray-200 selection:bg-kuka-orange selection:text-white pb-20">
-    <!-- Hero Section -->
-    <header class="relative overflow-hidden pt-24 pb-32">
-      <!-- Glow effect -->
-      <div class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-kuka-orange/10 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="kuka-landing min-h-screen bg-kuka-dark text-gray-200 selection:bg-kuka-orange selection:text-white pb-24 overflow-x-hidden">
+    
+    <!-- Language Switcher Bar -->
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 flex justify-end items-center relative z-30">
+      <div class="inline-flex items-center gap-1 bg-[#11161d]/90 backdrop-blur-md p-1.5 rounded-full border border-gray-800 shadow-xl">
+        <span class="text-xs text-gray-400 pl-2 pr-1 font-mono flex items-center gap-1">
+          <svg class="w-3.5 h-3.5 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          Language:
+        </span>
+        <a :href="withBase('/')" :class="['px-3 py-1 rounded-full text-xs font-bold transition-all', currentLang === 'en' ? 'bg-kuka-orange text-white shadow-md' : 'text-gray-400 hover:text-white']">EN</a>
+        <a :href="withBase('/ru/')" :class="['px-3 py-1 rounded-full text-xs font-bold transition-all', currentLang === 'ru' ? 'bg-kuka-orange text-white shadow-md' : 'text-gray-400 hover:text-white']">RU</a>
+        <a :href="withBase('/tr/')" :class="['px-3 py-1 rounded-full text-xs font-bold transition-all', currentLang === 'tr' ? 'bg-kuka-orange text-white shadow-md' : 'text-gray-400 hover:text-white']">TR</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section with Interactive Parallax Glow -->
+    <header class="relative overflow-hidden pt-12 pb-24" @mousemove="handleMouseMove">
+      <!-- Interactive Dynamic Glow Orb following mouse -->
+      <div 
+        class="absolute w-[650px] h-[650px] bg-gradient-to-r from-kuka-orange/20 via-amber-500/15 to-orange-600/10 rounded-full blur-[140px] pointer-events-none transition-all duration-300 ease-out"
+        :style="{ left: `${glowX}px`, top: `${glowY}px`, transform: 'translate(-50%, -50%)' }"
+      ></div>
+
+      <!-- Cyber Grid Background -->
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#1f293715_1px,transparent_1px),linear-gradient(to_bottom,#1f293715_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
       
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-kuka-gray border border-kuka-border text-sm text-kuka-orange font-medium mb-8 shadow-sm">
-          <span class="flex h-2 w-2 rounded-full bg-kuka-orange animate-pulse"></span>
-          {{ t.heroBadge }}
+        
+        <!-- Live Badges Row -->
+        <div class="flex flex-wrap justify-center items-center gap-3 mb-8">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-kuka-gray/90 border border-kuka-border text-xs sm:text-sm text-kuka-orange font-mono font-medium shadow-sm backdrop-blur-md">
+            <span class="flex h-2 w-2 rounded-full bg-kuka-orange animate-pulse"></span>
+            {{ t.heroBadge }}
+          </div>
+          <a href="https://secure.software/vscode/LiskinLabs.kuka-krl-extension" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs sm:text-sm text-emerald-400 font-mono font-semibold hover:bg-emerald-500/20 transition-colors shadow-sm">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            Spectra Assure: PASSED (100% Clean)
+          </a>
         </div>
         
-        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6" v-html="t.heroTitle"></h1>
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white mb-6 leading-tight" v-html="t.heroTitle"></h1>
         
-        <p class="mt-4 max-w-3xl text-xl text-gray-400 mx-auto mb-10 leading-relaxed" v-html="t.heroSubtitle"></p>
+        <p class="mt-4 max-w-3xl text-lg sm:text-xl text-gray-300 mx-auto mb-10 leading-relaxed font-normal" v-html="t.heroSubtitle"></p>
         
+        <!-- Main CTAs -->
         <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-          <a :href="t.wikiLink" class="px-8 py-4 bg-kuka-orange hover:bg-orange-600 text-white font-bold rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-[0_0_25px_rgba(255,102,0,0.4)] flex items-center gap-2">
+          <a :href="withBase(t.wikiLink)" class="w-full sm:w-auto px-8 py-4 bg-kuka-orange hover:bg-orange-600 text-white font-bold rounded-xl transition-all duration-200 transform hover:scale-105 hover:shadow-[0_0_30px_rgba(255,102,0,0.45)] flex items-center justify-center gap-2.5 shadow-lg">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
             {{ t.openWiki }}
           </a>
-          <a href="#pricing" class="px-8 py-4 bg-kuka-gray hover:bg-gray-800 text-white font-bold rounded-lg border border-kuka-border transition-all duration-200 hover:border-kuka-orange flex items-center gap-2">
+          <a href="#pricing" class="w-full sm:w-auto px-8 py-4 bg-kuka-gray hover:bg-gray-800 text-white font-bold rounded-xl border border-kuka-border transition-all duration-200 hover:border-kuka-orange flex items-center justify-center gap-2">
             {{ t.getProKey }}
             <svg class="w-5 h-5 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
           </a>
-          <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension" target="_blank" rel="noopener noreferrer" class="px-8 py-4 bg-kuka-gray hover:bg-gray-800 text-white font-medium rounded-lg border border-kuka-border transition-all duration-200 flex items-center gap-2">
+          <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 bg-kuka-gray/70 hover:bg-gray-800 text-white font-medium rounded-xl border border-kuka-border transition-all duration-200 flex items-center justify-center gap-2">
             {{ t.downloadFree }}
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.593 3.322c-.394-.271-.926-.237-1.28.083L12 7.228 7.687 3.405c-.354-.32-.886-.354-1.28-.083L.884 7.159c-.43.295-.494.908-.135 1.281l10.536 11.02a1.47 1.47 0 002.133.003L24 8.442c.36-.372.296-.985-.133-1.28L17.593 3.322zm-5.59 13.91l-7.794-8.15 4.542-3.13 3.252 2.89v8.39zm1.5-8.39l3.252-2.89 4.542 3.13-7.794 8.15v-8.39z"/></svg>
           </a>
@@ -32,45 +61,151 @@
       </div>
     </header>
 
-    <!-- Trust Badges -->
-    <section class="py-10 border-y border-kuka-border bg-kuka-darker/50">
-      <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-80">
-        <div class="flex items-center gap-2 font-mono text-sm uppercase tracking-wider text-gray-300">
-          <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+    <!-- Trust Badges Bar -->
+    <section class="py-8 border-y border-kuka-border bg-kuka-darker/60 backdrop-blur-sm">
+      <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-90">
+        <div class="flex items-center gap-2 font-mono text-xs sm:text-sm uppercase tracking-wider text-gray-300">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
           {{ t.secure100 }}
         </div>
-        <div class="flex items-center gap-2 font-mono text-sm uppercase tracking-wider text-gray-300">
-          <svg class="w-6 h-6 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div class="flex items-center gap-2 font-mono text-xs sm:text-sm uppercase tracking-wider text-gray-300">
+          <svg class="w-5 h-5 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
           {{ t.offlineFirst }}
         </div>
-        <div class="flex items-center gap-2 font-mono text-sm uppercase tracking-wider text-gray-300">
-          <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path></svg>
+        <div class="flex items-center gap-2 font-mono text-xs sm:text-sm uppercase tracking-wider text-gray-300">
+          <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path></svg>
           {{ t.builtFor }}
+        </div>
+        <div class="flex items-center gap-2 font-mono text-xs sm:text-sm uppercase tracking-wider text-gray-300">
+          <span class="text-amber-400 text-base">⚡</span>
+          KSS 8.3 / 8.6 / 8.7 Full AST
         </div>
       </div>
     </section>
 
-    <!-- Showcase Features -->
-    <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-32">
+    <!-- 🛡️ ReversingLabs Spectra Assure Security Verification Showcase -->
+    <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-emerald-500/30 bg-gradient-to-b from-[#0e1713]/90 to-[#0d1117]/90 relative overflow-hidden shadow-2xl">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
+          <div class="lg:w-7/12 space-y-4 text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 text-xs font-mono font-bold uppercase">
+              🛡️ Enterprise Security Certification
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
+              {{ t.securityTitle }}
+            </h2>
+            <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+              {{ t.securityDesc }}
+            </p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+              <div class="p-3 bg-[#131d18] rounded-xl border border-emerald-500/20 text-xs text-gray-300 font-mono">
+                <span class="text-emerald-400 font-bold block text-sm">0 Malware</span> Clean binary scan
+              </div>
+              <div class="p-3 bg-[#131d18] rounded-xl border border-emerald-500/20 text-xs text-gray-300 font-mono">
+                <span class="text-emerald-400 font-bold block text-sm">0 CVEs</span> 0 Vulnerabilities
+              </div>
+              <div class="p-3 bg-[#131d18] rounded-xl border border-emerald-500/20 text-xs text-gray-300 font-mono">
+                <span class="text-emerald-400 font-bold block text-sm">0 Leaks</span> 0 Secret exposure
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:w-5/12 w-full flex flex-col items-center justify-center p-6 bg-[#0a0f0d] rounded-2xl border border-emerald-500/30 text-center space-y-4">
+            <div class="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 border border-emerald-500/40 shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            </div>
+            <div>
+              <div class="text-white font-bold text-lg">ReversingLabs Spectra Assure</div>
+              <div class="text-emerald-400 font-mono font-bold text-sm">100% Security Health Score</div>
+            </div>
+            <a 
+              href="https://secure.software/vscode/LiskinLabs.kuka-krl-extension" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20"
+            >
+              <span>{{ t.viewSecurityReport }}</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🎮 Interactive 5-in-1 Tool Inspector Widget -->
+    <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">{{ t.toolInspectorTitle }}</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">{{ t.toolInspectorDesc }}</p>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8">
+        <button
+          v-for="(tab, i) in interactiveTabs"
+          :key="i"
+          @click="activeToolTab = i"
+          :class="[
+            'px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all border flex items-center gap-2',
+            activeToolTab === i
+              ? 'bg-kuka-orange text-white border-kuka-orange shadow-lg shadow-orange-500/25'
+              : 'bg-[#11161d] text-gray-400 border-gray-800 hover:text-white hover:border-gray-700'
+          ]"
+        >
+          <span>{{ tab.icon }}</span>
+          {{ tab.name[currentLang] }}
+        </button>
+      </div>
+
+      <!-- Live Interactive Tab Content -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-kuka-border bg-[#11161d]/90 shadow-2xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-5 space-y-4 text-left">
+            <div class="inline-block px-3 py-1 rounded-full bg-orange-500/10 text-kuka-orange font-mono text-xs font-bold uppercase border border-orange-500/20">
+              Tool 0{{ activeToolTab + 1 }} • Pro Engine
+            </div>
+            <h3 class="text-2xl font-bold text-white">{{ interactiveTabs[activeToolTab].title[currentLang] }}</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">{{ interactiveTabs[activeToolTab].desc[currentLang] }}</p>
+            <div class="p-4 rounded-xl bg-orange-500/5 border border-orange-500/20 text-xs text-orange-200">
+              <strong class="text-orange-400 block mb-1">⚡ Factory Floor Impact:</strong>
+              {{ interactiveTabs[activeToolTab].benefit[currentLang] }}
+            </div>
+            <a :href="withBase(interactiveTabs[activeToolTab].link)" class="inline-flex items-center gap-2 text-sm text-kuka-orange hover:text-orange-400 font-semibold pt-2">
+              {{ t.readFullGuide }} →
+            </a>
+          </div>
+
+          <div class="lg:col-span-7">
+            <div class="rounded-2xl overflow-hidden border border-gray-800 bg-[#0d1117] shadow-xl relative aspect-video flex items-center justify-center">
+              <img :src="withBase(interactiveTabs[activeToolTab].media)" :alt="interactiveTabs[activeToolTab].title[currentLang]" class="w-full h-full object-cover rounded-xl" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Showcase Features Grid -->
+    <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28">
       <!-- Feature 1: Flowchart -->
       <div class="flex flex-col lg:flex-row items-center gap-12">
-        <div class="lg:w-1/2 space-y-6">
+        <div class="lg:w-1/2 space-y-6 text-left">
           <div class="inline-flex items-center justify-center p-3 bg-kuka-gray border border-kuka-border rounded-xl text-kuka-orange mb-2 shadow-inner">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
           </div>
           <h2 class="text-3xl font-bold text-white">{{ t.f1Title }}</h2>
           <p class="text-lg text-gray-400 leading-relaxed">{{ t.f1Desc }}</p>
           <ul class="space-y-3 text-gray-300">
-            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f1p1 }}</li>
-            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f1p2 }}</li>
-            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f1p3 }}</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f1p1 }}</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f1p2 }}</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f1p3 }}</li>
           </ul>
         </div>
         <div class="lg:w-1/2 w-full">
-          <div class="glass-panel p-2 rounded-2xl overflow-hidden shadow-2xl relative group transform transition-transform hover:-translate-y-2">
-            <div class="absolute inset-0 bg-gradient-to-r from-kuka-orange/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="glass-panel p-2 rounded-2xl overflow-hidden shadow-2xl relative group transform transition-transform hover:-translate-y-1">
             <div class="aspect-video bg-[#1e1e1e] rounded-xl flex flex-col items-center justify-center border border-kuka-border/50 relative overflow-hidden">
-              <img src="/media/control_flow_graph.gif" alt="Interactive Flowchart Demo" class="w-full h-full object-cover rounded-xl" />
+              <img :src="withBase('/media/control_flow_graph.gif')" alt="Interactive Flowchart Demo" class="w-full h-full object-cover rounded-xl" />
             </div>
           </div>
         </div>
@@ -78,23 +213,22 @@
 
       <!-- Feature 2: Diagnostics -->
       <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
-        <div class="lg:w-1/2 space-y-6">
+        <div class="lg:w-1/2 space-y-6 text-left">
           <div class="inline-flex items-center justify-center p-3 bg-kuka-gray border border-kuka-border rounded-xl text-kuka-orange mb-2 shadow-inner">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
           </div>
           <h2 class="text-3xl font-bold text-white">{{ t.f2Title }}</h2>
           <p class="text-lg text-gray-400 leading-relaxed">{{ t.f2Desc }}</p>
           <ul class="space-y-3 text-gray-300">
-            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f2p1 }}</li>
-            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f2p2 }}</li>
-            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f2p3 }}</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f2p1 }}</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f2p2 }}</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f2p3 }}</li>
           </ul>
         </div>
         <div class="lg:w-1/2 w-full">
-          <div class="glass-panel p-2 rounded-2xl overflow-hidden shadow-2xl relative group transform transition-transform hover:-translate-y-2">
-             <div class="absolute inset-0 bg-gradient-to-r from-red-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="glass-panel p-2 rounded-2xl overflow-hidden shadow-2xl relative group transform transition-transform hover:-translate-y-1">
              <div class="aspect-video bg-[#1e1e1e] rounded-xl flex flex-col items-center justify-center border border-kuka-border/50 relative overflow-hidden">
-              <img src="/media/type-validation-demo.gif" alt="Diagnostics and Safety Demo" class="w-full h-full object-cover rounded-xl" />
+              <img :src="withBase('/media/type-validation-demo.gif')" alt="Diagnostics and Safety Demo" class="w-full h-full object-cover rounded-xl" />
             </div>
           </div>
         </div>
@@ -102,23 +236,22 @@
       
       <!-- Feature 3: Backup Diff -->
       <div class="flex flex-col lg:flex-row items-center gap-12">
-        <div class="lg:w-1/2 space-y-6">
+        <div class="lg:w-1/2 space-y-6 text-left">
           <div class="inline-flex items-center justify-center p-3 bg-kuka-gray border border-kuka-border rounded-xl text-kuka-orange mb-2 shadow-inner">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
           </div>
           <h2 class="text-3xl font-bold text-white">{{ t.f3Title }}</h2>
           <p class="text-lg text-gray-400 leading-relaxed">{{ t.f3Desc }}</p>
           <ul class="space-y-3 text-gray-300">
-            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f3p1 }}</li>
-            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f3p2 }}</li>
-            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f3p3 }}</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f3p1 }}</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f3p2 }}</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.f3p3 }}</li>
           </ul>
         </div>
         <div class="lg:w-1/2 w-full">
-          <div class="glass-panel p-2 rounded-2xl overflow-hidden shadow-2xl relative group transform transition-transform hover:-translate-y-2">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="glass-panel p-2 rounded-2xl overflow-hidden shadow-2xl relative group transform transition-transform hover:-translate-y-1">
             <div class="aspect-video bg-[#1e1e1e] rounded-xl flex flex-col items-center justify-center border border-kuka-border/50 relative overflow-hidden">
-              <img src="/media/krc_backup_diff.gif" alt="KRC Backup Diff & Delta Inspector" class="w-full h-full object-cover rounded-xl" />
+              <img :src="withBase('/media/krc_backup_diff.gif')" alt="KRC Backup Diff & Delta Inspector" class="w-full h-full object-cover rounded-xl" />
             </div>
           </div>
         </div>
@@ -127,8 +260,6 @@
 
     <!-- Comparison Table -->
     <section class="py-24 bg-kuka-darker/80 border-y border-kuka-border relative overflow-hidden">
-      <div class="absolute top-[50%] left-[-10%] w-[500px] h-[500px] bg-kuka-orange/5 rounded-full blur-[100px] pointer-events-none"></div>
-      
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center mb-16">
           <h2 class="text-3xl font-bold text-white mb-4">{{ t.compareTitle }}</h2>
@@ -171,7 +302,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto relative z-10 items-stretch">
         
         <!-- Community (Free) -->
-        <div class="glass-panel p-8 rounded-2xl flex flex-col hover:border-gray-500 transition-colors border border-kuka-border">
+        <div class="glass-panel p-8 rounded-2xl flex flex-col hover:border-gray-500 transition-colors border border-kuka-border text-left">
           <h3 class="text-xl font-bold text-white mb-2">{{ t.p0Name }}</h3>
           <p class="text-gray-400 text-sm mb-6">{{ t.p0Desc }}</p>
           <div class="text-4xl font-extrabold text-white mb-2">$0<span class="text-lg text-gray-500 font-normal"> / forever</span></div>
@@ -185,7 +316,7 @@
         </div>
 
         <!-- Monthly -->
-        <div class="glass-panel p-8 rounded-2xl flex flex-col hover:border-gray-500 transition-colors relative border border-kuka-border">
+        <div class="glass-panel p-8 rounded-2xl flex flex-col hover:border-gray-500 transition-colors relative border border-kuka-border text-left">
           <div class="inline-block self-start px-2.5 py-0.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-kuka-orange text-xs font-mono font-bold uppercase mb-3">14-Day Free Trial</div>
           <h3 class="text-xl font-bold text-white mb-2">{{ t.p1Name }}</h3>
           <p class="text-gray-400 text-sm mb-6">{{ t.p1Desc }}</p>
@@ -200,7 +331,7 @@
         </div>
 
         <!-- Annual (Featured) -->
-        <div class="bg-kuka-gray p-[1px] rounded-2xl relative transform md:-translate-y-4 shadow-[0_0_40px_rgba(255,102,0,0.25)] flex flex-col">
+        <div class="bg-kuka-gray p-[1px] rounded-2xl relative transform md:-translate-y-4 shadow-[0_0_40px_rgba(255,102,0,0.25)] flex flex-col text-left">
           <div class="absolute inset-0 bg-gradient-to-b from-kuka-orange to-kuka-darker rounded-2xl opacity-50"></div>
           <div class="relative bg-kuka-dark h-full p-8 rounded-2xl flex flex-col z-10 border border-kuka-orange/50">
             <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-kuka-orange text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">{{ t.mostPopular }}</div>
@@ -226,7 +357,7 @@
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl font-bold text-white mb-12 text-center">{{ t.faqTitle }}</h2>
         <div class="space-y-6">
-          <div v-for="(faq, i) in t.faqs" :key="i" class="glass-panel p-6 rounded-xl hover:border-kuka-orange/30 transition-colors">
+          <div v-for="(faq, i) in t.faqs" :key="i" class="glass-panel p-6 rounded-xl hover:border-kuka-orange/30 transition-colors text-left">
             <h3 class="text-xl font-semibold text-white mb-3">{{ faq.q }}</h3>
             <p class="text-gray-400 leading-relaxed">{{ faq.a }}</p>
           </div>
@@ -237,10 +368,116 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useData } from 'vitepress'
+import { computed, ref, onMounted } from 'vue'
+import { useData, withBase } from 'vitepress'
 
 const { lang } = useData()
+
+// Interactive Parallax mouse position
+const glowX = ref(600)
+const glowY = ref(300)
+
+const handleMouseMove = (e) => {
+  glowX.value = e.clientX
+  glowY.value = e.clientY
+}
+
+// Compute current language key
+const currentLang = computed(() => {
+  if (lang.value === 'ru' || lang.value?.startsWith('ru')) return 'ru'
+  if (lang.value === 'tr' || lang.value?.startsWith('tr')) return 'tr'
+  return 'en'
+})
+
+// Active Interactive Tool Tab
+const activeToolTab = ref(0)
+
+const interactiveTabs = [
+  {
+    icon: '🗺️',
+    name: { en: 'Flowchart', ru: 'Блок-схема', tr: 'Akış Şeması' },
+    title: {
+      en: 'Interactive Flowchart & Control Flow Graph',
+      ru: 'Интерактивные Блок-схемы и Графы Логики',
+      tr: 'Etkileşimli Akış Şeması ve Kontrol Grafiği'
+    },
+    desc: {
+      en: 'Transforms nested KRL programs into interactive, clickable Mermaid SVG graphs with bidirectional code jumping.',
+      ru: 'Превращает запутанные программы KRL в интерактивные кликабельные графы логики с прыжком к строкам кода.',
+      tr: 'Karmaşık KRL programlarını iki yönlü kod atlamalı etkileşimli Mermaid SVG grafiklerine dönüştürür.'
+    },
+    benefit: {
+      en: 'Instantly understand complex handover sequences and export clear vector documentation for clients.',
+      ru: 'Мгновенно разбирайтесь в чужих программах и экспортируйте векторную документацию для заказчиков.',
+      tr: 'Karmaşık robot sekanslarını anında anlayın ve müşteriler için vektör dokümantasyonu dışa aktarın.'
+    },
+    media: '/media/control_flow_graph.gif',
+    link: '/guide/flowchart'
+  },
+  {
+    icon: '🛡️',
+    name: { en: 'Safety', ru: 'Безопасность', tr: 'Güvenlik' },
+    title: {
+      en: 'Safety & Velocity Collision Inspector',
+      ru: 'Инспектор Безопасности и Скоростей ($VEL.CP)',
+      tr: 'Güvenlik ve Hız Çarpışma Denetçisi'
+    },
+    desc: {
+      en: 'Flags high speeds ($VEL.CP > 3.0 m/s), uninitialized Tool/Base frames, infinite loops, and invisible non-ASCII characters.',
+      ru: 'Выявляет опасные скорости, движение без Tool/Base, зависающие циклы и русскую раскладку в коде.',
+      tr: 'Aşırı hızları ($VEL.CP > 3.0 m/s), başlatılmamış Tool/Base değerlerini ve ASCII dışı karakterleri yakalar.'
+    },
+    benefit: {
+      en: 'Prevents expensive mechanical robot crashes and compiler stalls before touching the teach pendant.',
+      ru: 'Предотвращает механические удары робота об оснастку и сбои компилятора до запуска программы.',
+      tr: 'Öğretme kumandasına dokunmadan önce mekanik robot çarpışmalarını ve derleyici durmalarını önler.'
+    },
+    media: '/media/type-validation-demo.gif',
+    link: '/guide/diagnostics'
+  },
+  {
+    icon: '📦',
+    name: { en: 'Backup Diff', ru: 'KRC Diff', tr: 'Yedek Farkı' },
+    title: {
+      en: 'SmartPAD ZIP Backup Diff & Delta Math',
+      ru: 'Сравнение бэкапов SmartPAD .ZIP и Дельта Точек',
+      tr: 'SmartPAD ZIP Yedek Farkı ve Delta Hesabı'
+    },
+    desc: {
+      en: 'Compares active source code against SmartPAD ZIP archives and calculates exact coordinate shifts (ΔX, ΔY, ΔZ, ΔA, ΔB, ΔC).',
+      ru: 'Сравнивает код с архивными ZIP-бэкапами и рассчитывает точное смещение координат точек.',
+      tr: 'Kaynak kodunu ZIP yedekleriyle karşılaştırır ve kesin koordinat kaymalarını (ΔX, ΔY, ΔZ) hesaplar.'
+    },
+    benefit: {
+      en: 'Pinpoints unverified point modifications made on the shop floor before they cause collisions.',
+      ru: 'Находит скрытые изменения точек на пульте робота до того, как они приведут к аварии.',
+      tr: 'Sahada yapılan doğrulanmamış nokta değişikliklerini çarpışmalara yol açmadan önce tespit eder.'
+    },
+    media: '/media/krc_backup_diff.gif',
+    link: '/guide/backup-diff'
+  },
+  {
+    icon: '📐',
+    name: { en: 'Frame Math', ru: 'Калькулятор', tr: 'Frame Hesabı' },
+    title: {
+      en: '3-Point Frame & Euler Angle Math Engine',
+      ru: '3-Точечный Калькулятор Фреймов (Euler A, B, C)',
+      tr: '3 Noktalı Frame ve Euler Açı Motoru'
+    },
+    desc: {
+      en: 'Calculates BASE_DATA and TOOL_DATA transformations and Euler orientation angles from 3 measured calibration points.',
+      ru: 'Вычисляет трансформации BASE_DATA и TOOL_DATA и углы Эйлера по 3 замеренным реперным точкам.',
+      tr: '3 ölçülen noktadan BASE_DATA ve TOOL_DATA dönüşümlerini ve Euler yönelim açılarını hesaplar.'
+    },
+    benefit: {
+      en: 'Zero manual trigonometry errors when establishing fixtures and coordinate frames on the shop floor.',
+      ru: 'Исключает ошибки тригонометрии при привязке кондукторов и баз деталей в цеху.',
+      tr: 'Sahada fikstür ve koordinat sistemlerini kurarken sıfır trigonometri hatası sağlar.'
+    },
+    media: '/media/kuka_control_center.gif',
+    link: '/guide/pro-features'
+  }
+]
 
 const translations = {
   en: {
@@ -255,6 +492,14 @@ const translations = {
     offlineFirst: "Offline-First Architecture",
     builtFor: "Built for KRC4 & KRC5",
     
+    securityTitle: "Certified & Audited by ReversingLabs Spectra Assure",
+    securityDesc: "Every production build of KUKA KRL Professional undergoes rigorous automated binary inspection and supply chain verification by ReversingLabs Spectra Assure. Fully compliant with enterprise automotive and OT security standards.",
+    viewSecurityReport: "View Live Report on secure.software",
+
+    toolInspectorTitle: "Interactive Industrial Tool Suite",
+    toolInspectorDesc: "Experience the specialized engineering tools designed exclusively for commissioning engineers.",
+    readFullGuide: "Read full deep-dive guide",
+
     f1Title: "Interactive Flowchart Viewer",
     f1Desc: "Turn massive, complex .src programs into visual, clean control-flow diagrams. Featuring bidirectional navigation, detailed signals, and SVG export. Stop guessing logic, start seeing it.",
     f1p1: "One-click drill-down into subprograms",
@@ -334,6 +579,14 @@ const translations = {
     offlineFirst: "Офлайн-Архитектура",
     builtFor: "Для KRC4 и KRC5",
     
+    securityTitle: "Сертифицировано ReversingLabs Spectra Assure",
+    securityDesc: "Каждая сборка KUKA KRL Professional проходит всесторонний бинарный аудит безопасности в ReversingLabs Spectra Assure. Полное соответствие строгим стандартам безопасности автоконцернов и промышленных сетей OT/PLC.",
+    viewSecurityReport: "Смотреть отчёт на secure.software",
+
+    toolInspectorTitle: "Интерактивный Инспектор Промышленных Модулей",
+    toolInspectorDesc: "Исследуйте специализированные инженерные инструменты, разработанные специально для инженеров-наладчиков.",
+    readFullGuide: "Читать полное руководство",
+
     f1Title: "Интерактивные Блок-схемы",
     f1Desc: "Превращайте огромные и запутанные программы .src в чистые, визуальные графы логики. Двусторонняя навигация, отображение сигналов и экспорт в SVG. Хватит гадать — начните видеть код.",
     f1p1: "Проваливание в подпрограммы в 1 клик",
@@ -413,6 +666,14 @@ const translations = {
     offlineFirst: "Çevrimdışı Mimari",
     builtFor: "KRC4 & KRC5 Uyumlu",
     
+    securityTitle: "ReversingLabs Spectra Assure Tarafından Sertifikalandırıldı",
+    securityDesc: "KUKA KRL Professional'ın her üretim sürümü, ReversingLabs Spectra Assure tarafından otomatik ikili denetimden ve tedarik zinciri doğrulamasından geçer. Otomotiv ve OT güvenlik standartlarına %100 uygundur.",
+    viewSecurityReport: "secure.software'de Canlı Raporu Gör",
+
+    toolInspectorTitle: "Etkileşimli Endüstriyel Araç Paketi",
+    toolInspectorDesc: "Devreye alma mühendisleri için özel olarak tasarlanmış mühendislik araçlarını keşfedin.",
+    readFullGuide: "Kılavuzun tamamını oku",
+
     f1Title: "Etkileşimli Akış Şeması Görüntüleyici",
     f1Desc: "Büyük, karmaşık .src programlarını görsel, temiz kontrol akışı diyagramlarına dönüştürün. İki yönlü gezinme, ayrıntılı sinyaller ve SVG dışa aktarımı özellikleri.",
     f1p1: "Alt programlara tek tıklamayla inme",
@@ -482,13 +743,13 @@ const translations = {
   }
 }
 
-const t = computed(() => translations[lang.value] || translations.en)
+const t = computed(() => translations[currentLang.value] || translations.en)
 </script>
 
 <style scoped>
 .glass-panel {
-  background: rgba(17, 22, 29, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(17, 22, 29, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 </style>

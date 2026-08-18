@@ -34,6 +34,7 @@ export class TelegramChatService {
   private lastPollTimestamp = 0;
   private isChatOpen = false;
   private highFrequencyUntil = 0;
+  private executionLogs: string[] = [];
 
   private constructor() {
     // Generate initial session ID (will be restored from persistent state in init)
@@ -797,44 +798,180 @@ export class TelegramChatService {
     }
   }
 
-  private gatherDiagnosticLogs(): string {
-    const osInfo = `${os.type()} ${os.release()} (${os.arch()})`;
-    const memoryInfo = `Free: ${Math.round(os.freemem() / 1024 / 1024)}MB / Total: ${Math.round(os.totalmem() / 1024 / 1024)}MB`;
-    const activeDoc = vscode.window.activeTextEditor?.document;
+  public logToOutput(
+    msg: string,
+    level: "INFO" | "WARN" | "ERROR" = "INFO",
+    error?: unknown,
+  ) {
+    const timestamp = new Date().toLocaleTimeString();
+    const formatted = `[${timestamp}] [${level}] ${msg}${error ? ` | Error: ${(error as any)?.stack || error}` : ""}`;
 
-    let log = `=== KUKA KRL Professional Extension Remote Diagnostic Log ===\n`;
-    log += `Timestamp   : ${new Date().toISOString()}\n`;
-    log += `Session ID  : #${this.sessionId}\n`;
-    log += `Hostname    : ${os.hostname()}\n`;
-    log += `OS Platform : ${osInfo}\n`;
-    log += `Memory      : ${memoryInfo}\n`;
-    log += `VS Code Ver : ${vscode.version}\n`;
-    log += `License     : ${isPremium() ? "Pro Permanent / Active" : "Community"}\n`;
-    log += `============================================================\n\n`;
-
-    if (activeDoc) {
-      log += `--- Active KRL Document ---\n`;
-      log += `File Path : ${activeDoc.fileName}\n`;
-      log += `Language  : ${activeDoc.languageId}\n`;
-      log += `Lines     : ${activeDoc.lineCount}\n`;
-      log += `---------------------------\n\n`;
-
-      const lines = activeDoc.getText().split(/\r?\n/).slice(0, 50);
-      log += lines.join("\n");
-      log += `\n-----------------------------------------\n`;
-    } else {
-      log += `No active text editor in VS Code workspace.\n`;
+    if (this.executionLogs.length > 150) {
+      this.executionLogs.shift();
     }
+    this.executionLogs.push(formatted);
 
-    return log;
+    if (this.outputChannel) {
+      this.outputChannel.appendLine(formatted);
+    }
   }
 
-  private logToOutput(msg: string) {
-    if (this.outputChannel) {
-      this.outputChannel.appendLine(
-        `[${new Date().toLocaleTimeString()}] ${msg}`,
-      );
+  private gatherDiagnosticLogs(): string {
+    const osInfo = `${os.type()} ${os.release()} (${os.arch()})`;
+    const memFreeMb = Math.round(os.freemem() / 1024 / 1024);
+    const memTotalMb = Math.round(os.totalmem() / 1024 / 1024);
+    const memUsagePercent = Math.round(
+      ((memTotalMb - memFreeMb) / memTotalMb) * 100,
+    );
+    const nodeMem = process.memoryUsage();
+    const nodeHeapMb = Math.round(nodeMem.heapUsed / 1024 / 1024);
+
+    const activeEditor = vscode.window.activeTextEditor;
+    const activeDoc = activeEditor?.document;
+    const config = vscode.workspace.getConfiguration("krl");
+
+    let log = `================================================================================\n`;
+    log += `               KUKA KRL PROFESSIONAL INDUSTRIAL DIAGNOSTIC REPORT               \n`;
+    log += `================================================================================\n`;
+    log += `Generated Timestamp : ${new Date().toISOString()} (Local: ${new Date().toLocaleString()})\n`;
+    log += `Active Session ID   : #${this.sessionId}\n`;
+    log += `Extension Version   : v1.7.3 (Industrial Suite)\n`;
+    log += `License Status      : ${isPremium() ? "⭐ PRO (Industrial Commercial License)" : "🆓 Community Edition"}\n`;
+    log += `--------------------------------------------------------------------------------\n`;
+    log += `💻 SYSTEM & RUNTIME ENVIRONMENT\n`;
+    log += `• Hostname          : ${os.hostname()}\n`;
+    log += `• OS Platform       : ${osInfo}\n`;
+    log += `• System Memory     : ${memFreeMb} MB Free / ${memTotalMb} MB Total (${memUsagePercent}% utilized)\n`;
+    log += `• Node.js Heap      : ${nodeHeapMb} MB (Runtime: ${process.version})\n`;
+    log += `• VS Code Version   : ${vscode.version} (App: ${vscode.env.appName})\n`;
+    log += `• UI Locale         : ${vscode.env.language}\n`;
+    log += `• Active Theme Kind : ColorThemeKind #${vscode.window.activeColorTheme.kind}\n`;
+    log += `--------------------------------------------------------------------------------\n`;
+    log += `⚙️ KRL EXTENSION CONFIGURATION\n`;
+    log += `• krl.indentWidth        : ${config.get<number>("indentWidth", 3)}\n`;
+    log += `• krl.alignAssignments   : ${config.get<boolean>("alignAssignments", true)}\n`;
+    log += `• krl.errorLens.enabled  : ${config.get<boolean>("errorLens.enabled", true)}\n`;
+    log += `• krl.validateNonAscii   : ${config.get<boolean>("validateNonAscii", true)}\n`;
+    log += `• krl.inlayHints.enabled : ${config.get<boolean>("inlayHints.enabled", true)}\n`;
+    log += `• krl.supportGatewayUrl  : ${this.getGatewayUrl()}\n`;
+    log += `--------------------------------------------------------------------------------\n`;
+
+    // Workspace & KRL Files Analysis
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (workspaceFolders && workspaceFolders.length > 0) {
+      log += `📁 WORKSPACE OVERVIEW\n`;
+      log += `• Root Folder : ${workspaceFolders[0].uri.fsPath}\n`;
+      log += `• Folders Cnt : ${workspaceFolders.length}\n`;
+
+      try {
+        const krlFiles: string[] = [];
+        const scanDir = (dir: string, depth: number = 0) => {
+          if (depth > 5 || !fs.existsSync(dir)) return;
+          const entries = fs.readdirSync(dir, { withFileTypes: true });
+          for (const entry of entries) {
+            const p = path.join(dir, entry.name);
+            if (entry.isDirectory()) {
+              if (
+                !entry.name.startsWith(".") &&
+                entry.name !== "node_modules"
+              ) {
+                scanDir(p, depth + 1);
+              }
+            } else if (entry.isFile()) {
+              const ext = path.extname(entry.name).toLowerCase();
+              if ([".src", ".dat", ".sub", ".krl", ".xml"].includes(ext)) {
+                krlFiles.push(p);
+              }
+            }
+          }
+        };
+        scanDir(workspaceFolders[0].uri.fsPath);
+        log += `• KRL Files Found (${krlFiles.length}):\n`;
+        for (const kf of krlFiles.slice(0, 30)) {
+          const stats = fs.statSync(kf);
+          const rel = path.relative(workspaceFolders[0].uri.fsPath, kf);
+          log += `  - ${rel} (${(stats.size / 1024).toFixed(1)} KB)\n`;
+        }
+        if (krlFiles.length > 30) {
+          log += `  ... and ${krlFiles.length - 30} more KRL files\n`;
+        }
+      } catch (err) {
+        log += `• Error scanning workspace: ${err}\n`;
+      }
+    } else {
+      log += `📁 WORKSPACE: No open workspace folder in VS Code.\n`;
     }
+
+    log += `--------------------------------------------------------------------------------\n`;
+
+    // Active Document & Detailed Compiler/LSP Diagnostics
+    if (activeDoc) {
+      log += `📄 ACTIVE DOCUMENT ANALYSIS\n`;
+      log += `• File Path : ${activeDoc.fileName}\n`;
+      log += `• Language  : ${activeDoc.languageId}\n`;
+      log += `• Metrics   : ${activeDoc.lineCount} lines, ${activeDoc.getText().length} chars\n`;
+      log += `• Dirty/Mod : ${activeDoc.isDirty ? "YES (Unsaved changes)" : "NO (Saved to disk)"}\n`;
+
+      const docDiagnostics = vscode.languages.getDiagnostics(activeDoc.uri);
+      log += `\n🚨 ACTIVE FILE COMPILER & LANGUAGE DIAGNOSTICS (${docDiagnostics.length} issues):\n`;
+      if (docDiagnostics.length === 0) {
+        log += `  ✅ 0 Errors / 0 Warnings reported on active file.\n`;
+      } else {
+        docDiagnostics.forEach((diag, idx) => {
+          const sevStr =
+            diag.severity === vscode.DiagnosticSeverity.Error
+              ? "❌ ERROR"
+              : diag.severity === vscode.DiagnosticSeverity.Warning
+                ? "⚠️ WARNING"
+                : diag.severity === vscode.DiagnosticSeverity.Information
+                  ? "ℹ️ INFO"
+                  : "💡 HINT";
+          const line = diag.range.start.line + 1;
+          const col = diag.range.start.character + 1;
+          log += `  [#${idx + 1}] ${sevStr} (Line ${line}, Col ${col}) [${diag.source || "krl"}]: ${diag.message}\n`;
+        });
+      }
+
+      // Summary of all diagnostics across workspace
+      const allDiags = vscode.languages.getDiagnostics();
+      let totalWsErrors = 0;
+      let totalWsWarnings = 0;
+      allDiags.forEach(([_, diags]) => {
+        diags.forEach((d) => {
+          if (d.severity === vscode.DiagnosticSeverity.Error) totalWsErrors++;
+          if (d.severity === vscode.DiagnosticSeverity.Warning)
+            totalWsWarnings++;
+        });
+      });
+      log += `\n📊 WORKSPACE DIAGNOSTICS SUMMARY: ${totalWsErrors} Total Errors, ${totalWsWarnings} Total Warnings across all files.\n`;
+
+      log += `\n--- ACTIVE FILE CODE PREVIEW (First 80 Lines) ---\n`;
+      const lines = activeDoc.getText().split(/\r?\n/).slice(0, 80);
+      lines.forEach((l, idx) => {
+        log += `${String(idx + 1).padStart(4, " ")} | ${l}\n`;
+      });
+      log += `-------------------------------------------------\n`;
+    } else {
+      log += `📄 ACTIVE DOCUMENT: No active text editor currently open in VS Code.\n`;
+    }
+
+    log += `--------------------------------------------------------------------------------\n`;
+
+    // Extension Execution Logs & Errors Ring Buffer
+    log += `📋 EXTENSION RUNTIME EXECUTION & ERROR LOGS (${this.executionLogs.length} entries):\n`;
+    if (this.executionLogs.length === 0) {
+      log += `  (No runtime errors logged in current session)\n`;
+    } else {
+      this.executionLogs.forEach((entry) => {
+        log += `  ${entry}\n`;
+      });
+    }
+
+    log += `================================================================================\n`;
+    log += `                             END OF DIAGNOSTIC LOG                             \n`;
+    log += `================================================================================\n`;
+
+    return log;
   }
 
   /**

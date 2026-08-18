@@ -1,7 +1,7 @@
 image: node:20
 
 stages:
-  - build_and_test
+  - test_and_build
   - deploy
 
 cache:
@@ -11,32 +11,35 @@ cache:
     - docs/node_modules/
 
 build_extension:
-  stage: build_and_test
-  script:
+  stage: test_and_build
+  before_script:
     - node -v
     - npm -v
-    - cp LICENSE extension/LICENSE.txt
+    - cp LICENSE extension/LICENSE.txt || true
+  script:
     - cd extension
-    - npm install --progress=false
-    - npm run compile
+    - npm ci --legacy-peer-deps || npm install --legacy-peer-deps
+    - cd server && npx tsc --noEmit && cd ../client && npx tsc --noEmit && cd ..
     - npm run lint
-    - npm run package
+    - npm run compile
+    - npm test
+    - npm run test:e2e
+    - npx @vscode/vsce package --no-dependencies
   artifacts:
     name: "kuka-krl-extension-$CI_COMMIT_SHORT_SHA"
     paths:
       - extension/*.vsix
     expire_in: 1 week
-  only:
-    - main
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "master"
 
 pages:
   stage: deploy
   script:
-    - cd docs
-    - npm install --progress=false
-    - npx vitepress build
+    - if [ -d "docs" ] && [ -f "docs/package.json" ]; then cd docs && (npm ci --legacy-peer-deps || npm install --legacy-peer-deps) && npx vitepress build && cd ..; fi
   artifacts:
     paths:
       - public
-  only:
-    - main
+    expire_in: 1 week
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "master"

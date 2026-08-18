@@ -37,6 +37,10 @@ jobs:
           cd server && npx tsc
           cd ../client && npx tsc
 
+      - name: Compile Production Bundle
+        working-directory: extension
+        run: npm run compile
+
       - name: Run Unit Tests
         working-directory: extension
         run: npm test
@@ -44,10 +48,6 @@ jobs:
       - name: Run E2E Tests
         working-directory: extension
         run: npm run test:e2e
-
-      - name: Compile Production Bundle
-        working-directory: extension
-        run: npm run compile
 
       - name: Package VSIX
         working-directory: extension

@@ -35,6 +35,10 @@ jobs:
           cd server && npx tsc
           cd ../client && npx tsc
 
+      - name: Compile Production Extension
+        working-directory: extension
+        run: npm run compile
+
       - name: Static Security & i18n Symmetry Tests
         working-directory: extension
         run: npm test
@@ -42,10 +46,6 @@ jobs:
       - name: Comprehensive E2E Safety Matrix
         working-directory: extension
         run: npm run test:e2e
-
-      - name: Build Production Extension
-        working-directory: extension
-        run: npm run compile
 
       - name: Package VSIX
         working-directory: extension

@@ -32,9 +32,11 @@ export class TelegramChatService {
   private sessions: Record<string, ChatMessage[]> = {};
   private extensionContext: vscode.ExtensionContext | null = null;
   private lastPollTimestamp = 0;
+  private isChatOpen = false;
+  private highFrequencyUntil = 0;
 
   private constructor() {
-    // Generate unique resilient session ID for this engineer instance
+    // Generate initial session ID (will be restored from persistent state in init)
     const rawId = `${os.hostname()}-${process.pid}-${Date.now()}`;
     this.sessionId = crypto
       .createHash("md5")
@@ -48,6 +50,23 @@ export class TelegramChatService {
       TelegramChatService.instance = new TelegramChatService();
     }
     return TelegramChatService.instance;
+  }
+
+  public setChatOpen(open: boolean) {
+    this.isChatOpen = open;
+    if (open) {
+      this.triggerImmediatePoll();
+    }
+  }
+
+  public activateHighFrequencyPolling(durationMs: number = 180000) {
+    this.highFrequencyUntil = Date.now() + durationMs;
+  }
+
+  public triggerImmediatePoll() {
+    if (this.extensionContext) {
+      this.fetchGatewayReplies(this.extensionContext).catch(() => {});
+    }
   }
 
   /**
@@ -73,6 +92,24 @@ export class TelegramChatService {
     >("krl_telegram_sessions_store", {});
 
     this.sessions = savedSessions || {};
+
+    // Restore persistent session ID across restarts (Ensures offline replies reach the engineer)
+    const savedActiveId = context.globalState.get<string>(
+      "krl_telegram_active_session_id",
+    );
+
+    if (savedActiveId && this.sessions[savedActiveId]) {
+      this.sessionId = savedActiveId;
+    } else {
+      const keys = Object.keys(this.sessions);
+      if (keys.length > 0) {
+        this.sessionId = keys[0];
+      }
+      context.globalState.update(
+        "krl_telegram_active_session_id",
+        this.sessionId,
+      );
+    }
 
     // Ensure current session exists in sessions store
     if (!this.sessions[this.sessionId]) {
@@ -101,7 +138,7 @@ export class TelegramChatService {
     // Check first-run welcome registration
     this.checkFirstRunWelcome(context);
 
-    // Start secure gateway long-polling & heartbeat
+    // Start secure gateway low-latency polling & heartbeat
     this.startPolling(context);
     this.startHeartbeat();
   }
@@ -146,6 +183,7 @@ export class TelegramChatService {
     if (this.sessions[id]) {
       this.sessionId = id;
       this.saveSessions();
+      this.triggerImmediatePoll();
     }
   }
 
@@ -160,6 +198,7 @@ export class TelegramChatService {
     this.sessionId = newId;
     this.sessions[newId] = [];
     this.saveSessions();
+    this.triggerImmediatePoll();
     return newId;
   }
 
@@ -223,6 +262,10 @@ export class TelegramChatService {
       this.extensionContext.globalState.update(
         "krl_telegram_sessions_store",
         this.sessions,
+      );
+      this.extensionContext.globalState.update(
+        "krl_telegram_active_session_id",
+        this.sessionId,
       );
     }
   }
@@ -437,6 +480,10 @@ export class TelegramChatService {
         timestamp: Date.now(),
       };
 
+      this.activateHighFrequencyPolling(180000);
+      setTimeout(() => this.triggerImmediatePoll(), 600);
+      setTimeout(() => this.triggerImmediatePoll(), 1800);
+
       const gatewayUrl = this.getGatewayUrl();
 
       // Post to Gateway REST API endpoint
@@ -467,6 +514,7 @@ export class TelegramChatService {
 
   /**
    * Periodically polls Gateway for developer replies with 0 race condition.
+   * Uses adaptive interval: 1.2s when actively chatting or panel is open, 3.5s when idle.
    */
   private startPolling(context: vscode.ExtensionContext) {
     if (this.pollingTimer) return;
@@ -477,7 +525,10 @@ export class TelegramChatService {
       } catch {
         /* Ignore transient network hiccups */
       } finally {
-        this.pollingTimer = setTimeout(poll, 3000);
+        const isHighFreq =
+          this.isChatOpen || Date.now() < this.highFrequencyUntil;
+        const interval = isHighFreq ? 1200 : 3500;
+        this.pollingTimer = setTimeout(poll, interval);
       }
     };
 

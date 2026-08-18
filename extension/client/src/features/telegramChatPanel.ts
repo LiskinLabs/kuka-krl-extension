@@ -130,6 +130,7 @@ export class TelegramChatPanel {
     service.onMessage(() => {
       this.refreshWebview();
     });
+    service.setChatOpen(true);
   }
 
   public static createOrShow(
@@ -143,6 +144,7 @@ export class TelegramChatPanel {
     if (TelegramChatPanel.currentPanel) {
       TelegramChatPanel.currentPanel.panel.reveal(column);
       TelegramChatPanel.currentPanel.refreshWebview();
+      TelegramChatService.getInstance().setChatOpen(true);
       return;
     }
 
@@ -184,6 +186,7 @@ export class TelegramChatPanel {
   }
 
   public dispose() {
+    TelegramChatService.getInstance().setChatOpen(false);
     TelegramChatPanel.currentPanel = undefined;
     this.panel.dispose();
     while (this.disposables.length) {

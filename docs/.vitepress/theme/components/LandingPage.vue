@@ -33,7 +33,7 @@
             <span class="flex h-2 w-2 rounded-full bg-kuka-orange animate-pulse"></span>
             {{ t.heroBadge }}
           </div>
-          <a href="https://secure.software/vscode/LiskinLabs.kuka-krl-extension" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs sm:text-sm text-emerald-600 dark:text-emerald-400 font-mono font-semibold hover:bg-emerald-500/20 transition-colors shadow-sm">
+          <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs sm:text-sm text-emerald-600 dark:text-emerald-400 font-mono font-semibold hover:bg-emerald-500/20 transition-colors shadow-sm">
             <svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
             Spectra Assure: PASSED (100% Clean)
           </a>
@@ -121,7 +121,7 @@
               <div class="text-emerald-600 dark:text-emerald-400 font-mono font-bold text-sm">100% Security Health Score</div>
             </div>
             <a 
-              href="https://secure.software/vscode/LiskinLabs.kuka-krl-extension" 
+              href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension" 
               target="_blank" 
               rel="noopener noreferrer"
               class="w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 min-h-[44px]"

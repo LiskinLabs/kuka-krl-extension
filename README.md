@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/v/LiskinLabs.kuka-krl-extension?style=for-the-badge&label=VS%20Marketplace&color=FF6600" alt="VS Code Version" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=for-the-badge&label=Open%20VSX&color=007ACC" alt="Open VSX Version" /></a>
-  <a href="https://secure.software/vscode/LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=for-the-badge&logo=shield" alt="ReversingLabs Security Score" /></a>
+  <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=for-the-badge&logo=shield" alt="ReversingLabs Security Score" /></a>
 </p>
 
 <p align="center">
@@ -51,7 +51,7 @@ KUKA KRL Professional is certified by **ReversingLabs Spectra Assure** with a **
 * 🟢 **0 Secret / Token Leaks**
 * 🟢 **0 MITRE ATT&CK Indicators**
 
-Live Security Report: [https://secure.software/vscode/LiskinLabs.kuka-krl-extension](https://secure.software/vscode/LiskinLabs.kuka-krl-extension)
+Live Security Report: [https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension](https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension)
 
 ---
 
@@ -120,5 +120,5 @@ Configure extension behaviors in your `settings.json`:
 ## 📄 License & Credits
 
 * **Publisher & Developer**: [Liskin Labs](https://github.com/LiskinLabs) / [Silvestr Liskin](https://www.linkedin.com/in/silvestr-liskin-ab712920b/)
-* **Security Auditor**: [ReversingLabs Spectra Assure](https://secure.software/vscode/LiskinLabs.kuka-krl-extension)
+* **Security Auditor**: [ReversingLabs Spectra Assure](https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension)
 * **Official Merchant of Record**: [Lemon Squeezy](https://liskinlabs.lemonsqueezy.com/)

@@ -42,9 +42,8 @@ We offer flexible, industrial-grade licensing through our official merchant, **L
 
 | Plan | Price | Best For | License Type |
 |:---|:---:|:---|:---|
-| ⏱️ **Pro Monthly** | **$19** / mo | Short-term commissioning trips | Subscription (Cancel anytime) |
-| 📅 **Pro Annual** | **$149** / yr | Full-time robotics engineers *(Save ~35%)* | Subscription |
-| ♾️ **Pro Lifetime** | **$399** | Enterprises & long-term ownership | One-time payment (Yours forever) |
+| ⏱️ **Pro Monthly** | **$3.99** / mo | Short-term commissioning & trial | Subscription (14-day free trial, 3 PCs) |
+| 📅 **Pro Annual** | **$39.99** / yr | Full-time robotics engineers *(Save 20%)* | Subscription (Priority updates, 3 PCs) |
 
 <div align="center" style="margin: 30px 0;">
   <a href="https://liskin.lemonsqueezy.com/" style="text-decoration:none;">

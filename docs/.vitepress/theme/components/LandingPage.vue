@@ -196,7 +196,7 @@
             <li class="flex gap-2 text-gray-300 text-sm"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.pf2 }}</li>
             <li class="flex gap-2 text-gray-300 text-sm"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.pf3_std }}</li>
           </ul>
-          <a href="https://liskin.lemonsqueezy.com/checkout/buy/ab34799e-42d7-49b0-ad33-94b2d4fe0a7d" target="_blank" rel="noopener noreferrer" class="block w-full py-3.5 px-4 bg-kuka-gray hover:bg-gray-700 text-center text-white font-bold rounded-lg border border-kuka-border transition-colors">{{ t.btnSub }}</a>
+          <a href="https://liskinlabs.lemonsqueezy.com/checkout/buy/ab34799e-42d7-49b0-ad33-94b2d4fe0a7d" target="_blank" rel="noopener noreferrer" class="block w-full py-3.5 px-4 bg-kuka-gray hover:bg-gray-700 text-center text-white font-bold rounded-lg border border-kuka-border transition-colors">{{ t.btnSub }}</a>
         </div>
 
         <!-- Annual (Featured) -->
@@ -214,7 +214,7 @@
               <li class="flex gap-2 text-gray-300 text-sm"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.pf2 }}</li>
               <li class="flex gap-2 text-gray-300 text-sm"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.pf3_pri }}</li>
             </ul>
-            <a href="https://liskin.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7" target="_blank" rel="noopener noreferrer" class="block w-full py-3.5 px-4 bg-kuka-orange hover:bg-orange-600 text-center text-white font-bold rounded-lg transition-colors shadow-lg shadow-orange-500/20">{{ t.btnSubYr }}</a>
+            <a href="https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7" target="_blank" rel="noopener noreferrer" class="block w-full py-3.5 px-4 bg-kuka-orange hover:bg-orange-600 text-center text-white font-bold rounded-lg transition-colors shadow-lg shadow-orange-500/20">{{ t.btnSubYr }}</a>
           </div>
         </div>
 

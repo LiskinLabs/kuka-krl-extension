@@ -1,0 +1,47 @@
+&ACCESS RVP
+&REL 1
+&COMMENT Flowchart Viewer Demo
+DEF flowchart_demo()
+  ; --- DEMO: Control Flow Graph Visualizer ---
+  ; ACTION: Open this file and click "Show Control Flow Graph" icon
+  ; The extension renders this nested logic into a beautiful interactive flowchart.
+  
+  $BASE = BASE_DATA[1]
+  $TOOL = TOOL_DATA[1]
+  
+  IF $IN[1] THEN
+    ; Part arrived
+    PTP xPickupApproach
+    
+    SWITCH nActiveCycleMode
+      CASE 1
+        LIN xPickMain
+        grabPart()
+      CASE 2
+        LIN xPickAlternate
+        grabPart()
+      DEFAULT
+        HALT ; Unknown mode
+    ENDSWITCH
+    
+  ELSE
+    ; Waiting area
+    PTP xWaitHome
+    
+    LOOP
+      IF $IN[1] THEN
+        EXIT ; Found part, exit wait loop
+      ENDIF
+      WAIT SEC 0.5
+    ENDLOOP
+    
+  ENDIF
+  
+  PTP xSafeRetract
+END
+
+DEF grabPart()
+  $OUT[4] = FALSE ; Open off
+  $OUT[5] = TRUE  ; Close on
+  WAIT SEC 1.0
+END

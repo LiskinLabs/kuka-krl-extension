@@ -46,7 +46,7 @@ We offer flexible, industrial-grade licensing through our official merchant, **L
 | 📅 **Pro Annual** | **$39.99** / yr | Full-time robotics engineers *(Save 20%)* | Subscription (Priority updates, 3 PCs) |
 
 <div align="center" style="margin: 30px 0;">
-  <a href="https://liskin.lemonsqueezy.com/" style="text-decoration:none;">
+  <a href="https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7" style="text-decoration:none;">
     <kbd style="font-size: 1.4em; padding: 14px 28px; background-color: #FF6600; color: white; border-radius: 8px; font-weight: bold; border: 1px solid #d15500; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">
       🛒 Buy KRL Extension Pro License
     </kbd>

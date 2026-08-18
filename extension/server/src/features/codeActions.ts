@@ -58,8 +58,8 @@ export class CodeActionsProvider {
               diagnostic,
               targetPointName,
               "E6POS",
-              "={X 0.0,Y 0.0,Z 0.0,A 0.0,B 0.0,C 0.0,S 0,T 0}"
-            )
+              "={X 0.0,Y 0.0,Z 0.0,A 0.0,B 0.0,C 0.0,S 0,T 0}",
+            ),
           );
           actions.push(
             this.createDeclareVariableAction(
@@ -67,8 +67,8 @@ export class CodeActionsProvider {
               diagnostic,
               varName,
               "POS",
-              "={X 0.0,Y 0.0,Z 0.0,A 0.0,B 0.0,C 0.0}"
-            )
+              "={X 0.0,Y 0.0,Z 0.0,A 0.0,B 0.0,C 0.0}",
+            ),
           );
           // INT olarak tanımla
           actions.push(

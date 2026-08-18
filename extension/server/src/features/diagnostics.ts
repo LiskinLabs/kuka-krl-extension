@@ -736,8 +736,14 @@ export class DiagnosticsProvider {
         // Değişken listesinde tanımlı mı kontrol et (KRL motion point prefixes P1 <-> xP1)
         const upperVar = varName.toUpperCase();
         if (validatedNames.has(upperVar)) continue;
-        if (!upperVar.startsWith("X") && validatedNames.has("X" + upperVar)) continue;
-        if (upperVar.startsWith("X") && upperVar.length > 1 && validatedNames.has(upperVar.substring(1))) continue;
+        if (!upperVar.startsWith("X") && validatedNames.has("X" + upperVar))
+          continue;
+        if (
+          upperVar.startsWith("X") &&
+          upperVar.length > 1 &&
+          validatedNames.has(upperVar.substring(1))
+        )
+          continue;
 
         // Fonksiyon mu kontrol et (önbellekten)
         if (functionNamesCache.has(varName.toUpperCase())) continue;

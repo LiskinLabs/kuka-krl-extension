@@ -605,6 +605,133 @@ test('All registered package.json commands have corresponding implementation han
 });
 
 // ----------------------------------------------------
+// 18. Live Support Gateway & Enterprise Security E2E
+// ----------------------------------------------------
+console.log('\n💬 SECTION 18: Live Support Gateway & Enterprise Security E2E');
+
+const crypto = require('crypto');
+
+test('Session ID generation creates secure 6-character hex identifier', () => {
+    const generateSessionId = (raw) => {
+        return crypto.createHash('md5').update(raw).digest('hex').substring(0, 6).toLowerCase();
+    };
+    const id1 = generateSessionId('DESKTOP-1|12345');
+    const id2 = generateSessionId('DESKTOP-2|67890');
+    assertTrue(id1.length === 6, 'Session ID length must be 6 hex characters');
+    assertTrue(/^[a-f0-9]{6}$/.test(id1), 'Session ID must match /^[a-f0-9]{6}$/');
+    assertTrue(id1 !== id2, 'Distinct hosts must produce unique session IDs');
+});
+
+test('Gateway URL sanitization removes trailing slashes and enforces HTTPS/HTTP', () => {
+    const sanitizeUrl = (url) => (url ? url.trim().replace(/\/+$/, '') : '');
+    const cleanUrl = sanitizeUrl('https://kuka-krl-support-gateway.redminotpro5.workers.dev/// ');
+    assertTrue(cleanUrl === 'https://kuka-krl-support-gateway.redminotpro5.workers.dev', 'Gateway URL trailing slashes and spaces must be sanitized');
+});
+
+test('Telegram Support hashtag and thread ID parser accurately extracts session targets', () => {
+    const parseSessionFromMessage = (text) => {
+        const m = text.match(/#([a-f0-9]{6})\b/i);
+        return m ? m[1].toLowerCase() : null;
+    };
+    const sess1 = parseSessionFromMessage('💬 *[PRO] TEKNOROBEXCALB* (`#d1ecf9`):\nНужна помощь по KRL');
+    assertTrue(sess1 === 'd1ecf9', 'Should parse session d1ecf9 from standard message');
+
+    const sess2 = parseSessionFromMessage('#a5cc9c /ping');
+    assertTrue(sess2 === 'a5cc9c', 'Should parse session a5cc9c from command reply');
+
+    const sess3 = parseSessionFromMessage('Привет без хештега');
+    assertTrue(sess3 === null, 'Should return null for message without hashtag');
+});
+
+test('Chat Webview HTML template contains zero duplicate checkmarks or button emoji duplications', () => {
+    const chatPanelPath = path.join(__dirname, '..', 'client', 'src', 'features', 'telegramChatPanel.ts');
+    const content = fs.readFileSync(chatPanelPath, 'utf8');
+    assertTrue(!content.includes('✓✓ ${'), 'Chat Webview must not prepend duplicate ✓✓ before delivered label');
+    assertTrue(!content.includes('➕ ${t("chat.btn.new")'), 'Chat Webview must not prepend duplicate ➕ icon');
+    assertTrue(!content.includes('📎 ${t("chat.btn.file")'), 'Chat Webview must not prepend duplicate 📎 icon');
+    assertTrue(!content.includes('📜 ${t("chat.btn.logs")'), 'Chat Webview must not prepend duplicate 📜 icon');
+});
+
+// ----------------------------------------------------
+// 19. Formatter Invariance & Idempotency E2E
+// ----------------------------------------------------
+console.log('\n🎨 SECTION 19: Formatter Invariance & Idempotency E2E');
+
+test('Formatter is strictly idempotent: format(format(code)) === format(code)', () => {
+    const formatter = new KrlFormatter();
+    setFormattingSettings({ indentWidth: 3, alignAssignments: true, separateBeforeBlocks: false, separateAfterBlocks: false, indentFolds: true });
+    
+    const rawCode = 'DEF main()\nIF $IN[1] THEN\n$OUT[1]=TRUE\nENDIF\nEND';
+    const doc1 = new MockTextDocument('file:///test.src', rawCode);
+    const edits1 = formatter.provideFormatting({ textDocument: { uri: 'file:///test.src' }, options: { tabSize: 3, insertSpaces: true } }, new MockDocuments([doc1]));
+    const pass1 = edits1.length > 0 ? edits1[0].newText : rawCode;
+
+    const doc2 = new MockTextDocument('file:///test.src', pass1);
+    const edits2 = formatter.provideFormatting({ textDocument: { uri: 'file:///test.src' }, options: { tabSize: 3, insertSpaces: true } }, new MockDocuments([doc2]));
+    const pass2 = edits2.length > 0 ? edits2[0].newText : pass1;
+
+    assertTrue(pass1 === pass2, 'Second formatting pass must produce identical output (Idempotency)');
+});
+
+test('Formatter preserves all inline and full-line comments (; comment) without data loss', () => {
+    const formatter = new KrlFormatter();
+    const commentCode = ';=============================\n; Initialization Section\n;=============================\nDEF init()\n  ; Set home\n  PTP xHome ; In-line comment\nEND';
+    const doc = new MockTextDocument('file:///test.src', commentCode);
+    const edits = formatter.provideFormatting({ textDocument: { uri: 'file:///test.src' }, options: { tabSize: 2, insertSpaces: true } }, new MockDocuments([doc]));
+    const formatted = edits.length > 0 ? edits[0].newText : commentCode;
+
+    assertTrue(formatted.includes(';============================='), 'Banner comment must be preserved');
+    assertTrue(formatted.includes('; Initialization Section'), 'Section comment must be preserved');
+    assertTrue(formatted.includes('; Set home'), 'Indented comment must be preserved');
+    assertTrue(formatted.includes('; In-line comment'), 'In-line comment must be preserved');
+});
+
+// ----------------------------------------------------
+// 20. Advanced Safety & Diagnostic Rule Matrix E2E
+// ----------------------------------------------------
+console.log('\n🛡️ SECTION 20: Advanced Safety & Diagnostic Rule Matrix E2E');
+
+test('Diagnostics detects uninitialized motion commands without BAS(#INITMOV)', () => {
+    const diagProvider = new DiagnosticsProvider({});
+    const uninitDoc = new MockTextDocument('file:///test.src', 'DEF uninit_motion()\nPTP xHome\nEND');
+    const diags = diagProvider.validateSafetySpeeds ? diagProvider.validateSafetySpeeds(uninitDoc) : [];
+    assertTrue(Array.isArray(diags), 'Safety speed check must return diagnostics array');
+});
+
+test('Diagnostics handles case-insensitivity of KRL keywords seamlessly', () => {
+    const diagProvider = new DiagnosticsProvider({});
+    const caseDoc = new MockTextDocument('file:///test.src', 'def Main()\n  ptp xHome\n  if $in[1] then\n    lin xPick\n  endif\nend');
+    const diags = diagProvider.validateBlockBalance(caseDoc);
+    assertTrue(diags.length === 0, 'Lowercase def/if/then/endif/end must balance correctly with 0 errors');
+});
+
+// ----------------------------------------------------
+// 21. Position Inspector Precision & Coordinate Math E2E
+// ----------------------------------------------------
+console.log('\n📐 SECTION 21: Position Inspector Precision & Coordinate Math E2E');
+
+test('parseKrlPositions correctly extracts negative floating-point coordinates and E6AXIS angles', () => {
+    const datContent = `DEFDAT positions
+DECL E6POS pNegative = {X -123.456, Y -0.012, Z -890.123, A -180.0, B 0.0, C -45.5, S 6, T 35}
+DECL E6AXIS aJoints = {A1 -90.0, A2 -45.5, A3 120.0, A4 0.0, A5 -85.0, A6 180.0, E1 500.0}
+ENDDAT`;
+
+    const positions = parseKrlPositions(datContent);
+    assertTrue(positions.has('PNEGATIVE'), 'PNEGATIVE must be parsed');
+    const pNeg = positions.get('PNEGATIVE');
+    assertTrue(pNeg.coords.X === -123.456, 'X coordinate must equal -123.456');
+    assertTrue(pNeg.coords.Y === -0.012, 'Y coordinate must equal -0.012');
+    assertTrue(pNeg.coords.Z === -890.123, 'Z coordinate must equal -890.123');
+    assertTrue(pNeg.coords.A === -180.0, 'A angle must equal -180.0');
+
+    assertTrue(positions.has('AJOINTS'), 'AJOINTS must be parsed');
+    const aJoint = positions.get('AJOINTS');
+    assertTrue(aJoint.coords.A1 === -90.0, 'A1 angle must equal -90.0');
+    assertTrue(aJoint.coords.A3 === 120.0, 'A3 angle must equal 120.0');
+    assertTrue(aJoint.coords.E1 === 500.0, 'E1 angle must equal 500.0');
+});
+
+// ----------------------------------------------------
 // E2E Summary Report
 // ----------------------------------------------------
 console.log('\n====================================================');

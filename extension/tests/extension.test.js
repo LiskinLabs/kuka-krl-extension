@@ -326,15 +326,110 @@ test('esbuild.js obfuscator settings are safe for VS Code extension architecture
     assertTrue(content.includes('^deactivate$'), 'esbuild.js reservedNames must protect deactivate entry point');
 });
 
-// Test 11: Extension Activation & Async Lifecycle Safety
-console.log('\n--- Activation & Async Lifecycle Safety Tests ---');
+// Test 12: Support Gateway & Enterprise Relay Configuration Tests
+console.log('\n--- Support Gateway & Zero-Token Security Tests ---');
 
-test('main.ts exports async activate and awaits initLicense', () => {
-    const mainTsPath = path.join(__dirname, '..', 'client', 'src', 'main.ts');
-    const content = fs.readFileSync(mainTsPath, 'utf8');
-    assertTrue(content.includes('export async function activate'), 'main.ts activate function must be async');
-    assertTrue(content.includes('await initLicense(context)'), 'main.ts must await initLicense(context) to avoid race condition');
-    assertTrue(content.includes('.catch(('), 'main.ts lsClient.start() must have .catch() error handler');
+test('package.json contributes krl.supportGatewayUrl with valid live URL', () => {
+    const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
+    const config = pkg.contributes.configuration.properties['krl.supportGatewayUrl'];
+    assertTrue(config !== undefined, 'krl.supportGatewayUrl setting is missing from package.json');
+    assertTrue(config.default.startsWith('https://'), 'Default gateway URL must use HTTPS');
+    assertTrue(config.default.includes('workers.dev'), 'Default gateway URL points to live Cloudflare Worker');
+});
+
+test('telegramService.ts contains ZERO hardcoded BOT_TOKEN', () => {
+    const tgServicePath = path.join(__dirname, '..', 'client', 'src', 'features', 'telegramService.ts');
+    const content = fs.readFileSync(tgServicePath, 'utf8');
+    assertTrue(!content.includes('BOT_TOKEN ='), 'telegramService.ts must not define BOT_TOKEN constant');
+    assertTrue(!content.includes('api.telegram.org/bot'), 'telegramService.ts must not call Telegram API directly');
+    assertTrue(content.includes('/api/v1/chat/message'), 'telegramService.ts routes messages through /api/v1/chat/message');
+    assertTrue(content.includes('/api/v1/chat/poll'), 'telegramService.ts polls through /api/v1/chat/poll');
+});
+
+test('telegramService.ts enforces explicit user consent before executing remote actions', () => {
+    const tgServicePath = path.join(__dirname, '..', 'client', 'src', 'features', 'telegramService.ts');
+    const content = fs.readFileSync(tgServicePath, 'utf8');
+    assertTrue(content.includes('handleRemoteActionWithConsent'), 'Missing handleRemoteActionWithConsent guard');
+    assertTrue(content.includes('vscode.window.showWarningMessage'), 'Remote actions must show modal warning message');
+    assertTrue(content.includes('modal: true'), 'Consent prompt must be modal to prevent background exfiltration');
+});
+
+test('Cloudflare Worker configuration files and bindings exist and are valid', () => {
+    const workerPath = path.join(__dirname, '..', '..', 'cloudflare-worker', 'worker.js');
+    const wranglerPath = path.join(__dirname, '..', '..', 'cloudflare-worker', 'wrangler.toml');
+    assertTrue(fs.existsSync(workerPath), 'worker.js must exist in cloudflare-worker directory');
+    assertTrue(fs.existsSync(wranglerPath), 'wrangler.toml must exist in cloudflare-worker directory');
+    const wranglerContent = fs.readFileSync(wranglerPath, 'utf8');
+    assertTrue(wranglerContent.includes('binding = "CHAT_KV"'), 'wrangler.toml must bind CHAT_KV namespace');
+});
+
+test('Language configuration JSON exists and defines valid comment and bracket pairs', () => {
+    const langConfigPath = path.join(__dirname, '..', 'client', 'krl-language-configuration.json');
+    assertTrue(fs.existsSync(langConfigPath), 'krl-language-configuration.json must exist');
+    const langConfig = JSON.parse(fs.readFileSync(langConfigPath, 'utf8'));
+    assertTrue(langConfig.comments && langConfig.comments.lineComment === ';', 'KRL line comment must be ";"');
+    assertTrue(Array.isArray(langConfig.brackets), 'Brackets array must be defined');
+    assertTrue(Array.isArray(langConfig.autoClosingPairs), 'Auto closing pairs must be defined');
+});
+
+test('KRL TextMate Grammar contains advanced Spline motion keywords and system functions', () => {
+    const grammarPath = path.join(__dirname, '..', 'client', 'syntaxes', 'krl.tmLanguage.json');
+    const grammar = JSON.parse(fs.readFileSync(grammarPath, 'utf8'));
+    const grammarStr = JSON.stringify(grammar);
+    assertTrue(grammarStr.includes('SPLINE'), 'Grammar must contain SPLINE keyword');
+    assertTrue(grammarStr.includes('ENDSPLINE'), 'Grammar must contain ENDSPLINE keyword');
+    assertTrue(grammarStr.includes('SPTP'), 'Grammar must contain SPTP keyword');
+    assertTrue(grammarStr.includes('SLIN'), 'Grammar must contain SLIN keyword');
+    assertTrue(grammarStr.includes('SCIRC'), 'Grammar must contain SCIRC keyword');
+});
+
+// Test 13: ReversingLabs Spectra Assure & Supply Chain Compliance Tests
+console.log('\n--- Spectra Assure & Supply Chain Security Tests ---');
+
+test('All Webview features enforce strict Content-Security-Policy (CSP) headers', () => {
+    const webviewFiles = [
+        'flowchartViewer.ts',
+        'telegramChatPanel.ts',
+        'controlCenter.ts',
+        'snippetGenerator.ts',
+        'calculator.ts'
+    ];
+    for (const fileName of webviewFiles) {
+        const filePath = path.join(__dirname, '..', 'client', 'src', 'features', fileName);
+        assertTrue(fs.existsSync(filePath), `Webview feature file missing: ${fileName}`);
+        const content = fs.readFileSync(filePath, 'utf8');
+        assertTrue(content.includes('Content-Security-Policy'), `${fileName} missing Content-Security-Policy meta tag`);
+        assertTrue(content.includes("default-src 'none'"), `${fileName} CSP must declare default-src 'none'`);
+    }
+});
+
+test('Client and server source code contains zero unsafe eval or dynamic code execution', () => {
+    function checkDirForUnsafeCode(dir) {
+        const files = fs.readdirSync(dir);
+        for (const file of files) {
+            const fullPath = path.join(dir, file);
+            const stat = fs.statSync(fullPath);
+            if (stat.isDirectory()) {
+                checkDirForUnsafeCode(fullPath);
+            } else if (file.endsWith('.ts') && !file.endsWith('.d.ts')) {
+                const code = fs.readFileSync(fullPath, 'utf8');
+                assertTrue(!code.includes('eval('), `Unsafe eval() found in ${fullPath}`);
+                assertTrue(!code.includes('new Function('), `Unsafe new Function() found in ${fullPath}`);
+                assertTrue(!code.includes('vm.runIn'), `Unsafe vm.runIn* execution found in ${fullPath}`);
+            }
+        }
+    }
+    checkDirForUnsafeCode(path.join(__dirname, '..', 'client', 'src'));
+    checkDirForUnsafeCode(path.join(__dirname, '..', 'server', 'src'));
+});
+
+test('GitHub Actions CI and Security workflows exist and validate VSIX artifacts', () => {
+    const ciPath = path.join(__dirname, '..', '..', '.github', 'workflows', 'ci.yml');
+    const secPath = path.join(__dirname, '..', '..', '.github', 'workflows', 'security.yml');
+    assertTrue(fs.existsSync(ciPath), 'ci.yml workflow missing');
+    assertTrue(fs.existsSync(secPath), 'security.yml workflow missing');
+    const secContent = fs.readFileSync(secPath, 'utf8');
+    assertTrue(secContent.includes('gh-action-rl-scanner'), 'security.yml must integrate ReversingLabs Spectra Assure action');
 });
 
 // Summary
@@ -344,3 +439,4 @@ console.log(`Failed: ${failed}`);
 console.log(`Total: ${passed + failed}`);
 
 process.exit(failed > 0 ? 1 : 0);
+

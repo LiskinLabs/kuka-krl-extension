@@ -207,119 +207,241 @@ export class TelegramChatPanel {
     const deliveredLabel = t("chat.status.delivered");
 
     return `<!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${this.panel.webview.cspSource} https: data:; script-src ${this.panel.webview.cspSource} 'unsafe-inline'; style-src ${this.panel.webview.cspSource} 'unsafe-inline'; font-src ${this.panel.webview.cspSource};">
   <title>${t("chat.title")}</title>
   <style>
+    :root {
+      --kuka-orange: #ff6600;
+      --kuka-orange-glow: rgba(255, 102, 0, 0.35);
+      --cyber-cyan: #00e5ff;
+      --status-emerald: #10b981;
+      --panel-bg: var(--vscode-editor-background, #0b0f17);
+      --header-bg: var(--vscode-sideBar-background, #121824);
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --card-border: var(--vscode-widget-border, rgba(255, 255, 255, 0.08));
+      --text-main: var(--vscode-editor-foreground, #f1f5f9);
+      --text-muted: var(--vscode-descriptionForeground, #94a3b8);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       padding: 0;
       font-family: var(--vscode-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
       font-size: var(--vscode-font-size, 13px);
-      background-color: var(--vscode-editor-background, #0f172a);
-      color: var(--vscode-editor-foreground, #f8fafc);
+      background-color: var(--panel-bg);
+      color: var(--text-main);
       display: flex;
       flex-direction: column;
       height: 100vh;
-      box-sizing: border-box;
+      overflow: hidden;
     }
+
+    /* Top Command Header */
     .chat-header {
-      background: var(--vscode-sideBar-background, var(--vscode-editorGroupHeader-tabsBackground, #1e293b));
-      padding: 10px 16px;
-      border-bottom: 1px solid var(--vscode-widget-border, rgba(255,255,255,0.1));
+      background: var(--header-bg);
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--card-border);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
       flex-shrink: 0;
+      backdrop-filter: blur(12px);
     }
-    .header-info {
+    .header-left {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
-    .header-title {
-      font-size: 14px;
+    .brand-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-weight: 700;
-      color: var(--vscode-editor-foreground, #ffffff);
+      font-size: 14px;
+      letter-spacing: -0.2px;
+      color: var(--text-main);
+    }
+    .brand-icon {
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, var(--kuka-orange) 0%, #ff8533 100%);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px var(--kuka-orange-glow);
+      font-size: 13px;
+    }
+    .gateway-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--status-emerald);
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+    .gateway-pulse {
+      width: 6px;
+      height: 6px;
+      background: var(--status-emerald);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--status-emerald);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.2); }
+    }
+
+    .header-right {
       display: flex;
       align-items: center;
       gap: 8px;
     }
+    .session-selector-wrap {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 2px 6px;
+    }
     .session-select {
-      background: var(--vscode-dropdown-background, var(--vscode-input-background, #0f172a));
-      color: var(--vscode-dropdown-foreground, var(--vscode-input-foreground, #ffffff));
-      border: 1px solid var(--vscode-dropdown-border, var(--vscode-input-border, #334155));
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 11.5px;
+      background: transparent;
+      color: var(--text-main);
+      border: none;
+      font-size: 12px;
       font-family: var(--vscode-editor-font-family, monospace);
       outline: none;
       cursor: pointer;
+      padding: 4px 6px;
     }
-    .header-actions {
-      display: flex;
-      gap: 6px;
-      align-items: center;
+    .session-select option {
+      background: var(--header-bg);
+      color: var(--text-main);
     }
-    .btn-action {
-      background: var(--vscode-button-secondaryBackground, rgba(255, 255, 255, 0.08));
-      color: var(--vscode-button-secondaryForeground, #e2e8f0);
-      border: 1px solid var(--vscode-widget-border, transparent);
-      padding: 5px 10px;
-      border-radius: 6px;
-      font-size: 11.5px;
+
+    .action-btn {
+      background: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      padding: 6px 11px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
       font-weight: 500;
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 5px;
-      transition: all 0.2s;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .btn-action:hover {
-      background: var(--vscode-button-secondaryHoverBackground, rgba(255, 255, 255, 0.18));
+    .action-btn:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--kuka-orange);
+      transform: translateY(-1px);
     }
-    .btn-primary {
-      background: var(--vscode-button-background, #ff6600);
-      color: var(--vscode-button-foreground, #ffffff);
-      border: none;
-    }
-    .btn-primary:hover {
-      background: var(--vscode-button-hoverBackground, #e65c00);
-    }
-    .btn-danger {
-      background: var(--vscode-statusBarItem-errorBackground, #dc3545);
+    .action-btn.primary {
+      background: var(--kuka-orange);
+      border-color: var(--kuka-orange);
       color: #ffffff;
-      border: none;
+      box-shadow: 0 2px 10px var(--kuka-orange-glow);
     }
-    .btn-danger:hover {
-      opacity: 0.9;
+    .action-btn.primary:hover {
+      background: #e65c00;
     }
+    .action-btn.danger {
+      background: rgba(239, 68, 68, 0.12);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: #f87171;
+    }
+    .action-btn.danger:hover {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    /* Message Stream */
     .chat-messages {
       flex: 1;
       overflow-y: auto;
-      padding: 16px;
+      padding: 20px 24px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 16px;
+      scroll-behavior: smooth;
     }
-    .empty-state {
+
+    .empty-hero {
       margin: auto;
       text-align: center;
-      color: var(--vscode-descriptionForeground, #94a3b8);
-      max-width: 380px;
+      max-width: 440px;
+      padding: 30px 20px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255, 102, 0, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+      border: 1px solid var(--card-border);
     }
-    .empty-icon {
-      font-size: 42px;
-      margin-bottom: 8px;
+    .empty-hero-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 16px var(--kuka-orange-glow));
     }
+    .empty-hero-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+    .empty-hero-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .quick-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+    }
+    .quick-pill {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      font-size: 11.5px;
+      padding: 5px 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .quick-pill:hover {
+      border-color: var(--kuka-orange);
+      background: rgba(255, 102, 0, 0.15);
+      color: #ffffff;
+    }
+
+    /* Message Bubbles */
     .msg-row {
       display: flex;
       flex-direction: column;
-      max-width: 80%;
+      max-width: 78%;
+      animation: msgSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes msgSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .msg-row.user {
       align-self: flex-end;
@@ -329,105 +451,163 @@ export class TelegramChatPanel {
       align-self: flex-start;
       align-items: flex-start;
     }
-    .msg-sender {
-      font-size: 10px;
-      color: var(--vscode-descriptionForeground, #94a3b8);
-      margin-bottom: 3px;
+    .msg-sender-tag {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 4px;
       padding: 0 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
     .msg-bubble {
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 13px;
-      line-height: 1.45;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      line-height: 1.5;
       word-break: break-word;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
       position: relative;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
     .msg-row.user .msg-bubble {
-      background: var(--vscode-button-background, #1e40af);
-      color: var(--vscode-button-foreground, #ffffff);
+      background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+      color: #ffffff;
       border-bottom-right-radius: 2px;
+      border: 1px solid rgba(59, 130, 246, 0.3);
     }
     .msg-row.developer .msg-bubble {
-      background: var(--vscode-sideBar-background, #334155);
-      color: var(--vscode-editor-foreground, #f1f5f9);
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      color: #f8fafc;
       border-bottom-left-radius: 2px;
-      border: 1px solid var(--vscode-widget-border, #475569);
+      border: 1px solid var(--card-border);
     }
-    .msg-time {
-      font-size: 9px;
-      opacity: 0.75;
-      margin-top: 4px;
-      text-align: right;
-    }
-    .msg-status {
+
+    .msg-meta-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
       font-size: 10px;
-      color: var(--vscode-textLink-foreground, #38bdf8);
-      margin-top: 2px;
-      font-weight: 600;
+      opacity: 0.8;
     }
+    .msg-ticks {
+      color: var(--cyber-cyan);
+      font-weight: 700;
+    }
+
+    /* Code Block Formatting */
+    pre.code-block {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin: 8px 0;
+      font-family: var(--vscode-editor-font-family, 'JetBrains Mono', monospace);
+      font-size: 12px;
+      overflow-x: auto;
+      position: relative;
+    }
+    code.inline-code {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: var(--vscode-editor-font-family, 'JetBrains Mono', monospace);
+      font-size: 12px;
+      color: var(--cyber-cyan);
+    }
+    .krl-kw { color: #ff9933; font-weight: 700; }
+    .krl-var { color: #38bdf8; font-weight: 600; }
+
+    /* Footer & Smart Input Station */
     .chat-footer {
-      background: var(--vscode-sideBar-background, var(--vscode-editorGroupHeader-tabsBackground, #1e293b));
-      padding: 12px 16px;
-      border-top: 1px solid var(--vscode-widget-border, rgba(255,255,255,0.1));
+      background: var(--header-bg);
+      padding: 14px 20px;
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .input-row {
       display: flex;
       gap: 10px;
       align-items: flex-end;
-      flex-shrink: 0;
     }
     .chat-input {
       flex: 1;
-      background: var(--vscode-input-background, #0f172a);
-      border: 1px solid var(--vscode-input-border, #334155);
-      color: var(--vscode-input-foreground, #ffffff);
-      padding: 10px 12px;
-      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 11px 14px;
+      border-radius: var(--radius-md);
       font-size: 13px;
       font-family: inherit;
       resize: none;
-      height: 38px;
+      min-height: 42px;
+      max-height: 120px;
       outline: none;
-      box-sizing: border-box;
+      transition: border 0.2s;
+      line-height: 1.4;
     }
     .chat-input:focus {
-      border-color: var(--vscode-focusBorder, #ff6600);
+      border-color: var(--kuka-orange);
+      box-shadow: 0 0 10px var(--kuka-orange-glow);
     }
     .send-btn {
-      background: var(--vscode-button-background, #ff6600);
-      color: var(--vscode-button-foreground, #ffffff);
+      background: linear-gradient(135deg, var(--kuka-orange) 0%, #ff8533 100%);
+      color: #ffffff;
       border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-weight: 600;
+      padding: 11px 20px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
       font-size: 13px;
       cursor: pointer;
-      height: 38px;
-      display: flex;
+      height: 42px;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
-      transition: background 0.15s;
+      gap: 8px;
+      box-shadow: 0 3px 12px var(--kuka-orange-glow);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .send-btn:hover {
-      background: var(--vscode-button-hoverBackground, #e65c00);
+      background: #e65c00;
+      transform: translateY(-1px);
+    }
+    .footer-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 4px;
     }
   </style>
 </head>
 <body>
   <div class="chat-header">
-    <div class="header-info">
-      <div class="header-title">
+    <div class="header-left">
+      <div class="brand-badge">
+        <div class="brand-icon">⚡</div>
         <span>${t("chat.title")}</span>
       </div>
-      <select id="session-select" class="session-select" onchange="switchSession(this.value)" title="${t("chat.session.tooltip")}">
-        ${this.renderSessionOptions(sessions, sessionId)}
-      </select>
+      <div class="gateway-pill" title="Connected to Liskin Labs Serverless Support Gateway">
+        <div class="gateway-pulse"></div>
+        <span>Cloudflare Relay: Online</span>
+      </div>
     </div>
-    <div class="header-actions">
-      <button class="btn-action btn-primary" onclick="newSession()" title="${t("chat.btn.new.tooltip")}">${t("chat.btn.new")}</button>
-      <button class="btn-action" onclick="sendFile()" title="${t("chat.btn.file.tooltip")}">${t("chat.btn.file")}</button>
-      <button class="btn-action" onclick="sendLogs()" title="${t("chat.btn.logs.tooltip")}">${t("chat.btn.logs")}</button>
-      <button class="btn-action btn-danger" onclick="deleteCurrentSession()" title="${t("chat.btn.delete.tooltip")}">${t("chat.btn.delete")}</button>
+    <div class="header-right">
+      <div class="session-selector-wrap" title="${t("chat.session.tooltip")}">
+        <select id="session-select" class="session-select" onchange="switchSession(this.value)">
+          ${this.renderSessionOptions(sessions, sessionId)}
+        </select>
+      </div>
+      <button class="action-btn primary" onclick="newSession()" title="${t("chat.btn.new.tooltip")}">${t("chat.btn.new")}</button>
+      <button class="action-btn" onclick="sendFile()" title="${t("chat.btn.file.tooltip")}">${t("chat.btn.file")}</button>
+      <button class="action-btn" onclick="sendLogs()" title="${t("chat.btn.logs.tooltip")}">${t("chat.btn.logs")}</button>
+      <button class="action-btn" onclick="sendAiDiag()" title="Run AI Industrial Safety Check">🛡️ Safety</button>
+      <button class="action-btn danger" onclick="deleteCurrentSession()" title="${t("chat.btn.delete.tooltip")}">🗑️</button>
     </div>
   </div>
 
@@ -436,8 +616,16 @@ export class TelegramChatPanel {
   </div>
 
   <div class="chat-footer">
-    <textarea id="msg-input" class="chat-input" placeholder="${t("chat.input.placeholder")}" rows="1" onkeydown="handleKeyDown(event)"></textarea>
-    <button class="send-btn" onclick="submitMessage()">${t("chat.btn.send")}</button>
+    <div class="input-row">
+      <textarea id="msg-input" class="chat-input" placeholder="${t("chat.input.placeholder")}" rows="1" onkeydown="handleKeyDown(event)" oninput="autoResize(this)"></textarea>
+      <button class="send-btn" onclick="submitMessage()">
+        <span>${t("chat.btn.send")}</span>
+      </button>
+    </div>
+    <div class="footer-hint">
+      <span>💡 Нажмите <b>Enter</b> для отправки, <b>Shift+Enter</b> для новой строки</span>
+      <span>Bot: @kukakrlbot</span>
+    </div>
   </div>
 
   <script>
@@ -450,6 +638,11 @@ export class TelegramChatPanel {
       deliveredLabel: ${JSON.stringify(deliveredLabel)}
     };
 
+    function autoResize(el) {
+      el.style.height = 'auto';
+      el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+    }
+
     function submitMessage() {
       const input = document.getElementById('msg-input');
       const text = input.value.trim();
@@ -457,6 +650,7 @@ export class TelegramChatPanel {
       
       vscode.postMessage({ command: 'sendMessage', text: text });
       input.value = '';
+      input.style.height = '42px';
     }
 
     function handleKeyDown(e) {
@@ -466,20 +660,15 @@ export class TelegramChatPanel {
       }
     }
 
-    function sendLogs() {
-      vscode.postMessage({ command: 'sendLogs' });
-    }
-
-    function sendFile() {
-      vscode.postMessage({ command: 'sendFile' });
-    }
-
-    function newSession() {
-      vscode.postMessage({ command: 'newSession' });
-    }
-
-    function switchSession(id) {
-      vscode.postMessage({ command: 'switchSession', sessionId: id });
+    function sendLogs() { vscode.postMessage({ command: 'sendLogs' }); }
+    function sendFile() { vscode.postMessage({ command: 'sendFile' }); }
+    function sendAiDiag() { vscode.postMessage({ command: 'sendAiDiag' }); }
+    function newSession() { vscode.postMessage({ command: 'newSession' }); }
+    function switchSession(id) { vscode.postMessage({ command: 'switchSession', sessionId: id }); }
+    function insertQuickPrompt(text) {
+      const input = document.getElementById('msg-input');
+      input.value = text;
+      input.focus();
     }
 
     function deleteCurrentSession() {
@@ -517,35 +706,76 @@ export class TelegramChatPanel {
       sessions.forEach(s => {
         const isCurrent = s.id === currentId;
         const timeStr = new Date(s.lastTime).toLocaleDateString([], {month:'numeric', day:'numeric'}) + ' ' + new Date(s.lastTime).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-        html += '<option value="' + s.id + '" ' + (isCurrent ? 'selected' : '') + '>Session #' + s.id + ' (' + s.msgCount + ' msgs | ' + timeStr + ')' + (isCurrent ? ' ★' : '') + '</option>';
+        html += '<option value="' + s.id + '" ' + (isCurrent ? 'selected' : '') + '>#' + s.id + ' (' + s.msgCount + ' msgs | ' + timeStr + ')' + (isCurrent ? ' ★' : '') + '</option>';
       });
       select.innerHTML = html;
+    }
+
+    function formatRichText(raw) {
+      if (!raw) return '';
+      // Escape HTML
+      let s = raw.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      
+      // Code blocks
+      s = s.replace(/\`\`\`(krl)?\\n?([\\s\\S]*?)\`\`\`/gi, function(m, lang, code) {
+        return '<pre class="code-block">' + highlightKrl(code) + '</pre>';
+      });
+
+      // Inline code
+      s = s.replace(/\`([^\`]+)\`/g, function(m, code) {
+        return '<code class="inline-code">' + highlightKrl(code) + '</code>';
+      });
+
+      // Bold & Italic
+      s = s.replace(/\\*\\*([^\\*]+)\\*\\*/g, '<b>$1</b>');
+      s = s.replace(/\\*([^\\*]+)\\*/g, '<i>$1</i>');
+      
+      // Newlines
+      return s.replace(/\\n/g, '<br>');
+    }
+
+    function highlightKrl(code) {
+      return code
+        .replace(/\\b(PTP|LIN|CIRC|SPTP|SLIN|SCIRC|SPLINE|ENDSPLINE|DEF|DEFDAT|DEFFCT|END|ENDDAT|ENDFCT|IF|THEN|ELSE|ENDIF|LOOP|ENDLOOP|WHILE|ENDWHILE|WAIT|FOR|SWITCH|CASE|DEFAULT|ENDSWITCH|HALT|RETURN|EXIT|GLOBAL|INTERRUPT|DECL|BAS)\\b/gi, '<span class="krl-kw">$1</span>')
+        .replace(/(\\$[A-Z0-9_\\.]+)/gi, '<span class="krl-var">$1</span>');
     }
 
     function renderHistory(history) {
       const container = document.getElementById('messages-container');
       if (!history || history.length === 0) {
-        container.innerHTML = '<div class="empty-state"><div class="empty-icon">🤖</div><div style="font-weight:600; font-size:14px; margin-bottom:4px;">' + currentLabels.emptyTitle + '</div><div style="font-size:12px;">' + currentLabels.emptyDesc + '</div></div>';
+        container.innerHTML = '<div class="empty-hero">' +
+          '<div class="empty-hero-icon">🤖</div>' +
+          '<div class="empty-hero-title">' + currentLabels.emptyTitle + '</div>' +
+          '<div class="empty-hero-desc">' + currentLabels.emptyDesc + '</div>' +
+          '<div class="quick-pill-row">' +
+            '<div class="quick-pill" onclick="insertQuickPrompt(\\'Как настроить EthernetKRL (EKI)?\\')">💡 Настройка EKI</div>' +
+            '<div class="quick-pill" onclick="insertQuickPrompt(\\'Синтаксис PTP и аппроксимации C_PTP\\')">⚡ Синтаксис PTP</div>' +
+            '<div class="quick-pill" onclick="sendLogs()">📊 Отправить логи</div>' +
+          '</div>' +
+        '</div>';
         return;
       }
 
       let html = '';
       history.forEach(m => {
         const isUser = m.sender === 'user';
-        const senderName = isUser ? currentLabels.userLabel : currentLabels.devLabel;
+        const senderTag = isUser ? currentLabels.userLabel : currentLabels.devLabel;
         const timeStr = new Date(m.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
-        html += '<div class="msg-row ' + (isUser ? 'user' : 'developer') + '"><div class="msg-sender">' + senderName + '</div><div class="msg-bubble">' + escapeHtml(m.text) + '<div class="msg-time">' + timeStr + '</div>' + (isUser ? '<div class="msg-status">' + currentLabels.deliveredLabel + '</div>' : '') + '</div></div>';
+        html += '<div class="msg-row ' + (isUser ? 'user' : 'developer') + '">' +
+          '<div class="msg-sender-tag">' + senderTag + '</div>' +
+          '<div class="msg-bubble">' +
+            formatRichText(m.text) +
+            '<div class="msg-meta-row">' +
+              '<span>' + timeStr + '</span>' +
+              (isUser ? '<span class="msg-ticks">' + currentLabels.deliveredLabel + '</span>' : '') +
+            '</div>' +
+          '</div>' +
+        '</div>';
       });
 
       container.innerHTML = html;
       scrollToBottom();
-    }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.innerText = text;
-      return div.innerHTML.replace(/\\n/g, '<br>');
     }
   </script>
 </body>
@@ -572,7 +802,7 @@ export class TelegramChatPanel {
             hour: "2-digit",
             minute: "2-digit",
           });
-        return `<option value="${s.id}" ${isCurrent ? "selected" : ""}>${t("chat.session.label", s.id, s.msgCount, timeStr)}${isCurrent ? " ★" : ""}</option>`;
+        return `<option value="${s.id}" ${isCurrent ? "selected" : ""}>#${s.id} (${s.msgCount} msgs | ${timeStr})${isCurrent ? " ★" : ""}</option>`;
       })
       .join("");
   }
@@ -580,10 +810,15 @@ export class TelegramChatPanel {
   private renderMessagesHtml(history: ChatMessage[]): string {
     if (!history || history.length === 0) {
       return `
-        <div class="empty-state">
-          <div class="empty-icon">🤖</div>
-          <div style="font-weight:600; font-size:14px; margin-bottom:4px;">${t("chat.empty.title")}</div>
-          <div style="font-size:12px;">${t("chat.empty.desc")}</div>
+        <div class="empty-hero">
+          <div class="empty-hero-icon">🤖</div>
+          <div class="empty-hero-title">${t("chat.empty.title")}</div>
+          <div class="empty-hero-desc">${t("chat.empty.desc")}</div>
+          <div class="quick-pill-row">
+            <div class="quick-pill" onclick="insertQuickPrompt('Как настроить EthernetKRL (EKI)?')">💡 Настройка EKI</div>
+            <div class="quick-pill" onclick="insertQuickPrompt('Синтаксис PTP и аппроксимации C_PTP')">⚡ Синтаксис PTP</div>
+            <div class="quick-pill" onclick="sendLogs()">📊 Отправить логи</div>
+          </div>
         </div>
       `;
     }
@@ -591,9 +826,7 @@ export class TelegramChatPanel {
     return history
       .map((m) => {
         const isUser = m.sender === "user";
-        const senderName = isUser
-          ? t("chat.sender.user")
-          : t("chat.sender.dev");
+        const senderTag = isUser ? t("chat.sender.user") : t("chat.sender.dev");
         const timeStr = new Date(m.timestamp).toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
@@ -601,16 +834,54 @@ export class TelegramChatPanel {
 
         return `
         <div class="msg-row ${isUser ? "user" : "developer"}">
-          <div class="msg-sender">${senderName}</div>
+          <div class="msg-sender-tag">${senderTag}</div>
           <div class="msg-bubble">
-            ${this.escapeHtml(m.text)}
-            <div class="msg-time">${timeStr}</div>
-            ${isUser ? `<div class="msg-status">${t("chat.status.delivered")}</div>` : ""}
+            ${this.formatRichText(m.text)}
+            <div class="msg-meta-row">
+              <span>${timeStr}</span>
+              ${isUser ? `<span class="msg-ticks">${t("chat.status.delivered")}</span>` : ""}
+            </div>
           </div>
         </div>
       `;
       })
       .join("");
+  }
+
+  private formatRichText(raw: string): string {
+    if (!raw) {
+      return "";
+    }
+    let s = this.escapeHtml(raw);
+
+    // Triple-backtick code blocks
+    s = s.replace(
+      /```(krl)?<br>?([\s\S]*?)```/gi,
+      (_m, _lang, code) =>
+        `<pre class="code-block">${this.highlightKrl(code)}</pre>`,
+    );
+
+    // Inline code
+    s = s.replace(
+      /`([^`]+)`/g,
+      (_m, code) =>
+        `<code class="inline-code">${this.highlightKrl(code)}</code>`,
+    );
+
+    // Bold & Italic
+    s = s.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
+    s = s.replace(/\*([^*]+)\*/g, "<i>$1</i>");
+
+    return s;
+  }
+
+  private highlightKrl(code: string): string {
+    return code
+      .replace(
+        /\b(PTP|LIN|CIRC|SPTP|SLIN|SCIRC|SPLINE|ENDSPLINE|DEF|DEFDAT|DEFFCT|END|ENDDAT|ENDFCT|IF|THEN|ELSE|ENDIF|LOOP|ENDLOOP|WHILE|ENDWHILE|WAIT|FOR|SWITCH|CASE|DEFAULT|ENDSWITCH|HALT|RETURN|EXIT|GLOBAL|INTERRUPT|DECL|BAS)\b/gi,
+        '<span class="krl-kw">$1</span>',
+      )
+      .replace(/(\$[A-Z0-9_\.]+)/gi, '<span class="krl-var">$1</span>');
   }
 
   private escapeHtml(text: string): string {

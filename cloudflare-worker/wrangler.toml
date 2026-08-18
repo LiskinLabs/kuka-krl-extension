@@ -1,0 +1,10 @@
+name = "kuka-krl-support-gateway"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[[kv_namespaces]]
+binding = "CHAT_KV"
+id = "ccb4ac9320f7430592efe5816c58261c"
+
+[vars]
+BOT_TOKEN = "8895123367:AAHliBqzJ2Tz6lBSc_zfXRwMGawRzFVfDSU"

@@ -270,6 +270,17 @@ interface Messages {
   "chat.sender.user": string;
   "chat.sender.dev": string;
   "chat.status.delivered": string;
+  "chat.topic.label": string;
+  "chat.topic.placeholder": string;
+  "chat.topic.chip.bug": string;
+  "chat.topic.chip.eki": string;
+  "chat.topic.chip.motion": string;
+  "chat.topic.chip.safety": string;
+  "chat.topic.chip.license": string;
+  "chat.consent.remoteAction": string;
+  "chat.consent.actionLogs": string;
+  "chat.consent.actionProject": string;
+  "chat.consent.actionSysinfo": string;
 
   // KRC Backup Diff
   "backup.picker.title": string;
@@ -572,6 +583,18 @@ const en: Messages = {
   "chat.sender.user": "You (Engineer)",
   "chat.sender.dev": "👨‍💻 Silvestr Liskin (Lead Developer)",
   "chat.status.delivered": "✓ Delivered to Telegram",
+  "chat.topic.label": "Subject / Topic:",
+  "chat.topic.placeholder": "Enter topic (e.g., EKI Setup, $VEL.CP error)...",
+  "chat.topic.chip.bug": "🚨 Bug / Error",
+  "chat.topic.chip.eki": "⚙️ EthernetKRL (EKI)",
+  "chat.topic.chip.motion": "⚡ Motion & Trajectory",
+  "chat.topic.chip.safety": "🛡️ Safety & Logic",
+  "chat.topic.chip.license": "💼 License & PRO",
+  "chat.consent.remoteAction":
+    "🔒 Developer Request: Silvestr Liskin requests '{0}'. Allow sending this data from your workspace?",
+  "chat.consent.actionLogs": "Diagnostic Logs Export",
+  "chat.consent.actionProject": "KRL Project Workspace Export",
+  "chat.consent.actionSysinfo": "PC System Info & Diagnostics",
 
   "backup.picker.title": "Select KRC Backup (.zip)",
   "backup.error.notFound":
@@ -884,6 +907,19 @@ const ru: Messages = {
   "chat.sender.user": "Вы (Инженер)",
   "chat.sender.dev": "👨‍💻 Сильвестр Лискин (Разработчик)",
   "chat.status.delivered": "✓ Доставлено в Telegram",
+  "chat.topic.label": "Тема обращения:",
+  "chat.topic.placeholder":
+    "Введите тему (напр. Настройка EKI, ошибка $VEL.CP)...",
+  "chat.topic.chip.bug": "🚨 Баг / Ошибка",
+  "chat.topic.chip.eki": "⚙️ EthernetKRL (EKI)",
+  "chat.topic.chip.motion": "⚡ Траектория и Движение",
+  "chat.topic.chip.safety": "🛡️ Безопасность и Логика",
+  "chat.topic.chip.license": "💼 Лицензия и PRO",
+  "chat.consent.remoteAction":
+    "🔒 Запрос разработчика: Сильвестр Лискин запрашивает '{0}'. Разрешить отправку данных из вашей среды?",
+  "chat.consent.actionLogs": "Экспорт диагностических логов",
+  "chat.consent.actionProject": "Экспорт файлов проекта KRL",
+  "chat.consent.actionSysinfo": "Системная информация ПК и окружения",
 
   "backup.picker.title": "Выберите KRC Бэкап (.zip)",
   "backup.error.notFound":
@@ -1199,6 +1235,18 @@ const tr: Messages = {
   "chat.sender.user": "Siz (Mühendis)",
   "chat.sender.dev": "👨‍💻 Silvestr Liskin (Baş Geliştirici)",
   "chat.status.delivered": "✓ Telegram'a İletildi",
+  "chat.topic.label": "Konu / Başlık:",
+  "chat.topic.placeholder": "Konu girin (örn: EKI Kurulumu, $VEL.CP hatası)...",
+  "chat.topic.chip.bug": "🚨 Hata / Problem",
+  "chat.topic.chip.eki": "⚙️ EthernetKRL (EKI)",
+  "chat.topic.chip.motion": "⚡ Hareket ve Yörünge",
+  "chat.topic.chip.safety": "🛡️ Güvenlik ve Mantık",
+  "chat.topic.chip.license": "💼 Lisans ve PRO",
+  "chat.consent.remoteAction":
+    "🔒 Geliştirici Talebi: Silvestr Liskin '{0}' talep ediyor. Çalışma alanınızdan bu verilerin gönderilmesine izin verilsin mi?",
+  "chat.consent.actionLogs": "Teşhis Günlükleri Dışa Aktarma",
+  "chat.consent.actionProject": "KRL Proje Çalışma Alanı Dışa Aktarma",
+  "chat.consent.actionSysinfo": "Bilgisayar Sistem Bilgisi ve Teşhis",
 
   "backup.picker.title": "KRC Yedeğini Seçin (.zip)",
   "backup.error.notFound":

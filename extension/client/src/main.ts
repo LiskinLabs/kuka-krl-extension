@@ -665,27 +665,30 @@ export async function activate(context: vscode.ExtensionContext) {
     }),
   );
 
-  lsClient.start().then(() => {
-    // Отправляем локаль на сервер
-    lsClient.sendNotification("custom/setLocale", vscode.env.language);
+  lsClient
+    .start()
+    .then(() => {
+      // Отправляем локаль на сервер
+      lsClient.sendNotification("custom/setLocale", vscode.env.language);
 
-    // Отправляем настройки на сервер после запуска
-    sendSettingsToServer();
+      // Отправляем настройки на сервер после запуска
+      sendSettingsToServer();
 
-    vscode.workspace.textDocuments.forEach((doc) => {
-      if (doc.languageId === "krl") {
-        runSyntaxCheck(doc);
-      }
+      vscode.workspace.textDocuments.forEach((doc) => {
+        if (doc.languageId === "krl") {
+          runSyntaxCheck(doc);
+        }
+      });
+
+      // Validate workspace immediately on startup
+      lsClient.sendNotification("custom/validateWorkspace");
+    })
+    .catch((err) => {
+      const msg = err instanceof Error ? err.message : String(err);
+      vscode.window.showErrorMessage(
+        `KRL Language Server failed to start: ${msg}`,
+      );
     });
-
-    // Validate workspace immediately on startup
-    lsClient.sendNotification("custom/validateWorkspace");
-  }).catch((err) => {
-    const msg = err instanceof Error ? err.message : String(err);
-    vscode.window.showErrorMessage(
-      `KRL Language Server failed to start: ${msg}`,
-    );
-  });
 
   context.subscriptions.push(krlDiagnostics);
 }

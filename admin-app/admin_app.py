@@ -698,17 +698,20 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.end_headers()
             self.wfile.write(b"OK")
-        elif self.path.startswith("/api/poll_for_vscode"):
+        elif self.path.startswith("/api/v1/chat/poll") or self.path.startswith("/api/poll_for_vscode"):
             query = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
             session_id = query.get("session_id", [None])[0]
             hostname = query.get("hostname", [None])[0]
+            since_val = query.get("since", ["0"])[0]
+            since_ts = int(since_val) if since_val.isdigit() else 0
 
             dev_msgs = []
             if session_id and session_id in store["sessions"]:
                 msgs = store["sessions"][session_id].get("messages", [])
                 for m in msgs:
                     if m.get("sender") == "developer":
-                        dev_msgs.append(m)
+                        if m.get("timestamp", 0) > since_ts or since_ts == 0:
+                            dev_msgs.append(m)
 
             # Check matching offline messages for host
             if hostname:
@@ -716,12 +719,13 @@ class RequestHandler(BaseHTTPRequestHandler):
                     if sess.get("hostname") == hostname and sid != session_id:
                         for m in sess.get("messages", []):
                             if m.get("sender") == "developer" and m not in dev_msgs:
-                                dev_msgs.append(m)
+                                if m.get("timestamp", 0) > since_ts or since_ts == 0:
+                                    dev_msgs.append(m)
 
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            self.wfile.write(json.dumps({"messages": dev_msgs}, ensure_ascii=False).encode("utf-8"))
+            self.wfile.write(json.dumps({"ok": True, "messages": dev_msgs}, ensure_ascii=False).encode("utf-8"))
         else:
             self.send_response(404)
             self.end_headers()
@@ -737,8 +741,9 @@ class RequestHandler(BaseHTTPRequestHandler):
             if active_id and text:
                 payload_text = f"#{active_id} {text}"
                 dev_chat_id = store.get("devChatId")
+                thread_id = store.get("session_topics", {}).get(active_id)
                 if dev_chat_id:
-                    send_telegram_msg(dev_chat_id, payload_text)
+                    send_telegram_msg(dev_chat_id, payload_text, thread_id=thread_id)
 
                 if active_id in store["sessions"]:
                     store["sessions"][active_id]["messages"].append({
@@ -753,7 +758,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b"OK")
 
-        elif self.path == "/api/post_from_vscode":
+        elif self.path == "/api/v1/chat/message" or self.path == "/api/post_from_vscode":
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length)
             body = json.loads(post_data.decode('utf-8'))
@@ -765,6 +770,11 @@ class RequestHandler(BaseHTTPRequestHandler):
             active_file = body.get("activeFile", "Нет")
 
             if session_id:
+                if "sessions" not in store:
+                    store["sessions"] = {}
+                if "session_topics" not in store:
+                    store["session_topics"] = {}
+
                 if session_id not in store["sessions"]:
                     store["sessions"][session_id] = {
                         "hostname": hostname,
@@ -788,22 +798,102 @@ class RequestHandler(BaseHTTPRequestHandler):
                     })
                     store["sessions"][session_id]["lastTime"] = int(time.time() * 1000)
 
+                    # Relay to Telegram Supergroup Topic or Developer chat
+                    dev_chat_id = store.get("devChatId")
+                    if dev_chat_id:
+                        thread_id = get_or_create_forum_topic(dev_chat_id, session_id, hostname, role)
+                        formatted_text = f"💬 *[{role}] {hostname}* (`#{session_id}`):\n{text}"
+                        send_telegram_msg(dev_chat_id, formatted_text, thread_id=thread_id)
+
                 if not store.get("activeSessionId"):
                     store["activeSessionId"] = session_id
                 save_db(store)
 
             self.send_response(200)
+            self.send_header("Content-type", "application/json")
             self.end_headers()
-            self.wfile.write(b"OK")
+            self.wfile.write(json.dumps({"ok": True}).encode("utf-8"))
 
-def send_telegram_msg(chat_id, text):
+        elif self.path == "/api/v1/chat/heartbeat":
+            content_length = int(self.headers.get('Content-Length', 0))
+            if content_length > 0:
+                post_data = self.rfile.read(content_length)
+                body = json.loads(post_data.decode('utf-8'))
+                session_id = body.get("sessionId")
+                if session_id:
+                    if session_id not in store["sessions"]:
+                        store["sessions"][session_id] = {
+                            "hostname": body.get("hostname", "ПК"),
+                            "role": body.get("role", "⭐ PRO"),
+                            "activeFile": body.get("activeFile", "Нет"),
+                            "lastPingTime": int(time.time() * 1000),
+                            "lastTime": int(time.time() * 1000),
+                            "messages": []
+                        }
+                    else:
+                        store["sessions"][session_id]["lastPingTime"] = int(time.time() * 1000)
+                        if "activeFile" in body:
+                            store["sessions"][session_id]["activeFile"] = body["activeFile"]
+                        if "role" in body:
+                            store["sessions"][session_id]["role"] = body["role"]
+                    save_db(store)
+
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps({"ok": True}).encode("utf-8"))
+
+        elif self.path == "/api/v1/chat/file":
+            # File / Attachment relay handler
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length)
+            # Accept and save uploaded payload
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps({"ok": True}).encode("utf-8"))
+
+def get_or_create_forum_topic(chat_id, session_id, hostname, role):
+    """Creates a dedicated Forum Topic in Telegram Support Supergroup for this engineer."""
+    if "session_topics" not in store:
+        store["session_topics"] = {}
+    
+    if session_id in store["session_topics"]:
+        return store["session_topics"][session_id]
+
+    try:
+        topic_name = f"[{'PRO' if 'PRO' in role else 'FREE'}] {hostname} (#{session_id})"[:120]
+        url = f"{TELEGRAM_API_BASE}/createForumTopic"
+        data = urllib.parse.urlencode({
+            "chat_id": chat_id,
+            "name": topic_name
+        }).encode("utf-8")
+        req = urllib.request.Request(url, data=data)
+        with urllib.request.urlopen(req) as resp:
+            res_data = json.loads(resp.read().decode("utf-8"))
+            if res_data.get("ok") and "result" in res_data:
+                thread_id = res_data["result"]["message_thread_id"]
+                store["session_topics"][session_id] = thread_id
+                save_db(store)
+                print(f"✨ [Forum Topic Created] #{session_id} -> Thread ID: {thread_id}")
+                return thread_id
+    except Exception as e:
+        # Fallback to main chat if not a supergroup with topics
+        pass
+    return None
+
+def send_telegram_msg(chat_id, text, thread_id=None):
     try:
         url = f"{TELEGRAM_API_BASE}/sendMessage"
-        data = urllib.parse.urlencode({
+        params = {
             "chat_id": chat_id,
             "text": text,
             "parse_mode": "Markdown"
-        }).encode("utf-8")
+        }
+        if thread_id:
+            params["message_thread_id"] = thread_id
+
+        data = urllib.parse.urlencode(params).encode("utf-8")
         req = urllib.request.Request(url, data=data)
         urllib.request.urlopen(req)
     except Exception as e:
@@ -869,13 +959,24 @@ def poll_telegram_updates():
 
                     # Ultra-resilient Session Matcher & Markdown Text Cleaner
                     match_session = None
-                    m = (
-                        re.search(r"Сессия:\s*`?#?([a-f0-9]{6})`?", text, re.IGNORECASE) or
-                        re.search(r"session:\s*`?#?([a-f0-9]{6})`?", text, re.IGNORECASE) or
-                        re.search(r"#([a-f0-9]{6})\b", text, re.IGNORECASE)
-                    )
-                    if m:
-                        match_session = m.group(1).lower()
+
+                    # 1. Check Forum Topic Thread ID first (Supergroup Topics mode)
+                    thread_id = msg.get("message_thread_id")
+                    if thread_id and "session_topics" in store:
+                        for sid, tid in store["session_topics"].items():
+                            if tid == thread_id:
+                                match_session = sid
+                                break
+
+                    # 2. Check reply_to_message or hashtag if not found by thread ID
+                    if not match_session:
+                        m = (
+                            re.search(r"Сессия:\s*`?#?([a-f0-9]{6})`?", text, re.IGNORECASE) or
+                            re.search(r"session:\s*`?#?([a-f0-9]{6})`?", text, re.IGNORECASE) or
+                            re.search(r"#([a-f0-9]{6})\b", text, re.IGNORECASE)
+                        )
+                        if m:
+                            match_session = m.group(1).lower()
 
                     if not match_session and store.get("sessions") and len(store["sessions"]) == 1:
                         match_session = list(store["sessions"].keys())[0]

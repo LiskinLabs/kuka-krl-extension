@@ -154,7 +154,7 @@ export function showCalculator(context: vscode.ExtensionContext) {
     context.subscriptions,
   );
 
-  panel.webview.html = getWebviewContent(t);
+  panel.webview.html = getWebviewContent(t, panel.webview.cspSource);
 }
 
 // Parse FRAME/POS from text like {X 100, Y 200, Z 300, A 0, B 0, C 0}
@@ -307,12 +307,13 @@ async function collectFrameVariables(): Promise<
   return items;
 }
 
-function getWebviewContent(t: typeof translations.en) {
+function getWebviewContent(t: typeof translations.en, cspSource: string) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${cspSource} https: data:; script-src ${cspSource} 'unsafe-inline'; style-src ${cspSource} 'unsafe-inline'; font-src ${cspSource};">
     <title>${t.title}</title>
     <style>
         * { box-sizing: border-box; }

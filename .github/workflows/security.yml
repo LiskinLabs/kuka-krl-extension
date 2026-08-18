@@ -1,0 +1,64 @@
+name: Security & Spectra Assure Verification
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  schedule:
+    - cron: '0 4 * * 1' # Weekly security scan on Monday at 04:00 UTC
+  workflow_dispatch:
+
+jobs:
+  security-audit:
+    name: Security & Supply Chain Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Copy License
+        run: cp LICENSE extension/LICENSE.txt
+
+      - name: Install Extension Dependencies
+        working-directory: extension
+        run: npm ci || npm install
+
+      - name: Static Security & i18n Symmetry Tests
+        working-directory: extension
+        run: npm test
+
+      - name: Comprehensive E2E Safety Matrix
+        working-directory: extension
+        run: npm run test:e2e
+
+      - name: Build Production Extension
+        working-directory: extension
+        run: npm run compile
+
+      - name: Package VSIX
+        working-directory: extension
+        run: npx @vscode/vsce package --no-dependencies
+
+      - name: ReversingLabs Spectra Assure Security Scan
+        uses: reversinglabs/gh-action-rl-scanner-composite@v1
+        continue-on-error: true # Allows non-blocking report generation if RL credentials are not yet set
+        with:
+          artifact-path: "extension/kuka-krl-extension-*.vsix"
+          report-path: "reports"
+        env:
+          RL_TOKEN: ${{ secrets.RL_PORTAL_TOKEN }}
+          RL_PORTAL_SERVER: ${{ secrets.RL_PORTAL_SERVER || 'https://my.secure.software' }}
+
+      - name: Upload Security Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: spectra-assure-security-reports
+          path: reports/
+          retention-days: 14

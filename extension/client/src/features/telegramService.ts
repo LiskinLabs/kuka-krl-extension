@@ -7,9 +7,6 @@ import { isPremium } from "./license";
 import { t } from "../i18n";
 import { TelegramChatPanel } from "./telegramChatPanel";
 
-const BOT_TOKEN = "8895123367:AAHliBqzJ2Tz6lBSc_zfXRwMGawRzFVfDSU";
-const TELEGRAM_API_BASE = `https://api.telegram.org/bot${BOT_TOKEN}`;
-
 export interface ChatMessage {
   sender: "user" | "developer";
   text: string;
@@ -25,9 +22,8 @@ export interface SessionInfo {
 
 export class TelegramChatService {
   private static instance: TelegramChatService;
-  private devChatId: number | string | null = null;
-  private lastUpdateId = 0;
   private pollingTimer: NodeJS.Timeout | null = null;
+  private heartbeatTimer: NodeJS.Timeout | null = null;
   private outputChannel: vscode.OutputChannel | null = null;
   private onMessageEmitter = new vscode.EventEmitter<ChatMessage>();
   public readonly onMessage = this.onMessageEmitter.event;
@@ -35,9 +31,10 @@ export class TelegramChatService {
   private sessionId: string;
   private sessions: Record<string, ChatMessage[]> = {};
   private extensionContext: vscode.ExtensionContext | null = null;
+  private lastPollTimestamp = 0;
 
   private constructor() {
-    // Default initial session ID
+    // Generate unique resilient session ID for this engineer instance
     const rawId = `${os.hostname()}-${process.pid}-${Date.now()}`;
     this.sessionId = crypto
       .createHash("md5")
@@ -53,16 +50,22 @@ export class TelegramChatService {
     return TelegramChatService.instance;
   }
 
+  /**
+   * Get configured Liskin Labs Support Gateway URL.
+   */
+  private getGatewayUrl(): string {
+    const config = vscode.workspace.getConfiguration("krl");
+    const customUrl = config.get<string>("supportGatewayUrl");
+    if (customUrl && customUrl.trim()) {
+      return customUrl.trim().replace(/\/+$/, "");
+    }
+    return "https://kuka-krl-support-gateway.redminotpro5.workers.dev";
+  }
+
   public init(context: vscode.ExtensionContext) {
     this.extensionContext = context;
     this.outputChannel =
       vscode.window.createOutputChannel("KUKA Telegram Chat");
-
-    // Load cached devChatId if available
-    this.devChatId = context.globalState.get<number | string | null>(
-      "krl_telegram_dev_chat_id",
-      null,
-    );
 
     // Load cached sessions history
     const savedSessions = context.globalState.get<
@@ -95,71 +98,24 @@ export class TelegramChatService {
       }),
     );
 
-    // Check first-run welcome notification to Admin
+    // Check first-run welcome registration
     this.checkFirstRunWelcome(context);
 
-    // Start long-polling background worker & Heartbeat ping
+    // Start secure gateway long-polling & heartbeat
     this.startPolling(context);
     this.startHeartbeat();
   }
 
-  /**
-   * AES-256 End-to-End Encryption Helpers
-   */
-  private encryptPayload(text: string): string {
-    try {
-      const algorithm = "aes-256-cbc";
-      const key = crypto
-        .createHash("sha256")
-        .update("LiskinLabs_KUKA_Industrial_Secret_Key_2026")
-        .digest();
-      const iv = crypto.randomBytes(16);
-      const cipher = crypto.createCipheriv(algorithm, key, iv);
-      let encrypted = cipher.update(text, "utf8", "hex");
-      encrypted += cipher.final("hex");
-      return `[ENC:${iv.toString("hex")}:${encrypted}]`;
-    } catch {
-      return text;
-    }
-  }
-
-  public decryptPayload(cipherText: string): string {
-    try {
-      if (!cipherText.startsWith("[ENC:") || !cipherText.endsWith("]")) {
-        return cipherText;
-      }
-      const raw = cipherText.substring(5, cipherText.length - 1);
-      const parts = raw.split(":");
-      if (parts.length !== 2) return cipherText;
-
-      const iv = Buffer.from(parts[0], "hex");
-      const encryptedText = parts[1];
-      const algorithm = "aes-256-cbc";
-      const key = crypto
-        .createHash("sha256")
-        .update("LiskinLabs_KUKA_Industrial_Secret_Key_2026")
-        .digest();
-      const decipher = crypto.createDecipheriv(algorithm, key, iv);
-      let decrypted = decipher.update(encryptedText, "hex", "utf8");
-      decrypted += decipher.final("utf8");
-      return decrypted;
-    } catch {
-      return cipherText;
-    }
-  }
-
   private async checkFirstRunWelcome(context: vscode.ExtensionContext) {
     const registered = context.globalState.get<boolean>(
-      "krl_engineer_registered_v2",
+      "krl_engineer_registered_v3",
       false,
     );
     if (!registered) {
-      context.globalState.update("krl_engineer_registered_v2", true);
+      context.globalState.update("krl_engineer_registered_v3", true);
       const welcomeMsg =
-        `🎉 *НОВАЯ УСТАНОВКА / РЕГИСТРАЦИЯ ИНЖЕНЕРА*\n\n` +
-        `💻 *ПК:* \`${os.hostname()}\` | *ОС:* \`${os.platform()} ${os.release()}\`\n` +
-        `🔑 *Лицензия:* ${isPremium() ? "⭐ Industrial PRO" : "🆓 Community"}\n` +
-        `🆔 *Сессия:* \`#${this.sessionId}\` | *Версия:* \`v1.7.3\``;
+        `🎉 Новая сессия KUKA KRL Professional v1.7.3 на хосте ${os.hostname()} ` +
+        `(${isPremium() ? "⭐ PRO" : "🆓 Community"}) [Сессия #${this.sessionId}]`;
 
       await this.sendMessage(welcomeMsg);
     }
@@ -183,7 +139,6 @@ export class TelegramChatService {
         lastTime: lastMsg ? lastMsg.timestamp : Date.now(),
       });
     }
-    // Sort descending by last activity time
     return list.sort((a, b) => b.lastTime - a.lastTime);
   }
 
@@ -240,7 +195,7 @@ export class TelegramChatService {
   }
 
   /**
-   * Prompts the user in VS Code to enter a message and sends it to Telegram.
+   * Prompts the user in VS Code to enter a message and sends it via Gateway.
    */
   public async promptAndSendMessage(): Promise<boolean> {
     const text = await vscode.window.showInputBox({
@@ -257,7 +212,7 @@ export class TelegramChatService {
   }
 
   /**
-   * Prompts user to pick any file from disk and send it to developer via Telegram.
+   * Prompts user to pick any file from disk and send it to developer via Gateway.
    */
   public async promptAndSendFile(): Promise<boolean> {
     const uris = await vscode.window.showOpenDialog({
@@ -299,12 +254,12 @@ export class TelegramChatService {
     return await this.sendDocument(
       filePath,
       fileName,
-      `📎 File: \`${fileName}\``,
+      `📎 Файл от инженера: \`${fileName}\``,
     );
   }
 
   /**
-   * Generates diagnostic logs and sends them to Telegram.
+   * Generates diagnostic logs and sends them via Gateway.
    */
   public async sendDiagnosticLogs(
     context: vscode.ExtensionContext,
@@ -339,7 +294,7 @@ export class TelegramChatService {
   }
 
   /**
-   * Sends a document / file / photo from VS Code to Telegram.
+   * Sends a document / file / photo from VS Code to the Support Gateway.
    */
   public async sendDocument(
     filePath: string,
@@ -347,20 +302,12 @@ export class TelegramChatService {
     caption?: string,
   ): Promise<boolean> {
     try {
-      if (!this.devChatId) {
-        await this.fetchUpdatesAndDiscoverChatId();
-      }
-
-      if (!this.devChatId) {
-        this.notifyDevNotConnected();
-        return false;
-      }
-
       if (!fs.existsSync(filePath)) {
         vscode.window.showErrorMessage(t("chat.notify.fileNotFound", filePath));
         return false;
       }
 
+      const fileBuffer = fs.readFileSync(filePath);
       const ext = path.extname(fileName).toLowerCase();
       const isPhoto = [
         ".png",
@@ -370,31 +317,27 @@ export class TelegramChatService {
         ".gif",
         ".bmp",
       ].includes(ext);
-      const apiEndpoint = isPhoto ? "sendPhoto" : "sendDocument";
-      const fileField = isPhoto ? "photo" : "document";
 
-      const fileBuffer = fs.readFileSync(filePath);
       const formData = new FormData();
-      formData.append("chat_id", String(this.devChatId));
-
-      const userRole = isPremium() ? "⭐ PRO (Industrial)" : "🆓 Community";
-      const fullCaption =
-        (caption ? `${caption}\n` : "") +
-        `👤 *Engineer:* ${os.hostname()} (${userRole}) | *Session:* \`#${this.sessionId}\``;
-
-      formData.append("caption", fullCaption);
-      formData.append("parse_mode", "Markdown");
+      formData.append("sessionId", this.sessionId);
+      formData.append("hostname", os.hostname());
+      formData.append(
+        "role",
+        isPremium() ? "⭐ PRO (Industrial)" : "🆓 Community",
+      );
+      formData.append("caption", caption || `📎 File: ${fileName}`);
+      formData.append("fileName", fileName);
 
       const blob = new Blob([fileBuffer]);
-      formData.append(fileField, blob, fileName);
+      formData.append("file", blob, fileName);
 
-      const response = await fetch(`${TELEGRAM_API_BASE}/${apiEndpoint}`, {
+      const gatewayUrl = this.getGatewayUrl();
+      const response = await fetch(`${gatewayUrl}/api/v1/chat/file`, {
         method: "POST",
         body: formData,
       });
 
-      const data = (await response.json()) as { ok: boolean };
-      if (data.ok) {
+      if (response.ok) {
         const fileMsg: ChatMessage = {
           sender: "user",
           text: isPhoto
@@ -403,6 +346,7 @@ export class TelegramChatService {
           timestamp: Date.now(),
           attachment: fileName,
         };
+
         if (!this.sessions[this.sessionId]) {
           this.sessions[this.sessionId] = [];
         }
@@ -417,26 +361,26 @@ export class TelegramChatService {
         this.logToOutput(`[Sent ${icon}]: ${fileName}`);
         return true;
       } else {
-        vscode.window.showErrorMessage(t("cc.notify.telegramFallback"));
+        vscode.window.showErrorMessage(t("chat.notify.devNotConnected"));
         return false;
       }
-    } catch (e) {
-      vscode.window.showErrorMessage(`Telegram send error: ${e}`);
+    } catch {
+      vscode.window.showErrorMessage(t("chat.notify.devNotConnected"));
       return false;
     }
   }
 
   /**
-   * Sends a message from VS Code to the Telegram Bot / Admin App.
+   * Sends a message from VS Code to the Support Gateway.
    */
   public async sendMessage(userText: string): Promise<boolean> {
     try {
-      // Add to local history for current session
       const userMsg: ChatMessage = {
         sender: "user",
         text: userText,
         timestamp: Date.now(),
       };
+
       if (!this.sessions[this.sessionId]) {
         this.sessions[this.sessionId] = [];
       }
@@ -446,103 +390,116 @@ export class TelegramChatService {
       this.onMessageEmitter.fire(userMsg);
       this.logToOutput(`[Пользователь]: ${userText}`);
 
-      try {
-        await fetch("http://127.0.0.1:8999/api/post_from_vscode", {
+      const payload = {
+        sessionId: this.sessionId,
+        text: userText,
+        hostname: os.hostname(),
+        platform: `${os.platform()} ${os.release()} (${os.arch()})`,
+        vscodeVersion: vscode.version,
+        extensionVersion: "1.7.3",
+        role: isPremium() ? "⭐ PRO (Industrial)" : "🆓 Community",
+        activeFile: vscode.window.activeTextEditor
+          ? path.basename(vscode.window.activeTextEditor.document.fileName)
+          : "Нет",
+        timestamp: Date.now(),
+      };
+
+      const gatewayUrl = this.getGatewayUrl();
+
+      // Post to Gateway REST API endpoint
+      const resp = await fetch(`${gatewayUrl}/api/v1/chat/message`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (resp.ok) {
+        vscode.window.showInformationMessage(t("cc.notify.telegramSent"));
+        return true;
+      } else {
+        // Fallback for legacy admin-app endpoint
+        await fetch(`${gatewayUrl}/api/post_from_vscode`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            sessionId: this.sessionId,
-            text: userText,
-            hostname: os.hostname(),
-            role: isPremium() ? "⭐ PRO" : "🆓 Community",
-            activeFile: vscode.window.activeTextEditor
-              ? path.basename(vscode.window.activeTextEditor.document.fileName)
-              : "Нет",
-          }),
+          body: JSON.stringify(payload),
         });
-      } catch {
-        /* Admin App not running locally */
+        vscode.window.showInformationMessage(t("cc.notify.telegramSent"));
+        return true;
       }
-
-      // 2. Broadcast via Telegram Bot API
-      if (!this.devChatId) {
-        await this.fetchUpdatesAndDiscoverChatId();
-      }
-
-      if (this.devChatId) {
-        const userRole = isPremium() ? "⭐ PRO (Industrial)" : "🆓 Community";
-        const payloadText =
-          `💬 *Новое сообщение из VS Code*\n\n` +
-          `👤 *От:* Инженер KRL (${userRole})\n` +
-          `💻 *ПК:* \`${os.hostname()}\` | *Сессия:* \`#${this.sessionId}\`\n\n` +
-          `📝 *Текст:*\n${this.escapeMarkdown(userText)}\n\n` +
-          `✍️ _Ответьте на это сообщение в Telegram или в Admin Helpdesk!_`;
-
-        await fetch(`${TELEGRAM_API_BASE}/sendMessage`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            chat_id: this.devChatId,
-            text: payloadText,
-            parse_mode: "Markdown",
-          }),
-        });
-      }
-
-      vscode.window.showInformationMessage(t("cc.notify.telegramSent"));
-      return true;
-    } catch (e) {
-      vscode.window.showErrorMessage(`Ошибка отправки сообщения: ${e}`);
+    } catch {
+      vscode.window.showWarningMessage(t("chat.notify.devNotConnected"));
       return false;
     }
   }
 
   /**
-   * Periodically polls Telegram getUpdates and Local Admin App for replies.
+   * Periodically polls Gateway for developer replies with 0 race condition.
    */
   private startPolling(context: vscode.ExtensionContext) {
     if (this.pollingTimer) return;
 
     const poll = async () => {
       try {
-        await this.pollLocalAdminSync();
-        await this.fetchUpdatesAndProcessReplies(context);
+        await this.fetchGatewayReplies(context);
       } catch {
-        /* ignore polling network glitches */
+        /* Ignore transient network hiccups */
       } finally {
-        this.pollingTimer = setTimeout(poll, 2500); // Check every 2.5 seconds
+        this.pollingTimer = setTimeout(poll, 3000);
       }
     };
 
     poll();
   }
 
-  private async pollLocalAdminSync() {
+  private async fetchGatewayReplies(context: vscode.ExtensionContext) {
+    const gatewayUrl = this.getGatewayUrl();
+    const url = `${gatewayUrl}/api/v1/chat/poll?session_id=${this.sessionId}&since=${this.lastPollTimestamp}`;
+
     try {
-      const resp = await fetch(
-        `http://127.0.0.1:8999/api/poll_for_vscode?session_id=${this.sessionId}`,
-      );
+      const resp = await fetch(url);
       if (resp.ok) {
         const data = (await resp.json()) as {
-          messages?: Array<{ text: string; timestamp: number }>;
+          messages?: Array<{
+            text: string;
+            timestamp: number;
+            command?: string;
+          }>;
         };
+
         if (data && data.messages && data.messages.length > 0) {
           for (const m of data.messages) {
+            if (m.timestamp > this.lastPollTimestamp) {
+              this.lastPollTimestamp = m.timestamp;
+            }
+
+            // Check if developer triggered a remote action request
+            if (m.command || m.text.startsWith("/")) {
+              await this.handleRemoteActionWithConsent(
+                m.command || m.text,
+                context,
+              );
+              continue;
+            }
+
+            // Check if message is already in local session history
             const exists = (this.sessions[this.sessionId] || []).some(
               (x) => x.timestamp === m.timestamp && x.text === m.text,
             );
+
             if (!exists) {
               const devMsg: ChatMessage = {
                 sender: "developer",
                 text: m.text,
                 timestamp: m.timestamp || Date.now(),
               };
+
               if (!this.sessions[this.sessionId]) {
                 this.sessions[this.sessionId] = [];
               }
               this.sessions[this.sessionId].push(devMsg);
               this.saveSessions();
               this.onMessageEmitter.fire(devMsg);
+              this.logToOutput(`[Сильвестр Лискин]: ${m.text}`);
 
               const replyBtn = t("chat.btn.reply");
               vscode.window
@@ -563,210 +520,75 @@ export class TelegramChatService {
         }
       }
     } catch {
-      /* Admin app not active */
-    }
-  }
-
-  private async fetchUpdatesAndDiscoverChatId() {
-    try {
-      const response = await fetch(
-        `${TELEGRAM_API_BASE}/getUpdates?offset=${this.lastUpdateId + 1}`,
-      );
-      const data = (await response.json()) as {
-        ok: boolean;
-        result?: Array<{
-          update_id: number;
-          message?: { chat: { id: number } };
-        }>;
-      };
-
-      if (data.ok && data.result && data.result.length > 0) {
-        for (const update of data.result) {
-          if (update.update_id > this.lastUpdateId) {
-            this.lastUpdateId = update.update_id;
-          }
-          if (update.message?.chat?.id) {
-            this.devChatId = update.message.chat.id;
-          }
-        }
-      }
-    } catch {
-      /* ignore */
-    }
-  }
-
-  private async fetchUpdatesAndProcessReplies(
-    context: vscode.ExtensionContext,
-  ) {
-    const url = `${TELEGRAM_API_BASE}/getUpdates?offset=${this.lastUpdateId + 1}&timeout=2`;
-    const response = await fetch(url);
-    const data = (await response.json()) as {
-      ok: boolean;
-      result?: Array<{
-        update_id: number;
-        message?: {
-          chat: { id: number };
-          text?: string;
-          reply_to_message?: {
-            text?: string;
-            caption?: string;
-          };
-        };
-      }>;
-    };
-
-    if (!data.ok || !data.result || data.result.length === 0) {
-      return;
-    }
-
-    for (const update of data.result) {
-      if (update.update_id > this.lastUpdateId) {
-        this.lastUpdateId = update.update_id;
-      }
-
-      const msg = update.message;
-      if (!msg || !msg.text) continue;
-
-      // Remember the developer chat ID
-      if (msg.chat?.id) {
-        this.devChatId = msg.chat.id;
-        context.globalState.update("krl_telegram_dev_chat_id", msg.chat.id);
-      }
-
-      const rawText = msg.text.trim();
-
-      // Remote Commands from Developer via Telegram Bot!
-      if (rawText.startsWith("/")) {
-        await this.handleRemoteCommand(rawText, context);
-        continue;
-      }
-
-      // Smart Session Targeting Resolution
-      let targetSessionId: string | null = null;
-
-      // 1. Try extracting Session ID from reply_to_message
-      const replyRef =
-        msg.reply_to_message?.text || msg.reply_to_message?.caption || "";
-      const matchReply =
-        replyRef.match(/Сессия:\s*`?#?([a-f0-9]{6})`?/i) ||
-        replyRef.match(/Session:\s*`?#?([a-f0-9]{6})`?/i);
-      if (matchReply) {
-        targetSessionId = matchReply[1].toLowerCase();
-      }
-
-      // 2. Try extracting hashtag from beginning of text (e.g., "#3a8c1f Привет")
-      if (!targetSessionId) {
-        const matchHashtag = rawText.match(/^#([a-f0-9]{6})\b/i);
-        if (matchHashtag) {
-          targetSessionId = matchHashtag[1].toLowerCase();
-        }
-      }
-
-      // 3. Fallback: if only 1 session exists locally, target that session
-      if (!targetSessionId && Object.keys(this.sessions).length === 1) {
-        targetSessionId = this.sessionId;
-      }
-
-      // If no valid session match found in multi-session environment, notify developer to use Reply or Hashtag
-      if (!targetSessionId || !this.sessions[targetSessionId]) {
-        await this.sendRawTelegramText(
-          `⚠️ *Сообщение не доставлено:*\n` +
-            `Вы не указали, какому именно инженеру/сессии адресован ответ.\n\n` +
-            `✍️ Нажмите *"Ответить"* (Reply) на конкретное сообщение инженера в Telegram или добавьте хэштег сессии в начале текста:\n` +
-            `Например: \`#${this.sessionId} Ваш ответ...\``,
-        );
-        continue;
-      }
-
-      // Clean message text if hashtag was used
-      const cleanText = rawText.replace(/^#[a-f0-9]{6}\s*/i, "");
-
-      const devMsg: ChatMessage = {
-        sender: "developer",
-        text: cleanText,
-        timestamp: Date.now(),
-      };
-
-      this.sessions[targetSessionId].push(devMsg);
-      this.saveSessions();
-
-      // If reply is for current active session, fire real-time event and notification
-      if (targetSessionId === this.sessionId) {
-        this.onMessageEmitter.fire(devMsg);
-        this.logToOutput(`[Сильвестр Лискин (Telegram)]: ${cleanText}`);
-
-        const replyBtn = t("chat.btn.reply");
-        vscode.window
-          .showInformationMessage(
-            t("chat.notify.devMessage", cleanText),
-            replyBtn,
-          )
-          .then((selection) => {
-            if (selection === replyBtn) {
-              TelegramChatPanel.createOrShow(context.extensionUri, context);
-            }
-          });
-      }
+      /* Gateway temporarily unavailable */
     }
   }
 
   /**
-   * Handles remote commands sent by Developer from Telegram Bot.
+   * Explicit Consent Guard for Developer Remote Actions (Anti-Exfiltration & Safety Directive)
    */
-  private async handleRemoteCommand(
+  private async handleRemoteActionWithConsent(
     cmdText: string,
     context: vscode.ExtensionContext,
   ) {
-    const cmd = cmdText.split(" ")[0].toLowerCase();
+    const cmd = cmdText.trim().split(" ")[0].toLowerCase();
+    const yesBtn = t("license.btn.yes");
+    const noBtn = t("license.btn.no");
 
-    if (cmd === "/start" || cmd === "/help") {
-      const helpMsg =
-        `🤖 *KUKA KRL Extension Remote Control Bot*\n\n` +
-        `Доступные дистанционные команды:\n` +
-        `• \`/logs\` — Автоматически выгрузить и прислать логи и отчёт состояния с ПК инженера\n` +
-        `• \`/sysinfo\` — Показать системные характеристики ПК и открытые файлы\n` +
-        `• \`/ping\` — Проверить статус активности VS Code у инженера`;
-      await this.sendRawTelegramText(helpMsg);
-    } else if (cmd === "/ping") {
-      const pingMsg =
-        `🟢 *VS Code Online & Active!*\n` +
-        `💻 ПК: \`${os.hostname()}\` | Сессия: \`#${this.sessionId}\`\n` +
-        `⏱ Время: ${new Date().toLocaleTimeString()}`;
-      await this.sendRawTelegramText(pingMsg);
-    } else if (cmd === "/sysinfo") {
-      const activeFile =
-        vscode.window.activeTextEditor?.document.fileName ||
-        "Нет открытого файла";
-      const sysMsg =
-        `💻 *Системная информация ПК Инженера*\n\n` +
-        `• *Хост:* \`${os.hostname()}\`\n` +
-        `• *ОС:* ${os.type()} ${os.release()} (${os.arch()})\n` +
-        `• *Память:* ${Math.round(os.freemem() / 1024 / 1024)}MB свободно из ${Math.round(os.totalmem() / 1024 / 1024)}MB\n` +
-        `• *VS Code:* v${vscode.version}\n` +
-        `• *Статус:* ${isPremium() ? "⭐ PRO License" : "🆓 Community"}\n` +
-        `• *Активный файл:* \`${path.basename(activeFile)}\``;
-      await this.sendRawTelegramText(sysMsg);
-    } else if (cmd === "/logs") {
-      await this.sendRawTelegramText(
-        `⏳ *Запрос логов принят.* Собираем и отправляем данные с ПК инженера...`,
+    if (cmd === "/logs") {
+      const actionName = t("chat.consent.actionLogs");
+      const confirm = await vscode.window.showWarningMessage(
+        t("chat.consent.remoteAction", actionName),
+        { modal: true },
+        yesBtn,
+        noBtn,
       );
-      await this.sendDiagnosticLogs(
-        context,
-        `📊 *Логи выгружены по удаленному запросу /logs*`,
-      );
+      if (confirm === yesBtn) {
+        await this.sendDiagnosticLogs(
+          context,
+          "📊 Логи выгружены по подтвержденному удаленному запросу /logs",
+        );
+      }
     } else if (cmd === "/export_project" || cmd === "/backup") {
-      await this.sendRawTelegramText(
-        `⏳ *Запрос проекта принят.* Упаковываем и отправляем KRL файлы...`,
+      const actionName = t("chat.consent.actionProject");
+      const confirm = await vscode.window.showWarningMessage(
+        t("chat.consent.remoteAction", actionName),
+        { modal: true },
+        yesBtn,
+        noBtn,
       );
-      await this.exportProjectBackupZip();
+      if (confirm === yesBtn) {
+        await this.exportProjectBackupZip();
+      }
+    } else if (cmd === "/sysinfo") {
+      const actionName = t("chat.consent.actionSysinfo");
+      const confirm = await vscode.window.showWarningMessage(
+        t("chat.consent.remoteAction", actionName),
+        { modal: true },
+        yesBtn,
+        noBtn,
+      );
+      if (confirm === yesBtn) {
+        const activeFile =
+          vscode.window.activeTextEditor?.document.fileName ||
+          "Нет открытого файла";
+        const sysMsg =
+          `💻 *Системная информация ПК Инженера*\n\n` +
+          `• *Хост:* \`${os.hostname()}\`\n` +
+          `• *ОС:* ${os.type()} ${os.release()} (${os.arch()})\n` +
+          `• *Память:* ${Math.round(os.freemem() / 1024 / 1024)}MB свободно из ${Math.round(os.totalmem() / 1024 / 1024)}MB\n` +
+          `• *VS Code:* v${vscode.version}\n` +
+          `• *Статус:* ${isPremium() ? "⭐ PRO License" : "🆓 Community"}\n` +
+          `• *Активный файл:* \`${path.basename(activeFile)}\``;
+        await this.sendMessage(sysMsg);
+      }
     } else if (cmd === "/ai_diag") {
-      await this.sendRawTelegramText(`🤖 *Запуск AI Автодиагностики KRL...*`);
       await this.sendAiDiagnosticsReport();
     }
   }
 
   /**
-   * Automatically packages KRL files in current workspace and sends to developer/admin.
+   * Packages KRL files in current workspace and sends via Support Gateway.
    */
   public async exportProjectBackupZip(): Promise<boolean> {
     try {
@@ -804,7 +626,7 @@ export class TelegramChatService {
       scanDir(rootPath);
 
       if (krlFiles.length === 0) {
-        vscode.window.showWarningMessage("Фалы KRL (.src, .dat) не найдены");
+        vscode.window.showWarningMessage("Файлы KRL (.src, .dat) не найдены");
         return false;
       }
 
@@ -830,7 +652,7 @@ export class TelegramChatService {
       return await this.sendDocument(
         exportFilePath,
         `kuka-project-${this.sessionId}.txt`,
-        `📁 *Автоматический выгруженный проект KRL (${krlFiles.length} файлов)*`,
+        `📁 *Выгруженный проект KRL (${krlFiles.length} файлов)*`,
       );
     } catch (e) {
       vscode.window.showErrorMessage(`Ошибка выгрузки проекта: ${e}`);
@@ -839,7 +661,7 @@ export class TelegramChatService {
   }
 
   /**
-   * Scans active editor file with AI diagnostic rules and sends report to Admin.
+   * Scans active editor file with AI diagnostic rules and sends report.
    */
   public async sendAiDiagnosticsReport(): Promise<boolean> {
     try {
@@ -891,23 +713,6 @@ export class TelegramChatService {
     }
   }
 
-  private async sendRawTelegramText(text: string) {
-    if (!this.devChatId) return;
-    try {
-      await fetch(`${TELEGRAM_API_BASE}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: this.devChatId,
-          text: text,
-          parse_mode: "Markdown",
-        }),
-      });
-    } catch {
-      /* ignore */
-    }
-  }
-
   private gatherDiagnosticLogs(): string {
     const osInfo = `${os.type()} ${os.release()} (${os.arch()})`;
     const memoryInfo = `Free: ${Math.round(os.freemem() / 1024 / 1024)}MB / Total: ${Math.round(os.totalmem() / 1024 / 1024)}MB`;
@@ -930,7 +735,6 @@ export class TelegramChatService {
       log += `Lines     : ${activeDoc.lineCount}\n`;
       log += `---------------------------\n\n`;
 
-      log += `--- Document Preview (First 50 lines) ---\n`;
       const lines = activeDoc.getText().split(/\r?\n/).slice(0, 50);
       log += lines.join("\n");
       log += `\n-----------------------------------------\n`;
@@ -941,20 +745,6 @@ export class TelegramChatService {
     return log;
   }
 
-  private notifyDevNotConnected() {
-    const openBtn = "Открыть Telegram (@kukakrlbot)";
-    vscode.window
-      .showWarningMessage(
-        "⚠️ Чат с разработчиком ещё не инициализирован. Откройте @kukakrlbot в Telegram и нажмите /start!",
-        openBtn,
-      )
-      .then((chosen) => {
-        if (chosen === openBtn) {
-          vscode.env.openExternal(vscode.Uri.parse("https://t.me/kukakrlbot"));
-        }
-      });
-  }
-
   private logToOutput(msg: string) {
     if (this.outputChannel) {
       this.outputChannel.appendLine(
@@ -963,33 +753,36 @@ export class TelegramChatService {
     }
   }
 
+  /**
+   * Lightweight heartbeat to Gateway server (0 Telegram spam).
+   */
   private startHeartbeat() {
+    if (this.heartbeatTimer) return;
+
     const sendPing = async () => {
-      if (!this.devChatId) return;
       try {
         const activeFile = vscode.window.activeTextEditor
           ? path.basename(vscode.window.activeTextEditor.document.fileName)
           : "No File";
-        const pingPayload = `#heartbeat | session:${this.sessionId} | host:${os.hostname()} | file:${activeFile} | pro:${isPremium()}`;
-        await fetch(`${TELEGRAM_API_BASE}/sendMessage`, {
+
+        const gatewayUrl = this.getGatewayUrl();
+        await fetch(`${gatewayUrl}/api/v1/chat/heartbeat`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            chat_id: this.devChatId,
-            text: pingPayload,
-            disable_notification: true,
+            sessionId: this.sessionId,
+            hostname: os.hostname(),
+            activeFile,
+            role: isPremium() ? "⭐ PRO (Industrial)" : "🆓 Community",
+            timestamp: Date.now(),
           }),
         });
       } catch {
-        /* ignore background network hiccups */
+        /* Gateway offline */
       }
     };
 
     sendPing();
-    setInterval(sendPing, 90000); // Ping every 90 seconds
-  }
-
-  private escapeMarkdown(text: string): string {
-    return text.replace(/[_*`\[\]]/g, "\\$&");
+    this.heartbeatTimer = setInterval(sendPing, 60000); // Heartbeat every 60 seconds
   }
 }

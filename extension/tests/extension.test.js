@@ -41,13 +41,23 @@ console.log('=== KRL Extension Tests ===\n');
 console.log('--- Static Type & Linting Checks ---');
 
 test('Server TypeScript compilation (tsc --noEmit) passes with 0 errors', () => {
-    const serverDir = path.join(__dirname, '..', 'server');
-    execSync('npx tsc --noEmit', { cwd: serverDir, stdio: 'pipe' });
+    const rootDir = path.join(__dirname, '..');
+    const tscBin = path.join(rootDir, 'node_modules', '.bin', process.platform === 'win32' ? 'tsc.cmd' : 'tsc');
+    if (fs.existsSync(tscBin)) {
+        execSync(`"${tscBin}" -p server --noEmit`, { cwd: rootDir, stdio: 'pipe' });
+    } else {
+        execSync('npx tsc -p server --noEmit', { cwd: rootDir, stdio: 'pipe' });
+    }
 });
 
 test('Client TypeScript compilation (tsc --noEmit) passes with 0 errors', () => {
-    const clientDir = path.join(__dirname, '..', 'client');
-    execSync('npx tsc --noEmit', { cwd: clientDir, stdio: 'pipe' });
+    const rootDir = path.join(__dirname, '..');
+    const tscBin = path.join(rootDir, 'node_modules', '.bin', process.platform === 'win32' ? 'tsc.cmd' : 'tsc');
+    if (fs.existsSync(tscBin)) {
+        execSync(`"${tscBin}" -p client --noEmit`, { cwd: rootDir, stdio: 'pipe' });
+    } else {
+        execSync('npx tsc -p client --noEmit', { cwd: rootDir, stdio: 'pipe' });
+    }
 });
 
 test('Codicons in package.json match valid VS Code icon set', () => {

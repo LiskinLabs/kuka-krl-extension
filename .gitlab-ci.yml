@@ -19,7 +19,8 @@ build_extension:
   script:
     - cd extension
     - npm ci --legacy-peer-deps || npm install --legacy-peer-deps
-    - cd server && npx tsc --noEmit && cd ../client && npx tsc --noEmit && cd ..
+    - npx tsc -p server --noEmit
+    - npx tsc -p client --noEmit
     - npm run lint
     - npm run compile
     - npm test

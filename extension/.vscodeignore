@@ -48,6 +48,10 @@ test_krl_extension.src
 validate-json.js
 *.test.js
 
-# Heavy demo media (hosted externally on GitHub)
-media/*.gif
+# Allow media assets for offline README rendering inside VS Code
+!media/*.gif
+!media/*.png
+!media/*.svg
+!logo.png
+!logo.svg
 

@@ -50,5 +50,4 @@ validate-json.js
 
 # Heavy demo media (hosted externally on GitHub)
 media/*.gif
-media/**/*.gif
-media/1.1.*/**
+

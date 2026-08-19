@@ -1,8 +1,21 @@
 import { defineConfig } from 'vitepress'
 
+const getBase = () => {
+  if (process.env.BASE_URL) return process.env.BASE_URL
+  if (process.env.CI_PAGES_URL) {
+    try {
+      const pathname = new URL(process.env.CI_PAGES_URL).pathname
+      return pathname.endsWith('/') ? pathname : `${pathname}/`
+    } catch {
+      return '/'
+    }
+  }
+  return '/kuka-krl-extension/'
+}
+
 export default defineConfig({
   title: "KUKA KRL Professional",
-  base: '/kuka-krl-extension/',
+  base: getBase(),
   outDir: '../public',
   themeConfig: {
     logo: '/logo.png',

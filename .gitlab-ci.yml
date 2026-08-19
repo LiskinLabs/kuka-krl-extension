@@ -1,0 +1,12 @@
+image: node:20
+
+pages:
+  stage: deploy
+  script:
+    - npm --prefix docs install
+    - npm --prefix docs run docs:build
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "main"

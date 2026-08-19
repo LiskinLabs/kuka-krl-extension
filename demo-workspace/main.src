@@ -1,0 +1,37 @@
+&ACCESS RVP
+&REL 5
+&COMMENT Main Program Demo
+DEF main()
+  ; --- 1. DEMO: System Initialization ---
+  ; Notice Inlay Hint for BASE_DATA[1] and TOOL_DATA[1]
+  $BASE = BASE_DATA[1]
+  $TOOL = TOOL_DATA[1]
+
+  $VEL.CP = 1.5
+  $ACC.CP = 2.0
+
+  PTP {A1 0, A2 -90, A3 90, A4 0, A5 30, A6 0}
+
+  ; --- 2. DEMO: Signal Operations (Inlay Hints active here) ---
+  ; Write "$OUT[4] = TRUE" or "$IN[1]" to see instant hints
+  WAIT FOR $IN[1]  ; <- Will show diPartReady
+
+  $OUT[4] = TRUE   ; <- Will show doGripperOpen
+  $OUT[5] = FALSE  ; <- Will show doGripperClose
+
+  ; Call subroutine
+  executeProcessCycle()
+
+
+  $OUT[10] = TRUE  ; <- Will show doCycleComplete
+END
+
+DEF executeProcessCycle()
+  ; Basic sequence
+  LIN {X 1200, Y -450, Z 950}
+  WAIT SEC 0.5
+  LIN {X 1200, Y -450, Z 800}
+  $OUT[4] = FALSE
+  $OUT[5] = TRUE
+  WAIT SEC 1.0
+END

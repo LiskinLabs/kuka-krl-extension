@@ -1,0 +1,33 @@
+&ACCESS RVP
+&REL 10
+&COMMENT Advanced Diagnostics Demo
+DEF diagnostics_demo()
+  ; --- 1. DEMO: Variable Naming Constraint (24 Chars Limit) ---
+  DECL INT thisVariableNameIsWayTooLongToBeValidInKRL ; Exceeds 24 chars
+
+  ; --- 2. DEMO: Block Balance Mismatch ---
+  IF $IN[1] THEN
+    FOR nActiveCycleMode = 1 TO 5
+      WAIT SEC 0.1
+      END
+  ENDIF ; <- Expected ENDFOR here, mismatches with nested FOR
+
+  ; --- 3. DEMO: Type Misuse in SWITCH ---
+  DECL INT rVelocitySetting
+  rVelocitySetting = 1
+  SWITCH rVelocitySetting ; ERROR: REAL not allowed in SWITCH expression!
+    CASE 1.0
+      $VEL.CP = 0.5
+  ENDSWITCH
+
+  ; --- 4. DEMO: Safety Speed Warnings ---
+  $VEL.CP = 5.0 ; WARNING: Exceeds safe commissioning speed limit (max 3.0 m/s)
+
+  ; --- 5. DEMO: Missing Tool/Base Initialization ---
+  ; Moving without setting $TOOL or $BASE triggers a diagnostic warning.
+  LIN {X 0, Y 0, Z 100}
+
+  ; --- 6. DEMO: Unreachable Code (Dead Code) ---
+  RETURN
+  $OUT[10] = FALSE ; WARNING: Unreachable code after RETURN
+END

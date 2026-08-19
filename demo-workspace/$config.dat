@@ -1,0 +1,24 @@
+&ACCESS RVP
+&REL 1
+&COMMENT SYSTEM-CONFIG
+DEFDAT $CONFIG
+  ; --- Global Signals for Inlay Hints Demonstration ---
+  SIGNAL diPartReady $IN[1]
+  SIGNAL diRobotSafetyOK $IN[2]
+  SIGNAL doGripperOpen $OUT[4]
+  SIGNAL doGripperClose $OUT[5]
+  SIGNAL doCycleComplete $OUT[10]
+
+  ; --- Global Base / Tool Data ---
+  DECL FRAME BASE_DATA[32]
+  BASE_DATA[1]={X 1200.5, Y -450.0, Z 800.0, A 0.0, B 90.0, C 0.0}
+  BASE_DATA[2]={X 1500.0, Y 0.0, Z 750.0, A 90.0, B 0.0, C 0.0}
+
+  DECL FRAME TOOL_DATA[16]
+  TOOL_DATA[1]={X 0.0, Y 0.0, Z 250.0, A 0.0, B 0.0, C 0.0}
+  TOOL_DATA[2]={X 100.0, Y 0.0, Z 300.0, A 0.0, B 45.0, C 0.0}
+
+  ; --- Global Ints and Reals ---
+  GLOBAL INT nActiveCycleMode = 1
+  GLOBAL REAL rCriticalSpeedLimit = 2.5
+ENDDAT

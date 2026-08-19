@@ -1,0 +1,586 @@
+{
+  "name": "kuka-krl-extension",
+  "displayName": "%extension.displayName%",
+  "description": "%extension.description%",
+  "version": "1.7.3",
+  "icon": "logo.png",
+  "publisher": "LiskinLabs",
+  "author": {
+    "name": "Liskin Labs",
+    "email": "silvlis@outlook.com",
+    "url": "https://github.com/LiskinLabs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LiskinLabs/kuka-krl-extension-core.git"
+  },
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "pricing": "Free",
+  "badges": [
+    {
+      "url": "https://img.shields.io/badge/Pro_Store-Lemon_Squeezy-FF6600?style=flat-square",
+      "href": "https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7",
+      "description": "Buy KRL Extension Pro License"
+    }
+  ],
+  "sponsor": {
+    "url": "https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7"
+  },
+  "homepage": "https://github.com/LiskinLabs/kuka-krl-extension-core",
+  "bugs": {
+    "url": "https://github.com/LiskinLabs/kuka-krl-extension-core/issues"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters",
+    "Linters",
+    "Themes"
+  ],
+  "keywords": [
+    "kuka",
+    "krl",
+    "robot",
+    "industrial",
+    "automation",
+    "robotics",
+    "kuka robot language"
+  ],
+  "galleryBanner": {
+    "color": "#FF6600",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "main": "./client/out/main.js",
+  "activationEvents": [],
+  "contributes": {
+    "languages": [
+      {
+        "id": "krl",
+        "aliases": [
+          "KUKA KRL",
+          "krl"
+        ],
+        "extensions": [
+          ".src",
+          ".dat",
+          ".sub"
+        ],
+        "configuration": "./client/krl-language-configuration.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "krl",
+        "path": "./client/snippets/krl.code-snippets"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "krl",
+        "scopeName": "source.krl",
+        "path": "./client/syntaxes/krl.tmLanguage.json"
+      }
+    ],
+    "themes": [
+      {
+        "label": "KRL Industrial Dark",
+        "uiTheme": "vs-dark",
+        "path": "./client/themes/KRL_Industrial_Dark.json"
+      },
+      {
+        "label": "KRL Industrial Light",
+        "uiTheme": "vs",
+        "path": "./client/themes/KRL_Industrial_Light.json"
+      },
+      {
+        "label": "KRL Midnight OLED",
+        "uiTheme": "vs-dark",
+        "path": "./client/themes/KRL_Midnight_OLED.json"
+      },
+      {
+        "label": "KRL Blueprint",
+        "uiTheme": "vs-dark",
+        "path": "./client/themes/KRL_Blueprint.json"
+      },
+      {
+        "label": "KRL WorkVisual Dark (Standard)",
+        "uiTheme": "vs-dark",
+        "path": "./client/themes/KRL_WorkVisual_Dark.json"
+      },
+      {
+        "label": "KRL WorkVisual Light (Standard)",
+        "uiTheme": "vs",
+        "path": "./client/themes/KRL_WorkVisual_Light.json"
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "krl-icons",
+        "label": "KRL File Icons",
+        "path": "./client/krl-icon-theme.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "krl.validateWorkspace",
+        "title": "%command.validateWorkspace%",
+        "category": "KRL",
+        "icon": "$(check-all)"
+      },
+      {
+        "command": "krl.foldAll",
+        "title": "%command.foldAll%",
+        "category": "KRL",
+        "icon": "$(fold)"
+      },
+      {
+        "command": "krl.unfoldAll",
+        "title": "%command.unfoldAll%",
+        "category": "KRL",
+        "icon": "$(unfold)"
+      },
+      {
+        "command": "krl.formatDocument",
+        "title": "%command.formatDocument%",
+        "category": "KRL",
+        "icon": "$(code)"
+      },
+      {
+        "command": "krl.removeTrailingWhitespace",
+        "title": "%command.removeTrailingWhitespace%",
+        "category": "KRL",
+        "icon": "$(whitespace)"
+      },
+      {
+        "command": "krl.cleanGitMetadata",
+        "title": "%command.cleanGitMetadata%",
+        "category": "KRL",
+        "icon": "$(clear-all)"
+      },
+      {
+        "command": "krl.sortDeclarations",
+        "title": "%command.sortDeclarations%",
+        "category": "KRL",
+        "icon": "$(list-ordered)"
+      },
+      {
+        "command": "krl.insertFold",
+        "title": "%command.insertFold%",
+        "category": "KRL",
+        "icon": "$(symbol-namespace)"
+      },
+      {
+        "command": "krl.refreshIOView",
+        "title": "%command.refreshIOView%",
+        "category": "KRL",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "krl.cleanupUnusedVariables",
+        "title": "%command.cleanupUnusedVariables%",
+        "category": "KRL",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "krl.showCalculator",
+        "title": "%command.showCalculator%",
+        "category": "KRL",
+        "icon": "$(symbol-numeric)"
+      },
+      {
+        "command": "krl.renameSignal",
+        "title": "%command.renameSignal%",
+        "category": "KRL",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "krl.openSnippetGenerator",
+        "title": "%command.openSnippetGenerator%",
+        "category": "KRL",
+        "icon": "$(beaker)"
+      },
+      {
+        "command": "krl.generateReport",
+        "title": "%command.generateReport%",
+        "category": "KRL",
+        "icon": "$(report)"
+      },
+      {
+        "command": "krl.showFlowchart",
+        "title": "%command.showFlowchart%",
+        "category": "KRL",
+        "icon": "$(git-merge)"
+      },
+      {
+        "command": "krl.activateLicense",
+        "title": "%command.activateLicense%",
+        "category": "KRL",
+        "icon": "$(key)"
+      },
+      {
+        "command": "krl.deactivateLicense",
+        "title": "%command.deactivateLicense%",
+        "category": "KRL",
+        "icon": "$(lock)"
+      },
+      {
+        "command": "krl.checkLicenseStatus",
+        "title": "%command.checkLicenseStatus%",
+        "category": "KRL",
+        "icon": "$(info)"
+      },
+      {
+        "command": "krl.validateEkiXml",
+        "title": "%command.validateEkiXml%",
+        "category": "KRL",
+        "icon": "$(file-code)"
+      },
+      {
+        "command": "krl.generateEkiCode",
+        "title": "%command.generateEkiCode%",
+        "category": "KRL",
+        "icon": "$(symbol-interface)"
+      },
+      {
+        "command": "krl.aiCheckSafety",
+        "title": "%command.aiCheckSafety%",
+        "category": "KRL",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "krl.openControlCenter",
+        "title": "%command.openControlCenter%",
+        "category": "KRL",
+        "icon": "$(dashboard)"
+      },
+      {
+        "command": "krl.compareKrcBackup",
+        "title": "%command.compareKrcBackup%",
+        "category": "KRL",
+        "icon": "$(diff)"
+      },
+      {
+        "command": "krl.openTelegramChat",
+        "title": "%command.openTelegramChat%",
+        "category": "KRL",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "krl.sendLogsToDeveloper",
+        "title": "%command.sendLogsToDeveloper%",
+        "category": "KRL",
+        "icon": "$(output)"
+      },
+      {
+        "command": "krl.sendFileToDeveloper",
+        "title": "%command.sendFileToDeveloper%",
+        "category": "KRL",
+        "icon": "$(file-submodule)"
+      },
+      {
+        "command": "krl.findReferences",
+        "title": "%command.findReferences%",
+        "category": "KRL",
+        "icon": "$(references)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "kuka-krl-container",
+          "title": "KUKA KRL Professional",
+          "icon": "media/kuka-activitybar.svg"
+        }
+      ]
+    },
+    "views": {
+      "kuka-krl-container": [
+        {
+          "id": "krlIO",
+          "name": "KRL I/O Signals"
+        },
+        {
+          "id": "krlCommands",
+          "name": "KUKA Commands"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "krlIO",
+        "contents": "%view.krlIO.welcome%\n[Refresh](command:krl.refreshIOView)"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "krl.contextSubmenu",
+        "label": "KUKA KRL Professional"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "krl.openControlCenter",
+          "group": "navigation@1",
+          "when": "resourceLangId == krl"
+        },
+        {
+          "command": "krl.showFlowchart",
+          "group": "navigation@2",
+          "when": "resourceLangId == krl"
+        },
+        {
+          "command": "krl.foldAll",
+          "group": "navigation@3",
+          "when": "resourceLangId == krl"
+        },
+        {
+          "command": "krl.unfoldAll",
+          "group": "navigation@4",
+          "when": "resourceLangId == krl"
+        },
+        {
+          "command": "krl.validateWorkspace",
+          "group": "navigation@5",
+          "when": "resourceLangId == krl"
+        }
+      ],
+      "editor/context": [
+        {
+          "submenu": "krl.contextSubmenu",
+          "group": "1_modification@1",
+          "when": "resourceLangId == krl"
+        }
+      ],
+      "krl.contextSubmenu": [
+        {
+          "command": "krl.openControlCenter",
+          "group": "1_main@1"
+        },
+        {
+          "command": "krl.showFlowchart",
+          "group": "1_main@2"
+        },
+        {
+          "command": "krl.compareKrcBackup",
+          "group": "1_main@3"
+        },
+        {
+          "command": "krl.showCalculator",
+          "group": "1_main@4"
+        },
+        {
+          "command": "krl.openSnippetGenerator",
+          "group": "1_main@5"
+        },
+        {
+          "command": "krl.findReferences",
+          "group": "1_main@6"
+        },
+        {
+          "command": "krl.sendLogsToDeveloper",
+          "group": "1_main@7"
+        },
+        {
+          "command": "krl.sendFileToDeveloper",
+          "group": "1_main@8"
+        },
+        {
+          "command": "krl.aiCheckSafety",
+          "group": "2_safety@1"
+        },
+        {
+          "command": "krl.validateEkiXml",
+          "group": "2_safety@2"
+        },
+        {
+          "command": "krl.generateEkiCode",
+          "group": "2_safety@3"
+        },
+        {
+          "command": "krl.formatDocument",
+          "group": "3_code@1"
+        },
+        {
+          "command": "krl.removeTrailingWhitespace",
+          "group": "3_code@2"
+        },
+        {
+          "command": "krl.cleanGitMetadata",
+          "group": "3_code@3"
+        },
+        {
+          "command": "krl.sortDeclarations",
+          "group": "3_code@4"
+        },
+        {
+          "command": "krl.insertFold",
+          "group": "3_code@5"
+        },
+        {
+          "command": "krl.cleanupUnusedVariables",
+          "group": "3_code@6"
+        },
+        {
+          "command": "krl.renameSignal",
+          "group": "3_code@7"
+        },
+        {
+          "command": "krl.generateReport",
+          "group": "4_report@1"
+        },
+        {
+          "command": "krl.validateWorkspace",
+          "group": "4_report@2"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "krl.refreshIOView",
+          "when": "view == krlIO",
+          "group": "navigation"
+        },
+        {
+          "command": "krl.generateReport",
+          "when": "view == krlCommands",
+          "group": "navigation"
+        },
+        {
+          "command": "krl.showCalculator",
+          "when": "view == krlCommands",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "krl.showCalculator",
+          "when": "view == krlCommands",
+          "group": "inline"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "%config.title%",
+      "properties": {
+        "krl.autoFold": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.autoFold.description%"
+        },
+        "krl.formatOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.formatOnSave.description%"
+        },
+        "krl.removeTrailingWhitespaceOnFormat": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.removeTrailingWhitespaceOnFormat.description%"
+        },
+        "krl.indentWidth": {
+          "type": "integer",
+          "default": 3,
+          "minimum": 1,
+          "maximum": 8,
+          "description": "%config.indentWidth.description%"
+        },
+        "krl.separateBeforeBlocks": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.separateBeforeBlocks.description%"
+        },
+        "krl.separateAfterBlocks": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.separateAfterBlocks.description%"
+        },
+        "krl.validateNonAscii": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.validateNonAscii.description%"
+        },
+        "krl.indentFolds": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.indentFolds%"
+        },
+        "krl.alignAssignments": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.alignAssignments%"
+        },
+        "krl.inlayHints.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.inlayHints.enabled%"
+        },
+        "krl.errorLens.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.errorLens.enabled%"
+        },
+        "krl.codeLens.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.codeLens.enabled%"
+        },
+        "krl.callHierarchy.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.callHierarchy.enabled%"
+        },
+        "krl.documentHighlights.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.documentHighlights.enabled%"
+        },
+        "krl.maxCartesianVelocity": {
+          "type": "number",
+          "default": 3.0,
+          "minimum": 0.1,
+          "maximum": 5.0,
+          "description": "%config.maxCartesianVelocity%"
+        },
+        "krl.supportGatewayUrl": {
+          "type": "string",
+          "default": "https://kuka-krl-support-gateway.redminotpro5.workers.dev",
+          "description": "%config.supportGatewayUrl%"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "build:ts": "tsc -p server && tsc -p client",
+    "compile": "npm run build:ts && node esbuild.js --production",
+    "watch": "node esbuild.js --watch",
+    "lint": "eslint .",
+    "package": "vsce package --no-dependencies",
+    "test": "node tests/extension.test.js",
+    "test:e2e": "node tests/e2e.test.js"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.8",
+    "@types/node": "^20.17.23",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^8.50.0",
+    "@typescript-eslint/parser": "^8.50.0",
+    "@vscode/vsce": "^2.32.0",
+    "esbuild": "^0.28.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "javascript-obfuscator": "^5.4.3",
+    "prettier": "^3.7.4",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "adm-zip": "^0.6.0",
+    "vscode-languageclient": "^9.0.1",
+    "vscode-languageserver": "^9.0.1",
+    "vscode-languageserver-textdocument": "^1.0.12",
+    "vscode-uri": "^3.1.0"
+  }
+}

@@ -1,0 +1,41 @@
+# Changelog
+
+All notable changes to the **KUKA KRL Extension** will be documented in this file.
+
+## [1.7.3] - 2026-08-06 (Industrial Production Edition)
+
+### Added
+- **Lemon Squeezy API Store Integration**: Live licensing backend integration with Store ID `393141` (`Liskin Silvestr`) and Product ID `1103272` (`KRL Extension Pro`).
+- **Subscription Tiers in Control Center**: Interactive billing cards for Pro Monthly ($3.99/mo) and Pro Annual ($39.99/yr, 20% discount) with direct checkout integration.
+- **ContextMenu & Sidebar Synchronization**: 100% unified 4-category menu structure between Right-Click Editor Menu (`editor/context`) and Sidebar (`KUKA COMMANDS`).
+- **Interactive SVG Motion Diagrams**: Dynamic 2-column Motion Scheme visualization in `Snippet Generator` for `PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`, and `SPLINE Block`.
+- **KSS 8.3+ Spline Motion Snippets**: Full support for Spline PTP (`SPTP`), Spline Linear (`SLIN`), Spline Circular (`SCIRC`), and `SPLINE Path Block` with automatic `$SGEAR_JERK` and `C_Spl` blending configurations.
+- **KRC Backup Diff & Point Delta Inspector**: Direct comparison of `.src`/`.dat` files and $E6POS/POS/E6AXIS$ point coordinates against KRC `.zip` backup archives.
+- **Telegram Live Chat Integration**: Direct developer support bridge (@kukakrlbot) embedded in VS Code.
+
+### Fixed & Optimized
+- **License Status & Offline Buffer**: Differentiated Dev Master Keys vs Lemon Squeezy Active Keys, and added explicit `30 Days Remaining (Auto-synced online)` label for offline validation buffer.
+- **Codicon UI Manifest Fix**: Fixed broken icon rendering for `krl.showCalculator` (`$(symbol-numeric)`) and `krl.validateEkiXml` (`$(file-code)`).
+- **Zero-Warning Code Quality**: Fixed linter/prettier formatting across `telegramService.ts` and `controlCenter.ts`.
+- **Diagnostics Performance**: Optimized Levenshtein distance spellchecker with early length-difference exit and removed unused dead code.
+- **Repository Cleanup**: Removed obsolete 44MB backup directory `2026-02-23_10-13-15`, scratch scripts, and old pre-built `.vsix` artifacts.
+
+## [1.7.2] - 2026-04-02
+
+### Added
+- **Full KSS 8.7 Documentation**: Over 350 system variables now have detailed trilingual descriptions (EN, RU, TR).
+- **Semantic Inlay Hints**: Real-time descriptive labels for `$IN`, `$OUT`, `$ANIN`, `$ANOUT`, `TOOL_DATA`, and `BASE_DATA` indices.
+- **Enhanced Hover Info**: Hovering over system variables now shows `Type`, `Writability` (Read-Only status), and `Syntax`.
+- **Turkish Localization**: Comprehensive support for the Turkish language across all documentation and UI elements.
+
+### Fixed
+- **Navigation Bug**: Fixed a core issue where the `$` character was stripped during word detection, breaking Go to Definition and References for system variables.
+- **LSP Performance**: Implemented a memory-based symbol cache. Navigation (F12) and Hover are now near-instant, even in large projects.
+- **Security**: Fixed a critical ReDoS (Regular Expression Denial of Service) vulnerability in the variable declaration parser.
+- **Formatting**: Global cleanup of line endings (CRLF/LF) and formatting for 6000+ lines of code.
+
+### Removed
+- GitHub Sponsorship integration.
+
+## [1.7.1] - 2026-01-28
+- Initial internal release with basic KRL support.

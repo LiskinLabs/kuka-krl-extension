@@ -738,6 +738,32 @@ export async function activate(context: vscode.ExtensionContext) {
     }),
   );
 
+  // Formatter Status Bar Item (Prettier-style indicator for KRL files)
+  const formatterStatusBarItem = vscode.window.createStatusBarItem(
+    vscode.StatusBarAlignment.Right,
+    100,
+  );
+  formatterStatusBarItem.command = "editor.action.formatDocument";
+  context.subscriptions.push(formatterStatusBarItem);
+
+  const updateFormatterStatusBar = (editor?: vscode.TextEditor) => {
+    if (editor && editor.document.languageId === "krl") {
+      const indentWidth = vscode.workspace
+        .getConfiguration("krl")
+        .get<number>("indentWidth", 3);
+      formatterStatusBarItem.text = `$(sparkle) KRL: ${indentWidth}sp`;
+      formatterStatusBarItem.tooltip = `KUKA KRL Formatter (${indentWidth} spaces). Click to Format Document (Shift+Alt+F)`;
+      formatterStatusBarItem.show();
+    } else {
+      formatterStatusBarItem.hide();
+    }
+  };
+
+  context.subscriptions.push(
+    vscode.window.onDidChangeActiveTextEditor(updateFormatterStatusBar),
+  );
+  updateFormatterStatusBar(vscode.window.activeTextEditor);
+
   lsClient
     .start()
     .then(() => {

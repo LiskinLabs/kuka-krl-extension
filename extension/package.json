@@ -358,6 +358,42 @@
         "title": "%command.insertSplineBlock%",
         "category": "KRL",
         "icon": "$(symbol-namespace)"
+      },
+      {
+        "command": "krl.errorLens.toggle",
+        "title": "%command.errorLens.toggle%",
+        "category": "KRL",
+        "icon": "$(pulse)"
+      },
+      {
+        "command": "krl.errorLens.toggleInlineMessage",
+        "title": "%command.errorLens.toggleInlineMessage%",
+        "category": "KRL",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "krl.errorLens.copyProblemMessage",
+        "title": "%command.errorLens.copyProblemMessage%",
+        "category": "KRL",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "krl.errorLens.copyProblemCode",
+        "title": "%command.errorLens.copyProblemCode%",
+        "category": "KRL",
+        "icon": "$(file-code)"
+      },
+      {
+        "command": "krl.errorLens.searchForProblem",
+        "title": "%command.errorLens.searchForProblem%",
+        "category": "KRL",
+        "icon": "$(globe)"
+      },
+      {
+        "command": "krl.errorLens.disableLine",
+        "title": "%command.errorLens.disableLine%",
+        "category": "KRL",
+        "icon": "$(clear-all)"
       }
     ],
     "viewsContainers": {
@@ -619,6 +655,77 @@
           "type": "boolean",
           "default": true,
           "description": "%config.errorLens.enabled%"
+        },
+        "krl.errorLens.inlineMessageEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.errorLens.inlineMessageEnabled%"
+        },
+        "krl.errorLens.followCursor": {
+          "type": "string",
+          "enum": [
+            "allLines",
+            "activeLine",
+            "closestProblem"
+          ],
+          "default": "allLines",
+          "description": "%config.errorLens.followCursor%"
+        },
+        "krl.errorLens.messageBackgroundMode": {
+          "type": "string",
+          "enum": [
+            "line",
+            "message",
+            "none"
+          ],
+          "default": "line",
+          "description": "%config.errorLens.messageBackgroundMode%"
+        },
+        "krl.errorLens.gutterIconsEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.errorLens.gutterIconsEnabled%"
+        },
+        "krl.errorLens.delay": {
+          "type": "integer",
+          "default": 300,
+          "minimum": 0,
+          "maximum": 5000,
+          "description": "%config.errorLens.delay%"
+        },
+        "krl.errorLens.onSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.errorLens.onSave%"
+        },
+        "krl.errorLens.alignMessage": {
+          "type": "integer",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 200,
+          "description": "%config.errorLens.alignMessage%"
+        },
+        "krl.errorLens.messageTemplate": {
+          "type": "string",
+          "default": "$message",
+          "description": "%config.errorLens.messageTemplate%"
+        },
+        "krl.errorLens.maxCharsPerLine": {
+          "type": "integer",
+          "default": 120,
+          "minimum": 20,
+          "maximum": 500,
+          "description": "%config.errorLens.maxCharsPerLine%"
+        },
+        "krl.errorLens.statusBarEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.errorLens.statusBarEnabled%"
+        },
+        "krl.errorLens.fontStyleItalic": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.errorLens.fontStyleItalic%"
         },
         "krl.codeLens.enabled": {
           "type": "boolean",

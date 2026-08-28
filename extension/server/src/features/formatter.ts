@@ -1,5 +1,6 @@
 import {
   DocumentFormattingParams,
+  DocumentRangeFormattingParams,
   TextDocuments,
   TextEdit,
   Range,
@@ -30,6 +31,7 @@ interface FormattingSettings {
   separateAfterBlocks: boolean;
   indentFolds: boolean;
   alignAssignments: boolean;
+  uppercaseKeywords: boolean;
 }
 
 // Хранилище настроек
@@ -38,6 +40,7 @@ let formattingSettings: FormattingSettings = {
   separateAfterBlocks: false,
   indentFolds: true,
   alignAssignments: true,
+  uppercaseKeywords: true,
 };
 
 /**
@@ -51,7 +54,7 @@ export function setFormattingSettings(
 
 export class KrlFormatter {
   /**
-   * Выполняет форматирование документа: выравнивание отступов и приведение ключевых слов к верхнему регистру.
+   * Выполняет форматирование всего документа: отступы, выравнивание, регистр и поддержка ignore-директив.
    */
   provideFormatting(
     params: DocumentFormattingParams,
@@ -62,101 +65,13 @@ export class KrlFormatter {
       return [];
     }
 
-    const edits: TextEdit[] = [];
     const text = document.getText();
     const lines = text.split(/\r?\n/);
-    const resultLines: string[] = [];
-
-    let indentLevel = 0;
-    const tabSize = params.options.tabSize || 2;
-    const insertSpaces = params.options.insertSpaces;
+    const tabSize = params.options.tabSize || 3;
+    const insertSpaces = params.options.insertSpaces !== false;
     const indentChar = insertSpaces ? " ".repeat(tabSize) : "\t";
 
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim();
-      // const originalLine = lines[i]; // Not used
-
-      if (line.length === 0) {
-        // Boş satır - sadece boşlukları temizle
-        resultLines.push("");
-        continue;
-      }
-
-      // Yorum kısmını ayır (string-safe: ';' inside "..." is NOT a comment)
-      let commentIndex = -1;
-      {
-        let inStr = false;
-        for (let j = 0; j < line.length; j++) {
-          if (line[j] === '"') inStr = !inStr;
-          else if (line[j] === ";" && !inStr) {
-            commentIndex = j;
-            break;
-          }
-        }
-      }
-      let codePart = commentIndex >= 0 ? line.substring(0, commentIndex) : line;
-
-      // Anahtar kelimeleri büyük harfe dönüştür
-      codePart = this.uppercaseKeywords(codePart);
-
-      // Satırı yeniden oluştur
-      const formattedLine =
-        commentIndex >= 0 ? codePart + line.substring(commentIndex) : codePart;
-
-      // Girinti hesapla
-      // 1. Bu satır için azaltma gerekiyor mu?
-      if (DECREASE_INDENT.test(codePart)) {
-        indentLevel = Math.max(0, indentLevel - 1);
-      }
-
-      // FOLD Logic
-      if (formattingSettings.indentFolds && /^\s*;?ENDFOLD\b/i.test(codePart)) {
-        indentLevel = Math.max(0, indentLevel - 1);
-      }
-
-      // Добавить пустую строку перед блоком (если включено)
-      if (
-        formattingSettings.separateBeforeBlocks &&
-        BLOCK_START.test(codePart)
-      ) {
-        // Проверяем, что предыдущая строка не пустая
-        if (
-          resultLines.length > 0 &&
-          resultLines[resultLines.length - 1].trim() !== ""
-        ) {
-          resultLines.push("");
-        }
-      }
-
-      const indentString = indentChar.repeat(indentLevel);
-      const newLineContent = indentString + formattedLine;
-
-      resultLines.push(newLineContent);
-
-      // Добавить пустую строку после блока (если включено)
-      if (formattingSettings.separateAfterBlocks && BLOCK_END.test(codePart)) {
-        // Пустая строка будет добавлена в следующей итерации, если следующая строка не пустая
-        // Добавляем только если это не последняя строка
-        if (i < lines.length - 1 && lines[i + 1].trim() !== "") {
-          resultLines.push("");
-        }
-      }
-
-      // 2. Sonraki satır için artırma gerekiyor mu?
-      if (INCREASE_INDENT.test(codePart)) {
-        // Özel kontrol: IF ... ENDIF aynı satırda artırma yapmamalı
-        if (/^IF\b/i.test(codePart) && /\bENDIF\b/i.test(codePart)) {
-          // Değişiklik yok
-        } else {
-          indentLevel++;
-        }
-      }
-
-      // FOLD Logic
-      if (formattingSettings.indentFolds && /^\s*;?FOLD\b/i.test(codePart)) {
-        indentLevel++;
-      }
-    }
+    const resultLines = this.formatLineRange(lines, 0, lines.length - 1, indentChar);
 
     // Align assignments if enabled
     if (formattingSettings.alignAssignments) {
@@ -166,7 +81,7 @@ export class KrlFormatter {
     // Формируем единый TextEdit для всего документа
     const newText = resultLines.join("\n");
     if (newText !== text.replace(/\r\n/g, "\n")) {
-      edits.push(
+      return [
         TextEdit.replace(
           Range.create(
             0,
@@ -176,10 +91,164 @@ export class KrlFormatter {
           ),
           newText,
         ),
+      ];
+    }
+
+    return [];
+  }
+
+  /**
+   * Выполняет форматирование выделенного диапазона строк (Ctrl+K, Ctrl+F).
+   */
+  provideRangeFormatting(
+    params: DocumentRangeFormattingParams,
+    documents: TextDocuments<TextDocument>,
+  ): TextEdit[] {
+    const document = documents.get(params.textDocument.uri);
+    if (!document) {
+      return [];
+    }
+
+    const text = document.getText();
+    const lines = text.split(/\r?\n/);
+    const startLine = Math.max(0, params.range.start.line);
+    const endLine = Math.min(lines.length - 1, params.range.end.line);
+
+    const tabSize = params.options.tabSize || 3;
+    const insertSpaces = params.options.insertSpaces !== false;
+    const indentChar = insertSpaces ? " ".repeat(tabSize) : "\t";
+
+    const formattedAll = this.formatLineRange(lines, 0, lines.length - 1, indentChar);
+    
+    // Extract only the edited range
+    const rangeEdits: TextEdit[] = [];
+    const newRangeText = formattedAll.slice(startLine, endLine + 1).join("\n");
+    const oldRangeText = lines.slice(startLine, endLine + 1).join("\n");
+
+    if (newRangeText !== oldRangeText) {
+      rangeEdits.push(
+        TextEdit.replace(
+          Range.create(
+            startLine,
+            0,
+            endLine,
+            lines[endLine]?.length || 0,
+          ),
+          newRangeText,
+        ),
       );
     }
 
-    return edits;
+    return rangeEdits;
+  }
+
+  /**
+   * Внутренний движок форматирования строк с поддержкой ; krl-ignore и ; krl-format-off
+   */
+  private formatLineRange(
+    lines: string[],
+    startLine: number,
+    endLine: number,
+    indentChar: string,
+  ): string[] {
+    const resultLines: string[] = [];
+    let indentLevel = 0;
+    let formatDisabled = false;
+    let skipNextLine = false;
+
+    for (let i = 0; i < lines.length; i++) {
+      const originalLine = lines[i];
+      const trimmed = originalLine.trim();
+
+      // Check format toggle comments (; krl-format-off / ; krl-format-on)
+      if (/^\s*;\s*krl-format-off\b/i.test(trimmed) || /^\s*;\s*prettier-ignore-start\b/i.test(trimmed)) {
+        formatDisabled = true;
+        resultLines.push(originalLine);
+        continue;
+      }
+      if (/^\s*;\s*krl-format-on\b/i.test(trimmed) || /^\s*;\s*prettier-ignore-end\b/i.test(trimmed)) {
+        formatDisabled = false;
+        resultLines.push(originalLine);
+        continue;
+      }
+
+      // Check single line ignore directive (; krl-ignore / ; prettier-ignore)
+      if (/^\s*;\s*krl-ignore\b/i.test(trimmed) || /^\s*;\s*prettier-ignore\b/i.test(trimmed)) {
+        skipNextLine = true;
+        resultLines.push(originalLine);
+        continue;
+      }
+
+      if (formatDisabled || skipNextLine) {
+        skipNextLine = false;
+        resultLines.push(originalLine);
+        continue;
+      }
+
+      if (trimmed.length === 0) {
+        resultLines.push("");
+        continue;
+      }
+
+      // String-safe comment separation
+      let commentIndex = -1;
+      let inStr = false;
+      for (let j = 0; j < trimmed.length; j++) {
+        if (trimmed[j] === '"') inStr = !inStr;
+        else if (trimmed[j] === ";" && !inStr) {
+          commentIndex = j;
+          break;
+        }
+      }
+      let codePart = commentIndex >= 0 ? trimmed.substring(0, commentIndex) : trimmed;
+
+      // Uppercase keywords
+      if (formattingSettings.uppercaseKeywords) {
+        codePart = this.uppercaseKeywords(codePart);
+      }
+
+      const formattedLine =
+        commentIndex >= 0 ? codePart + trimmed.substring(commentIndex) : codePart;
+
+      // Indent decrement before line output
+      if (DECREASE_INDENT.test(codePart)) {
+        indentLevel = Math.max(0, indentLevel - 1);
+      }
+
+      if (formattingSettings.indentFolds && /^\s*;?ENDFOLD\b/i.test(codePart)) {
+        indentLevel = Math.max(0, indentLevel - 1);
+      }
+
+      // Space before block
+      if (formattingSettings.separateBeforeBlocks && BLOCK_START.test(codePart)) {
+        if (resultLines.length > 0 && resultLines[resultLines.length - 1].trim() !== "") {
+          resultLines.push("");
+        }
+      }
+
+      const indentString = indentChar.repeat(indentLevel);
+      resultLines.push(indentString + formattedLine);
+
+      // Space after block
+      if (formattingSettings.separateAfterBlocks && BLOCK_END.test(codePart)) {
+        if (i < lines.length - 1 && lines[i + 1].trim() !== "") {
+          resultLines.push("");
+        }
+      }
+
+      // Indent increment after line output
+      if (INCREASE_INDENT.test(codePart)) {
+        if (!(/^IF\b/i.test(codePart) && /\bENDIF\b/i.test(codePart))) {
+          indentLevel++;
+        }
+      }
+
+      if (formattingSettings.indentFolds && /^\s*;?FOLD\b/i.test(codePart)) {
+        indentLevel++;
+      }
+    }
+
+    return resultLines;
   }
 
   /**
@@ -199,14 +268,11 @@ export class KrlFormatter {
 
       while (i < lines.length) {
         const line = lines[i];
-        // Skip empty lines? No, empty lines break the group.
-        // Also check for FOLDs or comments that are not assignments
         const match = assignmentRegex.exec(line);
 
         if (match) {
-          // If group is not empty, check indentation match
           if (group.length > 0 && group[0].indent !== match[1]) {
-            break; // Indentation changed
+            break;
           }
           group.push({
             index: i,
@@ -216,11 +282,10 @@ export class KrlFormatter {
           });
           i++;
         } else {
-          break; // Not an assignment
+          break;
         }
       }
 
-      // Process group
       if (group.length > 1) {
         const maxLhs = Math.max(...group.map((g) => g.lhs.length));
 

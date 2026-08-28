@@ -144,6 +144,7 @@ connection.onInitialize((params: InitializeParams): InitializeResult => {
       hoverProvider: true,
       foldingRangeProvider: true,
       documentFormattingProvider: true,
+      documentRangeFormattingProvider: true,
       documentSymbolProvider: true,
       workspaceSymbolProvider: true,
       documentHighlightProvider: true,
@@ -454,6 +455,9 @@ connection.onHover((p) => hoverInfo.onHover(p, documents, state));
 connection.onFoldingRanges((p) => regions.onFoldingRanges(p, documents));
 connection.onDocumentFormatting((p) =>
   formatter.provideFormatting(p, documents),
+);
+connection.onDocumentRangeFormatting((p) =>
+  formatter.provideRangeFormatting(p, documents),
 );
 connection.onDocumentSymbol((p) =>
   documentSymbols.onDocumentSymbols(p, documents),

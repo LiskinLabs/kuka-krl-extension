@@ -5,8 +5,8 @@ import {
   getDeviceDetails,
   onLicenseChanged,
   LicenseCacheData,
-  LEMON_SQUEEZY_CHECKOUT_URL,
-  LEMON_SQUEEZY_PORTAL_URL,
+  DODO_PAYMENTS_CHECKOUT_URL,
+  DODO_PAYMENTS_PORTAL_URL,
   PRICING_PLANS,
 } from "./license";
 import { t } from "../i18n";
@@ -52,11 +52,48 @@ async function openControlCenterPanel(context: vscode.ExtensionContext) {
     device,
   );
 
+  const ALLOWED_CONTROL_CENTER_COMMANDS = new Set<string>([
+    "krl.showFlowchart",
+    "krl.compareKrcBackup",
+    "krl.openSnippetGenerator",
+    "krl.showCalculator",
+    "krl.validateEkiXml",
+    "krl.generateEkiCode",
+    "krl.cleanGitMetadata",
+    "krl.aiCheckSafety",
+    "krl.generateReport",
+    "krl.validateWorkspace",
+    "krl.formatDocument",
+    "krl.sortDeclarations",
+    "krl.cleanupUnusedVariables",
+    "krl.openControlCenter",
+    "krl.openTelegramChat",
+    "krl.sendLogsToDeveloper",
+    "krl.sendFileToDeveloper",
+    "krl.deactivateLicense",
+    "krl.checkLicenseStatus",
+    "krl.activateLicense",
+    "krl.openCustomerPortal",
+    "krl.exportBackupZip",
+    "krl.sendAiDiagnostics",
+    "krl.viewFileHistory",
+    "krl.showLineBlameDetails",
+    "krl.findReferences",
+    "krl.foldAll",
+    "krl.unfoldAll",
+    "krl.refreshIOView",
+    "krl.insertFold",
+    "krl.removeTrailingWhitespace",
+  ]);
+
   currentPanel.webview.onDidReceiveMessage(
     async (message) => {
       switch (message.command) {
         case "runCommand":
-          if (message.target) {
+          if (
+            message.target &&
+            ALLOWED_CONTROL_CENTER_COMMANDS.has(message.target)
+          ) {
             await vscode.commands.executeCommand(message.target);
             await refreshControlCenterPanel(context);
           }
@@ -75,13 +112,13 @@ async function openControlCenterPanel(context: vscode.ExtensionContext) {
           break;
         case "openCustomerPortal":
         case "downloadInvoice":
-          vscode.env.openExternal(vscode.Uri.parse(LEMON_SQUEEZY_PORTAL_URL));
+          vscode.env.openExternal(vscode.Uri.parse(DODO_PAYMENTS_PORTAL_URL));
           vscode.window.showInformationMessage(t("cc.notify.portalOpened"));
           break;
         case "buyLicense":
         case "buyPlan":
           {
-            const targetUrl = message.url || LEMON_SQUEEZY_CHECKOUT_URL;
+            const targetUrl = message.url || DODO_PAYMENTS_CHECKOUT_URL;
             vscode.env.openExternal(vscode.Uri.parse(targetUrl));
             vscode.window.showInformationMessage(t("cc.notify.storeOpened"));
           }
@@ -207,21 +244,14 @@ function getControlCenterHtml(
       )
     : 30;
 
-  const isMasterKey =
-    licenseKey === "TEKNOROB-DEV-MODE" ||
-    licenseKey === "TEKNOROB-INDUSTRIAL-LEAD-PRO" ||
-    licenseKey === "TEKNOROB-LEAD";
-
   let onlineExpiry = "No Active Subscription";
-  if (isMasterKey) {
-    onlineExpiry = "Master Engineering Pro License (Permanent / Lead Access)";
-  } else if (licenseCache?.subscriptionEndsAt) {
+  if (licenseCache?.subscriptionEndsAt) {
     const expDate = new Date(licenseCache.subscriptionEndsAt);
     const msLeft = expDate.getTime() - now;
     const daysLeft = Math.max(0, Math.ceil(msLeft / (24 * 60 * 60 * 1000)));
     onlineExpiry = `Active Subscription (Renews: ${expDate.toLocaleDateString()} — ${daysLeft} Days Left)`;
   } else if (isPremium()) {
-    onlineExpiry = "Lemon Squeezy Pro License (Active / Verified)";
+    onlineExpiry = "Dodo Payments Pro License (Active / Verified)";
   }
 
   const logoUri = webview.asWebviewUri(
@@ -305,8 +335,7 @@ function getControlCenterHtml(
     .btn-danger { background: var(--vscode-errorForeground, #dc3545); }
     .btn-secondary { background: var(--vscode-button-secondaryBackground, #444); color: var(--vscode-button-secondaryForeground, #fff); }
     .btn-success { background: var(--vscode-charts-green, #28a745); }
-    .btn-info { background: var(--vscode-button-background, #007acc); color: var(--vscode-button-foreground, #fff); }
-    .btn-telegram { background: #2AABEE; }
+    .btn-support { background: linear-gradient(135deg, var(--accent) 0%, #ff8533 100%); color: #fff; font-weight: 600; }
     .section-title {
       font-size: 16px;
       font-weight: 700;
@@ -333,11 +362,16 @@ function getControlCenterHtml(
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      outline: none;
     }
-    .card:hover {
+    .card:hover, .card:focus-visible {
       border-color: var(--accent);
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(255, 102, 0, 0.15);
+    }
+    .card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
     .card-header {
       display: flex;
@@ -414,7 +448,7 @@ function getControlCenterHtml(
 
   <div class="section-title">⚡ ${t("cc.engTools")}</div>
   <div class="grid">
-    <div class="card" onclick="exec('krl.showFlowchart')">
+    <div class="card" tabindex="0" role="button" onclick="exec('krl.showFlowchart')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.showFlowchart')}">
       <div>
         <div class="card-header">
           <span class="card-icon">🗺️</span>
@@ -422,10 +456,10 @@ function getControlCenterHtml(
         </div>
         <div class="card-desc">${t("command.showFlowchart.tooltip")}</div>
       </div>
-      <button class="card-btn">${t("cc.btn.openFlowchart")}</button>
+      <button class="card-btn" onclick="event.stopPropagation();exec('krl.showFlowchart')">${t("cc.btn.openFlowchart")}</button>
     </div>
 
-    <div class="card" onclick="exec('krl.compareKrcBackup')">
+    <div class="card" tabindex="0" role="button" onclick="exec('krl.compareKrcBackup')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.compareKrcBackup')}">
       <div>
         <div class="card-header">
           <span class="card-icon">📦</span>
@@ -433,10 +467,10 @@ function getControlCenterHtml(
         </div>
         <div class="card-desc">${t("command.compareKrcBackup.tooltip")}</div>
       </div>
-      <button class="card-btn">${t("cc.btn.inspectBackup")}</button>
+      <button class="card-btn" onclick="event.stopPropagation();exec('krl.compareKrcBackup')">${t("cc.btn.inspectBackup")}</button>
     </div>
 
-    <div class="card" onclick="exec('krl.openSnippetGenerator')">
+    <div class="card" tabindex="0" role="button" onclick="exec('krl.openSnippetGenerator')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.openSnippetGenerator')}">
       <div>
         <div class="card-header">
           <span class="card-icon">🎬</span>
@@ -444,10 +478,10 @@ function getControlCenterHtml(
         </div>
         <div class="card-desc">${t("command.openSnippetGenerator.tooltip")}</div>
       </div>
-      <button class="card-btn">${t("cc.btn.generateSnippets")}</button>
+      <button class="card-btn" onclick="event.stopPropagation();exec('krl.openSnippetGenerator')">${t("cc.btn.generateSnippets")}</button>
     </div>
 
-    <div class="card" onclick="exec('krl.showCalculator')">
+    <div class="card" tabindex="0" role="button" onclick="exec('krl.showCalculator')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.showCalculator')}">
       <div>
         <div class="card-header">
           <span class="card-icon">📐</span>
@@ -455,10 +489,10 @@ function getControlCenterHtml(
         </div>
         <div class="card-desc">${t("command.calculator.tooltip")}</div>
       </div>
-      <button class="card-btn">${t("cc.btn.openCalculator")}</button>
+      <button class="card-btn" onclick="event.stopPropagation();exec('krl.showCalculator')">${t("cc.btn.openCalculator")}</button>
     </div>
 
-    <div class="card">
+    <div class="card" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.validateEkiXml')}">
       <div>
         <div class="card-header">
           <span class="card-icon">🌐</span>
@@ -467,12 +501,12 @@ function getControlCenterHtml(
         <div class="card-desc">${t("command.validateEkiXml.tooltip")}</div>
       </div>
       <div style="display:flex; gap:6px;">
-        <button class="card-btn" onclick="exec('krl.validateEkiXml')">${t("cc.btn.ekiValidator")}</button>
-        <button class="card-btn btn-secondary" onclick="exec('krl.generateEkiCode')">${t("cc.btn.generateHandler")}</button>
+        <button class="card-btn" onclick="event.stopPropagation();exec('krl.validateEkiXml')">${t("cc.btn.ekiValidator")}</button>
+        <button class="card-btn btn-secondary" onclick="event.stopPropagation();exec('krl.generateEkiCode')">${t("cc.btn.generateHandler")}</button>
       </div>
     </div>
 
-    <div class="card" onclick="exec('krl.cleanGitMetadata')">
+    <div class="card" tabindex="0" role="button" onclick="exec('krl.cleanGitMetadata')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.cleanGitMetadata')}">
       <div>
         <div class="card-header">
           <span class="card-icon">🧹</span>
@@ -480,13 +514,13 @@ function getControlCenterHtml(
         </div>
         <div class="card-desc">${t("command.cleanGitMetadata.tooltip")}</div>
       </div>
-      <button class="card-btn">${t("cc.btn.cleanGitMetadata")}</button>
+      <button class="card-btn" onclick="event.stopPropagation();exec('krl.cleanGitMetadata')">${t("cc.btn.cleanGitMetadata")}</button>
     </div>
   </div>
 
   <div class="section-title">🛡️ ${t("cc.safetyDiag")}</div>
   <div class="grid">
-    <div class="card" onclick="exec('krl.aiCheckSafety')">
+    <div class="card" tabindex="0" role="button" onclick="exec('krl.aiCheckSafety')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.aiCheckSafety')}">
       <div>
         <div class="card-header">
           <span class="card-icon">🛡️</span>
@@ -494,10 +528,10 @@ function getControlCenterHtml(
         </div>
         <div class="card-desc">${t("command.aiCheckSafety.tooltip")}</div>
       </div>
-      <button class="card-btn">${t("cc.btn.runSafetyCheck")}</button>
+      <button class="card-btn" onclick="event.stopPropagation();exec('krl.aiCheckSafety')">${t("cc.btn.runSafetyCheck")}</button>
     </div>
 
-    <div class="card" onclick="exec('krl.generateReport')">
+    <div class="card" tabindex="0" role="button" onclick="exec('krl.generateReport')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.generateReport')}">
       <div>
         <div class="card-header">
           <span class="card-icon">📋</span>
@@ -505,17 +539,17 @@ function getControlCenterHtml(
         </div>
         <div class="card-desc">${t("command.generateReport.tooltip")}</div>
       </div>
-      <button class="card-btn">${t("cc.btn.generateReport")}</button>
+      <button class="card-btn" onclick="event.stopPropagation();exec('krl.generateReport')">${t("cc.btn.generateReport")}</button>
     </div>
   </div>
 
   <div class="section-title">👤 ${t("cc.accountHub")}</div>
   <div class="account-hub">
     <div class="tab-bar" role="tablist">
-      <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-profile" onclick="switchAccountTab('profile')">👤 ${t("cc.tab.profile")}</button>
-      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-devices" onclick="switchAccountTab('devices')">💻 ${t("cc.tab.devices")}</button>
-      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-billing" onclick="switchAccountTab('billing')">💳 ${t("cc.tab.billing")}</button>
-      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-support" onclick="switchAccountTab('support')">🛟 ${t("cc.tab.support")}</button>
+      <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-profile" onclick="switchAccountTab('profile', event)">👤 ${t("cc.tab.profile")}</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-devices" onclick="switchAccountTab('devices', event)">💻 ${t("cc.tab.devices")}</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-billing" onclick="switchAccountTab('billing', event)">💳 ${t("cc.tab.billing")}</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-support" onclick="switchAccountTab('support', event)">🛟 ${t("cc.tab.support")}</button>
     </div>
 
     <!-- TAB 1: Profile & Key -->
@@ -528,7 +562,7 @@ function getControlCenterHtml(
       <div class="info-row"><span class="info-label">Plan Tier:</span><span class="info-val">${planVariant}</span></div>
       <div class="info-row">
         <span class="info-label">License Key:</span>
-        <span class="info-val" style="font-family:monospace;">${maskedKey} ${isPremium() && licenseKey !== "NO-KEY" ? `<button class="card-btn" style="padding:2px 8px; font-size:11px; margin-left:8px;" onclick="copyKey('${licenseKey}')">Copy Key</button>` : ""}</span>
+        <span class="info-val" style="font-family:monospace;">${maskedKey} ${isPremium() && licenseKey !== "NO-KEY" ? `<button class="card-btn" style="padding:2px 8px; font-size:11px; margin-left:8px;" data-key="${escapeHtml(licenseKey)}" onclick="copyKey(this.getAttribute('data-key'))">Copy Key</button>` : ""}</span>
       </div>
       <div class="info-row"><span class="info-label">Online Expiry / Renewal:</span><span class="info-val">${onlineExpiry}</span></div>
       <div class="info-row"><span class="info-label">Offline Validation Cache:</span><span class="info-val">${offlineDaysLeft} Days Remaining (Auto-synced online)</span></div>
@@ -600,7 +634,7 @@ function getControlCenterHtml(
       <div style="font-weight:600; margin-bottom:10px; font-size:14px;">🛟 Direct Engineering Support</div>
       <p style="font-size:12px; opacity:0.8; margin-bottom:14px;">${t("cc.support.desc")}</p>
       <div style="display:flex; flex-direction:column; gap:10px; max-width:420px;">
-        <button class="card-btn btn-telegram" onclick="openTelegram()">${t("cc.support.btn.chat")}</button>
+        <button class="card-btn btn-support" onclick="openTelegram()">${t("cc.support.btn.chat")}</button>
         <button class="card-btn" onclick="exec('krl.sendLogsToDeveloper')">${t("cc.support.btn.sendLogs")}</button>
         <button class="card-btn btn-success" onclick="exec('krl.sendFileToDeveloper')">${t("cc.support.btn.sendFile")}</button>
         <button class="card-btn btn-secondary" onclick="openGitHub()">${t("cc.support.btn.github")}</button>
@@ -651,14 +685,14 @@ function getControlCenterHtml(
     function downloadInvoice() {
       vscode.postMessage({ command: 'downloadInvoice' });
     }
-    function switchAccountTab(tabName) {
+    function switchAccountTab(tabName, evt) {
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('active');
         btn.setAttribute('aria-selected', 'false');
       });
       document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
       
-      const targetBtn = event.currentTarget;
+      const targetBtn = (evt && evt.currentTarget) || document.querySelector('[aria-controls="tab-' + tabName + '"]');
       const targetContent = document.getElementById('tab-' + tabName);
       if (targetBtn) {
         targetBtn.classList.add('active');

@@ -185,9 +185,7 @@ export async function cleanupUnusedVariables() {
   }
 
   if (unusedDecls.length === 0) {
-    vscode.window.showInformationMessage(
-      "✅ Все переменные используются! Неиспользуемых объявлений не найдено.",
-    );
+    vscode.window.showInformationMessage(t("cleanup.notify.allUsed"));
     return;
   }
 
@@ -198,16 +196,16 @@ export async function cleanupUnusedVariables() {
       decl.foldStartIndex !== undefined && decl.foldEndIndex !== undefined;
     return {
       label: decl.varNames.join(", "),
-      description: `Строка ${decl.lineIndex + 1}: ${lineContent}`,
+      description: `${t("io.line", decl.lineIndex + 1)}: ${lineContent}`,
       detail: hasFold
-        ? "Блок ;FOLD будет очищен полностью"
-        : "Неиспользуемая переменная",
+        ? t("cleanup.picker.foldDetail")
+        : t("cleanup.picker.varDetail"),
       picked: true,
     };
   });
 
   const selectedItems = await vscode.window.showQuickPick(items, {
-    placeHolder: `Найдено неиспользуемых строк: ${unusedDecls.length}. Выберите строки для очистки:`,
+    placeHolder: t("cleanup.picker.selectPlaceholder", unusedDecls.length),
     canPickMany: true,
   });
 
@@ -224,23 +222,24 @@ export async function cleanupUnusedVariables() {
   const finalDecls = unusedDecls.filter((_, idx) => selectedIndices.has(idx));
 
   // 3. Choice of Action: Delete or Comment Out
+  const delLabel = t("cleanup.action.deleteLabel");
   const action = await vscode.window.showQuickPick(
     [
       {
-        label: "$(trash) Удалить",
-        description: "Полностью удалить неиспользуемые переменные и FOLD блоки",
+        label: delLabel,
+        description: t("cleanup.action.deleteDesc"),
       },
       {
-        label: "$(comment) Закомментировать",
-        description: "Безопасный режим: закомментировать (; DECL ...)",
+        label: t("cleanup.action.commentLabel"),
+        description: t("cleanup.action.commentDesc"),
       },
     ],
-    { placeHolder: "Выберите действие по очистке:" },
+    { placeHolder: t("cleanup.action.placeholder") },
   );
 
   if (!action) return;
 
-  const isDelete = action.label.includes("Удалить");
+  const isDelete = action.label === delLabel;
   const edit = new vscode.WorkspaceEdit();
 
   for (const decl of finalDecls) {
@@ -266,7 +265,10 @@ export async function cleanupUnusedVariables() {
   }
 
   await vscode.workspace.applyEdit(edit);
+  const actionWord = isDelete
+    ? t("cleanup.word.deleted")
+    : t("cleanup.word.commented");
   vscode.window.showInformationMessage(
-    `Успешно ${isDelete ? "удалено" : "закомментировано"} строк: ${finalDecls.length}.`,
+    t("cleanup.notify.success", actionWord, finalDecls.length),
   );
 }

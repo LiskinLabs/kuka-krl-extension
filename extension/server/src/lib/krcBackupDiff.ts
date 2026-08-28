@@ -1,4 +1,5 @@
 import AdmZip = require("adm-zip");
+import * as path from "path";
 
 export interface KrlPosition {
   name: string;
@@ -144,8 +145,14 @@ export function comparePositionPoints(
   };
 }
 
+// Security constants to prevent Zip Bomb OOM and Path Traversal attacks
+const MAX_ZIP_ENTRIES = 15000;
+const MAX_EXTRACT_SIZE_BYTES = 50 * 1024 * 1024; // 50 MB max for a single KRL text file
+const MAX_COMPRESSION_RATIO = 100;
+
 /**
  * Searches and extracts a KRL file (.src, .dat, .sub) from KRC Zip Backup.
+ * Hardened against Zip Bombs, Decompression OOM, and Path Traversal.
  */
 export function extractFileFromZipBackup(
   zipFilePath: string,
@@ -155,16 +162,21 @@ export function extractFileFromZipBackup(
     const zip = new AdmZip(zipFilePath);
     const zipEntries = zip.getEntries();
 
+    // 1. Guard against entry flood Zip Bomb
+    if (!zipEntries || zipEntries.length > MAX_ZIP_ENTRIES) {
+      return { found: false };
+    }
+
     const targetLower = targetFileName.toLowerCase();
 
-    // 1. Try exact filename match
+    // 2. Try exact filename match
     let bestEntry = zipEntries.find(
       (entry: AdmZip.IZipEntry) =>
         !entry.isDirectory &&
         entry.entryName.toLowerCase().endsWith("/" + targetLower),
     );
 
-    // 2. Fallback to basename match if nested
+    // 3. Fallback to basename match if nested
     if (!bestEntry) {
       bestEntry = zipEntries.find(
         (entry: AdmZip.IZipEntry) =>
@@ -173,7 +185,29 @@ export function extractFileFromZipBackup(
     }
 
     if (bestEntry) {
-      const content = bestEntry.getData().toString("utf8");
+      // 4. Path Traversal Guard
+      if (bestEntry.entryName.includes("..") || path.isAbsolute(bestEntry.entryName)) {
+        return { found: false };
+      }
+
+      // 5. Decompression Bomb & Size Guard
+      const uncompressedSize = bestEntry.header?.size ?? 0;
+      const compressedSize = bestEntry.header?.compressedSize ?? 0;
+
+      if (uncompressedSize > MAX_EXTRACT_SIZE_BYTES) {
+        return { found: false };
+      }
+
+      if (compressedSize > 0 && uncompressedSize / compressedSize > MAX_COMPRESSION_RATIO) {
+        return { found: false };
+      }
+
+      const buffer = bestEntry.getData();
+      if (!buffer || buffer.length > MAX_EXTRACT_SIZE_BYTES) {
+        return { found: false };
+      }
+
+      const content = buffer.toString("utf8");
       return {
         found: true,
         content,

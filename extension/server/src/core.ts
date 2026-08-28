@@ -300,8 +300,15 @@ documents.onDidChangeContent(async (change) => {
 documents.onDidClose((e) => {
   const uri = e.document.uri;
   const existingTimeout = validationTimeouts.get(uri);
-  if (existingTimeout) clearTimeout(existingTimeout);
+  if (existingTimeout) {
+    clearTimeout(existingTimeout);
+    validationTimeouts.delete(uri);
+  }
+  // Clear diagnostics for closed document
   connection.sendDiagnostics({ uri, diagnostics: [] });
+
+  // Free per-file cache to prevent memory leak
+  state.fileWordCounts.delete(uri);
 });
 
 async function validateDocument(document: TextDocument): Promise<void> {

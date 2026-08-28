@@ -42,14 +42,14 @@ export async function showFlowchartViewer(
       detailed: isDetailed,
     });
   } catch (e) {
-    vscode.window.showErrorMessage(`Failed to analyze: ${e}`);
+    vscode.window.showErrorMessage(t("flow.error.analyze", String(e)));
     return;
   }
 
   // 3. Create WebView panel
   const panel = vscode.window.createWebviewPanel(
     "krlFlowchart",
-    "KRL Flowchart: " + path.basename(currentUri.fsPath),
+    t("flow.title", path.basename(currentUri.fsPath)),
     vscode.ViewColumn.Beside,
     {
       enableScripts: true,
@@ -136,12 +136,12 @@ export async function showFlowchartViewer(
                 isDetailed,
               );
             } catch (e) {
-              vscode.window.showErrorMessage(`Failed to analyze: ${e}`);
+              vscode.window.showErrorMessage(
+                t("flow.error.analyze", String(e)),
+              );
             }
           } else {
-            vscode.window.showWarningMessage(
-              `Could not find definition for ${funcName}`,
-            );
+            vscode.window.showWarningMessage(t("flow.error.noDef", funcName));
           }
           break;
         }
@@ -155,7 +155,7 @@ export async function showFlowchartViewer(
             );
             const r = newResult as CfgResult;
             currentUri = newUri;
-            panel.title = "KRL Flowchart: " + path.basename(currentUri.fsPath);
+            panel.title = t("flow.title", path.basename(currentUri.fsPath));
             panel.webview.html = getWebviewContent(
               panel.webview.cspSource,
               mermaidUri.toString(),
@@ -166,7 +166,7 @@ export async function showFlowchartViewer(
               isDetailed,
             );
           } catch (e) {
-            vscode.window.showErrorMessage(`Failed to analyze: ${e}`);
+            vscode.window.showErrorMessage(t("flow.error.analyze", String(e)));
           }
           break;
         }
@@ -184,9 +184,7 @@ export async function showFlowchartViewer(
               uri,
               Buffer.from(message.content, "utf8"),
             );
-            vscode.window.showInformationMessage(
-              "Flowchart saved successfully!",
-            );
+            vscode.window.showInformationMessage(t("flow.notify.saved"));
           }
           break;
         }
@@ -208,7 +206,7 @@ export async function showFlowchartViewer(
               isDetailed,
             );
           } catch (e) {
-            vscode.window.showErrorMessage(`Failed to analyze: ${e}`);
+            vscode.window.showErrorMessage(t("flow.error.analyze", String(e)));
           }
           break;
         }
@@ -624,7 +622,7 @@ function getWebviewContent(
         const inner = document.getElementById('chart-inner');
 
         function updateTransform() {
-            inner.style.transform = \`translate(\${posX}px, \${posY}px) scale(\${scale})\`;
+            inner.style.transform = 'translate(' + posX + 'px, ' + posY + 'px) scale(' + scale + ')';
         }
 
         outer.addEventListener('mousedown', (e) => {
@@ -819,12 +817,7 @@ function getWebviewContent(
             
             // Apply hardcoded light theme styles for external viewer compatibility
             const style = document.createElement('style');
-            style.textContent = \`
-                svg { background-color: #ffffff; }
-                text { font-family: "Segoe UI", sans-serif; }
-                .node rect, .node circle, .node polygon, .node path { stroke-width: 1.5px !important; }
-                .edgePath .path { stroke-width: 1.5px !important; fill: none !important; }
-            \`;
+            style.textContent = 'svg { background-color: #ffffff; } text { font-family: "Segoe UI", sans-serif; } .node rect, .node circle, .node polygon, .node path { stroke-width: 1.5px !important; } .edgePath .path { stroke-width: 1.5px !important; fill: none !important; }';
             svgClone.prepend(style);
             svgClone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
             

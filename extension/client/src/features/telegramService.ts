@@ -12,10 +12,12 @@ export interface ChatMessage {
   text: string;
   timestamp: number;
   attachment?: string;
+  actionCommand?: string;
 }
 
 export interface SessionInfo {
   id: string;
+  title?: string;
   msgCount: number;
   lastTime: number;
 }
@@ -30,20 +32,17 @@ export class TelegramChatService {
 
   private sessionId: string;
   private sessions: Record<string, ChatMessage[]> = {};
+  private sessionTitles: Record<string, string> = {};
   private extensionContext: vscode.ExtensionContext | null = null;
-  private lastPollTimestamp = 0;
+  private sessionPollTimestamps: Record<string, number> = {};
   private isChatOpen = false;
   private highFrequencyUntil = 0;
   private executionLogs: string[] = [];
+  private processedCommandKeys = new Set<string>();
 
   private constructor() {
-    // Generate initial session ID (will be restored from persistent state in init)
-    const rawId = `${os.hostname()}-${process.pid}-${Date.now()}`;
-    this.sessionId = crypto
-      .createHash("md5")
-      .update(rawId)
-      .digest("hex")
-      .substring(0, 6);
+    // Generate initial cryptographically random 16-hex-character session ID
+    this.sessionId = crypto.randomBytes(8).toString("hex");
   }
 
   public static getInstance(): TelegramChatService {
@@ -91,8 +90,14 @@ export class TelegramChatService {
     const savedSessions = context.globalState.get<
       Record<string, ChatMessage[]>
     >("krl_telegram_sessions_store", {});
-
     this.sessions = savedSessions || {};
+
+    // Load cached session topic titles
+    const savedTitles = context.globalState.get<Record<string, string>>(
+      "krl_telegram_session_titles",
+      {},
+    );
+    this.sessionTitles = savedTitles || {};
 
     // Restore persistent session ID across restarts (Ensures offline replies reach the engineer)
     const savedActiveId = context.globalState.get<string>(
@@ -117,6 +122,17 @@ export class TelegramChatService {
       this.sessions[this.sessionId] = [];
     }
 
+    // Initialize developer poll timestamps per session
+    for (const [sId, msgs] of Object.entries(this.sessions)) {
+      let maxDevTs = 0;
+      for (const msg of msgs) {
+        if (msg.sender === "developer" && msg.timestamp > maxDevTs) {
+          maxDevTs = msg.timestamp;
+        }
+      }
+      this.sessionPollTimestamps[sId] = maxDevTs;
+    }
+
     // Register Commands
     context.subscriptions.push(
       vscode.commands.registerCommand("krl.openTelegramChat", () => {
@@ -134,6 +150,9 @@ export class TelegramChatService {
       vscode.commands.registerCommand("krl.sendAiDiagnostics", async () => {
         await this.sendAiDiagnosticsReport();
       }),
+      vscode.commands.registerCommand("krl.checkSupportStatus", async () => {
+        await this.checkSupportStatus();
+      }),
     );
 
     // Check first-run welcome registration
@@ -144,23 +163,33 @@ export class TelegramChatService {
     this.startHeartbeat();
   }
 
-  private async checkFirstRunWelcome(context: vscode.ExtensionContext) {
+  private checkFirstRunWelcome(context: vscode.ExtensionContext) {
     const registered = context.globalState.get<boolean>(
       "krl_engineer_registered_v3",
       false,
     );
     if (!registered) {
       context.globalState.update("krl_engineer_registered_v3", true);
-      const welcomeMsg =
-        `🎉 Новая сессия KUKA KRL Professional v1.7.3 на хосте ${os.hostname()} ` +
-        `(${isPremium() ? "⭐ PRO" : "🆓 Community"}) [Сессия #${this.sessionId}]`;
-
-      await this.sendMessage(welcomeMsg);
+      this.logToOutput("KUKA KRL Professional session initialized.");
     }
   }
 
   public getSessionId(): string {
     return this.sessionId;
+  }
+
+  public getSessionTitle(id?: string): string {
+    const targetId = id || this.sessionId;
+    return this.sessionTitles[targetId] || "";
+  }
+
+  public setSessionTitle(id: string, title: string): void {
+    if (title && title.trim()) {
+      this.sessionTitles[id] = title.trim();
+    } else {
+      delete this.sessionTitles[id];
+    }
+    this.saveSessions();
   }
 
   public getHistory(): ChatMessage[] {
@@ -173,6 +202,7 @@ export class TelegramChatService {
       const lastMsg = msgs[msgs.length - 1];
       list.push({
         id,
+        title: this.sessionTitles[id] || "",
         msgCount: msgs.length,
         lastTime: lastMsg ? lastMsg.timestamp : Date.now(),
       });
@@ -188,16 +218,15 @@ export class TelegramChatService {
     }
   }
 
-  public newSession(): string {
-    const rawId = `${os.hostname()}-${process.pid}-${Date.now()}`;
-    const newId = crypto
-      .createHash("md5")
-      .update(rawId)
-      .digest("hex")
-      .substring(0, 6);
+  public newSession(customTitle?: string): string {
+    const newId = crypto.randomBytes(8).toString("hex");
 
     this.sessionId = newId;
     this.sessions[newId] = [];
+    this.sessionPollTimestamps[newId] = 0;
+    if (customTitle && customTitle.trim()) {
+      this.sessionTitles[newId] = customTitle.trim();
+    }
     this.saveSessions();
     this.triggerImmediatePoll();
     return newId;
@@ -214,6 +243,7 @@ export class TelegramChatService {
 
   public deleteSession(id: string): void {
     delete this.sessions[id];
+    delete this.sessionTitles[id];
     const sessionKeys = Object.keys(this.sessions);
     if (sessionKeys.length === 0) {
       this.newSession();
@@ -227,6 +257,7 @@ export class TelegramChatService {
   public deleteAllSessions(): void {
     const oldIds = Object.keys(this.sessions);
     this.sessions = {};
+    this.sessionTitles = {};
     this.newSession();
     this.saveSessions();
     for (const id of oldIds) {
@@ -248,6 +279,7 @@ export class TelegramChatService {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           sessionId: id,
+          sessionTitle: this.sessionTitles[id] || undefined,
           hostname: os.hostname(),
           action,
           timestamp: Date.now(),
@@ -263,6 +295,10 @@ export class TelegramChatService {
       this.extensionContext.globalState.update(
         "krl_telegram_sessions_store",
         this.sessions,
+      );
+      this.extensionContext.globalState.update(
+        "krl_telegram_session_titles",
+        this.sessionTitles,
       );
       this.extensionContext.globalState.update(
         "krl_telegram_active_session_id",
@@ -365,7 +401,9 @@ export class TelegramChatService {
         caption,
       );
     } catch (e) {
-      vscode.window.showErrorMessage(`Log capture error: ${e}`);
+      vscode.window.showErrorMessage(
+        t("chat.error.logCaptureFailed", String(e)),
+      );
       return false;
     }
   }
@@ -395,8 +433,13 @@ export class TelegramChatService {
         ".bmp",
       ].includes(ext);
 
+      const topicTitle = this.getSessionTitle(this.sessionId);
       const formData = new FormData();
       formData.append("sessionId", this.sessionId);
+      if (topicTitle) {
+        formData.append("sessionTitle", topicTitle);
+        formData.append("topicTitle", topicTitle);
+      }
       formData.append("hostname", os.hostname());
       formData.append(
         "role",
@@ -415,6 +458,18 @@ export class TelegramChatService {
       });
 
       if (response.ok) {
+        const respData = (await response.json().catch(() => ({}))) as {
+          ok?: boolean;
+          telegramDelivery?: { ok?: boolean; error?: string; description?: string };
+        };
+
+        if (respData.telegramDelivery && respData.telegramDelivery.ok === false) {
+          this.logToOutput(
+            `[Gateway Warning]: Telegram delivery issue: ${respData.telegramDelivery.description || respData.telegramDelivery.error}`,
+            "WARN",
+          );
+        }
+
         const fileMsg: ChatMessage = {
           sender: "user",
           text: isPhoto
@@ -452,9 +507,35 @@ export class TelegramChatService {
    */
   public async sendMessage(userText: string): Promise<boolean> {
     try {
+      let finalMsg = userText;
+      const mentionRegex = /@([\w\-\.]+)/g;
+      let match;
+      const mentions = [];
+      while ((match = mentionRegex.exec(userText)) !== null) {
+        mentions.push(match[1]);
+      }
+
+      if (mentions.length > 0 && vscode.workspace.workspaceFolders) {
+        const wsRoot = vscode.workspace.workspaceFolders[0].uri;
+        for (const fileName of mentions) {
+          try {
+            const searchPattern = new vscode.RelativePattern(wsRoot.fsPath, `**/${fileName}`);
+            const files = await vscode.workspace.findFiles(searchPattern, '**/node_modules/**', 1);
+            if (files.length > 0) {
+              const uint8Array = await vscode.workspace.fs.readFile(files[0]);
+              const content = new TextDecoder().decode(uint8Array);
+              const ext = fileName.split('.').pop() || 'txt';
+              finalMsg += `\n\n📄 **${fileName}**:\n\`\`\`${ext}\n${content.substring(0, 2000)}\n\`\`\``;
+            }
+          } catch (e) {
+            console.error("Mention resolution failed", e);
+          }
+        }
+      }
+
       const userMsg: ChatMessage = {
         sender: "user",
-        text: userText,
+        text: finalMsg,
         timestamp: Date.now(),
       };
 
@@ -467,8 +548,11 @@ export class TelegramChatService {
       this.onMessageEmitter.fire(userMsg);
       this.logToOutput(`[Пользователь]: ${userText}`);
 
+      const topicTitle = this.getSessionTitle(this.sessionId);
       const payload = {
         sessionId: this.sessionId,
+        sessionTitle: topicTitle || undefined,
+        topicTitle: topicTitle || undefined,
         text: userText,
         hostname: os.hostname(),
         platform: `${os.platform()} ${os.release()} (${os.arch()})`,
@@ -495,6 +579,18 @@ export class TelegramChatService {
       });
 
       if (resp.ok) {
+        const respData = (await resp.json().catch(() => ({}))) as {
+          ok?: boolean;
+          telegramDelivery?: { ok?: boolean; error?: string; description?: string };
+        };
+
+        if (respData.telegramDelivery && respData.telegramDelivery.ok === false) {
+          this.logToOutput(
+            `[Gateway Warning]: Telegram delivery issue: ${respData.telegramDelivery.description || respData.telegramDelivery.error}`,
+            "WARN",
+          );
+        }
+
         vscode.window.showInformationMessage(t("cc.notify.telegramSent"));
         return true;
       } else {
@@ -536,9 +632,22 @@ export class TelegramChatService {
     poll();
   }
 
+  private getLastDevTimestamp(sessionId: string): number {
+    const msgs = this.sessions[sessionId] || [];
+    let maxDevTs = 0;
+    for (const m of msgs) {
+      if (m.sender === "developer" && m.timestamp > maxDevTs) {
+        maxDevTs = m.timestamp;
+      }
+    }
+    return this.sessionPollTimestamps[sessionId] ?? maxDevTs;
+  }
+
   private async fetchGatewayReplies(context: vscode.ExtensionContext) {
     const gatewayUrl = this.getGatewayUrl();
-    const url = `${gatewayUrl}/api/v1/chat/poll?session_id=${this.sessionId}&since=${this.lastPollTimestamp}`;
+    const currentSession = this.sessionId;
+    const since = this.getLastDevTimestamp(currentSession);
+    const url = `${gatewayUrl}/api/v1/chat/poll?session_id=${currentSession}&since=${since}`;
 
     try {
       const resp = await fetch(url);
@@ -552,54 +661,29 @@ export class TelegramChatService {
         };
 
         if (data && data.messages && data.messages.length > 0) {
-          for (const m of data.messages) {
-            if (m.timestamp > this.lastPollTimestamp) {
-              this.lastPollTimestamp = m.timestamp;
-            }
+          this.processIncomingMessages(data.messages, currentSession, context);
+        }
+      }
 
-            // Check if developer triggered a remote action request
-            if (m.command || m.text.startsWith("/")) {
-              await this.handleRemoteActionWithConsent(
-                m.command || m.text,
-                context,
-              );
-              continue;
-            }
-
-            // Check if message is already in local session history
-            const exists = (this.sessions[this.sessionId] || []).some(
-              (x) => x.timestamp === m.timestamp && x.text === m.text,
-            );
-
-            if (!exists) {
-              const devMsg: ChatMessage = {
-                sender: "developer",
-                text: m.text,
-                timestamp: m.timestamp || Date.now(),
-              };
-
-              if (!this.sessions[this.sessionId]) {
-                this.sessions[this.sessionId] = [];
+      // Background batch poll for any other known sessions
+      const otherSessionIds = Object.keys(this.sessions).filter(
+        (id) => id !== currentSession,
+      );
+      if (otherSessionIds.length > 0) {
+        const batchUrl = `${gatewayUrl}/api/v1/chat/poll?session_ids=${encodeURIComponent(otherSessionIds.slice(0, 15).join(","))}&since=0`;
+        const batchResp = await fetch(batchUrl);
+        if (batchResp.ok) {
+          const batchData = (await batchResp.json()) as {
+            sessionMessages?: Record<
+              string,
+              Array<{ text: string; timestamp: number; command?: string }>
+            >;
+          };
+          if (batchData && batchData.sessionMessages) {
+            for (const [sid, msgs] of Object.entries(batchData.sessionMessages)) {
+              if (msgs && msgs.length > 0) {
+                this.processIncomingMessages(msgs, sid, context);
               }
-              this.sessions[this.sessionId].push(devMsg);
-              this.saveSessions();
-              this.onMessageEmitter.fire(devMsg);
-              this.logToOutput(`[Сильвестр Лискин]: ${m.text}`);
-
-              const replyBtn = t("chat.btn.reply");
-              vscode.window
-                .showInformationMessage(
-                  t("chat.notify.devMessage", m.text),
-                  replyBtn,
-                )
-                .then((selection) => {
-                  if (selection === replyBtn && this.extensionContext) {
-                    TelegramChatPanel.createOrShow(
-                      this.extensionContext.extensionUri,
-                      this.extensionContext,
-                    );
-                  }
-                });
             }
           }
         }
@@ -609,10 +693,151 @@ export class TelegramChatService {
     }
   }
 
+  private processIncomingMessages(
+    messages: Array<{ text: string; timestamp: number; command?: string }>,
+    targetSessionId: string,
+    context: vscode.ExtensionContext,
+  ) {
+    for (const m of messages) {
+      if (m.timestamp > (this.sessionPollTimestamps[targetSessionId] || 0)) {
+        this.sessionPollTimestamps[targetSessionId] = m.timestamp;
+      }
+
+      // Check if developer triggered a remote action request
+      const isCommand = Boolean(
+        m.command || (m.text && m.text.startsWith("/")),
+      );
+      if (isCommand) {
+        const cmdStr = (m.command || m.text).trim();
+        const cmdKey = `${targetSessionId}:${m.timestamp}:${cmdStr}`;
+
+        // Prevent replay: execute command ONLY IF:
+        // 1. It has never been processed in this runtime session
+        // 2. If recent (within 5 minutes): request immediate consent
+        // 3. If offline/older: insert an interactive action card into chat timeline
+        const isRecent = Boolean(
+          m.timestamp && Math.abs(Date.now() - m.timestamp) < 300000,
+        );
+        if (!this.processedCommandKeys.has(cmdKey)) {
+          this.processedCommandKeys.add(cmdKey);
+          if (isRecent) {
+            this.handleRemoteActionWithConsent(cmdStr, context).catch(() => {});
+          } else {
+            this.insertPendingActionCard(cmdStr, m.timestamp);
+          }
+        }
+        continue;
+      }
+
+      // Check if message is already in local session history
+      const exists = (this.sessions[targetSessionId] || []).some(
+        (x) => x.timestamp === m.timestamp && x.text === m.text,
+      );
+
+      if (!exists) {
+        const devMsg: ChatMessage = {
+          sender: "developer",
+          text: m.text,
+          timestamp: m.timestamp || Date.now(),
+        };
+
+        if (!this.sessions[targetSessionId]) {
+          this.sessions[targetSessionId] = [];
+        }
+        this.sessions[targetSessionId].push(devMsg);
+        this.saveSessions();
+        this.onMessageEmitter.fire(devMsg);
+        this.logToOutput(`[Сильвестр Лискин (#${targetSessionId})]: ${m.text}`);
+
+        const replyBtn = t("chat.btn.reply");
+        vscode.window
+          .showInformationMessage(
+            t("chat.notify.devMessage", m.text),
+            replyBtn,
+          )
+          .then((selection) => {
+            if (selection === replyBtn && this.extensionContext) {
+              if (this.sessionId !== targetSessionId) {
+                this.switchSession(targetSessionId);
+              }
+              TelegramChatPanel.createOrShow(
+                this.extensionContext.extensionUri,
+                this.extensionContext,
+              );
+            }
+          });
+      }
+    }
+  }
+
+  /**
+   * Inserts an interactive action card into session history for offline/pending developer requests.
+   */
+  public insertPendingActionCard(cmdText: string, timestamp?: number): void {
+    const cmd = cmdText.trim().split(" ")[0].toLowerCase();
+    let actionTitle = "";
+
+    if (cmd === "/logs") {
+      actionTitle = "📊 Запрос выгрузки логов расширения";
+    } else if (cmd === "/export_project" || cmd === "/backup") {
+      actionTitle = "📁 Запрос экспорта проекта KRL";
+    } else if (cmd === "/sysinfo") {
+      actionTitle = "💻 Запрос системной информации ПК";
+    } else if (cmd === "/ai_diag") {
+      actionTitle = "🤖 Запрос AI-диагностики безопасности KRL";
+    } else {
+      return;
+    }
+
+    const actionMsg: ChatMessage = {
+      sender: "developer",
+      text: `🛠️ **Запрос от Сильвестр Лискин:**\n${actionTitle}`,
+      timestamp: timestamp || Date.now(),
+      actionCommand: cmd,
+    };
+
+    if (!this.sessions[this.sessionId]) {
+      this.sessions[this.sessionId] = [];
+    }
+
+    const exists = this.sessions[this.sessionId].some(
+      (x) => x.timestamp === actionMsg.timestamp && x.actionCommand === cmd,
+    );
+    if (!exists) {
+      this.sessions[this.sessionId].push(actionMsg);
+      this.saveSessions();
+      this.onMessageEmitter.fire(actionMsg);
+    }
+  }
+
   /**
    * Explicit Consent Guard for Developer Remote Actions (Anti-Exfiltration & Safety Directive)
    */
-  private async handleRemoteActionWithConsent(
+  private async readAndSendFile(fileName: string) {
+    if (!vscode.workspace.workspaceFolders || vscode.workspace.workspaceFolders.length === 0) {
+      vscode.window.showErrorMessage("Нет открытого Workspace.");
+      return;
+    }
+    const wsRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
+    const searchPattern = new vscode.RelativePattern(wsRoot, `**/${fileName}`);
+    const files = await vscode.workspace.findFiles(searchPattern, '**/node_modules/**', 1);
+    
+    if (files.length === 0) {
+      this.sendMessage(`❌ Файл ${fileName} не найден в рабочем пространстве.`);
+      return;
+    }
+    try {
+      const uint8Array = await vscode.workspace.fs.readFile(files[0]);
+      const content = new TextDecoder().decode(uint8Array);
+      const ext = fileName.split('.').pop() || 'txt';
+      this.sendMessage(`📄 **${fileName}**:\n\`\`\`${ext}\n${content.substring(0, 3000)}\n\`\`\``);
+      vscode.window.showInformationMessage(`Файл ${fileName} отправлен.`);
+    } catch (err) {
+      vscode.window.showErrorMessage(`Ошибка при чтении файла`);
+    }
+  }
+
+  public async handleRemoteActionWithConsent(
     cmdText: string,
     context: vscode.ExtensionContext,
   ) {
@@ -620,7 +845,19 @@ export class TelegramChatService {
     const yesBtn = t("license.btn.yes");
     const noBtn = t("license.btn.no");
 
-    if (cmd === "/logs") {
+    if (cmd === "/read_file") {
+      const fileName = cmdText.trim().substring("/read_file".length).trim();
+      const actionName = `Чтение файла: ${fileName}`;
+      const confirm = await vscode.window.showWarningMessage(
+        `Telegram Support запрашивает удаленное действие: ${actionName}`,
+        { modal: true },
+        yesBtn,
+        noBtn,
+      );
+      if (confirm === yesBtn) {
+        await this.readAndSendFile(fileName);
+      }
+    } else if (cmd === "/logs") {
       const actionName = t("chat.consent.actionLogs");
       const confirm = await vscode.window.showWarningMessage(
         t("chat.consent.remoteAction", actionName),
@@ -668,7 +905,16 @@ export class TelegramChatService {
         await this.sendMessage(sysMsg);
       }
     } else if (cmd === "/ai_diag") {
-      await this.sendAiDiagnosticsReport();
+      const actionName = "AI-диагностика безопасности KRL";
+      const confirm = await vscode.window.showWarningMessage(
+        t("chat.consent.remoteAction", actionName),
+        { modal: true },
+        yesBtn,
+        noBtn,
+      );
+      if (confirm === yesBtn) {
+        await this.sendAiDiagnosticsReport();
+      }
     }
   }
 
@@ -679,9 +925,7 @@ export class TelegramChatService {
     try {
       const workspaceFolders = vscode.workspace.workspaceFolders;
       if (!workspaceFolders || workspaceFolders.length === 0) {
-        vscode.window.showWarningMessage(
-          "Нет открытой рабочей папки в VS Code",
-        );
+        vscode.window.showWarningMessage(t("chat.warning.noWorkspace"));
         return false;
       }
 
@@ -711,7 +955,7 @@ export class TelegramChatService {
       scanDir(rootPath);
 
       if (krlFiles.length === 0) {
-        vscode.window.showWarningMessage("Файлы KRL (.src, .dat) не найдены");
+        vscode.window.showWarningMessage(t("chat.warning.noKrlFiles"));
         return false;
       }
 
@@ -740,7 +984,7 @@ export class TelegramChatService {
         `📁 *Выгруженный проект KRL (${krlFiles.length} файлов)*`,
       );
     } catch (e) {
-      vscode.window.showErrorMessage(`Ошибка выгрузки проекта: ${e}`);
+      vscode.window.showErrorMessage(t("chat.error.exportFailed", String(e)));
       return false;
     }
   }
@@ -752,9 +996,7 @@ export class TelegramChatService {
     try {
       const editor = vscode.window.activeTextEditor;
       if (!editor) {
-        vscode.window.showWarningMessage(
-          "Откройте KRL файл для AI диагностики",
-        );
+        vscode.window.showWarningMessage(t("chat.warning.noEditorOpen"));
         return false;
       }
 
@@ -793,7 +1035,7 @@ export class TelegramChatService {
 
       return await this.sendMessage(reportText);
     } catch (e) {
-      vscode.window.showErrorMessage(`Ошибка AI диагностики: ${e}`);
+      vscode.window.showErrorMessage(t("chat.error.aiDiagFailed", String(e)));
       return false;
     }
   }
@@ -804,7 +1046,9 @@ export class TelegramChatService {
     error?: unknown,
   ) {
     const timestamp = new Date().toLocaleTimeString();
-    const formatted = `[${timestamp}] [${level}] ${msg}${error ? ` | Error: ${(error as any)?.stack || error}` : ""}`;
+    const errText =
+      error instanceof Error ? error.stack || error.message : String(error);
+    const formatted = `[${timestamp}] [${level}] ${msg}${error ? ` | Error: ${errText}` : ""}`;
 
     if (this.executionLogs.length > 150) {
       this.executionLogs.shift();
@@ -945,11 +1189,8 @@ export class TelegramChatService {
       });
       log += `\n📊 WORKSPACE DIAGNOSTICS SUMMARY: ${totalWsErrors} Total Errors, ${totalWsWarnings} Total Warnings across all files.\n`;
 
-      log += `\n--- ACTIVE FILE CODE PREVIEW (First 80 Lines) ---\n`;
-      const lines = activeDoc.getText().split(/\r?\n/).slice(0, 80);
-      lines.forEach((l, idx) => {
-        log += `${String(idx + 1).padStart(4, " ")} | ${l}\n`;
-      });
+      log += `\n📊 ACTIVE FILE STRUCTURE SUMMARY: Language ID: ${activeDoc.languageId}, Lines: ${activeDoc.lineCount}, Size: ${activeDoc.getText().length} chars\n`;
+      log += `(Note: Raw source code lines are masked for IP security and industrial NDA compliance)\n`;
       log += `-------------------------------------------------\n`;
     } else {
       log += `📄 ACTIVE DOCUMENT: No active text editor currently open in VS Code.\n`;
@@ -975,25 +1216,33 @@ export class TelegramChatService {
   }
 
   /**
-   * Lightweight heartbeat to Gateway server (0 Telegram spam).
+   * Lightweight heartbeat to Gateway server (Safe & Privacy-Compliant).
    */
   private startHeartbeat() {
     if (this.heartbeatTimer) return;
 
     const sendPing = async () => {
       try {
-        const activeFile = vscode.window.activeTextEditor
-          ? path.basename(vscode.window.activeTextEditor.document.fileName)
-          : "No File";
+        const config = vscode.workspace.getConfiguration("krl");
+        const telemetryEnabled = config.get<boolean>("telemetry.enabled", true);
+        if (!telemetryEnabled) return;
 
+        // Privacy Guard: Only attach active file name if user actually has chat open
+        const activeFile =
+          this.isChatOpen && vscode.window.activeTextEditor
+            ? path.basename(vscode.window.activeTextEditor.document.fileName)
+            : undefined;
+
+        const topicTitle = this.getSessionTitle(this.sessionId);
         const gatewayUrl = this.getGatewayUrl();
         await fetch(`${gatewayUrl}/api/v1/chat/heartbeat`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             sessionId: this.sessionId,
+            sessionTitle: topicTitle || undefined,
             hostname: os.hostname(),
-            activeFile,
+            activeFile: activeFile || "Idle",
             role: isPremium() ? "⭐ PRO (Industrial)" : "🆓 Community",
             timestamp: Date.now(),
           }),
@@ -1006,4 +1255,47 @@ export class TelegramChatService {
     sendPing();
     this.heartbeatTimer = setInterval(sendPing, 60000); // Heartbeat every 60 seconds
   }
+
+  /**
+   * Diagnostic test checking connection to the Support Gateway and Telegram bot.
+   */
+  public async checkSupportStatus(): Promise<void> {
+    try {
+      const gatewayUrl = this.getGatewayUrl();
+      const resp = await fetch(`${gatewayUrl}/api/v1/status`);
+      if (resp.ok) {
+        const data = (await resp.json()) as {
+          online?: boolean;
+          botConfigured?: boolean;
+          botUsername?: string;
+          adminChatConfigured?: boolean;
+          adminChatId?: string;
+          webhookUrl?: string;
+          pendingUpdateCount?: number;
+          lastWebhookError?: string | null;
+        };
+        const botStatus = data.botConfigured
+          ? `🟢 Бот @${data.botUsername || "connected"}`
+          : "🔴 Бот не настроен";
+        const adminStatus = data.adminChatConfigured
+          ? "🟢 Чат администратора подключен"
+          : "🟡 Чат администратора ожидает /connect";
+        const hookStatus = data.lastWebhookError
+          ? `⚠️ Ошибка вебхука: ${data.lastWebhookError}`
+          : "🟢 Вебхук активен";
+        vscode.window.showInformationMessage(
+          `📡 Статус шлюза поддержки:\n• ${botStatus}\n• ${adminStatus}\n• ${hookStatus}`,
+        );
+      } else {
+        vscode.window.showWarningMessage(
+          `Шлюз поддержки ответил HTTP кодом: ${resp.status}`,
+        );
+      }
+    } catch (e) {
+      vscode.window.showErrorMessage(
+        `Не удалось подключиться к шлюзу поддержки: ${e}`,
+      );
+    }
+  }
 }
+

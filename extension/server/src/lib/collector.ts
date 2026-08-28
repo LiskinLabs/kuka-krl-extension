@@ -71,9 +71,9 @@ export const splitVarsRespectingBracketsWithOffsets = (
 export function extractStrucVariables(
   datContent: string,
 ): Record<string, string[]> {
-  // KRL'de STRUC tek satırda tanımlanır, ENDSTRUC yok
+  // KRL'de STRUC tek satırda tanımlanır, ENDSTRUC yok (Linear ReDoS-safe)
   const structRegex =
-    /^\s*(?:GLOBAL\s+)?(?:DECL\s+)?(?:GLOBAL\s+)?(STRUC|ENUM)\s+(\w+)\s+(.+)$/gim;
+    /^[ \t]*(?:GLOBAL[ \t]+)?(?:DECL[ \t]+)?(STRUC|ENUM)[ \t]+([A-Za-z0-9_]+)[ \t]+([^\r\n;]+)$/gim;
 
   const knownTypes = [
     "INT",
@@ -161,9 +161,9 @@ export class SymbolExtractor {
   extractFromText(documentText: string): void {
     const lineOffsets = this.computeLineOffsets(documentText);
 
-    // DECL regex'i - CONST dahil
+    // DECL regex'i - CONST dahil (Linear ReDoS-safe)
     const declRegex =
-      /^\s*(?:(?:GLOBAL\s+)?(?:CONST\s+)?DECL\s+(?:GLOBAL\s+)?(?:CONST\s+)?(\w+)|(?:GLOBAL\s+)?(?:CONST\s+)?(INT|REAL|BOOL|CHAR|FRAME|POS|E6POS|E6AXIS|AXIS|LOAD|SIGNAL|STRING))\s+([^\r\n;]+)/gim;
+      /^[ \t]*(?:(?:GLOBAL[ \t]+)?(?:CONST[ \t]+)?DECL[ \t]+([A-Za-z0-9_]+)|(?:GLOBAL[ \t]+)?(?:CONST[ \t]+)?(INT|REAL|BOOL|CHAR|FRAME|POS|E6POS|E6AXIS|AXIS|LOAD|SIGNAL|STRING))[ \t]+([^\r\n;]+)/gim;
 
     let match: RegExpExecArray | null;
     while ((match = declRegex.exec(documentText)) !== null) {

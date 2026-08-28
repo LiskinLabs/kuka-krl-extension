@@ -85,7 +85,7 @@ export function initEkiValidator(context: vscode.ExtensionContext) {
           }
           return;
         } catch (e) {
-          vscode.window.showErrorMessage(`Error reading EKI XML: ${e}`);
+          vscode.window.showErrorMessage(t("eki.error.readFailed", String(e)));
           return;
         }
       }

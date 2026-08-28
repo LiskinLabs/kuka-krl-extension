@@ -18,13 +18,13 @@
   "pricing": "Free",
   "badges": [
     {
-      "url": "https://img.shields.io/badge/Pro_Store-Lemon_Squeezy-FF6600?style=flat-square",
-      "href": "https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7",
+      "url": "https://img.shields.io/badge/Pro_Store-Dodo_Payments-FF6600?style=flat-square",
+      "href": "https://checkout.dodopayments.com/buy/pdt_0NlsStba24X0wCjqfZo3O",
       "description": "Buy KRL Extension Pro License"
     }
   ],
   "sponsor": {
-    "url": "https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7"
+    "url": "https://checkout.dodopayments.com/buy/pdt_0NlsStba24X0wCjqfZo3O"
   },
   "homepage": "https://github.com/LiskinLabs/kuka-krl-extension-core",
   "bugs": {
@@ -53,7 +53,15 @@
     "vscode": "^1.85.0"
   },
   "main": "./client/out/main.js",
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:krl",
+    "onView:krlIO",
+    "onView:krlCommands",
+    "onCommand:krl.openControlCenter",
+    "onCommand:krl.openTelegramChat",
+    "onCommand:krl.validateWorkspace",
+    "onCommand:krl.formatDocument"
+  ],
   "contributes": {
     "languages": [
       {
@@ -232,6 +240,12 @@
         "icon": "$(info)"
       },
       {
+        "command": "krl.openCustomerPortal",
+        "title": "%command.openCustomerPortal%",
+        "category": "KRL",
+        "icon": "$(credit-card)"
+      },
+      {
         "command": "krl.validateEkiXml",
         "title": "%command.validateEkiXml%",
         "category": "KRL",
@@ -260,6 +274,12 @@
         "title": "%command.compareKrcBackup%",
         "category": "KRL",
         "icon": "$(diff)"
+            },
+      {
+        "command": "krl.sendSelectionToChat",
+        "title": "Send Selection to Telegram Chat",
+        "category": "KRL",
+        "icon": "$(comment-discussion)"
       },
       {
         "command": "krl.openTelegramChat",
@@ -280,10 +300,64 @@
         "icon": "$(file-submodule)"
       },
       {
+        "command": "krl.exportBackupZip",
+        "title": "%command.exportBackupZip%",
+        "category": "KRL",
+        "icon": "$(archive)"
+      },
+      {
+        "command": "krl.sendAiDiagnostics",
+        "title": "%command.sendAiDiagnostics%",
+        "category": "KRL",
+        "icon": "$(pulse)"
+      },
+      {
         "command": "krl.findReferences",
         "title": "%command.findReferences%",
         "category": "KRL",
         "icon": "$(references)"
+      },
+      {
+        "command": "krl.viewFileHistory",
+        "title": "%command.viewFileHistory%",
+        "category": "KRL",
+        "icon": "$(history)"
+      },
+      {
+        "command": "krl.showLineBlameDetails",
+        "title": "%command.showLineBlameDetails%",
+        "category": "KRL",
+        "icon": "$(git-commit)"
+      },
+      {
+        "command": "krl.convertToIiqkaFold",
+        "title": "%command.convertToIiqkaFold%",
+        "category": "KRL",
+        "icon": "$(fold)"
+      },
+      {
+        "command": "krl.convertLegacyToSpline",
+        "title": "%command.convertLegacyToSpline%",
+        "category": "KRL",
+        "icon": "$(pulse)"
+      },
+      {
+        "command": "krl.unwrapFold",
+        "title": "%command.unwrapFold%",
+        "category": "KRL",
+        "icon": "$(unfold)"
+      },
+      {
+        "command": "krl.insertCollisionGuard",
+        "title": "%command.insertCollisionGuard%",
+        "category": "KRL",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "krl.insertSplineBlock",
+        "title": "%command.insertSplineBlock%",
+        "category": "KRL",
+        "icon": "$(symbol-namespace)"
       }
     ],
     "viewsContainers": {
@@ -310,7 +384,7 @@
     "viewsWelcome": [
       {
         "view": "krlIO",
-        "contents": "%view.krlIO.welcome%\n[Refresh](command:krl.refreshIOView)"
+        "contents": "%view.krlIO.welcome%"
       }
     ],
     "submenus": [
@@ -348,6 +422,11 @@
         }
       ],
       "editor/context": [
+        {
+          "command": "krl.sendSelectionToChat",
+          "when": "editorHasSelection",
+          "group": "krl_ai@2"
+        },
         {
           "submenu": "krl.contextSubmenu",
           "group": "1_modification@1",
@@ -426,6 +505,26 @@
         {
           "command": "krl.renameSignal",
           "group": "3_code@7"
+        },
+        {
+          "command": "krl.convertToIiqkaFold",
+          "group": "3_code@8"
+        },
+        {
+          "command": "krl.convertLegacyToSpline",
+          "group": "3_code@9"
+        },
+        {
+          "command": "krl.unwrapFold",
+          "group": "3_code@10"
+        },
+        {
+          "command": "krl.insertCollisionGuard",
+          "group": "3_code@11"
+        },
+        {
+          "command": "krl.insertSplineBlock",
+          "group": "3_code@12"
         },
         {
           "command": "krl.generateReport",
@@ -547,6 +646,11 @@
           "type": "string",
           "default": "https://kuka-krl-support-gateway.redminotpro5.workers.dev",
           "description": "%config.supportGatewayUrl%"
+        },
+        "krl.telemetry.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.telemetry.enabled%"
         }
       }
     }
@@ -584,3 +688,6 @@
     "vscode-uri": "^3.1.0"
   }
 }
+
+
+

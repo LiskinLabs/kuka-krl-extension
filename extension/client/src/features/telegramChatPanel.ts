@@ -34,6 +34,24 @@ export class TelegramChatPanel {
         const service = TelegramChatService.getInstance();
 
         switch (message.command) {
+          case "applyCode":
+            if (message.code) {
+              const editor = vscode.window.activeTextEditor;
+              if (!editor) {
+                vscode.window.showWarningMessage("Откройте файл в редакторе, чтобы вставить код.");
+              } else {
+                editor.edit(editBuilder => {
+                  if (!editor.selection.isEmpty) {
+                    editBuilder.replace(editor.selection, message.code);
+                  } else {
+                    editBuilder.insert(editor.selection.active, message.code);
+                  }
+                });
+                vscode.window.showInformationMessage("Код внедрен (Внимание: проверьте правильность перед сохранением).");
+              }
+            }
+            break;
+
           case "sendMessage":
             if (message.text && message.text.trim()) {
               await service.sendMessage(message.text.trim());
@@ -54,13 +72,69 @@ export class TelegramChatPanel {
             this.refreshWebview();
             break;
 
-          case "newSession":
-            const newId = service.newSession();
-            vscode.window.showInformationMessage(
-              t("chat.notify.newSession", newId),
-            );
-            this.refreshWebview();
+          case "newSession": {
+            let sessionTopic = message.title;
+            if (sessionTopic === undefined) {
+              sessionTopic = await vscode.window.showInputBox({
+                prompt: t("chat.prompt.sessionTitle"),
+                placeHolder: t("chat.prompt.sessionTitlePlaceholder"),
+                ignoreFocusOut: true,
+              });
+            }
+            if (sessionTopic !== undefined) {
+              const newId = service.newSession(
+                sessionTopic.trim() || undefined,
+              );
+              if (sessionTopic.trim()) {
+                vscode.window.showInformationMessage(
+                  t(
+                    "chat.notify.newSessionWithTopic",
+                    newId,
+                    sessionTopic.trim(),
+                  ),
+                );
+              } else {
+                vscode.window.showInformationMessage(
+                  t("chat.notify.newSession", newId),
+                );
+              }
+              this.refreshWebview();
+            }
             break;
+          }
+
+          case "renameSession":
+          case "setTopic": {
+            const currentId = message.sessionId || service.getSessionId();
+            const currentTitle = service.getSessionTitle(currentId);
+            const newTitle = await vscode.window.showInputBox({
+              prompt: t("chat.prompt.renameTopic", currentId),
+              placeHolder: t("chat.prompt.sessionTitlePlaceholder"),
+              value: message.title !== undefined ? message.title : currentTitle,
+              ignoreFocusOut: true,
+            });
+            if (newTitle !== undefined) {
+              service.setSessionTitle(currentId, newTitle.trim());
+              vscode.window.showInformationMessage(
+                t(
+                  "chat.notify.topicUpdated",
+                  currentId,
+                  newTitle.trim() || "—",
+                ),
+              );
+              this.refreshWebview();
+            }
+            break;
+          }
+
+          case "quickSetTopic": {
+            if (message.topic) {
+              const currentId = service.getSessionId();
+              service.setSessionTitle(currentId, message.topic);
+              this.refreshWebview();
+            }
+            break;
+          }
 
           case "switchSession":
             if (message.sessionId) {
@@ -463,12 +537,15 @@ export class TelegramChatPanel {
       align-items: center;
       gap: 5px;
     }
+    .msg-text {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
     .msg-bubble {
       padding: 12px 16px;
       border-radius: var(--radius-md);
       font-size: 13.5px;
       line-height: 1.5;
-      word-break: break-word;
       box-shadow: 0 2px 8px rgba(0,0,0,0.12);
       position: relative;
     }
@@ -605,6 +682,7 @@ export class TelegramChatPanel {
           ${this.renderSessionOptions(sessions, sessionId)}
         </select>
       </div>
+      <button class="action-btn" onclick="renameCurrentSession()" title="${t("chat.btn.renameTopic.tooltip")}">${t("chat.btn.renameTopic")}</button>
       <button class="action-btn primary" onclick="newSession()" title="${t("chat.btn.new.tooltip")}">${t("chat.btn.new")}</button>
       <button class="action-btn" onclick="sendFile()" title="${t("chat.btn.file.tooltip")}">${t("chat.btn.file")}</button>
       <button class="action-btn" onclick="sendLogs()" title="${t("chat.btn.logs.tooltip")}">${t("chat.btn.logs")}</button>
@@ -666,7 +744,32 @@ export class TelegramChatPanel {
     function sendFile() { vscode.postMessage({ command: 'sendFile' }); }
     function sendAiDiag() { vscode.postMessage({ command: 'sendAiDiag' }); }
     function newSession() { vscode.postMessage({ command: 'newSession' }); }
+    function renameCurrentSession() {
+      const select = document.getElementById('session-select');
+      const id = select ? select.value : '';
+      vscode.postMessage({ command: 'renameSession', sessionId: id });
+    }
+    function quickSetTopic(topic, promptText) {
+      vscode.postMessage({ command: 'quickSetTopic', topic: topic });
+      if (promptText) {
+        insertQuickPrompt(promptText);
+      }
+    }
     function switchSession(id) { vscode.postMessage({ command: 'switchSession', sessionId: id }); }
+    function applyCodeToEditor(btn) {
+      if (!btn) return;
+      const code = btn.getAttribute('data-code');
+      if (code) {
+        vscode.postMessage({ command: 'applyCode', code: code });
+        btn.innerHTML = "Applied";
+        btn.style.background = "#28a745";
+        setTimeout(() => {
+          btn.innerHTML = "Apply & Diff";
+          btn.style.background = "var(--kuka-orange)";
+        }, 2000);
+      }
+    }
+
     function insertQuickPrompt(text) {
       const input = document.getElementById('msg-input');
       input.value = text;
@@ -704,6 +807,11 @@ export class TelegramChatPanel {
       }
     });
 
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
     function renderSessionSelect(sessions, currentId) {
       const select = document.getElementById('session-select');
       if (!sessions || sessions.length === 0) return;
@@ -711,8 +819,9 @@ export class TelegramChatPanel {
       let html = '';
       sessions.forEach(s => {
         const isCurrent = s.id === currentId;
+        const topicBadge = s.title ? '[' + escapeHtml(s.title) + '] ' : '';
         const timeStr = new Date(s.lastTime).toLocaleDateString([], {month:'numeric', day:'numeric'}) + ' ' + new Date(s.lastTime).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-        html += '<option value="' + s.id + '" ' + (isCurrent ? 'selected' : '') + '>#' + s.id + ' (' + s.msgCount + ' msgs | ' + timeStr + ')' + (isCurrent ? ' ★' : '') + '</option>';
+        html += '<option value="' + s.id + '" ' + (isCurrent ? 'selected' : '') + '>' + topicBadge + '#' + s.id + ' (' + s.msgCount + ' msgs | ' + timeStr + ')' + (isCurrent ? ' ★' : '') + '</option>';
       });
       select.innerHTML = html;
     }
@@ -746,6 +855,13 @@ export class TelegramChatPanel {
         .replace(/(\\$[A-Z0-9_\\.]+)/gi, '<span class="krl-var">$1</span>');
     }
 
+    function onQuickTopicClick(el) {
+      if (!el) return;
+      const topic = el.getAttribute('data-topic');
+      const prompt = el.getAttribute('data-prompt');
+      quickSetTopic(topic, prompt);
+    }
+
     function renderHistory(history) {
       const container = document.getElementById('messages-container');
       if (!history || history.length === 0) {
@@ -754,9 +870,11 @@ export class TelegramChatPanel {
           '<div class="empty-hero-title">' + currentLabels.emptyTitle + '</div>' +
           '<div class="empty-hero-desc">' + currentLabels.emptyDesc + '</div>' +
           '<div class="quick-pill-row">' +
-            '<div class="quick-pill" onclick="insertQuickPrompt(\\'Как настроить EthernetKRL (EKI)?\\')">💡 Настройка EKI</div>' +
-            '<div class="quick-pill" onclick="insertQuickPrompt(\\'Синтаксис PTP и аппроксимации C_PTP\\')">⚡ Синтаксис PTP</div>' +
-            '<div class="quick-pill" onclick="sendLogs()">📊 Отправить логи</div>' +
+            '<div class="quick-pill" data-topic="⚙️ EthernetKRL (EKI)" data-prompt="Как настроить EthernetKRL (EKI)?" onclick="onQuickTopicClick(this)">⚙️ EthernetKRL (EKI)</div>' +
+            '<div class="quick-pill" data-topic="⚡ Траектории и Движение" data-prompt="Вопрос по синтаксису и аппроксимации PTP / LIN" onclick="onQuickTopicClick(this)">⚡ Траектории</div>' +
+            '<div class="quick-pill" data-topic="🛡️ Безопасность и Логика" data-prompt="Проверка безопасности и блок-баланса" onclick="onQuickTopicClick(this)">🛡️ Безопасность</div>' +
+            '<div class="quick-pill" data-topic="🚨 Ошибка / Баг" data-prompt="Найдена ошибка / баг в программе" onclick="onQuickTopicClick(this)">🚨 Ошибка / Баг</div>' +
+            '<div class="quick-pill" data-topic="💼 Лицензия и PRO" data-prompt="Вопрос по активации Pro лицензии" onclick="onQuickTopicClick(this)">💼 Pro Лицензия</div>' +
           '</div>' +
         '</div>';
         return;
@@ -771,7 +889,7 @@ export class TelegramChatPanel {
         html += '<div class="msg-row ' + (isUser ? 'user' : 'developer') + '">' +
           '<div class="msg-sender-tag">' + senderTag + '</div>' +
           '<div class="msg-bubble">' +
-            formatRichText(m.text) +
+            '<div class="msg-text">' + formatRichText(m.text) + '</div>' +
             '<div class="msg-meta-row">' +
               '<span>' + timeStr + '</span>' +
               (isUser ? '<span class="msg-ticks">' + currentLabels.deliveredLabel + '</span>' : '') +
@@ -793,11 +911,12 @@ export class TelegramChatPanel {
     currentId: string,
   ): string {
     if (!sessions || sessions.length === 0) {
-      return `<option value="${currentId}">${t("chat.session.label", currentId, 0, "")}</option>`;
+      return `<option value="${currentId}">#${currentId}</option>`;
     }
     return sessions
       .map((s) => {
         const isCurrent = s.id === currentId;
+        const topicBadge = s.title ? `[${this.escapeHtml(s.title)}] ` : "";
         const timeStr =
           new Date(s.lastTime).toLocaleDateString([], {
             month: "numeric",
@@ -808,22 +927,31 @@ export class TelegramChatPanel {
             hour: "2-digit",
             minute: "2-digit",
           });
-        return `<option value="${s.id}" ${isCurrent ? "selected" : ""}>#${s.id} (${s.msgCount} msgs | ${timeStr})${isCurrent ? " ★" : ""}</option>`;
+        return `<option value="${s.id}" ${isCurrent ? "selected" : ""}>${topicBadge}#${s.id} (${s.msgCount} msgs | ${timeStr})${isCurrent ? " ★" : ""}</option>`;
       })
       .join("");
   }
 
   private renderMessagesHtml(history: ChatMessage[]): string {
+    const service = TelegramChatService.getInstance();
+    const currentTopic = service.getSessionTitle();
     if (!history || history.length === 0) {
+      const topicBanner = currentTopic
+        ? `<div style="display:inline-flex; align-items:center; gap:6px; background:rgba(0,229,255,0.1); border:1px solid rgba(0,229,255,0.3); color:var(--cyber-cyan); padding:4px 12px; border-radius:12px; font-size:12px; font-weight:700; margin-bottom:14px;">📌 Тема: ${this.escapeHtml(currentTopic)}</div>`
+        : `<div style="font-size:11.5px; font-weight:600; color:var(--text-muted); margin-bottom:10px;">${t("chat.topic.label")}</div>`;
+
       return `
         <div class="empty-hero">
           <div class="empty-hero-icon">🤖</div>
           <div class="empty-hero-title">${t("chat.empty.title")}</div>
           <div class="empty-hero-desc">${t("chat.empty.desc")}</div>
+          ${topicBanner}
           <div class="quick-pill-row">
-            <div class="quick-pill" onclick="insertQuickPrompt('Как настроить EthernetKRL (EKI)?')">💡 Настройка EKI</div>
-            <div class="quick-pill" onclick="insertQuickPrompt('Синтаксис PTP и аппроксимации C_PTP')">⚡ Синтаксис PTP</div>
-            <div class="quick-pill" onclick="sendLogs()">📊 Отправить логи</div>
+            <div class="quick-pill" onclick="quickSetTopic('${t("chat.topic.chip.eki")}', 'Как настроить EthernetKRL (EKI)?')">${t("chat.topic.chip.eki")}</div>
+            <div class="quick-pill" onclick="quickSetTopic('${t("chat.topic.chip.motion")}', 'Вопрос по синтаксису и аппроксимации PTP / LIN')">${t("chat.topic.chip.motion")}</div>
+            <div class="quick-pill" onclick="quickSetTopic('${t("chat.topic.chip.safety")}', 'Проверка безопасности и блок-баланса')">${t("chat.topic.chip.safety")}</div>
+            <div class="quick-pill" onclick="quickSetTopic('${t("chat.topic.chip.bug")}', 'Найдена ошибка / баг в программе')">${t("chat.topic.chip.bug")}</div>
+            <div class="quick-pill" onclick="quickSetTopic('${t("chat.topic.chip.license")}', 'Вопрос по активации Pro лицензии')">${t("chat.topic.chip.license")}</div>
           </div>
         </div>
       `;
@@ -842,7 +970,7 @@ export class TelegramChatPanel {
         <div class="msg-row ${isUser ? "user" : "developer"}">
           <div class="msg-sender-tag">${senderTag}</div>
           <div class="msg-bubble">
-            ${this.formatRichText(m.text)}
+            <div class="msg-text">${this.formatRichText(m.text)}</div>
             <div class="msg-meta-row">
               <span>${timeStr}</span>
               ${isUser ? `<span class="msg-ticks">${t("chat.status.delivered")}</span>` : ""}
@@ -862,9 +990,15 @@ export class TelegramChatPanel {
 
     // Triple-backtick code blocks
     s = s.replace(
-      /```(krl)?<br>?([\s\S]*?)```/gi,
-      (_m, _lang, code) =>
-        `<pre class="code-block">${this.highlightKrl(code)}</pre>`,
+      /```(\w*)?<br>?([\s\S]*?)```/gi,
+      (_m, lang, code) =>
+        `<div class="code-block-wrapper" style="position:relative; margin:8px 0;">
+           <div class="code-block-header" style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px; padding-bottom:4px; border-bottom:1px solid rgba(255,255,255,0.1);">
+             <span style="opacity:0.6">${lang || "code"}</span>
+             <button class="apply-code-btn" onclick="applyCodeToEditor(this)" data-code="${this.escapeHtml(code.trim())}" style="background:var(--kuka-orange); color:#fff; border:none; border-radius:3px; cursor:pointer; padding:2px 8px; font-weight:bold;">⚡ Apply & Diff</button>
+           </div>
+           <pre class="code-block">${this.highlightKrl(code)}</pre>
+         </div>`,
     );
 
     // Inline code
@@ -900,3 +1034,4 @@ export class TelegramChatPanel {
       .replace(/\n/g, "<br>");
   }
 }
+

@@ -142,10 +142,10 @@ export class CommandsTreeProvider implements vscode.TreeDataProvider<CommandItem
         t("command.refreshIOView.tooltip"),
       ),
       new CommandItem(
-        "Telegram Support Chat (@kukakrlbot)",
+        t("command.openTelegramChat"),
         "krl.openTelegramChat",
         "comment-discussion",
-        "Send & receive live messages with developer directly in VS Code",
+        t("command.openTelegramChat.tooltip"),
       ),
     ];
   }

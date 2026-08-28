@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main, master]
   schedule:
-    - cron: '0 4 * * 1' # Weekly security scan on Monday at 04:00 UTC
+    - cron: '0 4 * * 1'
   workflow_dispatch:
 
 permissions:
@@ -19,6 +19,9 @@ jobs:
   security-audit:
     name: Security & Supply Chain Audit
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      RL_PORTAL_ORG: ${{ secrets.RL_PORTAL_ORG }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -29,7 +32,7 @@ jobs:
           node-version: 20
 
       - name: Copy License
-        run: cp LICENSE extension/LICENSE.txt || true
+        run: cp LICENSE extension/LICENSE.txt 2>/dev/null || true
 
       - name: Install Extension Dependencies
         working-directory: extension
@@ -51,15 +54,34 @@ jobs:
         working-directory: extension
         run: npx @vscode/vsce package --no-dependencies
 
-      - name: ReversingLabs Spectra Assure Security Scan
-        uses: reversinglabs/gh-action-rl-scanner-composite@v1
+      - name: Prepare Reports Directory
+        run: mkdir -p reports
+
+      - name: ReversingLabs Spectra Assure Community Scan
+        uses: reversinglabs/gh-action-rl-protect-scan@v1
         continue-on-error: true
         with:
-          artifact-to-scan: "extension/kuka-krl-extension-1.7.3.vsix"
+          scan-path: "extension/package.json"
+          report: "reports/spectra-assure-community-report.json"
+          verbose: false
+        env:
+          RL_TOKEN: ${{ secrets.RL_TOKEN || secrets.RLPORTAL_ACCESS_TOKEN || secrets.RL_PORTAL_TOKEN }}
+
+      - name: ReversingLabs Spectra Assure Enterprise Scan
+        if: env.RL_PORTAL_ORG != ''
+        uses: reversinglabs/gh-action-rl-scanner-cloud-composite@v1
+        continue-on-error: true
+        with:
+          artifact-to-scan: "extension/*.vsix"
           report-path: "reports"
           rl-verbose: true
+          rl-portal-server: ${{ secrets.RL_PORTAL_SERVER || 'my.secure.software' }}
+          rl-portal-org: ${{ secrets.RL_PORTAL_ORG }}
+          rl-portal-group: ${{ secrets.RL_PORTAL_GROUP || 'default' }}
+          rl-package-url: "pkg:vscode/kuka-krl-extension@1.7.3"
         env:
-          RL_TOKEN: ${{ secrets.RL_PORTAL_TOKEN }}
+          RLPORTAL_ACCESS_TOKEN: ${{ secrets.RLPORTAL_ACCESS_TOKEN || secrets.RL_PORTAL_TOKEN }}
+          RL_PORTAL_TOKEN: ${{ secrets.RL_PORTAL_TOKEN || secrets.RLPORTAL_ACCESS_TOKEN }}
           RL_PORTAL_SERVER: ${{ secrets.RL_PORTAL_SERVER || 'https://my.secure.software' }}
 
       - name: Upload Security Reports
@@ -68,4 +90,5 @@ jobs:
         with:
           name: spectra-assure-security-reports
           path: reports/
+          if-no-files-found: ignore
           retention-days: 14

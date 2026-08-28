@@ -25,9 +25,10 @@
 3. В настройках созданного воркера: **Settings** ➔ **Variables** ➔ **KV Namespace Bindings** ➔ добавьте переменную с именем `CHAT_KV` и выберите ваше хранилище `KUKA_CHAT_KV`.
 
 ### 3. Задайте секреты:
-В **Settings** ➔ **Variables** ➔ **Environment Variables**:
-- `BOT_TOKEN`: ваш токен бота (например `8895123367:...`).
+В **Settings** ➔ **Variables and Secrets** (или через CLI: `npx wrangler secret put BOT_TOKEN`):
+- `BOT_TOKEN`: ваш токен бота от @BotFather (зашифрованный секрет).
 - `ADMIN_CHAT_ID`: ID вашей супергруппы в Telegram (например `-100...`).
+- `TELEGRAM_SECRET_TOKEN`: (опционально) секретный токен для проверки подписи входящих вебхуков.
 
 ### 4. Настройте Telegram Webhook:
 Откройте браузер и перейдите по ссылке:

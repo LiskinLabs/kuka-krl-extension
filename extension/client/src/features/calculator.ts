@@ -22,6 +22,8 @@ const translations = {
     loadFromCode: "Load from Code",
     copied: "Copied!",
     noSelection: "No valid FRAME/POS found in selection",
+    noVariables: "No BASE/TOOL/POS variables found",
+    selectVariable: "Select a variable to load",
     // Converter
     converterTitle: "🔄 Coordinate System Converter",
     converterDesc: "Convert a point from one coordinate system to another",
@@ -51,6 +53,8 @@ const translations = {
     loadFromCode: "Загрузить из кода",
     copied: "Скопировано!",
     noSelection: "Не найден FRAME/POS в выделении",
+    noVariables: "Переменные BASE/TOOL/POS не найдены",
+    selectVariable: "Выберите переменную для загрузки",
     // Converter
     converterTitle: "🔄 Конвертер Систем Координат",
     converterDesc: "Преобразовать точку из одной системы координат в другую",
@@ -80,6 +84,8 @@ const translations = {
     loadFromCode: "Koddan Yükle",
     copied: "Kopyalandı!",
     noSelection: "Seçimde geçerli FRAME/POS bulunamadı",
+    noVariables: "BASE/TOOL/POS değişkeni bulunamadı",
+    selectVariable: "Yüklenecek değişkeni seçin",
     // Converter
     converterTitle: "🔄 Koordinat Sistemi Dönüştürücü",
     converterDesc: "Bir noktayı bir koordinat sisteminden diğerine dönüştürün",
@@ -100,15 +106,15 @@ function getLocale(): "en" | "ru" | "tr" {
 }
 
 export function showCalculator(context: vscode.ExtensionContext) {
+  const locale = getLocale();
+  const t = translations[locale];
+
   const panel = vscode.window.createWebviewPanel(
     "krlCalculator",
-    "KRL Frame Calculator",
+    t.title,
     vscode.ViewColumn.Two,
     { enableScripts: true },
   );
-
-  const locale = getLocale();
-  const t = translations[locale];
 
   // Handle messages from webview
   panel.webview.onDidReceiveMessage(
@@ -133,13 +139,11 @@ export function showCalculator(context: vscode.ExtensionContext) {
       } else if (message.command === "pickVariable") {
         const items = await collectFrameVariables();
         if (items.length === 0) {
-          vscode.window.showInformationMessage(
-            "No BASE/TOOL/POS variables found",
-          );
+          vscode.window.showInformationMessage(t.noVariables);
           return;
         }
         const picked = await vscode.window.showQuickPick(items, {
-          placeHolder: "Select a variable to load",
+          placeHolder: t.selectVariable,
         });
         if (picked) {
           panel.webview.postMessage({
@@ -716,12 +720,12 @@ function getWebviewContent(t: typeof translations.en, cspSource: string) {
         function toggleWorldTarget() {
             const fields = document.getElementById('tgtBaseFields');
             const isWorld = document.getElementById('tgtIsWorld').checked;
-            fields.style.display = isWorld ? 'none' : 'block';
+            fields.style.display = isWorld ? 'none' : 'grid';
         }
         
         function copyResult(frameId) {
             const f = getFrame(frameId);
-            const str = \`{X \${f.x.toFixed(3)}, Y \${f.y.toFixed(3)}, Z \${f.z.toFixed(3)}, A \${f.a.toFixed(3)}, B \${f.b.toFixed(3)}, C \${f.c.toFixed(3)}}\`;
+            const str = '{X ' + f.x.toFixed(3) + ', Y ' + f.y.toFixed(3) + ', Z ' + f.z.toFixed(3) + ', A ' + f.a.toFixed(3) + ', B ' + f.b.toFixed(3) + ', C ' + f.c.toFixed(3) + '}';
             const el = document.createElement('textarea');
             el.value = str;
             document.body.appendChild(el);

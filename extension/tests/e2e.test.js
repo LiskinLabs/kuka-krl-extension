@@ -580,6 +580,41 @@ test('Snippet Generator Panel specifies ViewColumn.Beside', () => {
     assertTrue(content.includes('vscode.ViewColumn.Beside'), 'Snippet Generator panel must use ViewColumn.Beside');
 });
 
+test('All Webview scripts across extension features parse and execute without JavaScript syntax errors', () => {
+    const webviewFiles = [
+        'calculator.ts',
+        'controlCenter.ts',
+        'flowchartViewer.ts',
+        'snippetGenerator.ts',
+        'telegramChatPanel.ts'
+    ];
+    for (const fileName of webviewFiles) {
+        const filePath = path.join(__dirname, '..', 'client', 'src', 'features', fileName);
+        assertTrue(fs.existsSync(filePath), `Webview feature file missing: ${fileName}`);
+        const content = fs.readFileSync(filePath, 'utf8');
+        const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
+        let match;
+        let scriptCount = 0;
+        while ((match = scriptRegex.exec(content)) !== null) {
+            scriptCount++;
+            const scriptBody = match[1];
+            if (!scriptBody.trim()) continue;
+
+            let sanitized = scriptBody;
+            sanitized = sanitized.replace(/"[^"\r\n]*\$\{[\s\S]*?\}[^"\r\n]*"/g, '"mock_str"');
+            sanitized = sanitized.replace(/'[^'\r\n]*\$\{[\s\S]*?\}[^'\r\n]*'/g, "'mock_str'");
+            sanitized = sanitized.replace(/\$\{[\s\S]*?\}/g, '"mock_val"');
+
+            try {
+                new Function('acquireVsCodeApi', 'window', 'document', sanitized);
+            } catch (err) {
+                throw new Error(`Syntax error in Webview script inside ${fileName} (script #${scriptCount}): ${err.message}`);
+            }
+        }
+        assertTrue(scriptCount > 0, `No <script> tag found in Webview file: ${fileName}`);
+    }
+});
+
 // ----------------------------------------------------
 // 17. Command Registry Coverage E2E
 // ----------------------------------------------------
@@ -591,9 +626,21 @@ test('All registered package.json commands have corresponding implementation han
     const commands = pkg.contributes.commands || [];
     assertTrue(commands.length >= 10, 'package.json should contribute commands');
 
-    const mainTsContent = fs.readFileSync(path.join(__dirname, '..', 'client', 'src', 'main.ts'), 'utf8');
-    const controlCenterTsContent = fs.readFileSync(path.join(__dirname, '..', 'client', 'src', 'features', 'controlCenter.ts'), 'utf8');
-    const combinedContent = mainTsContent + '\n' + controlCenterTsContent;
+    const clientSrcDir = path.join(__dirname, '..', 'client', 'src');
+    let combinedContent = '';
+    const readTsFiles = (dir) => {
+        if (!fs.existsSync(dir)) return;
+        const files = fs.readdirSync(dir);
+        for (const file of files) {
+            const fullPath = path.join(dir, file);
+            if (fs.statSync(fullPath).isDirectory()) {
+                readTsFiles(fullPath);
+            } else if (file.endsWith('.ts')) {
+                combinedContent += '\n' + fs.readFileSync(fullPath, 'utf8');
+            }
+        }
+    };
+    readTsFiles(clientSrcDir);
 
     commands.forEach(cmd => {
         const cmdName = cmd.command;
@@ -650,6 +697,46 @@ test('Chat Webview HTML template contains zero duplicate checkmarks or button em
     assertTrue(!content.includes('➕ ${t("chat.btn.new")'), 'Chat Webview must not prepend duplicate ➕ icon');
     assertTrue(!content.includes('📎 ${t("chat.btn.file")'), 'Chat Webview must not prepend duplicate 📎 icon');
     assertTrue(!content.includes('📜 ${t("chat.btn.logs")'), 'Chat Webview must not prepend duplicate 📜 icon');
+});
+
+test('Session Topic Titles are formatted with [Topic] in session selector and forum topics', () => {
+    const formatSessionOption = (s, currentId) => {
+        const isCurrent = s.id === currentId;
+        const topicBadge = s.title ? `[${s.title}] ` : '';
+        return `${topicBadge}#${s.id} (${s.msgCount} msgs)${isCurrent ? ' ★' : ''}`;
+    };
+
+    const s1 = { id: 'd1ecf9', title: 'Настройка EKI', msgCount: 5 };
+    const s2 = { id: 'b4a102', msgCount: 0 };
+
+    const rendered1 = formatSessionOption(s1, 'd1ecf9');
+    assertTrue(rendered1.includes('[Настройка EKI] #d1ecf9'), 'Session option must display custom topic badge');
+    assertTrue(rendered1.includes('★'), 'Current session must have star');
+
+    const rendered2 = formatSessionOption(s2, 'd1ecf9');
+    assertTrue(!rendered2.includes('['), 'Session without topic must not display empty brackets');
+    assertTrue(rendered2.includes('#b4a102'), 'Session ID must be present');
+
+    // Forum topic name generation format
+    const formatForumTopic = (role, hostname, sessionId, topicTitle) => {
+        const topicSuffix = topicTitle ? ` | ${topicTitle}` : '';
+        return `[${role && role.includes('PRO') ? 'PRO' : 'FREE'}] ${hostname || 'PC'} (#${sessionId})${topicSuffix}`.substring(0, 120);
+    };
+
+    const forum1 = formatForumTopic('⭐ PRO', 'KR-210', 'd1ecf9', 'Ошибка $VEL.CP');
+    assertTrue(forum1 === '[PRO] KR-210 (#d1ecf9) | Ошибка $VEL.CP', 'Forum topic name must match standard pattern with topic');
+
+    const forum2 = formatForumTopic('Community', 'PC-TEST', 'a1b2c3', '');
+    assertTrue(forum2 === '[FREE] PC-TEST (#a1b2c3)', 'Forum topic without title must omit suffix cleanly');
+});
+
+test('Telegram Chat Panel supports interactive topic renaming and quick preset chips', () => {
+    const chatPanelPath = path.join(__dirname, '..', 'client', 'src', 'features', 'telegramChatPanel.ts');
+    const content = fs.readFileSync(chatPanelPath, 'utf8');
+    assertTrue(content.includes('renameCurrentSession()'), 'Chat Webview must include renameCurrentSession function');
+    assertTrue(content.includes('quickSetTopic('), 'Chat Webview must include quickSetTopic function');
+    assertTrue(content.includes('case "renameSession":'), 'Chat panel dispatcher must handle renameSession command');
+    assertTrue(content.includes('case "quickSetTopic":'), 'Chat panel dispatcher must handle quickSetTopic command');
 });
 
 // ----------------------------------------------------
@@ -732,6 +819,28 @@ ENDDAT`;
 });
 
 // ----------------------------------------------------
+// 22. 1-Click URI Protocol & Dodo Webhook Contract E2E
+// ----------------------------------------------------
+console.log('\n🔗 SECTION 22: 1-Click URI Protocol & Dodo Webhook Contract E2E');
+
+test('KrlUriHandler and openCustomerPortal are exported and registered in client code', () => {
+    const licenseFile = path.join(__dirname, '..', 'client', 'src', 'features', 'license.ts');
+    const content = fs.readFileSync(licenseFile, 'utf8');
+    assertTrue(content.includes('class KrlUriHandler'), 'KrlUriHandler class must be defined in license.ts');
+    assertTrue(content.includes('vscode.window.registerUriHandler'), 'UriHandler must be registered in subscriptions');
+    assertTrue(content.includes('activateLicenseWithKey'), 'activateLicenseWithKey must be implemented');
+    assertTrue(content.includes('openCustomerPortalCommand'), 'openCustomerPortalCommand must be implemented');
+});
+
+test('Cloudflare Worker contains Dodo Payments Webhook endpoint handler', () => {
+    const workerFile = path.join(__dirname, '..', '..', 'cloudflare-worker', 'worker.js');
+    const content = fs.readFileSync(workerFile, 'utf8');
+    assertTrue(content.includes('/webhook/dodo'), 'worker.js must define /webhook/dodo endpoint');
+    assertTrue(content.includes('entitlement_grant.created'), 'worker.js must handle entitlement_grant.created event');
+    assertTrue(content.includes('subscription.active'), 'worker.js must handle subscription.active event');
+});
+
+// ----------------------------------------------------
 // E2E Summary Report
 // ----------------------------------------------------
 console.log('\n====================================================');
@@ -742,4 +851,18 @@ console.log(` Failed E2E Checks: ${failed}`);
 console.log(` Total E2E Checks : ${passed + failed}`);
 console.log('====================================================\n');
 
+test('Telegram Chat supports Smart Diff & Apply, @ mentions and Remote Telepresence', () => {
+    const chatPanelPath = path.join(__dirname, '..', 'client', 'src', 'features', 'telegramChatPanel.ts');
+    const panelContent = fs.readFileSync(chatPanelPath, 'utf8');
+    assertTrue(panelContent.includes('applyCodeToEditor(btn)'), 'Chat Webview must include applyCodeToEditor function');
+    assertTrue(panelContent.includes('case "applyCode":'), 'Chat panel dispatcher must handle applyCode command');
+    
+    const servicePath = path.join(__dirname, '..', 'client', 'src', 'features', 'telegramService.ts');
+    const serviceContent = fs.readFileSync(servicePath, 'utf8');
+    assertTrue(serviceContent.includes('mentionRegex = /@'), 'TelegramService must parse @ mentions');
+    assertTrue(serviceContent.includes('cmd === "/read_file"'), 'TelegramService must handle /read_file remote command');
+    assertTrue(serviceContent.includes('readAndSendFile'), 'TelegramService must include readAndSendFile method');
+});
 process.exit(failed > 0 ? 1 : 0);
+
+

@@ -25,24 +25,92 @@ import { initAiTools } from "./features/aiTools";
 import { initKrcBackupDiff } from "./features/krcBackupDiff";
 import { initControlCenter } from "./features/controlCenter";
 import { TelegramChatService } from "./features/telegramService";
+import { registerGitLensKrl } from "./features/gitLensKrl";
+import { registerTelemetry } from "./features/telemetry";
+import {
+  convertToIiqkaFold,
+  convertLegacyToSpline,
+  unwrapFolds,
+  insertCollisionGuard,
+  insertSplineBlock,
+} from "./features/foldTools";
 
 // KRL tanılama koleksiyonu
 const krlDiagnostics = vscode.languages.createDiagnosticCollection("krl");
 let lsClient: LanguageClient;
 
 export async function activate(context: vscode.ExtensionContext) {
-  // Initialize License System (await ensures isPremiumCached is set before commands are used)
-  await initLicense(context);
+  // Tree Views (Must register immediately to guarantee views and commands are populated)
+  const ioTreeProvider = new IOTreeProvider();
+  vscode.window.registerTreeDataProvider("krlIO", ioTreeProvider);
+  context.subscriptions.push(
+    vscode.commands.registerCommand("krl.refreshIOView", () => {
+      ioTreeProvider.refresh();
+    }),
+    vscode.commands.registerCommand("krl.renameSignal", (item) => {
+      ioTreeProvider.renameSignal(item);
+    }),
+  );
+
+  const commandsTreeProvider = new CommandsTreeProvider();
+  vscode.window.registerTreeDataProvider("krlCommands", commandsTreeProvider);
+
+  // Initialize License System
+  try {
+    await initLicense(context);
+  } catch (err) {
+    console.error("Failed to initialize License system:", err);
+  }
 
   // Initialize Error Lens
-  initErrorLens(context);
+  try {
+    initErrorLens(context);
+  } catch (err) {
+    console.error("Failed to initialize ErrorLens:", err);
+  }
 
   // Initialize EthernetKRL Validator, AI Tools, KRC Backup Diff, Control Center & Telegram Chat
-  initEkiValidator(context);
-  initAiTools(context);
-  initKrcBackupDiff(context);
-  initControlCenter(context);
-  TelegramChatService.getInstance().init(context);
+  try {
+    initEkiValidator(context);
+  } catch (err) {
+    console.error("Failed to initialize EkiValidator:", err);
+  }
+
+  try {
+    initAiTools(context);
+  } catch (err) {
+    console.error("Failed to initialize AiTools:", err);
+  }
+
+  try {
+    initKrcBackupDiff(context);
+  } catch (err) {
+    console.error("Failed to initialize KrcBackupDiff:", err);
+  }
+
+  try {
+    initControlCenter(context);
+  } catch (err) {
+    console.error("Failed to initialize ControlCenter:", err);
+  }
+
+  try {
+    TelegramChatService.getInstance().init(context);
+  } catch (err) {
+    console.error("Failed to initialize TelegramService:", err);
+  }
+
+  try {
+    registerGitLensKrl(context);
+  } catch (err) {
+    console.error("Failed to initialize GitLensKrl:", err);
+  }
+
+  try {
+    registerTelemetry(context);
+  } catch (err) {
+    console.error("Failed to initialize Telemetry:", err);
+  }
 
   // Sunucu yolunu belirle
   const serverPath = context.asAbsolutePath(
@@ -209,6 +277,26 @@ export async function activate(context: vscode.ExtensionContext) {
     /* Fold commands already registered */
   }
   context.subscriptions.push(
+    vscode.commands.registerCommand("krl.sendSelectionToChat", async () => {
+      const editor = vscode.window.activeTextEditor;
+      if (!editor || editor.selection.isEmpty) {
+        vscode.window.showInformationMessage("Выделите код для отправки в чат.");
+        return;
+      }
+      const selection = editor.document.getText(editor.selection);
+      const startLine = editor.selection.start.line + 1;
+      const endLine = editor.selection.end.line + 1;
+      const fileName = require("path").basename(editor.document.fileName);
+      const ext = fileName.split('.').pop() || 'txt';
+      const msg = `[Файл: ${fileName}, Строки: ${startLine}-${endLine}]\n\`\`\`${ext}\n${selection}\n\`\`\``;
+      
+      const input = await vscode.window.showInputBox({ prompt: "Добавьте комментарий к коду (опционально)" });
+      const finalMsg = input ? `${input}\n\n${msg}` : msg;
+      
+      const service = TelegramChatService.getInstance();
+      await service.sendMessage(finalMsg);
+      vscode.window.showInformationMessage("Код отправлен в Telegram чат.");
+    }),
     vscode.commands.registerCommand("krl.cleanGitMetadata", async () => {
       const editor = vscode.window.activeTextEditor;
       if (!editor || editor.document.languageId !== "krl") {
@@ -241,26 +329,6 @@ export async function activate(context: vscode.ExtensionContext) {
       }
     }),
   );
-
-  // =====================
-  // Tree Views
-  // =====================
-
-  // I/O Tree View
-  const ioTreeProvider = new IOTreeProvider();
-  vscode.window.registerTreeDataProvider("krlIO", ioTreeProvider);
-  context.subscriptions.push(
-    vscode.commands.registerCommand("krl.refreshIOView", () => {
-      ioTreeProvider.refresh();
-    }),
-    vscode.commands.registerCommand("krl.renameSignal", (item) => {
-      ioTreeProvider.renameSignal(item);
-    }),
-  );
-
-  // Commands Tree View
-  const commandsTreeProvider = new CommandsTreeProvider();
-  vscode.window.registerTreeDataProvider("krlCommands", commandsTreeProvider);
 
   // Smart Declaration Sorter for KRL .dat files (Pro Industrial Edition)
   context.subscriptions.push(
@@ -591,6 +659,11 @@ export async function activate(context: vscode.ExtensionContext) {
         }
       });
     }),
+    vscode.commands.registerCommand("krl.convertToIiqkaFold", convertToIiqkaFold),
+    vscode.commands.registerCommand("krl.convertLegacyToSpline", convertLegacyToSpline),
+    vscode.commands.registerCommand("krl.unwrapFold", unwrapFolds),
+    vscode.commands.registerCommand("krl.insertCollisionGuard", insertCollisionGuard),
+    vscode.commands.registerCommand("krl.insertSplineBlock", insertSplineBlock),
   );
 
   // =====================

@@ -171,7 +171,7 @@ export function initKrcBackupDiff(context: vscode.ExtensionContext) {
             channel.show(true);
 
             vscode.window.showWarningMessage(
-              `⚠️ Point differences detected in ${fileName}! Check Output channel "KRC Backup Point Diff" for details.`,
+              t("backup.warning.differences", fileName),
             );
           }
         }

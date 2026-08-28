@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { t } from "../i18n";
 
 export async function generateReport() {
   const files = await vscode.workspace.findFiles("**/*.{src,dat,sub}");
@@ -43,21 +44,24 @@ export async function generateReport() {
     }
   });
 
-  let report = `# KRL Project Analysis Report\n\n`;
-  report += `**Date:** ${new Date().toLocaleString()}\n`;
-  report += `**Total KRL Files:** ${files.length}\n`;
-  report += `**Total Issues:** ${totalErrors + totalWarnings + totalInfos + totalHints}\n\n`;
+  let report = t("report.title");
+  report += t("report.date", new Date().toLocaleString());
+  report += t("report.totalFiles", files.length);
+  report += t(
+    "report.totalIssues",
+    totalErrors + totalWarnings + totalInfos + totalHints,
+  );
 
-  report += `## Summary\n`;
-  report += `- 🔴 **Errors:** ${totalErrors}\n`;
-  report += `- 🟡 **Warnings:** ${totalWarnings}\n`;
-  report += `- 🔵 **Information:** ${totalInfos}\n`;
-  report += `- ⚪ **Hints:** ${totalHints}\n\n`;
+  report += t("report.summary");
+  report += t("report.errors", totalErrors);
+  report += t("report.warnings", totalWarnings);
+  report += t("report.info", totalInfos);
+  report += t("report.hints", totalHints);
 
-  report += `## Detailed Issues\n`;
+  report += t("report.details");
 
   if (fileDiagnostics.size === 0) {
-    report += "_No issues found in the workspace._\n";
+    report += t("report.noIssues");
   } else {
     // Sort files by path
     const sortedUris = Array.from(fileDiagnostics.keys()).sort();
@@ -89,7 +93,7 @@ export async function generateReport() {
             icon = "⚪";
             break;
         }
-        report += `- ${icon} **Line ${line}:** ${d.message}\n`;
+        report += t("report.line", icon, line, d.message);
       });
       report += "\n";
     }

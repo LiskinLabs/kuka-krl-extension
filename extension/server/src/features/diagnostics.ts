@@ -751,15 +751,24 @@ export class DiagnosticsProvider {
         // Bilinmeyen sembol ise hata bildir
         let message = t("diag.variableNotDefined", varName);
 
-        // Поиск похожего имени (Spellchecking)
+        // Поиск похожего имени (Spellchecking) с защитой от CPU DoS
         let bestMatch = "";
         let minDistance = 3; // Порог схожести
 
+        // Фильтрация кандидатов по схожести длины и начальному символу
+        let evaluatedCount = 0;
+        const MAX_TYPO_CANDIDATES = 120;
+
         for (const name of validatedNames) {
-          const distance = levenshteinDistance(varName.toUpperCase(), name);
+          if (evaluatedCount++ > MAX_TYPO_CANDIDATES) break;
+          // Быстрый отсев нерелевантных имен
+          if (Math.abs(upperVar.length - name.length) > 2) continue;
+
+          const distance = levenshteinDistance(upperVar, name);
           if (distance < minDistance) {
             minDistance = distance;
             bestMatch = name;
+            if (minDistance === 1) break; // 1 опечатка - оптимальный результат
           }
         }
 
@@ -1829,33 +1838,32 @@ export class DiagnosticsProvider {
 
 /**
  * Расстояние Левенштейна для поиска похожих имен.
- * Оптимизировано с быстрой проверкой разницы длин.
+ * Защищено от CPU DoS (ограничение длины 48 симв) и использует O(N) памяти.
  */
 function levenshteinDistance(s1: string, s2: string): number {
   const len1 = s1.length;
   const len2 = s2.length;
+  // Быстрый отсев по длине и защита от длинных строк
+  if (len1 > 48 || len2 > 48) return 99;
   if (Math.abs(len1 - len2) >= 3) return 99;
 
-  const matrix: number[][] = [];
-
-  for (let i = 0; i <= len1; i++) {
-    matrix[i] = [i];
-  }
-
-  for (let j = 1; j <= len2; j++) {
-    matrix[0][j] = j;
-  }
+  let prev = Array.from({ length: len2 + 1 }, (_, i) => i);
+  let curr = new Array(len2 + 1);
 
   for (let i = 1; i <= len1; i++) {
+    curr[0] = i;
     for (let j = 1; j <= len2; j++) {
       const cost = s1[i - 1] === s2[j - 1] ? 0 : 1;
-      matrix[i][j] = Math.min(
-        matrix[i - 1][j] + 1, // deletion
-        matrix[i][j - 1] + 1, // insertion
-        matrix[i - 1][j - 1] + cost, // substitution
+      curr[j] = Math.min(
+        prev[j] + 1,      // deletion
+        curr[j - 1] + 1,  // insertion
+        prev[j - 1] + cost // substitution
       );
     }
+    const temp = prev;
+    prev = curr;
+    curr = temp;
   }
 
-  return matrix[len1][len2];
+  return prev[len2];
 }

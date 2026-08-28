@@ -66,7 +66,8 @@ test('Codicons in package.json match valid VS Code icon set', () => {
         'list-ordered', 'symbol-namespace', 'refresh', 'trash', 'symbol-numeric',
         'edit', 'beaker', 'report', 'git-merge', 'key', 'lock', 'info',
         'file-code', 'symbol-interface', 'list-flat', 'shield', 'widget',
-        'diff', 'comment-discussion', 'dashboard', 'references', 'output', 'file-submodule'
+        'diff', 'comment-discussion', 'dashboard', 'references', 'output', 'file-submodule',
+        'archive', 'pulse', 'credit-card', 'globe', 'account', 'git-commit', 'history', 'source-control'
     ]);
     const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
     const commands = pkg.contributes.commands || [];
@@ -231,35 +232,75 @@ test('Wonderlib contains expected functions', () => {
 // Test 6: Licensing & Links
 console.log('\n--- Licensing Tests ---');
 
-test('Control Center has the correct Lemon Squeezy Checkout URL', () => {
+test('Control Center has the correct Dodo Payments Checkout URL', () => {
     const licensePath = path.join(__dirname, '..', 'client', 'src', 'features', 'license.ts');
     const licenseContent = fs.readFileSync(licensePath, 'utf8');
-    assertTrue(licenseContent.includes('https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7'), 'Checkout URL is missing or incorrect in license.ts');
+    assertTrue(licenseContent.includes('https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ'), 'Checkout URL is missing or incorrect in license.ts');
 
     const controlCenterPath = path.join(__dirname, '..', 'client', 'src', 'features', 'controlCenter.ts');
     const ccContent = fs.readFileSync(controlCenterPath, 'utf8');
-    assertTrue(ccContent.includes('LEMON_SQUEEZY_CHECKOUT_URL'), 'LEMON_SQUEEZY_CHECKOUT_URL missing in controlCenter.ts');
+    assertTrue(ccContent.includes('DODO_PAYMENTS_CHECKOUT_URL'), 'DODO_PAYMENTS_CHECKOUT_URL missing in controlCenter.ts');
 });
 
-test('Lemon Squeezy Store ID (393141) and Product ID (1103272) exist in license.ts', () => {
+test('Dodo Payments Business ID (bus_0NlrxPhrg9eHzPZKAgsF1) and Product ID exist in license.ts', () => {
     const licensePath = path.join(__dirname, '..', 'client', 'src', 'features', 'license.ts');
     const content = fs.readFileSync(licensePath, 'utf8');
-    assertTrue(content.includes('LEMON_SQUEEZY_STORE_ID = 393141'), 'LEMON_SQUEEZY_STORE_ID 393141 missing in license.ts');
-    assertTrue(content.includes('LEMON_SQUEEZY_PRODUCT_ID = 1103272'), 'LEMON_SQUEEZY_PRODUCT_ID 1103272 missing in license.ts');
+    assertTrue(content.includes('DODO_BUSINESS_ID = "bus_0NlrxPhrg9eHzPZKAgsF1"'), 'DODO_BUSINESS_ID missing in license.ts');
+    assertTrue(content.includes('DODO_PRODUCT_ID_ANNUAL = "pdt_0NmAV012KFHSjUMyDomJ6"'), 'DODO_PRODUCT_ID_ANNUAL missing in license.ts');
 });
 
-test('PRICING_PLANS contains Monthly and Annual subscription tiers', () => {
+test('PRICING_PLANS contains Monthly, Annual, and Lifetime tiers', () => {
     const licensePath = path.join(__dirname, '..', 'client', 'src', 'features', 'license.ts');
     const content = fs.readFileSync(licensePath, 'utf8');
     assertTrue(content.includes('pro_monthly'), 'pro_monthly tier missing in PRICING_PLANS');
     assertTrue(content.includes('pro_annual'), 'pro_annual tier missing in PRICING_PLANS');
+    assertTrue(content.includes('pro_lifetime'), 'pro_lifetime tier missing in PRICING_PLANS');
+    assertTrue(content.includes('DODO_PRODUCT_ID_LIFETIME = "pdt_0NmAcoqVCfuwQ6Xx7qyqr"'), 'DODO_PRODUCT_ID_LIFETIME missing in license.ts');
+    assertTrue(content.includes('GRACE_PERIOD_MS = 14 * 24 * 60 * 60 * 1000'), '14-day GRACE_PERIOD_MS missing in license.ts');
 });
 
-test('Lemon Squeezy API calls use application/x-www-form-urlencoded specification', () => {
+test('GitLens KRL Version Control features and commands are registered', () => {
+    const pkgPath = path.join(__dirname, '..', 'package.json');
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+    const commands = pkg.contributes.commands.map(c => c.command);
+    assertTrue(commands.includes('krl.viewFileHistory'), 'krl.viewFileHistory missing in package.json');
+    assertTrue(commands.includes('krl.showLineBlameDetails'), 'krl.showLineBlameDetails missing in package.json');
+
+    const gitLensPath = path.join(__dirname, '..', 'client', 'src', 'features', 'gitLensKrl.ts');
+    assertTrue(fs.existsSync(gitLensPath), 'gitLensKrl.ts file is missing');
+});
+
+test('Dodo Payments API calls use application/json specification', () => {
     const licensePath = path.join(__dirname, '..', 'client', 'src', 'features', 'license.ts');
     const content = fs.readFileSync(licensePath, 'utf8');
-    assertTrue(content.includes('application/x-www-form-urlencoded'), 'x-www-form-urlencoded Content-Type missing in license.ts');
-    assertTrue(content.includes('callLemonSqueezyApi'), 'callLemonSqueezyApi helper missing in license.ts');
+    assertTrue(content.includes('application/json'), 'application/json Content-Type missing in license.ts');
+    assertTrue(content.includes('callDodoPaymentsApi'), 'callDodoPaymentsApi helper missing in license.ts');
+});
+
+test('License security enforces SecretStorage encryption, HMAC signature, and zero hardcoded plaintext keys', () => {
+    const licensePath = path.join(__dirname, '..', 'client', 'src', 'features', 'license.ts');
+    const content = fs.readFileSync(licensePath, 'utf8');
+    assertTrue(content.includes('SECRET_STORAGE_KEY'), 'SECRET_STORAGE_KEY missing in license.ts');
+    assertTrue(content.includes('computeCacheSignature'), 'computeCacheSignature HMAC helper missing in license.ts');
+    assertTrue(!content.includes('"TEKNOROB-LEAD"'), 'Plaintext TEKNOROB-LEAD string must NOT be hardcoded in license.ts');
+});
+
+test('Modern KRL & iiQKA Fold Suite features and commands are registered and functional', () => {
+    const pkgPath = path.join(__dirname, '..', 'package.json');
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+    const commands = pkg.contributes.commands.map(c => c.command);
+    assertTrue(commands.includes('krl.convertToIiqkaFold'), 'krl.convertToIiqkaFold missing in package.json');
+    assertTrue(commands.includes('krl.convertLegacyToSpline'), 'krl.convertLegacyToSpline missing in package.json');
+    assertTrue(commands.includes('krl.unwrapFold'), 'krl.unwrapFold missing in package.json');
+    assertTrue(commands.includes('krl.insertCollisionGuard'), 'krl.insertCollisionGuard missing in package.json');
+    assertTrue(commands.includes('krl.insertSplineBlock'), 'krl.insertSplineBlock missing in package.json');
+
+    const foldToolsPath = path.join(__dirname, '..', 'client', 'src', 'features', 'foldTools.ts');
+    assertTrue(fs.existsSync(foldToolsPath), 'foldTools.ts file is missing');
+    const content = fs.readFileSync(foldToolsPath, 'utf8');
+    assertTrue(content.includes('parseMotionLine'), 'parseMotionLine helper missing in foldTools.ts');
+    assertTrue(content.includes('convertToIiqkaFold'), 'convertToIiqkaFold missing in foldTools.ts');
+    assertTrue(content.includes('convertLegacyToSpline'), 'convertLegacyToSpline missing in foldTools.ts');
 });
 
 // Test 7: Multilingual i18n Symmetry
@@ -411,6 +452,52 @@ test('All Webview features enforce strict Content-Security-Policy (CSP) headers'
         assertTrue(content.includes('Content-Security-Policy'), `${fileName} missing Content-Security-Policy meta tag`);
         assertTrue(content.includes("default-src 'none'"), `${fileName} CSP must declare default-src 'none'`);
     }
+});
+
+test('All Webview embedded JavaScript scripts are syntactically valid with zero errors', () => {
+    const webviewFiles = [
+        'calculator.ts',
+        'controlCenter.ts',
+        'flowchartViewer.ts',
+        'snippetGenerator.ts',
+        'telegramChatPanel.ts'
+    ];
+    for (const fileName of webviewFiles) {
+        const filePath = path.join(__dirname, '..', 'client', 'src', 'features', fileName);
+        assertTrue(fs.existsSync(filePath), `Webview feature file missing: ${fileName}`);
+        const content = fs.readFileSync(filePath, 'utf8');
+        const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
+        let match;
+        let scriptCount = 0;
+        while ((match = scriptRegex.exec(content)) !== null) {
+            scriptCount++;
+            const scriptBody = match[1];
+            if (!scriptBody.trim()) continue;
+
+            // Sanitize template string interpolations like ${...} for syntax checking
+            let sanitized = scriptBody;
+            // 1. Strings containing interpolations: "foo ${bar} baz" -> "mock_str"
+            sanitized = sanitized.replace(/"[^"\r\n]*\$\{[\s\S]*?\}[^"\r\n]*"/g, '"mock_str"');
+            sanitized = sanitized.replace(/'[^'\r\n]*\$\{[\s\S]*?\}[^'\r\n]*'/g, "'mock_str'");
+            // 2. Pure JS interpolations: ${JSON.stringify(...)} -> "mock_val"
+            sanitized = sanitized.replace(/\$\{[\s\S]*?\}/g, '"mock_val"');
+
+            try {
+                new Function('acquireVsCodeApi', 'window', 'document', sanitized);
+            } catch (err) {
+                throw new Error(`Syntax error in Webview script inside ${fileName} (script #${scriptCount}): ${err.message}`);
+            }
+        }
+        assertTrue(scriptCount > 0, `No <script> tag found in Webview file: ${fileName}`);
+    }
+});
+
+test('Cloudflare Worker HTML pages contain valid syntax and zero dead links', () => {
+    const workerPath = path.join(__dirname, '..', '..', 'cloudflare-worker', 'worker.js');
+    assertTrue(fs.existsSync(workerPath), 'worker.js missing');
+    const content = fs.readFileSync(workerPath, 'utf8');
+    assertTrue(content.includes('vscode://LiskinLabs.kuka-krl-extension/activate'), 'worker.js must contain 1-click URI handler for VS Code');
+    assertTrue(content.includes('/activate') && content.includes('/webhook/dodo'), 'worker.js must handle activation and dodo webhook endpoints');
 });
 
 test('Client and server source code contains zero unsafe eval or dynamic code execution', () => {

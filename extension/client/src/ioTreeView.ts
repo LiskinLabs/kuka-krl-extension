@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs";
+import { t } from "./i18n";
 
 /**
  * Tree item для I/O элемента
@@ -18,9 +19,9 @@ export class IOItem extends vscode.TreeItem {
     super(alias ? `${alias} (${label})` : label, collapsibleState); // Update label
 
     this.tooltip = alias
-      ? `${alias} = ${label}\n${locations.length} uses`
-      : `${label} - ${locations.length} uses`;
-    this.description = `${locations.length} uses`;
+      ? `${alias} = ${label}\n${t("io.uses", locations.length)}`
+      : `${label} - ${t("io.uses", locations.length)}`;
+    this.description = t("io.uses", locations.length);
     this.contextValue = "ioItem";
   }
 }
@@ -39,7 +40,7 @@ export class IOLocation extends vscode.TreeItem {
     );
 
     const line = location.range.start.line + 1;
-    this.description = `Line ${line}`;
+    this.description = t("io.line", line);
     this.tooltip = lineText.trim();
 
     this.command = {
@@ -65,7 +66,7 @@ export class IOCategory extends vscode.TreeItem {
         ? vscode.TreeItemCollapsibleState.Expanded
         : vscode.TreeItemCollapsibleState.None,
     );
-    this.description = `${items.length} signals`;
+    this.description = t("io.signals", items.length);
   }
 }
 
@@ -229,7 +230,7 @@ export class IOTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem> 
       ) {
         return Promise.resolve([
           new vscode.TreeItem(
-            "No KRL signals found in workspace",
+            t("io.view.empty"),
             vscode.TreeItemCollapsibleState.None,
           ),
         ]);
@@ -306,13 +307,13 @@ export class IOTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem> 
   public async renameSignal(item: IOItem): Promise<void> {
     // 1. Ask for new name
     const newName = await vscode.window.showInputBox({
-      prompt: `Enter alias for ${item.label}`,
+      prompt: t("io.rename.prompt", item.label),
       value: item.alias || "",
-      placeHolder: "e.g. Vacuum_OK",
+      placeHolder: t("io.rename.placeholder"),
       validateInput: (text) => {
         if (!text) return null; // Allow empty to remove alias
         if (!/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(text)) {
-          return "Invalid KRL identifier (must start with letter/_ and contain only letters/numbers/_)";
+          return t("io.rename.invalid");
         }
         return null;
       },
@@ -326,9 +327,7 @@ export class IOTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem> 
       "**/node_modules/**",
     );
     if (configFiles.length === 0) {
-      vscode.window.showErrorMessage(
-        "Could not find '$config.dat' in workspace. Cannot save alias.",
-      );
+      vscode.window.showErrorMessage(t("io.rename.noConfig"));
       return;
     }
 
@@ -340,7 +339,7 @@ export class IOTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem> 
           uri: f,
         })),
         {
-          placeHolder: "Select $config.dat to save alias",
+          placeHolder: t("io.rename.pickConfig"),
         },
       );
       if (!picked) return;
@@ -411,10 +410,10 @@ export class IOTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem> 
       // 5. Refresh tree
       this.refresh();
       vscode.window.showInformationMessage(
-        `Signal updated: ${signalType}[${item.index}] -> ${newName || "(removed)"}`,
+        t("io.rename.updated", signalType, item.index, newName || "(removed)"),
       );
     } catch (e) {
-      vscode.window.showErrorMessage(`Failed to update $config.dat: ${e}`);
+      vscode.window.showErrorMessage(t("io.rename.failed", String(e)));
     }
   }
 }

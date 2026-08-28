@@ -48,6 +48,18 @@ test_krl_extension.src
 validate-json.js
 *.test.js
 
+# Secrets, Environment & Database files
+.env*
+.dev.vars*
+*.sql
+*.tmp
+*.bak
+*.zip
+*.log
+.github/**
+.agents/**
+.system_generated/**
+
 # Allow media assets for offline README rendering inside VS Code
 !media/*.gif
 !media/*.png

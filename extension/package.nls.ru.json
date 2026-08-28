@@ -32,6 +32,7 @@
     "command.findReferences": "Найти все ссылки (Go to References)",
     "command.openCustomerPortal": "Личный кабинет и инвойсы (Dodo Payments)",
     "command.viewFileHistory": "История изменений файла и сравнение ревизий (Git)",
+    "command.viewGitGraph": "Открыть граф ревизий KRL и таймлайн точек",
     "command.showLineBlameDetails": "Детали автора строки KRL (Git Blame)",
     "command.convertToIiqkaFold": "Конвертировать в iiQKA Motion Fold",
     "command.convertLegacyToSpline": "Конвертировать в сплайны (KSS 8.6+ / 8.7)",
@@ -44,6 +45,9 @@
     "command.errorLens.copyProblemCode": "Error Lens: Скопировать код ошибки",
     "command.errorLens.searchForProblem": "Error Lens: Найти решение ошибки в интернете",
     "command.errorLens.disableLine": "Error Lens: Подавить предупреждение на текущей строке",
+    "command.diffWithPrevious": "Сравнить строку с предыдущей ревизией коммита (Diff)",
+    "command.copyCommitMessage": "Скопировать сообщение коммита",
+    "command.toggleGitLensInlineBlame": "Включить/выключить строку автора GitLens в коде",
     "config.title": "KUKA KRL Extension",
     "config.autoFold.description": "Автоматически сворачивать все регионы при открытии KRL файла",
     "config.formatOnSave.description": "Автоматически форматировать документ при сохранении",
@@ -73,5 +77,6 @@
     "config.documentHighlights.enabled": "Подсвечивать вхождения одной и той же переменной/функции в документе.",
     "config.maxCartesianVelocity": "Максимальный безопасный лимит декартовой скорости для $VEL.CP (м/с).",
     "config.supportGatewayUrl": "URL-адрес шлюза поддержки Liskin Labs (Прямая инженерная поддержка).",
-    "config.telemetry.enabled": "Разрешить пинг статуса и сессий к шлюзу поддержки Liskin Labs (отключите для изолированных промышленных ячеек без интернета)."
+    "config.telemetry.enabled": "Разрешить пинг статуса и сессий к шлюзу поддержки Liskin Labs (отключите для изолированных промышленных ячеек без интернета).",
+    "config.gitLens.currentLine.enabled": "Отображать информацию Git Blame в конце активной строки."
 }

@@ -32,6 +32,7 @@
   "command.findReferences": "Find All References (Go to References)",
   "command.openCustomerPortal": "Open Customer Portal & Invoices (Dodo Payments)",
   "command.viewFileHistory": "View KRL File History & Compare Revisions",
+  "command.viewGitGraph": "Open KRL Revision Graph & Point Timeline",
   "command.showLineBlameDetails": "Show KRL Line Git Blame Details",
   "command.convertToIiqkaFold": "Convert Selection to iiQKA Motion Fold",
   "command.convertLegacyToSpline": "Convert Legacy Motions to Modern Splines (KSS 8.6+ / 8.7)",
@@ -44,6 +45,9 @@
   "command.errorLens.copyProblemCode": "Error Lens: Copy Problem Code",
   "command.errorLens.searchForProblem": "Error Lens: Search Problem on Web",
   "command.errorLens.disableLine": "Error Lens: Suppress Diagnostic on Current Line",
+  "command.diffWithPrevious": "Compare Line with Previous Commit Revision (Diff)",
+  "command.copyCommitMessage": "Copy Commit Message",
+  "command.toggleGitLensInlineBlame": "Toggle GitLens Inline Blame Annotations",
   "config.title": "KUKA KRL Extension",
   "config.autoFold.description": "Automatically fold all regions when opening a KRL file",
   "config.formatOnSave.description": "Automatically format document on save",
@@ -73,5 +77,6 @@
   "config.documentHighlights.enabled": "Highlight occurrences of the same variable/function in the document.",
   "config.maxCartesianVelocity": "Maximum safe Cartesian velocity limit for $VEL.CP (m/s).",
   "config.supportGatewayUrl": "Liskin Labs Support Desk Gateway URL (Direct Engineering Support Relay).",
-  "config.telemetry.enabled": "Enable heartbeat and status pings to Liskin Labs Support Gateway (disable for air-gapped industrial cells)."
+  "config.telemetry.enabled": "Enable heartbeat and status pings to Liskin Labs Support Gateway (disable for air-gapped industrial cells).",
+  "config.gitLens.currentLine.enabled": "Show Git Blame annotations inline at the end of the current line."
 }

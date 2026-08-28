@@ -329,6 +329,12 @@
         "icon": "$(history)"
       },
       {
+        "command": "krl.viewGitGraph",
+        "title": "%command.viewGitGraph%",
+        "category": "KRL",
+        "icon": "$(source-control)"
+      },
+      {
         "command": "krl.showLineBlameDetails",
         "title": "%command.showLineBlameDetails%",
         "category": "KRL",
@@ -399,6 +405,24 @@
         "title": "%command.errorLens.disableLine%",
         "category": "KRL",
         "icon": "$(clear-all)"
+      },
+      {
+        "command": "krl.diffWithPrevious",
+        "title": "%command.diffWithPrevious%",
+        "category": "KRL",
+        "icon": "$(diff)"
+      },
+      {
+        "command": "krl.copyCommitMessage",
+        "title": "%command.copyCommitMessage%",
+        "category": "KRL",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "krl.toggleGitLensInlineBlame",
+        "title": "%command.toggleGitLensInlineBlame%",
+        "category": "KRL",
+        "icon": "$(git-commit)"
       }
     ],
     "viewsContainers": {
@@ -763,6 +787,11 @@
           "type": "boolean",
           "default": true,
           "description": "%config.telemetry.enabled%"
+        },
+        "krl.gitLens.currentLine.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.gitLens.currentLine.enabled%"
         }
       }
     }

@@ -529,6 +529,38 @@ test('GitHub Actions CI and Security workflows exist and validate VSIX artifacts
     assertTrue(secContent.includes('gh-action-rl-scanner'), 'security.yml must integrate ReversingLabs Spectra Assure action');
 });
 
+test('organizeKrlDeclarations organizes, groups, and sorts KRL declarations', () => {
+    const { organizeKrlDeclarations } = require('../server/out/features/codeActions');
+    const rawKrl = [
+        'DEF my_program()',
+        '  DECL INT nCounter = 0',
+        '  DECL E6POS XP_HOME = {X 0, Y 0, Z 0, A 0, B 0, C 0}',
+        '  SIGNAL do_clamp $OUT[1]',
+        '  EXT Sub_Palletize(INT:IN)',
+        '  GLOBAL DECL REAL rSpeed = 1.5',
+        '  DECL BOOL bReady = FALSE',
+        '  PTP XP_HOME',
+        'END'
+    ].join('\n');
+
+    const organized = organizeKrlDeclarations(rawKrl);
+    assertTrue(organized.includes('; --- External Declarations ---'), 'Must contain External Declarations header');
+    assertTrue(organized.includes('; --- I/O Signals ---'), 'Must contain I/O Signals header');
+    assertTrue(organized.includes('; --- Global Declarations ---'), 'Must contain Global Declarations header');
+    assertTrue(organized.includes('; --- Variables ---'), 'Must contain Variables header');
+    assertTrue(organized.includes('; --- Positions & Frames ---'), 'Must contain Positions & Frames header');
+    assertTrue(organized.includes('PTP XP_HOME'), 'Must preserve execution statements');
+});
+
+test('GitLens KRL commands and configuration are registered in package.json', () => {
+    const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
+    const commandNames = pkg.contributes.commands.map(c => c.command);
+    assertTrue(commandNames.includes('krl.diffWithPrevious'), 'Must contribute krl.diffWithPrevious command');
+    assertTrue(commandNames.includes('krl.copyCommitMessage'), 'Must contribute krl.copyCommitMessage command');
+    assertTrue(commandNames.includes('krl.toggleGitLensInlineBlame'), 'Must contribute krl.toggleGitLensInlineBlame command');
+    assertTrue(pkg.contributes.configuration.properties['krl.gitLens.currentLine.enabled'] !== undefined, 'Must contribute krl.gitLens.currentLine.enabled setting');
+});
+
 // Summary
 console.log('\n=== Test Summary ===');
 console.log(`Passed: ${passed}`);

@@ -154,7 +154,16 @@ connection.onInitialize((params: InitializeParams): InitializeResult => {
         triggerCharacters: ["(", ","],
         retriggerCharacters: [","],
       },
-      codeActionProvider: { codeActionKinds: ["quickfix", "refactor.extract"] },
+      codeActionProvider: {
+        codeActionKinds: [
+          "quickfix",
+          "refactor.extract",
+          "source.fixAll",
+          "source.fixAll.krl",
+          "source.organizeDeclarations",
+          "source.organizeDeclarations.krl",
+        ],
+      },
       completionProvider: {
         triggerCharacters: [
           "$",

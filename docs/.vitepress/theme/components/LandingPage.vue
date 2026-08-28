@@ -320,31 +320,31 @@
           <div class="inline-block self-start px-2.5 py-0.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-kuka-orange text-xs font-mono font-bold uppercase mb-3">14-Day Free Trial</div>
           <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">{{ t.p1Name }}</h3>
           <p class="text-slate-600 dark:text-gray-400 text-sm mb-6">{{ t.p1Desc }}</p>
-          <div class="text-4xl font-extrabold text-slate-900 dark:text-white mb-2">$3.99<span class="text-lg text-slate-500 dark:text-gray-500 font-normal"> / mo</span></div>
-          <div class="text-xs text-orange-600 dark:text-orange-400 font-mono font-semibold mb-6">⚡ Instant License Key • 3 PCs</div>
+          <div class="text-4xl font-extrabold text-slate-900 dark:text-white mb-2">$9.99<span class="text-lg text-slate-500 dark:text-gray-500 font-normal"> / mo</span></div>
+          <div class="text-xs text-orange-600 dark:text-orange-400 font-mono font-semibold mb-6">⚡ Instant License Key • 2 PCs</div>
           <ul class="space-y-3 mb-8 flex-grow text-sm text-slate-700 dark:text-gray-300">
             <li class="flex gap-2"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.pf1 }}</li>
             <li class="flex gap-2"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.pf2 }}</li>
             <li class="flex gap-2"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.pf3_std }}</li>
           </ul>
-          <a href="https://liskinlabs.lemonsqueezy.com/checkout/buy/ab34799e-42d7-49b0-ad33-94b2d4fe0a7d" target="_blank" rel="noopener noreferrer" class="block w-full py-3.5 px-4 bg-slate-100 hover:bg-slate-200 dark:bg-kuka-gray dark:hover:bg-gray-700 text-center text-slate-900 dark:text-white font-bold rounded-xl border border-slate-300 dark:border-kuka-border transition-colors min-h-[44px] flex items-center justify-center">{{ t.btnSub }}</a>
+          <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ" target="_blank" rel="noopener noreferrer" class="block w-full py-3.5 px-4 bg-slate-100 hover:bg-slate-200 dark:bg-kuka-gray dark:hover:bg-gray-700 text-center text-slate-900 dark:text-white font-bold rounded-xl border border-slate-300 dark:border-kuka-border transition-colors min-h-[44px] flex items-center justify-center">{{ t.btnSub }}</a>
         </div>
 
         <!-- Annual (Featured) -->
         <div class="bg-gradient-to-b from-kuka-orange to-orange-600 p-[2px] rounded-2xl relative transform md:-translate-y-3 shadow-[0_0_40px_rgba(255,102,0,0.25)] flex flex-col text-left">
           <div class="relative bg-white dark:bg-kuka-dark h-full p-6 sm:p-8 rounded-2xl flex flex-col z-10">
             <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-kuka-orange text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">{{ t.mostPopular }}</div>
-            <div class="inline-block self-start px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-bold uppercase mb-3">SAVE 20%</div>
+            <div class="inline-block self-start px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-bold uppercase mb-3">SAVE 35%</div>
             <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">{{ t.p2Name }}</h3>
             <p class="text-orange-700 dark:text-kuka-orange/90 text-sm mb-6">{{ t.p2Desc }}</p>
-            <div class="text-4xl font-extrabold text-slate-900 dark:text-white mb-2">$39.99<span class="text-lg text-slate-500 dark:text-gray-400 font-normal"> / yr</span></div>
+            <div class="text-4xl font-extrabold text-slate-900 dark:text-white mb-2">$79.00<span class="text-lg text-slate-500 dark:text-gray-400 font-normal"> / yr</span></div>
             <div class="text-xs text-amber-700 dark:text-amber-400 font-mono font-semibold mb-6">👑 Priority Support & Updates • 3 PCs</div>
             <ul class="space-y-3 mb-8 flex-grow text-sm text-slate-700 dark:text-gray-300">
               <li class="flex gap-2"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.pf1 }}</li>
               <li class="flex gap-2"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.pf2 }}</li>
               <li class="flex gap-2"><svg class="w-5 h-5 text-kuka-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> {{ t.pf3_pri }}</li>
             </ul>
-            <a href="https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7" target="_blank" rel="noopener noreferrer" class="block w-full py-3.5 px-4 bg-kuka-orange hover:bg-orange-600 text-center text-white font-bold rounded-xl transition-colors shadow-lg shadow-orange-500/20 min-h-[44px] flex items-center justify-center">{{ t.btnSubYr }}</a>
+            <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ" target="_blank" rel="noopener noreferrer" class="block w-full py-3.5 px-4 bg-kuka-orange hover:bg-orange-600 text-center text-white font-bold rounded-xl transition-colors shadow-lg shadow-orange-500/20 min-h-[44px] flex items-center justify-center">{{ t.btnSubYr }}</a>
           </div>
         </div>
 
@@ -535,7 +535,7 @@ const translations = {
     ],
 
     pricingTitle: "Invest in Your Productivity",
-    pricingDesc: "Flexible pricing for commissioning engineers. Secure payment processing via Lemon Squeezy (Merchant of Record).",
+    pricingDesc: "Flexible pricing for commissioning engineers. Secure payment processing via Dodo Payments (Merchant of Record).",
     
     p0Name: "Community Edition",
     p0Desc: "Core syntax & development tools.",
@@ -556,13 +556,13 @@ const translations = {
     
     btnFree: "Download on Marketplace",
     btnSub: "Start 14-Day Free Trial",
-    btnSubYr: "Subscribe Yearly (Save 20%)",
+    btnSubYr: "Subscribe Yearly (Save 35%)",
 
     faqTitle: "Frequently Asked Questions",
     faqs: [
       { q: "Does it work entirely offline?", a: 'Yes. The Industrial Edition is built with an "Offline-First Architecture". Once you activate your license, it is securely cached in your OS keychain and works without any internet connection, making it perfect for secure factory floors.' },
       { q: "Do I need KUKA WorkVisual installed?", a: "No! KUKA KRL Professional operates completely independently in VS Code. It uses its own custom AST parser and static analyzer, meaning you can develop on any OS (Windows, macOS, Linux) without WorkVisual." },
-      { q: "What payment methods do you accept?", a: "We process payments via Lemon Squeezy, which accepts all major credit cards, Apple Pay, Google Pay, and PayPal across 135+ countries. Official VAT/tax invoices are generated automatically." },
+      { q: "What payment methods do you accept?", a: "We process payments via Dodo Payments, which accepts all major credit cards, Apple Pay, Google Pay, and PayPal across 135+ countries. Official B2B VAT/tax invoices are generated automatically." },
       { q: "How many machines can I use with one license?", a: "Each Pro license allows activation on up to 3 computers (e.g. your field laptop, office workstation, and home PC)." }
     ]
   },
@@ -622,7 +622,7 @@ const translations = {
     ],
 
     pricingTitle: "Инвестируйте в Свою Продуктивность",
-    pricingDesc: "Гибкие тарифы для инженеров-наладчиков. Безопасная оплата через Lemon Squeezy (Merchant of Record).",
+    pricingDesc: "Гибкие тарифы для инженеров-наладчиков. Безопасная оплата через Dodo Payments (Merchant of Record).",
     
     p0Name: "Community Edition",
     p0Desc: "Базовый синтаксис и инструменты.",
@@ -643,13 +643,13 @@ const translations = {
     
     btnFree: "Установить из Marketplace",
     btnSub: "Начать 14 дней бесплатно",
-    btnSubYr: "Оформить на год (Скидка 20%)",
+    btnSubYr: "Оформить на год (Скидка 35%)",
 
     faqTitle: "Часто Задаваемые Вопросы",
     faqs: [
       { q: "Работает ли расширение полностью офлайн?", a: "Да. Industrial Edition использует Офлайн-Архитектуру. После активации лицензионного ключа, он надежно кэшируется в системном хранилище. Для работы в цехах и на заводах интернет не требуется." },
       { q: "Нужен ли установленный KUKA WorkVisual?", a: "Нет! KUKA KRL Professional работает абсолютно независимо внутри VS Code. Он использует собственный AST-парсер, что позволяет программировать на любой ОС (Windows, macOS, Linux) без WorkVisual." },
-      { q: "Какие методы оплаты вы принимаете?", a: "Мы обрабатываем платежи через Lemon Squeezy, который поддерживает банковские карты, Apple Pay, Google Pay и PayPal в более чем 135 странах. Официальные инвойсы и чеки формируются автоматически." },
+      { q: "Какие методы оплаты вы принимаете?", a: "Мы обрабатываем платежи через Dodo Payments, который поддерживает банковские карты, Apple Pay, Google Pay и PayPal в более чем 135 странах. Официальные инвойсы и чеки формируются автоматически." },
       { q: "На скольких компьютерах можно использовать лицензию?", a: "Каждая лицензия Pro позволяет активировать расширение на 3 устройствах (например: рабочий ноутбук для выездов, офисный ПК и домашний компьютер)." }
     ]
   },
@@ -709,7 +709,7 @@ const translations = {
     ],
 
     pricingTitle: "Verimliliğinize Yatırım Yapın",
-    pricingDesc: "Devreye alma mühendisleri için esnek fiyatlandırma. Lemon Squeezy aracılığıyla güvenli ödemeler.",
+    pricingDesc: "Devreye alma mühendisleri için esnek fiyatlandırma. Dodo Payments aracılığıyla güvenli ödemeler.",
     
     p0Name: "Community Sürümü",
     p0Desc: "Temel sözdizimi ve geliştirme araçları.",
@@ -730,13 +730,13 @@ const translations = {
     
     btnFree: "Marketplace'ten İndir",
     btnSub: "14 Günlük Ücretsiz Deneme",
-    btnSubYr: "Yıllık Abone Ol (%20 Tasarruf)",
+    btnSubYr: "Yıllık Abone Ol (%35 Tasarruf)",
 
     faqTitle: "Sıkça Sorulan Sorular",
     faqs: [
       { q: "Tamamen çevrimdışı çalışıyor mu?", a: 'Evet. Industrial Edition "Çevrimdışı Öncelikli Mimari" ile oluşturulmuştur. Lisansı etkinleştirdiğinizde güvenli bir şekilde önbelleğe alınır ve internet olmadan çalışır.' },
       { q: "KUKA WorkVisual kurulu olması gerekir mi?", a: "Hayır! KUKA KRL Professional, VS Code içinde tamamen bağımsız çalışır. Kendi özel AST ayrıştırıcısını kullanır." },
-      { q: "Hangi ödeme yöntemlerini kabul ediyorsunuz?", a: "Tüm büyük kredi kartlarını, Apple Pay, Google Pay ve PayPal'ı kabul eden Lemon Squeezy aracılığıyla ödemeleri alıyoruz." },
+      { q: "Hangi ödeme yöntemlerini kabul ediyorsunuz?", a: "Tüm büyük kredi kartlarını, Apple Pay, Google Pay ve PayPal'ı kabul eden Dodo Payments aracılığıyla ödemeleri alıyoruz." },
       { q: "Bir lisansı kaç bilgisayarda kullanabilirim?", a: "Her Pro lisansı 3 bilgisayara kadar etkinleştirilebilir (örn. saha dizüstü bilgisayarı, ofis iş istasyonu ve ev bilgisayarı)." }
     ]
   }

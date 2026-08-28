@@ -10,14 +10,9 @@
 </p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/v/LiskinLabs.kuka-krl-extension?style=for-the-badge&label=VS%20Marketplace&color=FF6600" alt="VS Code Version" /></a>
-  <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=for-the-badge&label=Open%20VSX&color=007ACC" alt="Open VSX Version" /></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/v/LiskinLabs.kuka-krl-extension?style=for-the-badge&label=Marketplace&color=FF6600" alt="Version" /></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/i/LiskinLabs.kuka-krl-extension?style=for-the-badge&logo=visual-studio-code&label=Installs" alt="Installs" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=for-the-badge&logo=shield" alt="ReversingLabs Security Score" /></a>
-</p>
-
-<p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/i/LiskinLabs.kuka-krl-extension?style=for-the-badge&logo=visual-studio-code&label=VS%20Installs" alt="VS Code Installs" /></a>
-  <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/dt/LiskinLabs/kuka-krl-extension?style=for-the-badge&logo=eclipse-che&label=Open%20VSX%20Installs" alt="Open VSX Installs" /></a>
 </p>
 
 <p align="center">
@@ -30,8 +25,8 @@
 
 <p align="center">
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>🌐 Interactive Wiki (26 Tools)</b></a> •
-  <a href="https://liskinlabs.lemonsqueezy.com/checkout/buy/ab34799e-42d7-49b0-ad33-94b2d4fe0a7d"><b>⚡ 14-Day Free Trial ($3.99/mo)</b></a> •
-  <a href="https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7"><b>👑 Annual Pro ($39.99/yr - Save 20%)</b></a> •
+  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"><b>⚡ 14-Day Free Trial ($9.99/mo)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"><b>👑 Annual Pro ($79.00/yr - Save 35%)</b></a> • 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>🛡️ Security Audit Report</b></a>
 </p>
 
@@ -91,7 +86,15 @@ Every commissioning robotics engineer knows the pain:
 
 ---
 
-### 4. 📐 3-Point Euler Frame Math & KUKA Control Center
+### 4. 🔀 GitLens-Supercharged KRL Version Control
+*Track every coordinate edit and program modification with precision.*
+* **Line Blame Annotations**: Instant author, timestamp, and commit details displayed in the status bar for any KRL line.
+* **Commit Inspector**: Click status bar blame to inspect full commit diffs, commit metadata, and historical revisions.
+* **Visual File History (`krl.viewFileHistory`)**: Compare current workspace code against any historical Git commit in a side-by-side diff.
+
+---
+
+### 5. 📐 3-Point Euler Frame Math & KUKA Control Center
 *Direct coordinate system transformation calculator built into your editor.*
 * **3-Point Method**: Compute `BASE_DATA` and `TOOL_DATA` origins and Euler rotation angles (A, B, C) from measured calibration points.
 * **Direct `.dat` Insertion**: Insert calculated coordinate frames straight into data files with one click.
@@ -103,7 +106,7 @@ Every commissioning robotics engineer knows the pain:
 
 ---
 
-### 5. 🔍 Signal Inlay Hints & PLC Comment Mapping
+### 6. 🔍 Signal Inlay Hints & PLC Comment Mapping
 *Understand I/O logic at a glance without flipping through electrical schematics.*
 * Reads signal definitions directly from `$config.dat` and `kuka_signals.json`.
 * Displays human-readable labels inline next to `$IN[x]`, `$OUT[y]`, `$ANIN[z]`, and `$FLAG[k]`.
@@ -114,7 +117,7 @@ Every commissioning robotics engineer knows the pain:
 
 ---
 
-### 6. ⚡ Automated Code Formatter & Matrix Alignment
+### 7. ⚡ Automated Code Formatter & Matrix Alignment
 *Turn messy handwritten code into clean, standardized industrial code in 1 keystroke (`Shift+Alt+F`).*
 * Standards-compliant 3-space KUKA indentation.
 * Aligns `=` assignment operators in `.dat` files for readable coordinate matrices.
@@ -122,6 +125,77 @@ Every commissioning robotics engineer knows the pain:
 
 <p align="center">
   <img src="docs/public/media/code_formatter.gif" width="720" alt="Code Formatter Demo" />
+</p>
+
+---
+
+### 8. 💡 Smart Context Autocomplete & Snippets
+*Type at the speed of thought.* Instant code completion across 350+ KSS system variables, motion commands, structured types, and subroutines.
+
+<p align="center">
+  <img src="docs/public/media/smart_autocomplete.gif" width="720" alt="Smart Autocomplete Demo" />
+</p>
+
+---
+
+### 9. 🔎 Go-to-Definition & Find All References
+*Instant AST-level indexing across your entire project folder.* Jump from any function or variable call straight to its declaration across separate `.src` and `.dat` files.
+
+<p align="center">
+  <img src="docs/public/media/goto_definition.gif" width="720" alt="Go to Definition Demo" />
+</p>
+
+---
+
+### 10. ℹ️ Rich Hover Documentation & Read/Write Status
+*Get instant parameter explanations and safety warnings.* Hover over any KSS system variable to see its physical units, read/write permissions, and KSS manual descriptions.
+
+<p align="center">
+  <img src="docs/public/media/hover_info.gif" width="720" alt="Hover Info Demo" />
+</p>
+
+---
+
+### 11. 🧹 Clean Git Metadata & WorkVisual Header Stripper
+*Keep version control clean.* Strip WorkVisual headers (`&ACCESS`, `&REL`, `&PARAM`, `&COMMENT`) with one click to prevent noisy git diffs on automated commits.
+
+<p align="center">
+  <img src="docs/public/media/git_metadata_cleaner.gif" width="720" alt="Git Metadata Cleaner Demo" />
+</p>
+
+---
+
+### 12. ⚙️ Modern KRL & iiQKA Fold Suite
+*Upgrade your code to modern KUKA standards in 1 click.*
+* **Convert Selection to iiQKA Fold (`krl.wrapIiQkaFold`)**: Wrap custom logic into standard iiQKA collapsible blocks.
+* **Convert to Spline Block (`krl.wrapSplineBlock`)**: Wrap linear and circular motions into high-performance `SPLINE` / `ENDSPLINE` blocks for KSS 8.3–8.7.
+* **Collision Guard Injector (`krl.insertCollisionGuard`)**: Automatically inject `$TORQMON` torque monitoring frames around critical motion zones.
+* **Clean & Unwrap Folds (`krl.cleanUnwrapFolds`)**: Safely unwrap obsolete Inline Forms while preserving internal motion instructions.
+
+---
+
+### 13. 💬 Live Support Gateway & Remote Telepresence
+*Direct two-way support chat with developers right inside VS Code.*
+* **Interactive Chat Panel**: Instant forum-based thread synchronization with development engineering support.
+* **Smart Diff & Apply**: One-click review and automatic application of code fixes suggested by technical support.
+* **Remote Telepresence & Diagnostics**: Optional secure telemetry commands (`/ai_diag`, `/logs`, `/sysinfo`, `/ping`) for rapid plant commissioning assistance.
+
+---
+
+### 14. 🗂️ Quick Fold Toolbar & Sort Declarations
+*Manage massive programs with ease.* One-click folding of FOLD blocks, subprograms, and automatic sorting of variable declarations.
+
+<p align="center">
+  <img src="docs/public/media/quick_fold_toolbar.gif" width="720" alt="Quick Fold Toolbar Demo" />
+</p>
+
+---
+
+### 15. 💀 Dead Code & Unused Global Function Analysis
+*Prevent code bloat and leftover test routines.* Identify uncalled subroutines, unused variables, and unreachable code branches across your entire workspace.
+
+<p align="center">
+  <img src="docs/public/media/dead-code-demo.gif" width="720" alt="Dead Code Analysis Demo" />
 </p>
 
 ---
@@ -135,7 +209,10 @@ Every commissioning robotics engineer knows the pain:
 | **6 Contrast Themes** (Midnight OLED, WorkVisual, Blueprint) | ✅ | ✅ | Designed for outdoor sunlight & dark plant cells |
 | **Signal Inlay Hints & Hover Docs** | ✅ | ✅ | Inline PLC signal labels & parameter signatures |
 | **Code Formatter & Matrix Alignment** | ✅ | ✅ | Instant 1-click cleanup (`Shift+Alt+F`) |
+| **GitLens Line Blame & Revision History** | ✅ | ✅ | Instant author & commit tracking for every point |
 | **Trilingual Localization** (EN, RU, TR) | ✅ | ✅ | Full native UI & diagnostic messages |
+| **Clean Git Metadata Stripper** | ✅ | ✅ | Strips WorkVisual headers for pristine Git diffs |
+| **Modern KRL & iiQKA Fold Suite** | ❌ | **✅ Pro** | iiQKA Folds, Spline Blocks & Collision Guard |
 | **Interactive Flowchart Viewer** (Mermaid SVG) | ❌ | **✅ Pro** | Visual control-flow logic & 2-way code jump |
 | **Strict Block Balance Diagnostic** | ❌ | **✅ Pro** | Catches unclosed `IF/LOOP/FOR` blocks |
 | **Velocity & Safety Inspector** ($VEL.CP) | ❌ | **✅ Pro** | Prevents dangerous Cartesian overspeeds |
@@ -143,6 +220,7 @@ Every commissioning robotics engineer knows the pain:
 | **SmartPAD ZIP Backup Diff & Point Delta** | ❌ | **✅ Pro** | Computes exact coordinate deltas (ΔX, ΔY, ΔZ) |
 | **3-Point Euler Frame Math Calculator** | ❌ | **✅ Pro** | Calculates `BASE_DATA`/`TOOL_DATA` in editor |
 | **EthernetKRL (EKI) XML Suite** | ❌ | **✅ Pro** | Live XML template generator & validator |
+| **Live Support Gateway & Remote Telepresence** | ❌ | **✅ Pro** | Direct 2-way helpdesk chat, Diff & Apply |
 | **Dead Code & Scope Checker** | ❌ | **✅ Pro** | Finds unused variables & dead subroutines |
 | **Motion Diagrams & Spline Generator** | ❌ | **✅ Pro** | Visualizes spline curves for KSS 8.3+ |
 | **100% Offline Factory Access** | ✅ | **✅ Pro** | Zero internet required on shop floor |
@@ -151,41 +229,34 @@ Every commissioning robotics engineer knows the pain:
 
 ## 👑 Upgrade to Pro: Pricing & Instant Licensing
 
-We offer flexible, industrial-grade licensing through our verified merchant of record, **Lemon Squeezy**. All transactions are encrypted and support Credit Cards, Apple Pay, Google Pay, and PayPal across 135+ countries with automatic VAT/tax invoices.
+We offer flexible, industrial-grade licensing through our verified merchant of record, **Dodo Payments**. All transactions are encrypted and support Credit Cards, Apple Pay, Google Pay, and PayPal across 135+ countries with automatic VAT/tax invoices.
 
 ### 💳 Plans:
 
 | Plan | Price | Trial / Discount | License Terms | Checkout |
-|:---|:---:|:---|:---:|:---|
+|:---|:---:|:---|:---|:---:|
 | 🟢 **Community** | **$0** | 100% Free Forever | Personal & Commercial Use | [Install Free](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| ⏱️ **Pro Monthly** | **$3.99** / mo | **14-Day Free Trial** | All 26 Pro Tools • Up to 3 PCs | [Start 14-Day Trial](https://liskinlabs.lemonsqueezy.com/checkout/buy/ab34799e-42d7-49b0-ad33-94b2d4fe0a7d) |
-| 👑 **Pro Annual** | **$39.99** / yr | **Save 20%** | Priority Updates & Support • 3 PCs | [Get Annual Pro](https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7) |
+| ⏱️ **Pro Monthly** | **$9.99** / mo | **14-Day Free Trial** ($0.00 today) | All 26 Pro Tools • 2 Workstations | [Start 14-Day Trial](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
+| 👑 **Pro Annual** | **$79.00** / yr | **Save 35%** (~$6.58/mo) | 3 Workstations • 30-Day Offline Buffer | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
+| 🏆 **Pro Lifetime** | **$199.00** | **Pay Once, Own Forever** | 5 Workstations • Lifetime Updates | [Get Lifetime Pro](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
 
 <div align="center" style="margin: 25px 0;">
-  <a href="https://liskinlabs.lemonsqueezy.com/checkout/buy/ab34799e-42d7-49b0-ad33-94b2d4fe0a7d" style="text-decoration:none;">
-    <kbd style="font-size: 1.25em; padding: 12px 28px; background-color: #FF6600; color: white; border-radius: 10px; font-weight: bold; border: 1px solid #d15500; cursor: pointer; box-shadow: 0 4px 15px rgba(255,102,0,0.35);">
-      ⚡ Start 14-Day Free Trial ($3.99/mo)
+  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ" style="text-decoration:none;">
+    <kbd style="font-size: 1.25em; padding: 14px 32px; background-color: #FF6600; color: white; border-radius: 10px; font-weight: bold; border: 1px solid #d15500; cursor: pointer; box-shadow: 0 4px 18px rgba(255,102,0,0.4);">
+      ⚡ Choose Plan & Start 14-Day Free Trial (Dodo Checkout)
     </kbd>
   </a>
-  &nbsp;&nbsp;
-  <a href="https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7" style="text-decoration:none;">
-    <kbd style="font-size: 1.25em; padding: 12px 28px; background-color: #161b22; color: #FF6600; border-radius: 10px; font-weight: bold; border: 1px solid #FF6600; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-      👑 Get Annual Pro ($39.99/yr - Save 20%)
-    </kbd>
-  </a>
-  <p style="margin-top: 10px; font-size: 0.9em; color: #888;">Instant activation key delivery via <b>Lemon Squeezy</b> • Cancel anytime in 1 click</p>
+  <p style="margin-top: 10px; font-size: 0.9em; color: #888;">Instant 1-Click VS Code activation • 14-Day Grace Period Protection • 30-Day Offline Buffer</p>
 </div>
 
 ---
 
-## 🔒 Offline-First Guarantee (For Factory Floors)
+## 🔒 14-Day Grace Period & Offline-First Guarantee
 
-Automation engineers work in interference-heavy environments, underground automotive cells, and plants with **zero internet connectivity**.
+Commissioning engineers work in interference-heavy plants, clean rooms, and automotive cells with **zero network connectivity**.
 
-Our licensing module is built with an **Offline-First Architecture**:
-1. **Activation**: Connect once to activate your license key.
-2. **Local OS Keychain**: The verified license state is safely cached on your machine.
-3. **Zero Lockouts**: The extension will **never** lock you out if internet drops. All Pro features continue running offline indefinitely.
+* 📶 **30-Day Offline-First Buffer**: Activate once and work completely offline on the plant floor for up to 30 days without network handshakes.
+* 🛡️ **14-Day Grace Period**: If an international payment method or card renewal temporarily fails while you are on site, Pro features **will never lock you out mid-commissioning**. The extension provides a 14-day grace window with smart automatic background retries.
 
 ---
 
@@ -240,4 +311,4 @@ Configure extension behaviors in your `settings.json`:
 
 * **Publisher & Developer**: [Liskin Labs](https://github.com/LiskinLabs) / [Silvestr Liskin](https://www.linkedin.com/in/silvestr-liskin-ab712920b/)
 * **Security Auditor**: [ReversingLabs Spectra Assure](https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension)
-* **Official Merchant of Record**: [Lemon Squeezy](https://liskinlabs.lemonsqueezy.com/)
+* **Official Merchant of Record**: [Dodo Payments](https://dodopayments.com/)

@@ -73,8 +73,13 @@
         "extensions": [
           ".src",
           ".dat",
-          ".sub"
+          ".sub",
+          ".kfd"
         ],
+        "icon": {
+          "light": "./client/icons/krl-src.svg",
+          "dark": "./client/icons/krl-src.svg"
+        },
         "configuration": "./client/krl-language-configuration.json"
       }
     ],

@@ -25,7 +25,7 @@
 </p>
 
 <p align="center">
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>🌐 Interactive Wiki (26 Tools)</b></a> •
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>🌐 Interactive Wiki (50 Industrial Tools)</b></a> •
   <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"><b>⚡ 14-Day Free Trial ($9.99/mo)</b></a> • 
   <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"><b>👑 Annual Pro ($79.00/yr - Save 35%)</b></a> • 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>🛡️ Security Audit Report</b></a>
@@ -201,7 +201,7 @@ Every commissioning robotics engineer knows the pain:
 
 ---
 
-## 📊 Feature Comparison Matrix (26 Tools)
+## 📊 Feature Comparison Matrix (50 Industrial Tools)
 
 | Feature | Community (Free) | Pro Industrial | Benefit for Engineers |
 |:---|:---:|:---:|:---|
@@ -237,9 +237,9 @@ We offer flexible, industrial-grade licensing through our verified merchant of r
 | Plan | Price | Trial / Discount | License Terms | Checkout |
 |:---|:---:|:---|:---|:---:|
 | 🟢 **Community** | **$0** | 100% Free Forever | Personal & Commercial Use | [Install Free](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| ⏱️ **Pro Monthly** | **$9.99** / mo | **14-Day Free Trial** ($0.00 today) | All 26 Pro Tools • 2 Workstations | [Start 14-Day Trial](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
-| 👑 **Pro Annual** | **$79.00** / yr | **Save 35%** (~$6.58/mo) | 3 Workstations • 30-Day Offline Buffer | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
-| 🏆 **Pro Lifetime** | **$199.00** | **Pay Once, Own Forever** | 5 Workstations • Lifetime Updates | [Get Lifetime Pro](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
+| ⏱️ **Pro Monthly** | **$9.99** / mo | **14-Day Free Trial** ($0.00 today) | All 50 Industrial Pro Tools • 2 Workstations | [Start 14-Day Trial](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
+| 👑 **Pro Annual** | **$79.00** / yr | **Save 35%** (~$6.58/mo) | All 50 Industrial Pro Tools • 3 Workstations • 30-Day Offline Buffer | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
+| 🏆 **Pro Lifetime** | **$199.00** | **Pay Once, Own Forever** | All 50 Industrial Pro Tools • 5 Workstations • Lifetime Updates | [Get Lifetime Pro](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ" style="text-decoration:none;">

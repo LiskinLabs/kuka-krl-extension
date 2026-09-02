@@ -1,14 +1,46 @@
-# Node dependencies
+# Dependencies
 node_modules/
-docs/node_modules/
+**/node_modules/
 
-# VitePress build output & cache
-public/
-docs/.vitepress/dist
-docs/.vitepress/cache
+# Build output
+**/out/
+*.tsbuildinfo
+build/
+dist/
 
-# OS & IDE
+# Packaged binaries & extension
+*.vsix
+*.exe
+
+# Cloudflare Wrangler & Secrets
+.wrangler/
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+*.pem
+*.key
+
+# Python cache & build
+__pycache__/
+*.py[cod]
+
+# Logs
+logs/
+*.log
+
+# Personal & Temporary
+project_memory/
+2026-02-23_10-13-15/
+
+# OS files
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
+
+# Docs build output
+/public/
+!docs/public/
+docs/.vitepress/dist/
+docs/.vitepress/cache/

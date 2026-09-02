@@ -204,6 +204,14 @@ export async function activate(context: vscode.ExtensionContext) {
         vscode.window.showErrorMessage(t("error.serverNotRunning"));
       }
     }),
+    vscode.commands.registerCommand("krl.activateFileIcons", async () => {
+      await vscode.workspace
+        .getConfiguration("workbench")
+        .update("iconTheme", "krl-icons", vscode.ConfigurationTarget.Global);
+      vscode.window.showInformationMessage(
+        "KUKA KRL: File Icons activated (.src, .dat, .sub, .kfd)!"
+      );
+    }),
   );
 
   // Belgeyi biçimlendir komutu

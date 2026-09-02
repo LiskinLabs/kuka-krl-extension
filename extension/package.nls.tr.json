@@ -4,6 +4,7 @@
     "command.validateWorkspace": "Tüm Dosyaları Kontrol Et",
     "command.foldAll": "Tümünü Katla",
     "command.unfoldAll": "Tümünü Aç",
+    "command.activateFileIcons": "KRL Dosya Simgelerini Etkinleştir (.src, .dat, .sub, .kfd)",
     "command.formatDocument": "Belgeyi Biçimlendir",
     "command.removeTrailingWhitespace": "Sondaki Boşlukları Kaldır",
     "command.sortDeclarations": "Bildirimleri Sırala",

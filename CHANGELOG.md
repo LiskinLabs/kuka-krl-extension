@@ -2,7 +2,7 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
-## [1.8.0] - 2026-09-02 (Industrial 50-Tools Suite Milestone)
+## [1.7.3] - 2026-09-02 (Industrial 50-Tools Production Debut)
 
 ### Added
 - **50 Industrial Engineering Tools Suite**: Full enterprise tooling covering logic, kinematics, safety, diagnostics, version control, and offline commissioning.
@@ -14,24 +14,14 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Modern KRL & iiQKA Fold Suite**: Automatic wrapping of logic into official iiQKA Folds (`krl.convertToIiqkaFold`) and Spline Blocks (`krl.convertLegacyToSpline`).
 - **Dodo Payments Global Licensing Integration**: Support for 135+ countries, Apple Pay, Google Pay, 30-day offline buffer, and 14-day commissioning grace period.
 - **Velocity & Safety Inspector ($VEL.CP)**: Real-time detection of dangerous Cartesian overspeed (> 2.0 m/s) and uninitialized motion hazards.
-
-## [1.7.3] - 2026-08-06 (Industrial Production Edition)
-
-### Added
-- **Lemon Squeezy API Store Integration**: Live licensing backend integration with Store ID `393141` (`Liskin Silvestr`) and Product ID `1103272` (`KRL Extension Pro`).
-- **Subscription Tiers in Control Center**: Interactive billing cards for Pro Monthly ($3.99/mo) and Pro Annual ($39.99/yr, 20% discount) with direct checkout integration.
-- **ContextMenu & Sidebar Synchronization**: 100% unified 4-category menu structure between Right-Click Editor Menu (`editor/context`) and Sidebar (`KUKA COMMANDS`).
-- **Interactive SVG Motion Diagrams**: Dynamic 2-column Motion Scheme visualization in `Snippet Generator` for `PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`, and `SPLINE Block`.
 - **KSS 8.3+ Spline Motion Snippets**: Full support for Spline PTP (`SPTP`), Spline Linear (`SLIN`), Spline Circular (`SCIRC`), and `SPLINE Path Block` with automatic `$SGEAR_JERK` and `C_Spl` blending configurations.
-- **KRC Backup Diff & Point Delta Inspector**: Direct comparison of `.src`/`.dat` files and $E6POS/POS/E6AXIS$ point coordinates against KRC `.zip` backup archives.
-- **Telegram Live Chat Integration**: Direct developer support bridge (@kukakrlbot) embedded in VS Code.
+- **Telegram Live Chat Integration**: Direct developer support bridge embedded in VS Code with forum topic threads.
 
 ### Fixed & Optimized
-- **License Status & Offline Buffer**: Differentiated Dev Master Keys vs Lemon Squeezy Active Keys, and added explicit `30 Days Remaining (Auto-synced online)` label for offline validation buffer.
-- **Codicon UI Manifest Fix**: Fixed broken icon rendering for `krl.showCalculator` (`$(symbol-numeric)`) and `krl.validateEkiXml` (`$(file-code)`).
+- **License Status & Offline Buffer**: Differentiated Dev Master Keys vs Active Keys, and added explicit `30 Days Remaining (Auto-synced online)` label for offline validation buffer.
 - **Zero-Warning Code Quality**: Fixed linter/prettier formatting across `telegramService.ts` and `controlCenter.ts`.
 - **Diagnostics Performance**: Optimized Levenshtein distance spellchecker with early length-difference exit and removed unused dead code.
-- **Repository Cleanup**: Removed obsolete 44MB backup directory `2026-02-23_10-13-15`, scratch scripts, and old pre-built `.vsix` artifacts.
+- **Repository Cleanup**: Removed obsolete backup directories, scratch scripts, and old pre-built `.vsix` artifacts.
 
 ## [1.7.2] - 2026-04-02
 

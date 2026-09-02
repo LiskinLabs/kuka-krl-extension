@@ -888,38 +888,47 @@
                 </g>
               </svg>
 
-              <!-- Floating Active Cluster Telemetry HUD (Clean Live Region Card) -->
-              <div v-if="activeHeatPoint" class="absolute bottom-3 left-3 right-3 sm:right-auto sm:max-w-xs p-3.5 rounded-xl bg-[#07090e]/95 backdrop-blur-md border border-kuka-orange/50 shadow-[0_0_30px_rgba(0,0,0,0.9)] text-left text-xs font-mono transition-all animate-fadeIn">
-                <div class="flex items-center justify-between pb-2 mb-2 border-b border-white/10">
-                  <div class="flex items-center gap-1.5 font-bold text-white">
-                    <span class="text-base">{{ activeHeatPoint.flag }}</span>
-                    <span class="text-xs font-sans tracking-tight">{{ activeHeatPoint.cluster }}, {{ activeHeatPoint.country }}</span>
-                  </div>
-                  <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                    ACTIVE
-                  </span>
+            </div>
+
+            <!-- Active Cluster Telemetry Bar (Positioned OUTSIDE and BELOW map so map is 100% unobstructed on mobile and desktop) -->
+            <div v-if="activeHeatPoint" class="mt-3 p-3 sm:p-4 rounded-xl bg-[#090d16] border border-kuka-orange/40 shadow-xl text-left text-xs font-mono transition-all animate-fadeIn">
+              <div class="flex flex-wrap items-center justify-between gap-2 pb-2 mb-2.5 border-b border-white/10">
+                <div class="flex items-center gap-2 font-bold text-white">
+                  <span class="text-xl">{{ activeHeatPoint.flag }}</span>
+                  <span class="text-sm font-sans tracking-tight text-white">{{ activeHeatPoint.cluster }}, {{ activeHeatPoint.country }}</span>
                 </div>
-                <div class="space-y-1 text-[11px] text-gray-300">
-                  <div class="flex justify-between items-center">
-                    <span class="text-gray-400">Cluster Density:</span>
-                    <span class="font-bold text-kuka-orange">{{ activeHeatPoint.ides }} Active IDE Sessions</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-gray-400">Environment:</span>
-                    <span class="text-white font-semibold">VS Code / KRL LSP</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-gray-400">Controller Target:</span>
-                    <span class="text-cyan-400 font-semibold">KSS 8.3 – 8.7 (KRC4/5)</span>
-                  </div>
-                  <div class="flex justify-between items-center pt-1 border-t border-white/10 text-[10px]">
-                    <span class="text-gray-400">Data Privacy:</span>
-                    <span class="text-emerald-400 font-bold">100% Air-Gap & Zero-PII</span>
-                  </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                    ACTIVE CLUSTER
+                  </span>
+                  <button 
+                    @click="activeHeatPoint = null" 
+                    class="text-gray-400 hover:text-white px-2 py-0.5 rounded hover:bg-white/10 text-xs transition-colors"
+                    title="Close cluster info"
+                    aria-label="Close">
+                    ✕
+                  </button>
                 </div>
               </div>
-
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
+                <div class="p-2.5 rounded-lg bg-white/[0.03] border border-white/5">
+                  <div class="text-gray-400 text-[10px] uppercase font-sans">Cluster Density</div>
+                  <div class="font-bold text-kuka-orange text-xs mt-0.5">{{ activeHeatPoint.ides }} Active IDEs</div>
+                </div>
+                <div class="p-2.5 rounded-lg bg-white/[0.03] border border-white/5">
+                  <div class="text-gray-400 text-[10px] uppercase font-sans">Environment</div>
+                  <div class="text-white font-semibold text-xs mt-0.5">VS Code / KRL LSP</div>
+                </div>
+                <div class="p-2.5 rounded-lg bg-white/[0.03] border border-white/5">
+                  <div class="text-gray-400 text-[10px] uppercase font-sans">Target Controller</div>
+                  <div class="text-cyan-400 font-semibold text-xs mt-0.5">KSS 8.3 – 8.7 (KRC4/5)</div>
+                </div>
+                <div class="p-2.5 rounded-lg bg-white/[0.03] border border-white/5">
+                  <div class="text-gray-400 text-[10px] uppercase font-sans">Data Privacy</div>
+                  <div class="text-emerald-400 font-bold text-xs mt-0.5">100% Air-Gap & Zero-PII</div>
+                </div>
+              </div>
             </div>
 
             <!-- Map Bottom Info -->

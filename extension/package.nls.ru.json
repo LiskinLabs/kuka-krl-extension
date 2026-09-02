@@ -4,6 +4,7 @@
     "command.validateWorkspace": "Проверить все файлы",
     "command.foldAll": "Свернуть всё",
     "command.unfoldAll": "Развернуть всё",
+    "command.activateFileIcons": "Включить иконки файлов KRL (.src, .dat, .sub, .kfd)",
     "command.formatDocument": "Форматировать документ",
     "command.removeTrailingWhitespace": "Удалить пробелы в конце строк",
     "command.sortDeclarations": "Сортировать объявления",

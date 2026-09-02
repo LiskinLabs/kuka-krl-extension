@@ -2,7 +2,7 @@
   "name": "kuka-krl-extension",
   "displayName": "%extension.displayName%",
   "description": "%extension.description%",
-  "version": "1.8.0",
+  "version": "1.7.3",
   "icon": "logo.png",
   "publisher": "LiskinLabs",
   "author": {
@@ -153,6 +153,12 @@
         "title": "%command.unfoldAll%",
         "category": "KRL",
         "icon": "$(unfold)"
+      },
+      {
+        "command": "krl.activateFileIcons",
+        "title": "%command.activateFileIcons%",
+        "category": "KRL",
+        "icon": "$(file-code)"
       },
       {
         "command": "krl.formatDocument",

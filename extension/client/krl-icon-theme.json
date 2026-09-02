@@ -8,12 +8,16 @@
         },
         "krl-sub": {
             "iconPath": "./icons/krl-sub.svg"
+        },
+        "krl-kfd": {
+            "iconPath": "./icons/krl-kfd.svg"
         }
     },
     "fileExtensions": {
         "src": "krl-src",
         "dat": "krl-dat",
-        "sub": "krl-sub"
+        "sub": "krl-sub",
+        "kfd": "krl-kfd"
     },
     "fileNames": {},
     "folderNames": {},

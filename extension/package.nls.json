@@ -4,6 +4,7 @@
   "command.validateWorkspace": "Check All Files",
   "command.foldAll": "Fold All",
   "command.unfoldAll": "Unfold All",
+  "command.activateFileIcons": "Activate KRL File Icons (.src, .dat, .sub, .kfd)",
   "command.formatDocument": "Format Document",
   "command.removeTrailingWhitespace": "Remove Trailing Whitespace",
   "command.sortDeclarations": "Sort Declarations",

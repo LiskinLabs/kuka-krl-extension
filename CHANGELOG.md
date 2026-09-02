@@ -2,6 +2,19 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.8.0] - 2026-09-02 (Industrial 50-Tools Suite Milestone)
+
+### Added
+- **50 Industrial Engineering Tools Suite**: Full enterprise tooling covering logic, kinematics, safety, diagnostics, version control, and offline commissioning.
+- **Interactive Flowchart & Control Flow Graph (`krl.showFlowchart`)**: Bi-directional, clickable SVG diagrams with subroutine drill-down and vector export.
+- **KRL Revision Graph & GitLens Point Blame Timeline (`krl.viewLineHistory`, `krl.compareTwoRevisions`)**: Commit graph and author tracking for every teaching point and motion line.
+- **3-Point Euler Base/Tool Frame Calculator (`krl.showCalculator`)**: Calculate Euler rotation angles (A, B, C) and generate valid KRL coordinate structures directly in editor.
+- **SmartPAD ZIP Backup Diff & Point Delta Inspector (`krl.compareKrcBackup`)**: Automated coordinate delta calculations (ΔX, ΔY, ΔZ) against robot backup archives.
+- **Dead-Code & Unused Global Function Workspace Analyzer**: Scan entire project for dead subroutines, orphaned variables, and unreachable code paths.
+- **Modern KRL & iiQKA Fold Suite**: Automatic wrapping of logic into official iiQKA Folds (`krl.convertToIiqkaFold`) and Spline Blocks (`krl.convertLegacyToSpline`).
+- **Dodo Payments Global Licensing Integration**: Support for 135+ countries, Apple Pay, Google Pay, 30-day offline buffer, and 14-day commissioning grace period.
+- **Velocity & Safety Inspector ($VEL.CP)**: Real-time detection of dangerous Cartesian overspeed (> 2.0 m/s) and uninitialized motion hazards.
+
 ## [1.7.3] - 2026-08-06 (Industrial Production Edition)
 
 ### Added

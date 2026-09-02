@@ -100,6 +100,8 @@ export class SnippetGeneratorPanel {
             font-size: var(--vscode-font-size, 13px);
             color: var(--vscode-editor-foreground);
             background-color: var(--vscode-editor-background);
+              background-image: radial-gradient(rgba(255, 102, 0, 0.06) 1px, transparent 1px);
+              background-size: 20px 20px;
             max-width: 600px;
             margin: 0 auto;
         }

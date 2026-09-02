@@ -86,7 +86,6 @@ const state: ServerState = {
 // Конфигурация
 let serverConfig = {
   validateNonAscii: true,
-  maxCartesianVelocity: 3.0,
   separateBeforeBlocks: false,
   separateAfterBlocks: false,
   inlayHintsEnabled: true,
@@ -351,10 +350,7 @@ async function validateDocument(document: TextDocument): Promise<void> {
     }
     if (isSrc) {
       allDiagnostics.push(
-        ...diagnostics.validateSafetySpeeds(
-          document,
-          serverConfig.maxCartesianVelocity,
-        ),
+        ...diagnostics.validateSafetySpeeds(document),
         ...diagnostics.validateToolBaseInit(document),
         ...diagnostics.validateBlockBalance(document),
         ...diagnostics.validateDuplicateNames(document),

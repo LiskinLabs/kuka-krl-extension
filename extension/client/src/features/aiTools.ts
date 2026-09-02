@@ -23,10 +23,8 @@ export function initAiTools(context: vscode.ExtensionContext) {
       }
 
       const doc = editor.document;
-      const config = vscode.workspace.getConfiguration("krl");
-      const maxSpeed = config.get<number>("maxCartesianVelocity", 2.0);
 
-      const result = performAiSafetyCheck(doc.getText(), maxSpeed);
+      const result = performAiSafetyCheck(doc.getText());
 
       // Publish diagnostics to VS Code Problems Panel
       const diagnostics: vscode.Diagnostic[] = result.detailedIssues.map(
@@ -63,7 +61,7 @@ export function initAiTools(context: vscode.ExtensionContext) {
       const totalRisks = warningsCount + infoCount;
 
       if (errorsCount === 0 && totalRisks === 0) {
-        vscode.window.showInformationMessage(t("safety.notify.safe", maxSpeed));
+        vscode.window.showInformationMessage(t("safety.notify.safe"));
       } else {
         const flowBtn = t("cc.btn.openFlowchart");
         let msg = "";

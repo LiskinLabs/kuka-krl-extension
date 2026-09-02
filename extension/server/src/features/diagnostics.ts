@@ -38,7 +38,6 @@ const REGEX_SKIP_DEF = /^\s*(?:GLOBAL\s+)?(?:DEF|DEFFCT)\b/i;
 const REGEX_STRING_CONTENT = /"[^"]*"/g;
 const REGEX_SCIENTIFIC_NOTATION = /\d+\.?\d*[eE][+-]?\d+/g;
 
-const REGEX_VEL_CP = /\$VEL\.CP\s*=\s*(\d+(?:\.\d+)?)/gi;
 const REGEX_VEL_PTP = /\$VEL_PTP\s*=\s*(\d+(?:\.\d+)?)/gi;
 
 const REGEX_TOOL_INIT =
@@ -812,12 +811,11 @@ export class DiagnosticsProvider {
   }
 
   /**
-   * Проверяет безопасные скорости в SRC файлах.
-   * Warning для $VEL.CP > 3 m/s и $VEL_PTP > 100%
+   * Проверяет безопасные скорости PTP в SRC файлах.
+   * Warning для $VEL_PTP > 100%
    */
   public validateSafetySpeeds(
     document: TextDocument,
-    maxVelocity: number = 3.0,
   ): Diagnostic[] {
     // SİSTEM DOSYALARINI ATLA
     if (isSystemFile(document.uri)) {
@@ -828,7 +826,6 @@ export class DiagnosticsProvider {
     const text = document.getText();
     const lines = text.split(/\r?\n/);
 
-    const velCpRegex = REGEX_VEL_CP;
     const velPtpRegex = REGEX_VEL_PTP;
 
     for (let i = 0; i < lines.length; i++) {
@@ -837,25 +834,8 @@ export class DiagnosticsProvider {
       // Пропустить комментарии
       const codePart = getLineWithoutComment(line);
 
-      // Проверка $VEL.CP
-      let match;
-      velCpRegex.lastIndex = 0;
-      while ((match = velCpRegex.exec(codePart)) !== null) {
-        const velocity = parseFloat(match[1]);
-        if (velocity > maxVelocity) {
-          diagnostics.push({
-            severity: DiagnosticSeverity.Warning,
-            range: {
-              start: { line: i, character: match.index },
-              end: { line: i, character: match.index + match[0].length },
-            },
-            message: t("diag.velocityTooHigh", velocity.toString()),
-            source: "krl-language-support",
-          });
-        }
-      }
-
       // Проверка $VEL_PTP
+      let match;
       velPtpRegex.lastIndex = 0;
       while ((match = velPtpRegex.exec(codePart)) !== null) {
         const velocity = parseFloat(match[1]);
@@ -1855,9 +1835,9 @@ function levenshteinDistance(s1: string, s2: string): number {
     for (let j = 1; j <= len2; j++) {
       const cost = s1[i - 1] === s2[j - 1] ? 0 : 1;
       curr[j] = Math.min(
-        prev[j] + 1,      // deletion
-        curr[j - 1] + 1,  // insertion
-        prev[j - 1] + cost // substitution
+        prev[j] + 1, // deletion
+        curr[j - 1] + 1, // insertion
+        prev[j - 1] + cost, // substitution
       );
     }
     const temp = prev;

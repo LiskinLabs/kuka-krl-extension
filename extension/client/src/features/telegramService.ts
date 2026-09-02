@@ -460,10 +460,17 @@ export class TelegramChatService {
       if (response.ok) {
         const respData = (await response.json().catch(() => ({}))) as {
           ok?: boolean;
-          telegramDelivery?: { ok?: boolean; error?: string; description?: string };
+          telegramDelivery?: {
+            ok?: boolean;
+            error?: string;
+            description?: string;
+          };
         };
 
-        if (respData.telegramDelivery && respData.telegramDelivery.ok === false) {
+        if (
+          respData.telegramDelivery &&
+          respData.telegramDelivery.ok === false
+        ) {
           this.logToOutput(
             `[Gateway Warning]: Telegram delivery issue: ${respData.telegramDelivery.description || respData.telegramDelivery.error}`,
             "WARN",
@@ -519,16 +526,23 @@ export class TelegramChatService {
         const wsRoot = vscode.workspace.workspaceFolders[0].uri;
         for (const fileName of mentions) {
           try {
-            const searchPattern = new vscode.RelativePattern(wsRoot.fsPath, `**/${fileName}`);
-            const files = await vscode.workspace.findFiles(searchPattern, '**/node_modules/**', 1);
+            const searchPattern = new vscode.RelativePattern(
+              wsRoot.fsPath,
+              `**/${fileName}`,
+            );
+            const files = await vscode.workspace.findFiles(
+              searchPattern,
+              "**/node_modules/**",
+              1,
+            );
             if (files.length > 0) {
               const uint8Array = await vscode.workspace.fs.readFile(files[0]);
               const content = new TextDecoder().decode(uint8Array);
-              const ext = fileName.split('.').pop() || 'txt';
+              const ext = fileName.split(".").pop() || "txt";
               finalMsg += `\n\n📄 **${fileName}**:\n\`\`\`${ext}\n${content.substring(0, 2000)}\n\`\`\``;
             }
-          } catch (e) {
-            console.error("Mention resolution failed", e);
+          } catch {
+            // Ignore mention file read failures
           }
         }
       }
@@ -581,10 +595,17 @@ export class TelegramChatService {
       if (resp.ok) {
         const respData = (await resp.json().catch(() => ({}))) as {
           ok?: boolean;
-          telegramDelivery?: { ok?: boolean; error?: string; description?: string };
+          telegramDelivery?: {
+            ok?: boolean;
+            error?: string;
+            description?: string;
+          };
         };
 
-        if (respData.telegramDelivery && respData.telegramDelivery.ok === false) {
+        if (
+          respData.telegramDelivery &&
+          respData.telegramDelivery.ok === false
+        ) {
           this.logToOutput(
             `[Gateway Warning]: Telegram delivery issue: ${respData.telegramDelivery.description || respData.telegramDelivery.error}`,
             "WARN",
@@ -680,7 +701,9 @@ export class TelegramChatService {
             >;
           };
           if (batchData && batchData.sessionMessages) {
-            for (const [sid, msgs] of Object.entries(batchData.sessionMessages)) {
+            for (const [sid, msgs] of Object.entries(
+              batchData.sessionMessages,
+            )) {
               if (msgs && msgs.length > 0) {
                 this.processIncomingMessages(msgs, sid, context);
               }
@@ -751,10 +774,7 @@ export class TelegramChatService {
 
         const replyBtn = t("chat.btn.reply");
         vscode.window
-          .showInformationMessage(
-            t("chat.notify.devMessage", m.text),
-            replyBtn,
-          )
+          .showInformationMessage(t("chat.notify.devMessage", m.text), replyBtn)
           .then((selection) => {
             if (selection === replyBtn && this.extensionContext) {
               if (this.sessionId !== targetSessionId) {
@@ -778,13 +798,13 @@ export class TelegramChatService {
     let actionTitle = "";
 
     if (cmd === "/logs") {
-      actionTitle = "📊 Запрос выгрузки логов расширения";
+      actionTitle = `📊 ${t("chat.remote.logRequest")}`;
     } else if (cmd === "/export_project" || cmd === "/backup") {
-      actionTitle = "📁 Запрос экспорта проекта KRL";
+      actionTitle = `📁 ${t("chat.remote.exportRequest")}`;
     } else if (cmd === "/sysinfo") {
-      actionTitle = "💻 Запрос системной информации ПК";
+      actionTitle = `💻 ${t("chat.remote.sysInfoRequest")}`;
     } else if (cmd === "/ai_diag") {
-      actionTitle = "🤖 Запрос AI-диагностики безопасности KRL";
+      actionTitle = `🤖 ${t("chat.remote.aiDiagRequest")}`;
     } else {
       return;
     }
@@ -814,26 +834,35 @@ export class TelegramChatService {
    * Explicit Consent Guard for Developer Remote Actions (Anti-Exfiltration & Safety Directive)
    */
   private async readAndSendFile(fileName: string) {
-    if (!vscode.workspace.workspaceFolders || vscode.workspace.workspaceFolders.length === 0) {
-      vscode.window.showErrorMessage("Нет открытого Workspace.");
+    if (
+      !vscode.workspace.workspaceFolders ||
+      vscode.workspace.workspaceFolders.length === 0
+    ) {
+      vscode.window.showErrorMessage(t("chat.remote.noWorkspace"));
       return;
     }
     const wsRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
     const searchPattern = new vscode.RelativePattern(wsRoot, `**/${fileName}`);
-    const files = await vscode.workspace.findFiles(searchPattern, '**/node_modules/**', 1);
-    
+    const files = await vscode.workspace.findFiles(
+      searchPattern,
+      "**/node_modules/**",
+      1,
+    );
+
     if (files.length === 0) {
-      this.sendMessage(`❌ Файл ${fileName} не найден в рабочем пространстве.`);
+      this.sendMessage(`❌ ${t("chat.remote.fileNotFound", fileName)}`);
       return;
     }
     try {
       const uint8Array = await vscode.workspace.fs.readFile(files[0]);
       const content = new TextDecoder().decode(uint8Array);
-      const ext = fileName.split('.').pop() || 'txt';
-      this.sendMessage(`📄 **${fileName}**:\n\`\`\`${ext}\n${content.substring(0, 3000)}\n\`\`\``);
-      vscode.window.showInformationMessage(`Файл ${fileName} отправлен.`);
-    } catch (err) {
-      vscode.window.showErrorMessage(`Ошибка при чтении файла`);
+      const ext = fileName.split(".").pop() || "txt";
+      this.sendMessage(
+        `📄 **${fileName}**:\n\`\`\`${ext}\n${content.substring(0, 3000)}\n\`\`\``,
+      );
+      vscode.window.showInformationMessage(t("chat.remote.fileSent", fileName));
+    } catch {
+      vscode.window.showErrorMessage(t("chat.remote.fileReadError"));
     }
   }
 
@@ -847,9 +876,9 @@ export class TelegramChatService {
 
     if (cmd === "/read_file") {
       const fileName = cmdText.trim().substring("/read_file".length).trim();
-      const actionName = `Чтение файла: ${fileName}`;
+      const actionName = t("chat.remote.readFileAction", fileName);
       const confirm = await vscode.window.showWarningMessage(
-        `Telegram Support запрашивает удаленное действие: ${actionName}`,
+        t("chat.remote.actionPrompt", actionName),
         { modal: true },
         yesBtn,
         noBtn,
@@ -868,7 +897,7 @@ export class TelegramChatService {
       if (confirm === yesBtn) {
         await this.sendDiagnosticLogs(
           context,
-          "📊 Логи выгружены по подтвержденному удаленному запросу /logs",
+          `📊 ${t("chat.remote.logsExported")}`,
         );
       }
     } else if (cmd === "/export_project" || cmd === "/backup") {
@@ -893,19 +922,19 @@ export class TelegramChatService {
       if (confirm === yesBtn) {
         const activeFile =
           vscode.window.activeTextEditor?.document.fileName ||
-          "Нет открытого файла";
+          t("chat.remote.noActiveFile");
         const sysMsg =
-          `💻 *Системная информация ПК Инженера*\n\n` +
-          `• *Хост:* \`${os.hostname()}\`\n` +
-          `• *ОС:* ${os.type()} ${os.release()} (${os.arch()})\n` +
-          `• *Память:* ${Math.round(os.freemem() / 1024 / 1024)}MB свободно из ${Math.round(os.totalmem() / 1024 / 1024)}MB\n` +
+          `💻 *${t("chat.remote.sysInfoTitle")}*\n\n` +
+          `• *Host:* \`${os.hostname()}\`\n` +
+          `• *OS:* ${os.type()} ${os.release()} (${os.arch()})\n` +
+          `• *Memory:* ${Math.round(os.freemem() / 1024 / 1024)}MB / ${Math.round(os.totalmem() / 1024 / 1024)}MB\n` +
           `• *VS Code:* v${vscode.version}\n` +
-          `• *Статус:* ${isPremium() ? "⭐ PRO License" : "🆓 Community"}\n` +
-          `• *Активный файл:* \`${path.basename(activeFile)}\``;
+          `• *Tier:* ${isPremium() ? "⭐ PRO License" : "🆓 Community"}\n` +
+          `• *File:* \`${path.basename(activeFile)}\``;
         await this.sendMessage(sysMsg);
       }
     } else if (cmd === "/ai_diag") {
-      const actionName = "AI-диагностика безопасности KRL";
+      const actionName = t("chat.remote.aiDiagRequest");
       const confirm = await vscode.window.showWarningMessage(
         t("chat.consent.remoteAction", actionName),
         { modal: true },
@@ -1025,13 +1054,13 @@ export class TelegramChatService {
       const summary =
         issues.length > 0
           ? issues.join("\n")
-          : "✅ Замечаний безопасности не обнаружено. Структура KRL в норме.";
+          : `✅ ${t("chat.remote.diagNoIssues")}`;
 
       const reportText =
-        `🤖 *AI АВТОДИАГНОСТИКА KRL*\n\n` +
-        `📄 *Файл:* \`${fileName}\`\n` +
-        `💻 *ПК:* \`${os.hostname()}\` | *Сессия:* \`#${this.sessionId}\`\n\n` +
-        `📊 *Результаты проверки:*\n${summary}`;
+        `🤖 *${t("chat.remote.diagTitle")}*\n\n` +
+        `📄 *File:* \`${fileName}\`\n` +
+        `💻 *Host:* \`${os.hostname()}\` | *Session:* \`#${this.sessionId}\`\n\n` +
+        `📊 *${t("chat.remote.diagSummary")}*\n${summary}`;
 
       return await this.sendMessage(reportText);
     } catch (e) {

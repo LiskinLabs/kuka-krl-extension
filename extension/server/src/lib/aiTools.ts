@@ -7,15 +7,13 @@ export interface KrlSafetyIssue {
 
 /**
  * Performs Deep Industrial Safety & Logic Diagnostics Check for KUKA KRC Robots.
- * Analyzes velocity limits, uninitialized movements, infinite loops, sensor deadlocks,
+ * Analyzes uninitialized movements, infinite loops, sensor deadlocks,
  * unchecked actuators, unreachable code, and non-ASCII blockers.
  *
  * @param text KRL code content
- * @param maxAllowedSpeed Optional max allowed velocity threshold in m/s (default 2.0 m/s)
  */
 export function performAiSafetyCheck(
   text: string,
-  maxAllowedSpeed: number = 2.0,
 ): {
   safe: boolean;
   issues: string[]; // Human readable legacy array
@@ -84,21 +82,7 @@ export function performAiSafetyCheck(
       unreachableReasonLine = lineNum;
     }
 
-    // 2. High Cartesian Velocity Check ($VEL.CP)
-    const velCpMatch = upperCode.match(/\$VEL\.CP\s*=\s*(\d+(\.\d+)?)/);
-    if (velCpMatch) {
-      const speed = parseFloat(velCpMatch[1]);
-      if (speed > maxAllowedSpeed) {
-        detailedIssues.push({
-          severity: "error",
-          line: lineNum,
-          code: "HIGH_VELOCITY",
-          message: `Cartesian velocity ($VEL.CP = ${speed} m/s) exceeds maximum safe limit for cell (${maxAllowedSpeed} m/s). Risk of collision or KRC axis overload!`,
-        });
-      }
-    }
-
-    // 3. Movement Initialization Checks (BAS(#INITMOV) or $TOOL / $BASE)
+    // 2. Movement Initialization Checks (BAS(#INITMOV) or $TOOL / $BASE)
     if (
       upperCode.includes("BAS(#INITMOV)") ||
       upperCode.includes("BAS( #INITMOV )")

@@ -280,22 +280,26 @@ export async function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand("krl.sendSelectionToChat", async () => {
       const editor = vscode.window.activeTextEditor;
       if (!editor || editor.selection.isEmpty) {
-        vscode.window.showInformationMessage("Выделите код для отправки в чат.");
+        vscode.window.showInformationMessage(
+          t("chat.sendSelection.noSelection"),
+        );
         return;
       }
       const selection = editor.document.getText(editor.selection);
       const startLine = editor.selection.start.line + 1;
       const endLine = editor.selection.end.line + 1;
       const fileName = require("path").basename(editor.document.fileName);
-      const ext = fileName.split('.').pop() || 'txt';
-      const msg = `[Файл: ${fileName}, Строки: ${startLine}-${endLine}]\n\`\`\`${ext}\n${selection}\n\`\`\``;
-      
-      const input = await vscode.window.showInputBox({ prompt: "Добавьте комментарий к коду (опционально)" });
+      const ext = fileName.split(".").pop() || "txt";
+      const msg = `[${fileName}:${startLine}-${endLine}]\n\`\`\`${ext}\n${selection}\n\`\`\``;
+
+      const input = await vscode.window.showInputBox({
+        prompt: t("chat.sendSelection.prompt"),
+      });
       const finalMsg = input ? `${input}\n\n${msg}` : msg;
-      
+
       const service = TelegramChatService.getInstance();
       await service.sendMessage(finalMsg);
-      vscode.window.showInformationMessage("Код отправлен в Telegram чат.");
+      vscode.window.showInformationMessage(t("chat.sendSelection.success"));
     }),
     vscode.commands.registerCommand("krl.cleanGitMetadata", async () => {
       const editor = vscode.window.activeTextEditor;
@@ -659,10 +663,19 @@ export async function activate(context: vscode.ExtensionContext) {
         }
       });
     }),
-    vscode.commands.registerCommand("krl.convertToIiqkaFold", convertToIiqkaFold),
-    vscode.commands.registerCommand("krl.convertLegacyToSpline", convertLegacyToSpline),
+    vscode.commands.registerCommand(
+      "krl.convertToIiqkaFold",
+      convertToIiqkaFold,
+    ),
+    vscode.commands.registerCommand(
+      "krl.convertLegacyToSpline",
+      convertLegacyToSpline,
+    ),
     vscode.commands.registerCommand("krl.unwrapFold", unwrapFolds),
-    vscode.commands.registerCommand("krl.insertCollisionGuard", insertCollisionGuard),
+    vscode.commands.registerCommand(
+      "krl.insertCollisionGuard",
+      insertCollisionGuard,
+    ),
     vscode.commands.registerCommand("krl.insertSplineBlock", insertSplineBlock),
   );
 

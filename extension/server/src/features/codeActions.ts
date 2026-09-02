@@ -759,10 +759,7 @@ export class CodeActionsProvider {
     if (!configDatUri) return null;
 
     const globalDecl = `GLOBAL DECL ${varType} ${varName}${initialValue}`;
-    const insertEdit = this.createConfigDatInsertEdit(
-      configDatUri,
-      globalDecl,
-    );
+    const insertEdit = this.createConfigDatInsertEdit(configDatUri, globalDecl);
 
     return {
       title: t("action.declareGlobalConfigDat", varType, varName),
@@ -847,10 +844,7 @@ export class CodeActionsProvider {
       }
     }
 
-    return TextEdit.insert(
-      Position.create(insertLine, 0),
-      `  ${insertText}\n`,
-    );
+    return TextEdit.insert(Position.create(insertLine, 0), `  ${insertText}\n`);
   }
 }
 

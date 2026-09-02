@@ -48,6 +48,8 @@
     "command.diffWithPrevious": "Satırı önceki commit revizyonuyla karşılaştır (Diff)",
     "command.copyCommitMessage": "Commit mesajını kopyala",
     "command.toggleGitLensInlineBlame": "GitLens satır içi yazar bilgisini aç/kapat",
+    "command.viewLineHistory": "Seçili satırların geçmişini görüntüle (git log -L)",
+    "command.compareTwoRevisions": "Herhangi iki commit revizyonunu karşılaştır (Diff)",
     "config.title": "KUKA KRL Extension",
     "config.autoFold.description": "KRL dosyası açıldığında tüm bölgeleri otomatik olarak katla",
     "config.formatOnSave.description": "Kaydederken belgeyi otomatik olarak biçimlendir",
@@ -75,7 +77,6 @@
     "config.codeLens.enabled": "Referanslar ve dokümantasyon için CodeLens ipuçlarını göster.",
     "config.callHierarchy.enabled": "Fonksiyonlar için Çağrı Hiyerarşisi desteğini etkinleştir.",
     "config.documentHighlights.enabled": "Aynı değişken/fonksiyonun belgedeki kullanımlarını vurgula.",
-    "config.maxCartesianVelocity": "$VEL.CP için maksimum güvenli Kartezyen hız limiti (m/s).",
     "config.supportGatewayUrl": "Liskin Labs Destek Masası Ağ Geçidi URL'si (Doğrudan Mühendislik Desteği).",
     "config.telemetry.enabled": "Liskin Labs Destek Ağ Geçidine durum pinglerini etkinleştir (yalıtılmış endüstriyel hücreler için devre dışı bırakın).",
     "config.gitLens.currentLine.enabled": "Geçerli satırın sonunda satır içi Git Blame bilgilerini göster."

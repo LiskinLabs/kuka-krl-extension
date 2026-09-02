@@ -359,6 +359,8 @@ function getWebviewContent(
             font-family: var(--vscode-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
             color: var(--vscode-editor-foreground);
             background-color: var(--vscode-editor-background);
+              background-image: radial-gradient(rgba(255, 102, 0, 0.06) 1px, transparent 1px);
+              background-size: 20px 20px;
             margin: 0;
             padding: 0;
             display: flex;

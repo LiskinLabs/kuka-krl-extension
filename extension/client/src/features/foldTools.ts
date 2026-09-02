@@ -1,6 +1,4 @@
 import * as vscode from "vscode";
-import * as path from "path";
-import * as fs from "fs";
 import { t } from "../i18n";
 
 /**
@@ -43,10 +41,12 @@ export function parseMotionLine(line: string): MotionParseResult | null {
   let toolIndex = 1;
   let baseIndex = 1;
 
-  const toolMatch = rest.match(/Tool\[(\d+)\]/i) || rest.match(/TOOL_DATA\[(\d+)\]/i);
+  const toolMatch =
+    rest.match(/Tool\[(\d+)\]/i) || rest.match(/TOOL_DATA\[(\d+)\]/i);
   if (toolMatch) toolIndex = parseInt(toolMatch[1], 10);
 
-  const baseMatch = rest.match(/Base\[(\d+)\]/i) || rest.match(/BASE_DATA\[(\d+)\]/i);
+  const baseMatch =
+    rest.match(/Base\[(\d+)\]/i) || rest.match(/BASE_DATA\[(\d+)\]/i);
   if (baseMatch) baseIndex = parseInt(baseMatch[1], 10);
 
   const velMatch = rest.match(/Vel\s*=\s*([0-9.]+)\s*(%|m\/s)/i);
@@ -76,11 +76,15 @@ function detectActiveToolAndBase(
 
   for (let i = currentLine; i >= 0; i--) {
     const text = document.lineAt(i).text.split(";")[0];
-    const toolMatch = text.match(/\$(?:ACT_)?TOOL\s*=\s*(?:TOOL_DATA\[(\d+)\]|(\d+))/i);
+    const toolMatch = text.match(
+      /\$(?:ACT_)?TOOL\s*=\s*(?:TOOL_DATA\[(\d+)\]|(\d+))/i,
+    );
     if (toolMatch && !tool) {
       tool = parseInt(toolMatch[1] || toolMatch[2], 10) || 1;
     }
-    const baseMatch = text.match(/\$(?:ACT_)?BASE\s*=\s*(?:BASE_DATA\[(\d+)\]|(\d+))/i);
+    const baseMatch = text.match(
+      /\$(?:ACT_)?BASE\s*=\s*(?:BASE_DATA\[(\d+)\]|(\d+))/i,
+    );
     if (baseMatch && !base) {
       base = parseInt(baseMatch[1] || baseMatch[2], 10) || 1;
     }
@@ -147,7 +151,8 @@ export async function convertToIiqkaFold(): Promise<void> {
       const toolIdx = parsed.toolIndex || detectedTool || 1;
       const baseIdx = parsed.baseIndex || detectedBase || 1;
       const contStr = parsed.isApprox ? " CONT" : "";
-      const velDisplay = parsed.velocityStr || (modernMotionType === "SPTP" ? "100 %" : "2 m/s");
+      const velDisplay =
+        parsed.velocityStr || (modernMotionType === "SPTP" ? "100 %" : "2 m/s");
 
       const foldBlock = [
         `${indent};FOLD {iiQKA} ${modernMotionType} ${cleanPoint}${contStr} Vel=${velDisplay} ${pdatName} Tool[${toolIdx}]:Tool${toolIdx} Base[${baseIdx}]:Base${baseIdx} ;%{PE}`,
@@ -206,7 +211,10 @@ export async function convertLegacyToSpline(): Promise<void> {
 
   const transformed = lines.map((line) => {
     const trimmed = line.trim();
-    if (trimmed.startsWith(";") || /^(SPTP|SLIN|SCIRC|SPLINE|ENDSPLINE)\b/i.test(trimmed)) {
+    if (
+      trimmed.startsWith(";") ||
+      /^(SPTP|SLIN|SCIRC|SPLINE|ENDSPLINE)\b/i.test(trimmed)
+    ) {
       return line;
     }
 
@@ -245,9 +253,7 @@ export async function convertLegacyToSpline(): Promise<void> {
     editBuilder.replace(range, transformed.join("\n"));
   });
 
-  vscode.window.showInformationMessage(
-    t("fold.notify.splineSuccess", count),
-  );
+  vscode.window.showInformationMessage(t("fold.notify.splineSuccess", count));
 }
 
 /**
@@ -281,7 +287,11 @@ export async function unwrapFolds(): Promise<void> {
       foldCount++;
       return false;
     }
-    if (trimmed.startsWith(";&ACCESS") || trimmed.startsWith(";&REL") || trimmed.startsWith(";&PARAM")) {
+    if (
+      trimmed.startsWith(";&ACCESS") ||
+      trimmed.startsWith(";&REL") ||
+      trimmed.startsWith(";&PARAM")
+    ) {
       return false;
     }
     return true;
@@ -296,9 +306,7 @@ export async function unwrapFolds(): Promise<void> {
     editBuilder.replace(range, cleanedLines.join("\n"));
   });
 
-  vscode.window.showInformationMessage(
-    t("fold.notify.unwrapped", foldCount),
-  );
+  vscode.window.showInformationMessage(t("fold.notify.unwrapped", foldCount));
 }
 
 /**
@@ -321,7 +329,8 @@ export async function insertCollisionGuard(): Promise<void> {
       );
 
   const selectedText = document.getText(range);
-  const indent = document.lineAt(selection.start.line).text.match(/^\s*/)?.[0] || "";
+  const indent =
+    document.lineAt(selection.start.line).text.match(/^\s*/)?.[0] || "";
 
   const collisionGuardBlock = [
     `${indent};FOLD {Safety} Collision Monitoring Protection ON ;%{PE}`,
@@ -353,7 +362,8 @@ export async function insertSplineBlock(): Promise<void> {
 
   const document = editor.document;
   const selection = editor.selection;
-  const indent = document.lineAt(selection.start.line).text.match(/^\s*/)?.[0] || "";
+  const indent =
+    document.lineAt(selection.start.line).text.match(/^\s*/)?.[0] || "";
 
   const velInput = await vscode.window.showInputBox({
     prompt: t("fold.prompt.splineVel"),

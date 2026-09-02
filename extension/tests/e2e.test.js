@@ -227,10 +227,10 @@ const { DiagnosticsProvider } = require('../server/out/features/diagnostics.js')
 test('Diagnostics detects unclosed blocks, high velocity, collision guard & non-ASCII', () => {
     const diagProvider = new DiagnosticsProvider({});
     
-    // High velocity check
-    const velDoc = new MockTextDocument('file:///test.src', 'DEF test()\n$VEL.CP = 4.5\nEND');
+    // PTP High velocity check ($VEL_PTP > 100%)
+    const velDoc = new MockTextDocument('file:///test.src', 'DEF test()\n$VEL_PTP = 115\nEND');
     const safetyDiags = diagProvider.validateSafetySpeeds(velDoc);
-    assertTrue(safetyDiags.some(d => d.message.includes('4.5')), 'Should flag velocity > 3.0 m/s');
+    assertTrue(safetyDiags.some(d => d.message.includes('115')), 'Should flag PTP velocity > 100%');
 
     // Non-ASCII check in executable line
     const asciiDoc = new MockTextDocument('file:///test.src', 'DEF test()\nINT х_cyrillic = 5\nEND');
@@ -452,17 +452,17 @@ console.log('\n🤖 SECTION 13: AI-Supportive Domain Context Tools');
 
 const { performAiSafetyCheck } = require('../server/out/lib/aiTools.js');
 
-test('AI Industrial Safety Check detects high velocity and structural errors', () => {
-    const safeCode = `DEF main()\n   DECL POS xHome\n   BAS(#INITMOV)\n   $VEL.CP = 1.5\n   ;FOLD Motion\n   PTP xHome\n   ;ENDFOLD\nEND`;
-    const dangerousCode = `DEF main()\n   $VEL.CP = 4.5\n   ;FOLD Motion\n   PTP xHome\nEND`;
+test('AI Industrial Safety Check detects structural and movement errors', () => {
+    const safeCode = `DEF main()\n   DECL POS xHome\n   BAS(#INITMOV)\n   $TOOL = TOOL_DATA[1]\n   $BASE = BASE_DATA[1]\n   ;FOLD Motion\n   PTP xHome\n   ;ENDFOLD\nEND`;
+    const dangerousCode = `DEF main()\n   ;FOLD Motion\n   PTP xHome\nEND`;
 
     const safeRes = performAiSafetyCheck(safeCode);
     assertTrue(safeRes.safe === true, 'Safe KRL code should pass safety check');
 
     const dangerousRes = performAiSafetyCheck(dangerousCode);
     assertTrue(dangerousRes.safe === false, 'Dangerous code should fail safety check');
-    assertTrue(dangerousRes.issues.some(i => i.includes('exceeds maximum configured safe limit') || i.includes('Cartesian velocity')), 'Should detect velocity violation');
     assertTrue(dangerousRes.issues.some(i => i.includes('Mismatched FOLD')), 'Should detect unclosed FOLD block');
+    assertTrue(dangerousRes.detailedIssues.some(i => i.code === 'UNINIT_MOTION'), 'Should detect uninitialized motion');
 });
 
 // ----------------------------------------------------

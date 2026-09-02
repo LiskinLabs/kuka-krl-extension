@@ -186,7 +186,10 @@ export function extractFileFromZipBackup(
 
     if (bestEntry) {
       // 4. Path Traversal Guard
-      if (bestEntry.entryName.includes("..") || path.isAbsolute(bestEntry.entryName)) {
+      if (
+        bestEntry.entryName.includes("..") ||
+        path.isAbsolute(bestEntry.entryName)
+      ) {
         return { found: false };
       }
 
@@ -198,7 +201,10 @@ export function extractFileFromZipBackup(
         return { found: false };
       }
 
-      if (compressedSize > 0 && uncompressedSize / compressedSize > MAX_COMPRESSION_RATIO) {
+      if (
+        compressedSize > 0 &&
+        uncompressedSize / compressedSize > MAX_COMPRESSION_RATIO
+      ) {
         return { found: false };
       }
 

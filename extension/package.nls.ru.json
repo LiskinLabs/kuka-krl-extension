@@ -48,6 +48,8 @@
     "command.diffWithPrevious": "Сравнить строку с предыдущей ревизией коммита (Diff)",
     "command.copyCommitMessage": "Скопировать сообщение коммита",
     "command.toggleGitLensInlineBlame": "Включить/выключить строку автора GitLens в коде",
+    "command.viewLineHistory": "История изменений выделенных строк (git log -L)",
+    "command.compareTwoRevisions": "Сравнить две любые ревизии файла (Diff)",
     "config.title": "KUKA KRL Extension",
     "config.autoFold.description": "Автоматически сворачивать все регионы при открытии KRL файла",
     "config.formatOnSave.description": "Автоматически форматировать документ при сохранении",
@@ -75,7 +77,6 @@
     "config.codeLens.enabled": "Показывать подсказки CodeLens для ссылок и документации.",
     "config.callHierarchy.enabled": "Включить поддержку иерархии вызовов для функций.",
     "config.documentHighlights.enabled": "Подсвечивать вхождения одной и той же переменной/функции в документе.",
-    "config.maxCartesianVelocity": "Максимальный безопасный лимит декартовой скорости для $VEL.CP (м/с).",
     "config.supportGatewayUrl": "URL-адрес шлюза поддержки Liskin Labs (Прямая инженерная поддержка).",
     "config.telemetry.enabled": "Разрешить пинг статуса и сессий к шлюзу поддержки Liskin Labs (отключите для изолированных промышленных ячеек без интернета).",
     "config.gitLens.currentLine.enabled": "Отображать информацию Git Blame в конце активной строки."

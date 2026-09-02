@@ -38,16 +38,20 @@ export class TelegramChatPanel {
             if (message.code) {
               const editor = vscode.window.activeTextEditor;
               if (!editor) {
-                vscode.window.showWarningMessage("Откройте файл в редакторе, чтобы вставить код.");
+                vscode.window.showWarningMessage(
+                  t("chat.apply.noEditor"),
+                );
               } else {
-                editor.edit(editBuilder => {
+                editor.edit((editBuilder) => {
                   if (!editor.selection.isEmpty) {
                     editBuilder.replace(editor.selection, message.code);
                   } else {
                     editBuilder.insert(editor.selection.active, message.code);
                   }
                 });
-                vscode.window.showInformationMessage("Код внедрен (Внимание: проверьте правильность перед сохранением).");
+                vscode.window.showInformationMessage(
+                  t("chat.apply.success"),
+                );
               }
             }
             break;

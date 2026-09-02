@@ -71,7 +71,12 @@ export class KrlFormatter {
     const insertSpaces = params.options.insertSpaces !== false;
     const indentChar = insertSpaces ? " ".repeat(tabSize) : "\t";
 
-    const resultLines = this.formatLineRange(lines, 0, lines.length - 1, indentChar);
+    const resultLines = this.formatLineRange(
+      lines,
+      0,
+      lines.length - 1,
+      indentChar,
+    );
 
     // Align assignments if enabled
     if (formattingSettings.alignAssignments) {
@@ -118,8 +123,13 @@ export class KrlFormatter {
     const insertSpaces = params.options.insertSpaces !== false;
     const indentChar = insertSpaces ? " ".repeat(tabSize) : "\t";
 
-    const formattedAll = this.formatLineRange(lines, 0, lines.length - 1, indentChar);
-    
+    const formattedAll = this.formatLineRange(
+      lines,
+      0,
+      lines.length - 1,
+      indentChar,
+    );
+
     // Extract only the edited range
     const rangeEdits: TextEdit[] = [];
     const newRangeText = formattedAll.slice(startLine, endLine + 1).join("\n");
@@ -128,12 +138,7 @@ export class KrlFormatter {
     if (newRangeText !== oldRangeText) {
       rangeEdits.push(
         TextEdit.replace(
-          Range.create(
-            startLine,
-            0,
-            endLine,
-            lines[endLine]?.length || 0,
-          ),
+          Range.create(startLine, 0, endLine, lines[endLine]?.length || 0),
           newRangeText,
         ),
       );
@@ -161,19 +166,28 @@ export class KrlFormatter {
       const trimmed = originalLine.trim();
 
       // Check format toggle comments (; krl-format-off / ; krl-format-on)
-      if (/^\s*;\s*krl-format-off\b/i.test(trimmed) || /^\s*;\s*prettier-ignore-start\b/i.test(trimmed)) {
+      if (
+        /^\s*;\s*krl-format-off\b/i.test(trimmed) ||
+        /^\s*;\s*prettier-ignore-start\b/i.test(trimmed)
+      ) {
         formatDisabled = true;
         resultLines.push(originalLine);
         continue;
       }
-      if (/^\s*;\s*krl-format-on\b/i.test(trimmed) || /^\s*;\s*prettier-ignore-end\b/i.test(trimmed)) {
+      if (
+        /^\s*;\s*krl-format-on\b/i.test(trimmed) ||
+        /^\s*;\s*prettier-ignore-end\b/i.test(trimmed)
+      ) {
         formatDisabled = false;
         resultLines.push(originalLine);
         continue;
       }
 
       // Check single line ignore directive (; krl-ignore / ; prettier-ignore)
-      if (/^\s*;\s*krl-ignore\b/i.test(trimmed) || /^\s*;\s*prettier-ignore\b/i.test(trimmed)) {
+      if (
+        /^\s*;\s*krl-ignore\b/i.test(trimmed) ||
+        /^\s*;\s*prettier-ignore\b/i.test(trimmed)
+      ) {
         skipNextLine = true;
         resultLines.push(originalLine);
         continue;
@@ -200,7 +214,8 @@ export class KrlFormatter {
           break;
         }
       }
-      let codePart = commentIndex >= 0 ? trimmed.substring(0, commentIndex) : trimmed;
+      let codePart =
+        commentIndex >= 0 ? trimmed.substring(0, commentIndex) : trimmed;
 
       // Uppercase keywords
       if (formattingSettings.uppercaseKeywords) {
@@ -208,7 +223,9 @@ export class KrlFormatter {
       }
 
       const formattedLine =
-        commentIndex >= 0 ? codePart + trimmed.substring(commentIndex) : codePart;
+        commentIndex >= 0
+          ? codePart + trimmed.substring(commentIndex)
+          : codePart;
 
       // Indent decrement before line output
       if (DECREASE_INDENT.test(codePart)) {
@@ -220,8 +237,14 @@ export class KrlFormatter {
       }
 
       // Space before block
-      if (formattingSettings.separateBeforeBlocks && BLOCK_START.test(codePart)) {
-        if (resultLines.length > 0 && resultLines[resultLines.length - 1].trim() !== "") {
+      if (
+        formattingSettings.separateBeforeBlocks &&
+        BLOCK_START.test(codePart)
+      ) {
+        if (
+          resultLines.length > 0 &&
+          resultLines[resultLines.length - 1].trim() !== ""
+        ) {
           resultLines.push("");
         }
       }

@@ -7,7 +7,6 @@
 
 import * as vscode from "vscode";
 import * as path from "path";
-import { t } from "../i18n";
 
 let errorDecorations: vscode.TextEditorDecorationType | undefined;
 let warningDecorations: vscode.TextEditorDecorationType | undefined;
@@ -17,14 +16,11 @@ let safetyDecorations: vscode.TextEditorDecorationType | undefined;
 
 let statusBarItem: vscode.StatusBarItem | undefined;
 let debounceTimer: NodeJS.Timeout | undefined;
-let extensionContext: vscode.ExtensionContext | undefined;
 
 /**
  * Initialize Error Lens feature
  */
 export function initErrorLens(context: vscode.ExtensionContext): void {
-  extensionContext = context;
-
   // Initialize Decoration Types
   recreateDecorationTypes(context);
 
@@ -140,19 +136,29 @@ function recreateDecorationTypes(context: vscode.ExtensionContext): void {
   const isItalic = config.get<boolean>("errorLens.fontStyleItalic", true);
 
   const errorGutter = gutterEnabled
-    ? vscode.Uri.file(path.join(context.extensionPath, "client", "icons", "error.svg"))
+    ? vscode.Uri.file(
+        path.join(context.extensionPath, "client", "icons", "error.svg"),
+      )
     : undefined;
   const warningGutter = gutterEnabled
-    ? vscode.Uri.file(path.join(context.extensionPath, "client", "icons", "warning.svg"))
+    ? vscode.Uri.file(
+        path.join(context.extensionPath, "client", "icons", "warning.svg"),
+      )
     : undefined;
   const infoGutter = gutterEnabled
-    ? vscode.Uri.file(path.join(context.extensionPath, "client", "icons", "info.svg"))
+    ? vscode.Uri.file(
+        path.join(context.extensionPath, "client", "icons", "info.svg"),
+      )
     : undefined;
   const hintGutter = gutterEnabled
-    ? vscode.Uri.file(path.join(context.extensionPath, "client", "icons", "hint.svg"))
+    ? vscode.Uri.file(
+        path.join(context.extensionPath, "client", "icons", "hint.svg"),
+      )
     : undefined;
   const safetyGutter = gutterEnabled
-    ? vscode.Uri.file(path.join(context.extensionPath, "client", "icons", "safety.svg"))
+    ? vscode.Uri.file(
+        path.join(context.extensionPath, "client", "icons", "safety.svg"),
+      )
     : undefined;
 
   const fontStyle = isItalic ? "italic" : "normal";
@@ -160,8 +166,7 @@ function recreateDecorationTypes(context: vscode.ExtensionContext): void {
   // Error Decoration Type
   errorDecorations = vscode.window.createTextEditorDecorationType({
     isWholeLine: bgMode === "line",
-    backgroundColor:
-      bgMode === "line" ? "rgba(255, 82, 82, 0.12)" : undefined,
+    backgroundColor: bgMode === "line" ? "rgba(255, 82, 82, 0.12)" : undefined,
     gutterIconPath: errorGutter,
     gutterIconSize: "contain",
     after: {
@@ -176,8 +181,7 @@ function recreateDecorationTypes(context: vscode.ExtensionContext): void {
   // Warning Decoration Type
   warningDecorations = vscode.window.createTextEditorDecorationType({
     isWholeLine: bgMode === "line",
-    backgroundColor:
-      bgMode === "line" ? "rgba(255, 193, 7, 0.12)" : undefined,
+    backgroundColor: bgMode === "line" ? "rgba(255, 193, 7, 0.12)" : undefined,
     gutterIconPath: warningGutter,
     gutterIconSize: "contain",
     after: {
@@ -192,8 +196,7 @@ function recreateDecorationTypes(context: vscode.ExtensionContext): void {
   // Info Decoration Type
   infoDecorations = vscode.window.createTextEditorDecorationType({
     isWholeLine: bgMode === "line",
-    backgroundColor:
-      bgMode === "line" ? "rgba(33, 150, 243, 0.10)" : undefined,
+    backgroundColor: bgMode === "line" ? "rgba(33, 150, 243, 0.10)" : undefined,
     gutterIconPath: infoGutter,
     gutterIconSize: "contain",
     after: {
@@ -208,8 +211,7 @@ function recreateDecorationTypes(context: vscode.ExtensionContext): void {
   // Hint Decoration Type
   hintDecorations = vscode.window.createTextEditorDecorationType({
     isWholeLine: bgMode === "line",
-    backgroundColor:
-      bgMode === "line" ? "rgba(46, 204, 113, 0.08)" : undefined,
+    backgroundColor: bgMode === "line" ? "rgba(46, 204, 113, 0.08)" : undefined,
     gutterIconPath: hintGutter,
     gutterIconSize: "contain",
     after: {
@@ -224,8 +226,7 @@ function recreateDecorationTypes(context: vscode.ExtensionContext): void {
   // Safety Decoration Type
   safetyDecorations = vscode.window.createTextEditorDecorationType({
     isWholeLine: bgMode === "line",
-    backgroundColor:
-      bgMode === "line" ? "rgba(231, 76, 60, 0.16)" : undefined,
+    backgroundColor: bgMode === "line" ? "rgba(231, 76, 60, 0.16)" : undefined,
     gutterIconPath: safetyGutter,
     gutterIconSize: "contain",
     after: {
@@ -261,9 +262,12 @@ function triggerUpdate(editor: vscode.TextEditor, immediate: boolean): void {
   } else {
     const config = vscode.workspace.getConfiguration("krl");
     const delay = config.get<number>("errorLens.delay", 300);
-    debounceTimer = setTimeout(() => {
-      updateErrorLensDecorations(editor);
-    }, Math.max(0, delay));
+    debounceTimer = setTimeout(
+      () => {
+        updateErrorLensDecorations(editor);
+      },
+      Math.max(0, delay),
+    );
   }
 }
 
@@ -284,10 +288,7 @@ function updateErrorLensDecorations(editor: vscode.TextEditor): void {
     "errorLens.inlineMessageEnabled",
     true,
   );
-  const followCursor = config.get<string>(
-    "errorLens.followCursor",
-    "allLines",
-  );
+  const followCursor = config.get<string>("errorLens.followCursor", "allLines");
   const alignCol = config.get<number>("errorLens.alignMessage", 0);
   const msgTemplate = config.get<string>(
     "errorLens.messageTemplate",
@@ -461,7 +462,12 @@ function updateStatusBar(editor?: vscode.TextEditor): void {
     true,
   );
 
-  if (!isEnabled || !statusBarEnabled || !editor || editor.document.languageId !== "krl") {
+  if (
+    !isEnabled ||
+    !statusBarEnabled ||
+    !editor ||
+    editor.document.languageId !== "krl"
+  ) {
     statusBarItem.hide();
     return;
   }
@@ -663,9 +669,7 @@ function registerErrorLensCommands(context: vscode.ExtensionContext): void {
       const editor = vscode.window.activeTextEditor;
       if (!editor || editor.document.languageId !== "krl") return;
 
-      const diagnostics = vscode.languages.getDiagnostics(
-        editor.document.uri,
-      );
+      const diagnostics = vscode.languages.getDiagnostics(editor.document.uri);
       const cursorLine = editor.selection.active.line;
       const lineDiag = diagnostics.find(
         (d) => d.range.start.line === cursorLine,
@@ -685,4 +689,3 @@ function registerErrorLensCommands(context: vscode.ExtensionContext): void {
     }),
   );
 }
-

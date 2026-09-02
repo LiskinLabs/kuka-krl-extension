@@ -48,6 +48,8 @@
   "command.diffWithPrevious": "Compare Line with Previous Commit Revision (Diff)",
   "command.copyCommitMessage": "Copy Commit Message",
   "command.toggleGitLensInlineBlame": "Toggle GitLens Inline Blame Annotations",
+  "command.viewLineHistory": "View Selected Lines History (git log -L)",
+  "command.compareTwoRevisions": "Compare Any Two Commit Revisions (Diff)",
   "config.title": "KUKA KRL Extension",
   "config.autoFold.description": "Automatically fold all regions when opening a KRL file",
   "config.formatOnSave.description": "Automatically format document on save",
@@ -75,7 +77,6 @@
   "config.codeLens.enabled": "Show CodeLens hints for references and documentation.",
   "config.callHierarchy.enabled": "Enable Call Hierarchy support for functions.",
   "config.documentHighlights.enabled": "Highlight occurrences of the same variable/function in the document.",
-  "config.maxCartesianVelocity": "Maximum safe Cartesian velocity limit for $VEL.CP (m/s).",
   "config.supportGatewayUrl": "Liskin Labs Support Desk Gateway URL (Direct Engineering Support Relay).",
   "config.telemetry.enabled": "Enable heartbeat and status pings to Liskin Labs Support Gateway (disable for air-gapped industrial cells).",
   "config.gitLens.currentLine.enabled": "Show Git Blame annotations inline at the end of the current line."

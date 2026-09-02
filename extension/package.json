@@ -2,7 +2,7 @@
   "name": "kuka-krl-extension",
   "displayName": "%extension.displayName%",
   "description": "%extension.description%",
-  "version": "1.7.3",
+  "version": "1.8.0",
   "icon": "logo.png",
   "publisher": "LiskinLabs",
   "author": {
@@ -423,6 +423,18 @@
         "title": "%command.toggleGitLensInlineBlame%",
         "category": "KRL",
         "icon": "$(git-commit)"
+      },
+      {
+        "command": "krl.viewLineHistory",
+        "title": "%command.viewLineHistory%",
+        "category": "KRL",
+        "icon": "$(history)"
+      },
+      {
+        "command": "krl.compareTwoRevisions",
+        "title": "%command.compareTwoRevisions%",
+        "category": "KRL",
+        "icon": "$(git-merge)"
       }
     ],
     "viewsContainers": {
@@ -491,6 +503,11 @@
           "command": "krl.sendSelectionToChat",
           "when": "editorHasSelection",
           "group": "krl_ai@2"
+        },
+        {
+          "command": "krl.viewLineHistory",
+          "when": "editorHasSelection && resourceLangId == krl",
+          "group": "krl_git@1"
         },
         {
           "submenu": "krl.contextSubmenu",
@@ -598,6 +615,18 @@
         {
           "command": "krl.validateWorkspace",
           "group": "4_report@2"
+        },
+        {
+          "command": "krl.viewLineHistory",
+          "group": "5_git@1"
+        },
+        {
+          "command": "krl.compareTwoRevisions",
+          "group": "5_git@2"
+        },
+        {
+          "command": "krl.viewFileHistory",
+          "group": "5_git@3"
         }
       ],
       "view/title": [
@@ -770,13 +799,6 @@
           "type": "boolean",
           "default": true,
           "description": "%config.documentHighlights.enabled%"
-        },
-        "krl.maxCartesianVelocity": {
-          "type": "number",
-          "default": 3.0,
-          "minimum": 0.1,
-          "maximum": 5.0,
-          "description": "%config.maxCartesianVelocity%"
         },
         "krl.supportGatewayUrl": {
           "type": "string",

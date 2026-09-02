@@ -1,7 +1,7 @@
-import * as vscode from 'vscode';
-import * as crypto from 'crypto';
-import * as https from 'https';
-import * as http from 'http';
+import * as vscode from "vscode";
+import * as crypto from "crypto";
+import * as https from "https";
+import * as http from "http";
 
 /**
  * Anonymous, Zero-PII Industrial Telemetry Service for KUKA KRL Professional
@@ -13,36 +13,48 @@ export function registerTelemetry(context: vscode.ExtensionContext): void {
     try {
       // 1. Check if user or VS Code has telemetry disabled
       const isGlobalTelemetryEnabled = vscode.env.isTelemetryEnabled ?? true;
-      const isKrlTelemetryEnabled = vscode.workspace.getConfiguration('krl').get<boolean>('telemetry.enabled', true);
-      
+      const isKrlTelemetryEnabled = vscode.workspace
+        .getConfiguration("krl")
+        .get<boolean>("telemetry.enabled", true);
+
       if (!isGlobalTelemetryEnabled || !isKrlTelemetryEnabled) {
         return;
       }
 
       // 2. Prevent multiple pings per day (1 daily heartbeat per device)
-      const today = new Date().toISOString().split('T')[0];
-      const lastPing = context.globalState.get<string>('krl.lastTelemetryDate');
+      const today = new Date().toISOString().split("T")[0];
+      const lastPing = context.globalState.get<string>("krl.lastTelemetryDate");
       if (lastPing === today) {
         return;
       }
 
       // 3. Generate non-reversible anonymous device identifier
-      const rawMachineId = vscode.env.machineId || 'krl-dev-station';
-      const anonymousId = crypto.createHash('sha256').update(rawMachineId).digest('hex').substring(0, 16);
+      const rawMachineId = vscode.env.machineId || "krl-dev-station";
+      const anonymousId = crypto
+        .createHash("sha256")
+        .update(rawMachineId)
+        .digest("hex")
+        .substring(0, 16);
 
-      const gatewayUrl = vscode.workspace.getConfiguration('krl').get<string>('supportGatewayUrl', 'https://kuka-support-gateway.liskinlabs.workers.dev').replace(/\/+$/, '');
+      const gatewayUrl = vscode.workspace
+        .getConfiguration("krl")
+        .get<string>(
+          "supportGatewayUrl",
+          "https://kuka-support-gateway.liskinlabs.workers.dev",
+        )
+        .replace(/\/+$/, "");
       const pingUrl = `${gatewayUrl}/api/telemetry/ping`;
 
       const payload = JSON.stringify({
         anonymousId,
         os: process.platform,
-        appVersion: '1.7.3',
+        appVersion: "1.7.3",
         vscodeVersion: vscode.version,
-        locale: vscode.env.language || 'en'
+        locale: vscode.env.language || "en",
       });
 
       const parsedUrl = new URL(pingUrl);
-      const isHttps = parsedUrl.protocol === 'https:';
+      const isHttps = parsedUrl.protocol === "https:";
       const client = isHttps ? https : http;
 
       const req = client.request(
@@ -51,21 +63,21 @@ export function registerTelemetry(context: vscode.ExtensionContext): void {
           hostname: parsedUrl.hostname,
           port: parsedUrl.port || (isHttps ? 443 : 80),
           path: parsedUrl.pathname,
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(payload)
+            "Content-Type": "application/json",
+            "Content-Length": Buffer.byteLength(payload),
           },
-          timeout: 8000
+          timeout: 8000,
         },
         (res) => {
           if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
-            context.globalState.update('krl.lastTelemetryDate', today);
+            context.globalState.update("krl.lastTelemetryDate", today);
           }
-        }
+        },
       );
 
-      req.on('error', () => {
+      req.on("error", () => {
         // Silently ignore offline network errors on factory floors
       });
 

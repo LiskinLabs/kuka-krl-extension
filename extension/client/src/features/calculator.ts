@@ -326,6 +326,8 @@ function getWebviewContent(t: typeof translations.en, cspSource: string) {
             padding: 16px; 
             color: var(--vscode-editor-foreground); 
             background-color: var(--vscode-editor-background);
+              background-image: radial-gradient(rgba(255, 102, 0, 0.06) 1px, transparent 1px);
+              background-size: 20px 20px;
             max-width: 640px;
             margin: 0 auto;
         }

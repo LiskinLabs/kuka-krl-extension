@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/LiskinLabs/kuka-krl-extension-core.git"
+    "url": "https://github.com/LiskinLabs/kuka-krl-extension.git"
   },
   "license": "SEE LICENSE IN LICENSE.txt",
   "pricing": "Free",
@@ -26,9 +26,9 @@
   "sponsor": {
     "url": "https://checkout.dodopayments.com/buy/pdt_0NlsStba24X0wCjqfZo3O"
   },
-  "homepage": "https://github.com/LiskinLabs/kuka-krl-extension-core",
+  "homepage": "https://github.com/LiskinLabs/kuka-krl-extension",
   "bugs": {
-    "url": "https://github.com/LiskinLabs/kuka-krl-extension-core/issues"
+    "url": "https://github.com/LiskinLabs/kuka-krl-extension/issues"
   },
   "categories": [
     "Programming Languages",

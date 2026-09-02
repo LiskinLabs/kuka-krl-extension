@@ -377,7 +377,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-4 text-xs text-gray-400">
         <div class="flex items-center gap-2 font-bold text-white">
           <span class="text-kuka-orange">//</span>
-          <span>AUTOMOTIVE COMPLIANCE:</span>
+          <span>{{ t.automotiveComplianceLabel }}</span>
         </div>
         <div class="flex flex-wrap items-center gap-3 sm:gap-6 font-semibold">
           <span class="px-3 py-1 rounded-lg bg-[#0e1420] border border-white/10 text-gray-300">VASS 6/7 (VW Group)</span>
@@ -763,18 +763,18 @@
           <div class="flex flex-wrap items-center gap-3">
             <div class="px-4 py-3 rounded-xl bg-[#0a0d14] border border-white/10 shadow-sm text-left">
               <div class="text-xl sm:text-2xl font-black text-kuka-orange font-mono">{{ telemetryStats.totalUsers.toLocaleString() }}+</div>
-              <div class="text-[10px] text-gray-400 uppercase tracking-wider">Active IDEs</div>
+              <div class="text-[10px] text-gray-400 uppercase tracking-wider">{{ t.activeIdesBadge }}</div>
             </div>
             <div class="px-4 py-3 rounded-xl bg-[#0a0d14] border border-white/10 shadow-sm text-left">
               <div class="text-xl sm:text-2xl font-black text-cyan-400 font-mono">{{ telemetryStats.countriesCount }}</div>
-              <div class="text-[10px] text-gray-400 uppercase tracking-wider">Active Nations</div>
+              <div class="text-[10px] text-gray-400 uppercase tracking-wider">{{ t.activeNationsBadge }}</div>
             </div>
             <button 
               @click="refreshTelemetry" 
               class="px-3.5 py-3 rounded-xl bg-[#0a0d14] hover:bg-[#121826] text-gray-300 border border-white/10 text-xs flex items-center gap-1.5 transition-all"
               title="Refresh Live Telemetry">
               <span :class="{'animate-spin': isRefreshingTelemetry}">🔄</span>
-              <span class="text-[11px] font-bold">{{ isRefreshingTelemetry ? 'Syncing...' : 'Live Ping' }}</span>
+              <span class="text-[11px] font-bold">{{ isRefreshingTelemetry ? (currentLang === 'ru' ? 'Синхронизация...' : currentLang === 'tr' ? 'Eşitleniyor...' : 'Syncing...') : t.liveD1SyncBtn }}</span>
             </button>
           </div>
         </div>
@@ -895,12 +895,12 @@
               <div class="flex flex-wrap items-center justify-between gap-2 pb-2 mb-2.5 border-b border-white/10">
                 <div class="flex items-center gap-2 font-bold text-white">
                   <span class="text-xl">{{ activeHeatPoint.flag }}</span>
-                  <span class="text-sm font-sans tracking-tight text-white">{{ activeHeatPoint.cluster }}, {{ activeHeatPoint.country }}</span>
+                  <span class="text-sm font-sans tracking-tight text-white">{{ activeHeatPoint.cluster }}, {{ localizeCountryName(activeHeatPoint.country) }}</span>
                 </div>
                 <div class="flex items-center gap-2">
                   <span class="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold flex items-center gap-1.5">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                    ACTIVE CLUSTER
+                    {{ t.activeClusterBadge }}
                   </span>
                   <button 
                     @click="activeHeatPoint = null" 
@@ -913,20 +913,20 @@
               </div>
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
                 <div class="p-2.5 rounded-lg bg-white/[0.03] border border-white/5">
-                  <div class="text-gray-400 text-[10px] uppercase font-sans">Cluster Density</div>
-                  <div class="font-bold text-kuka-orange text-xs mt-0.5">{{ activeHeatPoint.ides }} Active IDEs</div>
+                  <div class="text-gray-400 text-[10px] uppercase font-sans">{{ t.clusterDensityLabel }}</div>
+                  <div class="font-bold text-kuka-orange text-xs mt-0.5">{{ activeHeatPoint.ides }} {{ t.clusterSessionsText }}</div>
                 </div>
                 <div class="p-2.5 rounded-lg bg-white/[0.03] border border-white/5">
-                  <div class="text-gray-400 text-[10px] uppercase font-sans">Environment</div>
+                  <div class="text-gray-400 text-[10px] uppercase font-sans">{{ t.environmentLabel }}</div>
                   <div class="text-white font-semibold text-xs mt-0.5">VS Code / KRL LSP</div>
                 </div>
                 <div class="p-2.5 rounded-lg bg-white/[0.03] border border-white/5">
-                  <div class="text-gray-400 text-[10px] uppercase font-sans">Target Controller</div>
+                  <div class="text-gray-400 text-[10px] uppercase font-sans">{{ t.targetControllerLabel }}</div>
                   <div class="text-cyan-400 font-semibold text-xs mt-0.5">KSS 8.3 – 8.7 (KRC4/5)</div>
                 </div>
                 <div class="p-2.5 rounded-lg bg-white/[0.03] border border-white/5">
-                  <div class="text-gray-400 text-[10px] uppercase font-sans">Data Privacy</div>
-                  <div class="text-emerald-400 font-bold text-xs mt-0.5">100% Air-Gap & Zero-PII</div>
+                  <div class="text-gray-400 text-[10px] uppercase font-sans">{{ t.dataPrivacyLabel }}</div>
+                  <div class="text-emerald-400 font-bold text-xs mt-0.5">{{ t.privacyGuaranteeText }}</div>
                 </div>
               </div>
             </div>
@@ -935,9 +935,9 @@
             <div class="pt-3 flex flex-wrap items-center justify-between text-[11px] text-gray-400 border-t border-white/10 mt-3 gap-2">
               <span class="flex items-center gap-1.5 text-emerald-400">
                 <span class="w-2 h-2 rounded-full bg-emerald-400"></span> 
-                <span>Heartbeat Relay: Cloudflare Edge Global D1 Store</span>
+                <span>{{ t.heartbeatRelayText }}</span>
               </span>
-              <span class="text-gray-400">Zero-PII Anonymous Telemetry // GDPR Compliant</span>
+              <span class="text-gray-400">{{ t.gdprComplianceText }}</span>
             </div>
 
           </div>
@@ -948,15 +948,15 @@
             <!-- Top Regions -->
             <div class="p-4 rounded-2xl bg-[#0a0d14] border border-white/10 shadow-lg text-xs space-y-3">
               <div class="flex justify-between items-center pb-2 border-b border-white/10">
-                <span class="text-gray-200 font-bold">TOP ROBOTICS REGIONS</span>
-                <span class="text-[10px] text-kuka-orange font-bold">% TOTAL</span>
+                <span class="text-gray-200 font-bold">{{ t.topRegionsTitle }}</span>
+                <span class="text-[10px] text-kuka-orange font-bold">{{ t.pctTotalLabel }}</span>
               </div>
               <div class="space-y-2.5">
-                <div v-for="c in telemetryStats.topCountries" :key="c.country" class="space-y-1">
+                <div v-for="c in localizedTopCountries" :key="c.country" class="space-y-1">
                   <div class="flex justify-between text-[11px]">
                     <span class="text-gray-300 flex items-center gap-1.5">
                       <span>{{ c.flag }}</span>
-                      <span>{{ c.name }}</span>
+                      <span>{{ c.displayName }}</span>
                     </span>
                     <span class="text-gray-400 font-bold">{{ c.count }} ({{ c.pct }}%)</span>
                   </div>
@@ -972,34 +972,34 @@
               <div class="flex justify-between items-center pb-2 border-b border-white/10">
                 <span class="text-gray-200 font-bold flex items-center gap-1.5">
                   <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  GATEWAY & COMPLIANCE
+                  {{ t.gatewayTitle }}
                 </span>
-                <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">100% OPERATIONAL</span>
+                <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">{{ t.gatewayOperational }}</span>
               </div>
 
               <!-- Live Ping Measure -->
               <div class="p-3 rounded-xl bg-[#07090e] border border-white/5 space-y-1.5">
                 <div class="flex justify-between items-center text-[11px]">
-                  <span class="text-gray-400">Cloudflare D1 Relay:</span>
+                  <span class="text-gray-400">{{ t.d1RelayLabel }}</span>
                   <button 
                     @click="pingGateway" 
                     :disabled="isPingingGateway"
                     class="px-2.5 py-1 rounded bg-kuka-orange/20 hover:bg-kuka-orange/30 text-kuka-orange border border-kuka-orange/40 text-[10px] font-bold flex items-center gap-1.5 transition-all active:scale-95">
                     <span :class="{'animate-spin': isPingingGateway}">⚡</span>
-                    <span>{{ isPingingGateway ? 'Pinging...' : `${gatewayPingMs !== null ? gatewayPingMs + 'ms Latency' : 'Test Ping'}` }}</span>
+                    <span>{{ isPingingGateway ? t.pingingBtn : `${gatewayPingMs !== null ? gatewayPingMs + ' ' + t.latencySuffix : t.testPingBtn}` }}</span>
                   </button>
                 </div>
-                <div class="text-[10px] text-gray-500">Edge serverless telemetry relay with zero customer data retention.</div>
+                <div class="text-[10px] text-gray-500">{{ t.d1RelayDesc }}</div>
               </div>
 
               <!-- Air-Gap Compliance -->
               <div class="p-3 rounded-xl bg-[#07090e] border border-white/5 space-y-1">
                 <div class="flex items-center gap-1.5 font-bold text-emerald-400 text-[11px]">
                   <span>🛡️</span>
-                  <span>100% Air-Gap & On-Premise</span>
+                  <span>{{ t.airgapTitle }}</span>
                 </div>
                 <div class="text-[10px] text-gray-400 leading-relaxed">
-                  Your KRL logic, points, and frame coordinates execute purely in local RAM. Zero external cloud dependencies.
+                  {{ t.airgapDesc }}
                 </div>
               </div>
 
@@ -1007,10 +1007,10 @@
               <div class="p-3 rounded-xl bg-[#07090e] border border-white/5 space-y-1">
                 <div class="flex items-center gap-1.5 font-bold text-cyan-400 text-[11px]">
                   <span>✓</span>
-                  <span>Spectra Assure Supply-Chain Clean</span>
+                  <span>{{ t.spectraTitle }}</span>
                 </div>
                 <div class="text-[10px] text-gray-400 leading-relaxed">
-                  0 malicious signatures. Fully verified for tier-1 automotive & defense robotics lines.
+                  {{ t.spectraDesc }}
                 </div>
               </div>
             </div>
@@ -1153,7 +1153,7 @@
         <div class="p-6 rounded-2xl bg-[#0a0d14] border border-white/15 hover:border-kuka-orange/50 transition-all flex flex-col justify-between shadow-xl">
           <div class="space-y-4 text-left">
             <div class="text-kuka-orange text-xs font-bold tracking-widest uppercase">// PRO MONTHLY</div>
-            <div class="text-3xl font-black text-white font-sans">$9.99 <span class="text-xs text-gray-400 font-mono">/ month</span></div>
+            <div class="text-3xl font-black text-white font-sans">$9.99 <span class="text-xs text-gray-400 font-mono">{{ t.perMonth }}</span></div>
             <p class="text-xs text-gray-400 font-sans leading-relaxed">{{ t.p1Desc }}</p>
             <div class="space-y-2 text-xs text-gray-300 pt-4 border-t border-white/10">
               <div>✓ {{ t.pf1 }}</div>
@@ -1174,17 +1174,17 @@
         <!-- Tier 3: Pro Annual (RECOMMENDED) -->
         <div class="p-6 rounded-2xl bg-[#0d121e] border-2 border-kuka-orange shadow-[0_0_30px_rgba(255,102,0,0.2)] flex flex-col justify-between relative">
           <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-kuka-orange text-white text-[10px] font-bold tracking-wider uppercase shadow-md">
-            {{ t.mostPopular }} (SAVE 35%)
+            {{ t.mostPopular }} ({{ t.save35 }})
           </div>
           <div class="space-y-4 text-left">
             <div class="text-cyan-400 text-xs font-bold tracking-widest uppercase">// PRO ANNUAL</div>
-            <div class="text-3xl font-black text-white font-sans">$79.00 <span class="text-xs text-gray-400 font-mono">/ year</span></div>
+            <div class="text-3xl font-black text-white font-sans">$79.00 <span class="text-xs text-gray-400 font-mono">{{ t.perYear }}</span></div>
             <p class="text-xs text-gray-300 font-sans leading-relaxed">{{ t.p2Desc }}</p>
             <div class="space-y-2 text-xs text-gray-200 pt-4 border-t border-white/10">
               <div>✓ {{ t.pf1 }}</div>
               <div>✓ {{ t.pf2 }}</div>
               <div>✓ {{ t.pf3_pri }}</div>
-              <div class="text-emerald-400 font-bold">✓ 3 Machines Activation</div>
+              <div class="text-emerald-400 font-bold">✓ {{ t.activation3Machines }}</div>
             </div>
           </div>
           <div class="pt-6">
@@ -1201,12 +1201,12 @@
         <div class="p-6 rounded-2xl bg-[#0a0d14] border border-white/10 flex flex-col justify-between shadow-xl">
           <div class="space-y-4 text-left">
             <div class="text-purple-400 text-xs font-bold tracking-widest uppercase">// PRO LIFETIME</div>
-            <div class="text-3xl font-black text-white font-sans">$349 <span class="text-xs text-gray-400 font-mono">/ Once</span></div>
+            <div class="text-3xl font-black text-white font-sans">$349 <span class="text-xs text-gray-400 font-mono">{{ t.perOnce }}</span></div>
             <p class="text-xs text-gray-400 font-sans leading-relaxed">{{ t.p3Desc }}</p>
             <div class="space-y-2 text-xs text-gray-300 pt-4 border-t border-white/10">
-              <div>✓ All 50 Pro Tools Forever</div>
-              <div>✓ Free Future Major Updates</div>
-              <div>✓ Direct Engineering Support</div>
+              <div>✓ {{ t.lifetimeF1 }}</div>
+              <div>✓ {{ t.lifetimeF2 }}</div>
+              <div>✓ {{ t.lifetimeF3 }}</div>
             </div>
           </div>
           <div class="pt-6">
@@ -1241,17 +1241,17 @@
           <table class="w-full text-left border-collapse min-w-[560px]">
             <thead>
               <tr class="bg-[#0d121d] border-b border-white/10 text-gray-300 font-bold">
-                <th class="py-4 px-5 font-sans">Industrial Feature / Capability</th>
+                <th class="py-4 px-5 font-sans">{{ t.matrixColFeature }}</th>
                 <th class="py-4 px-4 text-center w-36 sm:w-44 text-gray-400 font-sans">
-                  <div>Community</div>
-                  <div class="text-[10px] font-normal text-gray-500 font-mono">Free Forever</div>
+                  <div>{{ t.matrixColCommunity }}</div>
+                  <div class="text-[10px] font-normal text-gray-500 font-mono">{{ t.matrixColFree }}</div>
                 </th>
                 <th class="py-4 px-4 text-center w-40 sm:w-52 text-kuka-orange font-sans bg-kuka-orange/5 border-l border-white/10">
                   <div class="flex items-center justify-center gap-1">
                     <span>★</span>
-                    <span>Pro Industrial</span>
+                    <span>{{ t.matrixColPro }}</span>
                   </div>
-                  <div class="text-[10px] font-normal text-kuka-orange/80 font-mono">Full Suite (50 Tools)</div>
+                  <div class="text-[10px] font-normal text-kuka-orange/80 font-mono">{{ t.matrixColProSub }}</div>
                 </th>
               </tr>
             </thead>
@@ -1262,11 +1262,11 @@
                   <div class="text-[10px] text-gray-400 font-mono mt-0.5">{{ row.category }}</div>
                 </td>
                 <td class="py-3 px-4 text-center font-bold">
-                  <span v-if="row.free" class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">✓ Included</span>
+                  <span v-if="row.free" class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">{{ t.matrixIncluded }}</span>
                   <span v-else class="text-gray-600 font-mono">—</span>
                 </td>
                 <td class="py-3 px-4 text-center font-bold bg-kuka-orange/5 border-l border-white/10">
-                  <span class="text-kuka-orange bg-kuka-orange/15 px-2.5 py-0.5 rounded-full border border-kuka-orange/40 font-bold">✓ Full Pro Access</span>
+                  <span class="text-kuka-orange bg-kuka-orange/15 px-2.5 py-0.5 rounded-full border border-kuka-orange/40 font-bold">{{ t.matrixFullPro }}</span>
                 </td>
               </tr>
             </tbody>
@@ -1275,20 +1275,20 @@
 
         <div class="p-4 bg-[#07090e] border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs">
           <span class="text-gray-400 font-mono text-[11px]">
-            Ready to equip your commissioning team with zero downtime tooling?
+            {{ t.matrixCtaText }}
           </span>
           <div class="flex items-center gap-3">
             <a 
               href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension" 
               target="_blank" 
               class="px-4 py-2 rounded-xl bg-[#121826] hover:bg-[#1c2538] text-gray-300 font-bold border border-white/10 transition-all text-xs">
-              Install Free Community
+              {{ t.matrixBtnFree }}
             </a>
             <a 
               href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ" 
               target="_blank" 
               class="px-4 py-2 rounded-xl bg-kuka-orange hover:bg-orange-600 text-white font-bold transition-all shadow-[0_0_15px_rgba(255,102,0,0.4)] text-xs">
-              Get Pro License Now ➔
+              {{ t.matrixBtnPro }}
             </a>
           </div>
         </div>
@@ -1314,12 +1314,12 @@
     <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-gray-400 relative z-10">
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span>ALL SYSTEMS OPERATIONAL // LISKIN LABS 2026</span>
+        <span>{{ t.allSystemsOperational }}</span>
       </div>
       <div class="flex items-center gap-4">
         <a href="https://github.com/LiskinLabs/kuka-krl-extension" target="_blank" class="hover:text-kuka-orange transition-colors">GitHub</a>
         <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension" target="_blank" class="hover:text-kuka-orange transition-colors">VS Marketplace</a>
-        <span>KSS 8.2 - 8.7 Verified</span>
+        <span>{{ t.kssVerified }}</span>
       </div>
     </footer>
 
@@ -1998,6 +1998,84 @@ const refreshTelemetry = async () => {
   }
 }
 
+function localizeCountryName(name) {
+  if (!name) return ''
+  if (currentLang.value === 'ru') {
+    const map = {
+      'Turkey': 'Турция',
+      'Germany': 'Германия',
+      'United States': 'США',
+      'USA': 'США',
+      'Italy': 'Италия',
+      'China': 'Китай',
+      'Russia': 'Россия',
+      'Japan': 'Япония',
+      'South Korea': 'Южная Корея',
+      'Mexico': 'Мексика',
+      'Brazil': 'Бразилия',
+      'Spain': 'Испания',
+      'France': 'Франция',
+      'Poland': 'Польша',
+      'Czech Republic': 'Чехия',
+      'Slovakia': 'Словакия',
+      'Hungary': 'Венгрия',
+      'Romania': 'Румыния',
+      'Sweden': 'Швеция',
+      'United Kingdom': 'Великобритания',
+      'Canada': 'Канада',
+      'India': 'Индия',
+      'Australia': 'Австралия'
+    }
+    return map[name] || name
+  }
+  if (currentLang.value === 'tr') {
+    const map = {
+      'Turkey': 'Türkiye',
+      'Germany': 'Almanya',
+      'United States': 'Amerika Birleşik Devletleri',
+      'USA': 'ABD',
+      'Italy': 'İtalya',
+      'China': 'Çin',
+      'Russia': 'Rusya',
+      'Japan': 'Japonya',
+      'South Korea': 'Güney Kore',
+      'Mexico': 'Meksika',
+      'Brazil': 'Brezilya',
+      'Spain': 'İspanya',
+      'France': 'Fransa',
+      'Poland': 'Polonya',
+      'Czech Republic': 'Çekya',
+      'Slovakia': 'Slovakya',
+      'Hungary': 'Macaristan',
+      'Romania': 'Romanya',
+      'Sweden': 'İsveç',
+      'United Kingdom': 'Birleşik Krallık',
+      'Canada': 'Kanada',
+      'India': 'Hindistan',
+      'Australia': 'Avustralya'
+    }
+    return map[name] || name
+  }
+  return name
+}
+
+const localizedTopCountries = computed(() => {
+  const isRu = currentLang.value === 'ru'
+  const isTr = currentLang.value === 'tr'
+  return telemetryStats.value.topCountries.map(c => {
+    let dName = c.name
+    if (c.country === 'OTHER' || c.name === 'Other Countries') {
+      dName = isRu ? 'Другие страны' : isTr ? 'Diğer Ülkeler' : 'Other Countries'
+    } else {
+      dName = localizeCountryName(c.name)
+    }
+    return {
+      ...c,
+      displayName: dName
+    }
+  })
+})
+
 onMounted(() => {
   runPlaygroundAnalysis()
   compute3PointFrame()
@@ -2070,7 +2148,63 @@ const translations = {
         q: "How many workstations can I activate with a Pro license?",
         a: "Each Pro license allows activation on up to 3 machines simultaneously (e.g. your shop-floor rugged laptop, office workstation, and home setup)."
       }
-    ]
+    ],
+
+    // Telemetry & Badges
+    activeIdesBadge: "Active IDEs",
+    activeNationsBadge: "Active Nations",
+    liveD1SyncBtn: "Live D1 Sync",
+    topRegionsTitle: "TOP ROBOTICS REGIONS",
+    pctTotalLabel: "% TOTAL",
+    gatewayTitle: "GATEWAY & COMPLIANCE",
+    gatewayOperational: "100% OPERATIONAL",
+    d1RelayLabel: "Cloudflare D1 Relay:",
+    testPingBtn: "Test Ping",
+    pingingBtn: "Pinging...",
+    latencySuffix: "ms Latency",
+    d1RelayDesc: "Edge serverless telemetry relay with zero customer data retention.",
+    airgapTitle: "100% Air-Gap & On-Premise",
+    airgapDesc: "Your KRL logic, points, and frame coordinates execute purely in local RAM. Zero external cloud dependencies.",
+    spectraTitle: "Spectra Assure Supply-Chain Clean",
+    spectraDesc: "0 malicious signatures. Fully verified for tier-1 automotive & defense robotics lines.",
+    heartbeatRelayText: "Heartbeat Relay: Cloudflare Edge Global D1 Store",
+    gdprComplianceText: "Zero-PII Anonymous Telemetry // GDPR Compliant",
+
+    // Active Cluster HUD
+    activeClusterBadge: "ACTIVE CLUSTER",
+    clusterDensityLabel: "Cluster Density",
+    clusterSessionsText: "Active IDEs",
+    environmentLabel: "Environment",
+    targetControllerLabel: "Target Controller",
+    dataPrivacyLabel: "Data Privacy",
+    privacyGuaranteeText: "100% Air-Gap & Zero-PII",
+
+    // Pricing additions
+    perMonth: "/ month",
+    perYear: "/ year",
+    perOnce: "/ Once",
+    save35: "SAVE 35%",
+    activation3Machines: "3 Machines Activation",
+    lifetimeF1: "All 50 Pro Tools Forever",
+    lifetimeF2: "Free Future Major Updates",
+    lifetimeF3: "Direct Engineering Support",
+
+    // Matrix additions
+    matrixColFeature: "Industrial Feature / Capability",
+    matrixColCommunity: "Community",
+    matrixColFree: "Free Forever",
+    matrixColPro: "Pro Industrial",
+    matrixColProSub: "Full Suite (50 Tools)",
+    matrixIncluded: "✓ Included",
+    matrixFullPro: "✓ Full Pro Access",
+    matrixCtaText: "Ready to equip your commissioning team with zero downtime tooling?",
+    matrixBtnFree: "Install Free Community",
+    matrixBtnPro: "Get Pro License Now ➔",
+
+    // Footer & Trust additions
+    automotiveComplianceLabel: "AUTOMOTIVE COMPLIANCE:",
+    allSystemsOperational: "ALL SYSTEMS OPERATIONAL // LISKIN LABS 2026",
+    kssVerified: "KSS 8.2 - 8.7 Verified"
   },
   ru: {
     navShowcase: "3D Обзор",
@@ -2136,7 +2270,63 @@ const translations = {
         q: "На скольких компьютерах можно активировать Pro лицензию?",
         a: "Каждая лицензия Pro позволяет активировать расширение одновременно на 3 компьютерах (например, цеховой защищенный ноутбук, офисный ПК и домашняя рабочая станция)."
       }
-    ]
+    ],
+
+    // Telemetry & Badges
+    activeIdesBadge: "Активных IDE",
+    activeNationsBadge: "Стран мира",
+    liveD1SyncBtn: "D1 Синхронизация",
+    topRegionsTitle: "РЕГИОНЫ ИСПОЛЬЗОВАНИЯ",
+    pctTotalLabel: "% ВСЕГО",
+    gatewayTitle: "ШЛЮЗ И БЕЗОПАСНОСТЬ",
+    gatewayOperational: "100% РАБОТАЕТ",
+    d1RelayLabel: "Шлюз Cloudflare D1:",
+    testPingBtn: "Тест пинга",
+    pingingBtn: "Запрос...",
+    latencySuffix: "мс задержка",
+    d1RelayDesc: "Анонимный серверлесс-шлюз телеметрии с нулевым сохранением персональных данных.",
+    airgapTitle: "100% Изоляция (Air-Gap) и On-Premise",
+    airgapDesc: "Вся KRL логика, координаты точек и фреймы обрабатываются исключительно в оперативной памяти ПК. Ноль внешних облачных зависимостей.",
+    spectraTitle: "Безопасность цепочки поставок Spectra Assure",
+    spectraDesc: "0 вредоносных сигнатур. Полностью проверено и сертифицировано для роботизированных линий автопрома и ВПК.",
+    heartbeatRelayText: "Канал телеметрии: Cloudflare Edge Global D1 Store",
+    gdprComplianceText: "Анонимная телеметрия без PII // Соответствие GDPR",
+
+    // Active Cluster HUD
+    activeClusterBadge: "АКТИВНЫЙ КЛАСТЕР",
+    clusterDensityLabel: "Плотность сессий",
+    clusterSessionsText: "активных IDE",
+    environmentLabel: "Среда разработки",
+    targetControllerLabel: "Контроллер робота",
+    dataPrivacyLabel: "Защита данных",
+    privacyGuaranteeText: "100% Air-Gap и без PII",
+
+    // Pricing additions
+    perMonth: "/ месяц",
+    perYear: "/ год",
+    perOnce: "разово",
+    save35: "СКИДКА 35%",
+    activation3Machines: "Активация на 3 компьютерах",
+    lifetimeF1: "Все 50 Pro инструментов навсегда",
+    lifetimeF2: "Все будущие обновления бесплатны",
+    lifetimeF3: "Прямая инженерная поддержка",
+
+    // Matrix additions
+    matrixColFeature: "Возможности и функции KRL",
+    matrixColCommunity: "Community",
+    matrixColFree: "Бесплатно навсегда",
+    matrixColPro: "Pro Industrial",
+    matrixColProSub: "Все 50 инструментов",
+    matrixIncluded: "✓ Включено",
+    matrixFullPro: "✓ Полный доступ Pro",
+    matrixCtaText: "Готовы оснастить команду пусконаладки надежными инструментами без простоя?",
+    matrixBtnFree: "Установить Community ($0)",
+    matrixBtnPro: "Купить Pro лицензию ➔",
+
+    // Footer & Trust additions
+    automotiveComplianceLabel: "АВТОМОБИЛЬНЫЕ СТАНДАРТЫ:",
+    allSystemsOperational: "ВСЕ СИСТЕМЫ РАБОТАЮТ ШТАТНО // LISKIN LABS 2026",
+    kssVerified: "KSS 8.2 - 8.7 Проверено"
   },
   tr: {
     navShowcase: "3D Tur",
@@ -2202,7 +2392,63 @@ const translations = {
         q: "Bir Pro lisansıyla kaç bilgisayar etkinleştirebilirim?",
         a: "Her Pro lisansı, aynı anda 3 bilgisayara kadar etkinleştirmeye izin verir (örneğin saha dizüstü bilgisayarı, ofis bilgisayarı ve ev iş istasyonu)."
       }
-    ]
+    ],
+
+    // Telemetry & Badges
+    activeIdesBadge: "Aktif IDE",
+    activeNationsBadge: "Aktif Ülke",
+    liveD1SyncBtn: "Canlı D1 Eşitleme",
+    topRegionsTitle: "EN ÇOK KULLANILAN BÖLGELER",
+    pctTotalLabel: "% TOPLAM",
+    gatewayTitle: "AĞ GEÇİDİ VE UYUMLULUK",
+    gatewayOperational: "%100 ÇALIŞIYOR",
+    d1RelayLabel: "Cloudflare D1 Rölesi:",
+    testPingBtn: "Ping Testi",
+    pingingBtn: "Sorgulanıyor...",
+    latencySuffix: "ms Gecikme",
+    d1RelayDesc: "Sıfır müşteri verisi saklama ile kenar sunucusuz telemetri rölesi.",
+    airgapTitle: "%100 Air-Gap ve Yerel Çalışma",
+    airgapDesc: "KRL mantığınız, noktalarınız ve koordinatlarınız yalnızca yerel RAM'de işlenir. Sıfır bulut bağımlılığı.",
+    spectraTitle: "Spectra Assure Tedarik Zinciri Güvenliği",
+    spectraDesc: "0 zararlı imza. Tier-1 otomotiv ve savunma robotik hatları için tamamen doğrulanmıştır.",
+    heartbeatRelayText: "Telemetri Kanalı: Cloudflare Edge Global D1 Store",
+    gdprComplianceText: "Sıfır PII Anonim Telemetri // GDPR Uyumlu",
+
+    // Active Cluster HUD
+    activeClusterBadge: "AKTİF KÜME",
+    clusterDensityLabel: "Küme Yoğunluğu",
+    clusterSessionsText: "aktif IDE",
+    environmentLabel: "Geliştirme Ortamı",
+    targetControllerLabel: "Hedef Kontrolör",
+    dataPrivacyLabel: "Veri Gizliliği",
+    privacyGuaranteeText: "%100 Air-Gap ve Sıfır PII",
+
+    // Pricing additions
+    perMonth: "/ ay",
+    perYear: "/ yıl",
+    perOnce: "tek seferlik",
+    save35: "%35 TASARRUF",
+    activation3Machines: "3 Bilgisayarda Aktivasyon",
+    lifetimeF1: "Tüm 50 Pro Araç Sonsuza Kadar",
+    lifetimeF2: "Gelecekteki Tüm Güncellemeler Dahil",
+    lifetimeF3: "Doğrudan Mühendislik Desteği",
+
+    // Matrix additions
+    matrixColFeature: "Endüstriyel Özellik / Yetenek",
+    matrixColCommunity: "Community",
+    matrixColFree: "Sonsuza Dek Ücretsiz",
+    matrixColPro: "Pro Industrial",
+    matrixColProSub: "Tam Paket (50 Araç)",
+    matrixIncluded: "✓ Dahil",
+    matrixFullPro: "✓ Tam Pro Erişim",
+    matrixCtaText: "Devreye alma ekibinizi sıfır duruş süreli araçlarla donatmaya hazır mısınız?",
+    matrixBtnFree: "Ücretsiz Community Kur",
+    matrixBtnPro: "Pro Lisans Satın Al ➔",
+
+    // Footer & Trust additions
+    automotiveComplianceLabel: "OTOMOTİV UYUMLULUĞU:",
+    allSystemsOperational: "TÜM SİSTEMLER ÇALIŞIYOR // LISKIN LABS 2026",
+    kssVerified: "KSS 8.2 - 8.7 Doğrulandı"
   }
 }
 

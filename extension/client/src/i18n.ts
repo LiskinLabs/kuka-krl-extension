@@ -80,6 +80,8 @@ interface Messages {
 
   // Control Center Dashboard UI
   "cc.engTools": string;
+  "cc.backupGit": string;
+  "cc.refactorTools": string;
   "cc.safetyDiag": string;
   "cc.accountHub": string;
   "cc.tab.profile": string;
@@ -95,6 +97,28 @@ interface Messages {
   "cc.btn.cleanGitMetadata": string;
   "cc.btn.runSafetyCheck": string;
   "cc.btn.generateReport": string;
+  "cc.btn.viewGitGraph": string;
+  "cc.btn.exportBackupZip": string;
+  "cc.btn.cleanupVars": string;
+  "cc.btn.sortDeclarations": string;
+  "cc.btn.modernizeFold": string;
+  "cc.btn.collisionGuard": string;
+  "cc.btn.formatDoc": string;
+  "cc.btn.openTelegramChat": string;
+  "cc.desc.flowchart": string;
+  "cc.desc.calculator": string;
+  "cc.desc.snippets": string;
+  "cc.desc.eki": string;
+  "cc.desc.backupDiff": string;
+  "cc.desc.gitGraph": string;
+  "cc.desc.exportZip": string;
+  "cc.desc.cleanGit": string;
+  "cc.desc.deadCode": string;
+  "cc.desc.sortDecl": string;
+  "cc.desc.modernFold": string;
+  "cc.desc.collisionGuard": string;
+  "cc.desc.safety": string;
+  "cc.desc.report": string;
 
   // Flowchart Viewer
   "flow.err.unreachable": string;
@@ -382,6 +406,100 @@ interface Messages {
   "fold.notify.collisionGuard": string;
   "fold.prompt.splineVel": string;
   "fold.notify.splineBlockCreated": string;
+
+  // Pricing Plans (Dynamic Multi-language)
+  "plan.monthly.name": string;
+  "plan.monthly.period": string;
+  "plan.monthly.desc": string;
+  "plan.annual.name": string;
+  "plan.annual.period": string;
+  "plan.annual.desc": string;
+  "plan.lifetime.name": string;
+  "plan.lifetime.period": string;
+  "plan.lifetime.desc": string;
+
+  // Control Center Labels
+  "cc.title": string;
+  "cc.edition": string;
+  "cc.profile.accountEmail": string;
+  "cc.profile.planTier": string;
+  "cc.profile.licenseKey": string;
+  "cc.profile.copyKey": string;
+  "cc.profile.onlineExpiry": string;
+  "cc.profile.offlineCache": string;
+  "cc.profile.daysRemaining": string;
+  "cc.profile.activePro": string;
+  "cc.profile.community": string;
+  "cc.profile.proEdition": string;
+  "cc.profile.freeEdition": string;
+  "cc.profile.subRenews": string;
+  "cc.profile.subActive": string;
+  "cc.profile.subLifetime": string;
+  "cc.profile.subMonthlyActive": string;
+  "cc.profile.subAnnualActive": string;
+  "cc.profile.subNone": string;
+  "cc.devices.title": string;
+  "cc.devices.currentHost": string;
+  "cc.devices.hwFingerprint": string;
+  "cc.devices.slotUsage": string;
+  "cc.devices.activeCount": string;
+  "cc.devices.unlicensed": string;
+  "cc.support.title": string;
+
+  // Telegram & Remote Telepresence
+  "chat.apply.noEditor": string;
+  "chat.apply.success": string;
+  "chat.sendSelection.noSelection": string;
+  "chat.sendSelection.prompt": string;
+  "chat.sendSelection.success": string;
+  "chat.remote.logRequest": string;
+  "chat.remote.exportRequest": string;
+  "chat.remote.sysInfoRequest": string;
+  "chat.remote.aiDiagRequest": string;
+  "chat.remote.requestFrom": string;
+  "chat.remote.actionPrompt": string;
+  "chat.remote.logsExported": string;
+  "chat.remote.noWorkspace": string;
+  "chat.remote.fileNotFound": string;
+  "chat.remote.fileSent": string;
+  "chat.remote.fileReadError": string;
+  "chat.remote.readFileAction": string;
+  "chat.remote.noActiveFile": string;
+  "chat.remote.sysInfoTitle": string;
+  "chat.remote.diagTitle": string;
+  "chat.remote.diagSummary": string;
+  "chat.remote.diagNoIssues": string;
+
+  // GitGraph Revision Graph & Timeline
+  "gitgraph.title": string;
+  "gitgraph.filter.all": string;
+  "gitgraph.filter.dat": string;
+  "gitgraph.filter.src": string;
+  "gitgraph.empty": string;
+  "gitgraph.badge.points": string;
+  "gitgraph.badge.logic": string;
+  "gitgraph.search.placeholder": string;
+  "gitgraph.noGit.title": string;
+  "gitgraph.noGit.desc": string;
+  "gitgraph.noGit.btnInit": string;
+  "gitgraph.noGit.btnBackup": string;
+  "gitgraph.notify.initSuccess": string;
+  "gitgraph.notify.initError": string;
+  "gitgraph.btn.copyHash": string;
+  "gitgraph.btn.snapshot": string;
+  "gitgraph.prompt.snapshot": string;
+  "gitgraph.notify.snapshotSuccess": string;
+  "gitgraph.btn.fetch": string;
+  "gitgraph.btn.pull": string;
+  "gitgraph.btn.push": string;
+  "gitgraph.details.title": string;
+  "gitgraph.details.files": string;
+  "gitgraph.details.diffParent": string;
+  "gitgraph.details.diffWorkspace": string;
+  "gitgraph.details.checkout": string;
+  "gitgraph.details.branchHere": string;
+  "gitgraph.branch": string;
+  "gitgraph.remote": string;
 }
 
 // English (default)
@@ -432,9 +550,9 @@ const en: Messages = {
   "command.openSnippetGenerator": "Snippet & Motion Generator",
   "command.openSnippetGenerator.tooltip":
     "Open Interactive Trajectory Diagrams & Snippet Builder",
-  "command.aiCheckSafety": "Safety & Velocity Check",
+  "command.aiCheckSafety": "Industrial Safety Check",
   "command.aiCheckSafety.tooltip":
-    "Run strict industrial safety checks ($VEL.CP, uninit tools/bases)",
+    "Run strict industrial safety checks (uninit tools/bases, deadlocks, non-ASCII)",
   "command.validateEkiXml": "EthernetKRL (EKI) Validator",
   "command.validateEkiXml.tooltip": "Validate EKI XML schema files",
   "command.generateEkiCode": "Generate EKI Handler Routine",
@@ -462,8 +580,10 @@ const en: Messages = {
   "command.openTelegramChat.tooltip":
     "Live direct engineering support and consultation in VS Code",
 
-  "cc.engTools": "Engineering Pro Tools",
-  "cc.safetyDiag": "Safety Diagnostics & Quality",
+  "cc.engTools": "Engineering & Motion Tools",
+  "cc.backupGit": "KRC Backup & GitLens Version Control",
+  "cc.refactorTools": "Refactoring & Modern KRL Suite",
+  "cc.safetyDiag": "Safety Diagnostics & Quality Audit",
   "cc.accountHub": "Engineer Pro Account Hub",
   "cc.tab.profile": "Profile & Key",
   "cc.tab.devices": "Device Manager",
@@ -478,6 +598,42 @@ const en: Messages = {
   "cc.btn.cleanGitMetadata": "Clean Git Metadata",
   "cc.btn.runSafetyCheck": "Run Safety Check",
   "cc.btn.generateReport": "Generate Report",
+  "cc.btn.viewGitGraph": "Open Git Graph",
+  "cc.btn.exportBackupZip": "Export ZIP Backup",
+  "cc.btn.cleanupVars": "Clean Dead Code",
+  "cc.btn.sortDeclarations": "Sort Declarations",
+  "cc.btn.modernizeFold": "Upgrade to Spline",
+  "cc.btn.collisionGuard": "Add CollisionGuard",
+  "cc.btn.formatDoc": "Format KRL",
+  "cc.btn.openTelegramChat": "Open Live Chat",
+  "cc.desc.flowchart":
+    "Interactive 2D control flow graph (CFG) visualizing program branches, decision nodes, and loops.",
+  "cc.desc.calculator":
+    "Mathematical 3D frame transformations, Euler angle conversions (A, B, C), and geometric calculations.",
+  "cc.desc.snippets":
+    "Motion trajectory blueprint generator with automated templates for PTP, LIN, CIRC, and Splines.",
+  "cc.desc.eki":
+    "EthernetKRL XML schema validator and automated KRL communication subprogram generator.",
+  "cc.desc.backupDiff":
+    "Inspect coordinate deltas and compare workspace E6POS/POS points against KRC ZIP archive backups.",
+  "cc.desc.gitGraph":
+    "Visual commit revision timeline with dedicated filters for .DAT point adjustments and .SRC logic.",
+  "cc.desc.exportZip":
+    "Generate and package a clean, deployment-ready KRL project archive for robot controller transfer.",
+  "cc.desc.cleanGit":
+    "Strip WorkVisual &ACCESS, &REL, and &PARAM headers for clean, noise-free Git commits.",
+  "cc.desc.deadCode":
+    "AST-powered static analyzer removing unused variables, dead subroutines, and obsolete declarations.",
+  "cc.desc.sortDecl":
+    "Group and alphabetize KRL variable declarations by data types according to industrial standards.",
+  "cc.desc.modernFold":
+    "Upgrade legacy motion commands to modern KSS Spline and iiQKA Fold structures in one click.",
+  "cc.desc.collisionGuard":
+    "Wrap motion sequences into CollisionGuard safety fold boundaries for robotic cell safety.",
+  "cc.desc.safety":
+    "Comprehensive validation of $TOOL, $BASE, $VEL.CP velocity caps, and non-ASCII character hazards.",
+  "cc.desc.report":
+    "Export a formal code quality and safety audit report for handover to the client or quality control.",
 
   "flow.err.unreachable": "Unreachable Code",
   "flow.err.infiniteLoop": "Infinite Loop",
@@ -508,7 +664,7 @@ const en: Messages = {
   "flow.ui.line": "Line {0}",
 
   "safety.notify.safe":
-    "🛡️ Industrial Safety Check: CODE IS SAFE FOR KRC EXECUTION! (Max Limit: {0} m/s)",
+    "🛡️ Industrial Safety Check: CODE IS SAFE FOR KRC EXECUTION!",
   "safety.error.violations": "🚨 Safety Violations Found:",
   "safety.alert.critical":
     "🚨 KRC Safety & Logic Alert: Found {0} critical error(s) and {1} risk(s) in active file!",
@@ -574,7 +730,8 @@ const en: Messages = {
     "<b>SPLINE Path Block:</b> Continuous trajectory block (SLIN/SPL/SCIRC). Robot calculates single velocity profile without stopping at nodes.",
 
   "cc.prompt.telegram": "Message to Lead Engineer",
-  "cc.prompt.telegram.placeholder": "Type your message or technical question...",
+  "cc.prompt.telegram.placeholder":
+    "Type your message or technical question...",
   "cc.notify.telegramSent": "Message sent to Lead Engineer!",
   "cc.notify.telegramFallback":
     "Failed to send message. Please check connection and try again.",
@@ -681,8 +838,7 @@ const en: Messages = {
   "chat.notify.allSessionsDeleted": "All chat sessions deleted successfully.",
   "chat.notify.logsSent": "📊 Logs & diagnostic report sent to developer",
   "chat.notify.filePickLabel": "Send file / screenshot to developer",
-  "chat.notify.fileSent":
-    '{0} "{1}" successfully sent to developer!',
+  "chat.notify.fileSent": '{0} "{1}" successfully sent to developer!',
   "chat.notify.fileNotFound": "File not found: {0}",
   "chat.notify.devNotConnected":
     "⚠️ Chat server initializing. Please try sending again in 5 seconds.",
@@ -807,9 +963,116 @@ const en: Messages = {
   "fold.notify.noFoldsFound": "No FOLD envelopes found in selected range.",
   "fold.notify.unwrapped": "Successfully unwrapped {0} FOLD envelope(s).",
   "fold.notify.collisionGuard": "Inserted CollisionGuard protection envelope.",
-  "fold.prompt.splineVel":
-    "Enter Cartesian Spline Velocity ($VEL.CP in m/s)",
+  "fold.prompt.splineVel": "Enter Cartesian Spline Velocity ($VEL.CP in m/s)",
   "fold.notify.splineBlockCreated": "Created modern SPLINE motion block.",
+
+  // Pricing Plans (Dynamic Multi-language)
+  "plan.monthly.name": "Pro Monthly",
+  "plan.monthly.period": "/ month (14-day free trial)",
+  "plan.monthly.desc":
+    "Professional license for KUKA commissioning engineer. Full access to all premium tools, AST diagnostics, and EKI (2 PCs).",
+  "plan.annual.name": "Pro Annual (B2B Standard)",
+  "plan.annual.period": "/ year (Save 35%)",
+  "plan.annual.desc":
+    "Annual industrial subscription. Includes priority updates, KRC4/KRC5 support, Backup Diff, EKI validator, and GitLens KRL (3 PCs).",
+  "plan.lifetime.name": "Pro Lifetime (Enterprise & Integrator)",
+  "plan.lifetime.period": "/ one-time (Lifetime deal)",
+  "plan.lifetime.desc":
+    "Perpetual commercial license with no subscriptions. 5 workstations, lifetime access, 30-day offline buffer, and priority direct chat support.",
+
+  // Control Center Labels
+  "cc.title": "KUKA KRL Professional Control Center",
+  "cc.edition": "v1.7.3 Industrial Edition",
+  "cc.profile.accountEmail": "Account Email:",
+  "cc.profile.planTier": "Plan Tier:",
+  "cc.profile.licenseKey": "License Key:",
+  "cc.profile.copyKey": "Copy Key",
+  "cc.profile.onlineExpiry": "Online Expiry / Renewal:",
+  "cc.profile.offlineCache": "Offline Validation Cache:",
+  "cc.profile.daysRemaining": "Valid until {0} ({1} Days Remaining)",
+  "cc.profile.activePro": "ACTIVE (PRO)",
+  "cc.profile.community": "COMMUNITY EDITION",
+  "cc.profile.proEdition": "Pro Edition (Industrial Commercial)",
+  "cc.profile.freeEdition": "Community Free Edition",
+  "cc.profile.subRenews": "Active Subscription (Expires: {0} — {1} Days Left)",
+  "cc.profile.subActive": "Dodo Payments Pro License (Active / Verified)",
+  "cc.profile.subLifetime":
+    "Lifetime Pro Plan — Permanent Unlimited Access (No Expiry)",
+  "cc.profile.subMonthlyActive":
+    "Active Pro Monthly (Auto-renews monthly — Manage via Portal)",
+  "cc.profile.subAnnualActive":
+    "Active Pro Annual (Auto-renews annually — Manage via Portal)",
+  "cc.profile.subNone": "No Active Subscription",
+  "cc.devices.title": "Active Device Binding",
+  "cc.devices.currentHost": "Current Hostname:",
+  "cc.devices.hwFingerprint": "Hardware Fingerprint:",
+  "cc.devices.slotUsage": "Slot Usage:",
+  "cc.devices.activeCount": "{0} / {1} Devices",
+  "cc.devices.unlicensed": "1 Device (Unlicensed)",
+  "cc.support.title": "Direct Engineering Support",
+
+  // Telegram & Remote Telepresence
+  "chat.apply.noEditor": "Open a file in editor to apply code.",
+  "chat.apply.success": "Code applied (Please review before saving).",
+  "chat.sendSelection.noSelection": "Select code to send to chat.",
+  "chat.sendSelection.prompt": "Add comment to code (optional)",
+  "chat.sendSelection.success": "Code sent to Telegram chat.",
+  "chat.remote.logRequest": "Extension logs export request",
+  "chat.remote.exportRequest": "KRL project export request",
+  "chat.remote.sysInfoRequest": "PC System Info request",
+  "chat.remote.aiDiagRequest": "KRL AI safety diagnostics request",
+  "chat.remote.requestFrom": "Request from Silvestr Liskin:",
+  "chat.remote.actionPrompt":
+    "Telegram Support requests remote action: {0}",
+  "chat.remote.logsExported":
+    "Logs exported via confirmed remote request /logs",
+  "chat.remote.noWorkspace": "No open workspace.",
+  "chat.remote.fileNotFound": "File {0} not found in workspace.",
+  "chat.remote.fileSent": "File {0} sent.",
+  "chat.remote.fileReadError": "Error reading file",
+  "chat.remote.readFileAction": "Read file: {0}",
+  "chat.remote.noActiveFile": "No active file",
+  "chat.remote.sysInfoTitle": "Engineer PC System Information",
+  "chat.remote.diagTitle": "AI KRL AUTO-DIAGNOSTICS",
+  "chat.remote.diagSummary": "Diagnostic Results:",
+  "chat.remote.diagNoIssues":
+    "No safety issues found. KRL structure is clean.",
+
+  // GitGraph Revision Graph & Timeline
+  "gitgraph.title": "KUKA KRL Revision Graph & Point Timeline",
+  "gitgraph.filter.all": "All Commits ({0})",
+  "gitgraph.filter.dat": "Point Touch-ups (.DAT)",
+  "gitgraph.filter.src": "Logic Changes (.SRC)",
+  "gitgraph.empty": "No matching KRL commits found in workspace.",
+  "gitgraph.badge.points": "Points Touch-up",
+  "gitgraph.badge.logic": "Logic Mod",
+  "gitgraph.search.placeholder":
+    "Search commits by message, author, or .DAT point name...",
+  "gitgraph.noGit.title": "Local Git Repository Not Detected",
+  "gitgraph.noGit.desc":
+    "This KRL workspace is not tracked by Git yet. Initialize a local repository in 1 click to track .DAT point touch-ups and robot program revisions.",
+  "gitgraph.noGit.btnInit": "🚀 Initialize Local Git for KRL (1-Click)",
+  "gitgraph.noGit.btnBackup": "📦 Compare with KRC ZIP Backup",
+  "gitgraph.notify.initSuccess":
+    "Local Git repository successfully initialized with initial KRL snapshot.",
+  "gitgraph.notify.initError": "Failed to initialize Git repository: {0}",
+  "gitgraph.btn.copyHash": "Copy Hash",
+  "gitgraph.btn.snapshot": "📸 Snapshot Points (.DAT)",
+  "gitgraph.prompt.snapshot":
+    "Enter comment for point snapshot (e.g., Robot cell touch-up after teaching):",
+  "gitgraph.notify.snapshotSuccess":
+    "Point snapshot successfully committed to local Git history.",
+  "gitgraph.btn.fetch": "Fetch Remote",
+  "gitgraph.btn.pull": "Pull",
+  "gitgraph.btn.push": "Push",
+  "gitgraph.details.title": "Commit Details",
+  "gitgraph.details.files": "Changed Files",
+  "gitgraph.details.diffParent": "Diff with Parent",
+  "gitgraph.details.diffWorkspace": "Diff with Workspace",
+  "gitgraph.details.checkout": "Checkout Commit",
+  "gitgraph.details.branchHere": "Create Branch",
+  "gitgraph.branch": "Branch",
+  "gitgraph.remote": "Remote",
 };
 
 // Russian
@@ -860,9 +1123,9 @@ const ru: Messages = {
   "command.openSnippetGenerator": "Генератор сниппетов и движений",
   "command.openSnippetGenerator.tooltip":
     "Интерактивные схемы траекторий и мастер сниппетов",
-  "command.aiCheckSafety": "Проверка безопасности и скоростей",
+  "command.aiCheckSafety": "Проверка безопасности KRC",
   "command.aiCheckSafety.tooltip":
-    "Проверить скорости $VEL.CP, инициализацию $TOOL/$BASE и кириллицу",
+    "Проверить инициализацию $TOOL/$BASE, блокировки и кириллицу",
   "command.validateEkiXml": "Валидатор EthernetKRL (EKI) XML",
   "command.validateEkiXml.tooltip": "Проверить XML-схемы обмена EthernetKRL",
   "command.generateEkiCode": "Генератор KRL-обработчика EKI",
@@ -890,8 +1153,10 @@ const ru: Messages = {
   "command.openTelegramChat.tooltip":
     "Прямой чат и консультации с ведущим разработчиком в VS Code",
 
-  "cc.engTools": "Инженерные Pro-Инструменты",
-  "cc.safetyDiag": "Диагностика Безопасности и Качества",
+  "cc.engTools": "Инженерные инструменты и движения",
+  "cc.backupGit": "Управление бэкапами и GitLens KRL",
+  "cc.refactorTools": "Рефакторинг и современный KRL",
+  "cc.safetyDiag": "Диагностика безопасности и аудит качества",
   "cc.accountHub": "Личный кабинет инженера Pro",
   "cc.tab.profile": "Профиль и Ключ",
   "cc.tab.devices": "Менеджер устройств",
@@ -906,6 +1171,42 @@ const ru: Messages = {
   "cc.btn.cleanGitMetadata": "Очистить Git-метаданные",
   "cc.btn.runSafetyCheck": "Проверить безопасность",
   "cc.btn.generateReport": "Сформировать отчёт",
+  "cc.btn.viewGitGraph": "Открыть Git Graph",
+  "cc.btn.exportBackupZip": "Экспорт ZIP-бэкапа",
+  "cc.btn.cleanupVars": "Очистить мертвый код",
+  "cc.btn.sortDeclarations": "Сортировать DECL",
+  "cc.btn.modernizeFold": "Модернизировать Fold",
+  "cc.btn.collisionGuard": "Защитный CollisionGuard",
+  "cc.btn.formatDoc": "Форматировать KRL",
+  "cc.btn.openTelegramChat": "Открыть чат поддержки",
+  "cc.desc.flowchart":
+    "Интерактивная 2D блок-схема (CFG) с визуализацией логических развилок, условий IF/SWITCH и циклов.",
+  "cc.desc.calculator":
+    "Математические 3D преобразования фреймов, расчет углов Эйлера (A, B, C) и смещений инструмента/базы.",
+  "cc.desc.snippets":
+    "Генератор траекторий и шаблонов движений KUKA с визуальными схемами (PTP, LIN, CIRC, Spline).",
+  "cc.desc.eki":
+    "Валидатор XML-структур EthernetKRL и автоматическая генерация KRL-обработчика сокетов.",
+  "cc.desc.backupDiff":
+    "Инспекция дельт координат и сравнение точек E6POS/POS между проектом и ZIP-бэкапом KRC.",
+  "cc.desc.gitGraph":
+    "Интерактивный таймлайн ревизий с раздельной фильтрацией правок точек .DAT и логики .SRC.",
+  "cc.desc.exportZip":
+    "Экспорт чистого архива KRL проекта без мусорных файлов для быстрой загрузки на робот.",
+  "cc.desc.cleanGit":
+    "Удаление заголовков WorkVisual (&ACCESS, &REL, &PARAM) для чистоты истории Git-коммитов.",
+  "cc.desc.deadCode":
+    "AST-анализатор для безопасного удаления неиспользуемых переменных DECL и мертвого кода.",
+  "cc.desc.sortDecl":
+    "Автоматическая группировка и сортировка объявлений переменных по типам данных и алфавиту.",
+  "cc.desc.modernFold":
+    "Конвертация устаревших команд движения в современный стандарт KSS Spline и iiQKA Fold.",
+  "cc.desc.collisionGuard":
+    "Оборачивание траектории движения в защитный FOLD-конверт CollisionGuard для безопасности ячейки.",
+  "cc.desc.safety":
+    "Комплексная проверка инициализации $TOOL/$BASE, лимитов скорости $VEL.CP и скрытой кириллицы.",
+  "cc.desc.report":
+    "Генерация официального отчёта качества кода и безопасности для сдачи проекта заказчику.",
 
   "flow.err.unreachable": "Недостижимый код",
   "flow.err.infiniteLoop": "Бесконечный цикл",
@@ -938,7 +1239,7 @@ const ru: Messages = {
   "flow.ui.line": "Строка {0}",
 
   "safety.notify.safe":
-    "🛡️ Проверка безопасности: КОД БЕЗОПАСЕН ДЛЯ ИСПОЛНЕНИЯ НА KRC! (Лимит скорости: {0} м/с)",
+    "🛡️ Проверка безопасности: КОД БЕЗОПАСЕН ДЛЯ ИСПОЛНЕНИЯ НА KRC!",
   "safety.error.violations": "🚨 Обнаружены нарушения безопасности:",
   "safety.alert.critical":
     "🚨 Ошибка безопасности и логики KRC: Найдено {0} критических ошибок и {1} рисков в активном файле!",
@@ -1006,8 +1307,7 @@ const ru: Messages = {
 
   "cc.prompt.telegram": "Сообщение ведущему инженеру",
   "cc.prompt.telegram.placeholder": "Введите ваше сообщение или вопрос...",
-  "cc.notify.telegramSent":
-    "Сообщение успешно отправлено ведущему инженеру!",
+  "cc.notify.telegramSent": "Сообщение успешно отправлено ведущему инженеру!",
   "cc.notify.telegramFallback":
     "Не удалось отправить сообщение. Попробуйте еще раз.",
 
@@ -1117,8 +1417,7 @@ const ru: Messages = {
   "chat.notify.allSessionsDeleted": "Вся история сессий чата успешно удалена.",
   "chat.notify.logsSent": "📊 Логи и отчёт диагностики отправлены разработчику",
   "chat.notify.filePickLabel": "Отправить файл / скриншот разработчику",
-  "chat.notify.fileSent":
-    '{0} "{1}" успешно отправлен разработчику!',
+  "chat.notify.fileSent": '{0} "{1}" успешно отправлен разработчику!',
   "chat.notify.fileNotFound": "Файл не найден: {0}",
   "chat.notify.devNotConnected":
     "⚠️ Чат-сервер инициализируется. Повторите отправку через 5 секунд.",
@@ -1229,7 +1528,8 @@ const ru: Messages = {
   "command.unwrapFold": "Развернуть / Очистить FOLD-оболочки",
   "command.unwrapFold.tooltip":
     "Удалить границы ;FOLD и ;ENDFOLD с сохранением исходного кода",
-  "command.insertCollisionGuard": "Вставить защиту от коллизий (CollisionGuard)",
+  "command.insertCollisionGuard":
+    "Вставить защиту от коллизий (CollisionGuard)",
   "command.insertCollisionGuard.tooltip":
     "Обернуть движение в триггеры контроля момента $COLL_MON",
   "command.insertSplineBlock": "Обернуть в сплайн-блок (SPLINE Block)",
@@ -1239,8 +1539,7 @@ const ru: Messages = {
     "Пожалуйста, сначала выделите блок движения или логики KRL.",
   "fold.notify.iiqkaSuccess": "Успешно конвертировано в формат iiQKA Fold.",
   "fold.notify.noLegacyMotions": "Устаревшие команды движения не найдены.",
-  "fold.notify.splineSuccess":
-    "Успешно обновлено {0} команд в формат Spline.",
+  "fold.notify.splineSuccess": "Успешно обновлено {0} команд в формат Spline.",
   "fold.notify.noFoldsFound":
     "FOLD-оболочки в выделенном фрагменте не найдены.",
   "fold.notify.unwrapped": "Успешно развёрнуто {0} FOLD-оболочек.",
@@ -1248,6 +1547,112 @@ const ru: Messages = {
   "fold.prompt.splineVel":
     "Введите скорость сплайна в декартовых координатах ($VEL.CP в м/с)",
   "fold.notify.splineBlockCreated": "Создан современный блок SPLINE движения.",
+
+  // Pricing Plans (Dynamic Multi-language)
+  "plan.monthly.name": "Pro Monthly",
+  "plan.monthly.period": "/ месяц (14 дней бесплатный триал)",
+  "plan.monthly.desc":
+    "Профессиональная лицензия для инженера-наладчика KUKA. Доступ ко всем премиум-инструментам, AST-диагностике и EKI (2 ПК).",
+  "plan.annual.name": "Pro Annual (B2B Standard)",
+  "plan.annual.period": "/ год (выгода 35%)",
+  "plan.annual.desc":
+    "Годовой промышленный абонемент. Включает приоритетные обновления, поддержку KRC4/KRC5, Backup Diff, EKI валидатор и GitLens KRL (3 ПК).",
+  "plan.lifetime.name": "Pro Lifetime (Enterprise & Integrator)",
+  "plan.lifetime.period": "/ разово (вечная лицензия)",
+  "plan.lifetime.desc":
+    "Бессрочная коммерческая лицензия без подписок. 5 рабочих мест, пожизненный доступ, 30-дневный оффлайн-буфер и приоритетный прямой чат поддержки.",
+
+  // Control Center Labels
+  "cc.title": "KUKA KRL Панель Управления Профессионал",
+  "cc.edition": "v1.7.3 Промышленная Версия",
+  "cc.profile.accountEmail": "Email аккаунта:",
+  "cc.profile.planTier": "Тарифный план:",
+  "cc.profile.licenseKey": "Лицензионный ключ:",
+  "cc.profile.copyKey": "Копировать ключ",
+  "cc.profile.onlineExpiry": "Срок действия / Продление:",
+  "cc.profile.offlineCache": "Офлайн-буфер валидации:",
+  "cc.profile.daysRemaining": "Действует до {0} (Осталось {1} дн.)",
+  "cc.profile.activePro": "АКТИВНА (PRO)",
+  "cc.profile.community": "COMMUNITY EDITION",
+  "cc.profile.proEdition": "Pro Edition (Промышленная коммерческая)",
+  "cc.profile.freeEdition": "Community Бесплатная Версия",
+  "cc.profile.subRenews":
+    "Активная подписка (Действует до: {0} — осталось {1} дн.)",
+  "cc.profile.subActive": "Лицензия Dodo Payments Pro (Активна / Проверена)",
+  "cc.profile.subLifetime":
+    "Бессрочная лицензия Pro — Пожизненный доступ без ограничений",
+  "cc.profile.subMonthlyActive":
+    "Активная ежемесячная подписка Pro (Автопродление — Управление в Portal)",
+  "cc.profile.subAnnualActive":
+    "Активная годовая подписка Pro (Автопродление — Управление в Portal)",
+  "cc.profile.subNone": "Нет активной подписки",
+  "cc.devices.title": "Привязка активных устройств",
+  "cc.devices.currentHost": "Имя текущего хоста:",
+  "cc.devices.hwFingerprint": "Аппаратный отпечаток:",
+  "cc.devices.slotUsage": "Использовано слотов:",
+  "cc.devices.activeCount": "{0} из {1} устройств",
+  "cc.devices.unlicensed": "1 устройство (Без лицензии)",
+  "cc.support.title": "Прямая инженерная поддержка",
+
+  // Telegram & Remote Telepresence
+  "chat.apply.noEditor": "Откройте файл в редакторе, чтобы вставить код.",
+  "chat.apply.success": "Код внедрен (Внимание: проверьте правильность перед сохранением).",
+  "chat.sendSelection.noSelection": "Выделите код для отправки в чат.",
+  "chat.sendSelection.prompt": "Добавьте комментарий к коду (опционально)",
+  "chat.sendSelection.success": "Код отправлен в Telegram чат.",
+  "chat.remote.logRequest": "Запрос выгрузки логов расширения",
+  "chat.remote.exportRequest": "Запрос экспорта проекта KRL",
+  "chat.remote.sysInfoRequest": "Запрос системной информации ПК",
+  "chat.remote.aiDiagRequest": "Запрос AI-диагностики безопасности KRL",
+  "chat.remote.requestFrom": "Запрос от Сильвестр Лискин:",
+  "chat.remote.actionPrompt": "Telegram Support запрашивает удаленное действие: {0}",
+  "chat.remote.logsExported": "Логи выгружены по подтвержденному удаленному запросу /logs",
+  "chat.remote.noWorkspace": "Нет открытого Workspace.",
+  "chat.remote.fileNotFound": "Файл {0} не найден в рабочем пространстве.",
+  "chat.remote.fileSent": "Файл {0} отправлен.",
+  "chat.remote.fileReadError": "Ошибка при чтении файла",
+  "chat.remote.readFileAction": "Чтение файла: {0}",
+  "chat.remote.noActiveFile": "Нет открытого файла",
+  "chat.remote.sysInfoTitle": "Системная информация ПК Инженера",
+  "chat.remote.diagTitle": "AI АВТОДИАГНОСТИКА KRL",
+  "chat.remote.diagSummary": "Результаты проверки:",
+  "chat.remote.diagNoIssues": "Замечаний безопасности не обнаружено. Структура KRL в норме.",
+
+  // GitGraph Revision Graph & Timeline
+  "gitgraph.title": "Граф Ревизий и Временная Шкала Точек KRL",
+  "gitgraph.filter.all": "Все коммиты ({0})",
+  "gitgraph.filter.dat": "Правка точек (.DAT)",
+  "gitgraph.filter.src": "Изменения логики (.SRC)",
+  "gitgraph.empty": "В рабочем пространстве не найдено коммитов KRL.",
+  "gitgraph.badge.points": "Правка точек",
+  "gitgraph.badge.logic": "Правка логики",
+  "gitgraph.search.placeholder":
+    "Поиск по сообщению, автору или имени точки .DAT...",
+  "gitgraph.noGit.title": "Локальный Git-репозиторий не обнаружен",
+  "gitgraph.noGit.desc":
+    "Этот KRL проект еще не отслеживается Git. Инициализируйте локальный репозиторий в 1 клик для контроля правок точек .DAT и ревизий программ робота.",
+  "gitgraph.noGit.btnInit": "🚀 Инициализировать локальный Git (в 1 клик)",
+  "gitgraph.noGit.btnBackup": "📦 Сравнить с ZIP-бэкапом KRC",
+  "gitgraph.notify.initSuccess":
+    "Локальный Git-репозиторий успешно создан с начальным снимком KRL проекта.",
+  "gitgraph.notify.initError": "Ошибка при инициализации Git: {0}",
+  "gitgraph.btn.copyHash": "Скопировать хэш",
+  "gitgraph.btn.snapshot": "📸 Снимок точек (.DAT)",
+  "gitgraph.prompt.snapshot":
+    "Введите комментарий к снимку точек (например: Подправка точек после переобучения):",
+  "gitgraph.notify.snapshotSuccess":
+    "Снимок точек успешно зафиксирован в локальной истории Git.",
+  "gitgraph.btn.fetch": "Получить (Fetch)",
+  "gitgraph.btn.pull": "Затянуть (Pull)",
+  "gitgraph.btn.push": "Отправить (Push)",
+  "gitgraph.details.title": "Детали коммита",
+  "gitgraph.details.files": "Изменённые файлы",
+  "gitgraph.details.diffParent": "Сравнить с предыдущим",
+  "gitgraph.details.diffWorkspace": "Сравнить с проектом",
+  "gitgraph.details.checkout": "Переключиться на коммит",
+  "gitgraph.details.branchHere": "Создать ветку отсюда",
+  "gitgraph.branch": "Ветка",
+  "gitgraph.remote": "Удалённый сервер",
 };
 
 // Turkish
@@ -1300,9 +1705,9 @@ const tr: Messages = {
   "command.openSnippetGenerator": "Snippet & Hareket Oluşturucu",
   "command.openSnippetGenerator.tooltip":
     "Etkileşimli Yörünge Diyagramları & Snippet Oluşturucu",
-  "command.aiCheckSafety": "Güvenlik & Hız Kontrolü",
+  "command.aiCheckSafety": "Endüstriyel Güvenlik Kontrolü",
   "command.aiCheckSafety.tooltip":
-    "Katı endüstriyel güvenlik kontrollerini çalıştır ($VEL.CP, başlatılmamış tool/base)",
+    "Katı endüstriyel güvenlik kontrollerini çalıştır (başlatılmamış tool/base, kilitlenmeler)",
   "command.validateEkiXml": "EthernetKRL (EKI) Doğrulayıcı",
   "command.validateEkiXml.tooltip": "EKI XML şema dosyalarını doğrula",
   "command.generateEkiCode": "EKI İşleyici Rutini Oluştur",
@@ -1330,8 +1735,10 @@ const tr: Messages = {
   "command.openTelegramChat.tooltip":
     "VS Code içinden baş mühendis ile canlı destek ve danışma",
 
-  "cc.engTools": "Mühendislik Pro Araçları",
-  "cc.safetyDiag": "Güvenlik Teşhisi & Kalite",
+  "cc.engTools": "Mühendislik ve Hareket Araçları",
+  "cc.backupGit": "KRC Yedekleme ve GitLens Sürüm Kontrolü",
+  "cc.refactorTools": "Yeniden Düzenleme ve Modern KRL",
+  "cc.safetyDiag": "Güvenlik Teşhisi ve Kalite Denetimi",
   "cc.accountHub": "Pro Mühendis Hesap Merkezi",
   "cc.tab.profile": "Profil & Anahtar",
   "cc.tab.devices": "Cihaz Yöneticisi",
@@ -1344,8 +1751,44 @@ const tr: Messages = {
   "cc.btn.ekiValidator": "EKI Doğrulayıcı",
   "cc.btn.generateHandler": "İşleyici Oluştur",
   "cc.btn.cleanGitMetadata": "Git Üst Bilgilerini Temizle",
-  "cc.btn.runSafetyCheck": "Güvenlik Kontrolünü Çalıştır",
+  "cc.btn.runSafetyCheck": "Güvenlik Kontrolü",
   "cc.btn.generateReport": "Rapor Oluştur",
+  "cc.btn.viewGitGraph": "Git Grafiğini Aç",
+  "cc.btn.exportBackupZip": "ZIP Yedeğini Dışa Aktar",
+  "cc.btn.cleanupVars": "Ölü Kodu Temizle",
+  "cc.btn.sortDeclarations": "DECL Sırala",
+  "cc.btn.modernizeFold": "Spline'a Yükselt",
+  "cc.btn.collisionGuard": "CollisionGuard Ekle",
+  "cc.btn.formatDoc": "KRL Biçimlendir",
+  "cc.btn.openTelegramChat": "Canlı Desteği Aç",
+  "cc.desc.flowchart":
+    "Mantık dallanmalarını, IF/SWITCH kararlarını ve döngüleri görselleştiren etkileşimli 2D akış şeması (CFG).",
+  "cc.desc.calculator":
+    "Matematiksel 3D çerçeve dönüşümleri, Euler açı hesaplamaları (A, B, C) ve takım/taban ofsetleri.",
+  "cc.desc.snippets":
+    "Görsel şemalarla KUKA hareket şablonları ve yörünge üreteci (PTP, LIN, CIRC, Spline).",
+  "cc.desc.eki":
+    "EthernetKRL XML şema doğrulayıcısı ve otomatik KRL soket işleyici alt program üreticisi.",
+  "cc.desc.backupDiff":
+    "Proje ile KRC ZIP yedeği arasındaki koordinat deltalarını ve E6POS/POS noktalarını karşılaştırma.",
+  "cc.desc.gitGraph":
+    ".DAT nokta düzeltmeleri ve .SRC mantığı için özel filtrelerle etkileşimli revizyon zaman çizelgesi.",
+  "cc.desc.exportZip":
+    "Robot denetleyicisine hızlı aktarım için temiz ve dağıtıma hazır KRL proje arşivi oluşturma.",
+  "cc.desc.cleanGit":
+    "Temiz Git geçmişi için WorkVisual &ACCESS, &REL ve &PARAM başlıklarını otomatik temizleme.",
+  "cc.desc.deadCode":
+    "Kullanılmayan DECL değişkenlerini ve ölü kodları güvenle temizleyen AST tabanlı statik analizci.",
+  "cc.desc.sortDecl":
+    "KRL değişken bildirimlerini endüstriyel standartlara göre veri türlerine ve alfabeye göre sıralama.",
+  "cc.desc.modernFold":
+    "Eski hareket komutlarını modern KSS Spline ve iiQKA Fold yapılarına tek tıkla yükseltme.",
+  "cc.desc.collisionGuard":
+    "Robot hücresi güvenliği için hareket bloklarını CollisionGuard güvenlik fold zarfına sarma.",
+  "cc.desc.safety":
+    "$TOOL/$BASE başlatması, $VEL.CP hız limitleri ve ASCII olmayan karakter tehlikeleri doğrulaması.",
+  "cc.desc.report":
+    "Müşteriye veya kalite kontrolüne teslim için resmi kod kalitesi ve güvenlik denetim raporu üretimi.",
 
   "flow.err.unreachable": "Ulaşılamayan Kod",
   "flow.err.infiniteLoop": "Sonsuz Döngü",
@@ -1377,7 +1820,7 @@ const tr: Messages = {
   "flow.ui.line": "Satır {0}",
 
   "safety.notify.safe":
-    "🛡️ Endüstriyel Güvenlik Kontrolü: KOD KRC İÇİN GÜVENLİ! (Maksimum Hız Sınırı: {0} m/s)",
+    "🛡️ Endüstriyel Güvenlik Kontrolü: KOD KRC İÇİN GÜVENLİ!",
   "safety.error.violations": "🚨 Güvenlik İhlalleri Bulundu:",
   "safety.alert.critical":
     "🚨 KRC Güvenlik ve Mantık Uyarısı: Etkin dosyada {0} kritik hata ve {1} risk bulundu!",
@@ -1444,12 +1887,9 @@ const tr: Messages = {
     "<b>SPLINE Yol Bloğu:</b> Sürekli yörünge bloğu (SLIN/SPL/SCIRC). Robot, düğüm noktalarında durmadan tek bir hız profili hesaplar.",
 
   "cc.prompt.telegram": "Baş Mühendise Mesaj Gönder",
-  "cc.prompt.telegram.placeholder":
-    "Mesajınızı veya teknik sorunuzu yazın...",
-  "cc.notify.telegramSent":
-    "Mesaj baş mühendise gönderildi!",
-  "cc.notify.telegramFallback":
-    "Mesaj gönderilemedi. Lütfen tekrar deneyin.",
+  "cc.prompt.telegram.placeholder": "Mesajınızı veya teknik sorunuzu yazın...",
+  "cc.notify.telegramSent": "Mesaj baş mühendise gönderildi!",
+  "cc.notify.telegramFallback": "Mesaj gönderilemedi. Lütfen tekrar deneyin.",
 
   "cc.billing.title": "Dodo Payments Fatura & Abonelik Portalı",
   "cc.billing.desc":
@@ -1559,8 +1999,7 @@ const tr: Messages = {
   "chat.notify.logsSent":
     "📊 Günlükler ve teşhis raporu geliştiriciye gönderildi",
   "chat.notify.filePickLabel": "Geliştiriciye dosya / ekran görüntüsü gönder",
-  "chat.notify.fileSent":
-    '{0} "{1}" geliştiriciye başarıyla gönderildi!',
+  "chat.notify.fileSent": '{0} "{1}" geliştiriciye başarıyla gönderildi!',
   "chat.notify.fileNotFound": "Dosya bulunamadı: {0}",
   "chat.notify.devNotConnected":
     "⚠️ Sohbet sunucusu başlatılıyor. Lütfen 5 saniye sonra tekrar deneyin.",
@@ -1680,7 +2119,8 @@ const tr: Messages = {
   "fold.notify.noSelection":
     "Lütfen önce bir KRL hareket veya mantık bloğu seçin.",
   "fold.notify.iiqkaSuccess": "Başarıyla iiQKA Fold formatına dönüştürüldü.",
-  "fold.notify.noLegacyMotions": "Dönüştürülecek eski hareket komutu bulunamadı.",
+  "fold.notify.noLegacyMotions":
+    "Dönüştürülecek eski hareket komutu bulunamadı.",
   "fold.notify.splineSuccess":
     "Başarıyla {0} hareket komutu Spline'a yükseltildi.",
   "fold.notify.noFoldsFound": "Seçili aralıkta FOLD kabuğu bulunamadı.",
@@ -1688,6 +2128,112 @@ const tr: Messages = {
   "fold.notify.collisionGuard": "CollisionGuard koruma zarfı eklendi.",
   "fold.prompt.splineVel": "Kartezyen Spline Hızını Girin ($VEL.CP m/s)",
   "fold.notify.splineBlockCreated": "Modern SPLINE hareket bloğu oluşturuldu.",
+
+  // Pricing Plans (Dynamic Multi-language)
+  "plan.monthly.name": "Pro Monthly",
+  "plan.monthly.period": "/ ay (14 günlük ücretsiz deneme)",
+  "plan.monthly.desc":
+    "KUKA devreye alma mühendisi için profesyonel lisans. Tüm premium araçlara, AST teşhislerine ve EKI'ye tam erişim (2 PC).",
+  "plan.annual.name": "Pro Annual (B2B Standard)",
+  "plan.annual.period": "/ yıl (%35 tasarruf)",
+  "plan.annual.desc":
+    "Yıllık endüstriyel abonelik. Öncelikli güncellemeler, KRC4/KRC5 desteği, Backup Diff, EKI doğrulayıcı ve GitLens KRL içerir (3 PC).",
+  "plan.lifetime.name": "Pro Lifetime (Enterprise & Integrator)",
+  "plan.lifetime.period": "/ tek seferlik (Ömür boyu lisans)",
+  "plan.lifetime.desc":
+    "Aboneliksiz kalıcı ticari lisans. 5 çalışma istasyonu, ömür boyu erişim, 30 günlük çevrimdışı arabellek ve öncelikli doğrudan sohbet desteği.",
+
+  // Control Center Labels
+  "cc.title": "KUKA KRL Profesyonel Kontrol Merkezi",
+  "cc.edition": "v1.7.3 Endüstriyel Sürüm",
+  "cc.profile.accountEmail": "Hesap E-postası:",
+  "cc.profile.planTier": "Plan Seviyesi:",
+  "cc.profile.licenseKey": "Lisans Anahtarı:",
+  "cc.profile.copyKey": "Anahtarı Kopyala",
+  "cc.profile.onlineExpiry": "Çevrimiçi Bitiş / Yenileme:",
+  "cc.profile.offlineCache": "Çevrimdışı Doğrulama Arabelleği:",
+  "cc.profile.daysRemaining": "{0} tarihine kadar ({1} Gün Kaldı)",
+  "cc.profile.activePro": "AKTİF (PRO)",
+  "cc.profile.community": "COMMUNITY SÜRÜMÜ",
+  "cc.profile.proEdition": "Pro Sürüm (Endüstriyel Ticari)",
+  "cc.profile.freeEdition": "Community Ücretsiz Sürüm",
+  "cc.profile.subRenews":
+    "Aktif Abonelik (Bitiş / Yenileme: {0} — {1} Gün Kaldı)",
+  "cc.profile.subActive": "Dodo Payments Pro Lisansı (Aktif / Doğrulanmış)",
+  "cc.profile.subLifetime":
+    "Ömür Boyu Pro Lisansı — Kalıcı ve Sınırsız Erişim",
+  "cc.profile.subMonthlyActive":
+    "Aktif Aylık Pro Aboneliği (Aylık otomatik yenileme — Portal üzerinden yönet)",
+  "cc.profile.subAnnualActive":
+    "Aktif Yıllık Pro Aboneliği (Yıllık otomatik yenileme — Portal üzerinden yönet)",
+  "cc.profile.subNone": "Aktif Abonelik Yok",
+  "cc.devices.title": "Aktif Cihaz Bağlantısı",
+  "cc.devices.currentHost": "Geçerli Ana Bilgisayar:",
+  "cc.devices.hwFingerprint": "Donanım Parmak İzi:",
+  "cc.devices.slotUsage": "Yuva Kullanımı:",
+  "cc.devices.activeCount": "{0} / {1} Cihaz",
+  "cc.devices.unlicensed": "1 Cihaz (Lisanssız)",
+  "cc.support.title": "Doğrudan Mühendislik Desteği",
+
+  // Telegram & Remote Telepresence
+  "chat.apply.noEditor": "Kodu eklemek için düzenleyicide bir dosya açın.",
+  "chat.apply.success": "Kod uygulandı (Lütfen kaydetmeden önce kontrol edin).",
+  "chat.sendSelection.noSelection": "Sohbete göndermek için kod seçin.",
+  "chat.sendSelection.prompt": "Koda açıklama ekleyin (isteğe bağlı)",
+  "chat.sendSelection.success": "Kod Telegram sohbetine gönderildi.",
+  "chat.remote.logRequest": "Uzantı günlükleri dışa aktarma talebi",
+  "chat.remote.exportRequest": "KRL projesi dışa aktarma talebi",
+  "chat.remote.sysInfoRequest": "PC Sistem Bilgisi talebi",
+  "chat.remote.aiDiagRequest": "KRL AI güvenlik teşhis talebi",
+  "chat.remote.requestFrom": "Silvestr Liskin'den Talep:",
+  "chat.remote.actionPrompt": "Telegram Desteği uzaktan işlem talep ediyor: {0}",
+  "chat.remote.logsExported": "Onaylanan uzaktan /logs talebiyle günlükler dışa aktarıldı",
+  "chat.remote.noWorkspace": "Açık çalışma alanı yok.",
+  "chat.remote.fileNotFound": "{0} dosyası çalışma alanında bulunamadı.",
+  "chat.remote.fileSent": "{0} dosyası gönderildi.",
+  "chat.remote.fileReadError": "Dosya okunurken hata oluştu",
+  "chat.remote.readFileAction": "Dosya okuma: {0}",
+  "chat.remote.noActiveFile": "Aktif dosya yok",
+  "chat.remote.sysInfoTitle": "Mühendis PC Sistem Bilgileri",
+  "chat.remote.diagTitle": "AI KRL OTOMATİK TEŞHİS",
+  "chat.remote.diagSummary": "Teşhis Sonuçları:",
+  "chat.remote.diagNoIssues": "Güvenlik sorunu bulunamadı. KRL yapısı temiz.",
+
+  // GitGraph Revision Graph & Timeline
+  "gitgraph.title": "KRL Revizyon Grafiği ve Nokta Zaman Çizelgesi",
+  "gitgraph.filter.all": "Tüm Commitler ({0})",
+  "gitgraph.filter.dat": "Nokta Düzeltmeleri (.DAT)",
+  "gitgraph.filter.src": "Mantık Değişiklikleri (.SRC)",
+  "gitgraph.empty": "Çalışma alanında eşleşen KRL commiti bulunamadı.",
+  "gitgraph.badge.points": "Nokta Düzeltme",
+  "gitgraph.badge.logic": "Mantık Değişikliği",
+  "gitgraph.search.placeholder":
+    "Commit mesajı, yazar veya .DAT nokta adına göre ara...",
+  "gitgraph.noGit.title": "Yerel Git Deposu Algılanmadı",
+  "gitgraph.noGit.desc":
+    "Bu KRL projesi henüz Git ile izlenmiyor. .DAT nokta düzeltmelerini ve robot programı revizyonlarını takip etmek için tek tıkla yerel bir depo başlatın.",
+  "gitgraph.noGit.btnInit": "🚀 KRL için Yerel Git Başlat (Tek Tıkla)",
+  "gitgraph.noGit.btnBackup": "📦 KRC ZIP Yedeği ile Karşılaştır",
+  "gitgraph.notify.initSuccess":
+    "Yerel Git deposu ilk KRL anlık görüntüsü ile başarıyla başlatıldı.",
+  "gitgraph.notify.initError": "Git deposu başlatılamadı: {0}",
+  "gitgraph.btn.copyHash": "Hash Kopyala",
+  "gitgraph.btn.snapshot": "📸 Nokta Anlık Görüntüsü (.DAT)",
+  "gitgraph.prompt.snapshot":
+    "Nokta anlık görüntüsü için açıklama girin (örn: Yeniden öğretme sonrası nokta düzeltmesi):",
+  "gitgraph.notify.snapshotSuccess":
+    "Nokta anlık görüntüsü yerel Git geçmişine başarıyla işlendi.",
+  "gitgraph.btn.fetch": "Uzak Değişiklikleri Al (Fetch)",
+  "gitgraph.btn.pull": "Değişiklikleri Çek (Pull)",
+  "gitgraph.btn.push": "Gönder (Push)",
+  "gitgraph.details.title": "Commit Detayları",
+  "gitgraph.details.files": "Değiştirilen Dosyalar",
+  "gitgraph.details.diffParent": "Önceki ile Karşılaştır",
+  "gitgraph.details.diffWorkspace": "Çalışma Alanı ile Karşılaştır",
+  "gitgraph.details.checkout": "Commit'e Geç",
+  "gitgraph.details.branchHere": "Buradan Dal Oluştur",
+  "gitgraph.branch": "Dal",
+  "gitgraph.remote": "Uzak Sunucu",
 };
 
 const locales: Record<Locale, Messages> = { en, ru, tr };

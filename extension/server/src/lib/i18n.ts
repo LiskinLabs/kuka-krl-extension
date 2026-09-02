@@ -107,7 +107,8 @@ const en: ServerMessages = {
   "action.fixTypo": "Change to '{0}'",
   "action.deleteInvalidChar": "Delete invalid character",
   "action.removeUnusedVariable": "Remove unused variable '{0}'",
-  "action.declareGlobalConfigDat": "Declare GLOBAL in $config.dat ('GLOBAL DECL {0} {1}')",
+  "action.declareGlobalConfigDat":
+    "Declare GLOBAL in $config.dat ('GLOBAL DECL {0} {1}')",
   "action.addExternalSubprogram": "Add external declaration 'EXT {0}()'",
   "action.addExternalFunction": "Add external function 'EXTFCT {0} {1}()'",
   "action.fixAllKrl": "Fix all auto-fixable KRL issues",
@@ -191,7 +192,8 @@ const ru: ServerMessages = {
   "action.fixTypo": "Заменить на '{0}'",
   "action.deleteInvalidChar": "Удалить недопустимый символ",
   "action.removeUnusedVariable": "Удалить неиспользуемую переменную '{0}'",
-  "action.declareGlobalConfigDat": "Объявить GLOBAL в $config.dat ('GLOBAL DECL {0} {1}')",
+  "action.declareGlobalConfigDat":
+    "Объявить GLOBAL в $config.dat ('GLOBAL DECL {0} {1}')",
   "action.addExternalSubprogram": "Добавить внешнее объявление 'EXT {0}()'",
   "action.addExternalFunction": "Добавить внешнюю функцию 'EXTFCT {0} {1}()'",
   "action.fixAllKrl": "Исправить все автоисправимые ошибки KRL",
@@ -276,9 +278,11 @@ const tr: ServerMessages = {
   "action.fixTypo": "'{0}' olarak değiştir",
   "action.deleteInvalidChar": "Geçersiz karakteri sil",
   "action.removeUnusedVariable": "Kullanılmayan değişkeni kaldır '{0}'",
-  "action.declareGlobalConfigDat": "$config.dat içinde GLOBAL olarak tanımla ('GLOBAL DECL {0} {1}')",
+  "action.declareGlobalConfigDat":
+    "$config.dat içinde GLOBAL olarak tanımla ('GLOBAL DECL {0} {1}')",
   "action.addExternalSubprogram": "Dış alt program bildirimi ekle 'EXT {0}()'",
-  "action.addExternalFunction": "Dış fonksiyon bildirimi ekle 'EXTFCT {0} {1}()'",
+  "action.addExternalFunction":
+    "Dış fonksiyon bildirimi ekle 'EXTFCT {0} {1}()'",
   "action.fixAllKrl": "Otomatik düzeltilebilir tüm KRL sorunlarını düzelt",
   "action.organizeDeclarations": "KRL bildirimlerini düzenle ve sırala",
 

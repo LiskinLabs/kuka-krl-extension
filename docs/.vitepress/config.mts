@@ -1,4 +1,7 @@
 import { defineConfig } from 'vitepress'
+import tailwindcss from 'tailwindcss'
+import autoprefixer from 'autoprefixer'
+import path from 'path'
 
 const getBase = () => {
   if (process.env.BASE_URL) return process.env.BASE_URL
@@ -15,12 +18,56 @@ const getBase = () => {
 
 export default defineConfig({
   title: "KUKA KRL Professional",
+  appearance: 'force-dark',
   base: getBase(),
   outDir: '../public',
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/kuka-krl-extension/favicon.svg' }],
+    ['link', { rel: 'icon', type: 'image/png', href: '/kuka-krl-extension/logo.png' }],
+    ['meta', { name: 'theme-color', content: '#FF6600' }],
+    ['meta', { name: 'keywords', content: 'KUKA, KRL, KRC4, KRC5, Robot, Robotics, Industrial Automation, WorkVisual, VS Code' }],
+    ['meta', { property: 'og:title', content: 'KUKA KRL Professional — Industrial Robotics IDE Suite' }],
+    ['meta', { property: 'og:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
+    ['meta', { property: 'og:image', content: '/kuka-krl-extension/logo.png' }]
+  ],
+  vite: {
+    css: {
+      postcss: {
+        plugins: [
+          tailwindcss({
+            content: [
+              path.resolve(__dirname, '../*.md'),
+              path.resolve(__dirname, '../guide/**/*.md'),
+              path.resolve(__dirname, '../ru/**/*.md'),
+              path.resolve(__dirname, '../tr/**/*.md'),
+              path.resolve(__dirname, './**/*.{vue,ts,js}')
+            ],
+            darkMode: 'class',
+            theme: {
+              extend: {
+                colors: {
+                  'kuka-orange': '#FF6600',
+                  'kuka-dark': '#0D1117',
+                  'kuka-darker': '#090C10',
+                  'kuka-gray': '#161B22',
+                  'kuka-border': '#30363D'
+                },
+                fontFamily: {
+                  sans: ['Inter', 'Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                  mono: ['JetBrains Mono', 'Roboto Mono', 'ui-monospace', 'monospace']
+                }
+              }
+            }
+          }),
+          autoprefixer()
+        ]
+      }
+    }
+  },
   themeConfig: {
     logo: '/logo.png',
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/LiskinLabs/kuka-krl-extension-core' }
+      { icon: 'github', link: 'https://github.com/LiskinLabs/kuka-krl-extension' }
     ],
   },
   locales: {
@@ -31,10 +78,10 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Home', link: '/' },
-          { text: 'Features Wiki', link: '/guide/features' },
+          { text: 'Features Wiki (50 Tools)', link: '/guide/features' },
           { text: 'Community', link: '/guide/community-features' },
           { text: 'Pro Features', link: '/guide/pro-features' },
-          { text: 'Buy Pro License', link: 'https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7' }
+          { text: 'Buy Pro License', link: 'https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ' }
         ],
         sidebar: [
           {
@@ -46,7 +93,7 @@ export default defineConfig({
           {
             text: 'Features Wiki',
             items: [
-              { text: 'Full Features Wiki (26 Tools)', link: '/guide/features' },
+              { text: 'Full Features Wiki (50 Tools)', link: '/guide/features' },
               { text: 'Community Features (Free)', link: '/guide/community-features' },
               { text: 'Pro & Industrial Features', link: '/guide/pro-features' }
             ]
@@ -56,6 +103,7 @@ export default defineConfig({
             items: [
               { text: 'Interactive Flowchart', link: '/guide/flowchart' },
               { text: 'Industrial Diagnostics & Safety', link: '/guide/diagnostics' },
+              { text: 'Dead-Code Analysis', link: '/guide/dead-code' },
               { text: 'KRC Backup Diff & Delta Inspector', link: '/guide/backup-diff' },
               { text: 'Real-time Inlay Hints', link: '/guide/inlay-hints' }
             ]
@@ -75,33 +123,34 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Главная', link: '/ru/' },
-          { text: 'Вики (26 функций)', link: '/ru/guide/features' },
-          { text: 'Бесплатные (Community)', link: '/ru/guide/community-features' },
+          { text: 'Вики (50 инструментов)', link: '/ru/guide/features' },
+          { text: 'Бесплатно (Community)', link: '/ru/guide/community-features' },
           { text: 'Pro функции', link: '/ru/guide/pro-features' },
-          { text: 'Купить Pro', link: 'https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7' }
+          { text: 'Купить Pro', link: 'https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ' }
         ],
         sidebar: [
           {
-            text: 'Быстрый старт',
+            text: 'С чего начать',
             items: [
               { text: 'Установка и настройка', link: '/ru/guide/installation' }
             ]
           },
           {
-            text: 'Вики функций (Wiki)',
+            text: 'База знаний (Wiki)',
             items: [
-              { text: 'Полный справочник (26 инструментов)', link: '/ru/guide/features' },
+              { text: 'Полный справочник (50 инструментов)', link: '/ru/guide/features' },
               { text: 'Бесплатные функции (Community)', link: '/ru/guide/community-features' },
               { text: 'Промышленные Pro-функции', link: '/ru/guide/pro-features' }
             ]
           },
           {
-            text: 'Обзор Pro-модулей',
+            text: 'Обзор Pro-функций',
             items: [
-              { text: 'Интерактивные блок-схемы', link: '/ru/guide/flowchart' },
+              { text: 'Интерактивная блок-схема', link: '/ru/guide/flowchart' },
               { text: 'Диагностика и безопасность', link: '/ru/guide/diagnostics' },
+              { text: 'Анализ неиспользуемого кода', link: '/ru/guide/dead-code' },
               { text: 'Сравнение бэкапов KRC Diff', link: '/ru/guide/backup-diff' },
-              { text: 'Подсказки сигналов Inlay Hints', link: '/ru/guide/inlay-hints' }
+              { text: 'Инлайн-подсказки сигналов', link: '/ru/guide/inlay-hints' }
             ]
           }
         ],
@@ -119,10 +168,10 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Ana Sayfa', link: '/tr/' },
-          { text: 'Özellikler Wiki', link: '/tr/guide/features' },
+          { text: 'Özellikler Wiki (50 Araç)', link: '/tr/guide/features' },
           { text: 'Ücretsiz (Community)', link: '/tr/guide/community-features' },
           { text: 'Pro Özellikler', link: '/tr/guide/pro-features' },
-          { text: 'Pro Satın Al', link: 'https://liskinlabs.lemonsqueezy.com/checkout/buy/886efdd8-90cc-4afd-856d-5d7b076ae9b7' }
+          { text: 'Pro Satın Al', link: 'https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ' }
         ],
         sidebar: [
           {
@@ -134,7 +183,7 @@ export default defineConfig({
           {
             text: 'Özellikler Wiki',
             items: [
-              { text: 'Tüm Özellikler Listesi (26 Araç)', link: '/tr/guide/features' },
+              { text: 'Tüm Özellikler Listesi (50 Araç)', link: '/tr/guide/features' },
               { text: 'Ücretsiz Topluluk Özellikleri', link: '/tr/guide/community-features' },
               { text: 'Pro ve Endüstriyel Özellikler', link: '/tr/guide/pro-features' }
             ]
@@ -144,6 +193,7 @@ export default defineConfig({
             items: [
               { text: 'Etkileşimli Akış Şeması', link: '/tr/guide/flowchart' },
               { text: 'Endüstriyel Güvenlik ve Teşhisler', link: '/tr/guide/diagnostics' },
+              { text: 'Kullanılmayan Kod Analizi', link: '/tr/guide/dead-code' },
               { text: 'KRC Yedekleme Farkı ve Delta Denetçisi', link: '/tr/guide/backup-diff' },
               { text: 'Donanım Sinyali İpuçları (Inlay Hints)', link: '/tr/guide/inlay-hints' }
             ]

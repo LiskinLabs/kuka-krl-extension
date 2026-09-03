@@ -20,7 +20,7 @@ Quick start guide for installing and configuring KUKA KRL Professional.
 ## 4. Activating Pro License
 1. Open the **KUKA Control Center** by clicking the KUKA icon in the Activity Bar or running `KRL: Open Control Center`.
 2. Click **Enter License Key**.
-3. Paste your Lemon Squeezy key and click **Activate**.
+3. Paste your Dodo Payments license key and click **Activate**.
 
 ## 5. Telegram Engineering Support
 For technical support, connect with us using the embedded support panel or via our Telegram bot **`@kukakrlbot`**.

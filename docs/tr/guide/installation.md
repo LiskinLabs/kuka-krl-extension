@@ -20,4 +20,4 @@ KUKA KRL Professional eklentisini kurmak ve yapılandırmak için hızlı başla
 ## 4. Pro Lisansı Etkinleştirme
 1. **KUKA Control Center**'ı açın.
 2. **Enter License Key** düğmesine tıklayın.
-3. Lemon Squeezy anahtarınızı yapıştırın ve **Activate** düğmesine basın.
+3. Dodo Payments lisans anahtarınızı yapıştırın ve **Activate** düğmesine basın.

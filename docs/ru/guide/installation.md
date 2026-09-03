@@ -20,7 +20,7 @@
 ## 4. Активация Pro Лицензии
 1. Откройте **KUKA Control Center** нажатием на иконку KUKA в Activity Bar или по команде `KRL: Open Control Center`.
 2. Нажмите кнопку **Enter License Key**.
-3. Вставьте ваш лицензионный ключ от Lemon Squeezy и нажмите **Activate**.
+3. Вставьте ваш лицензионный ключ от Dodo Payments и нажмите **Activate**.
 
 ## 5. Поддержка в Telegram
 По всем вопросам вы можете связаться с инженером поддержки через встроенный чат в VS Code или напрямую с ботом **`@kukakrlbot`** в Telegram.

@@ -170,7 +170,7 @@ async function openControlCenterPanel(context: vscode.ExtensionContext) {
         case "openGitHub":
           vscode.env.openExternal(
             vscode.Uri.parse(
-              "https://github.com/LiskinLabs/kuka-krl-extension-core/issues",
+              "https://github.com/LiskinLabs/kuka-krl-extension/issues",
             ),
           );
           break;

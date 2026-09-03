@@ -29,6 +29,8 @@ server/package.json
 *.md
 !README.md
 !readme.md
+!CHANGELOG.md
+!changelog.md
 
 # Package & Lock files
 *.vsix

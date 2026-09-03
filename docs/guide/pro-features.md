@@ -47,7 +47,7 @@ Validates EKI XML schemas and auto-generates KRL network handlers.
 ---
 
 ### 23. Industrial Safety & Velocity Diagnostics
-Automated inspector (`KRL: Run Safety Check`) flagging high speeds (`$VEL.CP > 3.0 m/s`), uninitialized `$TOOL`/`$BASE`, and non-ASCII characters.
+Automated inspector (`KRL: Run Safety Check`) flagging high speeds (`$VEL.CP > 2.0 m/s`), uninitialized `$TOOL`/`$BASE`, and non-ASCII characters.
 
 ---
 

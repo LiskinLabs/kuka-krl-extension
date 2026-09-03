@@ -16,38 +16,60 @@
   },
   "license": "SEE LICENSE IN LICENSE.txt",
   "pricing": "Free",
+  "qna": "marketplace",
   "badges": [
     {
       "url": "https://img.shields.io/badge/Pro_Store-Dodo_Payments-FF6600?style=flat-square",
-      "href": "https://checkout.dodopayments.com/buy/pdt_0NlsStba24X0wCjqfZo3O",
+      "href": "https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ",
       "description": "Buy KRL Extension Pro License"
+    },
+    {
+      "url": "https://img.shields.io/badge/Security-Spectra_Assure_Passed-10b981?style=flat-square",
+      "href": "https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension",
+      "description": "Spectra Assure Supply Chain Security"
     }
   ],
   "sponsor": {
-    "url": "https://checkout.dodopayments.com/buy/pdt_0NlsStba24X0wCjqfZo3O"
+    "url": "https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"
   },
-  "homepage": "https://github.com/LiskinLabs/kuka-krl-extension",
+  "homepage": "https://liskinlabs.github.io/kuka-krl-extension/",
   "bugs": {
     "url": "https://github.com/LiskinLabs/kuka-krl-extension/issues"
   },
   "categories": [
     "Programming Languages",
-    "Formatters",
     "Linters",
+    "Formatters",
+    "Snippets",
     "Themes"
   ],
   "keywords": [
     "kuka",
     "krl",
     "robot",
+    "robotics",
     "industrial",
     "automation",
-    "robotics",
-    "kuka robot language"
+    "krc4",
+    "krc5",
+    "krc2",
+    "kss",
+    "smartpad",
+    "workvisual",
+    "kuka robot language",
+    "motion",
+    "flowchart",
+    "linter"
   ],
   "galleryBanner": {
     "color": "#FF6600",
     "theme": "dark"
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
   },
   "engines": {
     "vscode": "^1.85.0"
@@ -831,6 +853,7 @@
     "watch": "node esbuild.js --watch",
     "lint": "eslint .",
     "package": "vsce package --no-dependencies",
+    "publish": "vsce publish --no-dependencies",
     "test": "node tests/extension.test.js",
     "test:e2e": "node tests/e2e.test.js"
   },

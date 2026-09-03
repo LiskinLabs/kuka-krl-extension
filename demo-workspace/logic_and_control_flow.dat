@@ -1,0 +1,7 @@
+&ACCESS RVP
+&REL 1
+&COMMENT Data list for logic and control flow demonstration
+DEFDAT logic_and_control_flow PUBLIC
+  ; Coordinates used in logic and interrupt demonstration
+  DECL GLOBAL E6POS xSafeStagingPoint = {X 850.0, Y -200.0, Z 650.0, A 0.0, B 90.0, C 0.0, S 'B010', T 'B100010'}
+ENDDAT

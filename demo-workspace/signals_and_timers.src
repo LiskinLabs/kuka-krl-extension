@@ -1,0 +1,68 @@
+&ACCESS RVP
+&REL 1
+&COMMENT Digital/Analog Signals, Timers, and Fast Handshaking
+GLOBAL DEF signals_and_timers()
+  ; ========================================================
+  ; KUKA KRL SIGNALS & TIMERS COMPREHENSIVE TEST SUITE
+  ; Tests: Inlay hints, digital/analog I/O, timer precision,
+  ; pulse outputs, and non-blocking sensor timeout guards
+  ; ========================================================
+  DECL INT nSensorId
+  DECL REAL rSensorVoltage
+
+  nSensorId = 39
+  rSensorVoltage = 0.0
+
+  ; --------------------------------------------------------
+  ; 1. DIGITAL OUTPUT CONTROL & PULSE COMMANDS
+  ; --------------------------------------------------------
+  $OUT[1] = TRUE   ; Inlay hint shows comment if mapped in $config.dat
+  $OUT[2] = FALSE
+
+  ; Emitting a 250ms calibrated trigger pulse
+  PULSE($OUT[10], TRUE, 0.25)
+
+  ; --------------------------------------------------------
+  ; 2. ANALOG INPUT / OUTPUT MEASUREMENTS
+  ; --------------------------------------------------------
+  rSensorVoltage = $ANIN[1] * 10.0 ; Scale 0..1 to 0..10V
+  IF rSensorVoltage > 5.0 THEN
+    $ANOUT[1] = 0.5 ; Output 50% voltage
+  ELSE
+    $ANOUT[1] = 0.0
+  ENDIF
+
+  ; --------------------------------------------------------
+  ; 3. PRECISION TIMER STOPWATCH & SENSOR HANDSHAKE
+  ; --------------------------------------------------------
+  ; Timer 1: Infeed station arrival watchdog (3000 ms limit)
+  $TIMER[1] = 0
+  $TIMER_STOP[1] = FALSE
+
+  ; CRITICAL SENSOR HANDSHAKE:
+  ; Safe wait condition - $TIMER protects against robot cell freezing!
+  WAIT FOR ($IN[39] == TRUE) OR ($TIMER[1] > 3000)
+
+  ; Stop timer once signal is received or timed out
+  $TIMER_STOP[1] = TRUE
+
+  ; Check if wait succeeded or timed out
+  IF $TIMER[1] > 3000 THEN
+    ; Alarm - Sensor failed to arrive in time
+    $OUT[50] = TRUE
+  ELSE
+    ; Sensor arrived OK
+    $OUT[51] = TRUE
+  ENDIF
+
+  ; --------------------------------------------------------
+  ; 4. TIMER FLAG USAGE ($TIMER_FLAG)
+  ; --------------------------------------------------------
+  $TIMER[2] = -2000 ; Negative start triggers $TIMER_FLAG when >= 0
+  $TIMER_STOP[2] = FALSE
+  WAIT FOR $TIMER_FLAG[2] OR ($IN[40] == TRUE)
+  $TIMER_STOP[2] = TRUE
+
+  ; Calibrated pause
+  WAIT SEC 0.1
+END

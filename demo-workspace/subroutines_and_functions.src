@@ -1,0 +1,82 @@
+&ACCESS RVP
+&REL 1
+&COMMENT Subroutines, Functions, and Math Parameter Passing
+GLOBAL DEF subroutines_and_functions()
+  ; ========================================================
+  ; KUKA KRL SUBROUTINES & FUNCTIONS SHOWCASE
+  ; Tests: Function calls with return values (DEFFCT),
+  ; parameter passing (:IN, :OUT), math formulas,
+  ; and automatic declaration organization (sortDeclarations)
+  ; ========================================================
+  DECL REAL rSideA
+  DECL REAL rSideB
+  DECL REAL rHypotenuse
+  DECL FRAME fOffsetResult
+  DECL BOOL bSensorValid
+
+  rSideA = 300.0
+  rSideB = 400.0
+  rHypotenuse = 0.0
+  bSensorValid = FALSE
+
+  ; Calling DEFFCT function that returns REAL
+  rHypotenuse = CalcHypotenuse(rSideA, rSideB)
+
+  ; Calling Subroutine with :OUT parameter modification
+  ComputeOffsetShift(10.0, -20.0, 50.0, fOffsetResult)
+
+  ; Calling Boolean validation function
+  bSensorValid = ValidateSensorRange(1, 10.0, 50.0)
+
+  IF bSensorValid THEN
+    $OUT[60] = TRUE
+  ENDIF
+END
+
+; --------------------------------------------------------
+; FUNCTION: Calculate Hypotenuse sqrt(a^2 + b^2)
+; --------------------------------------------------------
+GLOBAL DEFFCT REAL CalcHypotenuse(rA:IN, rB:IN)
+  DECL REAL rA
+  DECL REAL rB
+  DECL REAL rSumSquares
+  DECL REAL rResult
+
+  rSumSquares = (rA * rA) + (rB * rB)
+  rResult = SQRT(rSumSquares)
+  RETURN rResult
+ENDFCT
+
+; --------------------------------------------------------
+; SUBROUTINE: Apply coordinate offset calculation
+; --------------------------------------------------------
+GLOBAL DEF ComputeOffsetShift(rDX:IN, rDY:IN, rDZ:IN, fOutFrame:OUT)
+  DECL REAL rDX
+  DECL REAL rDY
+  DECL REAL rDZ
+  DECL FRAME fOutFrame
+
+  fOutFrame.X = rDX
+  fOutFrame.Y = rDY
+  fOutFrame.Z = rDZ
+  fOutFrame.A = 0.0
+  fOutFrame.B = 0.0
+  fOutFrame.C = 0.0
+END
+
+; --------------------------------------------------------
+; FUNCTION: Validate analog sensor range bounds
+; --------------------------------------------------------
+GLOBAL DEFFCT BOOL ValidateSensorRange(nChannel:IN, rMinVal:IN, rMaxVal:IN)
+  DECL INT nChannel
+  DECL REAL rMinVal
+  DECL REAL rMaxVal
+  DECL REAL rCurrentVal
+
+  rCurrentVal = $ANIN[nChannel] * 100.0
+  IF (rCurrentVal >= rMinVal) AND (rCurrentVal <= rMaxVal) THEN
+    RETURN TRUE
+  ELSE
+    RETURN FALSE
+  ENDIF
+ENDFCT

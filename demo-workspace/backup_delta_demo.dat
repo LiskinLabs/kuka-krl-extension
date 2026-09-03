@@ -1,0 +1,7 @@
+&ACCESS RVO
+&REL 1
+DEFDAT backup_delta_demo
+  ; Points with intentional coordinate deltas to test krl.compareKrcBackup
+  DECL E6POS xPickPosition = {X 1255.4, Y -452.1, Z 742.0, A 0.5, B 89.8, C 0.2, S 2, T 35}
+  DECL E6POS xPlacePosition = {X 852.1, Y 648.3, Z 751.5, A 89.2, B 90.1, C 0.0, S 2, T 35}
+ENDDAT

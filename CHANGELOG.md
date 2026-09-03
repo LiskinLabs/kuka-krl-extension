@@ -2,18 +2,34 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
-## [1.7.4] - 2026-09-03 (Spanish Localization & Industrial Telemetry Gateway)
+## [1.7.5] - 2026-09-03 (Interactive Reference Guide, Native ZIP Export & Unified Commands)
 
 ### Added
-- **Full Spanish (Español) Localization**: 100% complete technical translation for Spanish-speaking automation engineers across Spain and Latin America (`package.nls.es.json`, client commands, Control Center UI, Safety Diagnostics, and Language Server hover documentation).
-- **Quad-Locale Architecture**: Unified symmetrical localization for English (EN), Russian (RU), Turkish (TR), and Spanish (ES) across all client and server modules.
-- **Automated i18n Symmetry Tests**: Continuous verification of key parity across all 4 language dictionaries in extension test suite.
+- **21-Card In-Editor Engineering Reference Guide**: Added Section 4 to Control Center with illustrated reference cards for all contextual editor actions (Go to Definition `F12`, Find References `Shift+F12`, Rename Symbol `F2`, Format Document `Shift+Alt+F`, Fold/Unfold `Ctrl+Shift+[` / `]`, Fold All/Unfold All `Ctrl+K, 0` / `Ctrl+K, J`, Insert/Unwrap FOLD, Flowchart Graph, Clean Dead Variables, Sort Declarations, Industrial Safety Check, Legacy to Spline, iiQKA Fold, CollisionGuard, Trailing Whitespace, Signal Aliases, File History, Git Blame, Error Lens, Inlay Hints, I/O Refresh).
+- **Native Project ZIP Export & File Explorer Reveal**: Upgraded `krl.exportBackupZip` to launch native VS Code Save Dialog for local exports, packaging all files (including hidden configs and submodules) into a single archive with an instant **"📂 Show in File Explorer"** notification button.
+- **Complete KUKA Commands Flat Tree (35 Commands)**: Expanded sidebar commands tree into a comprehensive flat list with dedicated icons and localized tooltips, putting every extension capability directly at the engineer's fingertips.
+- **VS Code Language Model Tools API (`krl_safety_check`)**: Contributed `languageModelTools` schema in `package.json` for seamless integration with GitHub Copilot Chat and modern VS Code AI runtime.
 
-### Infrastructure & Improvements
-- **Live Industrial Telemetry Gateway**: Deployed Cloudflare Workers + D1 database bridge (`kuka-krl-support-gateway`) with real-time engineer count and multi-national commissioning tracking.
-- **Dynamic Shields.io Badge**: Real-time `Active Engineers Worldwide` badge powered by live Cloudflare D1 endpoint.
-- **Fixed Showcase Media Assets**: Root-level media hosting resolved for VS Code Marketplace preview and GitHub documentation.
-- **Dodo Payments Promo Code Precision**: Configured exact -30% basis-point discount (`LAUNCH30`) on live payment gateway.
+### Fixed & Optimized
+- **Resilient WorkVisual Metadata Cleanup (`krl.cleanGitMetadata`)**: Fixed "No active KRL files" error when clicked from Control Center; now automatically scans and cleans all `.src`, `.dat`, `.sub`, `.kfd` files across the entire workspace.
+- **Control Center Branding & Author Attribution**: Cleaned Control Center footer and account profile to strictly reflect `Developed by Liskin Labs & Silvestr Liskin`.
+- **Exthost Runtime Log Cleanliness**: Resolved uncaught rejection in modern VS Code 1.93+/1.136 by properly declaring language model tools.
+- **Documentation & Website Overhaul**: Updated VitePress documentation site and README across repositories with v1.7.5 feature matrix and new installation links.
+
+## [1.7.4] - 2026-09-03 (Feature Control Matrix, Timeout Guard & Industrial Demo Workspace)
+
+### Added
+- **Interactive Feature & Diagnostic Control Matrix in Control Center**: Dedicated dashboard card with live system health badges and individual switches for on-the-fly disabling of any diagnostic rule (Block balance, Speeds, Dead code, Type usage, Constraints, WAIT FOR timeout, HALT warnings, General syntax).
+- **Comprehensive Configuration Settings**: Master and granular toggles (`krl.diagnostics.*`) in VS Code settings with real-time language server re-validation across all active editor documents.
+- **Massive Industrial Demo Workspace (`demo-workspace`)**: Expanded test suite covering the entire KRL spectrum — cell orchestration (`cell.src`), pick & place cycle (`pick_and_place.src`), advanced SPLINE welding (`welding_process.src`), control flow & interrupts (`logic_and_control_flow.src`), digital/analog I/O & timers (`signals_and_timers.src`), math functions & parameter passing (`subroutines_and_functions.src`), EKI XML communication, and KRC backup diff.
+- **Full Spanish (Español) Localization**: 100% complete technical translation for Spanish-speaking automation engineers across Spain and Latin America (`package.nls.es.json`, client commands, Control Center UI, Safety Diagnostics, and Language Server hover documentation).
+- **Quad-Locale Architecture**: Symmetrical 94-key localization across English (EN), Russian (RU), Turkish (TR), and Spanish (ES).
+
+### Fixed & Optimized
+- **False WAIT FOR Timeout Warnings**: Resolved false timeout notifications on sensor handshake loops using timer safeguards such as `WAIT FOR ($IN[39]==TRUE) OR ($TIMER[1] > 3000)`. Timeout warning disabled by default (`warnWaitWithoutTimeout: false`) and fully configurable.
+- **Configurable HALT Warning**: Made `HALT` diagnostics toggleable via `krl.diagnostics.warnHalt`.
+- **$VEL.CP Velocity Guard Validation**: Correctly integrated Cartesian speed cap (> 3.0 m/s) in LSP safety checks alongside PTP velocity.
+- **Real-Time Setting Synchronization**: Client immediately notifies language server upon configuration change, triggering instantaneous document re-validation without requiring file reloads.
 
 ## [1.7.3] - 2026-09-02 (Industrial 50-Tools Production Debut)
 

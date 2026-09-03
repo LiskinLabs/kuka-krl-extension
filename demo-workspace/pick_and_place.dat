@@ -1,0 +1,10 @@
+&ACCESS RVP
+&REL 1
+DEFDAT pick_and_place
+  DECL E6POS xPickHome = {X 1450.0, Y 0.0, Z 1150.0, A 0.0, B 90.0, C 0.0, S 2, T 35}
+  DECL E6POS xApproachInfeed = {X 1250.0, Y -450.0, Z 950.0, A 0.0, B 90.0, C 0.0, S 2, T 35}
+  DECL E6POS xPickGrip = {X 1250.0, Y -450.0, Z 740.0, A 0.0, B 90.0, C 0.0, S 2, T 35}
+  DECL E6POS xTransitPoint = {X 1100.0, Y 100.0, Z 1050.0, A 45.0, B 90.0, C 0.0, S 2, T 35}
+  DECL E6POS xPlaceApproach = {X 850.0, Y 650.0, Z 950.0, A 90.0, B 90.0, C 0.0, S 2, T 35}
+  DECL E6POS xPlaceDrop = {X 850.0, Y 650.0, Z 750.0, A 90.0, B 90.0, C 0.0, S 2, T 35}
+ENDDAT

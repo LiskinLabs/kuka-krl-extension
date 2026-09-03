@@ -1,0 +1,37 @@
+&ACCESS RVP
+&REL 1
+&COMMENT Comprehensive Motion Showcase (PTP, LIN, CIRC, Splines)
+GLOBAL DEF motion_and_splines()
+  ; ========================================================
+  ; MOTION INSTRUCTION TEST SUITE
+  ; Tests: Axis coordinates (E6AXIS), Cartesian (E6POS),
+  ; CIRC arcs, velocity parameters, and tool/base switching
+  ; ========================================================
+  DECL E6AXIS axHomeAxis = {A1 0.0, A2 -90.0, A3 90.0, A4 0.0, A5 45.0, A6 0.0, E1 0.0}
+
+  BAS(#INITMOV, 0)
+  $TOOL = TOOL_DATA[1]
+  $BASE = BASE_DATA[1]
+
+  ; PTP Axis motion
+  $VEL_AXIS[1] = 75
+  $ACC_AXIS[1] = 50
+  PTP axHomeAxis
+
+  ; Cartesian Linear motion with approximation
+  $VEL.CP = 1.8
+  $APO.CDIS = 50.0
+  LIN xLinPoint1 C_DIS
+  LIN xLinPoint2 C_DIS
+
+  ; Circular interpolation arc
+  CIRC xCircAux, xCircEnd, CA 90.0 C_DIS
+
+  ; Modern KSS 8.6 Spline Segment
+  SPLINE
+    SPL xLinPoint2 WITH $VEL.CP = 1.2
+    SLIN xLinPoint1 WITH $VEL.CP = 1.5
+  ENDSPLINE
+
+  PTP axHomeAxis
+END

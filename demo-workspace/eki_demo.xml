@@ -1,27 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ETHERNETKRL>
   <CONFIGURATION>
     <EXTERNAL>
       <TYPE>Client</TYPE>
-      <IP>192.168.1.100</IP>
-      <PORT>59001</PORT>
     </EXTERNAL>
     <INTERNAL>
-      <BUFFERING Limit="10" />
-      <ALIVE Set="True" />
+      <IP>192.168.1.150</IP>
+      <PORT>54600</PORT>
+      <ALIVE Set_Flag="1" Ping="500"/>
     </INTERNAL>
   </CONFIGURATION>
   <RECEIVE>
     <XML>
-      <ELEMENT Tag="RobotTask/Command" Type="STRING" />
-      <ELEMENT Tag="RobotTask/TargetPos/X" Type="REAL" />
-      <ELEMENT Tag="RobotTask/TargetPos/Y" Type="REAL" />
-      <ELEMENT Tag="RobotTask/TargetPos/Z" Type="REAL" />
+      <ELEMENT Tag="VisionResponse/Coordinates/X" Type="REAL"/>
+      <ELEMENT Tag="VisionResponse/Coordinates/Y" Type="REAL"/>
+      <ELEMENT Tag="VisionResponse/Coordinates/A" Type="REAL"/>
+      <ELEMENT Tag="VisionResponse" Set_Flag="2"/>
     </XML>
   </RECEIVE>
   <SEND>
     <XML>
-      <ELEMENT Tag="RobotStatus/ActualPos/X" Type="REAL" />
-      <ELEMENT Tag="RobotStatus/IsReady" Type="BOOL" />
+      <ELEMENT Tag="RobotData/ActualPos/X" Type="REAL"/>
+      <ELEMENT Tag="RobotData/ActualPos/Y" Type="REAL"/>
+      <ELEMENT Tag="RobotData/ActualPos/Z" Type="REAL"/>
     </XML>
   </SEND>
 </ETHERNETKRL>

@@ -1,0 +1,57 @@
+&ACCESS RVP
+&REL 1
+&COMMENT Main Production Cell Supervisor Program
+DEF cell()
+  ; ========================================================
+  ; INDUSTRIAL ROBOT CELL SUPERVISOR (KSS 8.3 - 8.7 COMPLIANT)
+  ; Tests: Multi-file project search, LSP completion, Inlay Hints
+  ; ========================================================
+  DECL INT nSelectedJob
+  DECL BOOL bCellRunning
+
+  ; Robot motion and fieldbus parameter initialization
+  BAS(#INITMOV, 0)
+  $TOOL = TOOL_DATA[1]
+  $BASE = BASE_DATA[1]
+  $VEL_PTP = 80
+  $ACC_PTP = 50
+
+  $OUT[1] = TRUE ; Set doCellReady signal to master PLC
+  $OUT[2] = FALSE ; Reset doCycleActive
+  bCellRunning = TRUE
+
+  ; Main supervisor cycle loop
+  LOOP
+    ; Wait for external start command and safety interlock
+    WAIT FOR ($IN[1] == TRUE) AND ($IN[2] == TRUE)
+
+    $OUT[2] = TRUE ; Signal cycle active
+
+    ; Read requested job number from production dispatcher
+    nSelectedJob = 10
+
+    SWITCH nSelectedJob
+      CASE 10
+        ; Call Pick & Place handling module across project
+        pick_and_place()
+
+      CASE 20
+        ; Call Modern SPLINE welding module across project
+        welding_process()
+
+      CASE 30
+        ; Call motion trajectory verification module
+        motion_and_splines()
+
+      CASE 99
+        ; Run safety diagnostic routine
+        diagnostics_demo()
+
+      DEFAULT
+        ; Safe park position on unknown job request
+        PTP xHomePosition
+    ENDSWITCH
+
+    $OUT[2] = FALSE ; Clear cycle active flag
+  ENDLOOP
+END

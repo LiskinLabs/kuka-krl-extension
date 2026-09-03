@@ -1,25 +1,13 @@
-&ACCESS RVP
-&REL 3
-&COMMENT Smart Formatting Demo
-DEF formatting_demo()
-; --- DEMO: Advanced Smart Formatter ---
-; This code is poorly aligned, with inconsistent spacing and lowercase keywords.
-; It also includes a string literal containing a semicolon, which v1.7.2 
-; correctly recognizes as NOT being the start of a comment!
-; 
-; ACTION: Press "Shift + Alt + F" to format!
-
-decl int index=0
-decl real targetposition=150.5
-decl bool isrunning=true
-decl char message[30]
-
-index=5
-targetposition=2450.75  ; Active target for robot
-isrunning=false
-message[]="DATA;VALUE;FIELD" ; v1.7.2 fixed: text after semicolon here is protected!
-
-if isrunning then
-index=10
+def formatting_demo()
+; unformatted demonstration code to test krl.formatDocument
+decl int nCounter
+decl bool bReady
+$TOOL = TOOL_DATA[1]
+$BASE = BASE_DATA[1]
+if nCounter>10 then
+bReady=true
+ptp {x 100.0,y 200.0,z 300.0}
+else
+bReady=false
 endif
-END
+end

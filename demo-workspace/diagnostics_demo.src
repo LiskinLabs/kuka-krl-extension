@@ -1,33 +1,264 @@
 &ACCESS RVP
-&REL 10
-&COMMENT Advanced Diagnostics Demo
-DEF diagnostics_demo()
-  ; --- 1. DEMO: Variable Naming Constraint (24 Chars Limit) ---
-  DECL INT thisVariableNameIsWayTooLongToBeValidInKRL ; Exceeds 24 chars
+&REL 1
+&COMMENT Comprehensive Diagnostics Benchmark - 50 Errors, 50 Warnings, 50 Infos
+GLOBAL DEF diagnostics_demo()
+  DECL INT nStepCounter
+  DECL INT nTestVar
+  DECL BOOL bEmptyBlock_1
+  DECL BOOL bEmptyBlock_2
+  DECL BOOL bEmptyBlock_3
+  DECL BOOL bEmptyBlock_4
+  DECL INT nEmptyIdx_5
+  DECL REAL rVelocity_1
+  DECL REAL rVelocity_2
+  DECL REAL rVelocity_3
+  DECL REAL rVelocity_4
+  DECL REAL rVelocity_5
+  DECL INT nDeadCodeLine_01
+  DECL INT nDeadCodeLine_02
+  DECL INT nDeadCodeLine_03
+  DECL INT nDeadCodeLine_04
+  DECL INT nDeadCodeLine_05
+  DECL INT nDeadCodeLine_06
+  DECL INT nDeadCodeLine_07
+  DECL INT nDeadCodeLine_08
+  DECL INT nDeadCodeLine_09
+  DECL INT nDeadCodeLine_10
 
-  ; --- 2. DEMO: Block Balance Mismatch ---
-  IF $IN[1] THEN
-    FOR nActiveCycleMode = 1 TO 5
-      WAIT SEC 0.1
-      END
-  ENDIF ; <- Expected ENDFOR here, mismatches with nested FOR
+  ; ==========================================================================
+  ; 🔴 GROUP 1: 50 CRITICAL COMPILATION ERRORS (AST & KSS STRICT ERRORS)
+  ; ==========================================================================
 
-  ; --- 3. DEMO: Type Misuse in SWITCH ---
-  DECL INT rVelocitySetting
-  rVelocitySetting = 1
-  SWITCH rVelocitySetting ; ERROR: REAL not allowed in SWITCH expression!
-    CASE 1.0
-      $VEL.CP = 0.5
+  ; --- 1.1 KUKA Identifier Length Limit (Max 24 chars) ---
+  DECL INT nMotorVelocitySettingIsTooLong_01
+  DECL INT nMotorVelocitySettingIsTooLong_02
+  DECL INT nMotorVelocitySettingIsTooLong_03
+  DECL INT nMotorVelocitySettingIsTooLong_04
+  DECL INT nMotorVelocitySettingIsTooLong_05
+  DECL INT nMotorVelocitySettingIsTooLong_06
+  DECL INT nMotorVelocitySettingIsTooLong_07
+  DECL INT nMotorVelocitySettingIsTooLong_08
+  DECL INT nMotorVelocitySettingIsTooLong_09
+  DECL INT nMotorVelocitySettingIsTooLong_10
+
+  ; --- 1.2 Undefined Variables and Scope Resolution ---
+  nUndefinedSensorSignal_01 = 1
+  nUndefinedSensorSignal_02 = 2
+  nUndefinedSensorSignal_03 = 3
+  nUndefinedSensorSignal_04 = 4
+  nUndefinedSensorSignal_05 = 5
+  nUndefinedSensorSignal_06 = 6
+  nUndefinedSensorSignal_07 = 7
+  nUndefinedSensorSignal_08 = 8
+  nUndefinedSensorSignal_09 = 9
+  nUndefinedSensorSignal_10 = 10
+
+  ; --- 1.3 Strict KRL Type Safety (Prohibited REAL in SWITCH/CASE) ---
+  SWITCH rVelocity_1
+    CASE 1.5
+      nTestVar = 1
+  ENDSWITCH
+  SWITCH rVelocity_2
+    CASE 2.5
+      nTestVar = 2
+  ENDSWITCH
+  SWITCH rVelocity_3
+    CASE 3.5
+      nTestVar = 3
+  ENDSWITCH
+  SWITCH rVelocity_4
+    CASE 4.5
+      nTestVar = 4
+  ENDSWITCH
+  SWITCH rVelocity_5
+    CASE 5.5
+      nTestVar = 5
   ENDSWITCH
 
-  ; --- 4. DEMO: Safety Speed Warnings ---
-  $VEL.CP = 5.0 ; WARNING: Exceeds safe commissioning speed limit (max 3.0 m/s)
+  ; --- 1.4 Hardware Read-Only Violations & Keyword Abuse ---
+  $IN[1] = TRUE
+  $IN[2] = FALSE
+  $POS_ACT = {X 0, Y 0, Z 0}
+  $ROB_TIMER = 100
+  $ANIN[1] = 5.0
+  nTestVar = THEN
+  nTestVar = THEN
+  nTestVar = THEN
+  nTestVar = THEN
+  nTestVar = THEN
 
-  ; --- 5. DEMO: Missing Tool/Base Initialization ---
-  ; Moving without setting $TOOL or $BASE triggers a diagnostic warning.
-  LIN {X 0, Y 0, Z 100}
+  ; --- 1.5 Structural Block Hierarchy Mismatches ---
+  ENDIF
+  ENDFOR
+  ENDWHILE
+  ENDLOOP
+  ENDSPLINE
+  ENDIF
+  ENDFOR
+  ENDWHILE
+  ENDLOOP
+  ENDSPLINE
 
-  ; --- 6. DEMO: Unreachable Code (Dead Code) ---
+  ; ==========================================================================
+  ; 🟡 GROUP 2: 50 SAFETY, MOTION & CODE QUALITY WARNINGS
+  ; ==========================================================================
+
+  ; --- 2.1 Kinematic Velocity Limits ($VEL_PTP > 100% or $VEL.CP > 3.0 m/s) ---
+  $VEL_PTP = 110
+  $VEL_PTP = 120
+  $VEL_PTP = 130
+  $VEL_PTP = 140
+  $VEL_PTP = 150
+  $VEL.CP = 3.5
+  $VEL.CP = 4.0
+  $VEL.CP = 4.5
+  $VEL.CP = 5.0
+  $VEL.CP = 5.5
+
+  ; --- 2.2 Motions without Prior $TOOL & $BASE Initialization ---
+  PTP {A1 5, A2 0, A3 0, A4 0, A5 0, A6 0}
+  PTP {A1 10, A2 0, A3 0, A4 0, A5 0, A6 0}
+  PTP {A1 15, A2 0, A3 0, A4 0, A5 0, A6 0}
+  PTP {A1 20, A2 0, A3 0, A4 0, A5 0, A6 0}
+  PTP {A1 25, A2 0, A3 0, A4 0, A5 0, A6 0}
+  PTP {A1 30, A2 0, A3 0, A4 0, A5 0, A6 0}
+  PTP {A1 35, A2 0, A3 0, A4 0, A5 0, A6 0}
+  PTP {A1 40, A2 0, A3 0, A4 0, A5 0, A6 0}
+  PTP {A1 45, A2 0, A3 0, A4 0, A5 0, A6 0}
+  PTP {A1 50, A2 0, A3 0, A4 0, A5 0, A6 0}
+  PTP {A1 55, A2 0, A3 0, A4 0, A5 0, A6 0}
+  PTP {A1 60, A2 0, A3 0, A4 0, A5 0, A6 0}
+
+  ; --- 2.3 Empty Control Flow Constructs ---
+  IF bEmptyBlock_1 THEN
+  ENDIF
+  IF bEmptyBlock_2 THEN
+  ENDIF
+  IF bEmptyBlock_3 THEN
+  ENDIF
+  WHILE bEmptyBlock_4
+  ENDWHILE
+  FOR nEmptyIdx_5 = 1 TO 5
+  ENDFOR
+  LOOP
+  ENDLOOP
+
+  ; --- 2.4 Unreachable / Dead Code after RETURN ---
   RETURN
-  $OUT[10] = FALSE ; WARNING: Unreachable code after RETURN
+  nDeadCodeLine_01 = 1
+  nDeadCodeLine_02 = 2
+  nDeadCodeLine_03 = 3
+  nDeadCodeLine_04 = 4
+  nDeadCodeLine_05 = 5
+  nDeadCodeLine_06 = 6
+  nDeadCodeLine_07 = 7
+  nDeadCodeLine_08 = 8
+  nDeadCodeLine_09 = 9
+  nDeadCodeLine_10 = 10
+
+  ; ==========================================================================
+  ; 🔵 GROUP 3: 50 PROCESS NOTICES / COMMISSIONING CHECKPOINTS
+  ; ==========================================================================
+
+  ; --- 3.1 Step-by-Step Commissioning HALT Statements ---
+CHECKPOINT_STEP_01:
+  HALT
+CHECKPOINT_STEP_02:
+  HALT
+CHECKPOINT_STEP_03:
+  HALT
+CHECKPOINT_STEP_04:
+  HALT
+CHECKPOINT_STEP_05:
+  HALT
+CHECKPOINT_STEP_06:
+  HALT
+CHECKPOINT_STEP_07:
+  HALT
+CHECKPOINT_STEP_08:
+  HALT
+CHECKPOINT_STEP_09:
+  HALT
+CHECKPOINT_STEP_10:
+  HALT
+CHECKPOINT_STEP_11:
+  HALT
+CHECKPOINT_STEP_12:
+  HALT
+CHECKPOINT_STEP_13:
+  HALT
+CHECKPOINT_STEP_14:
+  HALT
+CHECKPOINT_STEP_15:
+  HALT
+CHECKPOINT_STEP_16:
+  HALT
+CHECKPOINT_STEP_17:
+  HALT
+CHECKPOINT_STEP_18:
+  HALT
+CHECKPOINT_STEP_19:
+  HALT
+CHECKPOINT_STEP_20:
+  HALT
+CHECKPOINT_STEP_21:
+  HALT
+CHECKPOINT_STEP_22:
+  HALT
+CHECKPOINT_STEP_23:
+  HALT
+CHECKPOINT_STEP_24:
+  HALT
+CHECKPOINT_STEP_25:
+  HALT
+CHECKPOINT_STEP_26:
+  HALT
+CHECKPOINT_STEP_27:
+  HALT
+CHECKPOINT_STEP_28:
+  HALT
+CHECKPOINT_STEP_29:
+  HALT
+CHECKPOINT_STEP_30:
+  HALT
+CHECKPOINT_STEP_31:
+  HALT
+CHECKPOINT_STEP_32:
+  HALT
+CHECKPOINT_STEP_33:
+  HALT
+CHECKPOINT_STEP_34:
+  HALT
+CHECKPOINT_STEP_35:
+  HALT
+CHECKPOINT_STEP_36:
+  HALT
+CHECKPOINT_STEP_37:
+  HALT
+CHECKPOINT_STEP_38:
+  HALT
+CHECKPOINT_STEP_39:
+  HALT
+CHECKPOINT_STEP_40:
+  HALT
+CHECKPOINT_STEP_41:
+  HALT
+CHECKPOINT_STEP_42:
+  HALT
+CHECKPOINT_STEP_43:
+  HALT
+CHECKPOINT_STEP_44:
+  HALT
+CHECKPOINT_STEP_45:
+  HALT
+CHECKPOINT_STEP_46:
+  HALT
+CHECKPOINT_STEP_47:
+  HALT
+CHECKPOINT_STEP_48:
+  HALT
+CHECKPOINT_STEP_49:
+  HALT
+CHECKPOINT_STEP_50:
+  HALT
 END

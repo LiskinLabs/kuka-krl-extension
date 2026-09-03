@@ -1,0 +1,7 @@
+&ACCESS RVP
+&REL 48
+&COMMENT WorkVisual Header DAT
+&PARAM EDITMASK = *
+DEFDAT git_clean_demo
+  DECL INT nVersion = 48
+ENDDAT

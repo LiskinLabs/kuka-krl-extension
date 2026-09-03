@@ -1,10 +1,24 @@
 # KUKA KRL VS Code Extension — Project Memory & DevSecOps Architecture
 
 ## 📌 Project Overview
-- **Repository:** `LiskinLabs/kuka-krl-extension` / `LiskinLabs/kuka-krl-extension-core`
+- **Repositories:**
+  - 🔒 **Core Engineering (Private):** `LiskinLabs/kuka-krl-extension-core` (`c:\Projects\01_Robotics\kuka-krl-extension`)
+  - 🌐 **Public Showcase (Public):** `LiskinLabs/kuka-krl-extension` (`c:\Projects\01_Robotics\kuka-krl-extension-public`)
 - **Current Version:** `1.7.5`
 - **Language / Environment:** TypeScript (Node.js 20+), VS Code Extension API (`@vscode/vsce`), Cloudflare Workers (Backend Gateway).
+- **Licensing Model:** Commercial EULA (LiskinLabs Proprietary, SPDX: `SEE LICENSE IN LICENSE.txt`).
 - **Core Purpose:** Enterprise-grade IDE extension for KUKA KRL (KSS 8.3–8.7), supporting syntax highlighting, AST parsing, symbol navigation, diagnostics, offline programming, Flowcharts, Wonderlib, and remote assistance.
+
+---
+
+## 🏰 Dual-Repository Architecture (Variant B — Intellectual Property Isolation)
+1. **Core Repository (`kuka-krl-extension`, Private):**
+   - Contains the entire un-obfuscated TypeScript codebase (`client/src`, `server/src`), tests (`tests/`), obfuscation bundler (`esbuild.js`), backend Cloudflare Worker, and Admin App.
+   - All feature additions, bugfixes, test executions, and VSIX packaging MUST occur here.
+2. **Public Repository (`kuka-krl-extension-public`, Public):**
+   - Strictly a public showcase, documentation portal, and community entrypoint.
+   - **STRICTLY ZERO SOURCE CODE:** Never contains `src/` directories, un-obfuscated scripts, tests, or backend secrets.
+   - Contains ONLY: VitePress docs site (`docs/`), compiled site (`public/`), community test files (`demo-workspace/`), `README.md`, `CHANGELOG.md`, `LICENSE`, `media/`, and `.github/workflows/deploy-docs.yml`.
 
 ---
 

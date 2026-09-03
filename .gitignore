@@ -12,6 +12,11 @@ dist/
 *.vsix
 *.exe
 
+# Proprietary Source Code Protection (Strict Isolation - Maintained ONLY in kuka-krl-extension-core)
+extension/
+cloudflare-worker/
+admin-app/
+
 # Cloudflare Wrangler & Secrets
 .wrangler/
 .dev.vars

@@ -1,0 +1,27 @@
+&ACCESS RVP
+&REL 1
+&COMMENT Modern Spline Arc Welding Routine
+GLOBAL DEF welding_process()
+  ; ========================================================
+  ; ARC WELDING MOTION TRAJECTORY
+  ; Tests: KSS 8.6+ Modern SPLINE blocks (SPLINE, SPTP, SLIN, SCIRC),
+  ; Analog outputs ($ANOUT), Triggers and CodeLens references
+  ; ========================================================
+  BAS(#INITMOV, 0)
+  $TOOL = TOOL_DATA[1]
+  $BASE = BASE_DATA[1]
+
+  ; Move to seam pre-position with Spline PTP
+  SPTP xWeldStartApproach WITH $VEL_AXIS[1]=80
+
+  ; Modern KSS continuous contour SPLINE block
+  SPLINE
+    SPL xSeamStart WITH $VEL.CP = 1.0
+    SLIN xSeamWeldPoint1 WITH $VEL.CP = 0.65
+    SCIRC xSeamAuxPoint, xSeamWeldPoint2 WITH $VEL.CP = 0.65
+    SLIN xSeamEnd WITH $VEL.CP = 0.85
+  ENDSPLINE
+
+  ; Retract motion
+  SPTP xWeldStartApproach WITH $VEL_AXIS[1]=90
+END

@@ -1,24 +1,42 @@
-&ACCESS RVP
+&ACCESS RVO
 &REL 1
-&COMMENT SYSTEM-CONFIG
-DEFDAT $CONFIG
-  ; --- Global Signals for Inlay Hints Demonstration ---
-  SIGNAL diPartReady $IN[1]
-  SIGNAL diRobotSafetyOK $IN[2]
-  SIGNAL doGripperOpen $OUT[4]
-  SIGNAL doGripperClose $OUT[5]
-  SIGNAL doCycleComplete $OUT[10]
+DEFDAT $CONFIG PUBLIC
+  ; ========================================================
+  ; GLOBAL SIGNALS & I/O MAPPING FOR INLAY HINTS
+  ; ========================================================
+  SIGNAL diSafetyFenceClosed $IN[1] ; Safety enclosure interlock circuit
+  SIGNAL diExtStartCmd       $IN[2] ; External cycle start request from PLC
+  SIGNAL diMoveEnable        $IN[3] ; Motion enable signal from safety PLC
+  SIGNAL diPartPresent       $IN[4] ; Sensor: Component detected on infeed fixture
+  SIGNAL diGripperOpened     $IN[38] ; Sensor: Pneumatic cylinder fully retracted
+  SIGNAL diGripperClosed     $IN[39] ; Sensor: Pneumatic cylinder clamped on workpiece
 
-  ; --- Global Base / Tool Data ---
-  DECL FRAME BASE_DATA[32]
-  BASE_DATA[1]={X 1200.5, Y -450.0, Z 800.0, A 0.0, B 90.0, C 0.0}
-  BASE_DATA[2]={X 1500.0, Y 0.0, Z 750.0, A 90.0, B 0.0, C 0.0}
+  SIGNAL doCellReady         $OUT[1] ; Cell master status: Ready for auto production
+  SIGNAL doCycleActive       $OUT[2] ; Robot motion cycle is currently executing
+  SIGNAL doWeldActive        $OUT[3] ; Power source arc enable active
+  SIGNAL doGripperOpenCmd    $OUT[4] ; Solenoid valve: Open mechanical gripper
+  SIGNAL doGripperCloseCmd   $OUT[5] ; Solenoid valve: Close mechanical gripper
+  SIGNAL doFaultAlarm        $OUT[8] ; General fault strobe indicator to cell beacon
 
-  DECL FRAME TOOL_DATA[16]
-  TOOL_DATA[1]={X 0.0, Y 0.0, Z 250.0, A 0.0, B 0.0, C 0.0}
-  TOOL_DATA[2]={X 100.0, Y 0.0, Z 300.0, A 0.0, B 45.0, C 0.0}
+  ; ========================================================
+  ; GLOBAL ROBOT TOOLS & BASES
+  ; ========================================================
+  DECL FRAME TOOL_DATA[1] = {X 0.0, Y 0.0, Z 245.5, A 0.0, B 45.0, C 0.0}
+  DECL FRAME BASE_DATA[1] = {X 1250.0, Y -450.0, Z 720.0, A 0.0, B 0.0, C 0.0}
+  DECL FRAME BASE_DATA[2] = {X 850.0, Y 650.0, Z 720.0, A 90.0, B 0.0, C 0.0}
 
-  ; --- Global Ints and Reals ---
-  GLOBAL INT nActiveCycleMode = 1
-  GLOBAL REAL rCriticalSpeedLimit = 2.5
+  ; ========================================================
+  ; GLOBAL USER TYPES & ENUMS
+  ; ========================================================
+  GLOBAL STRUC WORKPIECE_T INT nPartId, REAL rWeight, BOOL bInspected, CHAR cBatchCode
+  GLOBAL ENUM OPERATION_MODE_T #MODE_MANUAL, #MODE_AUTOMATIC, #MODE_PURGE, #MODE_CALIBRATE
+
+  ; ========================================================
+  ; SYSTEM CONSTANTS & TRACKING VARIABLES
+  ; ========================================================
+  DECL GLOBAL INT nActiveCycleMode = 2
+  DECL GLOBAL REAL rProcessSpeedLimit = 1.75
+  DECL GLOBAL INT nTotalPartsProduced = 1420
+  DECL GLOBAL E6POS xHomePosition = {X 1500.0, Y 0.0, Z 1200.0, A 0.0, B 90.0, C 0.0, S 2, T 35}
+  DECL GLOBAL E6POS xMaintPosition = {X 900.0, Y -800.0, Z 950.0, A -90.0, B 45.0, C 0.0, S 2, T 35}
 ENDDAT

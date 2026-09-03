@@ -1,0 +1,43 @@
+&ACCESS RVP
+&REL 1
+&COMMENT EthernetKRL XML Communication Handler
+DEF eki_comm_demo()
+  ; ========================================================
+  ; ETHERNETKRL (EKI) CLIENT/SERVER INTEGRATION
+  ; Tests: EKI Code Generator, XML Schema Validator,
+  ; Buffer management and socket error handling
+  ; ========================================================
+  DECL EKI_STATUS RET
+  DECL REAL rVisionTargetX, rVisionTargetY, rVisionTargetAngle
+  DECL BOOL bTargetReceived
+
+  ; Initialize EthernetKRL socket configuration
+  RET = EKI_Init("EkiDemo")
+  RET = EKI_Open("EkiDemo")
+
+  ; Wait for socket connection confirmation
+  WAIT FOR $FLAG[1] ; Flag 1 configured in XML as connection state
+
+  ; Transmit current robot status frame to remote PLC / Vision PC
+  RET = EKI_SetReal("EkiDemo", "RobotData/ActualPos/X", $POS_ACT.X)
+  RET = EKI_SetReal("EkiDemo", "RobotData/ActualPos/Y", $POS_ACT.Y)
+  RET = EKI_SetReal("EkiDemo", "RobotData/ActualPos/Z", $POS_ACT.Z)
+  RET = EKI_Send("EkiDemo", "RobotData")
+
+  ; Wait for vision guidance response data package
+  $TIMER[2] = 0
+  $TIMER_STOP[2] = FALSE
+  WAIT FOR $FLAG[2] OR ($TIMER[2] > 5000)
+  $TIMER_STOP[2] = TRUE
+
+  IF $FLAG[2] THEN
+    RET = EKI_GetReal("EkiDemo", "VisionResponse/Coordinates/X", rVisionTargetX)
+    RET = EKI_GetReal("EkiDemo", "VisionResponse/Coordinates/Y", rVisionTargetY)
+    RET = EKI_GetReal("EkiDemo", "VisionResponse/Coordinates/A", rVisionTargetAngle)
+    bTargetReceived = TRUE
+  ENDIF
+
+  ; Clean socket shutdown
+  RET = EKI_Close("EkiDemo")
+  RET = EKI_Clear("EkiDemo")
+END

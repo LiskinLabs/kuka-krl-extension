@@ -1,0 +1,6 @@
+&ACCESS RVP
+&REL 1
+&COMMENT Data list for subroutines and functions demonstration
+DEFDAT subroutines_and_functions PUBLIC
+  DECL GLOBAL REAL rDefaultTolerance = 0.05
+ENDDAT

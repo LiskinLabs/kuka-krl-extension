@@ -1,0 +1,9 @@
+&ACCESS RVP
+&REL 48
+&COMMENT WorkVisual Git Metadata Demonstration
+&PARAM EDITMASK = *
+&PARAM TEMPLATE = C:\KRC\Roboter\Template\vorgabe
+DEF git_clean_demo()
+  ; Use command: 'krl.cleanGitMetadata' to test stripping WorkVisual headers
+  $OUT[1] = TRUE
+END

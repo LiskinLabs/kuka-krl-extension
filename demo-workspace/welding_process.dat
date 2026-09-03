@@ -1,0 +1,10 @@
+&ACCESS RVP
+&REL 1
+DEFDAT welding_process
+  DECL E6POS xWeldStartApproach = {X 1300.0, Y -200.0, Z 900.0, A 0.0, B 45.0, C 0.0, S 2, T 35}
+  DECL E6POS xSeamStart = {X 1300.0, Y -200.0, Z 750.0, A 0.0, B 45.0, C 0.0, S 2, T 35}
+  DECL E6POS xSeamWeldPoint1 = {X 1350.0, Y -150.0, Z 750.0, A 0.0, B 45.0, C 0.0, S 2, T 35}
+  DECL E6POS xSeamAuxPoint = {X 1380.0, Y -120.0, Z 760.0, A 0.0, B 45.0, C 0.0, S 2, T 35}
+  DECL E6POS xSeamWeldPoint2 = {X 1400.0, Y -100.0, Z 750.0, A 0.0, B 45.0, C 0.0, S 2, T 35}
+  DECL E6POS xSeamEnd = {X 1450.0, Y -50.0, Z 750.0, A 0.0, B 45.0, C 0.0, S 2, T 35}
+ENDDAT

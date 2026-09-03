@@ -27,6 +27,8 @@ DEF main()
 END
 
 DEF executeProcessCycle()
+  $TOOL = TOOL_DATA[1]
+  $BASE = BASE_DATA[1]
   ; Basic sequence
   LIN {X 1200, Y -450, Z 950}
   WAIT SEC 0.5

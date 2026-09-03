@@ -40,7 +40,7 @@ export function registerTelemetry(context: vscode.ExtensionContext): void {
         .getConfiguration("krl")
         .get<string>(
           "supportGatewayUrl",
-          "https://kuka-support-gateway.liskinlabs.workers.dev",
+          "https://kuka-krl-support-gateway.redminotpro5.workers.dev",
         )
         .replace(/\/+$/, "");
       const pingUrl = `${gatewayUrl}/api/telemetry/ping`;

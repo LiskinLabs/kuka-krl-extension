@@ -26,9 +26,10 @@ export default defineConfig({
     ['link', { rel: 'icon', type: 'image/png', href: '/kuka-krl-extension/logo.png' }],
     ['meta', { name: 'theme-color', content: '#FF6600' }],
     ['meta', { name: 'keywords', content: 'KUKA, KRL, KRC4, KRC5, Robot, Robotics, Industrial Automation, WorkVisual, VS Code' }],
+    ['meta', { name: 'description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL robot programming. 50 industrial tools: Flowchart, Safety Diagnostics, Delta Math, Frame Calculator, and Offline Commissioning for KRC4 & KRC5 controllers.' }],
     ['meta', { property: 'og:title', content: 'KUKA KRL Professional — Industrial Robotics IDE Suite' }],
     ['meta', { property: 'og:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
-    ['meta', { property: 'og:image', content: '/kuka-krl-extension/logo.png' }]
+    ['meta', { property: 'og:image', content: 'https://liskinlabs.github.io/kuka-krl-extension/logo.png' }]
   ],
   vite: {
     css: {

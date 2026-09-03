@@ -4,7 +4,7 @@
  */
 
 // Supported locales
-type Locale = "en" | "ru" | "tr";
+type Locale = "en" | "ru" | "tr" | "es";
 
 // Message keys for server-side localization
 interface ServerMessages {
@@ -342,7 +342,69 @@ const tr: ServerMessages = {
     'Sözdizimi hatası: tanınmayan talimat veya rastgele metin "{0}".',
 };
 
-const locales: Record<Locale, ServerMessages> = { en, ru, tr };
+
+// Spanish
+const es: ServerMessages = {
+  "diag.notGlobalButPublic": "La declaración no es GLOBAL pero DEFDAT es PUBLIC.",
+  "diag.globalButNotPublic": "La declaración es GLOBAL pero DEFDAT no es PUBLIC.",
+  "diag.variableNotDefined": "La variable \"{0}\" no está definida.",
+  "diag.nonAsciiChar": "El carácter no ASCII \"{0}\" puede causar errores en el controlador KUKA.",
+  "diag.unclosedString": "Literal de cadena sin cerrar.",
+  "diag.nameTooLong": "El nombre \"{0}\" supera el límite de 24 caracteres de KUKA ({1} caracteres).",
+  "diag.nameStartsWithDigit": "El nombre \"{0}\" no puede comenzar con un dígito.",
+  "diag.didYouMean": "¿Quiso decir '{0}'?",
+  "diag.unusedVariable": "La variable \"{0}\" está declarada pero nunca se utiliza.",
+  "action.declareAs": "Declarar '{0}' como {1}",
+  "action.removeGlobal": "Eliminar la palabra clave 'GLOBAL'",
+  "action.addGlobal": "Añadir la palabra clave 'GLOBAL'",
+  "action.wrapWithFold": "Envolver con ;FOLD ... ;ENDFOLD",
+  "action.fixTypo": "Cambiar a '{0}'",
+  "action.deleteInvalidChar": "Eliminar carácter no válido",
+  "action.removeUnusedVariable": "Eliminar variable no utilizada '{0}'",
+  "action.declareGlobalConfigDat": "Declarar GLOBAL en $config.dat ('GLOBAL DECL {0} {1}')",
+  "action.addExternalSubprogram": "Añadir declaración externa 'EXT {0}()'",
+  "action.addExternalFunction": "Añadir función externa 'EXTFCT {0} {1}()'",
+  "action.fixAllKrl": "Corregir todos los problemas KRL autocorregibles",
+  "action.organizeDeclarations": "Organizar y ordenar declaraciones KRL",
+  "hover.krlKeyword": "— Palabra clave KRL",
+  "hover.systemVariable": "— Variable de sistema (KSS 8.7)",
+  "hover.userFunction": "*Función definida por el usuario*",
+  "hover.variable": "*Variable*",
+  "hover.struct": "STRUC",
+  "hover.members": "Miembros",
+  "completion.userFunction": "Función de usuario",
+  "completion.systemVariable": "Variable de sistema (KSS 8.7)",
+  "completion.variable": "Variable",
+  "completion.type": "Tipo: {0}",
+  "signature.userDefined": "Definido por el usuario {0}",
+  "signature.parameter": "Parámetro: {0}",
+  "codeLens.metrics": "▸ {0} líneas | {1} referencias",
+  "diag.velocityTooHigh": "La velocidad {0} m/s supera el límite máximo de KUKA (3 m/s).",
+  "diag.ptpVelocityTooHigh": "La velocidad PTP {0}% supera el máximo permitido (100%).",
+  "diag.toolNotInitialized": "Movimiento sin inicialización de $TOOL. Use BAS(#INITMOV) o configure $TOOL primero.",
+  "diag.baseNotInitialized": "Movimiento sin inicialización de $BASE. Use BAS(#INITMOV) o configure $BASE primero.",
+  "diag.unmatchedBlock": "\"{0}\" sin coincidencia — falta \"{1}\".",
+  "diag.duplicateName": "Nombre de {0} duplicado \"{1}\" (definido por primera vez en la línea {2}).",
+  "diag.deadCode": "Código inalcanzable después de \"{0}\".",
+  "diag.deadGlobalFunction": "La función global '{0}' está declarada pero nunca se utiliza en el espacio de trabajo.",
+  "diag.emptyBlock": "Bloque \"{0}\" vacío.",
+  "diag.waitWithoutTimeout": "WAIT FOR sin tiempo de espera puede causar una parada indefinida.",
+  "diag.dangerousHalt": "HALT en producción puede provocar paradas inesperadas de la línea.",
+  "diag.realInSwitch": "La expresión SWITCH debe ser de tipo INT o CHAR, no REAL.",
+  "diag.typeMismatch": "Discrepancia de tipos: se esperaba {0}, se obtuvo {1}.",
+  "diag.shouldBeReal": "La variable \"{0}\" es de tipo INT pero se utiliza en contexto de punto flotante.",
+  "action.changeToInt": "Cambiar tipo a INT",
+  "action.changeToReal": "Cambiar tipo a REAL",
+  "action.wrapWithRound": "Envolver con ROUND(...)",
+  "diag.invalidCharInName": "Carácter no válido \"{0}\" en el identificador KRL.",
+  "diag.msgKeyTooLong": "La clave del mensaje supera el límite de caracteres de KUKA.",
+  "diag.msgOriginatorTooLong": "El remitente del mensaje supera el límite de caracteres de KUKA.",
+  "diag.mismatchedBlock": "Bloque no coincidente \"{0}\" y \"{1}\".",
+  "diag.orphanBlock": "Bloque huérfano \"{0}\" sin inicio correspondiente.",
+  "diag.syntaxError": "Error de sintaxis KRL: \"{0}\".",
+};
+
+const locales: Record<Locale, ServerMessages> = { en, ru, tr, es };
 
 // Current locale - will be set from client
 let currentLocale: Locale = "en";

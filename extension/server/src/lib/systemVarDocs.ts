@@ -10,6 +10,7 @@ export interface SystemVarDoc {
     en: string;
     ru: string;
     tr: string;
+    es?: string;
   };
   example?: string;
   range?: string;
@@ -986,7 +987,7 @@ export const SYSTEM_VAR_DOCS: SystemVarDoc[] = [
  */
 export function getSystemVarDoc(
   varName: string,
-  lang: "en" | "ru" | "tr" = "en",
+  lang: "en" | "ru" | "tr" | "es" = "en",
 ): string | undefined {
   const normalized = varName.toUpperCase().startsWith("$")
     ? varName.toUpperCase()
@@ -1000,7 +1001,7 @@ export function getSystemVarDoc(
   result += `**Type**: \`${doc.type}\`  \n`;
   result += `**Writability**: \`${doc.readOnly ? "Read-Only" : "Read/Write"}\`  \n`;
 
-  result += `\n${doc.description[lang] || doc.description.en}\n\n`;
+  result += `\n${(doc.description as any)[lang] || doc.description.en}\n\n`;
 
   if (doc.syntax) {
     result += `**Syntax**:\n\`\`\`krl\n${doc.syntax}\n\`\`\`\n`;

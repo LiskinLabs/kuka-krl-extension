@@ -48,7 +48,7 @@ export function registerTelemetry(context: vscode.ExtensionContext): void {
       const payload = JSON.stringify({
         anonymousId,
         os: process.platform,
-        appVersion: "1.7.3",
+        appVersion: "1.7.4",
         vscodeVersion: vscode.version,
         locale: vscode.env.language || "en",
       });

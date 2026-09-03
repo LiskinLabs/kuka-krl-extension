@@ -306,7 +306,7 @@ test('Modern KRL & iiQKA Fold Suite features and commands are registered and fun
 // Test 7: Multilingual i18n Symmetry
 console.log('\n--- i18n Symmetry Tests ---');
 
-test('Client and Server i18n locales are symmetric for EN, RU, and TR', () => {
+test('Client and Server i18n locales are symmetric for EN, RU, TR, and ES', () => {
     function extractLocaleKeys(filePath, localeName) {
         const content = fs.readFileSync(filePath, 'utf8');
         const localeBlockRegex = new RegExp(`const ${localeName}:\\s*(?:Messages|ServerMessages)\\s*=\\s*\\{([\\s\\S]*?)\\};`, 'm');
@@ -325,24 +325,30 @@ test('Client and Server i18n locales are symmetric for EN, RU, and TR', () => {
     const clientEn = extractLocaleKeys(clientPath, 'en');
     const clientRu = extractLocaleKeys(clientPath, 'ru');
     const clientTr = extractLocaleKeys(clientPath, 'tr');
+    const clientEs = extractLocaleKeys(clientPath, 'es');
 
     assertEqual(clientEn.size, clientRu.size, 'Client EN and RU key counts must match');
     assertEqual(clientEn.size, clientTr.size, 'Client EN and TR key counts must match');
+    assertEqual(clientEn.size, clientEs.size, 'Client EN and ES key counts must match');
 
     const serverPath = path.join(__dirname, '..', 'server', 'src', 'lib', 'i18n.ts');
     const serverEn = extractLocaleKeys(serverPath, 'en');
     const serverRu = extractLocaleKeys(serverPath, 'ru');
     const serverTr = extractLocaleKeys(serverPath, 'tr');
+    const serverEs = extractLocaleKeys(serverPath, 'es');
 
     assertEqual(serverEn.size, serverRu.size, 'Server EN and RU key counts must match');
     assertEqual(serverEn.size, serverTr.size, 'Server EN and TR key counts must match');
+    assertEqual(serverEn.size, serverEs.size, 'Server EN and ES key counts must match');
 
     const nlsEn = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.nls.json'), 'utf8'));
     const nlsRu = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.nls.ru.json'), 'utf8'));
     const nlsTr = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.nls.tr.json'), 'utf8'));
+    const nlsEs = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.nls.es.json'), 'utf8'));
 
     assertEqual(Object.keys(nlsEn).length, Object.keys(nlsRu).length, 'Package NLS EN and RU key counts must match');
     assertEqual(Object.keys(nlsEn).length, Object.keys(nlsTr).length, 'Package NLS EN and TR key counts must match');
+    assertEqual(Object.keys(nlsEn).length, Object.keys(nlsEs).length, 'Package NLS EN and ES key counts must match');
 });
 
 // Test 9: Webview CSP & Panel ViewColumns Architecture

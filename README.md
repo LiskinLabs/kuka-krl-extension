@@ -21,7 +21,7 @@
   <img src="https://img.shields.io/badge/Compatible%20with-VS%20Code%20%7C%20Cursor%20%7C%20Antigravity-007ACC?style=flat-square" />
   <img src="https://img.shields.io/badge/Offline--First-100%25%20Factory%20Ready-green?style=flat-square" />
   <img src="https://img.shields.io/badge/Security-0%20Malware%20%7C%200%20CVEs-emerald?style=flat-square" />
-  <img src="https://img.shields.io/badge/Localization-EN%20%7C%20RU%20%7C%20TR-blue?style=flat-square" />
+  <img src="https://img.shields.io/badge/Localization-EN%20%7C%20RU%20%7C%20TR%20%7C%20ES-blue?style=flat-square" />
 </p>
 
 <p align="center">
@@ -211,8 +211,12 @@ Every commissioning robotics engineer knows the pain:
 | **Signal Inlay Hints & Hover Docs** | ✅ | ✅ | Inline PLC signal labels & parameter signatures |
 | **Code Formatter & Matrix Alignment** | ✅ | ✅ | Instant 1-click cleanup (`Shift+Alt+F`) |
 | **GitLens Line Blame & Revision History** | ✅ | ✅ | Instant author & commit tracking for every point |
-| **Trilingual Localization** (EN, RU, TR) | ✅ | ✅ | Full native UI & diagnostic messages |
+| **Quad-Locale Architecture** (EN, RU, TR, ES) | ✅ | ✅ | Full native UI & diagnostic messages |
 | **Clean Git Metadata Stripper** | ✅ | ✅ | Strips WorkVisual headers for pristine Git diffs |
+| **Control Center & 21-Card Reference Guide** | ✅ | ✅ | Real-time diagnostic toggles & in-editor shortcuts guide |
+| **Full Flat 35-Commands Sidebar Tree** | ✅ | ✅ | Every single extension command accessible in 1 click |
+| **Native Project ZIP Export & Remote Telepresence** | ✅ | ✅ | 1-click full backup to OS explorer or Telegram |
+| **Copilot AI Language Model Tools Integration** | ✅ | ✅ | `krl_safety_check` callable directly by VS Code AI |
 | **Modern KRL & iiQKA Fold Suite** | ❌ | **✅ Pro** | iiQKA Folds, Spline Blocks & Collision Guard |
 | **Interactive Flowchart Viewer** (Mermaid SVG) | ❌ | **✅ Pro** | Visual control-flow logic & 2-way code jump |
 | **Strict Block Balance Diagnostic** | ❌ | **✅ Pro** | Catches unclosed `IF/LOOP/FOR` blocks |

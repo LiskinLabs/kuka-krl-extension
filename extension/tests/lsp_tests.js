@@ -171,6 +171,33 @@ test('Diagnostics detects high velocity', () => {
     assertTrue(safety[1].message.includes('110'), 'Should warn about 110%');
 });
 
+test('Diagnostics: WAIT FOR timeout and HALT statements configuration', () => {
+    const diagProvider = new DiagnosticsProvider({});
+    const code = [
+        'DEF test()',
+        '  WAIT FOR ($IN[39] == TRUE) OR ($TIMER[1] > 3000)',
+        '  WAIT FOR ($IN[39] == TRUE)',
+        '  HALT',
+        'END'
+    ].join('\n');
+    const doc = new MockTextDocument('file:///test.src', code);
+
+    // Case 1: Default (warnWaitWithoutTimeout = false, warnHalt = true)
+    const resDefault = diagProvider.validateDangerousStatements(doc, false, true);
+    assertTrue(resDefault.length === 1, 'Default should only warn about HALT');
+    assertTrue(resDefault[0].message.includes('HALT'), 'Should be HALT message');
+
+    // Case 2: warnWaitWithoutTimeout = true
+    const resWarnWait = diagProvider.validateDangerousStatements(doc, true, true);
+    assertTrue(resWarnWait.length === 2, 'Should warn about unbounded WAIT and HALT');
+    assertTrue(resWarnWait.some(d => d.range.start.line === 2), 'Should warn about WAIT FOR on line 2');
+    assertTrue(!resWarnWait.some(d => d.range.start.line === 1), 'Line 1 with $TIMER must NOT trigger timeout warning');
+
+    // Case 3: Both disabled (warnWaitWithoutTimeout = false, warnHalt = false)
+    const resNone = diagProvider.validateDangerousStatements(doc, false, false);
+    assertTrue(resNone.length === 0, 'No warnings when both are disabled');
+});
+
 test('Diagnostics detects dead global functions', () => {
     const diagProvider = new DiagnosticsProvider({});
     const doc = new MockTextDocument('file:///test.src', 'GLOBAL DEF MY_DEAD_FUNC()\nEND\nGLOBAL DEF MY_USED_FUNC()\nEND');

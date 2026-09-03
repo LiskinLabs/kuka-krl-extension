@@ -184,9 +184,15 @@ export function performAiSafetyCheck(
     }
 
     // 6. Sensor Deadlock / Unbounded WAIT FOR Check
-    if (upperCode.startsWith("WAIT FOR ")) {
-      const waitCondition = upperCode.replace("WAIT FOR ", "");
-      if (!waitCondition.includes("$TIMER") && !waitCondition.includes("OR")) {
+    if (/^WAIT\s+FOR\s+/i.test(upperCode)) {
+      const waitCondition = upperCode.replace(/^WAIT\s+FOR\s+/i, "");
+      const hasTimerSafeguard =
+        waitCondition.includes("$TIMER") ||
+        waitCondition.includes("$ROB_TIMER") ||
+        waitCondition.includes("TIMEOUT") ||
+        waitCondition.includes("TIMER") ||
+        waitCondition.includes("OR");
+      if (!hasTimerSafeguard) {
         detailedIssues.push({
           severity: "info",
           line: lineNum,

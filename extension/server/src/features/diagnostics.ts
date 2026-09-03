@@ -29,12 +29,12 @@ const REGEX_STARTS_WITH_DIGIT = /^\d/;
 
 const REGEX_VARIABLE = /\b([a-zA-Z_]\w*)\b/g;
 const REGEX_LOCAL_DECL =
-  /^\s*(?:GLOBAL\s+)?(?:DECL\s+(?:\w+\s+)?|(?:INT|REAL|BOOL|CHAR|STRING|FRAME|POS|E6POS|AXIS|E6AXIS|LOAD|SIGNAL|STRUC|ENUM)\s+)([a-zA-Z_]\w*[^;\r\n]*)/gim;
+  /^\s*(?:(?:GLOBAL|CONST|DECL)\s+)+(?!(?:DEF|DEFFCT|DEFDAT|STRUC|ENUM|INTERRUPT)\b)(?:[a-zA-Z_]\w*\s+)?([a-zA-Z_]\w*[^;\r\n]*)|^\s*(?:INT|REAL|BOOL|CHAR|STRING|FRAME|POS|E6POS|AXIS|E6AXIS|LOAD|SIGNAL)\s+([a-zA-Z_]\w*[^;\r\n]*)/gim;
 const REGEX_ARRAY_BRACKETS = /\[.*?\]/g;
 const REGEX_VALID_VAR_NAME = /^[a-zA-Z_]\w*$/;
 const REGEX_SKIP_DECL_STRUC_SIGNAL =
-  /^\s*(?:GLOBAL\s+)?(?:DECL|STRUC|SIGNAL)\b/i;
-const REGEX_SKIP_DEF = /^\s*(?:GLOBAL\s+)?(?:DEF|DEFFCT)\b/i;
+  /^\s*(?:(?:GLOBAL|CONST|DECL)\s+)*(?:DECL|STRUC|SIGNAL|ENUM)\b/i;
+const REGEX_SKIP_DEF = /^\s*(?:GLOBAL\s+)?(?:DEF|DEFFCT|DEFDAT)\b/i;
 const REGEX_STRING_CONTENT = /"[^"]*"/g;
 const REGEX_SCIENTIFIC_NOTATION = /\d+\.?\d*[eE][+-]?\d+/g;
 
@@ -44,7 +44,8 @@ const REGEX_TOOL_INIT =
   /\$TOOL\s*=|BAS\s*\(\s*(?:#INITMOV|#FRAMES|#PTP_PARAMS|#CP_PARAMS)/i;
 const REGEX_BASE_INIT =
   /\$BASE\s*=|BAS\s*\(\s*(?:#INITMOV|#FRAMES|#PTP_PARAMS|#CP_PARAMS)/i;
-const REGEX_MOVEMENT = /^\s*(?:PTP|LIN|CIRC|SPTP|SLIN|SCIRC)\s+/i;
+const REGEX_MOVEMENT =
+  /^\s*(?:PTP|LIN|CIRC|SPTP|SLIN|SCIRC|SPL|SPLINE|PTP_REL|LIN_REL|CIRC_REL)\b/i;
 const REGEX_DEF_RESET = /^\s*(?:DEF|DEFFCT)\s+/i;
 
 const REGEX_FUNC_DEF =
@@ -52,7 +53,7 @@ const REGEX_FUNC_DEF =
 
 const REGEX_LABEL = /^\w+\s*:\s*$/i;
 const REGEX_BLOCK_END =
-  /^(END|ENDIF|ENDFOR|ENDWHILE|ENDLOOP|ENDFCT|UNTIL|CASE|DEFAULT|ELSE|ENDDAT|ENDSUB|ENDSPS|ENDSWITCH)\b/i;
+  /^(END|ENDIF|ENDFOR|ENDWHILE|ENDLOOP|ENDFCT|UNTIL|CASE|DEFAULT|ELSE|ENDDAT|ENDSUB|ENDSPS|ENDSWITCH|ENDSPLINE)\b/i;
 
 // Keywords that indicate a variable declaration start (including types)
 const VALID_DECL_STARTS = new Set([
@@ -164,6 +165,7 @@ const BLOCK_PAIRS: Record<string, string> = {
   DEF: "END",
   DEFFCT: "ENDFCT",
   DEFDAT: "ENDDAT",
+  SPLINE: "ENDSPLINE",
 };
 
 const CLOSE_TO_OPEN: Record<string, string> = {};
@@ -658,10 +660,11 @@ export class DiagnosticsProvider {
     const localDeclRegex = REGEX_LOCAL_DECL;
     let localMatch;
     while ((localMatch = localDeclRegex.exec(text)) !== null) {
-      const varList = localMatch[1];
+      const varList = localMatch[1] || localMatch[2];
+      if (!varList) continue;
       const vars = varList
         .split(",")
-        .map((v) => v.replace(REGEX_ARRAY_BRACKETS, "").trim());
+        .map((v) => v.split("=")[0].replace(REGEX_ARRAY_BRACKETS, "").trim());
       for (const v of vars) {
         if (REGEX_VALID_VAR_NAME.test(v)) {
           validatedNames.add(v.toUpperCase());
@@ -827,6 +830,7 @@ export class DiagnosticsProvider {
     const lines = text.split(/\r?\n/);
 
     const velPtpRegex = REGEX_VEL_PTP;
+    const velCpRegex = /\$VEL\.CP\s*=\s*(\d+(?:\.\d+)?)/gi;
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
@@ -834,7 +838,25 @@ export class DiagnosticsProvider {
       // Пропустить комментарии
       const codePart = getLineWithoutComment(line);
 
-      // Проверка $VEL_PTP
+      // Проверка $VEL.CP (> 3.0 м/с)
+      let cpMatch;
+      velCpRegex.lastIndex = 0;
+      while ((cpMatch = velCpRegex.exec(codePart)) !== null) {
+        const velCp = parseFloat(cpMatch[1]);
+        if (velCp > 3.0) {
+          diagnostics.push({
+            severity: DiagnosticSeverity.Warning,
+            range: {
+              start: { line: i, character: cpMatch.index },
+              end: { line: i, character: cpMatch.index + cpMatch[0].length },
+            },
+            message: t("diag.velocityTooHigh", velCp.toString()),
+            source: "krl-language-support",
+          });
+        }
+      }
+
+      // Проверка $VEL_PTP (> 100%)
       let match;
       velPtpRegex.lastIndex = 0;
       while ((match = velPtpRegex.exec(codePart)) !== null) {
@@ -1360,7 +1382,16 @@ export class DiagnosticsProvider {
   /**
    * Проверяет WAIT FOR без timeout и опасные HALT.
    */
-  public validateDangerousStatements(document: TextDocument): Diagnostic[] {
+  public validateDangerousStatements(
+    document: TextDocument,
+    warnWaitWithoutTimeout = false,
+    warnHalt = true,
+  ): Diagnostic[] {
+    // SİSTEM DOSYALARINI ATLA (ir_stopm, p00, BrakeTest vb.)
+    if (isSystemFile(document.uri)) {
+      return [];
+    }
+
     const diagnostics: Diagnostic[] = [];
     const text = document.getText();
     const lines = text.split(/\r?\n/);
@@ -1369,24 +1400,33 @@ export class DiagnosticsProvider {
       const line = lines[i];
       const codePart = getLineWithoutComment(line);
 
-      // WAIT FOR без TIMEOUT
-      if (/\bWAIT\s+FOR\b/i.test(codePart) && !/\bTIMEOUT\b/i.test(codePart)) {
-        const match = codePart.match(/\bWAIT\s+FOR\b/i);
-        if (match) {
-          diagnostics.push({
-            severity: DiagnosticSeverity.Information,
-            range: {
-              start: { line: i, character: match.index || 0 },
-              end: { line: i, character: (match.index || 0) + match[0].length },
-            },
-            message: t("diag.waitWithoutTimeout"),
-            source: "krl-language-support",
-          });
+      // WAIT FOR без TIMEOUT (только если включено в настройках, по умолчанию выключено)
+      if (warnWaitWithoutTimeout && /\bWAIT\s+FOR\b/i.test(codePart)) {
+        const hasTimeoutOrTimer =
+          /(?:\$TIMER|\$TIMER_FLAG|\$ROB_TIMER|\bTIMEOUT\b|\bTIMER\b)/i.test(
+            codePart,
+          );
+        if (!hasTimeoutOrTimer) {
+          const match = codePart.match(/\bWAIT\s+FOR\b/i);
+          if (match) {
+            diagnostics.push({
+              severity: DiagnosticSeverity.Information,
+              range: {
+                start: { line: i, character: match.index || 0 },
+                end: {
+                  line: i,
+                  character: (match.index || 0) + match[0].length,
+                },
+              },
+              message: t("diag.waitWithoutTimeout"),
+              source: "krl-language-support",
+            });
+          }
         }
       }
 
-      // HALT
-      if (/^\s*HALT\b/i.test(codePart)) {
+      // HALT (только если включено в настройках)
+      if (warnHalt && /^\s*HALT\b/i.test(codePart)) {
         const match = codePart.match(/\bHALT\b/i);
         if (match) {
           diagnostics.push({
@@ -1505,6 +1545,22 @@ export class DiagnosticsProvider {
 
       if (/\bENDSWITCH\b/i.test(codePart)) {
         // insideSwitch = false;
+      }
+
+      // Check CASE with float/REAL literal
+      const caseMatch = codePart.match(/\bCASE\s+(-?\d+\.\d+(?:[eE][+-]?\d+)?)/i);
+      if (caseMatch) {
+        const matchIndex = codePart.indexOf(caseMatch[1]);
+        diagnostics.push({
+          severity: DiagnosticSeverity.Error,
+          range: {
+            start: { line: i, character: matchIndex },
+            end: { line: i, character: matchIndex + caseMatch[1].length },
+          },
+          message: t("diag.realInCase", caseMatch[1]),
+          source: "krl-language-support",
+          code: "realInCase",
+        });
       }
 
       // General Assignment Type Check
@@ -1794,7 +1850,9 @@ export class DiagnosticsProvider {
         /^\s*(?:IF|FOR|WHILE|LOOP|SWITCH|REPEAT)\b/i.test(trimmedCode) ||
         /^\s*DEFDAT\b/i.test(trimmedCode) ||
         /^\s*ANOUT\b/i.test(trimmedCode) ||
-        /^\s*LIN_REL|PTP_REL/i.test(trimmedCode);
+        /^\s*LIN_REL|PTP_REL/i.test(trimmedCode) ||
+        /^\s*SPLINE\b/i.test(trimmedCode) ||
+        /^\s*(?:GLOBAL\s+)?(?:STRUC|ENUM)\b/i.test(trimmedCode);
 
       if (!isLegal) {
         diagnostics.push({

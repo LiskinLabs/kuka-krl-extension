@@ -85,6 +85,7 @@ const state: ServerState = {
 
 // Конфигурация
 let serverConfig = {
+  diagnosticsEnabled: true,
   validateNonAscii: true,
   separateBeforeBlocks: false,
   separateAfterBlocks: false,
@@ -92,6 +93,17 @@ let serverConfig = {
   codeLensEnabled: true,
   callHierarchyEnabled: true,
   documentHighlightsEnabled: true,
+  warnWaitWithoutTimeout: false,
+  warnHalt: true,
+  checkGeneralSyntax: true,
+  checkSafetySpeeds: true,
+  checkToolBaseInit: true,
+  checkBlockBalance: true,
+  checkDeadCode: true,
+  checkTypeUsage: true,
+  checkKrlConstraints: true,
+  checkUnusedVariables: true,
+  checkDuplicateNames: true,
 };
 
 const validationTimeouts = new Map<string, NodeJS.Timeout>();
@@ -140,6 +152,7 @@ connection.onInitialize((params: InitializeParams): InitializeResult => {
     capabilities: {
       textDocumentSync: TextDocumentSyncKind.Incremental,
       definitionProvider: true,
+      declarationProvider: true,
       hoverProvider: true,
       foldingRangeProvider: true,
       documentFormattingProvider: true,
@@ -201,6 +214,10 @@ connection.onNotification(
       separateBeforeBlocks: serverConfig.separateBeforeBlocks,
       separateAfterBlocks: serverConfig.separateAfterBlocks,
     });
+    // Немедленно перепроверяем все открытые документы при изменении настроек
+    for (const doc of documents.all()) {
+      validateDocument(doc);
+    }
   },
 );
 
@@ -210,16 +227,18 @@ connection.onNotification("custom/setLocale", (locale: string) =>
 
 connection.onInitialized(async () => {
   if (!state.workspaceRoot) return;
-  const datFiles = await getAllDatFiles(state.workspaceRoot);
-  for (const filePath of datFiles) {
+  const sourceFiles = await getAllSourceFiles(state.workspaceRoot);
+  for (const filePath of sourceFiles) {
     try {
       const content = await fs.promises.readFile(filePath, "utf8");
       const uri = URI.file(filePath).toString();
       const extractor = new SymbolExtractor();
       extractor.extractFromText(content);
       state.fileVariablesMap.set(uri, extractor.getVariables());
-      const structs = extractStrucVariables(content);
-      Object.assign(state.structDefinitions, structs);
+      if (filePath.toLowerCase().endsWith(".dat")) {
+        const structs = extractStrucVariables(content);
+        Object.assign(state.structDefinitions, structs);
+      }
     } catch {
       /* ignore */
     }
@@ -235,7 +254,8 @@ async function extractFunctionsFromWorkspace(
 ): Promise<void> {
   const sourceFiles = await getAllSourceFiles(workspaceRoot);
   const defRegex =
-    /^\s*(?:GLOBAL\s+)?(DEF|DEFFCT)\s+(?:\w+\s+)?(\w+)\s*\(([^)]*)\)/gim;
+    /^\s*(?:GLOBAL\s+)?(DEF|DEFFCT)\s+(?:\w+\s+)?(\w+)\b(?:\s*\(([^)]*)\))?/gim;
+  state.functionsDeclared = [];
   for (const filePath of sourceFiles) {
     try {
       const content = await fs.promises.readFile(filePath, "utf8");
@@ -250,7 +270,10 @@ async function extractFunctionsFromWorkspace(
           const funcName = match[2];
           if (
             !state.functionsDeclared.some(
-              (f) => f.name.toUpperCase() === funcName.toUpperCase(),
+              (f) =>
+                f.uri === uri &&
+                f.name.toUpperCase() === funcName.toUpperCase() &&
+                f.line === i,
             )
           ) {
             state.functionsDeclared.push({
@@ -322,13 +345,22 @@ documents.onDidClose((e) => {
 
 async function validateDocument(document: TextDocument): Promise<void> {
   try {
+    // Если глобальная диагностика отключена, очищаем проблемы и выходим
+    if (!serverConfig.diagnosticsEnabled) {
+      connection.sendDiagnostics({
+        uri: document.uri,
+        diagnostics: [],
+      });
+      return;
+    }
+
     let allDiagnostics: Diagnostic[] = [];
     if (workspaceInitialized) {
       allDiagnostics.push(
         ...diagnostics.validateVariablesUsage(document, state.mergedVariables),
       );
       const localVars = state.fileVariablesMap.get(document.uri);
-      if (localVars)
+      if (localVars && serverConfig.checkUnusedVariables)
         allDiagnostics.push(
           ...diagnostics.validateUnusedVariables(document, localVars),
         );
@@ -340,26 +372,50 @@ async function validateDocument(document: TextDocument): Promise<void> {
         ...diagnostics.validateDatFile(document, serverConfig.validateNonAscii),
       );
     if (isSrc || isDat) {
-      allDiagnostics.push(
-        ...diagnostics.validateKrlConstraints(
-          document,
-          serverConfig.validateNonAscii,
-        ),
-        ...diagnostics.validateGeneralSyntax(document),
-      );
+      if (serverConfig.checkKrlConstraints) {
+        allDiagnostics.push(
+          ...diagnostics.validateKrlConstraints(
+            document,
+            serverConfig.validateNonAscii,
+          ),
+        );
+      }
+      if (serverConfig.checkGeneralSyntax) {
+        allDiagnostics.push(...diagnostics.validateGeneralSyntax(document));
+      }
     }
     if (isSrc) {
+      if (serverConfig.checkSafetySpeeds) {
+        allDiagnostics.push(...diagnostics.validateSafetySpeeds(document));
+      }
+      if (serverConfig.checkToolBaseInit) {
+        allDiagnostics.push(...diagnostics.validateToolBaseInit(document));
+      }
+      if (serverConfig.checkBlockBalance) {
+        allDiagnostics.push(...diagnostics.validateBlockBalance(document));
+      }
+      if (serverConfig.checkDuplicateNames) {
+        allDiagnostics.push(...diagnostics.validateDuplicateNames(document));
+      }
+      if (serverConfig.checkDeadCode) {
+        allDiagnostics.push(
+          ...diagnostics.validateDeadCode(document),
+          ...diagnostics.validateDeadGlobalFunctions(document, state),
+        );
+      }
+      allDiagnostics.push(...diagnostics.validateEmptyBlocks(document));
       allDiagnostics.push(
-        ...diagnostics.validateSafetySpeeds(document),
-        ...diagnostics.validateToolBaseInit(document),
-        ...diagnostics.validateBlockBalance(document),
-        ...diagnostics.validateDuplicateNames(document),
-        ...diagnostics.validateDeadCode(document),
-        ...diagnostics.validateDeadGlobalFunctions(document, state),
-        ...diagnostics.validateEmptyBlocks(document),
-        ...diagnostics.validateDangerousStatements(document),
-        ...diagnostics.validateTypeUsage(document, state.mergedVariables),
+        ...diagnostics.validateDangerousStatements(
+          document,
+          serverConfig.warnWaitWithoutTimeout,
+          serverConfig.warnHalt,
+        ),
       );
+      if (serverConfig.checkTypeUsage) {
+        allDiagnostics.push(
+          ...diagnostics.validateTypeUsage(document, state.mergedVariables),
+        );
+      }
     }
     connection.sendDiagnostics({
       uri: document.uri,
@@ -455,6 +511,66 @@ connection.onNotification("custom/validateWorkspace", async () => {
 
 // İstek İşleyicileri
 connection.onDefinition((p) => definitions.onDefinition(p, documents, state));
+connection.onDeclaration((p) => definitions.onDefinition(p, documents, state));
+
+connection.onDidChangeWatchedFiles(async (params) => {
+  for (const change of params.changes) {
+    const fsPath = URI.parse(change.uri).fsPath;
+    const lower = fsPath.toLowerCase();
+    if (
+      lower.endsWith(".src") ||
+      lower.endsWith(".dat") ||
+      lower.endsWith(".sub")
+    ) {
+      try {
+        if (fs.existsSync(fsPath)) {
+          const content = await fs.promises.readFile(fsPath, "utf8");
+          const extractor = new SymbolExtractor();
+          extractor.extractFromText(content);
+          state.fileVariablesMap.set(change.uri, extractor.getVariables());
+          if (lower.endsWith(".dat")) {
+            Object.assign(
+              state.structDefinitions,
+              extractStrucVariables(content),
+            );
+          }
+          state.functionsDeclared = state.functionsDeclared.filter(
+            (f) => f.uri !== change.uri,
+          );
+          const lines = content.split(/\r?\n/);
+          const defRegex =
+            /^\s*(?:GLOBAL\s+)?(DEF|DEFFCT)\s+(?:\w+\s+)?(\w+)\b(?:\s*\(([^)]*)\))?/gim;
+          for (let i = 0; i < lines.length; i++) {
+            let match;
+            defRegex.lastIndex = 0;
+            while ((match = defRegex.exec(lines[i])) !== null) {
+              const isGlobal = /\bGLOBAL\b/i.test(match[0]);
+              const funcName = match[2];
+              state.functionsDeclared.push({
+                uri: change.uri,
+                line: i,
+                startChar: lines[i].indexOf(funcName),
+                endChar: lines[i].indexOf(funcName) + funcName.length,
+                params: match[3]?.trim() || "",
+                name: funcName,
+                isGlobal: isGlobal,
+              });
+            }
+          }
+        } else {
+          state.fileVariablesMap.delete(change.uri);
+          state.functionsDeclared = state.functionsDeclared.filter(
+            (f) => f.uri !== change.uri,
+          );
+        }
+      } catch {
+        /* ignore */
+      }
+    }
+  }
+  state.mergedVariables = mergeAllVariables(state.fileVariablesMap);
+  diagnostics.updateFunctionCache(state.functionsDeclared.map((f) => f.name));
+});
 connection.onCompletion((p) => completions.onCompletion(p, documents, state));
 connection.onHover((p) => hoverInfo.onHover(p, documents, state));
 connection.onFoldingRanges((p) => regions.onFoldingRanges(p, documents));

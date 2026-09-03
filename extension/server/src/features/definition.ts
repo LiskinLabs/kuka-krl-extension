@@ -50,7 +50,19 @@ export class SymbolResolver {
       );
     }
 
-    // Hızlı önbellek araması: Önce fonksiyon olarak ara
+    // 1. Поиск функции: сначала в текущем документе, затем по всем объявленным функциям
+    const currentDocFunc = state.functionsDeclared.find(
+      (f) =>
+        f.name.toUpperCase() === functionName.toUpperCase() &&
+        f.uri === params.textDocument.uri,
+    );
+    if (currentDocFunc) {
+      return Location.create(currentDocFunc.uri, {
+        start: Position.create(currentDocFunc.line, currentDocFunc.startChar),
+        end: Position.create(currentDocFunc.line, currentDocFunc.endChar),
+      });
+    }
+
     const cachedFunc = state.functionsDeclared.find(
       (f) => f.name.toUpperCase() === functionName.toUpperCase(),
     );
@@ -61,9 +73,9 @@ export class SymbolResolver {
       });
     }
 
-    // Özel kullanıcı değişken tipi (Struct) olarak ara
+    // 2. Специальный поиск структур (STRUC / ENUM)
     for (const key in state.structDefinitions) {
-      if (key === functionName) {
+      if (key.toUpperCase() === functionName.toUpperCase()) {
         const resultStruc = await isSymbolDeclared(
           state.workspaceRoot,
           functionName,
@@ -78,13 +90,11 @@ export class SymbolResolver {
       }
     }
 
-    // Değişken olarak ara
+    // 3. Поиск переменной в текущем документе (локальная область и файл)
     const enclosures = this.findEnclosuresLines(params.position.line, lines);
-
-    // Hızlı önbellek araması: İlk önce yerel değişkenleri kontrol et
     const localVars = state.fileVariablesMap.get(params.textDocument.uri);
     if (localVars) {
-      // 1. Kapsam içindeki yerel değişkeni bul
+      // 3.1. Локальная переменная внутри текущего блока DEF...END
       const localMatch = localVars.find(
         (v) =>
           v.name.toUpperCase() === functionName.toUpperCase() &&
@@ -96,7 +106,7 @@ export class SymbolResolver {
         return Location.create(params.textDocument.uri, localMatch.range);
       }
 
-      // 2. Aynı dosyada (örn. .dat kısmında) olan global/genel değişkeni bul
+      // 3.2. Переменная на уровне файла (модуля)
       const fileMatch = localVars.find(
         (v) => v.name.toUpperCase() === functionName.toUpperCase() && v.range,
       );
@@ -105,12 +115,11 @@ export class SymbolResolver {
       }
     }
 
-    // 2.5. Eğer .src dosyasındaysak, ilgili .dat dosyasını kontrol et
+    // 3.3. Если в .src, проверяем парный .dat файл
     const uri = params.textDocument.uri.toLowerCase();
     if (uri.endsWith(".src")) {
       const datUriPattern = uri.substring(0, uri.length - 4) + ".dat";
 
-      // Map keys case-sensitive olduğu için doğru uri'yi bul
       let datUri = "";
       for (const key of state.fileVariablesMap.keys()) {
         if (key.toLowerCase() === datUriPattern) {
@@ -133,7 +142,33 @@ export class SymbolResolver {
       }
     }
 
-    // 3. Yerel olarak bulunamadıysa mergedVariables'da global (veya diğer dosyalardaki) değişkenleri ara
+    // 3.4. Если в .dat, проверяем парный .src файл
+    if (uri.endsWith(".dat")) {
+      const srcUriPattern = uri.substring(0, uri.length - 4) + ".src";
+
+      let srcUri = "";
+      for (const key of state.fileVariablesMap.keys()) {
+        if (key.toLowerCase() === srcUriPattern) {
+          srcUri = key;
+          break;
+        }
+      }
+
+      if (srcUri) {
+        const srcVars = state.fileVariablesMap.get(srcUri);
+        if (srcVars) {
+          const srcMatch = srcVars.find(
+            (v) =>
+              v.name.toUpperCase() === functionName.toUpperCase() && v.range,
+          );
+          if (srcMatch && srcMatch.range) {
+            return Location.create(srcUri, srcMatch.range);
+          }
+        }
+      }
+    }
+
+    // 4. Поиск по объединенным переменным всего проекта (mergedVariables)
     const globalMatch = state.mergedVariables.find(
       (v) =>
         v.name.toUpperCase() === functionName.toUpperCase() && v.uri && v.range,
@@ -141,6 +176,46 @@ export class SymbolResolver {
 
     if (globalMatch && globalMatch.uri && globalMatch.range) {
       return Location.create(globalMatch.uri, globalMatch.range);
+    }
+
+    // 5. ГЛУБОКИЙ ПОИСК ПО ВСЕМУ ПРОЕКТУ (Disk Fallback по всем .src, .dat, .sub)
+    // 5.1. Поиск декларации функции по всему проекту
+    const fallbackFunc = await isSymbolDeclared(
+      state.workspaceRoot,
+      functionName,
+      "function",
+    );
+    if (fallbackFunc != undefined) {
+      return Location.create(fallbackFunc.uri, {
+        start: Position.create(fallbackFunc.line, fallbackFunc.startChar),
+        end: Position.create(fallbackFunc.line, fallbackFunc.endChar),
+      });
+    }
+
+    // 5.2. Поиск декларации переменной / сигнала / константы по всему проекту
+    const fallbackVar = await isSymbolDeclared(
+      state.workspaceRoot,
+      functionName,
+      "variable",
+    );
+    if (fallbackVar != undefined) {
+      return Location.create(fallbackVar.uri, {
+        start: Position.create(fallbackVar.line, fallbackVar.startChar),
+        end: Position.create(fallbackVar.line, fallbackVar.endChar),
+      });
+    }
+
+    // 5.3. Поиск декларации структуры / перечисления по всему проекту
+    const fallbackStruc = await isSymbolDeclared(
+      state.workspaceRoot,
+      functionName,
+      "struc",
+    );
+    if (fallbackStruc != undefined) {
+      return Location.create(fallbackStruc.uri, {
+        start: Position.create(fallbackStruc.line, fallbackStruc.startChar),
+        end: Position.create(fallbackStruc.line, fallbackStruc.endChar),
+      });
     }
 
     return;

@@ -1,0 +1,119 @@
+&ACCESS RVP
+&REL 1
+&COMMENT Comprehensive KRL Logic and Control Flow Showcase
+GLOBAL DEF logic_and_control_flow()
+  ; ========================================================
+  ; KUKA KRL LOGIC & CONTROL FLOW VERIFICATION SUITE
+  ; Tests: IF/ELSE, SWITCH/CASE, FOR, WHILE, LOOP/EXIT,
+  ; REPEAT/UNTIL, GOTO, INTERRUPT, BRAKE, RESUME
+  ; ========================================================
+  DECL INT nCounter
+  DECL INT nMode
+  DECL BOOL bFinished
+  DECL REAL rTemperature
+
+  nCounter = 0
+  nMode = 2
+  bFinished = FALSE
+  rTemperature = 24.5
+
+  ; --------------------------------------------------------
+  ; 1. IF - THEN - ELSE CONDITION
+  ; --------------------------------------------------------
+  IF ($IN[1] == TRUE) AND (nMode > 0) THEN
+    $OUT[1] = TRUE
+  ELSE
+    $OUT[1] = FALSE
+  ENDIF
+
+  ; --------------------------------------------------------
+  ; 2. SWITCH - CASE (Integer based branching)
+  ; --------------------------------------------------------
+  SWITCH nMode
+    CASE 1
+      ; Auto Mode
+      $VEL_PTP = 100
+      $ACC_PTP = 100
+    CASE 2
+      ; Commissioning Mode
+      $VEL_PTP = 50
+      $ACC_PTP = 50
+    CASE 3
+      ; Safe Teaching Mode
+      $VEL_PTP = 20
+      $ACC_PTP = 20
+    DEFAULT
+      ; Default Safety Mode
+      $VEL_PTP = 10
+      $ACC_PTP = 10
+  ENDSWITCH
+
+  ; --------------------------------------------------------
+  ; 3. FOR LOOP WITH STEP
+  ; --------------------------------------------------------
+  FOR nCounter = 1 TO 10 STEP 2
+    $OUT[nCounter] = TRUE
+    WAIT SEC 0.05
+    $OUT[nCounter] = FALSE
+  ENDFOR
+
+  ; --------------------------------------------------------
+  ; 4. WHILE - ENDWHILE LOOP
+  ; --------------------------------------------------------
+  WHILE (nCounter > 0) AND NOT $IN[2]
+    nCounter = nCounter - 1
+  ENDWHILE
+
+  ; --------------------------------------------------------
+  ; 5. REPEAT - UNTIL LOOP
+  ; --------------------------------------------------------
+  REPEAT
+    nCounter = nCounter + 1
+  UNTIL (nCounter >= 5) OR $IN[3]
+
+  ; --------------------------------------------------------
+  ; 6. INFINITE LOOP WITH CONDITIONAL EXIT (Deadlock Protected)
+  ; --------------------------------------------------------
+  LOOP
+    IF $IN[10] THEN
+      EXIT ; Properly guards loop against infinite hang
+    ENDIF
+    WAIT SEC 0.1
+  ENDLOOP
+
+  ; --------------------------------------------------------
+  ; 7. INTERRUPT DECLARATION & BRAKE HANDLING
+  ; --------------------------------------------------------
+  INTERRUPT DECL 10 WHEN $IN[15] == TRUE DO PartCollisionHandler()
+  INTERRUPT ON 10
+
+  ; Motion protected by interrupt
+  $TOOL = TOOL_DATA[1]
+  $BASE = BASE_DATA[1]
+  $VEL_PTP = 40
+  PTP xSafeStagingPoint
+
+  INTERRUPT OFF 10
+
+  ; --------------------------------------------------------
+  ; 8. FORWARD JUMP VIA LABEL (Safe control transfer)
+  ; --------------------------------------------------------
+  IF bFinished THEN
+    GOTO CycleEndLabel
+  ENDIF
+
+  $OUT[20] = TRUE
+
+CycleEndLabel:
+  $OUT[20] = FALSE
+END
+
+; --------------------------------------------------------
+; INTERRUPT SERVICE ROUTINE (ISR)
+; --------------------------------------------------------
+DEF PartCollisionHandler()
+  BRAKE
+  $OUT[50] = TRUE ; Alarm signal
+  WAIT SEC 0.5
+  RESUME
+END

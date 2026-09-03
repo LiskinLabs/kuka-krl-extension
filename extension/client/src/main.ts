@@ -144,6 +144,7 @@ export async function activate(context: vscode.ExtensionContext) {
     if (lsClient.state === State.Running) {
       const config = vscode.workspace.getConfiguration("krl");
       lsClient.sendNotification("custom/updateSettings", {
+        diagnosticsEnabled: config.get<boolean>("diagnostics.enabled", true),
         validateNonAscii: config.get<boolean>("validateNonAscii", true),
         separateBeforeBlocks: config.get<boolean>(
           "separateBeforeBlocks",
@@ -160,6 +161,41 @@ export async function activate(context: vscode.ExtensionContext) {
         ),
         documentHighlightsEnabled: config.get<boolean>(
           "documentHighlights.enabled",
+          true,
+        ),
+        warnWaitWithoutTimeout: config.get<boolean>(
+          "diagnostics.warnWaitWithoutTimeout",
+          false,
+        ),
+        warnHalt: config.get<boolean>("diagnostics.warnHalt", true),
+        checkGeneralSyntax: config.get<boolean>(
+          "diagnostics.checkGeneralSyntax",
+          true,
+        ),
+        checkSafetySpeeds: config.get<boolean>(
+          "diagnostics.checkSafetySpeeds",
+          true,
+        ),
+        checkToolBaseInit: config.get<boolean>(
+          "diagnostics.checkToolBaseInit",
+          true,
+        ),
+        checkBlockBalance: config.get<boolean>(
+          "diagnostics.checkBlockBalance",
+          true,
+        ),
+        checkDeadCode: config.get<boolean>("diagnostics.checkDeadCode", true),
+        checkTypeUsage: config.get<boolean>("diagnostics.checkTypeUsage", true),
+        checkKrlConstraints: config.get<boolean>(
+          "diagnostics.checkKrlConstraints",
+          true,
+        ),
+        checkUnusedVariables: config.get<boolean>(
+          "diagnostics.checkUnusedVariables",
+          true,
+        ),
+        checkDuplicateNames: config.get<boolean>(
+          "diagnostics.checkDuplicateNames",
           true,
         ),
       });
@@ -311,33 +347,64 @@ export async function activate(context: vscode.ExtensionContext) {
     }),
     vscode.commands.registerCommand("krl.cleanGitMetadata", async () => {
       const editor = vscode.window.activeTextEditor;
-      if (!editor || editor.document.languageId !== "krl") {
-        vscode.window.showWarningMessage(t("warning.noActiveKrlFile"));
+      const metadataRegex = /^&(ACCESS|REL|PARAM|COMMENT)\b/;
+
+      if (editor && editor.document.languageId === "krl") {
+        const document = editor.document;
+        const edits: vscode.TextEdit[] = [];
+        for (let i = 0; i < document.lineCount; i++) {
+          const line = document.lineAt(i);
+          if (metadataRegex.test(line.text.trim())) {
+            edits.push(vscode.TextEdit.delete(line.rangeIncludingLineBreak));
+          }
+        }
+        if (edits.length > 0) {
+          const edit = new vscode.WorkspaceEdit();
+          edit.set(document.uri, edits);
+          await vscode.workspace.applyEdit(edit);
+          vscode.window.showInformationMessage(
+            `Removed ${edits.length} KUKA metadata line(s) for a clean Git commit.`,
+          );
+        } else {
+          vscode.window.showInformationMessage("No KUKA metadata lines found in active file.");
+        }
         return;
       }
 
-      const document = editor.document;
-      const edits: vscode.TextEdit[] = [];
-      const metadataRegex = /^&(ACCESS|REL|PARAM|COMMENT)\b/;
+      // No active editor: clean all KRL files across the workspace
+      const krlFiles = await vscode.workspace.findFiles("**/*.{src,dat,sub,kfd}");
+      if (krlFiles.length === 0) {
+        vscode.window.showWarningMessage(t("chat.warning.noKrlFiles"));
+        return;
+      }
 
-      for (let i = 0; i < document.lineCount; i++) {
-        const line = document.lineAt(i);
-        if (metadataRegex.test(line.text.trim())) {
-          // Delete the line including the newline character if it's not the last line
-          const range = line.rangeIncludingLineBreak;
-          edits.push(vscode.TextEdit.delete(range));
+      let totalCleanedFiles = 0;
+      let totalLinesRemoved = 0;
+      const workspaceEdit = new vscode.WorkspaceEdit();
+
+      for (const uri of krlFiles) {
+        const doc = await vscode.workspace.openTextDocument(uri);
+        const edits: vscode.TextEdit[] = [];
+        for (let i = 0; i < doc.lineCount; i++) {
+          const line = doc.lineAt(i);
+          if (metadataRegex.test(line.text.trim())) {
+            edits.push(vscode.TextEdit.delete(line.rangeIncludingLineBreak));
+          }
+        }
+        if (edits.length > 0) {
+          workspaceEdit.set(uri, edits);
+          totalCleanedFiles++;
+          totalLinesRemoved += edits.length;
         }
       }
 
-      if (edits.length > 0) {
-        const edit = new vscode.WorkspaceEdit();
-        edit.set(document.uri, edits);
-        await vscode.workspace.applyEdit(edit);
+      if (totalCleanedFiles > 0) {
+        await vscode.workspace.applyEdit(workspaceEdit);
         vscode.window.showInformationMessage(
-          `Removed ${edits.length} KUKA metadata line(s) for a clean Git commit.`,
+          `Removed ${totalLinesRemoved} WorkVisual metadata line(s) across ${totalCleanedFiles} KRL file(s).`,
         );
       } else {
-        vscode.window.showInformationMessage("No KUKA metadata lines found.");
+        vscode.window.showInformationMessage("No WorkVisual metadata lines found in workspace files.");
       }
     }),
   );

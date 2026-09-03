@@ -690,7 +690,7 @@ export class TelegramChatPanel {
       <button class="action-btn primary" onclick="newSession()" title="${t("chat.btn.new.tooltip")}">${t("chat.btn.new")}</button>
       <button class="action-btn" onclick="sendFile()" title="${t("chat.btn.file.tooltip")}">${t("chat.btn.file")}</button>
       <button class="action-btn" onclick="sendLogs()" title="${t("chat.btn.logs.tooltip")}">${t("chat.btn.logs")}</button>
-      <button class="action-btn" onclick="sendAiDiag()" title="Run AI Industrial Safety Check">🛡️ Safety</button>
+      <button class="action-btn" onclick="sendAiDiag()" title="Generate KRL Project Quality & Acceptance Report">📊 Report</button>
       <button class="action-btn danger" onclick="deleteCurrentSession()" title="${t("chat.btn.delete.tooltip")}">🗑️</button>
     </div>
   </div>

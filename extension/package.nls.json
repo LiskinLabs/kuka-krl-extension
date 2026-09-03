@@ -80,5 +80,17 @@
   "config.documentHighlights.enabled": "Highlight occurrences of the same variable/function in the document.",
   "config.supportGatewayUrl": "Liskin Labs Support Desk Gateway URL (Direct Engineering Support Relay).",
   "config.telemetry.enabled": "Enable heartbeat and status pings to Liskin Labs Support Gateway (disable for air-gapped industrial cells).",
-  "config.gitLens.currentLine.enabled": "Show Git Blame annotations inline at the end of the current line."
+  "config.gitLens.currentLine.enabled": "Show Git Blame annotations inline at the end of the current line.",
+  "config.diagnostics.enabled": "Enable or disable all KRL diagnostic validations.",
+  "config.diagnostics.checkGeneralSyntax": "Validate general KRL instruction syntax and structure.",
+  "config.diagnostics.warnHalt": "Warn about HALT instructions that stop program execution.",
+  "config.diagnostics.warnWaitWithoutTimeout": "Warn if WAIT FOR lacks a timeout or timer condition",
+  "config.diagnostics.checkSafetySpeeds": "Check for excessive PTP speeds ($VEL_PTP > 100%)",
+  "config.diagnostics.checkToolBaseInit": "Check $TOOL and $BASE initialization before robot movement",
+  "config.diagnostics.checkBlockBalance": "Validate block balance (IF/ENDIF, FOR/ENDFOR, LOOP/ENDLOOP, SWITCH/ENDSWITCH)",
+  "config.diagnostics.checkDeadCode": "Detect unreachable code after RETURN and HALT",
+  "config.diagnostics.checkTypeUsage": "Validate type usage (SWITCH/CASE with REAL, assignments)",
+  "config.diagnostics.checkKrlConstraints": "Validate KRL identifier constraints (max 24 characters, naming rules)",
+  "config.diagnostics.checkUnusedVariables": "Detect unused local variables",
+  "config.diagnostics.checkDuplicateNames": "Detect duplicate variable, subroutine, and structure names"
 }

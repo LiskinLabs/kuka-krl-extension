@@ -1,0 +1,8 @@
+&ACCESS RVP
+&REL 1
+DEFDAT motion_and_splines
+  DECL E6POS xLinPoint1 = {X 1200.0, Y -300.0, Z 800.0, A 0.0, B 90.0, C 0.0, S 2, T 35}
+  DECL E6POS xLinPoint2 = {X 1200.0, Y 300.0, Z 800.0, A 0.0, B 90.0, C 0.0, S 2, T 35}
+  DECL E6POS xCircAux = {X 1250.0, Y 0.0, Z 850.0, A 0.0, B 90.0, C 0.0, S 2, T 35}
+  DECL E6POS xCircEnd = {X 1300.0, Y -300.0, Z 800.0, A 0.0, B 90.0, C 0.0, S 2, T 35}
+ENDDAT

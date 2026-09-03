@@ -1,0 +1,74 @@
+&ACCESS RVP
+&REL 1
+&COMMENT Material Handling Cycle with Timer-Guarded Gripper
+GLOBAL DEF pick_and_place()
+  ; ========================================================
+  ; PICK AND PLACE CYCLE
+  ; Tests: Inlay hints, WAIT FOR timeout validation ($TIMER),
+  ; CollisionGuard envelopes, and Tool/Base initialization
+  ; ========================================================
+  BAS(#INITMOV, 0)
+  $TOOL = TOOL_DATA[1]
+  $BASE = BASE_DATA[1]
+  $VEL_PTP = 85
+  $ACC_PTP = 70
+
+  ; Motion to home safety position
+  ;FOLD PTP HomeVel 85% ;%{PE}%R 8.3
+  PTP xPickHome
+  ;ENDFOLD
+
+  ; Approach infeed station fixture
+  ;FOLD LIN Approach Infeed ;%{PE}%R 8.3
+  $VEL.CP = 1.5
+  LIN xApproachInfeed C_DIS
+  ;ENDFOLD
+
+  ; Move into grip position
+  LIN xPickGrip
+
+  ; Command pneumatic gripper to clamp workpiece
+  $OUT[4] = FALSE ; doGripperOpenCmd
+  $OUT[5] = TRUE  ; doGripperCloseCmd
+
+  ; --------------------------------------------------------
+  ; CRITICAL HANDSHAKE CHECK:
+  ; Using $TIMER condition eliminates false timeout warnings!
+  ; --------------------------------------------------------
+  $TIMER[1] = 0
+  $TIMER_STOP[1] = FALSE
+  WAIT FOR ($IN[39] == TRUE) OR ($TIMER[1] > 3000)
+  $TIMER_STOP[1] = TRUE
+
+  ; Verify gripper clamped sensor before retraction
+  IF NOT $IN[39] THEN
+    $OUT[8] = TRUE ; Trigger fault alarm
+    HALT
+  ENDIF
+
+  ; Retract with component inside CollisionGuard envelope
+  ;FOLD CollisionGuard ClampedMotion ;%{PE}%R 8.3
+  LIN xApproachInfeed
+  PTP xTransitPoint C_PTP
+  ;ENDFOLD
+
+  ; Switch coordinate system to Outfeed Conveyor (BASE 2)
+  $BASE = BASE_DATA[2]
+  LIN xPlaceApproach C_DIS
+  LIN xPlaceDrop
+
+  ; Release workpiece
+  $OUT[5] = FALSE ; doGripperCloseCmd
+  $OUT[4] = TRUE  ; doGripperOpenCmd
+
+  ; Timed wait for gripper cylinder open verification
+  $TIMER[1] = 0
+  $TIMER_STOP[1] = FALSE
+  WAIT FOR ($IN[38] == TRUE) OR ($TIMER[1] > 2500)
+  $TIMER_STOP[1] = TRUE
+
+  ; Retract and return home
+  LIN xPlaceApproach
+  $BASE = BASE_DATA[1]
+  PTP xPickHome
+END

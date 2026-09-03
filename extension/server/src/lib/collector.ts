@@ -161,9 +161,9 @@ export class SymbolExtractor {
   extractFromText(documentText: string): void {
     const lineOffsets = this.computeLineOffsets(documentText);
 
-    // DECL regex'i - CONST dahil (Linear ReDoS-safe)
+    // DECL regex'i - GLOBAL, CONST, DECL her sırada desteklenir (Linear ReDoS-safe)
     const declRegex =
-      /^[ \t]*(?:(?:GLOBAL[ \t]+)?(?:CONST[ \t]+)?DECL[ \t]+([A-Za-z0-9_]+)|(?:GLOBAL[ \t]+)?(?:CONST[ \t]+)?(INT|REAL|BOOL|CHAR|FRAME|POS|E6POS|E6AXIS|AXIS|LOAD|SIGNAL|STRING))[ \t]+([^\r\n;]+)/gim;
+      /^[ \t]*(?:(?:(?:GLOBAL|CONST|DECL)[ \t]+)+(?!(?:DEF|DEFFCT|DEFDAT|STRUC|ENUM|INTERRUPT)\b)([A-Za-z0-9_]+)|(INT|REAL|BOOL|CHAR|FRAME|POS|E6POS|E6AXIS|AXIS|LOAD|SIGNAL|STRING))[ \t]+([^\r\n;]+)/gim;
 
     let match: RegExpExecArray | null;
     while ((match = declRegex.exec(documentText)) !== null) {

@@ -16,6 +16,7 @@ const BLOCK_PAIRS: Record<string, string> = {
   DEF: "END",
   DEFFCT: "ENDFCT",
   DEFDAT: "ENDDAT",
+  SPLINE: "ENDSPLINE",
 };
 
 const CLOSE_TO_OPEN: Record<string, string> = {};

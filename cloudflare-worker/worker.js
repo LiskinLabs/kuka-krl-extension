@@ -81,10 +81,10 @@ export default {
         inline_keyboard: [
           [
             { text: "📥 Скачать логи", callback_data: `cmd:/logs:${sessionId}` },
-            { text: "📦 Экспорт проекта", callback_data: `cmd:/export_project:${sessionId}` },
+            { text: "📦 Скачать проект (ZIP)", callback_data: `cmd:/export_project:${sessionId}` },
           ],
           [
-            { text: "🤖 AI-диагностика", callback_data: `cmd:/ai_diag:${sessionId}` },
+            { text: "📊 Отчет качества KRL", callback_data: `cmd:/report:${sessionId}` },
             { text: "ℹ️ Инфо о системе", callback_data: `cmd:/sysinfo:${sessionId}` },
           ],
         ],
@@ -1030,8 +1030,10 @@ export default {
 
               const commandTitles = {
                 "/logs": "📥 Запрос логов",
-                "/export_project": "📦 Запрос проекта",
-                "/ai_diag": "🤖 AI-диагностика",
+                "/export_project": "📦 Запрос архива проекта (ZIP)",
+                "/backup": "📦 Запрос архива проекта (ZIP)",
+                "/report": "📊 Отчет качества KRL",
+                "/ai_diag": "📊 Отчет качества KRL",
                 "/sysinfo": "ℹ️ Инфо о системе",
               };
               const title = commandTitles[command] || command;

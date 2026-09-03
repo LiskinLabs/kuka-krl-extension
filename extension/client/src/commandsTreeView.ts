@@ -1,7 +1,9 @@
 import * as vscode from "vscode";
 import { t } from "./i18n";
 
-export class CommandsTreeProvider implements vscode.TreeDataProvider<CommandItem> {
+export class CommandsTreeProvider
+  implements vscode.TreeDataProvider<CommandItem>
+{
   private _onDidChangeTreeData: vscode.EventEmitter<
     CommandItem | undefined | null | void
   > = new vscode.EventEmitter<CommandItem | undefined | null | void>();
@@ -17,12 +19,8 @@ export class CommandsTreeProvider implements vscode.TreeDataProvider<CommandItem
     return element;
   }
 
-  getChildren(element?: CommandItem): Thenable<CommandItem[]> {
-    if (element) {
-      return Promise.resolve([]);
-    } else {
-      return Promise.resolve(this.getCommands());
-    }
+  getChildren(): Thenable<CommandItem[]> {
+    return Promise.resolve(this.getCommands());
   }
 
   private getCommands(): CommandItem[] {
@@ -32,6 +30,18 @@ export class CommandsTreeProvider implements vscode.TreeDataProvider<CommandItem
         "krl.openControlCenter",
         "dashboard",
         t("command.openControlCenter.tooltip"),
+      ),
+      new CommandItem(
+        t("command.validateWorkspace"),
+        "krl.validateWorkspace",
+        "check-all",
+        t("command.validateWorkspace.tooltip"),
+      ),
+      new CommandItem(
+        t("command.generateReport"),
+        "krl.generateReport",
+        "report",
+        t("command.generateReport.tooltip"),
       ),
       new CommandItem(
         t("command.showFlowchart"),
@@ -46,6 +56,18 @@ export class CommandsTreeProvider implements vscode.TreeDataProvider<CommandItem
         t("command.compareKrcBackup.tooltip"),
       ),
       new CommandItem(
+        t("command.viewGitGraph"),
+        "krl.viewGitGraph",
+        "source-control",
+        t("command.viewGitGraph.tooltip"),
+      ),
+      new CommandItem(
+        t("command.exportBackupZip"),
+        "krl.exportBackupZip",
+        "archive",
+        t("command.exportBackupZip.tooltip"),
+      ),
+      new CommandItem(
         t("command.calculator"),
         "krl.showCalculator",
         "symbol-numeric",
@@ -56,18 +78,6 @@ export class CommandsTreeProvider implements vscode.TreeDataProvider<CommandItem
         "krl.openSnippetGenerator",
         "beaker",
         t("command.openSnippetGenerator.tooltip"),
-      ),
-      new CommandItem(
-        t("command.findReferences"),
-        "krl.findReferences",
-        "references",
-        t("command.findReferences.tooltip"),
-      ),
-      new CommandItem(
-        t("command.aiCheckSafety"),
-        "krl.aiCheckSafety",
-        "shield",
-        t("command.aiCheckSafety.tooltip"),
       ),
       new CommandItem(
         t("command.validateEkiXml"),
@@ -106,22 +116,28 @@ export class CommandsTreeProvider implements vscode.TreeDataProvider<CommandItem
         t("command.cleanup.tooltip"),
       ),
       new CommandItem(
-        t("command.generateReport"),
-        "krl.generateReport",
-        "report",
-        t("command.generateReport.tooltip"),
+        t("command.aiCheckSafety"),
+        "krl.aiCheckSafety",
+        "shield",
+        t("command.aiCheckSafety.tooltip"),
       ),
       new CommandItem(
-        t("command.sendLogsToDeveloper"),
-        "krl.sendLogsToDeveloper",
-        "output",
-        t("command.sendLogsToDeveloper.tooltip"),
+        t("command.findReferences"),
+        "krl.findReferences",
+        "references",
+        t("command.findReferences.tooltip"),
       ),
       new CommandItem(
-        t("command.sendFileToDeveloper"),
-        "krl.sendFileToDeveloper",
-        "file-submodule",
-        t("command.sendFileToDeveloper.tooltip"),
+        t("command.insertFold"),
+        "krl.insertFold",
+        "symbol-namespace",
+        t("command.insertFold.tooltip"),
+      ),
+      new CommandItem(
+        t("command.unwrapFold"),
+        "krl.unwrapFold",
+        "unfold",
+        t("command.unwrapFold.tooltip"),
       ),
       new CommandItem(
         t("command.foldAll"),
@@ -136,6 +152,54 @@ export class CommandsTreeProvider implements vscode.TreeDataProvider<CommandItem
         t("command.unfoldAll.tooltip"),
       ),
       new CommandItem(
+        t("command.convertToIiqkaFold"),
+        "krl.convertToIiqkaFold",
+        "fold",
+        t("command.convertToIiqkaFold.tooltip"),
+      ),
+      new CommandItem(
+        t("command.convertLegacyToSpline"),
+        "krl.convertLegacyToSpline",
+        "pulse",
+        t("command.convertLegacyToSpline.tooltip"),
+      ),
+      new CommandItem(
+        t("command.insertSplineBlock"),
+        "krl.insertSplineBlock",
+        "symbol-misc",
+        t("command.insertSplineBlock.tooltip"),
+      ),
+      new CommandItem(
+        t("command.insertCollisionGuard"),
+        "krl.insertCollisionGuard",
+        "shield",
+        t("command.insertCollisionGuard.tooltip"),
+      ),
+      new CommandItem(
+        t("command.removeTrailingWhitespace"),
+        "krl.removeTrailingWhitespace",
+        "whitespace",
+        t("command.removeTrailingWhitespace.tooltip"),
+      ),
+      new CommandItem(
+        t("command.renameSignal"),
+        "krl.renameSignal",
+        "edit",
+        t("command.renameSignal.tooltip"),
+      ),
+      new CommandItem(
+        t("command.viewFileHistory"),
+        "krl.viewFileHistory",
+        "history",
+        t("command.viewFileHistory.tooltip"),
+      ),
+      new CommandItem(
+        t("command.showLineBlameDetails"),
+        "krl.showLineBlameDetails",
+        "account",
+        t("command.showLineBlameDetails.tooltip"),
+      ),
+      new CommandItem(
         t("command.refreshIOView"),
         "krl.refreshIOView",
         "refresh",
@@ -147,11 +211,35 @@ export class CommandsTreeProvider implements vscode.TreeDataProvider<CommandItem
         "comment-discussion",
         t("command.openTelegramChat.tooltip"),
       ),
+      new CommandItem(
+        t("command.sendQualityReport"),
+        "krl.sendQualityReport",
+        "pulse",
+        t("command.sendQualityReport.tooltip"),
+      ),
+      new CommandItem(
+        t("command.sendLogsToDeveloper"),
+        "krl.sendLogsToDeveloper",
+        "output",
+        t("command.sendLogsToDeveloper.tooltip"),
+      ),
+      new CommandItem(
+        t("command.sendFileToDeveloper"),
+        "krl.sendFileToDeveloper",
+        "file-submodule",
+        t("command.sendFileToDeveloper.tooltip"),
+      ),
+      new CommandItem(
+        t("command.openCustomerPortal"),
+        "krl.openCustomerPortal",
+        "credit-card",
+        t("command.openCustomerPortal.tooltip"),
+      ),
     ];
   }
 }
 
-class CommandItem extends vscode.TreeItem {
+export class CommandItem extends vscode.TreeItem {
   constructor(
     public readonly label: string,
     public readonly commandId: string,

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.png" width="160" alt="KUKA KRL Professional" />
+  <img src="docs/public/logo.png" width="160" alt="KUKA KRL Professional" />
 </p>
 
 <h1 align="center">KUKA KRL Professional</h1>
@@ -21,13 +21,13 @@
   <img src="https://img.shields.io/badge/Compatible%20with-VS%20Code%20%7C%20Cursor%20%7C%20Antigravity-007ACC?style=flat-square" />
   <img src="https://img.shields.io/badge/Offline--First-100%25%20Factory%20Ready-green?style=flat-square" />
   <img src="https://img.shields.io/badge/Security-0%20Malware%20%7C%200%20CVEs-emerald?style=flat-square" />
-  <img src="https://img.shields.io/badge/Localization-EN%20%7C%20RU%20%7C%20TR-blue?style=flat-square" />
+  <img src="https://img.shields.io/badge/Localization-EN%20%7C%20RU%20%7C%20TR%20%7C%20ES-blue?style=flat-square" />
 </p>
 
 <p align="center">
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>🌐 Interactive Wiki (50 Industrial Tools)</b></a> •
-  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"><b>⚡ Unified Checkout (All Plans)</b></a> • 
-  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"><b>🎁 Promo: LAUNCH30 (-30%)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"><b>⚡ 14-Day Free Trial ($9.99/mo)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"><b>👑 Annual Pro ($79.00/yr - Save 35%)</b></a> • 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>🛡️ Security Audit Report</b></a>
 </p>
 
@@ -56,7 +56,7 @@ Every commissioning robotics engineer knows the pain:
 * **SVG Vector Export**: Export high-resolution vector diagrams for client handovers and automation documentation.
 
 <p align="center">
-  <img src="media/control_flow_graph.gif" width="720" alt="Interactive Flowchart Demo" />
+  <img src="docs/public/media/control_flow_graph.gif" width="720" alt="Interactive Flowchart Demo" />
 </p>
 
 ---
@@ -70,7 +70,7 @@ Every commissioning robotics engineer knows the pain:
 * **Cyrillic & Non-ASCII Blocker**: Detects accidental non-ASCII keyboard layout characters that crash older KSS compilers silently.
 
 <p align="center">
-  <img src="media/type-validation-demo.gif" width="720" alt="Safety and Diagnostics Demo" />
+  <img src="docs/public/media/type-validation-demo.gif" width="720" alt="Safety and Diagnostics Demo" />
 </p>
 
 ---
@@ -82,7 +82,7 @@ Every commissioning robotics engineer knows the pain:
 * **Side-by-Side Visual Diff**: Color-coded graphical diff viewer built directly into VS Code.
 
 <p align="center">
-  <img src="media/krc_backup_diff.gif" width="720" alt="SmartPAD Backup Diff Demo" />
+  <img src="docs/public/media/krc_backup_diff.gif" width="720" alt="SmartPAD Backup Diff Demo" />
 </p>
 
 ---
@@ -102,7 +102,7 @@ Every commissioning robotics engineer knows the pain:
 * **Zero Trigonometry Errors**: Eliminate spreadsheet calculations and manual orientation math on the plant floor.
 
 <p align="center">
-  <img src="media/kuka_control_center.gif" width="720" alt="KUKA Control Center Demo" />
+  <img src="docs/public/media/kuka_control_center.gif" width="720" alt="KUKA Control Center Demo" />
 </p>
 
 ---
@@ -113,7 +113,7 @@ Every commissioning robotics engineer knows the pain:
 * Displays human-readable labels inline next to `$IN[x]`, `$OUT[y]`, `$ANIN[z]`, and `$FLAG[k]`.
 
 <p align="center">
-  <img src="media/inlay_hints.gif" width="720" alt="Signal Inlay Hints Demo" />
+  <img src="docs/public/media/inlay_hints.gif" width="720" alt="Signal Inlay Hints Demo" />
 </p>
 
 ---
@@ -125,7 +125,7 @@ Every commissioning robotics engineer knows the pain:
 * Case standardization for KRL keywords (`DEF`, `GLOBAL`, `INTERRUPT`, `CONTINUE`).
 
 <p align="center">
-  <img src="media/code_formatter.gif" width="720" alt="Code Formatter Demo" />
+  <img src="docs/public/media/code_formatter.gif" width="720" alt="Code Formatter Demo" />
 </p>
 
 ---
@@ -134,7 +134,7 @@ Every commissioning robotics engineer knows the pain:
 *Type at the speed of thought.* Instant code completion across 350+ KSS system variables, motion commands, structured types, and subroutines.
 
 <p align="center">
-  <img src="media/smart_autocomplete.gif" width="720" alt="Smart Autocomplete Demo" />
+  <img src="docs/public/media/smart_autocomplete.gif" width="720" alt="Smart Autocomplete Demo" />
 </p>
 
 ---
@@ -143,7 +143,7 @@ Every commissioning robotics engineer knows the pain:
 *Instant AST-level indexing across your entire project folder.* Jump from any function or variable call straight to its declaration across separate `.src` and `.dat` files.
 
 <p align="center">
-  <img src="media/goto_definition.gif" width="720" alt="Go to Definition Demo" />
+  <img src="docs/public/media/goto_definition.gif" width="720" alt="Go to Definition Demo" />
 </p>
 
 ---
@@ -152,7 +152,7 @@ Every commissioning robotics engineer knows the pain:
 *Get instant parameter explanations and safety warnings.* Hover over any KSS system variable to see its physical units, read/write permissions, and KSS manual descriptions.
 
 <p align="center">
-  <img src="media/hover_info.gif" width="720" alt="Hover Info Demo" />
+  <img src="docs/public/media/hover_info.gif" width="720" alt="Hover Info Demo" />
 </p>
 
 ---
@@ -161,7 +161,7 @@ Every commissioning robotics engineer knows the pain:
 *Keep version control clean.* Strip WorkVisual headers (`&ACCESS`, `&REL`, `&PARAM`, `&COMMENT`) with one click to prevent noisy git diffs on automated commits.
 
 <p align="center">
-  <img src="media/git_metadata_cleaner.gif" width="720" alt="Git Metadata Cleaner Demo" />
+  <img src="docs/public/media/git_metadata_cleaner.gif" width="720" alt="Git Metadata Cleaner Demo" />
 </p>
 
 ---
@@ -187,7 +187,7 @@ Every commissioning robotics engineer knows the pain:
 *Manage massive programs with ease.* One-click folding of FOLD blocks, subprograms, and automatic sorting of variable declarations.
 
 <p align="center">
-  <img src="media/quick_fold_toolbar.gif" width="720" alt="Quick Fold Toolbar Demo" />
+  <img src="docs/public/media/quick_fold_toolbar.gif" width="720" alt="Quick Fold Toolbar Demo" />
 </p>
 
 ---
@@ -196,7 +196,7 @@ Every commissioning robotics engineer knows the pain:
 *Prevent code bloat and leftover test routines.* Identify uncalled subroutines, unused variables, and unreachable code branches across your entire workspace.
 
 <p align="center">
-  <img src="media/dead-code-demo.gif" width="720" alt="Dead Code Analysis Demo" />
+  <img src="docs/public/media/dead-code-demo.gif" width="720" alt="Dead Code Analysis Demo" />
 </p>
 
 ---
@@ -211,8 +211,12 @@ Every commissioning robotics engineer knows the pain:
 | **Signal Inlay Hints & Hover Docs** | ✅ | ✅ | Inline PLC signal labels & parameter signatures |
 | **Code Formatter & Matrix Alignment** | ✅ | ✅ | Instant 1-click cleanup (`Shift+Alt+F`) |
 | **GitLens Line Blame & Revision History** | ✅ | ✅ | Instant author & commit tracking for every point |
-| **Trilingual Localization** (EN, RU, TR) | ✅ | ✅ | Full native UI & diagnostic messages |
+| **Quad-Locale Architecture** (EN, RU, TR, ES) | ✅ | ✅ | Full native UI & diagnostic messages |
 | **Clean Git Metadata Stripper** | ✅ | ✅ | Strips WorkVisual headers for pristine Git diffs |
+| **Control Center & 21-Card Reference Guide** | ✅ | ✅ | Real-time diagnostic toggles & in-editor shortcuts guide |
+| **Full Flat 35-Commands Sidebar Tree** | ✅ | ✅ | Every single extension command accessible in 1 click |
+| **Native Project ZIP Export & Remote Telepresence** | ✅ | ✅ | 1-click full backup to OS explorer or Telegram |
+| **Copilot AI Language Model Tools Integration** | ✅ | ✅ | `krl_safety_check` callable directly by VS Code AI |
 | **Modern KRL & iiQKA Fold Suite** | ❌ | **✅ Pro** | iiQKA Folds, Spline Blocks & Collision Guard |
 | **Interactive Flowchart Viewer** (Mermaid SVG) | ❌ | **✅ Pro** | Visual control-flow logic & 2-way code jump |
 | **Strict Block Balance Diagnostic** | ❌ | **✅ Pro** | Catches unclosed `IF/LOOP/FOR` blocks |
@@ -291,7 +295,7 @@ Official Security Audit: [https://secure.software/vscode/packages/liskinlabs/kuk
 Configure extension behaviors in your `settings.json`:
 
 | Setting | Default | Description |
-|:---|:---:|:---:|
+|:---|:---:|:---|
 | `krl.indentWidth` | `3` | Indentation size (3 spaces is the official KUKA standard). |
 | `krl.alignAssignments` | `true` | Auto-align `=` symbols in `.dat` files for clean matrices. |
 | `krl.errorLens.enabled` | `true` | Show diagnostic errors inline at the end of lines. |

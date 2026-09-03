@@ -71,6 +71,7 @@ interface ServerMessages {
 
   // Type Diagnostics
   "diag.realInSwitch": string;
+  "diag.realInCase": string;
   "diag.typeMismatch": string;
   "diag.shouldBeReal": string;
   "action.changeToInt": string;
@@ -152,6 +153,8 @@ const en: ServerMessages = {
 
   "diag.realInSwitch":
     "REAL type cannot be used in SWITCH/CASE. Use INT or ENUM.",
+  "diag.realInCase":
+    'REAL value "{0}" is not allowed in CASE statement. Only INT, CHAR, and ENUM are valid.',
   "diag.typeMismatch": 'Type mismatch: assigning {0} to {1} variable "{2}".',
   "diag.shouldBeReal":
     'Value {0} contains decimal. Variable "{1}" should be REAL, not INT.',
@@ -165,7 +168,7 @@ const en: ServerMessages = {
     "Message key length ({0}) exceeds KUKA limit (26 characters).",
   "diag.msgOriginatorTooLong":
     "Message originator length ({0}) exceeds KUKA limit (24 characters).",
-  "diag.mismatchedBlock": 'Unexpected "{0}" — expected "{1}".',
+  "diag.mismatchedBlock": 'Unexpected closing "{0}" — no matching opening "{1}" found.',
   "diag.orphanBlock": 'Unexpected "{0}" outside of "{1}" block.',
   "diag.syntaxError":
     'Syntax error: unrecognized instruction or random text "{0}".',
@@ -237,6 +240,8 @@ const ru: ServerMessages = {
 
   "diag.realInSwitch":
     "Тип REAL нельзя использовать в SWITCH/CASE. Используйте INT или ENUM.",
+  "diag.realInCase":
+    'Значение REAL "{0}" недопустимо в инструкции CASE. Разрешены только INT, CHAR и ENUM.',
   "diag.typeMismatch":
     'Несовпадение типов: присваивание {0} переменной {1} "{2}".',
   "diag.shouldBeReal":
@@ -251,7 +256,7 @@ const ru: ServerMessages = {
     "Длина ключа сообщения ({0}) превышает лимит KUKA (26 символов).",
   "diag.msgOriginatorTooLong":
     "Длина отправителя сообщения ({0}) превышает лимит KUKA (24 символа).",
-  "diag.mismatchedBlock": 'Неожиданный "{0}" — ожидался "{1}".',
+  "diag.mismatchedBlock": 'Неожиданный закрывающий "{0}" — открывающий "{1}" не найден.',
   "diag.orphanBlock": 'Неожиданный "{0}" вне блока "{1}".',
   "diag.syntaxError":
     'Синтаксическая ошибка: нераспознанная инструкция или случайный текст "{0}".',
@@ -336,7 +341,8 @@ const tr: ServerMessages = {
     "Mesaj anahtar uzunluğu ({0}) KUKA sınırını aşıyor (26 karakter).",
   "diag.msgOriginatorTooLong":
     "Mesaj gönderici uzunluğu ({0}) KUKA sınırını aşıyor (24 karakter).",
-  "diag.mismatchedBlock": 'Beklenmeyen "{0}" — "{1}" bekleniyordu.',
+    "diag.realInCase": 'CASE ifadesinde REAL değeri "{0}" kullanılamaz. Yalnızca INT, CHAR ve ENUM geçerlidir.',
+  "diag.mismatchedBlock": 'Beklenmeyen kapanış "{0}" — eşleşen açılış "{1}" bulunamadı.',
   "diag.orphanBlock": '"{1}" bloğu dışında beklenmeyen "{0}".',
   "diag.syntaxError":
     'Sözdizimi hatası: tanınmayan talimat veya rastgele metin "{0}".',
@@ -391,6 +397,7 @@ const es: ServerMessages = {
   "diag.waitWithoutTimeout": "WAIT FOR sin tiempo de espera puede causar una parada indefinida.",
   "diag.dangerousHalt": "HALT en producción puede provocar paradas inesperadas de la línea.",
   "diag.realInSwitch": "La expresión SWITCH debe ser de tipo INT o CHAR, no REAL.",
+  "diag.realInCase": "El valor REAL \"{0}\" no está permitido en la instrucción CASE. Solo INT, CHAR y ENUM son válidos.",
   "diag.typeMismatch": "Discrepancia de tipos: se esperaba {0}, se obtuvo {1}.",
   "diag.shouldBeReal": "La variable \"{0}\" es de tipo INT pero se utiliza en contexto de punto flotante.",
   "action.changeToInt": "Cambiar tipo a INT",
@@ -399,7 +406,7 @@ const es: ServerMessages = {
   "diag.invalidCharInName": "Carácter no válido \"{0}\" en el identificador KRL.",
   "diag.msgKeyTooLong": "La clave del mensaje supera el límite de caracteres de KUKA.",
   "diag.msgOriginatorTooLong": "El remitente del mensaje supera el límite de caracteres de KUKA.",
-  "diag.mismatchedBlock": "Bloque no coincidente \"{0}\" y \"{1}\".",
+  "diag.mismatchedBlock": "Cierre inesperado \"{0}\" — no se encontró la apertura coincidente \"{1}\".",
   "diag.orphanBlock": "Bloque huérfano \"{0}\" sin inicio correspondiente.",
   "diag.syntaxError": "Error de sintaxis KRL: \"{0}\".",
 };

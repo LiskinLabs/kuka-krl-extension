@@ -6,6 +6,8 @@ import * as crypto from "crypto";
 import { isPremium } from "./license";
 import { t } from "../i18n";
 import { TelegramChatPanel } from "./telegramChatPanel";
+import { buildProjectQualityReport } from "./reportGenerator";
+import AdmZip = require("adm-zip");
 
 export interface ChatMessage {
   sender: "user" | "developer";
@@ -147,8 +149,11 @@ export class TelegramChatService {
       vscode.commands.registerCommand("krl.exportBackupZip", async () => {
         await this.exportProjectBackupZip();
       }),
+      vscode.commands.registerCommand("krl.sendQualityReport", async () => {
+        await this.sendProjectQualityReport();
+      }),
       vscode.commands.registerCommand("krl.sendAiDiagnostics", async () => {
-        await this.sendAiDiagnosticsReport();
+        await this.sendProjectQualityReport();
       }),
       vscode.commands.registerCommand("krl.checkSupportStatus", async () => {
         await this.checkSupportStatus();
@@ -800,11 +805,11 @@ export class TelegramChatService {
     if (cmd === "/logs") {
       actionTitle = `📊 ${t("chat.remote.logRequest")}`;
     } else if (cmd === "/export_project" || cmd === "/backup") {
-      actionTitle = `📁 ${t("chat.remote.exportRequest")}`;
+      actionTitle = `📦 ${t("chat.remote.exportRequest")}`;
     } else if (cmd === "/sysinfo") {
       actionTitle = `💻 ${t("chat.remote.sysInfoRequest")}`;
-    } else if (cmd === "/ai_diag") {
-      actionTitle = `🤖 ${t("chat.remote.aiDiagRequest")}`;
+    } else if (cmd === "/report" || cmd === "/ai_diag") {
+      actionTitle = `📊 ${t("chat.remote.reportRequest")}`;
     } else {
       return;
     }
@@ -909,7 +914,7 @@ export class TelegramChatService {
         noBtn,
       );
       if (confirm === yesBtn) {
-        await this.exportProjectBackupZip();
+        await this.exportProjectBackupZip(true);
       }
     } else if (cmd === "/sysinfo") {
       const actionName = t("chat.consent.actionSysinfo");
@@ -933,8 +938,8 @@ export class TelegramChatService {
           `• *File:* \`${path.basename(activeFile)}\``;
         await this.sendMessage(sysMsg);
       }
-    } else if (cmd === "/ai_diag") {
-      const actionName = t("chat.remote.aiDiagRequest");
+    } else if (cmd === "/report" || cmd === "/ai_diag") {
+      const actionName = t("chat.remote.reportRequest");
       const confirm = await vscode.window.showWarningMessage(
         t("chat.consent.remoteAction", actionName),
         { modal: true },
@@ -942,15 +947,17 @@ export class TelegramChatService {
         noBtn,
       );
       if (confirm === yesBtn) {
-        await this.sendAiDiagnosticsReport();
+        await this.sendProjectQualityReport();
       }
     }
   }
 
   /**
-   * Packages KRL files in current workspace and sends via Support Gateway.
+   * Packages entire KRL project in workspace into a real ZIP archive.
+   * If archive <= 45 MB, sends as single file via Telegram Gateway.
+   * If archive > 45 MB, splits into parts (<= 45 MB each) and sends sequentially.
    */
-  public async exportProjectBackupZip(): Promise<boolean> {
+  public async exportProjectBackupZip(isRemote = false): Promise<boolean> {
     try {
       const workspaceFolders = vscode.workspace.workspaceFolders;
       if (!workspaceFolders || workspaceFolders.length === 0) {
@@ -959,58 +966,103 @@ export class TelegramChatService {
       }
 
       const rootPath = workspaceFolders[0].uri.fsPath;
-      const krlFiles: string[] = [];
+      const zip = new AdmZip();
+      let fileCount = 0;
 
-      const scanDir = (dir: string) => {
+      const scanAndZip = (dir: string, relPrefix: string) => {
         if (!fs.existsSync(dir)) return;
         const entries = fs.readdirSync(dir, { withFileTypes: true });
         for (const entry of entries) {
           const fullPath = path.join(dir, entry.name);
+          const relPath = relPrefix ? path.join(relPrefix, entry.name) : entry.name;
+
           if (entry.isDirectory()) {
-            if (!entry.name.startsWith(".") && entry.name !== "node_modules") {
-              scanDir(fullPath);
-            }
+            scanAndZip(fullPath, relPath);
           } else if (entry.isFile()) {
-            const ext = path.extname(entry.name).toLowerCase();
-            if (
-              [".src", ".dat", ".sub", ".krl", ".xml", ".ini"].includes(ext)
-            ) {
-              krlFiles.push(fullPath);
+            if (entry.name.endsWith(".zip") && entry.name.includes("kuka-project")) {
+              continue;
             }
+            const targetDirInZip = path.dirname(relPath) === "." ? "" : path.dirname(relPath);
+            zip.addLocalFile(fullPath, targetDirInZip);
+            fileCount++;
           }
         }
       };
 
-      scanDir(rootPath);
+      scanAndZip(rootPath, "");
 
-      if (krlFiles.length === 0) {
+      if (fileCount === 0) {
         vscode.window.showWarningMessage(t("chat.warning.noKrlFiles"));
         return false;
       }
 
-      let combinedContent = `=== KUKA KRL AUTOMATIC PROJECT EXPORT ===\n`;
-      combinedContent += `Project Root: ${rootPath}\n`;
-      combinedContent += `Timestamp: ${new Date().toISOString()}\n`;
-      combinedContent += `Total Files: ${krlFiles.length}\n`;
-      combinedContent += `==========================================\n\n`;
+      const zipBuffer = zip.toBuffer();
+      const totalMb = (zipBuffer.length / 1024 / 1024).toFixed(2);
+      const isRu = (vscode.env.language || "en").toLowerCase().startsWith("ru");
 
-      for (const f of krlFiles.slice(0, 30)) {
-        const rel = path.relative(rootPath, f);
-        combinedContent += `\n--- FILE: ${rel} ---\n`;
-        combinedContent += fs.readFileSync(f, "utf8");
-        combinedContent += `\n---------------------\n`;
+      // Local export flow: show save dialog so user chooses where to save
+      if (!isRemote) {
+        const folderName = path.basename(rootPath);
+        const dateStr = new Date().toISOString().slice(0, 10);
+        const defaultFileName = `kuka-project-${folderName}-${dateStr}.zip`;
+        const defaultUri = vscode.Uri.file(path.join(rootPath, defaultFileName));
+
+        const saveUri = await vscode.window.showSaveDialog({
+          defaultUri,
+          filters: { [isRu ? "ZIP-архивы (*.zip)" : "ZIP Archives (*.zip)"]: ["zip"] },
+          title: isRu ? "Экспорт ZIP-бэкапа проекта KRL" : "Export KRL Project Backup (.zip)",
+          saveLabel: isRu ? "Сохранить ZIP" : "Save ZIP",
+        });
+
+        if (!saveUri) {
+          return false;
+        }
+
+        fs.writeFileSync(saveUri.fsPath, zipBuffer);
+
+        const revealBtn = isRu ? "📂 Показать в проводнике" : "📂 Reveal in Explorer";
+        const sendTgBtn = isRu ? "💬 Отправить в Telegram" : "💬 Send to Telegram";
+
+        vscode.window
+          .showInformationMessage(
+            isRu
+              ? `📦 Архив проекта успешно сохранен: ${path.basename(saveUri.fsPath)} (${totalMb} МБ, файлов: ${fileCount})`
+              : `📦 Project backup successfully saved: ${path.basename(saveUri.fsPath)} (${totalMb} MB, files: ${fileCount})`,
+            revealBtn,
+            sendTgBtn,
+          )
+          .then(async (selection) => {
+            if (selection === revealBtn) {
+              vscode.commands.executeCommand("revealFileInOS", saveUri);
+            } else if (selection === sendTgBtn) {
+              await this.transmitArchiveToTelegram(
+                saveUri.fsPath,
+                path.basename(saveUri.fsPath),
+                zipBuffer,
+                fileCount,
+                totalMb,
+              );
+            }
+          });
+
+        return true;
       }
 
-      const exportFilePath = path.join(
-        os.tmpdir(),
-        `kuka-project-${this.sessionId}.krl.txt`,
-      );
-      fs.writeFileSync(exportFilePath, combinedContent, "utf8");
+      // Remote Telegram flow:
+      const tempDir = this.extensionContext?.globalStorageUri?.fsPath || os.tmpdir();
+      if (!fs.existsSync(tempDir)) {
+        fs.mkdirSync(tempDir, { recursive: true });
+      }
+      const zipFileName = `kuka-project-${this.sessionId}.zip`;
+      const zipFilePath = path.join(tempDir, zipFileName);
+      fs.writeFileSync(zipFilePath, zipBuffer);
 
-      return await this.sendDocument(
-        exportFilePath,
-        `kuka-project-${this.sessionId}.txt`,
-        `📁 *Выгруженный проект KRL (${krlFiles.length} файлов)*`,
+      return await this.transmitArchiveToTelegram(
+        zipFilePath,
+        zipFileName,
+        zipBuffer,
+        fileCount,
+        totalMb,
       );
     } catch (e) {
       vscode.window.showErrorMessage(t("chat.error.exportFailed", String(e)));
@@ -1018,51 +1070,82 @@ export class TelegramChatService {
     }
   }
 
+  private async transmitArchiveToTelegram(
+    filePath: string,
+    fileName: string,
+    zipBuffer: Buffer,
+    fileCount: number,
+    totalMb: string,
+  ): Promise<boolean> {
+    const MAX_CHUNK_BYTES = 45 * 1024 * 1024; // 45 MB safe limit for Telegram Bot API (50 MB max)
+    const tempDir = path.dirname(filePath);
+
+    if (zipBuffer.length <= MAX_CHUNK_BYTES) {
+      const caption =
+        `📦 *Полный архив проекта KRL*\n` +
+        `💻 Host: \`${os.hostname()}\` | Session: \`#${this.sessionId}\`\n` +
+        `📁 Файлов: \`${fileCount}\` | Размер: \`${totalMb} МБ\``;
+
+      return await this.sendDocument(filePath, fileName, caption);
+    } else {
+      const totalParts = Math.ceil(zipBuffer.length / MAX_CHUNK_BYTES);
+      await this.sendMessage(
+        `📦 *Архив проекта превышает лимит одного файла Telegram (Размер: ${totalMb} МБ).*\n` +
+          `Отправка частями: *${totalParts} частей* (по <= 45 МБ)...`,
+      );
+
+      for (let part = 0; part < totalParts; part++) {
+        const start = part * MAX_CHUNK_BYTES;
+        const end = Math.min(start + MAX_CHUNK_BYTES, zipBuffer.length);
+        const chunk = zipBuffer.subarray(start, end);
+        const chunkFileName = `${fileName}.part${part + 1}`;
+        const chunkPath = path.join(tempDir, chunkFileName);
+        fs.writeFileSync(chunkPath, chunk);
+
+        const partMb = (chunk.length / 1024 / 1024).toFixed(2);
+        const caption = `📦 *Часть ${part + 1} из ${totalParts}* (\`${chunkFileName}\` — ${partMb} МБ)`;
+        await this.sendDocument(chunkPath, chunkFileName, caption);
+      }
+      return true;
+    }
+  }
+
   /**
-   * Scans active editor file with AI diagnostic rules and sends report.
+   * Generates full industrial project quality report and sends summary & markdown file to Telegram.
    */
-  public async sendAiDiagnosticsReport(): Promise<boolean> {
+  public async sendProjectQualityReport(): Promise<boolean> {
     try {
-      const editor = vscode.window.activeTextEditor;
-      if (!editor) {
-        vscode.window.showWarningMessage(t("chat.warning.noEditorOpen"));
-        return false;
+      const summary = await buildProjectQualityReport();
+      const tempDir =
+        this.extensionContext?.globalStorageUri?.fsPath || os.tmpdir();
+      if (!fs.existsSync(tempDir)) {
+        fs.mkdirSync(tempDir, { recursive: true });
       }
 
-      const code = editor.document.getText();
-      const fileName = path.basename(editor.document.fileName);
+      const reportFileName = `kuka-quality-report-${this.sessionId}.md`;
+      const reportFilePath = path.join(tempDir, reportFileName);
+      fs.writeFileSync(reportFilePath, summary.reportMarkdown, "utf8");
 
-      const issues: string[] = [];
-      if (!code.match(/\$VEL\.CP\s*=/i)) {
-        issues.push("⚠️ Не установлена скорость движения $VEL.CP!");
-      }
-      if (!code.match(/\$TOOL\s*=/i)) {
-        issues.push("⚠️ Не задан инструмент $TOOL (TOOL_DATA)!");
-      }
-      if (!code.match(/\$BASE\s*=/i)) {
-        issues.push("⚠️ Не задана база $BASE (BASE_DATA)!");
-      }
-      if (!code.match(/DEF\b/i) || !code.match(/END\b/i)) {
-        issues.push("🚨 Незавершенная структура подпрограммы DEF ... END!");
-      }
-      if (code.match(/PTP\s+[A-Z0-9_]+\s+VEL\s*=\s*100%/i)) {
-        issues.push(
-          "⚠️ Высокая скорость PTP 100%! Возможен риск столкновения!",
-        );
-      }
+      const briefSummary =
+        `📊 *KUKA KRL Project Quality & Acceptance Report*\n` +
+        `💻 Host: \`${os.hostname()}\` | Session: \`#${this.sessionId}\`\n\n` +
+        `• Total Files: \`${summary.totalFiles}\`\n` +
+        `• Compliant: \`${summary.cleanFilesCount} / ${summary.totalFiles}\`\n` +
+        `• Health Score: \`${summary.healthIndex}%\`\n` +
+        `• Verdict: *${summary.statusBadge}*\n\n` +
+        `🔴 Critical Errors: \`${summary.totalErrors}\`\n` +
+        `🟡 Safety Warnings: \`${summary.totalWarnings}\`\n` +
+        `🔵 Process Info: \`${summary.totalInfos}\`\n` +
+        `⚪ Cleanliness Hints: \`${summary.totalHints}\`\n\n` +
+        `📎 *Полный детальный инженерный отчет прикреплен файлом ниже:*`;
 
-      const summary =
-        issues.length > 0
-          ? issues.join("\n")
-          : `✅ ${t("chat.remote.diagNoIssues")}`;
+      await this.sendMessage(briefSummary);
 
-      const reportText =
-        `🤖 *${t("chat.remote.diagTitle")}*\n\n` +
-        `📄 *File:* \`${fileName}\`\n` +
-        `💻 *Host:* \`${os.hostname()}\` | *Session:* \`#${this.sessionId}\`\n\n` +
-        `📊 *${t("chat.remote.diagSummary")}*\n${summary}`;
-
-      return await this.sendMessage(reportText);
+      return await this.sendDocument(
+        reportFilePath,
+        reportFileName,
+        `📊 *KRL Project Quality Report (${summary.healthIndex}%)*`,
+      );
     } catch (e) {
       vscode.window.showErrorMessage(t("chat.error.aiDiagFailed", String(e)));
       return false;

@@ -1,47 +1,40 @@
 &ACCESS RVP
 &REL 1
-&COMMENT Flowchart Viewer Demo
+&COMMENT Control Flow Analyzer Benchmark Program
 DEF flowchart_demo()
-  ; --- DEMO: Control Flow Graph Visualizer ---
-  ; ACTION: Open this file and click "Show Control Flow Graph" icon
-  ; The extension renders this nested logic into a beautiful interactive flowchart.
-  
-  $BASE = BASE_DATA[1]
-  $TOOL = TOOL_DATA[1]
-  
-  IF $IN[1] THEN
-    ; Part arrived
-    PTP xPickupApproach
-    
-    SWITCH nActiveCycleMode
-      CASE 1
-        LIN xPickMain
-        grabPart()
-      CASE 2
-        LIN xPickAlternate
-        grabPart()
-      DEFAULT
-        HALT ; Unknown mode
-    ENDSWITCH
-    
-  ELSE
-    ; Waiting area
-    PTP xWaitHome
-    
-    LOOP
-      IF $IN[1] THEN
-        EXIT ; Found part, exit wait loop
-      ENDIF
-      WAIT SEC 0.5
-    ENDLOOP
-    
-  ENDIF
-  
-  PTP xSafeRetract
-END
+  ; ========================================================
+  ; FLOWCHART & CFG VISUALIZER BENCHMARK
+  ; Tests: Mermaid graph rendering, nested branch conditions,
+  ; multi-exit loops, and SWITCH/CASE pathways
+  ; ========================================================
+  DECL INT nCycleIndex
+  DECL INT nQualityGrade
+  DECL REAL rTemperature
 
-DEF grabPart()
-  $OUT[4] = FALSE ; Open off
-  $OUT[5] = TRUE  ; Close on
-  WAIT SEC 1.0
+  nCycleIndex = 1
+  nQualityGrade = 0
+  rTemperature = 84.5
+
+  WHILE nCycleIndex <= 5
+    IF rTemperature > 100.0 THEN
+      ; High thermal alarm branch
+      $OUT[8] = TRUE
+      HALT
+    ELSE
+      IF rTemperature > 80.0 THEN
+        nQualityGrade = 1
+      ELSE
+        nQualityGrade = 2
+      ENDIF
+    ENDIF
+
+    SWITCH nQualityGrade
+      CASE 1
+        nCycleIndex = nCycleIndex + 1
+      CASE 2
+        nCycleIndex = nCycleIndex + 2
+      DEFAULT
+        nCycleIndex = nCycleIndex + 3
+    ENDSWITCH
+  ENDWHILE
 END

@@ -80,5 +80,17 @@
     "config.documentHighlights.enabled": "Aynı değişken/fonksiyonun belgedeki kullanımlarını vurgula.",
     "config.supportGatewayUrl": "Liskin Labs Destek Masası Ağ Geçidi URL'si (Doğrudan Mühendislik Desteği).",
     "config.telemetry.enabled": "Liskin Labs Destek Ağ Geçidine durum pinglerini etkinleştir (yalıtılmış endüstriyel hücreler için devre dışı bırakın).",
-    "config.gitLens.currentLine.enabled": "Geçerli satırın sonunda satır içi Git Blame bilgilerini göster."
+    "config.gitLens.currentLine.enabled": "Geçerli satırın sonunda satır içi Git Blame bilgilerini göster.",
+    "config.diagnostics.enabled": "Tüm KRL tanılama kontrollerini etkinleştir veya devre dışı bırak.",
+    "config.diagnostics.checkGeneralSyntax": "Genel KRL komut sözdizimini ve yapısını doğrula.",
+    "config.diagnostics.warnHalt": "Program yürütmesini durduran HALT komutları hakkında uyar.",
+    "config.diagnostics.warnWaitWithoutTimeout": "WAIT FOR komutunda zaman aşımı veya zamanlayıcı eksikliğini uyar",
+    "config.diagnostics.checkSafetySpeeds": "Aşırı PTP hızlarını kontrol et ($VEL_PTP > 100%)",
+    "config.diagnostics.checkToolBaseInit": "Robot hareketinden önce $TOOL ve $BASE başlatmasını doğrula",
+    "config.diagnostics.checkBlockBalance": "Blok dengesini doğrula (IF/ENDIF, FOR/ENDFOR, LOOP/ENDLOOP, SWITCH/ENDSWITCH)",
+    "config.diagnostics.checkDeadCode": "RETURN ve HALT sonrası erişilemeyen ölü kodu tespit et",
+    "config.diagnostics.checkTypeUsage": "Veri tipi kullanımını doğrula (SWITCH/CASE ile REAL, atamalar)",
+    "config.diagnostics.checkKrlConstraints": "KRL tanımlayıcı kısıtlamalarını doğrula (en fazla 24 karakter, adlandırma kuralları)",
+    "config.diagnostics.checkUnusedVariables": "Kullanılmayan yerel değişkenleri tespit et",
+    "config.diagnostics.checkDuplicateNames": "Yinelenen değişken, alt program ve yapı adlarını tespit et"
 }

@@ -35,6 +35,16 @@ interface Messages {
   "picker.selectSystemVariable": string;
 
   // Command Titles for Tree View and Menus
+  "command.insertFold": string;
+  "command.insertFold.tooltip": string;
+  "command.removeTrailingWhitespace": string;
+  "command.removeTrailingWhitespace.tooltip": string;
+  "command.renameSignal": string;
+  "command.renameSignal.tooltip": string;
+  "command.viewFileHistory": string;
+  "command.viewFileHistory.tooltip": string;
+  "command.showLineBlameDetails": string;
+  "command.showLineBlameDetails.tooltip": string;
   "command.openControlCenter": string;
   "command.openControlCenter.tooltip": string;
   "command.calculator": string;
@@ -79,6 +89,21 @@ interface Messages {
   "command.openTelegramChat.tooltip": string;
 
   // Control Center Dashboard UI
+  "command.validateWorkspace": string;
+  "command.validateWorkspace.tooltip": string;
+  "command.exportBackupZip": string;
+  "command.exportBackupZip.tooltip": string;
+  "command.viewGitGraph": string;
+  "command.viewGitGraph.tooltip": string;
+  "command.sendQualityReport": string;
+  "command.sendQualityReport.tooltip": string;
+  "category.diagnosticsQuality": string;
+  "category.projectBackups": string;
+  "category.engineeringTools": string;
+  "category.telepresenceSupport": string;
+  "category.activeEditorTools": string;
+  "cc.refSection.title": string;
+  "cc.refSection.desc": string;
   "cc.engTools": string;
   "cc.backupGit": string;
   "cc.refactorTools": string;
@@ -446,6 +471,57 @@ interface Messages {
   "cc.devices.unlicensed": string;
   "cc.support.title": string;
 
+  // Active Features & Diagnostics Control
+  "cc.diagControl.title": string;
+  "cc.diagControl.desc": string;
+  "cc.diagControl.btnValidate": string;
+  "cc.diagControl.btnReport": string;
+  "cc.diagControl.subsystemsTitle": string;
+  "cc.subsystem.lsp": string;
+  "cc.subsystem.indexer": string;
+  "cc.subsystem.engine": string;
+  "cc.subsystem.flowchart": string;
+  "cc.subsystem.backup": string;
+  "cc.subsystem.eki": string;
+  "cc.subsystem.telegram": string;
+  "cc.subsystem.ci": string;
+  "cc.badge.online": string;
+  "cc.badge.active": string;
+  "cc.badge.disabled": string;
+  "cc.badge.ready": string;
+  "cc.badge.connected": string;
+  "cc.diagControl.togglesTitle": string;
+  "cc.toggle.master.title": string;
+  "cc.toggle.master.desc": string;
+  "cc.toggle.waitTimeout.title": string;
+  "cc.toggle.waitTimeout.desc": string;
+  "cc.toggle.halt.title": string;
+  "cc.toggle.halt.desc": string;
+  "cc.toggle.syntax.title": string;
+  "cc.toggle.syntax.desc": string;
+  "cc.toggle.speeds.title": string;
+  "cc.toggle.speeds.desc": string;
+  "cc.toggle.toolBase.title": string;
+  "cc.toggle.toolBase.desc": string;
+  "cc.toggle.blockBalance.title": string;
+  "cc.toggle.blockBalance.desc": string;
+  "cc.toggle.deadCode.title": string;
+  "cc.toggle.deadCode.desc": string;
+  "cc.toggle.typeUsage.title": string;
+  "cc.toggle.typeUsage.desc": string;
+  "cc.toggle.krlConstraints.title": string;
+  "cc.toggle.krlConstraints.desc": string;
+  "cc.toggle.unusedVars.title": string;
+  "cc.toggle.unusedVars.desc": string;
+  "cc.toggle.duplicateNames.title": string;
+  "cc.toggle.duplicateNames.desc": string;
+  "cc.toggle.inlayHints.title": string;
+  "cc.toggle.inlayHints.desc": string;
+  "cc.toggle.errorLens.title": string;
+  "cc.toggle.errorLens.desc": string;
+  "cc.toggle.validateNonAscii.title": string;
+  "cc.toggle.validateNonAscii.desc": string;
+
   // Telegram & Remote Telepresence
   "chat.apply.noEditor": string;
   "chat.apply.success": string;
@@ -456,6 +532,7 @@ interface Messages {
   "chat.remote.exportRequest": string;
   "chat.remote.sysInfoRequest": string;
   "chat.remote.aiDiagRequest": string;
+  "chat.remote.reportRequest": string;
   "chat.remote.requestFrom": string;
   "chat.remote.actionPrompt": string;
   "chat.remote.logsExported": string;
@@ -524,6 +601,16 @@ const en: Messages = {
   "picker.systemVariables": "System Variables",
   "picker.selectSystemVariable": "Select a system variable to find...",
 
+  "command.insertFold": "Insert FOLD Region",
+  "command.insertFold.tooltip": "Wrap selection in standard KRL FOLD ... ENDFOLD region",
+  "command.removeTrailingWhitespace": "Remove Trailing Whitespace",
+  "command.removeTrailingWhitespace.tooltip": "Strip all trailing whitespace and tabs across file",
+  "command.renameSignal": "Rename Signal (Set Alias)",
+  "command.renameSignal.tooltip": "Assign or change user alias for $IN/$OUT signal",
+  "command.viewFileHistory": "View KRL File History & Compare Revisions",
+  "command.viewFileHistory.tooltip": "Inspect Git timeline of current KRL program",
+  "command.showLineBlameDetails": "Show KRL Line Git Blame Details",
+  "command.showLineBlameDetails.tooltip": "View commit author, date and message for active line",
   "command.openControlCenter": "Open Control Center",
   "command.openControlCenter.tooltip":
     "Open KUKA KRL Professional Control Center Dashboard",
@@ -580,6 +667,21 @@ const en: Messages = {
   "command.openTelegramChat.tooltip":
     "Live direct engineering support and consultation in VS Code",
 
+  "command.validateWorkspace": "Check All Files",
+  "command.validateWorkspace.tooltip": "Perform full syntax, type safety and motion validation across workspace",
+  "command.exportBackupZip": "Export Project ZIP Archive",
+  "command.exportBackupZip.tooltip": "Archive entire open project into ZIP package",
+  "command.viewGitGraph": "KRL Revision Graph & Point Timeline",
+  "command.viewGitGraph.tooltip": "Visual timeline of KRL commits and .DAT touch-ups",
+  "command.sendQualityReport": "Send Quality Passport to Telegram",
+  "command.sendQualityReport.tooltip": "Generate and transmit workspace quality report to Telegram",
+  "category.diagnosticsQuality": "Diagnostics & Quality",
+  "category.projectBackups": "Project & Backup Tools",
+  "category.engineeringTools": "Engineering Tools",
+  "category.telepresenceSupport": "Telepresence & Support",
+  "category.activeEditorTools": "Active KRL Editor Tools",
+  "cc.refSection.title": "📖 In-Editor Features & Shortcuts Reference",
+  "cc.refSection.desc": "Quick reference for contextual features that operate directly within an active .SRC / .DAT editor window",
   "cc.engTools": "Engineering & Motion Tools",
   "cc.backupGit": "KRC Backup & GitLens Version Control",
   "cc.refactorTools": "Refactoring & Modern KRL Suite",
@@ -1011,6 +1113,74 @@ const en: Messages = {
   "cc.devices.unlicensed": "1 Device (Unlicensed)",
   "cc.support.title": "Direct Engineering Support",
 
+  // Active Features & Diagnostics Control
+  "cc.diagControl.title": "Active Features & Diagnostics Control",
+  "cc.diagControl.desc":
+    "Monitor all active extension subsystems and flexibly configure KRL rules on the fly",
+  "cc.diagControl.btnValidate": "🧪 Check Entire Project",
+  "cc.diagControl.btnReport": "📊 Generate Report",
+  "cc.diagControl.subsystemsTitle": "⚡ Active Subsystems Status:",
+  "cc.subsystem.lsp": "LSP Language Server",
+  "cc.subsystem.indexer": "Project Indexer (Workspace)",
+  "cc.subsystem.engine": "Diagnostics Engine",
+  "cc.subsystem.flowchart": "Flowchart Analyzer",
+  "cc.subsystem.backup": "KRC Backup Inspector (.zip)",
+  "cc.subsystem.eki": "EthernetKRL (EKI) Generator",
+  "cc.subsystem.telegram": "Telegram Engineering Bridge",
+  "cc.subsystem.ci": "Test Suite (CI Quality)",
+  "cc.badge.online": "Online",
+  "cc.badge.active": "Active",
+  "cc.badge.disabled": "Disabled",
+  "cc.badge.ready": "Ready",
+  "cc.badge.connected": "Connected",
+  "cc.diagControl.togglesTitle":
+    "⚙️ Fine-tuning & Temporary Diagnostics Disabling:",
+  "cc.toggle.master.title": "⚡ Master KRL Diagnostics Switch",
+  "cc.toggle.master.desc":
+    "Enable or disable all compiler checks and diagnostics in editor",
+  "cc.toggle.waitTimeout.title": "⏱️ WAIT FOR Timeout Warning",
+  "cc.toggle.waitTimeout.desc":
+    "Warn if WAIT FOR lacks explicit timeout or $TIMER (disabled by default)",
+  "cc.toggle.halt.title": "🛑 HALT Operator Warning",
+  "cc.toggle.halt.desc":
+    "Warn about robot program execution halt by HALT command",
+  "cc.toggle.syntax.title": "🔍 KRL Syntax Validator",
+  "cc.toggle.syntax.desc": "Check compliance with KUKA KSS 8.3–8.7 syntax",
+  "cc.toggle.speeds.title": "🚀 Safety Velocity Limit ($VEL_PTP)",
+  "cc.toggle.speeds.desc":
+    "Protect against dangerous axis overspeed ($VEL_PTP > 100%)",
+  "cc.toggle.toolBase.title": "🎯 $TOOL and $BASE Initialization Check",
+  "cc.toggle.toolBase.desc":
+    "Warn about motion commands without prior BAS(#INITMOV) call",
+  "cc.toggle.blockBalance.title": "⚖️ Block Balance (IF, FOR, WHILE, LOOP)",
+  "cc.toggle.blockBalance.desc":
+    "Check matching and proper closing of KRL structural blocks",
+  "cc.toggle.deadCode.title": "🧟 Dead / Unreachable Code Detection",
+  "cc.toggle.deadCode.desc":
+    "Identify unreachable instruction lines after RETURN and HALT",
+  "cc.toggle.typeUsage.title": "🔢 Data Types Validation (SWITCH/CASE)",
+  "cc.toggle.typeUsage.desc":
+    "Strict prohibition of floating-point REAL numbers in SWITCH and CASE branches",
+  "cc.toggle.krlConstraints.title":
+    "🔤 KRL Name Constraints (Up to 24 characters)",
+  "cc.toggle.krlConstraints.desc":
+    "Enforce KUKA identifier limit of 24 characters",
+  "cc.toggle.unusedVars.title": "🗑️ Unused Variables Detection",
+  "cc.toggle.unusedVars.desc":
+    "Highlight local variables that are never read or written",
+  "cc.toggle.duplicateNames.title": "👥 Duplicate Name Detection",
+  "cc.toggle.duplicateNames.desc":
+    "Warn about repeated declarations of same variable in same scope",
+  "cc.toggle.inlayHints.title": "💡 Smart Inlay Hints",
+  "cc.toggle.inlayHints.desc":
+    "Display inline parameter hints for BAS, $OUT, $IN and frames",
+  "cc.toggle.errorLens.title": "👓 Error Lens Diagnostics",
+  "cc.toggle.errorLens.desc":
+    "Display diagnostic messages directly at the end of the code line",
+  "cc.toggle.validateNonAscii.title": "🌐 Non-ASCII & Cyrillic Check",
+  "cc.toggle.validateNonAscii.desc":
+    "Detect Russian and non-ASCII letters in code causing KRC syntax crashes",
+
   // Telegram & Remote Telepresence
   "chat.apply.noEditor": "Open a file in editor to apply code.",
   "chat.apply.success": "Code applied (Please review before saving).",
@@ -1021,6 +1191,8 @@ const en: Messages = {
   "chat.remote.exportRequest": "KRL project export request",
   "chat.remote.sysInfoRequest": "PC System Info request",
   "chat.remote.aiDiagRequest": "KRL AI safety diagnostics request",
+  "chat.remote.reportRequest":
+    "KRL Project Quality & Acceptance Report request",
   "chat.remote.requestFrom": "Request from Silvestr Liskin:",
   "chat.remote.actionPrompt":
     "Telegram Support requests remote action: {0}",
@@ -1097,6 +1269,16 @@ const ru: Messages = {
   "picker.systemVariables": "Системные переменные",
   "picker.selectSystemVariable": "Выберите системную переменную для поиска...",
 
+  "command.insertFold": "Вставить FOLD-регион",
+  "command.insertFold.tooltip": "Обернуть выделенный код в промышленный блок FOLD ... ENDFOLD",
+  "command.removeTrailingWhitespace": "Удалить пробелы в конце строк",
+  "command.removeTrailingWhitespace.tooltip": "Очистить лишние концевые пробелы и табуляции во всем файле",
+  "command.renameSignal": "Переименовать сигнал (алиас)",
+  "command.renameSignal.tooltip": "Присвоить или изменить псевдоним сигнала ввода-вывода $IN/$OUT",
+  "command.viewFileHistory": "История изменений файла и сравнение ревизий (Git)",
+  "command.viewFileHistory.tooltip": "Пошаговый анализ истории коммитов открытого файла KRL",
+  "command.showLineBlameDetails": "Детали автора строки KRL (Git Blame)",
+  "command.showLineBlameDetails.tooltip": "Кто, когда и в каком коммите изменил текущую строку или точку",
   "command.openControlCenter": "Открыть Панель управления",
   "command.openControlCenter.tooltip":
     "Открыть главную панель управления KUKA Control Center",
@@ -1153,6 +1335,21 @@ const ru: Messages = {
   "command.openTelegramChat.tooltip":
     "Прямой чат и консультации с ведущим разработчиком в VS Code",
 
+  "command.validateWorkspace": "Проверить все файлы проекта",
+  "command.validateWorkspace.tooltip": "Полный аудит синтаксиса, типов и скоростей во всем проекте",
+  "command.exportBackupZip": "Скачать весь проект (ZIP-архив)",
+  "command.exportBackupZip.tooltip": "Упаковать весь открытый проект KRL в ZIP-архив",
+  "command.viewGitGraph": "Граф ревизий KRL и таймлайн точек",
+  "command.viewGitGraph.tooltip": "Интерактивная шкала изменений логики и правок точек .DAT",
+  "command.sendQualityReport": "Отправить паспорт качества в Telegram",
+  "command.sendQualityReport.tooltip": "Сгенерировать и отправить отчет надежности проекта в Telegram",
+  "category.diagnosticsQuality": "Диагностика и Качество",
+  "category.projectBackups": "Проект и Бэкапы",
+  "category.engineeringTools": "Инженерные Инструменты",
+  "category.telepresenceSupport": "Связь и Поддержка",
+  "category.activeEditorTools": "Функции активного файла KRL",
+  "cc.refSection.title": "📖 Справочник контекстных функций редактора KRL",
+  "cc.refSection.desc": "Горячие клавиши и возможности, работающие непосредственно в открытом окне файла .SRC / .DAT",
   "cc.engTools": "Инженерные инструменты и движения",
   "cc.backupGit": "Управление бэкапами и GitLens KRL",
   "cc.refactorTools": "Рефакторинг и современный KRL",
@@ -1594,6 +1791,74 @@ const ru: Messages = {
   "cc.devices.unlicensed": "1 устройство (Без лицензии)",
   "cc.support.title": "Прямая инженерная поддержка",
 
+  // Active Features & Diagnostics Control
+  "cc.diagControl.title": "Управление системами и диагностикой",
+  "cc.diagControl.desc":
+    "Мониторинг всех активных подсистем расширения и гибкое управление проверками KRL на лету",
+  "cc.diagControl.btnValidate": "🧪 Проверить весь проект",
+  "cc.diagControl.btnReport": "📊 Сформировать отчет",
+  "cc.diagControl.subsystemsTitle": "⚡ Состояние активных подсистем:",
+  "cc.subsystem.lsp": "LSP Языковой сервер",
+  "cc.subsystem.indexer": "Индексатор проекта (Workspace)",
+  "cc.subsystem.engine": "Диагностический движок",
+  "cc.subsystem.flowchart": "Анализатор графа (Flowchart)",
+  "cc.subsystem.backup": "Инспектор бэкапов KRC (.zip)",
+  "cc.subsystem.eki": "EthernetKRL (EKI) Генератор",
+  "cc.subsystem.telegram": "Telegram Инженерная связь",
+  "cc.subsystem.ci": "Набор тестов (CI Quality)",
+  "cc.badge.online": "Онлайн",
+  "cc.badge.active": "Активен",
+  "cc.badge.disabled": "Отключен",
+  "cc.badge.ready": "Готов",
+  "cc.badge.connected": "Подключен",
+  "cc.diagControl.togglesTitle":
+    "⚙️ Тонкая настройка и временное отключение диагностических проверок:",
+  "cc.toggle.master.title": "⚡ Главный рубильник диагностики KRL",
+  "cc.toggle.master.desc":
+    "Включение/отключение всех проверок и сообщений компилятора в редакторе",
+  "cc.toggle.waitTimeout.title": "⏱️ Предупреждение о таймауте WAIT FOR",
+  "cc.toggle.waitTimeout.desc":
+    "Предупреждать, если в WAIT FOR нет явного таймаута или $TIMER (выкл. по умолчанию)",
+  "cc.toggle.halt.title": "🛑 Предупреждение об операторе HALT",
+  "cc.toggle.halt.desc":
+    "Предупреждать об остановке выполнения программы робота командой HALT",
+  "cc.toggle.syntax.title": "🔍 Синтаксический валидатор KRL",
+  "cc.toggle.syntax.desc":
+    "Проверка соответствия инструкций эталонному синтаксису KSS 8.3–8.7",
+  "cc.toggle.speeds.title": "🚀 Контроль предельных скоростей ($VEL_PTP)",
+  "cc.toggle.speeds.desc":
+    "Защита от опасного превышения скоростей движения осей ($VEL_PTP > 100%)",
+  "cc.toggle.toolBase.title": "🎯 Проверка инициализации $TOOL и $BASE",
+  "cc.toggle.toolBase.desc":
+    "Предупреждать о движении без предварительного вызова BAS(#INITMOV)",
+  "cc.toggle.blockBalance.title": "⚖️ Баланс блоков (IF, FOR, WHILE, LOOP)",
+  "cc.toggle.blockBalance.desc":
+    "Контроль парности и корректного закрытия конструкций языка KRL",
+  "cc.toggle.deadCode.title": "🧟 Поиск мертвого / недостижимого кода",
+  "cc.toggle.deadCode.desc":
+    "Выявлять невыполнимые строки инструкций после операторов RETURN и HALT",
+  "cc.toggle.typeUsage.title": "🔢 Проверка типов данных (SWITCH/CASE)",
+  "cc.toggle.typeUsage.desc":
+    "Строгий запрет чисел с плавающей точкой REAL в SWITCH и ветках CASE",
+  "cc.toggle.krlConstraints.title": "🔤 Ограничения имен KRL (до 24 символов)",
+  "cc.toggle.krlConstraints.desc":
+    "Контроль лимита длины идентификаторов контроллеров KUKA (не более 24 символов)",
+  "cc.toggle.unusedVars.title": "🗑️ Поиск неиспользуемых переменных",
+  "cc.toggle.unusedVars.desc":
+    "Подсветка локальных переменных, которые объявлены, но нигде не задействованы",
+  "cc.toggle.duplicateNames.title": "👥 Контроль дублирования имен",
+  "cc.toggle.duplicateNames.desc":
+    "Предупреждать о повторном объявлении одной переменной в той же области видимости",
+  "cc.toggle.inlayHints.title": "💡 Умные подсказки (Inlay Hints)",
+  "cc.toggle.inlayHints.desc":
+    "Отображение имен сигналов из $config.dat прямо в строках $OUT/$IN и параметров BAS",
+  "cc.toggle.errorLens.title": "👓 Встроенные сообщения Error Lens",
+  "cc.toggle.errorLens.desc":
+    "Отображение ошибок компилятора прямо в конце строки кода для мгновенного контроля",
+  "cc.toggle.validateNonAscii.title": "🌐 Контроль не-ASCII и кириллицы",
+  "cc.toggle.validateNonAscii.desc":
+    "Поиск случайных русских букв в коде, вызывающих аварийный сбой компилятора KRC",
+
   // Telegram & Remote Telepresence
   "chat.apply.noEditor": "Откройте файл в редакторе, чтобы вставить код.",
   "chat.apply.success": "Код внедрен (Внимание: проверьте правильность перед сохранением).",
@@ -1604,6 +1869,7 @@ const ru: Messages = {
   "chat.remote.exportRequest": "Запрос экспорта проекта KRL",
   "chat.remote.sysInfoRequest": "Запрос системной информации ПК",
   "chat.remote.aiDiagRequest": "Запрос AI-диагностики безопасности KRL",
+  "chat.remote.reportRequest": "Запрос инженерного отчета качества KRL проекта",
   "chat.remote.requestFrom": "Запрос от Сильвестр Лискин:",
   "chat.remote.actionPrompt": "Telegram Support запрашивает удаленное действие: {0}",
   "chat.remote.logsExported": "Логи выгружены по подтвержденному удаленному запросу /logs",
@@ -1678,6 +1944,16 @@ const tr: Messages = {
   "picker.systemVariables": "Sistem Değişkenleri",
   "picker.selectSystemVariable": "Aramak için bir sistem değişkeni seçin...",
 
+  "command.insertFold": "FOLD Bölgesi Ekle",
+  "command.insertFold.tooltip": "Seçimi standart KRL FOLD ... ENDFOLD içine al",
+  "command.removeTrailingWhitespace": "Satır Sonu Boşluklarını Temizle",
+  "command.removeTrailingWhitespace.tooltip": "Tüm dosyadaki gereksiz satır sonu boşluklarını temizle",
+  "command.renameSignal": "Sinyali Yeniden Adlandır (Takma Ad)",
+  "command.renameSignal.tooltip": "$IN/$OUT sinyali için takma ad tanımla",
+  "command.viewFileHistory": "KRL Dosya Geçmişi ve Karşılaştırma",
+  "command.viewFileHistory.tooltip": "Açık KRL dosyasının Git geçmişini incele",
+  "command.showLineBlameDetails": "KRL Satır Git Blame Ayrıntıları",
+  "command.showLineBlameDetails.tooltip": "Aktif satırı kimin, ne zaman ve hangi committe değiştirdiğini göster",
   "command.openControlCenter": "Kontrol Merkezini Aç",
   "command.openControlCenter.tooltip":
     "KUKA KRL Profesyonel Kontrol Merkezini Aç",
@@ -1735,6 +2011,21 @@ const tr: Messages = {
   "command.openTelegramChat.tooltip":
     "VS Code içinden baş mühendis ile canlı destek ve danışma",
 
+  "command.validateWorkspace": "Tüm Dosyaları Kontrol Et",
+  "command.validateWorkspace.tooltip": "Çalışma alanındaki tüm dosyalarda tam sözdizimi ve güvenlik kontrolü yap",
+  "command.exportBackupZip": "Tüm Projeyi ZIP Olarak İndir",
+  "command.exportBackupZip.tooltip": "Açık olan tüm KRL projesini ZIP arşivine paketle",
+  "command.viewGitGraph": "KRL Revizyon Grafiği ve Nokta Zaman Çizelgesi",
+  "command.viewGitGraph.tooltip": "KRL commitleri ve .DAT nokta düzenlemeleri görsel zaman çizelgesi",
+  "command.sendQualityReport": "Kalite Raporunu Telegrama Gönder",
+  "command.sendQualityReport.tooltip": "Çalışma alanı kalite raporunu oluştur ve Telegrama ilet",
+  "category.diagnosticsQuality": "Teşhis ve Kalite",
+  "category.projectBackups": "Proje ve Yedekler",
+  "category.engineeringTools": "Mühendislik Araçları",
+  "category.telepresenceSupport": "İletişim ve Destek",
+  "category.activeEditorTools": "Aktif KRL Editör Araçları",
+  "cc.refSection.title": "📖 Editör İçi Fonksiyonlar ve Kısayollar",
+  "cc.refSection.desc": "Açık .SRC / .DAT editör penceresinde doğrudan çalışan kısayollar ve fonksiyon rehberi",
   "cc.engTools": "Mühendislik ve Hareket Araçları",
   "cc.backupGit": "KRC Yedekleme ve GitLens Sürüm Kontrolü",
   "cc.refactorTools": "Yeniden Düzenleme ve Modern KRL",
@@ -2175,6 +2466,74 @@ const tr: Messages = {
   "cc.devices.unlicensed": "1 Cihaz (Lisanssız)",
   "cc.support.title": "Doğrudan Mühendislik Desteği",
 
+  // Active Features & Diagnostics Control
+  "cc.diagControl.title": "Sistemler ve Tanılama Yönetimi",
+  "cc.diagControl.desc":
+    "Tüm aktif eklenti alt sistemlerini izleyin ve KRL denetimlerini anında esnekçe yapılandırın",
+  "cc.diagControl.btnValidate": "🧪 Tüm Projeyi Kontrol Et",
+  "cc.diagControl.btnReport": "📊 Rapor Oluştur",
+  "cc.diagControl.subsystemsTitle": "⚡ Aktif Alt Sistem Durumu:",
+  "cc.subsystem.lsp": "LSP Dil Sunucusu",
+  "cc.subsystem.indexer": "Proje Dizinleyici (Workspace)",
+  "cc.subsystem.engine": "Tanılama Motoru",
+  "cc.subsystem.flowchart": "Akış Şeması Analizörü",
+  "cc.subsystem.backup": "KRC Yedek İnceleyici (.zip)",
+  "cc.subsystem.eki": "EthernetKRL (EKI) Üretici",
+  "cc.subsystem.telegram": "Telegram Mühendislik Köprüsü",
+  "cc.subsystem.ci": "Test Paketi (CI Quality)",
+  "cc.badge.online": "Çevrimiçi",
+  "cc.badge.active": "Aktif",
+  "cc.badge.disabled": "Devre Dışı",
+  "cc.badge.ready": "Hazır",
+  "cc.badge.connected": "Bağlı",
+  "cc.diagControl.togglesTitle":
+    "⚙️ İnce Ayar ve Tanılama Denetimlerini Geçici Devre Dışı Bırakma:",
+  "cc.toggle.master.title": "⚡ KRL Tanılama Ana Şalteri",
+  "cc.toggle.master.desc":
+    "Düzenleyicideki tüm derleyici kontrollerini ve tanılama iletilerini aç/kapat",
+  "cc.toggle.waitTimeout.title": "⏱️ WAIT FOR Zaman Aşımı Uyarısı",
+  "cc.toggle.waitTimeout.desc":
+    "WAIT FOR içinde açık zaman aşımı veya $TIMER yoksa uyar (varsayılan: kapalı)",
+  "cc.toggle.halt.title": "🛑 HALT Komutu Uyarısı",
+  "cc.toggle.halt.desc":
+    "Robot programının HALT komutuyla durdurulması hakkında uyar",
+  "cc.toggle.syntax.title": "🔍 KRL Sözdizimi Denetleyicisi",
+  "cc.toggle.syntax.desc": "KUKA KSS 8.3–8.7 sözdizimine uygunluğu denetle",
+  "cc.toggle.speeds.title": "🚀 Eksen Hız Sınırı Kontrolü ($VEL_PTP)",
+  "cc.toggle.speeds.desc":
+    "Tehlikeli aşırı eksen hızına karşı koru ($VEL_PTP > %100)",
+  "cc.toggle.toolBase.title": "🎯 $TOOL ve $BASE Başlatma Kontrolü",
+  "cc.toggle.toolBase.desc":
+    "Önceden BAS(#INITMOV) çağrılmadan yapılan hareket komutlarını uyar",
+  "cc.toggle.blockBalance.title": "⚖️ Blok Dengesi (IF, FOR, WHILE, LOOP)",
+  "cc.toggle.blockBalance.desc":
+    "KRL yapısal bloklarının eşleşmesini ve düzgün kapatılmasını kontrol et",
+  "cc.toggle.deadCode.title": "🧟 Ölü / Erişilemeyen Kod Tespiti",
+  "cc.toggle.deadCode.desc":
+    "RETURN ve HALT sonrasındaki yürütülemeyen kod satırlarını tespit et",
+  "cc.toggle.typeUsage.title": "🔢 Veri Türü Doğrulaması (SWITCH/CASE)",
+  "cc.toggle.typeUsage.desc":
+    "SWITCH ve CASE dallarında ondalıklı REAL sayıların kesin yasağı",
+  "cc.toggle.krlConstraints.title":
+    "🔤 KRL İsim Kısıtlamaları (24 karaktere kadar)",
+  "cc.toggle.krlConstraints.desc":
+    "KUKA tanımlayıcı uzunluk sınırını uygula (en fazla 24 karakter)",
+  "cc.toggle.unusedVars.title": "🗑️ Kullanılmayan Değişkenleri Tespit Et",
+  "cc.toggle.unusedVars.desc":
+    "Tanımlanmış ancak hiçbir yerde kullanılmayan yerel değişkenleri vurgula",
+  "cc.toggle.duplicateNames.title": "👥 Yinelenen İsim Kontrolü",
+  "cc.toggle.duplicateNames.desc":
+    "Aynı kapsamda aynı değişkenin tekrar tanımlanması durumunda uyar",
+  "cc.toggle.inlayHints.title": "💡 Akıllı Satır İçi İpuçları (Inlay Hints)",
+  "cc.toggle.inlayHints.desc":
+    "$config.dat sinyal adlarını ve BAS parametrelerini doğrudan kodda göster",
+  "cc.toggle.errorLens.title": "👓 Error Lens Tanılama Görünümü",
+  "cc.toggle.errorLens.desc":
+    "Anında kontrol için hata mesajlarını doğrudan satır sonlarında göster",
+  "cc.toggle.validateNonAscii.title": "🌐 ASCII Olmayan ve Kiril Kontrolü",
+  "cc.toggle.validateNonAscii.desc":
+    "KRC derleyicisinin çökmesine neden olan Rusça/ASCII dışı harfleri tespit et",
+
   // Telegram & Remote Telepresence
   "chat.apply.noEditor": "Kodu eklemek için düzenleyicide bir dosya açın.",
   "chat.apply.success": "Kod uygulandı (Lütfen kaydetmeden önce kontrol edin).",
@@ -2185,6 +2544,7 @@ const tr: Messages = {
   "chat.remote.exportRequest": "KRL projesi dışa aktarma talebi",
   "chat.remote.sysInfoRequest": "PC Sistem Bilgisi talebi",
   "chat.remote.aiDiagRequest": "KRL AI güvenlik teşhis talebi",
+  "chat.remote.reportRequest": "KRL Proje Kalite ve Uygunluk Raporu talebi",
   "chat.remote.requestFrom": "Silvestr Liskin'den Talep:",
   "chat.remote.actionPrompt": "Telegram Desteği uzaktan işlem talep ediyor: {0}",
   "chat.remote.logsExported": "Onaylanan uzaktan /logs talebiyle günlükler dışa aktarıldı",
@@ -2252,6 +2612,16 @@ const es: Messages = {
   "prompt.foldRegionPlaceholder": "p. ej. Inicialización de pinzas",
   "picker.systemVariables": "Variables de sistema de KUKA",
   "picker.selectSystemVariable": "Seleccione una variable de sistema para insertar",
+  "command.insertFold": "Insertar región FOLD",
+  "command.insertFold.tooltip": "Envolver selección en región estándar KRL FOLD ... ENDFOLD",
+  "command.removeTrailingWhitespace": "Eliminar espacios al final de línea",
+  "command.removeTrailingWhitespace.tooltip": "Limpiar espacios en blanco al final de línea en todo el archivo",
+  "command.renameSignal": "Renombrar señal (alias)",
+  "command.renameSignal.tooltip": "Asignar o cambiar alias de señal $IN/$OUT",
+  "command.viewFileHistory": "Historial del archivo KRL y comparación de revisiones",
+  "command.viewFileHistory.tooltip": "Inspeccionar historial Git del programa KRL activo",
+  "command.showLineBlameDetails": "Detalles del autor de la línea KRL (Git Blame)",
+  "command.showLineBlameDetails.tooltip": "Quién, cuándo y en qué commit modificó la línea activa",
   "command.openControlCenter": "Abrir Centro de Control KUKA",
   "command.openControlCenter.tooltip": "Abrir el panel industrial de ingeniería KUKA",
   "command.calculator": "Calculadora de sistemas de coordenadas",
@@ -2294,6 +2664,21 @@ const es: Messages = {
   "command.openCustomerPortal.tooltip": "Gestionar suscripción y licencias en Dodo Payments",
   "command.openTelegramChat": "Chat directo de soporte de ingeniería",
   "command.openTelegramChat.tooltip": "Contactar con soporte técnico de Liskin Labs",
+  "command.validateWorkspace": "Verificar todos los archivos del proyecto",
+  "command.validateWorkspace.tooltip": "Auditoría completa de sintaxis, tipos y seguridad en el espacio de trabajo",
+  "command.exportBackupZip": "Descargar todo el proyecto (archivo ZIP)",
+  "command.exportBackupZip.tooltip": "Empaquetar todo el proyecto KRL abierto en un archivo ZIP",
+  "command.viewGitGraph": "Gráfico de revisiones de KRL y línea de puntos",
+  "command.viewGitGraph.tooltip": "Línea de tiempo interactiva de cambios de lógica y puntos .DAT",
+  "command.sendQualityReport": "Enviar pasaporte de calidad a Telegram",
+  "command.sendQualityReport.tooltip": "Generar y transmitir informe de calidad del proyecto a Telegram",
+  "category.diagnosticsQuality": "Diagnóstico y Calidad",
+  "category.projectBackups": "Proyecto y Copias de Seguridad",
+  "category.engineeringTools": "Herramientas de Ingeniería",
+  "category.telepresenceSupport": "Telepresencia y Soporte",
+  "category.activeEditorTools": "Herramientas del Editor Activo",
+  "cc.refSection.title": "📖 Referencia de funciones del editor y atajos",
+  "cc.refSection.desc": "Guía de atajos y funciones que operan directamente dentro de una ventana de edición .SRC / .DAT",
   "cc.engTools": "Herramientas de ingeniería",
   "cc.backupGit": "Copias de seguridad e inspección Git",
   "cc.refactorTools": "Refactorización y limpieza de código",
@@ -2617,7 +3002,76 @@ const es: Messages = {
   "cc.devices.slotUsage": "cc.devices.slotUsage",
   "cc.devices.activeCount": "cc.devices.activeCount",
   "cc.devices.unlicensed": "cc.devices.unlicensed",
-  "cc.support.title": "cc.support.title",
+  "cc.support.title": "Soporte Técnico Directo",
+
+  // Active Features & Diagnostics Control
+  "cc.diagControl.title": "Control de Sistemas y Diagnóstico",
+  "cc.diagControl.desc":
+    "Supervise subsistemas activos y configure dinámicamente las reglas KRL",
+  "cc.diagControl.btnValidate": "🧪 Comprobar Todo el Proyecto",
+  "cc.diagControl.btnReport": "📊 Generar Informe",
+  "cc.diagControl.subsystemsTitle": "⚡ Estado de Subsistemas Activos:",
+  "cc.subsystem.lsp": "Servidor de Lenguaje LSP",
+  "cc.subsystem.indexer": "Indexador del Proyecto (Workspace)",
+  "cc.subsystem.engine": "Motor de Diagnóstico",
+  "cc.subsystem.flowchart": "Analizador de Diagrama de Flujo",
+  "cc.subsystem.backup": "Inspector de Copias de Seguridad KRC (.zip)",
+  "cc.subsystem.eki": "Generador EthernetKRL (EKI)",
+  "cc.subsystem.telegram": "Puente de Ingeniería Telegram",
+  "cc.subsystem.ci": "Conjunto de Pruebas (CI Quality)",
+  "cc.badge.online": "En línea",
+  "cc.badge.active": "Activo",
+  "cc.badge.disabled": "Desactivado",
+  "cc.badge.ready": "Listo",
+  "cc.badge.connected": "Conectado",
+  "cc.diagControl.togglesTitle":
+    "⚙️ Ajuste Fino y Desactivación Temporal de Reglas:",
+  "cc.toggle.master.title": "⚡ Interruptor Maestro de Diagnóstico KRL",
+  "cc.toggle.master.desc":
+    "Activar o desactivar comprobaciones del compilador en el editor",
+  "cc.toggle.waitTimeout.title": "⏱️ Aviso de Tiempo de Espera WAIT FOR",
+  "cc.toggle.waitTimeout.desc":
+    "Avisar si WAIT FOR no tiene temporizador $TIMER (desactivado por defecto)",
+  "cc.toggle.halt.title": "🛑 Aviso de Operador HALT",
+  "cc.toggle.halt.desc":
+    "Avisar sobre la detención del robot mediante instrucción HALT",
+  "cc.toggle.syntax.title": "🔍 Validador de Sintaxis KRL",
+  "cc.toggle.syntax.desc":
+    "Verificar cumplimiento de sintaxis KUKA KSS 8.3–8.7",
+  "cc.toggle.speeds.title": "🚀 Límite de Velocidad de Seguridad ($VEL_PTP)",
+  "cc.toggle.speeds.desc":
+    "Proteger contra exceso peligroso de velocidad ($VEL_PTP > 100%)",
+  "cc.toggle.toolBase.title": "🎯 Comprobación de Inicio $TOOL y $BASE",
+  "cc.toggle.toolBase.desc":
+    "Avisar de movimientos sin llamada previa a BAS(#INITMOV)",
+  "cc.toggle.blockBalance.title": "⚖️ Balance de Bloques (IF, FOR, WHILE, LOOP)",
+  "cc.toggle.blockBalance.desc":
+    "Verificar cierre correcto de bloques estructurales de KRL",
+  "cc.toggle.deadCode.title": "🧟 Detección de Código Muerto / Inaccesible",
+  "cc.toggle.deadCode.desc":
+    "Identificar instrucciones inalcanzables tras RETURN y HALT",
+  "cc.toggle.typeUsage.title": "🔢 Validación de Tipos de Datos (SWITCH/CASE)",
+  "cc.toggle.typeUsage.desc":
+    "Prohibición de números reales (REAL) en SWITCH y ramas CASE",
+  "cc.toggle.krlConstraints.title":
+    "🔤 Restricciones de Nombres KRL (Hasta 24 caracteres)",
+  "cc.toggle.krlConstraints.desc":
+    "Aplicar límite de 24 caracteres para identificadores KUKA",
+  "cc.toggle.unusedVars.title": "🗑️ Detección de Variables No Utilizadas",
+  "cc.toggle.unusedVars.desc":
+    "Resaltar variables locales declaradas pero no usadas",
+  "cc.toggle.duplicateNames.title": "👥 Detección de Nombres Duplicados",
+  "cc.toggle.duplicateNames.desc":
+    "Avisar de declaraciones duplicadas de variables en el mismo ámbito",
+  "cc.toggle.inlayHints.title": "💡 Sugerencias Inteligentes (Inlay Hints)",
+  "cc.toggle.inlayHints.desc":
+    "Mostrar nombres de señales de $config.dat en líneas $OUT/$IN y BAS",
+  "cc.toggle.errorLens.title": "👓 Diagnóstico Error Lens",
+  "cc.toggle.errorLens.desc":
+    "Mostrar mensajes de error al final de la línea de código",
+  "cc.toggle.validateNonAscii.title": "🌐 Control de Caracteres No ASCII y Cirílico",
+  "cc.toggle.validateNonAscii.desc":
+    "Detectar caracteres no ASCII que provocan fallos en KRC",
   "chat.apply.noEditor": "chat.apply.noEditor",
   "chat.apply.success": "chat.apply.success",
   "chat.sendSelection.noSelection": "chat.sendSelection.noSelection",
@@ -2627,6 +3081,7 @@ const es: Messages = {
   "chat.remote.exportRequest": "chat.remote.exportRequest",
   "chat.remote.sysInfoRequest": "chat.remote.sysInfoRequest",
   "chat.remote.aiDiagRequest": "chat.remote.aiDiagRequest",
+  "chat.remote.reportRequest": "Solicitud de informe de calidad del proyecto KRL",
   "chat.remote.requestFrom": "chat.remote.requestFrom",
   "chat.remote.actionPrompt": "chat.remote.actionPrompt",
   "chat.remote.logsExported": "chat.remote.logsExported",

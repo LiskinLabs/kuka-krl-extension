@@ -2,7 +2,7 @@
   "name": "kuka-krl-extension",
   "displayName": "%extension.displayName%",
   "description": "%extension.description%",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "icon": "logo.png",
   "publisher": "LiskinLabs",
   "author": {
@@ -307,7 +307,7 @@
         "title": "%command.compareKrcBackup%",
         "category": "KRL",
         "icon": "$(diff)"
-            },
+      },
       {
         "command": "krl.sendSelectionToChat",
         "title": "Send Selection to Telegram Chat",
@@ -842,9 +842,85 @@
           "type": "boolean",
           "default": true,
           "description": "%config.gitLens.currentLine.enabled%"
+        },
+        "krl.diagnostics.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.diagnostics.enabled%"
+        },
+        "krl.diagnostics.checkGeneralSyntax": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.diagnostics.checkGeneralSyntax%"
+        },
+        "krl.diagnostics.warnHalt": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.diagnostics.warnHalt%"
+        },
+        "krl.diagnostics.warnWaitWithoutTimeout": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.diagnostics.warnWaitWithoutTimeout%"
+        },
+        "krl.diagnostics.checkSafetySpeeds": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.diagnostics.checkSafetySpeeds%"
+        },
+        "krl.diagnostics.checkToolBaseInit": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.diagnostics.checkToolBaseInit%"
+        },
+        "krl.diagnostics.checkBlockBalance": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.diagnostics.checkBlockBalance%"
+        },
+        "krl.diagnostics.checkDeadCode": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.diagnostics.checkDeadCode%"
+        },
+        "krl.diagnostics.checkTypeUsage": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.diagnostics.checkTypeUsage%"
+        },
+        "krl.diagnostics.checkKrlConstraints": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.diagnostics.checkKrlConstraints%"
+        },
+        "krl.diagnostics.checkUnusedVariables": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.diagnostics.checkUnusedVariables%"
+        },
+        "krl.diagnostics.checkDuplicateNames": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.diagnostics.checkDuplicateNames%"
         }
       }
-    }
+    },
+    "languageModelTools": [
+      {
+        "name": "krl_safety_check",
+        "displayName": "KUKA KRL Safety Check",
+        "modelDescription": "Inspects KUKA KRL code for motion safety, velocity overshoots, and uninitialized tools",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "input": {
+              "type": "string",
+              "description": "KRL code text to inspect"
+            }
+          }
+        }
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -880,6 +956,3 @@
     "vscode-uri": "^3.1.0"
   }
 }
-
-
-

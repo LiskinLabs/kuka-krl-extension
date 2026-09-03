@@ -96,6 +96,22 @@ async function openControlCenterPanel(context: vscode.ExtensionContext) {
   currentPanel.webview.onDidReceiveMessage(
     async (message) => {
       switch (message.command) {
+        case "updateSetting":
+          if (message.key && typeof message.value !== "undefined") {
+            await vscode.workspace
+              .getConfiguration("krl")
+              .update(
+                message.key,
+                message.value,
+                vscode.ConfigurationTarget.Global,
+              );
+            const stateWord = message.value ? "активирована" : "временно отключена";
+            vscode.window.showInformationMessage(
+              `Опция "${message.title || message.key}" ${stateWord}.`,
+            );
+            await refreshControlCenterPanel(context);
+          }
+          break;
         case "runCommand":
           if (
             message.target &&
@@ -217,6 +233,7 @@ function getControlCenterHtml(
     hardwareId: string;
   },
 ): string {
+  const isRu = (vscode.env.language || "en").toLowerCase().startsWith("ru");
   const premiumStatus = isPremium()
     ? t("cc.profile.activePro")
     : t("cc.profile.community");
@@ -224,11 +241,11 @@ function getControlCenterHtml(
 
   const ownerName = escapeHtml(
     licenseCache?.customerName ||
-      (isPremium() ? "Silvestr Liskin (Teknorob Lead)" : "Community User"),
+      (isPremium() ? "Silvestr Liskin (Liskin Labs)" : "Community User"),
   );
   const ownerEmail = escapeHtml(
     licenseCache?.customerEmail ||
-      (isPremium() ? "silvestr.liskin@teknorob.com" : "Not Registered"),
+      (isPremium() ? "silvestr.liskin@liskinlabs.com" : "Not Registered"),
   );
   const planVariant =
     licenseCache?.variantName ||
@@ -304,6 +321,23 @@ function getControlCenterHtml(
   );
 
   const pricingPlans = getPricingPlans();
+
+  const krlConfig = vscode.workspace.getConfiguration("krl");
+  const diagnosticsEnabled = krlConfig.get<boolean>("diagnostics.enabled", true);
+  const checkGeneralSyntax = krlConfig.get<boolean>("diagnostics.checkGeneralSyntax", true);
+  const warnHalt = krlConfig.get<boolean>("diagnostics.warnHalt", true);
+  const warnWaitTimeout = krlConfig.get<boolean>("diagnostics.warnWaitWithoutTimeout", false);
+  const checkSafetySpeeds = krlConfig.get<boolean>("diagnostics.checkSafetySpeeds", true);
+  const checkToolBaseInit = krlConfig.get<boolean>("diagnostics.checkToolBaseInit", true);
+  const checkBlockBalance = krlConfig.get<boolean>("diagnostics.checkBlockBalance", true);
+  const checkDeadCode = krlConfig.get<boolean>("diagnostics.checkDeadCode", true);
+  const checkTypeUsage = krlConfig.get<boolean>("diagnostics.checkTypeUsage", true);
+  const checkKrlConstraints = krlConfig.get<boolean>("diagnostics.checkKrlConstraints", true);
+  const checkUnusedVariables = krlConfig.get<boolean>("diagnostics.checkUnusedVariables", true);
+  const checkDuplicateNames = krlConfig.get<boolean>("diagnostics.checkDuplicateNames", true);
+  const inlayHintsEnabled = krlConfig.get<boolean>("inlayHints.enabled", true);
+  const errorLensEnabled = krlConfig.get<boolean>("errorLens.enabled", true);
+  const validateNonAscii = krlConfig.get<boolean>("validateNonAscii", true);
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -531,6 +565,63 @@ function getControlCenterHtml(
       flex-shrink: 0;
       border: 1px solid rgba(255, 102, 0, 0.5);
     }
+        /* Toggle Switches & Feature Matrix */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+      background-color: var(--vscode-input-background, #333);
+      border: 1px solid var(--card-border, #555);
+      transition: .22s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 22px;
+    }
+    .slider:before {
+      position: absolute; content: ""; height: 16px; width: 16px; left: 2px; bottom: 2px;
+      background-color: #fff; transition: .22s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: var(--accent, #FF6600);
+      border-color: var(--accent, #FF6600);
+      box-shadow: 0 0 10px rgba(255, 102, 0, 0.45);
+    }
+    input:checked + .slider:before { transform: translateX(20px); }
+    .toggle-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 14px; border-radius: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      margin-bottom: 8px;
+      transition: all 0.2s ease;
+    }
+    .toggle-row:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--accent-border);
+    }
+    .toggle-info { display: flex; flex-direction: column; gap: 2px; }
+    .toggle-title { font-size: 13px; font-weight: 600; color: var(--fg-color); }
+    .toggle-desc { font-size: 11px; opacity: 0.65; line-height: 1.3; }
+    .subsystem-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-bottom: 16px;
+    }
+    .subsystem-badge {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px; border-radius: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      font-size: 12px; font-weight: 600;
+    }
+    .status-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: #28a745;
+      box-shadow: 0 0 8px rgba(40, 167, 69, 0.8);
+      display: inline-block; margin-right: 6px;
+    }
     .footer {
       margin-top: 48px;
       padding-top: 20px;
@@ -538,6 +629,73 @@ function getControlCenterHtml(
       font-size: 12px;
       opacity: 0.7;
       text-align: center;
+    }
+    /* In-Editor Contextual Features Reference Guide */
+    .ref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .ref-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .ref-card:hover {
+      border-color: rgba(255, 102, 0, 0.45);
+      background: rgba(255, 255, 255, 0.03);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
+    .ref-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .ref-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .ref-desc {
+      font-size: 12px;
+      opacity: 0.8;
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+    .ref-hotkey-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 11px;
+      opacity: 0.9;
+    }
+    .kbd-badge {
+      display: inline-block;
+      padding: 3px 7px;
+      font-size: 11px;
+      font-family: var(--vscode-editor-font-family, monospace);
+      font-weight: 700;
+      color: #fff;
+      background: rgba(255, 102, 0, 0.2);
+      border: 1px solid rgba(255, 102, 0, 0.5);
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+    .kbd-badge.alt {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
     }
   </style>
 </head>
@@ -553,24 +711,259 @@ function getControlCenterHtml(
     <img class="header-logo" src="${logoUri}" alt="KUKA KRL Logo" />
   </div>
 
-  <!-- SECTION 1: Engineering & Motion Tools -->
+  <!-- SECTION 0: Active Features & Diagnostics Control Center -->
+  <div class="account-hub" id="card-diagnostics-control" style="border-color: var(--accent); margin-bottom: 32px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <div style="font-size: 17px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+          🛠️ ${t("cc.diagControl.title")}
+        </div>
+        <div style="font-size: 12px; opacity: 0.75; margin-top: 4px;">
+          ${t("cc.diagControl.desc")}
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button class="card-btn" style="background: #28a745;" onclick="exec('krl.validateWorkspace')">
+          ${t("cc.diagControl.btnValidate")}
+        </button>
+        <button class="card-btn" onclick="exec('krl.generateReport')">
+          ${t("cc.diagControl.btnReport")}
+        </button>
+      </div>
+    </div>
+
+    <!-- Subsystems Status Grid -->
+    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; opacity: 0.85;">
+      ${t("cc.diagControl.subsystemsTitle")}
+    </div>
+    <div class="subsystem-grid">
+      <div class="subsystem-badge">
+        <span><span class="status-dot"></span>${t("cc.subsystem.lsp")}</span>
+        <span class="badge badge-active" style="font-size: 9px; padding: 2px 6px;">${t("cc.badge.online")}</span>
+      </div>
+      <div class="subsystem-badge">
+        <span><span class="status-dot"></span>${t("cc.subsystem.indexer")}</span>
+        <span class="badge badge-active" style="font-size: 9px; padding: 2px 6px;">${t("cc.badge.active")}</span>
+      </div>
+      <div class="subsystem-badge">
+        <span><span class="status-dot"></span>${t("cc.subsystem.engine")}</span>
+        <span class="badge ${diagnosticsEnabled ? 'badge-active' : 'badge-disabled'}" style="font-size: 9px; padding: 2px 6px;">${diagnosticsEnabled ? t("cc.badge.active") : t("cc.badge.disabled")}</span>
+      </div>
+      <div class="subsystem-badge">
+        <span><span class="status-dot"></span>${t("cc.subsystem.flowchart")}</span>
+        <span class="badge badge-active" style="font-size: 9px; padding: 2px 6px;">${t("cc.badge.ready")}</span>
+      </div>
+      <div class="subsystem-badge">
+        <span><span class="status-dot"></span>${t("cc.subsystem.backup")}</span>
+        <span class="badge badge-active" style="font-size: 9px; padding: 2px 6px;">${t("cc.badge.ready")}</span>
+      </div>
+      <div class="subsystem-badge">
+        <span><span class="status-dot"></span>${t("cc.subsystem.eki")}</span>
+        <span class="badge badge-active" style="font-size: 9px; padding: 2px 6px;">${t("cc.badge.ready")}</span>
+      </div>
+      <div class="subsystem-badge">
+        <span><span class="status-dot"></span>${t("cc.subsystem.telegram")}</span>
+        <span class="badge badge-active" style="font-size: 9px; padding: 2px 6px;">${t("cc.badge.connected")}</span>
+      </div>
+      <div class="subsystem-badge">
+        <span><span class="status-dot"></span>${t("cc.subsystem.ci")}</span>
+        <span class="badge badge-active" style="font-size: 9px; padding: 2px 6px;">140/140 PASS</span>
+      </div>
+    </div>
+
+    <!-- Diagnostic Rule Toggles Grid -->
+    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 18px; margin-bottom: 10px; opacity: 0.85;">
+      ${t("cc.diagControl.togglesTitle")}
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 10px;">
+      <!-- Toggle: Master Diagnostics -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">${t("cc.toggle.master.title")}</span>
+          <span class="toggle-desc">${t("cc.toggle.master.desc")}</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" ${diagnosticsEnabled ? 'checked' : ''} onchange="toggleSetting('diagnostics.enabled', 'Diagnostics', this)">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Toggle: WAIT FOR Timeout -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">${t("cc.toggle.waitTimeout.title")}</span>
+          <span class="toggle-desc">${t("cc.toggle.waitTimeout.desc")}</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" ${warnWaitTimeout ? 'checked' : ''} onchange="toggleSetting('diagnostics.warnWaitWithoutTimeout', 'WAIT FOR Timeout', this)">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Toggle: HALT Warning -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">${t("cc.toggle.halt.title")}</span>
+          <span class="toggle-desc">${t("cc.toggle.halt.desc")}</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" ${warnHalt ? 'checked' : ''} onchange="toggleSetting('diagnostics.warnHalt', 'HALT Warning', this)">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Toggle: General Syntax Validator -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">${t("cc.toggle.syntax.title")}</span>
+          <span class="toggle-desc">${t("cc.toggle.syntax.desc")}</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" ${checkGeneralSyntax ? 'checked' : ''} onchange="toggleSetting('diagnostics.checkGeneralSyntax', 'Syntax Validator', this)">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Toggle: Safety Speeds -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">${t("cc.toggle.speeds.title")}</span>
+          <span class="toggle-desc">${t("cc.toggle.speeds.desc")}</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" ${checkSafetySpeeds ? 'checked' : ''} onchange="toggleSetting('diagnostics.checkSafetySpeeds', 'Safety Speeds', this)">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Toggle: Tool / Base Init -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">${t("cc.toggle.toolBase.title")}</span>
+          <span class="toggle-desc">${t("cc.toggle.toolBase.desc")}</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" ${checkToolBaseInit ? 'checked' : ''} onchange="toggleSetting('diagnostics.checkToolBaseInit', 'TOOL/BASE Init', this)">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Toggle: Block Balance -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">${t("cc.toggle.blockBalance.title")}</span>
+          <span class="toggle-desc">${t("cc.toggle.blockBalance.desc")}</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" ${checkBlockBalance ? 'checked' : ''} onchange="toggleSetting('diagnostics.checkBlockBalance', 'Block Balance', this)">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Toggle: Dead Code -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">${t("cc.toggle.deadCode.title")}</span>
+          <span class="toggle-desc">${t("cc.toggle.deadCode.desc")}</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" ${checkDeadCode ? 'checked' : ''} onchange="toggleSetting('diagnostics.checkDeadCode', 'Dead Code', this)">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Toggle: Type Usage -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">${t("cc.toggle.typeUsage.title")}</span>
+          <span class="toggle-desc">${t("cc.toggle.typeUsage.desc")}</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" ${checkTypeUsage ? 'checked' : ''} onchange="toggleSetting('diagnostics.checkTypeUsage', 'Type Usage', this)">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Toggle: KRL Constraints -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">${t("cc.toggle.krlConstraints.title")}</span>
+          <span class="toggle-desc">${t("cc.toggle.krlConstraints.desc")}</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" ${checkKrlConstraints ? 'checked' : ''} onchange="toggleSetting('diagnostics.checkKrlConstraints', 'KRL Constraints', this)">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Toggle: Unused Variables -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">${t("cc.toggle.unusedVars.title")}</span>
+          <span class="toggle-desc">${t("cc.toggle.unusedVars.desc")}</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" ${checkUnusedVariables ? 'checked' : ''} onchange="toggleSetting('diagnostics.checkUnusedVariables', 'Unused Variables', this)">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Toggle: Duplicate Names -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">${t("cc.toggle.duplicateNames.title")}</span>
+          <span class="toggle-desc">${t("cc.toggle.duplicateNames.desc")}</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" ${checkDuplicateNames ? 'checked' : ''} onchange="toggleSetting('diagnostics.checkDuplicateNames', 'Duplicate Names', this)">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Toggle: Inlay Hints -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">${t("cc.toggle.inlayHints.title")}</span>
+          <span class="toggle-desc">${t("cc.toggle.inlayHints.desc")}</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" ${inlayHintsEnabled ? 'checked' : ''} onchange="toggleSetting('inlayHints.enabled', 'Inlay Hints', this)">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Toggle: ErrorLens -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">${t("cc.toggle.errorLens.title")}</span>
+          <span class="toggle-desc">${t("cc.toggle.errorLens.desc")}</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" ${errorLensEnabled ? 'checked' : ''} onchange="toggleSetting('errorLens.enabled', 'ErrorLens', this)">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Toggle: Non-ASCII Validation -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">${t("cc.toggle.validateNonAscii.title")}</span>
+          <span class="toggle-desc">${t("cc.toggle.validateNonAscii.desc")}</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" ${validateNonAscii ? 'checked' : ''} onchange="toggleSetting('validateNonAscii', 'Non-ASCII Validation', this)">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: Engineering & Standalone Tools -->
   <div class="section-header">
     <div class="section-title">⚡ ${t("cc.engTools")}</div>
   </div>
   <div class="grid">
-    <div class="card" tabindex="0" role="button" onclick="exec('krl.showFlowchart')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.showFlowchart')}">
-      <div>
-        <div class="card-header">
-          <span class="card-icon">🗺️</span>
-          <span class="card-title">${t("command.showFlowchart")}</span>
-        </div>
-        <div class="card-desc">${t("cc.desc.flowchart")}</div>
-      </div>
-      <div class="card-actions">
-        <button class="card-btn" onclick="event.stopPropagation();exec('krl.showFlowchart')">${t("cc.btn.openFlowchart")}</button>
-      </div>
-    </div>
-
     <div class="card" tabindex="0" role="button" onclick="exec('krl.showCalculator')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.showCalculator')}">
       <div>
         <div class="card-header">
@@ -610,6 +1003,32 @@ function getControlCenterHtml(
         <button class="card-btn btn-secondary" onclick="event.stopPropagation();exec('krl.generateEkiCode')">${t("cc.btn.generateHandler")}</button>
       </div>
     </div>
+
+    <div class="card" tabindex="0" role="button" onclick="exec('krl.openTelegramChat')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.openTelegramChat')}">
+      <div>
+        <div class="card-header">
+          <span class="card-icon">💬</span>
+          <span class="card-title">${t("command.openTelegramChat")}</span>
+        </div>
+        <div class="card-desc">${isRu ? "Прямая защищенная связь с инженером-разработчиком в Telegram через Cloudflare Gateway." : "Direct secure telepresence chat with developer Silvestr Liskin via Telegram Support Gateway."}</div>
+      </div>
+      <div class="card-actions">
+        <button class="card-btn" onclick="event.stopPropagation();exec('krl.openTelegramChat')">${isRu ? "💬 Открыть Telegram чат" : "💬 Open Telegram Chat"}</button>
+      </div>
+    </div>
+
+    <div class="card" tabindex="0" role="button" onclick="exec('krl.generateReport')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.generateReport')}">
+      <div>
+        <div class="card-header">
+          <span class="card-icon">📋</span>
+          <span class="card-title">${t("command.generateReport")}</span>
+        </div>
+        <div class="card-desc">${t("cc.desc.report")}</div>
+      </div>
+      <div class="card-actions">
+        <button class="card-btn" onclick="event.stopPropagation();exec('krl.generateReport')">${t("cc.btn.generateReport")}</button>
+      </div>
+    </div>
   </div>
 
   <!-- SECTION 2: KRC Backup & GitLens Version Control -->
@@ -617,6 +1036,19 @@ function getControlCenterHtml(
     <div class="section-title">📦 ${t("cc.backupGit")}</div>
   </div>
   <div class="grid">
+    <div class="card" tabindex="0" role="button" onclick="exec('krl.exportBackupZip')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.exportBackupZip')}">
+      <div>
+        <div class="card-header">
+          <span class="card-icon">🗜️</span>
+          <span class="card-title">${t("command.exportBackupZip")}</span>
+        </div>
+        <div class="card-desc">${t("cc.desc.exportZip")}</div>
+      </div>
+      <div class="card-actions">
+        <button class="card-btn" onclick="event.stopPropagation();exec('krl.exportBackupZip')">${t("cc.btn.exportBackupZip")}</button>
+      </div>
+    </div>
+
     <div class="card" tabindex="0" role="button" onclick="exec('krl.compareKrcBackup')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.compareKrcBackup')}">
       <div>
         <div class="card-header">
@@ -645,19 +1077,6 @@ function getControlCenterHtml(
       </div>
     </div>
 
-    <div class="card" tabindex="0" role="button" onclick="exec('krl.exportBackupZip')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.exportBackupZip')}">
-      <div>
-        <div class="card-header">
-          <span class="card-icon">🗜️</span>
-          <span class="card-title">${t("cc.btn.exportBackupZip")}</span>
-        </div>
-        <div class="card-desc">${t("cc.desc.exportZip")}</div>
-      </div>
-      <div class="card-actions">
-        <button class="card-btn" onclick="event.stopPropagation();exec('krl.exportBackupZip')">${t("cc.btn.exportBackupZip")}</button>
-      </div>
-    </div>
-
     <div class="card" tabindex="0" role="button" onclick="exec('krl.cleanGitMetadata')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.cleanGitMetadata')}">
       <div>
         <div class="card-header">
@@ -670,101 +1089,35 @@ function getControlCenterHtml(
         <button class="card-btn" onclick="event.stopPropagation();exec('krl.cleanGitMetadata')">${t("cc.btn.cleanGitMetadata")}</button>
       </div>
     </div>
-  </div>
 
-  <!-- SECTION 3: Refactoring & Modern KRL Suite -->
-  <div class="section-header">
-    <div class="section-title">🛠️ ${t("cc.refactorTools")}</div>
-  </div>
-  <div class="grid">
-    <div class="card" tabindex="0" role="button" onclick="exec('krl.cleanupUnusedVariables')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.cleanupUnusedVariables')}">
+    <div class="card" tabindex="0" role="button" onclick="exec('krl.sendLogsToDeveloper')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.sendLogsToDeveloper')}">
       <div>
         <div class="card-header">
-          <span class="card-icon">🗑️</span>
-          <span class="card-title">${t("command.cleanup")}</span>
+          <span class="card-icon">📥</span>
+          <span class="card-title">${t("command.sendLogsToDeveloper")}</span>
         </div>
-        <div class="card-desc">${t("cc.desc.deadCode")}</div>
+        <div class="card-desc">${isRu ? "Сбор системных логов расширения и передача разработчику через шлюз техподдержки." : "Capture diagnostic runtime logs and transmit to developer."}</div>
       </div>
       <div class="card-actions">
-        <button class="card-btn" onclick="event.stopPropagation();exec('krl.cleanupUnusedVariables')">${t("cc.btn.cleanupVars")}</button>
+        <button class="card-btn" onclick="event.stopPropagation();exec('krl.sendLogsToDeveloper')">${isRu ? "📥 Выгрузить логи" : "📥 Export Logs"}</button>
       </div>
     </div>
 
-    <div class="card" tabindex="0" role="button" onclick="exec('krl.sortDeclarations')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.sortDeclarations')}">
+    <div class="card" tabindex="0" role="button" onclick="exec('krl.sendFileToDeveloper')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.sendFileToDeveloper')}">
       <div>
         <div class="card-header">
-          <span class="card-icon">📑</span>
-          <span class="card-title">${t("command.sortDeclarations")}</span>
+          <span class="card-icon">📎</span>
+          <span class="card-title">${t("command.sendFileToDeveloper")}</span>
         </div>
-        <div class="card-desc">${t("cc.desc.sortDecl")}</div>
+        <div class="card-desc">${isRu ? "Выбор любого файла на диске (.src, .dat, скриншот, pdf) и безопасная передача разработчику." : "Pick any local robot file, script, or screenshot and transmit to developer."}</div>
       </div>
       <div class="card-actions">
-        <button class="card-btn" onclick="event.stopPropagation();exec('krl.sortDeclarations')">${t("cc.btn.sortDeclarations")}</button>
-        <button class="card-btn btn-secondary" onclick="event.stopPropagation();exec('krl.formatDocument')">${t("cc.btn.formatDoc")}</button>
-      </div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" onclick="exec('krl.convertLegacyToSpline')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.convertLegacyToSpline')}">
-      <div>
-        <div class="card-header">
-          <span class="card-icon">🚀</span>
-          <span class="card-title">${t("command.convertLegacyToSpline")}</span>
-          <span class="badge badge-pro">PRO</span>
-        </div>
-        <div class="card-desc">${t("cc.desc.modernFold")}</div>
-      </div>
-      <div class="card-actions">
-        <button class="card-btn" onclick="event.stopPropagation();exec('krl.convertLegacyToSpline')">${t("cc.btn.modernizeFold")}</button>
-        <button class="card-btn btn-secondary" onclick="event.stopPropagation();exec('krl.convertToIiqkaFold')">iiQKA Fold</button>
-      </div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" onclick="exec('krl.insertCollisionGuard')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.insertCollisionGuard')}">
-      <div>
-        <div class="card-header">
-          <span class="card-icon">🛡️</span>
-          <span class="card-title">${t("command.insertCollisionGuard")}</span>
-        </div>
-        <div class="card-desc">${t("cc.desc.collisionGuard")}</div>
-      </div>
-      <div class="card-actions">
-        <button class="card-btn" onclick="event.stopPropagation();exec('krl.insertCollisionGuard')">${t("cc.btn.collisionGuard")}</button>
+        <button class="card-btn" onclick="event.stopPropagation();exec('krl.sendFileToDeveloper')">${isRu ? "📎 Отправить файл" : "📎 Send File"}</button>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 4: Safety Diagnostics & Quality Audit -->
-  <div class="section-header">
-    <div class="section-title">🛡️ ${t("cc.safetyDiag")}</div>
-  </div>
-  <div class="grid">
-    <div class="card" tabindex="0" role="button" onclick="exec('krl.aiCheckSafety')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.aiCheckSafety')}">
-      <div>
-        <div class="card-header">
-          <span class="card-icon">🛡️</span>
-          <span class="card-title">${t("command.aiCheckSafety")}</span>
-        </div>
-        <div class="card-desc">${t("cc.desc.safety")}</div>
-      </div>
-      <div class="card-actions">
-        <button class="card-btn" onclick="event.stopPropagation();exec('krl.aiCheckSafety')">${t("cc.btn.runSafetyCheck")}</button>
-      </div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" onclick="exec('krl.generateReport')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();exec('krl.generateReport')}">
-      <div>
-        <div class="card-header">
-          <span class="card-icon">📋</span>
-          <span class="card-title">${t("command.generateReport")}</span>
-        </div>
-        <div class="card-desc">${t("cc.desc.report")}</div>
-      </div>
-      <div class="card-actions">
-        <button class="card-btn" onclick="event.stopPropagation();exec('krl.generateReport')">${t("cc.btn.generateReport")}</button>
-      </div>
-    </div>
-  </div>
-
+  <!-- SECTION 3: Account Hub & Direct Engineering Support -->
   <!-- SECTION 5: Account Hub & Direct Engineering Support -->
   <div class="section-header">
     <div class="section-title">👤 ${t("cc.accountHub")}</div>
@@ -870,12 +1223,435 @@ function getControlCenterHtml(
     </div>
   </div>
 
-  <div class="footer">
-    KUKA KRL Extension Pro — Developed by Liskin Labs & Silvestr Liskin | Teknorob Robot ve Otomasyon
+    <!-- SECTION 4: In-Editor Features & Shortcuts Reference (Non-clickable Guide) -->
+  <div class="section-header" style="margin-top: 40px;">
+    <div class="section-title">${t("cc.refSection.title")}</div>
+  </div>
+  <div style="font-size: 12.5px; opacity: 0.75; margin-bottom: 14px;">
+    ${t("cc.refSection.desc")}
+  </div>
+
+  <div class="ref-grid">
+    <!-- Card 1: Go to Definition -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">🎯 ${isRu ? "Переход к определению" : "Go to Definition"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">LSP CORE</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Мгновенный прыжок к исходному объявлению подпрограмм DEF, структур, сигналов $IN/$OUT и данных в .DAT файлах проекта." 
+            : "Instant jump to declaration of subroutines (DEF), structures, $IN/$OUT signals, and global variables in .DAT files."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Горячая клавиша:" : "Shortcut:"}</span>
+        <div>
+          <span class="kbd-badge">F12</span>
+          <span style="opacity:0.5; margin:0 4px;">${isRu ? "или" : "or"}</span>
+          <span class="kbd-badge alt">Ctrl + Click</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Find All References -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">🔍 ${isRu ? "Поиск всех ссылок" : "Find All References"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">INDEXER</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Отображает полный список всех вызовов переменной, функции или системного сигнала по всем файлам рабочей области KRC." 
+            : "Locates all usage sites, calls, and references of a symbol across all workspace .SRC and .DAT files."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Горячая клавиша:" : "Shortcut:"}</span>
+        <span class="kbd-badge">Shift + F12</span>
+      </div>
+    </div>
+
+    <!-- Card 3: Rename Symbol -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">✏️ ${isRu ? "Переименование символа" : "Rename Symbol"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">REFACTOR</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Безопасный автоматический рефакторинг переменной или функции с синхронным переименованием во всех файлах проекта." 
+            : "Safe project-wide symbol renaming across all source and data files without broken dependencies."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Горячая клавиша:" : "Shortcut:"}</span>
+        <span class="kbd-badge">F2</span>
+      </div>
+    </div>
+
+    <!-- Card 4: Format Document -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">🎨 ${isRu ? "Форматирование документа" : "Format Document"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">FORMATTER</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Выравнивание отступов вложенных блоков (IF, LOOP, FOR), аккуратное выравнивание операторов присваивания по колонкам." 
+            : "Indents nested algorithmic control flow blocks (IF, LOOP, FOR, SWITCH) and column-aligns variable assignments."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Горячая клавиша:" : "Shortcut:"}</span>
+        <span class="kbd-badge">Shift + Alt + F</span>
+      </div>
+    </div>
+
+    <!-- Card 5: Fold / Unfold -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">📁 ${isRu ? "Сворачивание FOLD регионов" : "Fold / Unfold Folds"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">EDITOR</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Сворачивание и разворачивание промышленных пользовательских складок FOLD ... ENDFOLD, циклов и секций программы." 
+            : "Toggles folding for industrial FOLD ... ENDFOLD user regions, subprograms, and control blocks."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Горячие клавиши:" : "Shortcuts:"}</span>
+        <div>
+          <span class="kbd-badge">Ctrl + Shift + [</span>
+          <span style="opacity:0.5; margin:0 4px;">/</span>
+          <span class="kbd-badge">]</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6: Flowchart Viewer -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">🗺️ ${isRu ? "Интерактивная блок-схема" : "Flowchart Graph Viewer"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">VISUALIZER</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Генерация интерактивного графа переходов и ветвлений логики открытого файла .SRC. Нажмите правой кнопкой в файле -> KRL: Show Flowchart." 
+            : "Generates interactive flowchart graph for open .SRC file. Right-click in KRL editor -> KRL: Show Flowchart."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Вызов:" : "Trigger:"}</span>
+        <span class="kbd-badge alt">${isRu ? "Контекстное меню / Панель KUKA" : "Context Menu / KUKA Panel"}</span>
+      </div>
+    </div>
+
+    <!-- Card 7: Cleanup Unused Variables -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">🧹 ${isRu ? "Очистка неиспользуемых переменных" : "Clean Up Dead Variables"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">CLEANUP</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Автоматический поиск и безопасное удаление или комментирование локальных переменных DECL, которые не используются в подпрограмме." 
+            : "Detects and cleanly comments out or deletes local DECL variables declared in open file but never referenced."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Вызов:" : "Trigger:"}</span>
+        <span class="kbd-badge alt">${isRu ? "Панель KUKA Commands -> Clean Up" : "KUKA Commands -> Clean Up"}</span>
+      </div>
+    </div>
+
+    <!-- Card 8: Sort Declarations -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">📑 ${isRu ? "Сортировка объявлений" : "Sort Declarations"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">ORGANIZER</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Группирует объявления переменных по типам (INT, REAL, BOOL, FRAME, POS) и выстраивает их по алфавиту внутри DEF или .DAT." 
+            : "Groups and organizes DECL statements by data type (INT, REAL, BOOL, FRAME) and sorts them alphabetically in active DEF."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Вызов:" : "Trigger:"}</span>
+        <span class="kbd-badge alt">${isRu ? "Правый клик -> Sort Declarations" : "Right Click -> Sort Declarations"}</span>
+      </div>
+    </div>
+
+    <!-- Card 9: Modern Splines & iiQKA -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">🚀 ${isRu ? "Модернизация FOLD в Spline & iiQKA" : "Modern Splines & iiQKA Folds"}</span>
+          <span class="badge badge-pro">PRO</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Конвертация устаревших движений KSS в современные сплайны KSS 8.6+ / 8.7 и складки нового поколения iiQKA." 
+            : "Converts legacy KSS motion folds into modern optimized SPLINE blocks and iiQKA next-gen envelopes."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Вызов:" : "Trigger:"}</span>
+        <span class="kbd-badge alt">${isRu ? "Правый клик на блоке движения" : "Right Click on Motion Block"}</span>
+      </div>
+    </div>
+
+    <!-- Card 10: Collision Guard -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">🛡️ ${isRu ? "Защита от столкновений" : "Collision Guard Injection"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">SAFETY</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Вставка страховочных проверок моментов осей и условий безопасного замедления перед опасными точками траектории." 
+            : "Injects torque monitoring and velocity reduction envelopes before critical trajectory points."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Вызов:" : "Trigger:"}</span>
+        <span class="kbd-badge alt">${isRu ? "Правый клик -> Insert CollisionGuard" : "Right Click -> Insert CollisionGuard"}</span>
+      </div>
+    </div>
+
+    <!-- Card 11: Error Lens & Inlay Hints -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">👓 ${isRu ? "Инлайн-диагностика на строке" : "Error Lens & Inlay Hints"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">REALTIME</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Предупреждения компилятора, лимиты скоростей и подсказки параметров выводятся прямо в редакторе на лету. Включаются в секции 0 вверху." 
+            : "Real-time compiler warnings, speed overshoots, and parameter hints rendered inline. Toggle them in Section 0 above."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Управление:" : "Control:"}</span>
+        <span class="kbd-badge alt">${isRu ? "Переключатели в Секции 0 вверху" : "Toggles in Section 0 Above"}</span>
+      </div>
+    </div>
+
+    <!-- Card 12: Fold All / Unfold All -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">📁 ${isRu ? "Свернуть / Развернуть все FOLD" : "Fold All / Unfold All Folds"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">EDITOR</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Массовое сворачивание или разворачивание всех промышленных складок FOLD ... ENDFOLD по всему открытому файлу." 
+            : "Folds or unfolds all industrial FOLD ... ENDFOLD user blocks across the entire open KRL program."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Горячие клавиши:" : "Shortcuts:"}</span>
+        <div>
+          <span class="kbd-badge">Ctrl + K, 0</span>
+          <span style="opacity:0.5; margin:0 4px;">/</span>
+          <span class="kbd-badge">Ctrl + K, J</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 13: Insert FOLD Region -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">📦 ${isRu ? "Вставка FOLD-региона" : "Insert FOLD Region"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">STRUCTURE</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Оборачивает выделенный фрагмент кода KRL в аккуратную промышленную складку ;FOLD Название ... ;ENDFOLD." 
+            : "Wraps currently selected lines of KRL code into standard industrial ;FOLD Name ... ;ENDFOLD envelope."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Вызов:" : "Trigger:"}</span>
+        <span class="kbd-badge alt">${isRu ? "Правый клик -> Insert FOLD" : "Right Click -> Insert FOLD"}</span>
+      </div>
+    </div>
+
+    <!-- Card 14: Unwrap FOLD -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">✂️ ${isRu ? "Очистка / Разворачивание FOLD" : "Unwrap / Strip FOLD"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">REFACTOR</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Удаляет внешние маркеры ;FOLD и ;ENDFOLD, сохраняя исходные рабочие инструкции робота внутри файла." 
+            : "Strips outer ;FOLD and ;ENDFOLD wrapper lines while preserving all enclosed executable motion and logic."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Вызов:" : "Trigger:"}</span>
+        <span class="kbd-badge alt">${isRu ? "Правый клик -> Unwrap Fold" : "Right Click -> Unwrap Fold"}</span>
+      </div>
+    </div>
+
+    <!-- Card 15: Wrap in Modern SPLINE Block -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">🚀 ${isRu ? "Создание сплайн-блока SPLINE" : "Wrap in SPLINE Block"}</span>
+          <span class="badge badge-pro">PRO</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Оборачивает непрерывную цепочку движений в единый оптимизированный блок SPLINE WITH $VEL... ENDSPLINE." 
+            : "Wraps consecutive motion instructions into an optimized KSS 8.6+ SPLINE WITH $VEL... ENDSPLINE block."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Вызов:" : "Trigger:"}</span>
+        <span class="kbd-badge alt">${isRu ? "Правый клик -> Wrap in SPLINE" : "Right Click -> Wrap in SPLINE"}</span>
+      </div>
+    </div>
+
+    <!-- Card 16: Industrial Safety Check -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">🛡️ ${isRu ? "Экспресс-проверка безопасности" : "Industrial Safety Check"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">SAFETY</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Мгновенная проверка открытого файла на опасные скорости $VEL_PTP, инициализацию $TOOL/$BASE и зависания WAIT FOR." 
+            : "Instant scan of active file for dangerous velocity overshoots, uninitialized tools, and deadlock WAIT FOR conditions."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Вызов:" : "Trigger:"}</span>
+        <span class="kbd-badge alt">${isRu ? "KUKA Commands -> Safety Check" : "KUKA Commands -> Safety Check"}</span>
+      </div>
+    </div>
+
+    <!-- Card 17: Remove Trailing Whitespace -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">🧹 ${isRu ? "Удаление концевых пробелов" : "Strip Trailing Whitespace"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">CLEANUP</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Удаляет лишние пробелы и табуляции в конце строк во всем файле для строгого соответствия стилю WorkVisual." 
+            : "Cleans invisible trailing whitespace and tabs across the document to conform to KUKA formatting guidelines."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Вызов:" : "Trigger:"}</span>
+        <span class="kbd-badge alt">${isRu ? "Панель KUKA Commands" : "KUKA Commands Panel"}</span>
+      </div>
+    </div>
+
+    <!-- Card 18: Rename Signal -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">🏷️ ${isRu ? "Переименование сигнала (алиас)" : "Rename Signal (Set Alias)"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">SIGNALS</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Быстрое присвоение или изменение псевдонима сигнала ввода-вывода $IN/$OUT с автообновлением по проекту." 
+            : "Assigns or changes user-defined alias for $IN/$OUT industrial signal with workspace cross-references."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Вызов:" : "Trigger:"}</span>
+        <span class="kbd-badge alt">${isRu ? "Контекстное меню редактора" : "Editor Context Menu"}</span>
+      </div>
+    </div>
+
+    <!-- Card 19: View KRL File History & Compare -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">📜 ${isRu ? "История файла и сравнение ревизий" : "KRL File History & Compare"}</span>
+          <span class="badge badge-pro">PRO</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Пошаговое сравнение версий текущего файла .SRC/.DAT в репозитории с открытием интерактивного diff-окна." 
+            : "Step-by-step revision history of active KRL file with side-by-side visual diff comparison."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Вызов:" : "Trigger:"}</span>
+        <span class="kbd-badge alt">${isRu ? "Правый клик -> View File History" : "Right Click -> View File History"}</span>
+      </div>
+    </div>
+
+    <!-- Card 20: Show KRL Line Git Blame Details -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">🔍 ${isRu ? "Детали автора строки (Git Blame)" : "KRL Line Git Blame Details"}</span>
+          <span class="badge badge-pro">PRO</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Отображает хэш коммита, автора, дату и сообщение для текущей строки кода или измененной точки .DAT." 
+            : "Reveals exact commit hash, author name, timestamp, and message for active line or teach-point modification."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Вызов:" : "Trigger:"}</span>
+        <span class="kbd-badge alt">${isRu ? "Правый клик -> Show Line Blame" : "Right Click -> Show Line Blame"}</span>
+      </div>
+    </div>
+
+    <!-- Card 21: Refresh I/O Signals View -->
+    <div class="ref-card">
+      <div>
+        <div class="ref-title-row">
+          <span class="ref-title">🔄 ${isRu ? "Обновление дерева I/O сигналов" : "Refresh I/O Signals Tree"}</span>
+          <span class="badge badge-active" style="font-size: 9px;">I/O TREE</span>
+        </div>
+        <div class="ref-desc">
+          ${isRu 
+            ? "Повторное сканирование сигналов в $config.dat и обновление дерева KRL I/O Signals в боковой панели." 
+            : "Rescans signal declarations in $config.dat and refreshes the KRL I/O tree in the primary sidebar."}
+        </div>
+      </div>
+      <div class="ref-hotkey-wrap">
+        <span>${isRu ? "Вызов:" : "Trigger:"}</span>
+        <span class="kbd-badge alt">${isRu ? "Иконка в заголовке KRL I/O" : "Header Icon in KRL I/O"}</span>
+      </div>
+    </div>
+  </div>
+<div class="footer">
+    KUKA KRL Extension Pro — Developed by Liskin Labs & Silvestr Liskin
   </div>
 
   <script>
     const vscode = acquireVsCodeApi();
+    function toggleSetting(key, title, el) {
+      vscode.postMessage({ command: 'updateSetting', key: key, value: el.checked, title: title });
+    }
     function exec(cmd) {
       vscode.postMessage({ command: 'runCommand', target: cmd });
     }

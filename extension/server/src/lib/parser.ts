@@ -46,15 +46,15 @@ export async function isSymbolDeclared(
 
   const defRegex =
     mode === "struc"
-      ? new RegExp(`\\b(?:GLOBAL\\s+)?(?:STRUC)\\s+${name}\\b`, "i")
+      ? new RegExp(`\\b(?:GLOBAL\\s+)?(?:STRUC|ENUM)\\s+${name}\\b`, "i")
       : mode === "variable"
         ? new RegExp(
-            `\\b(?:GLOBAL\\s+)?(?:DECL|SIGNAL)\\b[^\\n]*\\b${name}\\b`,
+            `\\b(?:GLOBAL\\s+)?(?:DECL\\s+(?:\\w+\\s+)?|(?:INT|REAL|BOOL|CHAR|STRING|FRAME|POS|E6POS|AXIS|E6AXIS|LOAD|SIGNAL|STRUC|ENUM)\\s+)[^\\r\\n;]*\\b${name}\\b`,
             "i",
           )
         : mode === "function"
           ? new RegExp(
-              `\\b(GLOBAL\\s+)?(DEF|DEFFCT)\\s+(\\w+\\s+)?${name}\\s*\\(([^)]*)\\)`,
+              `\\b(?:GLOBAL\\s+)?(?:DEF|DEFFCT)\\s+(?:\\w+\\s+)?${name}\\b(?:\\s*\\(([^)]*)\\))?`,
               "i",
             )
           : undefined;
@@ -87,8 +87,10 @@ export async function isSymbolDeclared(
         const uri = filePath.startsWith("file://")
           ? filePath
           : URI.file(filePath).toString();
-        const startChar = defLine.indexOf(name);
-        const params = mode === "function" && match[4] ? match[4].trim() : "";
+        const wordRegex = new RegExp(`\\b${name}\\b`, "i");
+        const wordMatch = wordRegex.exec(defLine);
+        const startChar = wordMatch ? wordMatch.index : defLine.indexOf(name);
+        const params = mode === "function" && match[1] ? match[1].trim() : "";
 
         return {
           uri,
@@ -200,6 +202,9 @@ export const CODE_KEYWORDS = [
   "SPTP",
   "SLIN",
   "SCIRC",
+  "SPLINE",
+  "ENDSPLINE",
+  "SPL",
   "PTP_SPLINE",
   "LIN_SPLINE",
   "CP_SPLINE",
@@ -209,6 +214,7 @@ export const CODE_KEYWORDS = [
   "C_DIS",
   "C_ORI",
   "C_SPL",
+  "CA",
   // SPLINE parametreleri (SPTP, SLIN, SCIRC için)
   "SVEL",
   "SVEL_JOINT",
@@ -295,9 +301,67 @@ export const CODE_KEYWORDS = [
   "DISTANCE",
   "PRIO",
   "ON",
+  "OFF",
+  "ENABLE",
+  "DISABLE",
   "WITH",
   "IN",
   "OUT",
+  // KUKA EthernetKRL (EKI) Standart Fonksiyonları
+  "EKI_INIT",
+  "EKI_OPEN",
+  "EKI_CLOSE",
+  "EKI_CLEAR",
+  "EKI_SEND",
+  "EKI_CHECKBUFFER",
+  "EKI_GETSTRING",
+  "EKI_SETSTRING",
+  "EKI_GETINT",
+  "EKI_SETINT",
+  "EKI_GETREAL",
+  "EKI_SETREAL",
+  "EKI_GETBOOL",
+  "EKI_SETBOOL",
+  "EKI_GETFRAME",
+  "EKI_SETFRAME",
+  "EKI_GETELEMENT",
+  "EKI_SETELEMENT",
+  "EKI_LOCK",
+  "EKI_UNLOCK",
+  "EKI_STATUS",
+  // KUKA Standart Matematik Fonksiyonları
+  "SIN",
+  "COS",
+  "TAN",
+  "ACOS",
+  "ASIN",
+  "ATAN",
+  "ATAN2",
+  "SQRT",
+  "ABS",
+  "INV_POS",
+  "FORWARD",
+  "INVERSE",
+  // KUKA Standart Dize (String) Fonksiyonları
+  "STRDECL",
+  "STRLEN",
+  "STRCOPY",
+  "STRCLEAR",
+  "STRFIND",
+  "STRCOMP",
+  "STRTOINT",
+  "STRTOREAL",
+  // KUKA Mesaj ve Diyalog Fonksiyonları
+  "SET_KRLMSG",
+  "SET_KRLDLG",
+  "EXISTS_KRLMSG",
+  "EXISTS_KRLDLG",
+  "CLEAR_KRLMSG",
+  "CLEAR_KRLDLG",
+  "VARSTATE",
+  "IS_KEY_PRESSED",
+  "GET_ROB_TIME",
+  "PULSE",
   // Hareket parametreleri
   "PTP_PARAMS",
   "CP_PARAMS",

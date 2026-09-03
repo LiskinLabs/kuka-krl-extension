@@ -2,6 +2,19 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.7.4] - 2026-09-03 (Spanish Localization & Industrial Telemetry Gateway)
+
+### Added
+- **Full Spanish (Español) Localization**: 100% complete technical translation for Spanish-speaking automation engineers across Spain and Latin America (`package.nls.es.json`, client commands, Control Center UI, Safety Diagnostics, and Language Server hover documentation).
+- **Quad-Locale Architecture**: Unified symmetrical localization for English (EN), Russian (RU), Turkish (TR), and Spanish (ES) across all client and server modules.
+- **Automated i18n Symmetry Tests**: Continuous verification of key parity across all 4 language dictionaries in extension test suite.
+
+### Infrastructure & Improvements
+- **Live Industrial Telemetry Gateway**: Deployed Cloudflare Workers + D1 database bridge (`kuka-krl-support-gateway`) with real-time engineer count and multi-national commissioning tracking.
+- **Dynamic Shields.io Badge**: Real-time `Active Engineers Worldwide` badge powered by live Cloudflare D1 endpoint.
+- **Fixed Showcase Media Assets**: Root-level media hosting resolved for VS Code Marketplace preview and GitHub documentation.
+- **Dodo Payments Promo Code Precision**: Configured exact -30% basis-point discount (`LAUNCH30`) on live payment gateway.
+
 ## [1.7.3] - 2026-09-02 (Industrial 50-Tools Production Debut)
 
 ### Added

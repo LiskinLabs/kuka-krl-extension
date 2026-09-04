@@ -2,6 +2,21 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.8.1] - 2026-09-05 (Studio Hub Redesign, Universal Theme Support & Industrial Fleet Diagnostics)
+
+### Added
+- **Complete UI/UX Studio Hub Overhaul (`krl.openControlCenter`)**: Transformed Control Center into a modern multi-tabbed studio inspired by Linear / Apple HIG with 4 domain hubs:
+  - 🧭 **Overview & Tools**: Categorized tool cards with prominent `⭐ PRO` and `FREE` tier badges.
+  - ⚙️ **Diagnostics & Rules Engine**: Dedicated in-app settings with live search (`filterRules`), grouping 18 safety checks across Critical Safety, Compiler Logic, and Editor Hygiene.
+  - ⌨️ **In-Editor Features & Shortcuts Reference**: 21 interactive cards documenting all editor keybindings (`F12`, `Shift+F12`, `F2`, `Shift+Alt+F`, `Ctrl+Shift+[` / `]`) with 1-click execution.
+  - 👤 **Account & Support**: License key manager with masked copy, device hardware binding with unbind capability, Dodo Payments billing portal, and direct Telegram support channels.
+- **Universal Theme Adaptability**: Seamless dynamic integration with any VS Code theme (Default Light+, GitHub Light/Dark, Solarized, Monokai, High Contrast). Fully leverages semantic CSS variables with crystal-clear contrast.
+- **Hierarchical Sidebar Tree View**: Replaced flat list with 5 collapsible command categories (Quick Actions & Audit, Motion & Splines, Safety & Hygiene, Backups & Git, Support & License).
+- **Persistent Workspace Diagnostics & Continuous Scanner**: Background non-blocking diagnostic scanner ensuring errors remain visible across all workspace files even when closed.
+- **6 Deep Industrial Diagnostic Rules**: Hardware I/O boundary checks (1..4096), CIRC 2-point syntax validation, INTERRUPT DECL protocol, `;FOLD/ENDFOLD` balance check, SRC ⟷ DAT point integrity, and workspace global symbol collision guards.
+- **Industrial Fleet Stress Test Suite**: 100% verified across real automotive backups (Atlas Copco, Farplas, Magna, Osten, Parsan, Saint Gobain, Teknorob) across 17 automated industrial checks.
+- **Telegram Remote Action & Telepresence Suite**: Secure developer support protocol with modal consent guards for `/read_file`, `/logs`, `/backup`, `/sysinfo`, and Smart Diff & Apply.
+
 ## [1.8.0] - 2026-09-04 (KUKA.Sim 4.10 Kernel Integration & Official Specifications)
 
 ### Added

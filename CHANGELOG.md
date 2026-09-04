@@ -12,10 +12,13 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **111 System Structures & 112 System ENUMs (443 Literals)**: Pre-loaded into the LSP symbol index. Intelligent dot-completion (`.`) for both user variables and system variables (`$TOOL.`, `$BASE.`, `$POS_ACT.`, `$ACC.`), and instant `#` enum value completion (`#AUT`, `#T1`, `#T2`, `#EX`, `#P_FREE`, `#QUIT`).
 - **451-Keyword Official Compiler Matrix**: Direct implementation of KUKA C++ `keyword.h` rules with exact `allowedAsVariable` classification, preventing false-positive syntax warnings for valid KRL identifiers while strictly enforcing reserved language tokens.
 - **23 Official KUKA Inline Form Snippets (34 Templates)**: Complete replacement of legacy motion snippets with authentic Kuka Roboter GmbH XML templates (`ptpi`, `slini`, `sptpi`, `scirc`, `ptprel`, `PTPCo`, `ptpca`, `ptpa`, `trigdist`, `trigpath`, `pse`, `sigin`, `sigout`, `wsec`, `wfor`, `Forr`, etc.) featuring valid FOLD headers (`;FOLD ... ;%{PE}`) and parameter clauses.
+- **Hexa-Locale Architecture (6 Languages)**: Full localization across English (EN), German (DE), Italian (IT), Spanish (ES), Russian (RU), and Turkish (TR) with 100% key symmetry across 180+ UI strings, native commands, and authentic German engineering descriptions for all 513 core system variables.
 - **Interactive SmartPAD Backup Acceptance Report**: Upgraded automated quality audit report with controller serial number extraction, robot model passport, KSS version detection, and clickable file hyperlinks directly opening offending code lines in the editor.
 
 ### Fixed & Optimized
 - **Zero-False-Positive Fleet Audit Benchmark**: Stress-tested across 108 real-world robot backup archives (4,136,829 lines of code in 25.4s) with zero false-positive diagnostics.
+- **Parser Trailing Keyword Correction**: Removed erroneous single-letter `"S"` from reserved keywords list in `parser.ts`, restoring accurate diagnostic reporting for misspelled words ending with `s` (such as `moves`, `vars`).
+- **Control Center Visual Tier Badges & Command Routing**: Modernized Control Center tool grid with explicit `⭐ PRO` and `FREE` badges and robust command routing.
 - **Multi-Modifier Declaration Parser**: Fixed variable declaration regex to correctly parse multiple modifiers (`DECL CONST REAL`, `DECL GLOBAL CONST INT`) without false warnings.
 - **Bypass for Interrupt Declarations**: Fixed diagnostics analyzer to recognize `GLOBAL INTERRUPT DECL` statements as valid control-flow definitions rather than variable declarations.
 

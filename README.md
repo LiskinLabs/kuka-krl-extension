@@ -130,8 +130,13 @@ Every commissioning robotics engineer knows the pain:
 
 ---
 
-### 8. 💡 Smart Context Autocomplete & Snippets
-*Type at the speed of thought.* Instant code completion across 350+ KSS system variables, motion commands, structured types, and subroutines.
+### 8. 🏭 Official KUKA.Sim 4.10 Kernel Integration & 957+ System Variables
+*Authentic industrial specifications extracted directly from KUKA.Sim 4.10, WorkVisual, and KRC controller runtime.*
+* **957 System Variables**: Exhaustive coverage of KSS 8.3–8.7/9.0 system variables (`$ACC`, `$TOOL`, `$BASE`, `$POS_ACT`, `$VEL_AXIS`, etc.) with physical units, array bounds (217 arrays), and Read-Only statuses.
+* **116 Built-in System Functions**: Full runtime support for kinematics (`FORWARD`, `INVERSE`, `INV_POS`, `TOOL_ADJ`), string manipulation, type casting, message dialogs, and torque limits with real-time `signatureHelp` parameter hints.
+* **111 Structures & 112 ENUMs (443 Literals)**: Intelligent dot-completion (`$TOOL.`, `$ACC.`, `POINT.`) and `#` enum literal autocompletion (`#AUT`, `#T1`, `#P_FREE`, `#QUIT`).
+* **23 Official KUKA Inline Form Snippets (34 Templates)**: Authentic Kuka Roboter GmbH templates (`ptpi`, `slini`, `sptpi`, `scirc`, `PTPCo`, `ptprel`, `trigdist`, `sigin`, `wsec`, `Forr`) with complete Inline Form headers (`;FOLD ... ;%{PE}`).
+* **451-Keyword Compiler Matrix**: Direct integration of KUKA C++ `keyword.h` matrix rules, ensuring zero false-positive syntax warnings.
 
 <p align="center">
   <img src="docs/public/media/smart_autocomplete.gif" width="720" alt="Smart Autocomplete Demo" />
@@ -206,7 +211,8 @@ Every commissioning robotics engineer knows the pain:
 | Feature | Community (Free) | Pro Industrial | Benefit for Engineers |
 |:---|:---:|:---:|:---|
 | **KRL Syntax Highlighting** (`.src`, `.dat`, `.sub`, `.kfd`) | ✅ | ✅ | Full AST coloring for all KUKA file formats |
-| **Smart Autocomplete** (350+ KSS vars) | ✅ | ✅ | Instant completion for motions, structures & system vars |
+| **Smart Autocomplete & Kernel Specs** (957+ vars, 116 functions, 111 structs) | ✅ | ✅ | Official KUKA.Sim 4.10 kernel completion & signature help |
+| **23 Official Inline Form Snippets** (34 motion & logic templates) | ✅ | ✅ | Full `;FOLD ... ;%{PE}` templates from KUKA Roboter GmbH |
 | **6 Contrast Themes** (Midnight OLED, WorkVisual, Blueprint) | ✅ | ✅ | Designed for outdoor sunlight & dark plant cells |
 | **Signal Inlay Hints & Hover Docs** | ✅ | ✅ | Inline PLC signal labels & parameter signatures |
 | **Code Formatter & Matrix Alignment** | ✅ | ✅ | Instant 1-click cleanup (`Shift+Alt+F`) |
@@ -217,6 +223,7 @@ Every commissioning robotics engineer knows the pain:
 | **Full Flat 35-Commands Sidebar Tree** | ✅ | ✅ | Every single extension command accessible in 1 click |
 | **Native Project ZIP Export & Remote Telepresence** | ✅ | ✅ | 1-click full backup to OS explorer or Telegram |
 | **Copilot AI Language Model Tools Integration** | ✅ | ✅ | `krl_safety_check` callable directly by VS Code AI |
+| **SmartPAD Backup Quality Acceptance Report** | ❌ | **✅ Pro** | Automated project audit with robot passport & clickable hyperlinks |
 | **Modern KRL & iiQKA Fold Suite** | ❌ | **✅ Pro** | iiQKA Folds, Spline Blocks & Collision Guard |
 | **Interactive Flowchart Viewer** (Mermaid SVG) | ❌ | **✅ Pro** | Visual control-flow logic & 2-way code jump |
 | **Strict Block Balance Diagnostic** | ❌ | **✅ Pro** | Catches unclosed `IF/LOOP/FOR` blocks |

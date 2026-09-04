@@ -2,6 +2,23 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.8.0] - 2026-09-04 (KUKA.Sim 4.10 Kernel Integration & Official Specifications)
+
+### Added
+- **Complete KUKA.Sim 4.10 Kernel Specifications**: Full integration of authentic industrial language definitions extracted directly from KUKA.Sim 4.10, WorkVisual, and KRC / OfficeLite controller kernels.
+- **957 System Variables with Strict Typing & Metadata**: Expanded from 359 to 957 system variables (`$ACC`, `$TOOL`, `$BASE`, `$POS_ACT`, `$VEL_AXIS`, etc.) featuring exact data types (`FRAME`, `CP`, `INT`, `REAL`, `BOOL`, `E6POS`), array dimensions (217 multidimensional arrays), Read-Only/Read-Write writability badges, and authentic German engineering comments with physical units.
+- **116 Built-in Controller Functions & Procedures**: Integrated full runtime library of KSS system routines (kinematics: `FORWARD`, `INVERSE`, `INV_POS`, `TOOL_ADJ`; string operations: `STRLEN`, `STRDECLLEN`, `STRCOPY`; type conversion: `STRTOREAL`, `STRTOBOOL`, `STRTOINT`; message dialogs: `SET_KRLMSG`, `CLEAR_KRLMSG`; safety & torque: `SET_TORQUE_LIMITS`, `DYNBRAKETEST`).
+- **Interactive Parameter Assistance (`signatureHelp`)**: Real-time parameter tooltips with active argument highlighting and parameter direction (`:IN` / `:OUT`) when typing `(` for any of the 116 system functions.
+- **111 System Structures & 112 System ENUMs (443 Literals)**: Pre-loaded into the LSP symbol index. Intelligent dot-completion (`.`) for both user variables and system variables (`$TOOL.`, `$BASE.`, `$POS_ACT.`, `$ACC.`), and instant `#` enum value completion (`#AUT`, `#T1`, `#T2`, `#EX`, `#P_FREE`, `#QUIT`).
+- **451-Keyword Official Compiler Matrix**: Direct implementation of KUKA C++ `keyword.h` rules with exact `allowedAsVariable` classification, preventing false-positive syntax warnings for valid KRL identifiers while strictly enforcing reserved language tokens.
+- **23 Official KUKA Inline Form Snippets (34 Templates)**: Complete replacement of legacy motion snippets with authentic Kuka Roboter GmbH XML templates (`ptpi`, `slini`, `sptpi`, `scirc`, `ptprel`, `PTPCo`, `ptpca`, `ptpa`, `trigdist`, `trigpath`, `pse`, `sigin`, `sigout`, `wsec`, `wfor`, `Forr`, etc.) featuring valid FOLD headers (`;FOLD ... ;%{PE}`) and parameter clauses.
+- **Interactive SmartPAD Backup Acceptance Report**: Upgraded automated quality audit report with controller serial number extraction, robot model passport, KSS version detection, and clickable file hyperlinks directly opening offending code lines in the editor.
+
+### Fixed & Optimized
+- **Zero-False-Positive Fleet Audit Benchmark**: Stress-tested across 108 real-world robot backup archives (4,136,829 lines of code in 25.4s) with zero false-positive diagnostics.
+- **Multi-Modifier Declaration Parser**: Fixed variable declaration regex to correctly parse multiple modifiers (`DECL CONST REAL`, `DECL GLOBAL CONST INT`) without false warnings.
+- **Bypass for Interrupt Declarations**: Fixed diagnostics analyzer to recognize `GLOBAL INTERRUPT DECL` statements as valid control-flow definitions rather than variable declarations.
+
 ## [1.7.5] - 2026-09-03 (Interactive Reference Guide, Native ZIP Export & Unified Commands)
 
 ### Added

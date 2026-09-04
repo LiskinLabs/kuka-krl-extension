@@ -206,21 +206,33 @@ Every commissioning robotics engineer knows the pain:
 
 ---
 
+### 16. 🎨 Authentic KUKA.Sim & WorkVisual Syntax Palette & KSS 8.7 System Library
+*Rich color palette and standard system context extracted directly from KUKA.Sim 4.10.*
+* **Diverse High-Contrast Palette**: 100% authentic color schemes from KUKA.Sim (`KRLDark.xshd`) and WorkVisual (`KRL.xshd`). Differentiated scopes for motion commands (bold), bitwise/logical operators, mathematical symbols, system directives (`&ACCESS`, `&REL`), and hexadecimal/binary numbers (`'H...'`, `'B...'`).
+* **KSS 8.7 Standard System Library**: Built-in definitions, parameter help, and `F12` (Go to Definition) for `BAS()`, `MsgNotify()`, `MsgQuit()`, `MsgDialog()`, `USE_CM_PRO_VALUES()`, `TOOL_NAME[]`, and `BASE_NAME[]` directly to official KSS 8.7 reference modules.
+* **1-Click KSS 8.7 Project Scaffolding (`krl.scaffoldKrcFiles`)**: Automatically creates the standard `KRC/R1/System/`, `KRC/R1/Program/`, and `KRC/R1/TP/` folder tree populated with `$config.dat`, `bas.src`, `MsgLib.src`, `collmonlib.src`, and `sps.sub`.
+* **Factory Defaults & Advance Run Limiter**: Instant Hover display of official factory values (`operate.defaultvalues`) for `$ADVANCE = 3`, `$VEL.CP = 2.0 m/s`, `$ACC.CP = 2.3 m/s²`, `$JERK.CP = 500.0 m/s³`, and automatic linter warnings when `$ADVANCE` exceeds valid range `0..5`.
+
+---
+
 ## 📊 Feature Comparison Matrix (50 Industrial Tools)
 
 | Feature | Community (Free) | Pro Industrial | Benefit for Engineers |
 |:---|:---:|:---:|:---|
-| **KRL Syntax Highlighting** (`.src`, `.dat`, `.sub`, `.kfd`) | ✅ | ✅ | Full AST coloring for all KUKA file formats |
+| **KRL Syntax Highlighting** (`.src`, `.dat`, `.sub`, `.kfd`) | ✅ | ✅ | Full AST coloring with KUKA.Sim diverse color palette |
+| **KUKA.Sim 4.10 & WorkVisual Themes** | ✅ | ✅ | Authentic AvalonEdit color schemes (Dark & Light) |
 | **Smart Autocomplete & Kernel Specs** (957+ vars, 116 functions, 111 structs) | ✅ | ✅ | Official KUKA.Sim 4.10 kernel completion & signature help |
+| **KSS 8.7 Standard System Library & F12 Definition** | ✅ | ✅ | Instant F12 jump to `bas.src`, `MsgLib.src`, `$config.dat` |
+| **1-Click KRC Project Scaffolding** | ✅ | ✅ | Initializes standard `KRC/R1/System` folder structure |
+| **Factory Defaults Hover & $ADVANCE Limiter** | ✅ | ✅ | Displays factory defaults & warns on `$ADVANCE > 5` |
 | **23 Official Inline Form Snippets** (34 motion & logic templates) | ✅ | ✅ | Full `;FOLD ... ;%{PE}` templates from KUKA Roboter GmbH |
-| **6 Contrast Themes** (Midnight OLED, WorkVisual, Blueprint) | ✅ | ✅ | Designed for outdoor sunlight & dark plant cells |
 | **Signal Inlay Hints & Hover Docs** | ✅ | ✅ | Inline PLC signal labels & parameter signatures |
 | **Code Formatter & Matrix Alignment** | ✅ | ✅ | Instant 1-click cleanup (`Shift+Alt+F`) |
 | **GitLens Line Blame & Revision History** | ✅ | ✅ | Instant author & commit tracking for every point |
 | **Quad-Locale Architecture** (EN, RU, TR, ES) | ✅ | ✅ | Full native UI & diagnostic messages |
 | **Clean Git Metadata Stripper** | ✅ | ✅ | Strips WorkVisual headers for pristine Git diffs |
 | **Control Center & 21-Card Reference Guide** | ✅ | ✅ | Real-time diagnostic toggles & in-editor shortcuts guide |
-| **Full Flat 35-Commands Sidebar Tree** | ✅ | ✅ | Every single extension command accessible in 1 click |
+| **Full Flat 36-Commands Sidebar Tree** | ✅ | ✅ | Every single extension command accessible in 1 click |
 | **Native Project ZIP Export & Remote Telepresence** | ✅ | ✅ | 1-click full backup to OS explorer or Telegram |
 | **Copilot AI Language Model Tools Integration** | ✅ | ✅ | `krl_safety_check` callable directly by VS Code AI |
 | **SmartPAD Backup Quality Acceptance Report** | ❌ | **✅ Pro** | Automated project audit with robot passport & clickable hyperlinks |

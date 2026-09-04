@@ -9,7 +9,7 @@ KUKA KRL Professional eklentisini kurmak ve yapılandırmak için hızlı başla
 4. **Install** düğmesine tıklayın.
 
 ## 2. VSIX Dosyası İle Kurulum (Çevrimdışı Kurulum)
-1. `kuka-krl-extension-1.7.5.vsix` dosyasını indirin.
+1. `kuka-krl-extension-1.8.0.vsix` dosyasını indirin.
 2. VS Code'da Eklentiler panelinin sağ üst köşesindeki `...` menüsünü tıklayın.
 3. **Install from VSIX...** seçeneğini seçip dosyayı belirleyin.
 

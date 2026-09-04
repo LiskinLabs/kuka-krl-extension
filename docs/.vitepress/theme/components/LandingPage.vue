@@ -372,7 +372,7 @@
       </div>
     </section>
 
-    <!-- AUTOMOTIVE OEM COMPATIBILITY STRIP -->
+    <!-- AUTOMOTIVE OEM COMPLIANCE STRIP -->
     <section class="border-y border-white/10 py-6 bg-[#090d15]/60 relative z-10 font-mono">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-4 text-xs text-gray-400">
         <div class="flex items-center gap-2 font-bold text-white">
@@ -427,7 +427,7 @@
       <!-- Real Draggable Split Slider Container -->
       <div class="max-w-5xl mx-auto space-y-4">
         <!-- Quick Preset Switcher Buttons -->
-        <div class="flex flex-wrap justify-center items-center gap-2 font-mono text-xs">
+        <div class="flex justify-center items-center gap-2 font-mono text-xs">
           <button 
             @click="sliderPos = 0" 
             :class="['px-3 py-1.5 rounded-lg border transition-all font-bold', sliderPos === 0 ? 'bg-kuka-orange text-white border-kuka-orange shadow-md' : 'bg-[#0d121d] text-gray-400 border-white/10 hover:text-white']">
@@ -1537,12 +1537,12 @@ const runPlaygroundAnalysis = () => {
     const velMatch = noComment.match(/(?:\$VEL\.CP\s*=\s*|Vel\s*=\s*)([0-9]+(?:\.[0-9]+)?)/i)
     if (velMatch) {
       const speed = parseFloat(velMatch[1])
-      if (speed > 2.0) {
+      if (speed > 3.0) {
         errs.push({
           line: lineNum,
           severity: 'error',
           title: `Excessive Velocity Hazard ($VEL.CP = ${speed} m/s)`,
-          desc: `Linear velocity of ${speed} m/s exceeds ISO 13849 commissioning safety threshold (max 2.0 m/s in cell environment). High risk of mechanical damage.`
+          desc: `Linear velocity of ${speed} m/s exceeds ISO 13849 commissioning safety threshold (max 3.0 m/s in cell environment). High risk of mechanical damage.`
         })
       }
     }
@@ -1909,7 +1909,7 @@ const featureComparisonRows = computed(() => {
     {
       category: isRu ? 'Безопасность и Линтер' : isTr ? 'Güvenlik ve Linter' : 'Safety & Diagnostics',
       name: isRu ? 'Inlay Hints для физических сигналов ($IN / $OUT)' : isTr ? 'Donanım Sinyali ($IN / $OUT) Inlay Hints' : 'Hardware Signal ($IN / $OUT) Inlay Hints',
-      free: true, pro: true
+      free: false, pro: true
     },
     {
       category: isRu ? 'Безопасность и Линтер' : isTr ? 'Güvenlik ve Linter' : 'Safety & Diagnostics',
@@ -1959,7 +1959,7 @@ const featureComparisonRows = computed(() => {
     {
       category: isRu ? 'Интеграция и Стандарты' : isTr ? 'Entegrasyon ve Standartlar' : 'Integration & Standards',
       name: isRu ? 'Очистка метаданных WorkVisual (&ACCESS, &REL)' : isTr ? 'WorkVisual Meta Veri Temizleme (&ACCESS, &REL)' : 'WorkVisual Metadata Stripper (&ACCESS, &REL)',
-      free: true, pro: true
+      free: false, pro: true
     },
     {
       category: isRu ? 'Интеграция и Стандарты' : isTr ? 'Entegrasyon ve Standartlar' : 'Integration & Standards',
@@ -2202,7 +2202,7 @@ const translations = {
     matrixBtnPro: "Get Pro License Now ➔",
 
     // Footer & Trust additions
-    automotiveComplianceLabel: "AUTOMOTIVE COMPATIBILITY:",
+    automotiveComplianceLabel: "AUTOMOTIVE COMPLIANCE:",
     allSystemsOperational: "ALL SYSTEMS OPERATIONAL // LISKIN LABS 2026",
     kssVerified: "KSS 8.2 - 8.7 Verified"
   },
@@ -2324,7 +2324,7 @@ const translations = {
     matrixBtnPro: "Купить Pro лицензию ➔",
 
     // Footer & Trust additions
-    automotiveComplianceLabel: "СОВМЕСТИМОСТЬ С АВТОСТАНДАРТАМИ:",
+    automotiveComplianceLabel: "АВТОМОБИЛЬНЫЕ СТАНДАРТЫ:",
     allSystemsOperational: "ВСЕ СИСТЕМЫ РАБОТАЮТ ШТАТНО // LISKIN LABS 2026",
     kssVerified: "KSS 8.2 - 8.7 Проверено"
   },
@@ -2446,7 +2446,7 @@ const translations = {
     matrixBtnPro: "Pro Lisans Satın Al ➔",
 
     // Footer & Trust additions
-    automotiveComplianceLabel: "OTOMOTİV UYUMLULUK:",
+    automotiveComplianceLabel: "OTOMOTİV UYUMLULUĞU:",
     allSystemsOperational: "TÜM SİSTEMLER ÇALIŞIYOR // LISKIN LABS 2026",
     kssVerified: "KSS 8.2 - 8.7 Doğrulandı"
   }

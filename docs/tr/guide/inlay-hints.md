@@ -1,21 +1,15 @@
-# Donanım Sinyali İpucu İpuçları (Inlay Hints)
+# Donanım Sinyali İpuçları (Inlay Hints)
 
-<span class="badge community">Ücretsiz Özellik</span>
+<span class="badge pro">Topluluk ve Pro Özellik</span>
 
-Sinyal eşleme tablolarını açmadan mantık kodunun tam içinde sensör ve valf atamalarını görün.
+Belirli bir G/Ç sinyal kanalının ne anlama geldiğini hatırlamak için `.src` ve `.dat` dosyaları arasında sürekli sekme değiştirmeye son.
 
 ![Inlay Hints Demo](/media/inlay_hints.gif)
 
 ## Nasıl Çalışır
 
-KUKA KRL Professional, `.src` dosyasındaki `$IN[x]` veya `$OUT[x]` kanallarını algılar, ilişkili `.dat` veya `$config.dat` dosyasındaki açıklamayı okur ve satır içine sanal şeffaf bir etiket (`: diPartReady`) yerleştirir.
+KUKA KRL Professional, bilgileri doğrudan editör içinde satır içi olarak sunmak için Dil Sunucusu Protokolünü (LSP) kullanır.
 
-## Ayarlar
+Bir donanım sinyali (ör. `$IN[12]`) kullandığınızda, eklenti `.dat` dosyalarınızdaki sinyal bildirim adını veya yorumunu kodun yanında otomatik olarak görüntüler.
 
-VS Code `settings.json` dosyasında yapılandırılabilir:
-
-```json
-{
-  "krl.inlayHints.enabled": true
-}
-```
+* **Yapılandırma**: Bu özelliği VS Code ayarlarında `krl.inlayHints.enabled` seçeneğiyle açıp kapatabilirsiniz.

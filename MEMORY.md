@@ -4,7 +4,7 @@
 - **Repositories:**
   - 🔒 **Core Engineering (Private):** `LiskinLabs/kuka-krl-extension-core` (`c:\Projects\01_Robotics\kuka-krl-extension`)
   - 🌐 **Public Showcase (Public):** `LiskinLabs/kuka-krl-extension` (`c:\Projects\01_Robotics\kuka-krl-extension-public`)
-- **Current Version:** `1.7.5`
+- **Current Version:** `1.8.0`
 - **Language / Environment:** TypeScript (Node.js 20+), VS Code Extension API (`@vscode/vsce`), Cloudflare Workers (Backend Gateway).
 - **Licensing Model:** Commercial EULA (LiskinLabs Proprietary, SPDX: `SEE LICENSE IN LICENSE.txt`).
 - **Core Purpose:** Enterprise-grade IDE extension for KUKA KRL (KSS 8.3–8.7), supporting syntax highlighting, AST parsing, symbol navigation, diagnostics, offline programming, Flowcharts, Wonderlib, and remote assistance.

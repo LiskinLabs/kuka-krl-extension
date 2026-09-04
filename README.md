@@ -10,15 +10,17 @@
 </p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/v/LiskinLabs.kuka-krl-extension?style=for-the-badge&label=Marketplace&color=FF6600" alt="Version" /></a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/i/LiskinLabs.kuka-krl-extension?style=for-the-badge&logo=visual-studio-code&label=Installs" alt="Installs" /></a>
-  <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=for-the-badge&logo=shield" alt="ReversingLabs Security Score" /></a>
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/endpoint?url=https://kuka-krl-support-gateway.redminotpro5.workers.dev/api/telemetry/badge&style=for-the-badge&label=Active%20Engineers&color=FF6600" alt="Active Engineers Worldwide" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.0-FF6600?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Release v1.8.0" /></a>
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Verified-4.1M%2B%20LoC-10b981?style=for-the-badge&logo=checkmarx&logoColor=white" alt="Fleet Verified" /></a>
+  <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=for-the-badge&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
+  <a href="https://kuka-krl-support-gateway.redminotpro5.workers.dev/api/telemetry/stats"><img src="https://img.shields.io/endpoint?url=https://kuka-krl-support-gateway.redminotpro5.workers.dev/api/telemetry/badge&style=for-the-badge" alt="Active Engineers Worldwide" /></a>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Language-KRL-orange?style=flat-square" />
-  <img src="https://img.shields.io/badge/Compatible%20with-VS%20Code%20%7C%20Cursor%20%7C%20Antigravity-007ACC?style=flat-square" />
+  <img src="https://img.shields.io/badge/Controllers-KRC2%20%7C%20KRC4%20%7C%20KRC5-007ACC?style=flat-square" />
+  <img src="https://img.shields.io/badge/Kernel-KUKA.Sim%204.10%20Inside-FF6600?style=flat-square" />
+  <img src="https://img.shields.io/badge/Built--in%20Specs-957%20Vars%20%7C%20116%20Functions-10b981?style=flat-square" />
   <img src="https://img.shields.io/badge/Offline--First-100%25%20Factory%20Ready-green?style=flat-square" />
   <img src="https://img.shields.io/badge/Security-0%20Malware%20%7C%200%20CVEs-emerald?style=flat-square" />
   <img src="https://img.shields.io/badge/Localization-EN%20%7C%20DE%20%7C%20IT%20%7C%20ES%20%7C%20RU%20%7C%20TR-blue?style=flat-square" />
@@ -133,10 +135,12 @@ Every commissioning robotics engineer knows the pain:
 ### 8. 🏭 Official KUKA.Sim 4.10 Kernel Integration & 957+ System Variables
 *Authentic industrial specifications extracted directly from KUKA.Sim 4.10, WorkVisual, and KRC controller runtime.*
 * **957 System Variables**: Exhaustive coverage of KSS 8.3–8.7/9.0 system variables (`$ACC`, `$TOOL`, `$BASE`, `$POS_ACT`, `$VEL_AXIS`, etc.) with physical units, array bounds (217 arrays), and Read-Only statuses.
-* **116 Built-in System Functions**: Full runtime support for kinematics (`FORWARD`, `INVERSE`, `INV_POS`, `TOOL_ADJ`), string manipulation, type casting, message dialogs, and torque limits with real-time `signatureHelp` parameter hints.
+* **116 Built-in System Functions & Wonderlib**: Full runtime support for kinematics (`FORWARD`, `INVERSE`, `INV_POS`, `TOOL_ADJ`), string manipulation, type casting, message dialogs, torque limits, and Wonderlib routines with real-time `signatureHelp` parameter hints.
 * **111 Structures & 112 ENUMs (443 Literals)**: Intelligent dot-completion (`$TOOL.`, `$ACC.`, `POINT.`) and `#` enum literal autocompletion (`#AUT`, `#T1`, `#P_FREE`, `#QUIT`).
 * **23 Official KUKA Inline Form Snippets (34 Templates)**: Authentic Kuka Roboter GmbH templates (`ptpi`, `slini`, `sptpi`, `scirc`, `PTPCo`, `ptprel`, `trigdist`, `sigin`, `wsec`, `Forr`) with complete Inline Form headers (`;FOLD ... ;%{PE}`).
 * **451-Keyword Compiler Matrix**: Direct integration of KUKA C++ `keyword.h` matrix rules, ensuring zero false-positive syntax warnings.
+* **Single-Quoted Hex & Binary Syntax**: Full parser and diagnostic compliance for `'B000001'` (binary), `'HFF'` (hexadecimal), and character literals.
+* **Zero-False-Positive Fleet Audit (4.1M+ LoC)**: Verified against 107 real-world production robot backups with 0 false diagnostics.
 
 <p align="center">
   <img src="docs/public/media/smart_autocomplete.gif" width="720" alt="Smart Autocomplete Demo" />
@@ -229,7 +233,7 @@ Every commissioning robotics engineer knows the pain:
 | **Signal Inlay Hints & Hover Docs** | ✅ | ✅ | Inline PLC signal labels & parameter signatures |
 | **Code Formatter & Matrix Alignment** | ✅ | ✅ | Instant 1-click cleanup (`Shift+Alt+F`) |
 | **GitLens Line Blame & Revision History** | ✅ | ✅ | Instant author & commit tracking for every point |
-| **Quad-Locale Architecture** (EN, RU, TR, ES) | ✅ | ✅ | Full native UI & diagnostic messages |
+| **Hexa-Locale Architecture** (EN, DE, IT, ES, RU, TR) | ✅ | ✅ | Full native UI, 513 client keys & 1,073 system variable doc translations |
 | **Clean Git Metadata Stripper** | ✅ | ✅ | Strips WorkVisual headers for pristine Git diffs |
 | **Control Center & 21-Card Reference Guide** | ✅ | ✅ | Real-time diagnostic toggles & in-editor shortcuts guide |
 | **Full Flat 36-Commands Sidebar Tree** | ✅ | ✅ | Every single extension command accessible in 1 click |

@@ -12,10 +12,6 @@ Flags missing or orphaned block endings (`IF/ENDIF`, `FOR/ENDFOR`, `LOOP/ENDLOOP
 
 Warns you if movements (`PTP`, `LIN`, `CIRC`) are declared before active `$TOOL` or `$BASE` values have been initialized in the current routine.
 
-## High Velocity Warning
-
-Alerts you when speed settings exceed safe commissioning levels (e.g., `$VEL.CP` exceeding 3.0 m/s) to prevent test-run accidents.
-
 ## Silent Error Blocker (Non-ASCII)
 
 Cyrillic comments or invisible non-ASCII characters inside executable lines cause quiet compiler failures on KRC controllers. Pro safety checks detect and pinpoint them immediately.

@@ -1,19 +1,19 @@
-# Etkileşimli Akış Şeması Görüntüleyici (Flowchart)
+# Etkileşimli Akış Şeması Görüntüleyici
 
 <span class="badge pro">Pro Özellik</span>
 
-Karmaşık iç içe geçmiş mantıkları (`IF`, `SWITCH`, `LOOP`) elle takip etmeyi bırakın. KUKA KRL Professional, büyük `.src` programlarını görsel ve temiz kontrol akışı diyagramlarına dönüştürür.
+Karmaşık iç içe geçmiş mantıkları (`IF`, `SWITCH`, `LOOP`) manuel olarak takip etmeyi bırakın. KUKA KRL Professional, karmaşık `.src` programlarını temiz, görsel kontrol akış diyagramlarına dönüştürür.
 
-![Akış Şeması Görüntüleyici](/media/control_flow_graph.gif)
+![Flowchart Viewer Demo](/media/control_flow_graph.gif)
 
 ## Temel Özellikler
 
-* **İki Yönlü Gezinme**: Akış şemasındaki herhangi bir bloğa tıklayarak düzenleyicideki tam ilgili kod satırına gidin.
-* **Alt Program Detayı**: Alt program çağrılarına (örn. `GrabPart()`) tıklayarak doğrudan o alt programın akış şemasını yükleyin.
-* **Ayrıntılı Bilgi Modu**: Bayrakları, zamanlayıcıları ve I/O durumlarını doğrudan bloklar üzerinde renkli göstergelerle inceleyin.
-* **SVG Dışa Aktarımı**: Müşteri teslim dokümanlarına eklemek için tek tıklamayla yüksek çözünürlüklü vektör SVG grafikleri dışa aktarın.
+* **Çift Yönlü Gezinme**: Akış şemasındaki herhangi bir bloğa tıklayarak editördeki tam kod satırına gidin.
+* **Alt Program Detaylandırma**: Alt program çağrılarına (ör. `GrabPart()`) tıklayarak ilgili akış şemasını yükleyin.
+* **Detaylı Bilgi Modu**: Bayrakları, zamanlayıcıları ve G/Ç durumlarını renk göstergeleriyle doğrudan akış şeması bloklarında görüntüleyin.
+* **SVG Dışa Aktarma**: Müşteri belgelerine doğrudan eklemek için alt programların vektör grafiklerini dışa aktarın.
 
-![Vektör Akış Şeması](/media/cell_flowchart.svg)
+![Vector Flowchart Example](/media/cell_flowchart.svg)
 
 ## Nasıl Kullanılır
-Herhangi bir `.src` dosyasını açın ve editörün sağ üst köşesindeki `Show Control Flow Graph` simgesine tıklayın veya Komut Paletinden (`Ctrl+Shift+P`) `KRL: Show Control Flow Graph` komutunu çalıştırın.
+Herhangi bir `.src` dosyasını açın ve editörün sağ üst köşesindeki `Show Control Flow Graph` simgesine tıklayın veya Komut Paletinden `KRL: Show Control Flow Graph` komutunu çalıştırın.

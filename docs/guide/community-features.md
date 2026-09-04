@@ -33,12 +33,8 @@ Full syntax parsing of `.src`, `.dat`, `.sub` files. Colorizes keywords, data ty
 
 ---
 
-### 3. Smart Autocomplete & KUKA.Sim 4.10 Kernel Specifications
-Exhaustive code completion powered by authentic KUKA.Sim 4.10 and KRC controller kernel specifications:
-* **957 System Variables**: Full typing (`FRAME`, `CP`, `INT`, `REAL`, `BOOL`, `E6POS`), array dimensions (217 arrays), writability (`Read/Write` vs `Read-Only`), and original German physical units.
-* **116 Built-in System Functions**: Kinematics (`FORWARD`, `INVERSE`, `INV_POS`, `TOOL_ADJ`), strings, type conversions, message dialogs, and torque limits with real-time `signatureHelp` parameter hints.
-* **111 Structures & 112 ENUMs (443 Literals)**: Dot-completion (`.`) for structured types and system variables (`$TOOL.`, `$ACC.`), plus `#` enum autocompletion (`#AUT`, `#T1`, `#P_FREE`, `#QUIT`).
-* **23 Official Inline Form Snippets (34 Templates)**: Complete replacement of legacy snippets with authentic Kuka Roboter GmbH templates (`ptpi`, `slini`, `sptpi`, `scirc`, `PTPCo`, `ptprel`, `trigdist`, `sigin`, `wsec`, `Forr`) with complete FOLD headers (`;FOLD ... ;%{PE}`).
+### 3. Smart Autocomplete (KSS 8.7 & System Variables)
+Intelligent dropdown for 350+ system variables (`$POS_ACT`, `$VEL.CP`, `$BASE`, `$TOOL`, `$IN`, `$OUT`).
 
 ![Smart Autocomplete Demo](/media/smart_autocomplete.gif)
 
@@ -121,35 +117,3 @@ Strips `&ACCESS`, `&REL`, `&PARAM` headers for clean Git diffs.
 Sort `.dat` file declarations alphabetically.
 
 ![Sort Declarations Demo](/media/sort_declarations.gif)
-
----
-
-### 16. Authentic KUKA.Sim & WorkVisual Syntax Palette
-Specialized KRL syntax coloring based on authentic AvalonEdit definitions from `KRLDark.xshd` (KUKA.Sim 4.10) and `KRL.xshd` (WorkVisual):
-- **Motion Commands (`PTP`, `LIN`, `CIRC`, `PTP_REL`, `LIN_REL`):** Bold font for immediate operator trajectory scanning.
-- **Logical Operators (`AND`, `OR`, `NOT`, `EXOR`, `B_AND`, `B_OR`):** Distinct high-contrast blue `#569cd6`.
-- **Operators & Mathematical Symbols (`==`, `<>`, `<=`, `>=`, `+`, `-`, `*`, `/`):** Olive green tone `#6A9955` for formula readability.
-- **Hexadecimal & Binary Numbers (`'H0A'`, `&HFF`, `'B0101'`):** Signature neon magenta `#FF00FF`.
-- **Header Directives (`&ACCESS`, `&REL`, `&PARAM`):** Soft purple `#646695`.
-
----
-
-### 17. KSS 8.7 Standard System Library & F12 Definition
-Bundled official KSS 8.7 system modules:
-- System functions: `BAS()`, `MsgNotify()`, `MsgQuit()`, `MsgDialog()`, `USE_CM_PRO_VALUES()`, etc.
-- System arrays and variables: `TOOL_NAME[]`, `BASE_NAME[]`, `COLLMON_ACTIVE`, etc.
-- Seamless `F12` (Go to Definition) and `signatureHelp` jumping directly to official reference files `bas.src`, `MsgLib.src`, `collmonlib.src`, and `$config.dat`. Zero false positive "Unknown function" warnings.
-
----
-
-### 18. 1-Click KRC Project Scaffolding (`krl.scaffoldKrcFiles`)
-Instantly sets up standard KSS 8.7 controller folder structures:
-- Generates `KRC/R1/System/`, `KRC/R1/Program/`, `KRC/R1/TP/`.
-- Deploys reference files `$config.dat`, `bas.src`, `MsgLib.src`, `collmonlib.src`, `sps.sub`, `$machine.dat`, `$robcor.dat`, `$custom.dat`, `$option.dat`.
-
----
-
-### 19. Factory Defaults Inspector & $ADVANCE Limiter
-- **Factory Defaults Hover:** Hovering over core motion variables reveals official factory values (`operate.defaultvalues` from KUKA.Sim): `$ADVANCE = 3`, `$VEL.CP = 2.0 m/s`, `$ACC.CP = 2.3 m/s²`, `$JERK.CP = 500.0 m/s³`.
-- **$ADVANCE Safety Guard:** Diagnostic warning if `$ADVANCE` is set outside valid range `0..5`.
-

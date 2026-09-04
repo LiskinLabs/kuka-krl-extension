@@ -33,8 +33,12 @@ Full syntax parsing of `.src`, `.dat`, `.sub` files. Colorizes keywords, data ty
 
 ---
 
-### 3. Smart Autocomplete (KSS 8.7 & System Variables)
-Intelligent dropdown for 350+ system variables (`$POS_ACT`, `$VEL.CP`, `$BASE`, `$TOOL`, `$IN`, `$OUT`).
+### 3. Smart Autocomplete & KUKA.Sim 4.10 Kernel Specifications
+Exhaustive code completion powered by authentic KUKA.Sim 4.10 and KRC controller kernel specifications:
+* **957 System Variables**: Full typing (`FRAME`, `CP`, `INT`, `REAL`, `BOOL`, `E6POS`), array dimensions (217 arrays), writability (`Read/Write` vs `Read-Only`), and original German physical units.
+* **116 Built-in System Functions**: Kinematics (`FORWARD`, `INVERSE`, `INV_POS`, `TOOL_ADJ`), strings, type conversions, message dialogs, and torque limits with real-time `signatureHelp` parameter hints.
+* **111 Structures & 112 ENUMs (443 Literals)**: Dot-completion (`.`) for structured types and system variables (`$TOOL.`, `$ACC.`), plus `#` enum autocompletion (`#AUT`, `#T1`, `#P_FREE`, `#QUIT`).
+* **23 Official Inline Form Snippets (34 Templates)**: Complete replacement of legacy snippets with authentic Kuka Roboter GmbH templates (`ptpi`, `slini`, `sptpi`, `scirc`, `PTPCo`, `ptprel`, `trigdist`, `sigin`, `wsec`, `Forr`) with complete FOLD headers (`;FOLD ... ;%{PE}`).
 
 ![Smart Autocomplete Demo](/media/smart_autocomplete.gif)
 

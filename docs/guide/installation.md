@@ -9,7 +9,7 @@ Quick start guide for installing and configuring KUKA KRL Professional.
 4. Click **Install**.
 
 ## 2. Install from VSIX (Offline Installation)
-1. Download the `kuka-krl-extension-1.7.5.vsix` file.
+1. Download the `kuka-krl-extension-1.8.0.vsix` file.
 2. In VS Code, click the `...` menu in the top-right corner of the Extensions panel.
 3. Select **Install from VSIX...** and choose the `.vsix` file.
 

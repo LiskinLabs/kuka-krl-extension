@@ -9,7 +9,7 @@
 4. Нажмите **Install**.
 
 ## 2. Установка из VSIX-файла (Offline Installation)
-1. Скачайте файл `kuka-krl-extension-1.7.5.vsix`.
+1. Скачайте файл `kuka-krl-extension-1.8.0.vsix`.
 2. В VS Code выберите меню `...` в правом верхнем углу панели Extensions.
 3. Нажмите **Install from VSIX...** и выберите файл.
 

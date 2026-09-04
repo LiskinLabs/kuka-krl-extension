@@ -918,7 +918,7 @@ const filteredFeatures = computed(() => {
 const translations = {
   en: {
     backToLanding: 'Back to Main Landing',
-    heroBadge: 'v1.7.3 Industrial Suite • 50 Core Tools',
+    heroBadge: 'v1.8.0 Industrial Suite • 50 Core Tools',
     heroTitlePrefix: 'KUKA KRL Professional — ',
     heroTitleHighlight: 'Complete 50 Tools Encyclopedia',
     heroSubtitle: 'Exhaustive technical reference for all 50 industrial features, field commissioning benefits, keyboard shortcuts, configuration parameters, and before/after code examples.',
@@ -938,7 +938,7 @@ const translations = {
   },
   ru: {
     backToLanding: 'Вернуться на главную',
-    heroBadge: 'v1.7.3 Industrial Suite • 50 Промышленных Инструментов',
+    heroBadge: 'v1.8.0 Industrial Suite • 50 Промышленных Инструментов',
     heroTitlePrefix: 'KUKA KRL Professional — ',
     heroTitleHighlight: 'Полная Энциклопедия 50 Инструментов',
     heroSubtitle: 'Исчерпывающий технический разбор всех 50 функций расширения, пользы на пусконаладке, горячих клавиш, параметров settings.json и примеров кода «До / После».',
@@ -958,7 +958,7 @@ const translations = {
   },
   tr: {
     backToLanding: 'Ana Sayfaya Dön',
-    heroBadge: 'v1.7.3 Endüstriyel Paket • 50 Temel Araç',
+    heroBadge: 'v1.8.0 Endüstriyel Paket • 50 Temel Araç',
     heroTitlePrefix: 'KUKA KRL Professional — ',
     heroTitleHighlight: 'Kapsamlı 50 Araç Ansiklopedisi',
     heroSubtitle: 'Tüm 50 endüstriyel özelliğin, saha devreye alma faydalarının, kısayolların, settings.json ayarlarının ve önce/sonra kod örneklerinin ayrıntılı teknik referansı.',

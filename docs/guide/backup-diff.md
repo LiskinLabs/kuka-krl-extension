@@ -1,6 +1,6 @@
 # KRC Backup Diff & Point Delta Inspector
 
-<span class="badge pro">Pro Feature (v1.8.5)</span>
+<span class="badge pro">Pro Feature (v1.8.0)</span>
 
 Compare current workspace logic and point coordinates against physical robot SmartPAD backup ZIP archives (KRC4 / KRC5).
 

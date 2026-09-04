@@ -4,7 +4,7 @@ Advanced static code analysis, logic visualization, and industrial safety compli
 
 ---
 
-### 16. KUKA Control Center Dashboard (v1.8.5 Pro Hub)
+### 16. KUKA Control Center Dashboard (v1.8.0 Pro Hub)
 Fluent UI dashboard (`krl.openControlCenter`) providing 1-click access to all Pro tools and analytics.
 
 ![KUKA Control Center Demo](/media/kuka_control_center.gif)
@@ -46,8 +46,8 @@ Validates EKI XML schemas and auto-generates KRL network handlers.
 
 ---
 
-### 23. Industrial Safety & Velocity Diagnostics
-Automated inspector (`KRL: Run Safety Check`) flagging high speeds (`$VEL.CP > 2.0 m/s`), uninitialized `$TOOL`/`$BASE`, and non-ASCII characters.
+### 22. Industrial Safety & Diagnostics
+Automated inspector (`KRL: Run Safety Check`) flagging uninitialized `$TOOL`/`$BASE`, deadlocks, and non-ASCII characters.
 
 ---
 
@@ -62,7 +62,4 @@ Context providers for AI assistants (Google Antigravity IDE / Copilot).
 ---
 
 ### 26. Quality Acceptance Report Generator
-Generates comprehensive industrial project quality reports for client handovers, FAT/SAT sign-offs, and plant commissioning audits.
-* **Robot Passport Extraction**: Automatically parses `$machine.dat` / `am.ini` to extract robot serial number, model designation, and KSS system software release.
-* **Interactive Code Hyperlinks**: Offending code lines and syntax defects are rendered as clickable markdown links that open the exact file and cursor position directly in VS Code.
-* **Zero False-Alarm Benchmark**: Calibrated across 108 real-world robot backups (4.13 million lines of code) ensuring 100% genuine issue detection.
+Generates comprehensive HTML/JSON code quality reports for client sign-off.

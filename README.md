@@ -21,7 +21,7 @@
   <img src="https://img.shields.io/badge/Compatible%20with-VS%20Code%20%7C%20Cursor%20%7C%20Antigravity-007ACC?style=flat-square" />
   <img src="https://img.shields.io/badge/Offline--First-100%25%20Factory%20Ready-green?style=flat-square" />
   <img src="https://img.shields.io/badge/Security-0%20Malware%20%7C%200%20CVEs-emerald?style=flat-square" />
-  <img src="https://img.shields.io/badge/Localization-EN%20%7C%20RU%20%7C%20TR%20%7C%20ES-blue?style=flat-square" />
+  <img src="https://img.shields.io/badge/Localization-EN%20%7C%20DE%20%7C%20IT%20%7C%20ES%20%7C%20RU%20%7C%20TR-blue?style=flat-square" />
 </p>
 
 <p align="center">

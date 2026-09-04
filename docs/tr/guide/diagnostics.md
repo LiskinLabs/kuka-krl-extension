@@ -1,25 +1,19 @@
-# Endüstriyel Kalite Teşhisleri ve Güvenlik Denetimi
+# Endüstriyel Güvenlik ve Teşhisler
 
 <span class="badge pro">Pro Özellik</span>
 
-Kodu gerçek robot kontrolöründe çalıştırmadan önce sözdizimi çökmelerini, aşırı hız tehlikelerini ve fiziksel çarpışma risklerini yakalayın.
+Gerçek robot kontrol ünitesinde kod çalıştırmadan önce sözdizimi çökmelerini, başlatılmamış koordinat sistemlerini ve fiziksel çarpışma risklerini tespit edin.
 
-## Sıkı Blok Dengesi (Block Balance)
+## Blok Kapanış Dengesi (Block Balance)
 
-Eksik veya eşleşmeyen blok sonlarını (`IF/ENDIF`, `FOR/ENDFOR`, `LOOP/ENDLOOP`) işaretler. Yanlış alarmlar üretmeden karmaşık KRL sözdizimini doğru ayrıştırır.
-
-![Blok Dengesi](/media/block-balance.gif)
+Eksik veya yetim kalmış blok sonlarını (`IF/ENDIF`, `FOR/ENDFOR`, `LOOP/ENDLOOP`) işaretler.
 
 ## Tip Doğrulama ve Çarpışma Koruması
 
-Geçerli alt programda aktif `$TOOL` veya `$BASE` değerleri başlatılmadan önce hareket komutları (`PTP`, `LIN`, `CIRC`) bildirilmişse sizi uyarır.
+Geçerli yordamda aktif `$TOOL` veya `$BASE` değerleri başlatılmadan önce hareket komutları (`PTP`, `LIN`, `CIRC`) tanımlanırsa uyarır.
 
-![Tip ve Güvenlik Doğrulama](/media/type-validation-demo.gif)
+## Sessiz Hata Engelleyici (ASCII Dışı / Kiril Karakterler)
 
-## Yüksek Hız Uyarısı
+Yürütülebilir satırların içindeki Kiril veya görünmeyen ASCII dışı karakterler KRC denetleyicilerinde sessiz derleme çökmelerine neden olur. Pro güvenlik denetimi bunları anında işaretler.
 
-Manuel test çalıştırmalarında olası kazaları önlemek için hız ayarları güvenli devreye alma seviyelerini aştığında (örn. `$VEL.CP` 3.0 m/s üzerinde) uyarır.
-
-## Görünmez Karakter Engelleyici (Non-ASCII)
-
-Yürütülebilir satırlardaki görünmez ASCII dışı veya Kiril karakterleri eski KRC kontrolörlerinde sessiz derleyici hatalarına neden olur. Pro kontrolleri bunları anında tespit eder ve satırı gösterir.
+![Endüstriyel Teşhisler](/media/kuka_control_center.gif)

@@ -1,6 +1,6 @@
 # KRC Backup Diff ve Nokta Delta İnceleyicisi
 
-<span class="badge pro">Pro Özellik (v1.8.0)</span>
+<span class="badge pro">Pro Özellik (v1.8.1)</span>
 
 Mevcut çalışma alanı mantığını ve nokta koordinatlarını fiziksel robot SmartPAD yedek ZIP arşivleri (KRC4 / KRC5) ile karşılaştırın.
 

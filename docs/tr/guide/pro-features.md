@@ -4,7 +4,7 @@ Gelişmiş statik kod analizi, mantık görselleştirme ve endüstriyel güvenli
 
 ---
 
-### 16. KUKA Control Center Kontrol Paneli (v1.8.0 Pro Hub)
+### 16. KUKA Control Center Kontrol Paneli (v1.8.1 Pro Hub)
 Tüm Pro araçlarına ve çalışma alanı analizlerine tek tıkla erişim sağlayan Fluent UI kontrol paneli (`krl.openControlCenter`).
 
 ![KUKA Control Center Demo](/media/kuka_control_center.gif)

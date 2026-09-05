@@ -4,7 +4,7 @@
 
 ---
 
-### 16. Панель управления KUKA Control Center (v1.8.0 Pro Hub)
+### 16. Панель управления KUKA Control Center (v1.8.1 Pro Hub)
 Нативный Fluent UI дашборд (`krl.openControlCenter`) для быстрого вызова всех Pro-инструментов, статического анализа проекта и связи со службой поддержки.
 
 ![KUKA Control Center Demo](/media/kuka_control_center.gif)

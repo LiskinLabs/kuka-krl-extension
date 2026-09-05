@@ -1,6 +1,6 @@
 # KRC Backup Diff & Point Delta Inspector
 
-<span class="badge pro">Pro Функция (v1.8.0)</span>
+<span class="badge pro">Pro Функция (v1.8.1)</span>
 
 Сравнение локального проекта с ZIP-архивами бэкапов SmartPAD (KRC4 / KRC5).
 

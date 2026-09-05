@@ -4,7 +4,7 @@ Advanced static code analysis, logic visualization, and industrial safety compli
 
 ---
 
-### 16. KUKA Control Center Dashboard (v1.8.0 Pro Hub)
+### 16. KUKA Control Center Dashboard (v1.8.1 Pro Hub)
 Fluent UI dashboard (`krl.openControlCenter`) providing 1-click access to all Pro tools and analytics.
 
 ![KUKA Control Center Demo](/media/kuka_control_center.gif)

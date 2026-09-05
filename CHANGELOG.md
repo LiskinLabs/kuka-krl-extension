@@ -19,6 +19,8 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Array Return Types Parsing**: Full regex engine support for KRL functions returning typed array buffers (e.g. `GLOBAL DEFFCT CHAR[15] K_ADDR()`), preventing false duplicate function identifier collisions.
 - **LSP State Fault-Tolerance & Bulletproofing**: Guarded all hover and workspace symbol lookups with optional chaining and fallback collections, ensuring 100% uptime without unhandled exceptions on cold workspaces.
 - **Quality Audit Report Re-Categorization**: Refined issue categorization in Acceptance Reports — empty blocks classified as Logic Hygiene, with dedicated priority buckets for Global Scope Collisions and Inline Form FOLD balance.
+- **Multi-Robot Automation Cell Isolation & Passport Detection**: Deterministic controller root boundaries (`controllerScope`), isolating variables, symbols, and diagnostics across multiple open robot backups with auto-generated multi-robot workcell passports.
+- **Submit Interpreter (`sps.sub`) Blocking WAIT Detection**: Safe guard flagging blocking `WAIT FOR` / `WAIT SEC` statements inside background submit interpreter loops while intelligently ignoring standard KUKA power failure recovery patterns (`$POWER_FAIL`).
 
 ## [1.8.0] - 2026-09-04 (KUKA.Sim 4.10 Kernel Integration & Official Specifications)
 

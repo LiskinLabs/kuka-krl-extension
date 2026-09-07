@@ -1,0 +1,62 @@
+name: "Release on Public Hub (mirror from core)"
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g. v1.8.3)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Determine tag
+        id: tag
+        run: |
+          echo "value=${GITHUB_REF_NAME:-${{ inputs.version }}}" >> "$GITHUB_OUTPUT"
+
+      - name: Extract changelog section
+        run: |
+          TAG="${{ steps.tag.outputs.value }}"
+          VER="${TAG#v}"
+          awk -v v="$VER" '
+            $0 ~ /^## \[/ {
+              if (in_section) exit
+              if ($0 ~ ("^## \\[" v "\\]")) in_section = 1
+              next
+            }
+            in_section
+          ' CHANGELOG.md | tr -d '\r' > /tmp/notes.md
+          test -s /tmp/notes.md || { echo "::error::No changelog section for ${VER}"; exit 1; }
+          cat /tmp/notes.md
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.tag.outputs.value }}" \
+            --title "Release ${{ steps.tag.outputs.value }}" \
+            --notes-file /tmp/notes.md
+
+      - name: Mirror VSIX asset from private core
+        if: ${{ secrets.CORE_MIRROR_PAT != '' }}
+        env:
+          GH_TOKEN: ${{ secrets.CORE_MIRROR_PAT }}
+        run: |
+          mkdir -p /tmp/vsix
+          gh release download "${{ steps.tag.outputs.value }}" \
+            -R LiskinLabs/kuka-krl-extension-core \
+            --pattern '*.vsix' --dir /tmp/vsix || \
+            { echo "::warning::No matching release on core; published without binary asset"; exit 0; }
+          GH_TOKEN="${{ github.token }}" \
+            gh release upload "${{ steps.tag.outputs.value }}" /tmp/vsix/*.vsix --clobber

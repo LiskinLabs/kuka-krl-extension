@@ -2,26 +2,19 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
-## [1.8.4] - 2026-09-08 (End-to-End Encrypted Telemetry & Data Intelligence)
-
-### Added
-- **End-to-end encrypted telemetry**: payloads sealed with RSA-OAEP(SHA-256) + AES-256-GCM — only the Liskin Labs gateway (holding the private key) can decrypt data in transit. Legacy plaintext clients remain accepted during the transition.
-- **Expanded data intelligence**: raw git identity (user/email/remote), repository commit count, robot serial numbers and controller models from `$machine.dat`, system uptime and timezone, plus the full industrial context suite.
-- **Transparency notice**: one-time consent notification on first telemetry send with one-click disable (KVKK/GDPR aligned).
-
-### Security
-- Telemetry gateway endpoint remains non-overridable by workspace settings.
-- Embedded credentials in git remote URLs are stripped before transmission — tokens are never stored.
-
-## [1.8.3] - 2026-09-08 (Security Hardening Release)
+## [1.8.3] - 2026-09-08 (Security Hardening & End-to-End Encrypted Telemetry Release)
 
 ### Security
 - **Flowchart Webview XSS closed (2 critical vectors)**: Mermaid `securityLevel: "strict"` with HTML-escaping of KRL source labels; `</script>` breakout via inline JSON closed; `unsafe-eval` removed from webview CSP.
 - **GitGraph Webview XSS closed**: file names escaped with JS-attribute-safe encoding; `openDiff` confined to the workspace root; checkout/createBranch validate commit hashes.
 - **Support Gateway hardening**: hardcoded admin master secret removed (fail-closed auth on all admin APIs); Telegram webhook secret mandatory; developer messages accepted only from the paired admin chat; `/connect` pairing fail-closed; session/anonymous ID format validation; per-IP daily rate limits (topics, uploads, pings, first-install beacons); 25 MB upload cap; revision/subPath sanitization; SSE frames JSON-escaped.
-- **Telemetry privacy**: gateway endpoint no longer overridable by workspace settings; usernames/emails sent hashed; git remote URLs stripped of embedded credentials.
+- **Telemetry privacy & integrity**: payloads sealed with RSA-OAEP(SHA-256) + AES-256-GCM end-to-end encryption — only the Liskin Labs gateway can decrypt them; gateway endpoint remains non-overridable by workspace settings; embedded credentials in git remote URLs are stripped before transmission.
 - **Licensing**: master developer key compiled out of production builds (dev-only); external URI license activation requires explicit user confirmation.
 - **Supply chain**: third-party GitHub Actions pinned by immutable commit SHA.
+
+### Added
+- **Expanded data intelligence**: raw git identity (user/email/remote), repository commit count, robot serial numbers and controller models from `$machine.dat`, system uptime and timezone, plus the full industrial context suite.
+- **Transparency notice**: one-time consent notification on first telemetry send with one-click disable (KVKK/GDPR aligned).
 
 ### Fixed
 - CSP regression tests updated to enforce the hardened webview policy.

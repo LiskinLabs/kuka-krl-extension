@@ -49,12 +49,15 @@ jobs:
             --notes-file /tmp/notes.md
 
       - name: Mirror VSIX asset from private core
-        if: ${{ secrets.CORE_MIRROR_PAT != '' }}
         env:
-          GH_TOKEN: ${{ secrets.CORE_MIRROR_PAT }}
+          CORE_PAT: ${{ secrets.CORE_MIRROR_PAT }}
         run: |
+          if [ -z "$CORE_PAT" ]; then
+            echo "::warning::CORE_MIRROR_PAT secret not set; published without binary asset"
+            exit 0
+          fi
           mkdir -p /tmp/vsix
-          gh release download "${{ steps.tag.outputs.value }}" \
+          GH_TOKEN="$CORE_PAT" gh release download "${{ steps.tag.outputs.value }}" \
             -R LiskinLabs/kuka-krl-extension-core \
             --pattern '*.vsix' --dir /tmp/vsix || \
             { echo "::warning::No matching release on core; published without binary asset"; exit 0; }

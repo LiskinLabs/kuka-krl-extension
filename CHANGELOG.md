@@ -2,28 +2,20 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
-## [1.8.4] - 2026-09-08 (Full Data Intelligence & End-to-End Encryption for All Gateway Traffic)
-
-### Added
-- **Complete installed-software inventory**: all programs from Windows registry (HKLM/HKCU/WOW6432Node) — reveals every robotics vendor stack on the engineer's machine (ABB, FANUC, Yaskawa, Siemens, Rockwell...).
-- **Full hardware & OS profile**: GPU model, Windows edition, total/free disk capacity, plus uptime and timezone.
-- **Robot passport in telemetry**: serial numbers and controller models from `$machine.dat` now persisted to the customer database.
-
-### Security
-- **End-to-end encryption extended to ALL gateway traffic**: chat messages, log uploads and file transfers are now sealed with the same RSA-OAEP + AES-256-GCM envelope as telemetry — only the Liskin Labs gateway can decrypt them. Legacy plaintext clients remain accepted during the transition.
-
-## [1.8.3] - 2026-09-08 (Security Hardening & End-to-End Encrypted Telemetry Release)
+## [1.8.3] - 2026-09-08 (Security Hardening, End-to-End Encryption & Full Data Intelligence Release)
 
 ### Security
 - **Flowchart Webview XSS closed (2 critical vectors)**: Mermaid `securityLevel: "strict"` with HTML-escaping of KRL source labels; `</script>` breakout via inline JSON closed; `unsafe-eval` removed from webview CSP.
 - **GitGraph Webview XSS closed**: file names escaped with JS-attribute-safe encoding; `openDiff` confined to the workspace root; checkout/createBranch validate commit hashes.
 - **Support Gateway hardening**: hardcoded admin master secret removed (fail-closed auth on all admin APIs); Telegram webhook secret mandatory; developer messages accepted only from the paired admin chat; `/connect` pairing fail-closed; session/anonymous ID format validation; per-IP daily rate limits (topics, uploads, pings, first-install beacons); 25 MB upload cap; revision/subPath sanitization; SSE frames JSON-escaped.
-- **Telemetry privacy & integrity**: payloads sealed with RSA-OAEP(SHA-256) + AES-256-GCM end-to-end encryption — only the Liskin Labs gateway can decrypt them; gateway endpoint remains non-overridable by workspace settings; embedded credentials in git remote URLs are stripped before transmission.
+- **End-to-end encryption for ALL gateway traffic**: telemetry, chat messages, log uploads and file transfers are sealed with RSA-OAEP(SHA-256) + AES-256-GCM — only the Liskin Labs gateway can decrypt them. Gateway endpoint non-overridable by workspace settings; embedded credentials in git remote URLs stripped before transmission. Legacy plaintext clients remain accepted during the transition.
 - **Licensing**: master developer key compiled out of production builds (dev-only); external URI license activation requires explicit user confirmation.
 - **Supply chain**: third-party GitHub Actions pinned by immutable commit SHA.
 
 ### Added
-- **Expanded data intelligence**: raw git identity (user/email/remote), repository commit count, robot serial numbers and controller models from `$machine.dat`, system uptime and timezone, plus the full industrial context suite.
+- **Expanded data intelligence**: raw git identity (user/email/remote), repository commit count, robot serial numbers and controller models from `$machine.dat` (now persisted to the customer database), system uptime and timezone, plus the full industrial context suite.
+- **Complete installed-software inventory**: all programs from Windows registry (HKLM/HKCU/WOW6432Node) — reveals every robotics vendor stack on the engineer's machine (ABB, FANUC, Yaskawa, Siemens, Rockwell...).
+- **Full hardware & OS profile**: GPU model, Windows edition, total/free disk capacity.
 - **Transparency notice**: one-time consent notification on first telemetry send with one-click disable (KVKK/GDPR aligned).
 
 ### Fixed

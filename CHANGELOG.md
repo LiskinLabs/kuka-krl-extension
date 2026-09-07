@@ -2,6 +2,32 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.8.2] - 2026-09-06 (Interactive Flowchart Viewer v2.0, Multi-Backup Diagnostics & Industrial Pro License Alignment)
+
+### Added
+- **Interactive Control Flowchart v2.0 (`krl.showFlowchart`)**:
+  - **Bidirectional History Stack & Breadcrumbs**: Full navigation history with `⬅️ Back (Alt+Left)`, `➡️ Forward (Alt+Right)`, `🏠 Main Program`, and clickable breadcrumbs trail (`📍 cell.src ➔ p00.src ➔ ...`).
+  - **Smart Centering & Readability Zoom**: Automatically centers on program entry points (`DEF cell`) with high-legibility default scale (0.8x) for wide switch-case branching programs, avoiding illegible micro-scaling.
+  - **Fit to Screen (`🔄 Fit Screen`)**: Instant one-click adaptation to view the entire routing diagram regardless of complexity.
+  - **Industrial Capacity Engine**: Diagram processing engine uncapped to 100,000 edges and 10MB diagram buffers, flawlessly rendering massive production cell dispatchers (such as `p00.src`).
+  - **Interactive In-Diagram Search**: Real-time statement filtering with visual amber glow and match counters for motion commands, I/O flags, and subroutines.
+  - **Enhanced Graph Topology**: Refined control flow connectivity linking `CASE` branch exits directly to `ENDSWITCH` and ensuring seamless loop back-edges.
+- **Hierarchical Sidebar & Pro Alignment**:
+  - Full synchronization between sidebar `[PRO]` badges and runtime execution guards. All professional tools (AI Safety Checker, iiQKA FOLD converter, Spline blocks, EKI generator/validator, GitLens KRL history and diffs, unused variable cleanup) are strictly guarded.
+  - Core tools (Interactive Flowchart, KUKA Control Center, Frame Calculator, Workspace Validator, Snippet Generator, Project Scaffolding, and Backup Export) remain accessible for all automation engineers.
+- **License Management & Machine Seat Control**:
+  - Added in-editor license deactivation (`krl.deactivateLicense`) to seamlessly release and transfer license seats between industrial field laptops and engineering workstations.
+  - Real-time reactive updates for the sidebar command tree upon license activation and deactivation.
+- **Multi-Robot Controller Scoping & Diagnostics**:
+  - Automatic isolation of controller boundaries via `getControllerRoot`, preventing false procedure duplicate warnings across multi-robot automotive cells.
+  - Submit Interpreter safety validation flagging blocking `WAIT FOR` loops in `sps.sub`.
+  - Physical I/O range validation enforcing hardware boundaries for digital and analog channels.
+
+### Fixed
+- Fixed SVG export serialization in Flowchart Webview.
+- Fixed case-to-endswitch edge routing for nested branching blocks.
+- Fixed controller boundary resolution for multi-robot project folders.
+
 ## [1.8.1] - 2026-09-05 (Studio Hub Redesign, Universal Theme Support & Industrial Fleet Diagnostics)
 
 ### Added

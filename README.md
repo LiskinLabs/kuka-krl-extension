@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.1-FF6600?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Release v1.8.1" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.2-FF6600?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Release v1.8.2" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Verified-4.1M%2B%20LoC-10b981?style=for-the-badge&logo=checkmarx&logoColor=white" alt="Fleet Verified" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=for-the-badge&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
 </p>

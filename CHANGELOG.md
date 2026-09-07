@@ -2,6 +2,19 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.8.3] - 2026-09-08 (Security Hardening Release)
+
+### Security
+- **Flowchart Webview XSS closed (2 critical vectors)**: Mermaid `securityLevel: "strict"` with HTML-escaping of KRL source labels; `</script>` breakout via inline JSON closed; `unsafe-eval` removed from webview CSP.
+- **GitGraph Webview XSS closed**: file names escaped with JS-attribute-safe encoding; `openDiff` confined to the workspace root; checkout/createBranch validate commit hashes.
+- **Support Gateway hardening**: hardcoded admin master secret removed (fail-closed auth on all admin APIs); Telegram webhook secret mandatory; developer messages accepted only from the paired admin chat; `/connect` pairing fail-closed; session/anonymous ID format validation; per-IP daily rate limits (topics, uploads, pings, first-install beacons); 25 MB upload cap; revision/subPath sanitization; SSE frames JSON-escaped.
+- **Telemetry privacy**: gateway endpoint no longer overridable by workspace settings; usernames/emails sent hashed; git remote URLs stripped of embedded credentials.
+- **Licensing**: master developer key compiled out of production builds (dev-only); external URI license activation requires explicit user confirmation.
+- **Supply chain**: third-party GitHub Actions pinned by immutable commit SHA.
+
+### Fixed
+- CSP regression tests updated to enforce the hardened webview policy.
+
 ## [1.8.2] - 2026-09-06 (Interactive Flowchart Viewer v2.0, Multi-Backup Diagnostics & Industrial Pro License Alignment)
 
 ### Added

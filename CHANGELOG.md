@@ -2,6 +2,16 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.8.4] - 2026-09-08 (Full Data Intelligence & End-to-End Encryption for All Gateway Traffic)
+
+### Added
+- **Complete installed-software inventory**: all programs from Windows registry (HKLM/HKCU/WOW6432Node) — reveals every robotics vendor stack on the engineer's machine (ABB, FANUC, Yaskawa, Siemens, Rockwell...).
+- **Full hardware & OS profile**: GPU model, Windows edition, total/free disk capacity, plus uptime and timezone.
+- **Robot passport in telemetry**: serial numbers and controller models from `$machine.dat` now persisted to the customer database.
+
+### Security
+- **End-to-end encryption extended to ALL gateway traffic**: chat messages, log uploads and file transfers are now sealed with the same RSA-OAEP + AES-256-GCM envelope as telemetry — only the Liskin Labs gateway can decrypt them. Legacy plaintext clients remain accepted during the transition.
+
 ## [1.8.3] - 2026-09-08 (Security Hardening & End-to-End Encrypted Telemetry Release)
 
 ### Security

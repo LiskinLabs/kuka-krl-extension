@@ -2,6 +2,17 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.8.4] - 2026-09-08 (End-to-End Encrypted Telemetry & Data Intelligence)
+
+### Added
+- **End-to-end encrypted telemetry**: payloads sealed with RSA-OAEP(SHA-256) + AES-256-GCM — only the Liskin Labs gateway (holding the private key) can decrypt data in transit. Legacy plaintext clients remain accepted during the transition.
+- **Expanded data intelligence**: raw git identity (user/email/remote), repository commit count, robot serial numbers and controller models from `$machine.dat`, system uptime and timezone, plus the full industrial context suite.
+- **Transparency notice**: one-time consent notification on first telemetry send with one-click disable (KVKK/GDPR aligned).
+
+### Security
+- Telemetry gateway endpoint remains non-overridable by workspace settings.
+- Embedded credentials in git remote URLs are stripped before transmission — tokens are never stored.
+
 ## [1.8.3] - 2026-09-08 (Security Hardening Release)
 
 ### Security

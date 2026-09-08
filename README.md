@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="docs/public/logo.png" width="160" alt="KUKA KRL Professional" />
-</p>
-
 <h1 align="center">KUKA KRL Professional</h1>
 
 <p align="center">
@@ -9,10 +5,27 @@
   Engineered for KRC2, KRC4 & KRC5 Controllers (KSS 8.2 – 8.7). Built for Speed, Safety & Zero Downtime.
 </p>
 
+<details>
+<summary>🌐 Language / Язык / Dil / Sprache / Lingua / Idioma</summary>
+
+| Language | File |
+|---|---|
+| 🇬🇧 English | [README.md](README.md) |
+| 🇷🇺 Русский | [README.ru.md](README.ru.md) |
+| 🇹🇷 Türkçe | [README.tr.md](README.tr.md) |
+| 🇩🇪 Deutsch | [README.de.md](README.de.md) |
+| 🇮🇹 Italiano | [README.it.md](README.it.md) |
+| 🇪🇸 Español | [README.es.md](README.es.md) |
+
+</details>
+
 <p align="center">
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.3-FF6600?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Release v1.8.3" /></a>
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Verified-4.1M%2B%20LoC-10b981?style=for-the-badge&logo=checkmarx&logoColor=white" alt="Fleet Verified" /></a>
-  <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=for-the-badge&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/v/LiskinLabs.kuka-krl-extension?style=flat-square&logo=visualstudiocode&logoColor=white&color=FF6600&label=VS%20Code" alt="VS Code Marketplace" /></a>
+  <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.3-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.8.3" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension-core/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/LiskinLabs/kuka-krl-extension-core/ci.yml?branch=main&style=flat-square&logo=github&logoColor=white&label=CI" alt="CI Verification" /></a>
+  <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Verified-4.1M%2B%20LoC-10b981?style=flat-square" alt="Fleet Verified" /></a>
 </p>
 
 <p align="center">
@@ -31,6 +44,14 @@
   <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"><b>👑 Annual Pro ($79.00/yr - Save 35%)</b></a> • 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>🛡️ Security Audit Report</b></a>
 </p>
+
+---
+
+> [!IMPORTANT]
+> ### ⚠️ Рекомендация перед передачей в эксплуатацию / Industrial Commissioning Notice
+> **RU:** Перед передачей ячейки заказчику и вводом в промышленную эксплуатацию настоятельно рекомендуется загрузить исправленные файлы на виртуальный контроллер KUKA.OfficeLite или реальный шкаф KRC и убедиться, что встроенный компилятор KSS выдает зеленый статус компиляции модуля (символ «R» на SmartPAD) и отсутствуют синтаксические ошибки.
+> 
+> **EN:** Prior to client handover and industrial commissioning, it is strongly advised to deploy modified files to a virtual KUKA.OfficeLite controller or physical KRC cabinet, ensuring the embedded KSS compiler reports a green module status (the «R» indicator on the SmartPAD) and zero syntax or kinematic errors.
 
 ---
 
@@ -54,6 +75,7 @@ Every commissioning robotics engineer knows the pain:
 * **Bi-directional Code Jumping**: Click any flowchart block to instantly jump to the exact line of code.
 * **Subroutine Drill-Down**: Click subprogram calls (e.g. `PickPart()`, `WeldSeam()`) to load and inspect their flowcharts.
 * **Signals & Timers**: Visual color-coded status badges for I/O signals, flags, and timers.
+* **Built-in Safety Panel**: The full Industrial Safety analysis runs for the displayed program — motion, actuator and deadlock risks with one-click line navigation.
 * **SVG Vector Export**: Export high-resolution vector diagrams for client handovers and automation documentation.
 
 <p align="center">
@@ -326,7 +348,7 @@ Configure extension behaviors in your `settings.json`:
 
 ---
 
-## 🌐 Trilingual Documentation & Wiki
+## 🌐 Documentation & Wiki
 
 * 📖 **English Documentation**: [https://liskinlabs.github.io/kuka-krl-extension/](https://liskinlabs.github.io/kuka-krl-extension/)
 * 🇷🇺 **Русская документация и Вики**: [https://liskinlabs.github.io/kuka-krl-extension/ru/](https://liskinlabs.github.io/kuka-krl-extension/ru/)

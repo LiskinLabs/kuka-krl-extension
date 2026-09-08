@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.2-FF6600?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Release v1.8.2" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.3-FF6600?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Release v1.8.3" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Verified-4.1M%2B%20LoC-10b981?style=for-the-badge&logo=checkmarx&logoColor=white" alt="Fleet Verified" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=for-the-badge&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
 </p>
@@ -232,7 +232,7 @@ Every commissioning robotics engineer knows the pain:
 | **Signal Inlay Hints & Hover Docs** | ✅ | ✅ | Inline PLC signal labels & parameter signatures |
 | **Code Formatter & Matrix Alignment** | ✅ | ✅ | Instant 1-click cleanup (`Shift+Alt+F`) |
 | **GitLens Line Blame & Revision History** | ✅ | ✅ | Instant author & commit tracking for every point |
-| **Hexa-Locale Architecture** (EN, DE, IT, ES, RU, TR) | ✅ | ✅ | Full native UI, 513 client keys & 1,073 system variable doc translations |
+| **Hexa-Locale Architecture** (EN, DE, IT, ES, RU, TR) | ✅ | ✅ | Full native UI, 515 UI keys & 1,073 system variable doc translations |
 | **Clean Git Metadata Stripper** | ✅ | ✅ | Strips WorkVisual headers for pristine Git diffs |
 | **Control Center & 21-Card Reference Guide** | ✅ | ✅ | Real-time diagnostic toggles & in-editor shortcuts guide |
 | **Full Flat 36-Commands Sidebar Tree** | ✅ | ✅ | Every single extension command accessible in 1 click |

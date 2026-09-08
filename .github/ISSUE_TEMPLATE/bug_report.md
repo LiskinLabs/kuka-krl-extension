@@ -16,7 +16,7 @@ assignees: 'LiskinLabs'
 4. Ожидаемый результат: ...
 
 ## 💻 Системная информация
-- **Версия расширения**: v1.7.3 Industrial Edition
+- **Версия расширения**: v1.8.3 Industrial Edition
 - **Версия KSS (KUKA System Software)**: KSS 8.3 / KSS 8.5 / KSS 8.6 / KSS 8.7
 - **WorkVisual Version**: ...
 - **Операционная система**: Windows

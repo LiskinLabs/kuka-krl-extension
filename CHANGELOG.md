@@ -17,6 +17,9 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 ### Fixed
 - "Check All Files" previously flagged UTF-8 BOM as an error that disappeared as soon as the file was opened; batch scans now match the editor view exactly.
 - Workspace diagnostics no longer drift between the batch scanner and open documents.
+- Variable checks now wait for the workspace index to finish loading, so no transient "variable not defined" messages appear while a large project is still being scanned.
+- The quality report now waits for validation to settle before counting issues, so its numbers always match the Problems panel.
+- The motion snippet generator now emits `C_DIS` / `C_VEL` with their values, matching KRL semantics.
 - Internal consistency fixes across the language server and support gateway.
 
 ## [1.8.2] - 2026-09-06 (Interactive Flowchart Viewer v2.0, Multi-Backup Diagnostics & Industrial Pro License Alignment)

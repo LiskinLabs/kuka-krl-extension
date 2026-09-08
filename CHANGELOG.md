@@ -13,6 +13,8 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Sealed end-to-end data transport**: all data exchanged with the Liskin Labs gateway (telemetry, chat, logs, file transfers) travels in a sealed private format; the gateway enforces session identifier validation and per-day limits to keep the support channel responsive.
 - **Cleaner support workflow**: developer replies are accepted only from the paired support chat, and pairing requires the admin key.
 - **Transparency notice**: a one-time notification describes what telemetry is collected, with a one-click disable option.
+- **Flowchart + Safety in one view**: the Interactive Logic Flowchart now embeds the full Industrial Safety analysis panel — motion, actuator and deadlock risks are listed next to the control-flow diagram with one-click line navigation.
+- **Flowchart joins the Pro toolset**: the Interactive Logic Flowchart viewer is now a Pro feature, consistent with the published feature matrix.
 
 ### Fixed
 - "Check All Files" previously flagged UTF-8 BOM as an error that disappeared as soon as the file was opened; batch scans now match the editor view exactly.

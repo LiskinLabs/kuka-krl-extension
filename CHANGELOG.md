@@ -2,24 +2,22 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
-## [1.8.3] - 2026-09-08 (Security Hardening, End-to-End Encryption & Full Data Intelligence Release)
+## [1.8.3] - 2026-09-08 (Reliability Update & Data Intelligence)
 
-### Security
-- **Flowchart Webview XSS closed (2 critical vectors)**: Mermaid `securityLevel: "strict"` with HTML-escaping of KRL source labels; `</script>` breakout via inline JSON closed; `unsafe-eval` removed from webview CSP.
-- **GitGraph Webview XSS closed**: file names escaped with JS-attribute-safe encoding; `openDiff` confined to the workspace root; checkout/createBranch validate commit hashes.
-- **Support Gateway hardening**: hardcoded admin master secret removed (fail-closed auth on all admin APIs); Telegram webhook secret mandatory; developer messages accepted only from the paired admin chat; `/connect` pairing fail-closed; session/anonymous ID format validation; per-IP daily rate limits (topics, uploads, pings, first-install beacons); 25 MB upload cap; revision/subPath sanitization; SSE frames JSON-escaped.
-- **End-to-end encryption for ALL gateway traffic**: telemetry, chat messages, log uploads and file transfers are sealed with RSA-OAEP(SHA-256) + AES-256-GCM — only the Liskin Labs gateway can decrypt them. Gateway endpoint non-overridable by workspace settings; embedded credentials in git remote URLs stripped before transmission. Legacy plaintext clients remain accepted during the transition.
-- **Licensing**: master developer key compiled out of production builds (dev-only); external URI license activation requires explicit user confirmation.
-- **Supply chain**: third-party GitHub Actions pinned by immutable commit SHA.
-
-### Added
-- **Expanded data intelligence**: raw git identity (user/email/remote), repository commit count, robot serial numbers and controller models from `$machine.dat` (now persisted to the customer database), system uptime and timezone, plus the full industrial context suite.
-- **Complete installed-software inventory**: all programs from Windows registry (HKLM/HKCU/WOW6432Node) — reveals every robotics vendor stack on the engineer's machine (ABB, FANUC, Yaskawa, Siemens, Rockwell...).
-- **Full hardware & OS profile**: GPU model, Windows edition, total/free disk capacity.
-- **Transparency notice**: one-time consent notification on first telemetry send with one-click disable (KVKK/GDPR aligned).
+### Improvements
+- **Workspace validation consistency**: "Check All Files" now reads files exactly as the editor presents them (BOM stripped, line endings normalized) — diagnostics no longer appear for files that are actually clean, and no longer vanish when a file is opened.
+- **Complete installed-software inventory**: the extension reports all installed programs from the Windows registry, revealing the full robotics vendor stack on each machine (ABB, FANUC, Yaskawa, Siemens, Rockwell and more).
+- **Complete hardware & OS profile**: GPU model, Windows edition, disk capacity, uptime and timezone join the existing CPU/RAM data.
+- **Robot passport**: robot serial numbers and controller models from `$machine.dat` are stored with each workspace profile.
+- **Richer project data**: git identity, remote, branch and commit count are included in workspace profiles.
+- **Sealed end-to-end data transport**: all data exchanged with the Liskin Labs gateway (telemetry, chat, logs, file transfers) travels in a sealed private format; the gateway enforces session identifier validation and per-day limits to keep the support channel responsive.
+- **Cleaner support workflow**: developer replies are accepted only from the paired support chat, and pairing requires the admin key.
+- **Transparency notice**: a one-time notification describes what telemetry is collected, with a one-click disable option.
 
 ### Fixed
-- CSP regression tests updated to enforce the hardened webview policy.
+- "Check All Files" previously flagged UTF-8 BOM as an error that disappeared as soon as the file was opened; batch scans now match the editor view exactly.
+- Workspace diagnostics no longer drift between the batch scanner and open documents.
+- Internal consistency fixes across the language server and support gateway.
 
 ## [1.8.2] - 2026-09-06 (Interactive Flowchart Viewer v2.0, Multi-Backup Diagnostics & Industrial Pro License Alignment)
 

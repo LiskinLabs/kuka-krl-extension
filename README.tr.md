@@ -20,7 +20,7 @@
 </details>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/v/LiskinLabs.kuka-krl-extension?style=flat-square&logo=visualstudiocode&logoColor=white&color=FF6600&label=VS%20Code" alt="VS Code Marketplace" /></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://badgen.net/vs-marketplace/v/LiskinLabs.kuka-krl-extension?style=flat&label=VS%20Code%20Marketplace&color=FF6600" alt="VS Code Marketplace" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
   <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.3-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.8.3" /></a>
   <a href="https://github.com/LiskinLabs/kuka-krl-extension-core/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/LiskinLabs/kuka-krl-extension-core/ci.yml?branch=main&style=flat-square&logo=github&logoColor=white&label=CI" alt="CI Verification" /></a>
@@ -48,10 +48,8 @@
 ---
 
 > [!IMPORTANT]
-> ### ⚠️ Рекомендация перед передачей в эксплуатацию / Industrial Commissioning Notice
-> **RU:** Перед передачей ячейки заказчику и вводом в промышленную эксплуатацию настоятельно рекомендуется загрузить исправленные файлы на виртуальный контроллер KUKA.OfficeLite или реальный шкаф KRC и убедиться, что встроенный компилятор KSS выдает зеленый статус компиляции модуля (символ «R» на SmartPAD) и отсутствуют синтаксические ошибки.
-> 
-> **EN:** Prior to client handover and industrial commissioning, it is strongly advised to deploy modified files to a virtual KUKA.OfficeLite controller or physical KRC cabinet, ensuring the embedded KSS compiler reports a green module status (the «R» indicator on the SmartPAD) and zero syntax or kinematic errors.
+> ### ⚠️ Endüstriyel Devreye Alma Uyarısı
+> Hücreyi müşteriye teslim etmeden ve endüstriyel devreye almadan önce, değiştirilen dosyaların sanal bir KUKA.OfficeLite kontrolörüne veya fiziksel KRC kabinine yüklenmesi ve gömülü KSS derleyicisinin yeşil modül durumu (SmartPAD'deki «R» göstergesi) ile sıfır sözdizimi veya kinematik hata bildirdiğinden emin olunması şiddetle önerilir.
 
 ---
 

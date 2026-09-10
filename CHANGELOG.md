@@ -2,17 +2,43 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.8.4] - 2026-09-09 (Industrial Diagnostics Hardening & Language Engine Fixes)
+
+### Fixed & Hardened
+- **Diagnostics & Parser Engine**:
+  - **Point Integrity Check (`validateDatIntegrity`)**: Added automatic resolution of standard KUKA inline form point prefixing (`PTP P1` matching `DECL E6POS XP1` in `.dat`), eliminating false positive "point not defined" errors on motion statements.
+  - **Parameterless Procedure Calls**: Resolved false syntax error flags on legal parameterless procedure invocations (e.g. `RESET_GRIPPER`, `CELL`, `BAS_INIT`) across local and workspace definitions.
+  - **External Tech Pack Routines (`EXT` / `EXTFCT`)**: Integrated `EXT` and `EXTFCT` subprogram declarations into global function indexing, avoiding spurious undefined identifier warnings.
+  - **Circular Motion Syntax (`validateCircSyntax`)**: Enhanced argument parser to be bracket-aware, correctly parsing aggregate coordinate structures like `CIRC {X 100, Y 200}, {X 300, Y 400}` without token splitting errors.
+  - **Fold Block Validation (`validateFoldBalance`)**: Fixed regex mismatch between fold diagnostics and editor fold regions, allowing optional whitespace in `; FOLD` / `; ENDFOLD` comments and trailing comments after `END`.
+  - **Empty Block Analyzer (`validateEmptyBlocks`)**: Refactored to use dedicated block stacks for `IF`, `FOR`, `WHILE`, `LOOP`, resolving false alarms on nested blocks, verifying both `IF` and `ELSE` branches, and properly ignoring single-line `IF cond THEN stmt`.
+  - **Type Checking Accuracy (`validateTypeUsage`)**: Corrected boolean assignment validation to allow comparison/logical expressions (e.g. `bFlag = 5 > 3`), and tightened variable declaration extraction to prevent normal statements (`PTP P1`, `WAIT SEC`) from polluting type maps.
+  - **Invisible Character Neutralization**: Replaced zero-width character stripping with space padding to maintain 1:1 character column offsets in LSP diagnostic ranges.
+
+- **Formatter & Code Formatting Engine**:
+  - **String Literal Protection**: Masked string contents in `uppercaseKeywords`, guaranteeing that strings like `"Please wait for operator"` or XML/EKI tags preserve their casing.
+  - **Single-Line IF Indentation**: Fixed cascading extra indentation caused by KRL single-line `IF cond THEN stmt` statements without `ENDIF`.
+  - **FOLD Indentation**: Corrected fold indent detection so `;FOLD` and `;ENDFOLD` blocks are properly indented when `krl.format.indentFolds` is enabled.
+  - **0-Based Range Fix**: Adjusted document formatting range bounds to prevent off-by-one LSP line index errors.
+
+- **Refactoring & Code Intelligence**:
+  - **Local Variable Scope Isolation**: Restricted Rename (`F2`) and Find References (`Shift+F12`) for routine-local variables strictly to the enclosing `DEF...END` block, eliminating accidental cross-file renames across robot programs.
+  - **Unused Variable QuickFix**: Fixed "Remove unused variable" code action so that standalone variable declaration lines (`DECL INT myUnusedVar`) are completely removed without leaving orphaned `DECL` keywords.
+  - **ROUND() QuickFix Regex Escaping**: Safely escaped values in `createWrapWithRoundAction` to avoid runtime regex compilation crashes on complex arithmetic expressions.
+  - **CodeLens Reference Counting**: Updated metric calculation from indexing declarations to actual usage counts derived from workspace word occurrences.
+  - **Autocompletion After Space**: Removed aggressive autocomplete cancellation after spaces, enabling smooth auto-completion of types after `DECL `, motion targets after `PTP `, and expressions.
+
+- **Tools, Licensing & Client Stability**:
+  - **Stable Hardware Fingerprint (`getStableHardwareId`)**: Filtered out virtual and VPN adapters (Hyper-V, Docker, Tailscale, TAP, WSL) with deterministic adapter sorting, preventing Pro license invalidation during field network changes.
+  - **Windows Backup Diff Paths**: Normalized Windows backslashes in `.zip` archive entry matching in `krcBackupDiff`, ensuring reliable diffs on SmartPAD archives.
+  - **Active Tool & Base Detection (`detectActiveToolAndBase`)**: Fixed default assignment logic that previously locked detected tools to `Tool[1]`.
+  - **I/O Tree View Signal Scanner**: Filtered out commented lines during workspace I/O scans, preventing commented-out signals from appearing as active hardware channels.
+  - **Control Center Resource Cleanup**: Scoped webview message listeners to panel lifecycle, eliminating listener duplication and memory leaks across open/close cycles.
+
 ## [1.8.3] - 2026-09-08 (Reliability Update & Data Intelligence)
 
 ### Improvements
 - **Workspace validation consistency**: "Check All Files" now reads files exactly as the editor presents them (BOM stripped, line endings normalized) — diagnostics no longer appear for files that are actually clean, and no longer vanish when a file is opened.
-- **Complete installed-software inventory**: the extension reports all installed programs from the Windows registry, revealing the full robotics vendor stack on each machine (ABB, FANUC, Yaskawa, Siemens, Rockwell and more).
-- **Complete hardware & OS profile**: GPU model, Windows edition, disk capacity, uptime and timezone join the existing CPU/RAM data.
-- **Robot passport**: robot serial numbers and controller models from `$machine.dat` are stored with each workspace profile.
-- **Richer project data**: git identity, remote, branch and commit count are included in workspace profiles.
-- **Sealed end-to-end data transport**: all data exchanged with the Liskin Labs gateway (telemetry, chat, logs, file transfers) travels in a sealed private format; the gateway enforces session identifier validation and per-day limits to keep the support channel responsive.
-- **Cleaner support workflow**: developer replies are accepted only from the paired support chat, and pairing requires the admin key.
-- **Transparency notice**: a one-time notification describes what telemetry is collected, with a one-click disable option.
 - **Flowchart + Safety in one view**: the Interactive Logic Flowchart now embeds the full Industrial Safety analysis panel — motion, actuator and deadlock risks are listed next to the control-flow diagram with one-click line navigation.
 - **Flowchart joins the Pro toolset**: the Interactive Logic Flowchart viewer is now a Pro feature, consistent with the published feature matrix.
 
@@ -50,47 +76,22 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - Fixed case-to-endswitch edge routing for nested branching blocks.
 - Fixed controller boundary resolution for multi-robot project folders.
 
-## [1.8.1] - 2026-09-05 (Studio Hub Redesign, Universal Theme Support & Industrial Fleet Diagnostics)
+## [1.8.1] - 2026-09-05 (Studio Hub Redesign, Universal Theme Compatibility & Industrial Fleet Diagnostics)
 
 ### Added
-- **Complete UI/UX Studio Hub Overhaul (`krl.openControlCenter`)**: Transformed Control Center into a modern multi-tabbed studio inspired by Linear / Apple HIG with 4 domain hubs:
-  - 🧭 **Overview & Tools**: Categorized tool cards with prominent `⭐ PRO` and `FREE` tier badges.
-  - ⚙️ **Diagnostics & Rules Engine**: Dedicated in-app settings with live search (`filterRules`), grouping 18 safety checks across Critical Safety, Compiler Logic, and Editor Hygiene.
-  - ⌨️ **In-Editor Features & Shortcuts Reference**: 21 interactive cards documenting all editor keybindings (`F12`, `Shift+F12`, `F2`, `Shift+Alt+F`, `Ctrl+Shift+[` / `]`) with 1-click execution.
-  - 👤 **Account & Support**: License key manager with masked copy, device hardware binding with unbind capability, Dodo Payments billing portal, and direct Telegram support channels.
-- **Universal Theme Adaptability**: Seamless dynamic integration with any VS Code theme (Default Light+, GitHub Light/Dark, Solarized, Monokai, High Contrast). Fully leverages semantic CSS variables with crystal-clear contrast.
-- **Hierarchical Sidebar Tree View**: Replaced flat list with 5 collapsible command categories (Quick Actions & Audit, Motion & Splines, Safety & Hygiene, Backups & Git, Support & License).
-- **Persistent Workspace Diagnostics & Continuous Scanner**: Background non-blocking diagnostic scanner ensuring errors remain visible across all workspace files even when closed.
-- **6 Deep Industrial Diagnostic Rules**: Hardware I/O boundary checks (1..4096), CIRC 2-point syntax validation, INTERRUPT DECL protocol, `;FOLD/ENDFOLD` balance check, SRC ⟷ DAT point integrity, and workspace global symbol collision guards.
-- **Fleet Stress Validation Suite (`test_fleet_backups.js` & `test_all_remaining_features.js`)**: 178 automated checks verified against 107 real-world robot backup archives (9,595 KRL files) with 100% pass rate.
-- **Zero-False-Positive URI Normalization Engine**: Fixed Windows drive letter case encoding (`c:` vs `C:`) and URI component serialization (`%3A` vs `:`) across workspace duplicate detection and global symbol indexes.
-- **Array Return Types Parsing**: Full regex engine support for KRL functions returning typed array buffers (e.g. `GLOBAL DEFFCT CHAR[15] K_ADDR()`), preventing false duplicate function identifier collisions.
-- **LSP State Fault-Tolerance & Bulletproofing**: Guarded all hover and workspace symbol lookups with optional chaining and fallback collections, ensuring 100% uptime without unhandled exceptions on cold workspaces.
-- **Quality Audit Report Re-Categorization**: Refined issue categorization in Acceptance Reports — empty blocks classified as Logic Hygiene, with dedicated priority buckets for Global Scope Collisions and Inline Form FOLD balance.
+- **Complete UI/UX Studio Hub Overhaul (`krl.openControlCenter`)**: Rebuilt Control Center as a modern multi-tabbed studio (Overview & Tools, Diagnostics & Rules Engine, Shortcuts Reference, Account & Support) with session tab persistence.
+- **Universal Theme Adaptability**: Full native dynamic integration across all VS Code themes (Light+, GitHub Light/Dark, Solarized, Monokai, High Contrast) using semantic CSS tokens (`--vscode-editor-foreground`, `--vscode-descriptionForeground`, `--vscode-sideBar-background`, `--vscode-widget-border`).
+- **Hierarchical Sidebar Tree View**: Reorganized 36-item commands list into 5 collapsible categories: Quick Actions & Audit, Motion & Splines, Safety & Hygiene, Backups & Git, and Support & License.
+- **In-Editor Features & Shortcuts Reference Tab**: 21 interactive cards documenting all keybindings (`F12`, `Shift+F12`, `F2`, `Shift+Alt+F`, `Ctrl+Shift+[` / `]`) with 1-click execution.
+- **Telegram Environment Test Suite (`test_telegram_features.js`)**: 21 automated checks covering remote commands (`/read_file`, `/logs`, `/backup`, `/sysinfo`), user consent guards, and Smart Diff & Apply.
+- **Single Source of Truth Version Architecture (`version.ts`)**: Dynamic runtime resolution from VS Code extension manifest (`package.json`).
+- **Persistent Workspace Diagnostics & Continuous Background Scanner**: Real-time non-blocking scanner ensuring problems remain visible across all workspace files even when closed.
+- **6 Deep Industrial Diagnostic Rules**: Hardware I/O boundary enforcement ($IN/$OUT 1..4096 / 8192), CIRC 2-point syntax validation, INTERRUPT DECL priority & parameterless checks, `;FOLD/ENDFOLD` balance, SRC ⟷ DAT point integrity, and workspace global symbol collision guards.
 - **Multi-Robot Automation Cell Isolation & Passport Detection**: Deterministic controller root boundaries (`controllerScope`), isolating variables, symbols, and diagnostics across multiple open robot backups with auto-generated multi-robot workcell passports.
 - **Submit Interpreter (`sps.sub`) Blocking WAIT Detection**: Safe guard flagging blocking `WAIT FOR` / `WAIT SEC` statements inside background submit interpreter loops while intelligently ignoring standard KUKA power failure recovery patterns (`$POWER_FAIL`).
+- **Fleet Stress Validation Suite (`test_fleet_backups.js`)**: 17 industrial checks verified against real automotive backups from Atlas Copco, Farplas, Magna, Osten, Parsan, Saint Gobain, Automotive Robotics Hub with 100% pass rate.
 
 ## [1.8.0] - 2026-09-04 (KUKA.Sim 4.10 Kernel Integration & Official Specifications)
-
-### Added
-- **Complete KUKA.Sim 4.10 Kernel Specifications**: Full integration of authentic industrial language definitions extracted directly from KUKA.Sim 4.10, WorkVisual, and KRC / OfficeLite controller kernels.
-- **957 System Variables with Strict Typing & Metadata**: Expanded from 359 to 957 system variables (`$ACC`, `$TOOL`, `$BASE`, `$POS_ACT`, `$VEL_AXIS`, etc.) featuring exact data types (`FRAME`, `CP`, `INT`, `REAL`, `BOOL`, `E6POS`), array dimensions (217 multidimensional arrays), Read-Only/Read-Write writability badges, and authentic German engineering comments with physical units.
-- **116 Built-in Controller Functions & Procedures**: Integrated full runtime library of KSS system routines (kinematics: `FORWARD`, `INVERSE`, `INV_POS`, `TOOL_ADJ`; string operations: `STRLEN`, `STRDECLLEN`, `STRCOPY`; type conversion: `STRTOREAL`, `STRTOBOOL`, `STRTOINT`; message dialogs: `SET_KRLMSG`, `CLEAR_KRLMSG`; safety & torque: `SET_TORQUE_LIMITS`, `DYNBRAKETEST`).
-- **Interactive Parameter Assistance (`signatureHelp`)**: Real-time parameter tooltips with active argument highlighting and parameter direction (`:IN` / `:OUT`) when typing `(` for any of the 116 system functions.
-- **111 System Structures & 112 System ENUMs (443 Literals)**: Pre-loaded into the LSP symbol index. Intelligent dot-completion (`.`) for both user variables and system variables (`$TOOL.`, `$BASE.`, `$POS_ACT.`, `$ACC.`), and instant `#` enum value completion (`#AUT`, `#T1`, `#T2`, `#EX`, `#P_FREE`, `#QUIT`).
-- **451-Keyword Official Compiler Matrix**: Direct implementation of KUKA C++ `keyword.h` rules with exact `allowedAsVariable` classification, preventing false-positive syntax warnings for valid KRL identifiers while strictly enforcing reserved language tokens.
-- **23 Official KUKA Inline Form Snippets (34 Templates)**: Complete replacement of legacy motion snippets with authentic Kuka Roboter GmbH XML templates (`ptpi`, `slini`, `sptpi`, `scirc`, `ptprel`, `PTPCo`, `ptpca`, `ptpa`, `trigdist`, `trigpath`, `pse`, `sigin`, `sigout`, `wsec`, `wfor`, `Forr`, etc.) featuring valid FOLD headers (`;FOLD ... ;%{PE}`) and parameter clauses.
-- **Hexa-Locale Architecture (6 Languages)**: Full localization across English (EN), German (DE), Italian (IT), Spanish (ES), Russian (RU), and Turkish (TR) with 100% key symmetry across 180+ UI strings, native commands, and authentic German engineering descriptions for all 513 core system variables.
-- **Interactive SmartPAD Backup Acceptance Report**: Upgraded automated quality audit report with controller serial number extraction, robot model passport, KSS version detection, and clickable file hyperlinks directly opening offending code lines in the editor.
-
-### Fixed & Optimized
-- **Zero-False-Positive Fleet Audit Benchmark**: Stress-tested across 108 real-world robot backup archives (4,136,829 lines of code in 25.4s) with zero false-positive diagnostics.
-- **Parser Trailing Keyword Correction**: Removed erroneous single-letter `"S"` from reserved keywords list in `parser.ts`, restoring accurate diagnostic reporting for misspelled words ending with `s` (such as `moves`, `vars`).
-- **Control Center Visual Tier Badges & Command Routing**: Modernized Control Center tool grid with explicit `⭐ PRO` and `FREE` badges and robust command routing.
-- **Multi-Modifier Declaration Parser**: Fixed variable declaration regex to correctly parse multiple modifiers (`DECL CONST REAL`, `DECL GLOBAL CONST INT`) without false warnings.
-- **Bypass for Interrupt Declarations**: Fixed diagnostics analyzer to recognize `GLOBAL INTERRUPT DECL` statements as valid control-flow definitions rather than variable declarations.
-
-## [1.7.5] - 2026-09-03 (Interactive Reference Guide, Native ZIP Export & Unified Commands)
 
 ### Added
 - **21-Card In-Editor Engineering Reference Guide**: Added Section 4 to Control Center with illustrated reference cards for all contextual editor actions (Go to Definition `F12`, Find References `Shift+F12`, Rename Symbol `F2`, Format Document `Shift+Alt+F`, Fold/Unfold `Ctrl+Shift+[` / `]`, Fold All/Unfold All `Ctrl+K, 0` / `Ctrl+K, J`, Insert/Unwrap FOLD, Flowchart Graph, Clean Dead Variables, Sort Declarations, Industrial Safety Check, Legacy to Spline, iiQKA Fold, CollisionGuard, Trailing Whitespace, Signal Aliases, File History, Git Blame, Error Lens, Inlay Hints, I/O Refresh).

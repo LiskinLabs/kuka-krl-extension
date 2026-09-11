@@ -39,8 +39,8 @@
 
 <p align="center">
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>🌐 Интерактивная вики (50 промышленных инструментов)</b></a> •
-  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"><b>⚡ 14 дней бесплатно ($9.99/мес)</b></a> • 
-  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"><b>👑 Pro на год ($79.00/год — экономия 35%)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>⚡ 14 дней бесплатно ($9.99/мес)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>👑 Pro на год ($79.00/год — экономия 35%)</b></a> • 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>🛡️ Отчёт аудита безопасности</b></a>
 </p>
 
@@ -282,12 +282,14 @@
 | Тариф | Цена | Пробный период / скидка | Условия лицензии | Оформление |
 |:---|:---:|:---|:---|:---:|
 | 🟢 **Community** | **$0** | Бесплатно навсегда | Личное и коммерческое использование | [Установить бесплатно](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| ⏱️ **Pro Месячный** | **$9.99** / мес | **14 дней пробного периода** ($0.00 сегодня) | Все 50 промышленных Pro-инструментов • 2 рабочих места | [Начать 14-дневный пробный период](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
-| 👑 **Pro Годовой** | **$79.00** / год | **Экономия 35%** (~$6.58/мес) | Все 50 Pro-инструментов • 3 рабочих места • 30-дневный офлайн-буфер | [Оформить Pro на год](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
-| 🏆 **Pro Пожизненный** | **$349.00** | **Один платёж — навсегда** | Все 50 Pro-инструментов • 5 рабочих мест • Пожизненные обновления | [Купить пожизненный Pro](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
+| ⏱️ **Pro Месячный** | **$9.99** / мес | **14 дней пробного периода** ($0.00 сегодня) | Все 50 промышленных Pro-инструментов • 5 активаций | [Начать 14-дневный пробный период](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| 👑 **Pro Годовой** | **$79.00** / год | **Экономия 35%** (~$6.58/мес) | Все 50 Pro-инструментов • 5 активаций • 30-дневный офлайн-буфер | [Оформить Pro на год](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
+| 🏆 **Pro Пожизненный** | **$699.00** | **Один платёж — навсегда** | Все 50 Pro-инструментов • 5 активаций • Пожизненные обновления | [Купить пожизненный Pro](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
+| 🏢 **Team Edition** | **$299.00** / год | B2B — счёт и коммерческое предложение | Все 50 Pro-инструментов • 5 активаций | [Купить Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏭 **Enterprise Site** | **$1,499.00** / год | Безлимит рабочих мест | Все 50 Pro-инструментов • Неограниченные активации • Брендированные отчёты | [Купить Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
-  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ" style="text-decoration:none;">
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">
     <kbd style="font-size: 1.25em; padding: 14px 32px; background-color: #FF6600; color: white; border-radius: 10px; font-weight: bold; border: 1px solid #d15500; cursor: pointer; box-shadow: 0 4px 18px rgba(255,102,0,0.4);">
       ⚡ Выбрать тариф и начать 14-дневный пробный период (Dodo Checkout)
     </kbd>

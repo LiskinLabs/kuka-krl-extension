@@ -39,8 +39,8 @@
 
 <p align="center">
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>🌐 Wiki interactiva (50 herramientas industriales)</b></a> •
-  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"><b>⚡ Prueba gratuita de 14 días ($9.99/mes)</b></a> • 
-  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"><b>👑 Pro anual ($79.00/año – ahorra un 35%)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>⚡ Prueba gratuita de 14 días ($9.99/mes)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>👑 Pro anual ($79.00/año – ahorra un 35%)</b></a> • 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>🛡️ Informe de auditoría de seguridad</b></a>
 </p>
 
@@ -282,12 +282,14 @@ Ofrecemos licencias flexibles de grado industrial a través de nuestro comercian
 | Plan | Precio | Prueba / Descuento | Términos de licencia | Pago |
 |:---|:---:|:---|:---|:---:|
 | 🟢 **Community** | **$0** | 100% gratis para siempre | Uso personal y comercial | [Instalar gratis](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| ⏱️ **Pro Mensual** | **$9.99** / mes | **Prueba gratuita de 14 días** ($0.00 hoy) | Las 50 herramientas Pro industriales • 2 estaciones de trabajo | [Iniciar prueba de 14 días](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
-| 👑 **Pro Anual** | **$79.00** / año | **Ahorra un 35%** (~$6.58/mes) | Las 50 herramientas Pro • 3 estaciones • Buffer offline de 30 días | [Obtener Pro anual](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
-| 🏆 **Pro Vitalicio** | **$349.00** | **Paga una vez, tuyo para siempre** | Las 50 herramientas Pro • 5 estaciones • Actualizaciones de por vida | [Obtener Pro vitalicio](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
+| ⏱️ **Pro Mensual** | **$9.99** / mes | **Prueba gratuita de 14 días** ($0.00 hoy) | Las 50 herramientas Pro industriales • 5 activaciones | [Iniciar prueba de 14 días](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| 👑 **Pro Anual** | **$79.00** / año | **Ahorra un 35%** (~$6.58/mes) | Las 50 herramientas Pro • 5 activaciones • Buffer offline de 30 días | [Obtener Pro anual](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
+| 🏆 **Pro Vitalicio** | **$699.00** | **Paga una vez, tuyo para siempre** | Las 50 herramientas Pro • 5 activaciones • Actualizaciones de por vida | [Obtener Pro vitalicio](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
+| 🏢 **Team Edition** | **$299.00** / año | B2B — Factura y presupuesto | Las 50 herramientas Pro • 5 activaciones | [Obtener Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏭 **Enterprise Site** | **$1,499.00** / año | Estaciones ilimitadas | Las 50 herramientas Pro • Activaciones ilimitadas • Informes con marca | [Obtener Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
-  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ" style="text-decoration:none;">
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">
     <kbd style="font-size: 1.25em; padding: 14px 32px; background-color: #FF6600; color: white; border-radius: 10px; font-weight: bold; border: 1px solid #d15500; cursor: pointer; box-shadow: 0 4px 18px rgba(255,102,0,0.4);">
       ⚡ Elige plan e inicia la prueba gratuita de 14 días (Dodo Checkout)
     </kbd>

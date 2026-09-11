@@ -87,7 +87,7 @@ export default defineConfig({
           { text: 'Features Wiki (50 Tools)', link: '/guide/features' },
           { text: 'Community', link: '/guide/community-features' },
           { text: 'Pro Features', link: '/guide/pro-features' },
-          { text: 'Buy Pro License', link: 'https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ' }
+          { text: 'Buy Pro License', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' }
         ],
         sidebar: [
           {
@@ -132,7 +132,7 @@ export default defineConfig({
           { text: 'Вики (50 инструментов)', link: '/ru/guide/features' },
           { text: 'Бесплатно (Community)', link: '/ru/guide/community-features' },
           { text: 'Pro функции', link: '/ru/guide/pro-features' },
-          { text: 'Купить Pro', link: 'https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ' }
+          { text: 'Купить Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' }
         ],
         sidebar: [
           {
@@ -177,7 +177,7 @@ export default defineConfig({
           { text: 'Özellikler Wiki (50 Araç)', link: '/tr/guide/features' },
           { text: 'Ücretsiz (Community)', link: '/tr/guide/community-features' },
           { text: 'Pro Özellikler', link: '/tr/guide/pro-features' },
-          { text: 'Pro Satın Al', link: 'https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ' }
+          { text: 'Pro Satın Al', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' }
         ],
         sidebar: [
           {

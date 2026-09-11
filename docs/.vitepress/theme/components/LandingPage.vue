@@ -175,8 +175,8 @@
               </a>
 
               <a 
-                href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ" 
-                target="_blank" 
+                href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"
+                target="_blank"
                 class="px-4 py-3 rounded-xl bg-[#0d121d] hover:bg-[#141c2c] text-gray-200 hover:text-white font-bold tracking-wide transition-all border border-white/15 flex items-center gap-2 shadow-lg active:scale-95">
                 <span>{{ t.btnBuyPro }}</span>
                 <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">14-Day Free</span>
@@ -1125,7 +1125,7 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch font-mono">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch font-mono">
         
         <!-- Tier 1: Free Community -->
         <div class="p-6 rounded-2xl bg-[#0a0d14] border border-white/10 flex flex-col justify-between shadow-xl">
@@ -1163,8 +1163,8 @@
           </div>
           <div class="pt-6">
             <a 
-              href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ" 
-              target="_blank" 
+              href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"
+              target="_blank"
               class="block w-full py-3 rounded-xl bg-[#0d121d] hover:bg-[#151d2d] text-kuka-orange font-bold text-center border border-kuka-orange/50 text-xs transition-colors">
               [ {{ t.btnSub }} ]
             </a>
@@ -1184,13 +1184,13 @@
               <div>✓ {{ t.pf1 }}</div>
               <div>✓ {{ t.pf2 }}</div>
               <div>✓ {{ t.pf3_pri }}</div>
-              <div class="text-emerald-400 font-bold">✓ {{ t.activation3Machines }}</div>
+              <div class="text-emerald-400 font-bold">✓ {{ t.activation5Seats }}</div>
             </div>
           </div>
           <div class="pt-6">
             <a 
-              href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ" 
-              target="_blank" 
+              href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"
+              target="_blank"
               class="block w-full py-3 rounded-xl bg-kuka-orange hover:bg-orange-600 text-white font-bold text-center shadow-[0_0_20px_rgba(255,102,0,0.4)] text-xs transition-all border border-orange-400/50">
               [ {{ t.btnSubYr }} ]
             </a>
@@ -1201,7 +1201,7 @@
         <div class="p-6 rounded-2xl bg-[#0a0d14] border border-white/10 flex flex-col justify-between shadow-xl">
           <div class="space-y-4 text-left">
             <div class="text-purple-400 text-xs font-bold tracking-widest uppercase">// PRO LIFETIME</div>
-            <div class="text-3xl font-black text-white font-sans">$349 <span class="text-xs text-gray-400 font-mono">{{ t.perOnce }}</span></div>
+            <div class="text-3xl font-black text-white font-sans">$699 <span class="text-xs text-gray-400 font-mono">{{ t.perOnce }}</span></div>
             <p class="text-xs text-gray-400 font-sans leading-relaxed">{{ t.p3Desc }}</p>
             <div class="space-y-2 text-xs text-gray-300 pt-4 border-t border-white/10">
               <div>✓ {{ t.lifetimeF1 }}</div>
@@ -1211,10 +1211,57 @@
           </div>
           <div class="pt-6">
             <a 
-              href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ" 
-              target="_blank" 
+              href="https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr"
+              target="_blank"
               class="block w-full py-3 rounded-xl bg-[#0d121d] hover:bg-[#151d2d] text-white font-bold text-center border border-white/15 text-xs transition-colors">
               [ {{ t.btnLifetime }} ]
+            </a>
+          </div>
+        </div>
+
+        <!-- Tier 5: Team Edition (B2B) -->
+        <div class="p-6 rounded-2xl bg-[#0a0d14] border border-white/10 hover:border-cyan-400/50 transition-all flex flex-col justify-between shadow-xl">
+          <div class="space-y-4 text-left">
+            <div class="text-cyan-400 text-xs font-bold tracking-widest uppercase">// TEAM EDITION</div>
+            <div class="text-3xl font-black text-white font-sans">$299 <span class="text-xs text-gray-400 font-mono">{{ t.perYear }}</span></div>
+            <p class="text-xs text-gray-400 font-sans leading-relaxed">{{ t.p4Desc }}</p>
+            <div class="space-y-2 text-xs text-gray-300 pt-4 border-t border-white/10">
+              <div>✓ {{ t.pf4_1 }}</div>
+              <div>✓ {{ t.pf4_2 }}</div>
+              <div>✓ {{ t.pf4_3 }}</div>
+            </div>
+          </div>
+          <div class="pt-6">
+            <a
+              href="https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v"
+              target="_blank"
+              class="block w-full py-3 rounded-xl bg-[#0d121d] hover:bg-[#151d2d] text-cyan-400 font-bold text-center border border-cyan-400/50 text-xs transition-colors">
+              [ {{ t.btnTeam }} ]
+            </a>
+          </div>
+        </div>
+
+        <!-- Tier 6: Enterprise Site License (B2B) -->
+        <div class="p-6 rounded-2xl bg-[#0a0d14] border border-emerald-400/40 shadow-[0_0_30px_rgba(16,185,129,0.12)] flex flex-col justify-between relative">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-emerald-500 text-white text-[10px] font-bold tracking-wider uppercase shadow-md">
+            {{ t.entBadge }}
+          </div>
+          <div class="space-y-4 text-left">
+            <div class="text-emerald-400 text-xs font-bold tracking-widest uppercase">// ENTERPRISE SITE</div>
+            <div class="text-3xl font-black text-white font-sans">$1,499 <span class="text-xs text-gray-400 font-mono">{{ t.perYear }}</span></div>
+            <p class="text-xs text-gray-400 font-sans leading-relaxed">{{ t.p5Desc }}</p>
+            <div class="space-y-2 text-xs text-gray-300 pt-4 border-t border-white/10">
+              <div>✓ {{ t.pf5_1 }}</div>
+              <div>✓ {{ t.pf5_2 }}</div>
+              <div>✓ {{ t.pf5_3 }}</div>
+            </div>
+          </div>
+          <div class="pt-6">
+            <a
+              href="https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP"
+              target="_blank"
+              class="block w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-center shadow-[0_0_20px_rgba(16,185,129,0.35)] text-xs transition-all border border-emerald-400/50">
+              [ {{ t.btnEnterprise }} ]
             </a>
           </div>
         </div>
@@ -1285,8 +1332,8 @@
               {{ t.matrixBtnFree }}
             </a>
             <a 
-              href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ" 
-              target="_blank" 
+              href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"
+              target="_blank"
               class="px-4 py-2 rounded-xl bg-kuka-orange hover:bg-orange-600 text-white font-bold transition-all shadow-[0_0_15px_rgba(255,102,0,0.4)] text-xs">
               {{ t.matrixBtnPro }}
             </a>
@@ -2184,10 +2231,23 @@ const translations = {
     perYear: "/ year",
     perOnce: "/ Once",
     save35: "SAVE 35%",
-    activation3Machines: "3 Machines Activation",
+    activation5Seats: "5 Activations Included",
     lifetimeF1: "All 50 Pro Tools Forever",
     lifetimeF2: "Free Future Major Updates",
     lifetimeF3: "Direct Engineering Support",
+
+    // B2B tiers (Team / Enterprise)
+    p4Desc: "Annual licence for a small integration team — one invoice, 5 activations, priority support.",
+    pf4_1: "All 50 Pro Tools",
+    pf4_2: "5 Activations Included",
+    pf4_3: "Priority Engineering Support",
+    btnTeam: "Get Team Edition",
+    entBadge: "UNLIMITED SEATS",
+    p5Desc: "Site-wide licence for a plant or integrator — unlimited workstations and branded acceptance protocols.",
+    pf5_1: "Unlimited Activations",
+    pf5_2: "Company-Branded Reports",
+    pf5_3: "Priority Engineering Support",
+    btnEnterprise: "Get Enterprise",
 
     // Matrix additions
     matrixColFeature: "Industrial Feature / Capability",
@@ -2306,10 +2366,23 @@ const translations = {
     perYear: "/ год",
     perOnce: "разово",
     save35: "СКИДКА 35%",
-    activation3Machines: "Активация на 3 компьютерах",
+    activation5Seats: "Активация на 5 устройствах",
     lifetimeF1: "Все 50 Pro инструментов навсегда",
     lifetimeF2: "Все будущие обновления бесплатны",
     lifetimeF3: "Прямая инженерная поддержка",
+
+    // B2B тарифы (Team / Enterprise)
+    p4Desc: "Годовая лицензия для небольшой интеграторской команды — один счёт, 5 активаций, приоритетная поддержка.",
+    pf4_1: "Все 50 Pro инструментов",
+    pf4_2: "5 активаций",
+    pf4_3: "Приоритетная поддержка",
+    btnTeam: "Купить Team Edition",
+    entBadge: "БЕЗ ОГРАНИЧЕНИЙ",
+    p5Desc: "Лицензия на весь завод или интегратора — неограниченное число рабочих станций и брендированные протоколы приёмки.",
+    pf5_1: "Неограниченные активации",
+    pf5_2: "Брендированные отчёты",
+    pf5_3: "Приоритетная поддержка",
+    btnEnterprise: "Купить Enterprise",
 
     // Matrix additions
     matrixColFeature: "Возможности и функции KRL",
@@ -2428,10 +2501,23 @@ const translations = {
     perYear: "/ yıl",
     perOnce: "tek seferlik",
     save35: "%35 TASARRUF",
-    activation3Machines: "3 Bilgisayarda Aktivasyon",
+    activation5Seats: "5 Cihazda Aktivasyon",
     lifetimeF1: "Tüm 50 Pro Araç Sonsuza Kadar",
     lifetimeF2: "Gelecekteki Tüm Güncellemeler Dahil",
     lifetimeF3: "Doğrudan Mühendislik Desteği",
+
+    // B2B paketleri (Team / Enterprise)
+    p4Desc: "Küçük entegrasyon ekipleri için yıllık lisans — tek fatura, 5 aktivasyon, öncelikli destek.",
+    pf4_1: "Tüm 50 Pro Araç",
+    pf4_2: "5 Aktivasyon",
+    pf4_3: "Öncelikli Mühendislik Desteği",
+    btnTeam: "Team Edition Satın Al",
+    entBadge: "SINIRSIZ LİSANS",
+    p5Desc: "Fabrika veya entegratör için site lisansı — sınırsız iş istasyonu ve markalı kabul protokolleri.",
+    pf5_1: "Sınırsız Aktivasyon",
+    pf5_2: "Markalı Raporlar",
+    pf5_3: "Öncelikli Mühendislik Desteği",
+    btnEnterprise: "Enterprise Satın Al",
 
     // Matrix additions
     matrixColFeature: "Endüstriyel Özellik / Yetenek",

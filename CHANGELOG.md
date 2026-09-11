@@ -2,7 +2,47 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
-## [1.8.4] - 2026-09-09 (Industrial Diagnostics Hardening & Language Engine Fixes)
+## [1.8.4] - 2026-09-11 (Acceptance Protocol Integrity, Licence Operations & Fleet Hardening)
+
+### Acceptance protocol — corrected data
+- **I/O signal map is populated again**: the report attached `KRC/STEU/$config.dat` (a two-line `DEFDAT $CONFIG` stub) because it took whichever `$config.dat` a workspace-wide search returned first, and its parser only understood `$IN`/`$OUT`. On a real customer cell that meant "No individual signals configured" next to 136 actual declarations. Signals are now collected from **every `.dat` of the controller** (any `DEFDAT` may declare them — `$config.dat`, `$machine.dat`, `p00.dat`, integrator data lists), analogue buses (`$ANOUT`/`$ANIN`) and `TO` ranges are parsed, KUKA system signals such as `$MOVE_ENABLE $IN[6]` are recognised (address-less booleans are not I/O and stay out), duplicates are collapsed, and every row now names the file it came from.
+- **Safety section no longer asserts unverified results**: it printed hard-coded `PASS` / `VERIFIED` / `CONFIRMED` for every row, including an ISO 10218-1 clause, without performing any check. Each row is now a static finding with its evidence (`LOOP/ENDLOOP present — KRC/R1/System/sps.sub`) and the document states explicitly that on-site functional verification by the commissioning engineer is still required.
+- **Chunked support upload** works again: `crypto.subtle.decrypt` returns an `ArrayBuffer`, so the `.buffer` accessor read failed and every encrypted file was rejected with HTTP 400; client and gateway chunk caps are aligned at 24 MB.
+
+### Licence operations
+- **Real activation counters** in the licence panel via a gateway proxy to Dodo (`/api/v1/license/status`), replacing the previously hard-coded seat numbers.
+- **Seat reuse**: activation now looks for an existing machine instance before creating one, so re-installing on the same PC no longer consumes a second seat (verified live, 2 → 2).
+- **Device manager** lists the machines holding a seat and can release one; releasing *this* machine deactivates the local licence.
+- **Licence and trial events** are posted to the Telegram topic "💰 Лицензии / Licences" — purchases arrive through a signature-verified Dodo webhook, trial starts through the beacon (both were silently failing).
+- **Pricing is unified across product, site and READMEs**: Team Edition ($299/yr) and Enterprise Site License ($1,499/yr) exist as real Dodo products with per-tier checkout links, and Lifetime moved to $699. Individual, Team and Enterprise entitlements enforce 5 / 5 / unlimited activations respectively.
+
+### Reports & branding
+- Company branding (name + logo, `krl.report.companyName` / `krl.report.companyLogoPath`) now appears in the **engineering report** as well as the acceptance protocol.
+- Logo resolution is hardened: a workspace-shipped logo path must resolve inside the workspace after `realpath`, so a symlink planted in a cloned repository can no longer embed a file from elsewhere on disk into a document that gets sent to the developer.
+
+### Telemetry
+- The installations badge and `/api/telemetry/stats` report measured values; placeholder floors (1 250 installations / 35 countries) and seeded defaults are gone.
+
+### Diagnostics (fleet-wide false positive hardening)
+
+Derived from an industrial audit of 136 real robot backups / 10 327 KRL files across
+8 customer fleets (see `FLEET_AUDIT_2026-09-11.md`). Fleet findings dropped from
+7 364 to 2 275 (−69 %), errors from 2 548 to 444 (−83 %).
+
+### Fixed
+- **Inline Form Folds (`validateFoldBalance`)**: `;;FOLD … ;ENDFOLD` blocks — KUKA inline forms that live inside commented-out code — are recognized as balanced again, removing 54 bogus "orphaned ENDFOLD" errors.
+- **External Declarations (`validateWorkspaceDuplicates`)**: `EXT`/`EXTFCT` are references, not definitions; they no longer raise "Global Collision" against their own implementation (`EXT Check_Table_Full_Early()` in a `.dat` vs `GLOBAL DEF` in the `.src`).
+- **Type Resolution (`validateTypeUsage`)**: local declarations now shadow workspace-wide ones and every name of a declaration list (`DECL REAL Force, RESULT`) is captured — false "type mismatch" errors on valid production code are gone.
+- **Vendor File Linting (`validateUnusedVariables`, `validateDeadGlobalFunctions`)**: KSS identification programs (`$xx_ident.src`), the `/IR_SPEC/` and `/KRC/Roboter/` areas and factory libraries (`bas.src`, `collmonlib.src`, `p00.src`, `msglib.src`, …) no longer receive style-level hints (−2 400 findings). User programs under `TP/` and the `sps.sub` user section are still checked.
+- **I/O Ranges (`validateIoRanges`)**: `$CYCFLAG` ceiling corrected to the KSS declaration `BOOL $CYCFLAG[256]` (was 32); `$CYCFLAG[200]` in production code is no longer reported.
+- **Advance Run (`validateAdvanceRun`)**: no Vorlaufstopp warning for KUKA inline forms with the CONT flag off (`Kuka.Logics.Cont=False`, `Kuka.WaitForCont=False`) or when `CONTINUE` follows the assignment group (−82 % findings).
+- **Undefined Symbols (`validateVariablesUsage`)**: reported once per symbol per file instead of at every usage (one file produced 1 270 duplicate errors).
+- **CI**: the VSIX artifact upload step can no longer fail the build when the GitHub Actions storage quota is exhausted.
+
+### Tests
+- New `tests/test_fleet_backup_audit_fixes.js` — 16 regression cases, each derived from a real customer file.
+
+### Language Engine, Formatter & Refactoring Hardening
 
 ### Fixed & Hardened
 - **Diagnostics & Parser Engine**:
@@ -87,11 +127,35 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Single Source of Truth Version Architecture (`version.ts`)**: Dynamic runtime resolution from VS Code extension manifest (`package.json`).
 - **Persistent Workspace Diagnostics & Continuous Background Scanner**: Real-time non-blocking scanner ensuring problems remain visible across all workspace files even when closed.
 - **6 Deep Industrial Diagnostic Rules**: Hardware I/O boundary enforcement ($IN/$OUT 1..4096 / 8192), CIRC 2-point syntax validation, INTERRUPT DECL priority & parameterless checks, `;FOLD/ENDFOLD` balance, SRC ⟷ DAT point integrity, and workspace global symbol collision guards.
+- **Fleet Stress Validation Suite (`test_fleet_backups.js` & `test_all_remaining_features.js`)**: 178 automated checks verified against 107 real-world robot backup archives (9,595 KRL files) with 100% pass rate.
+- **Zero-False-Positive URI Normalization Engine**: Fixed Windows drive letter case encoding (`c:` vs `C:`) and URI component serialization (`%3A` vs `:`) across workspace duplicate detection and global symbol indexes.
+- **Array Return Types Parsing (`core.ts`)**: Added full regex engine support for KRL functions returning typed array buffers (e.g. `GLOBAL DEFFCT CHAR[15] K_ADDR()`), preventing false duplicate function identifier collisions.
+- **LSP State Fault-Tolerance & Bulletproofing**: Guarded all hover and workspace symbol lookups with optional chaining and fallback collections, ensuring 100% uptime without unhandled exceptions on cold workspaces.
+- **Quality Audit Report Re-Categorization**: Refined issue categorization in Acceptance Reports — empty blocks classified as Logic Hygiene, with dedicated priority buckets for Global Scope Collisions and Inline Form FOLD balance.
 - **Multi-Robot Automation Cell Isolation & Passport Detection**: Deterministic controller root boundaries (`controllerScope`), isolating variables, symbols, and diagnostics across multiple open robot backups with auto-generated multi-robot workcell passports.
 - **Submit Interpreter (`sps.sub`) Blocking WAIT Detection**: Safe guard flagging blocking `WAIT FOR` / `WAIT SEC` statements inside background submit interpreter loops while intelligently ignoring standard KUKA power failure recovery patterns (`$POWER_FAIL`).
-- **Fleet Stress Validation Suite (`test_fleet_backups.js`)**: 17 industrial checks verified against real automotive backups from Atlas Copco, Farplas, Magna, Osten, Parsan, Saint Gobain, Automotive Robotics Hub with 100% pass rate.
 
 ## [1.8.0] - 2026-09-04 (KUKA.Sim 4.10 Kernel Integration & Official Specifications)
+
+### Added
+- **Complete KUKA.Sim 4.10 Kernel Specifications**: Full integration of authentic industrial language definitions extracted directly from KUKA.Sim 4.10, WorkVisual, and KRC / OfficeLite controller kernels.
+- **957 System Variables with Strict Typing & Metadata**: Expanded from 359 to 957 system variables (`$ACC`, `$TOOL`, `$BASE`, `$POS_ACT`, `$VEL_AXIS`, etc.) featuring exact data types (`FRAME`, `CP`, `INT`, `REAL`, `BOOL`, `E6POS`), array dimensions (217 multidimensional arrays), Read-Only/Read-Write writability badges, and authentic German engineering comments with physical units.
+- **116 Built-in Controller Functions & Procedures**: Integrated full runtime library of KSS system routines (kinematics: `FORWARD`, `INVERSE`, `INV_POS`, `TOOL_ADJ`; string operations: `STRLEN`, `STRDECLLEN`, `STRCOPY`; type conversion: `STRTOREAL`, `STRTOBOOL`, `STRTOINT`; message dialogs: `SET_KRLMSG`, `CLEAR_KRLMSG`; safety & torque: `SET_TORQUE_LIMITS`, `DYNBRAKETEST`).
+- **Interactive Parameter Assistance (`signatureHelp`)**: Real-time parameter tooltips with active argument highlighting and parameter direction (`:IN` / `:OUT`) when typing `(` for any of the 116 system functions.
+- **111 System Structures & 112 System ENUMs (443 Literals)**: Pre-loaded into the LSP symbol index. Intelligent dot-completion (`.`) for both user variables and system variables (`$TOOL.`, `$BASE.`, `$POS_ACT.`, `$ACC.`), and instant `#` enum value completion (`#AUT`, `#T1`, `#T2`, `#EX`, `#P_FREE`, `#QUIT`).
+- **451-Keyword Official Compiler Matrix**: Direct implementation of KUKA C++ `keyword.h` rules with exact `allowedAsVariable` classification, preventing false-positive syntax warnings for valid KRL identifiers while strictly enforcing reserved language tokens.
+- **23 Official KUKA Inline Form Snippets (34 Templates)**: Complete replacement of legacy motion snippets with authentic Kuka Roboter GmbH XML templates (`ptpi`, `slini`, `sptpi`, `scirc`, `ptprel`, `PTPCo`, `ptpca`, `ptpa`, `trigdist`, `trigpath`, `pse`, `sigin`, `sigout`, `wsec`, `wfor`, `Forr`, etc.) featuring valid FOLD headers (`;FOLD ... ;%{PE}`) and parameter clauses.
+- **Hexa-Locale Architecture (6 Languages)**: Full localization across English (EN), German (DE), Italian (IT), Spanish (ES), Russian (RU), and Turkish (TR) with 100% key symmetry across 180+ UI strings, native commands, and authentic German engineering descriptions for all 513 core system variables.
+- **Interactive SmartPAD Backup Acceptance Report**: Upgraded automated quality audit report with controller serial number extraction, robot model passport, KSS version detection, and clickable file hyperlinks directly opening offending code lines in the editor.
+
+### Fixed & Optimized
+- **Zero-False-Positive Fleet Audit Benchmark**: Stress-tested across 108 real-world robot backup archives (4,136,829 lines of code in 25.4s) with zero false-positive diagnostics.
+- **Parser Trailing Keyword Correction**: Removed erroneous single-letter `"S"` from reserved keywords list in `parser.ts`, restoring accurate diagnostic reporting for misspelled words ending with `s` (such as `moves`, `vars`).
+- **Control Center Visual Tier Badges & Command Routing**: Modernized Control Center tool grid with explicit `⭐ PRO` and `FREE` badges and robust command routing.
+- **Multi-Modifier Declaration Parser**: Fixed variable declaration regex to correctly parse multiple modifiers (`DECL CONST REAL`, `DECL GLOBAL CONST INT`) without false warnings.
+- **Bypass for Interrupt Declarations**: Fixed diagnostics analyzer to recognize `GLOBAL INTERRUPT DECL` statements as valid control-flow definitions rather than variable declarations.
+
+## [1.7.5] - 2026-09-03 (Interactive Reference Guide, Native ZIP Export & Unified Commands)
 
 ### Added
 - **21-Card In-Editor Engineering Reference Guide**: Added Section 4 to Control Center with illustrated reference cards for all contextual editor actions (Go to Definition `F12`, Find References `Shift+F12`, Rename Symbol `F2`, Format Document `Shift+Alt+F`, Fold/Unfold `Ctrl+Shift+[` / `]`, Fold All/Unfold All `Ctrl+K, 0` / `Ctrl+K, J`, Insert/Unwrap FOLD, Flowchart Graph, Clean Dead Variables, Sort Declarations, Industrial Safety Check, Legacy to Spline, iiQKA Fold, CollisionGuard, Trailing Whitespace, Signal Aliases, File History, Git Blame, Error Lens, Inlay Hints, I/O Refresh).

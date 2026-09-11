@@ -39,8 +39,8 @@
 
 <p align="center">
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>🌐 Interactive Wiki (50 Industrial Tools)</b></a> •
-  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"><b>⚡ 14-Day Free Trial ($9.99/mo)</b></a> • 
-  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ"><b>👑 Annual Pro ($79.00/yr - Save 35%)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>⚡ 14-Day Free Trial ($9.99/mo)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>👑 Annual Pro ($79.00/yr - Save 35%)</b></a> • 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>🛡️ Security Audit Report</b></a>
 </p>
 
@@ -282,12 +282,14 @@ We offer flexible, industrial-grade licensing through our verified merchant of r
 | Plan | Price | Trial / Discount | License Terms | Checkout |
 |:---|:---:|:---|:---|:---:|
 | 🟢 **Community** | **$0** | 100% Free Forever | Personal & Commercial Use | [Install Free](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| ⏱️ **Pro Monthly** | **$9.99** / mo | **14-Day Free Trial** ($0.00 today) | All 50 Industrial Pro Tools • 2 Workstations | [Start 14-Day Trial](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
-| 👑 **Pro Annual** | **$79.00** / yr | **Save 35%** (~$6.58/mo) | All 50 Industrial Pro Tools • 3 Workstations • 30-Day Offline Buffer | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
-| 🏆 **Pro Lifetime** | **$349.00** | **Pay Once, Own Forever** | All 50 Industrial Pro Tools • 5 Workstations • Lifetime Updates | [Get Lifetime Pro](https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ) |
+| ⏱️ **Pro Monthly** | **$9.99** / mo | **14-Day Free Trial** ($0.00 today) | All 50 Industrial Pro Tools • 5 Activations | [Start 14-Day Trial](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| 👑 **Pro Annual** | **$79.00** / yr | **Save 35%** (~$6.58/mo) | All 50 Industrial Pro Tools • 5 Activations • 30-Day Offline Buffer | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
+| 🏆 **Pro Lifetime** | **$699.00** | **Pay Once, Own Forever** | All 50 Industrial Pro Tools • 5 Activations • Lifetime Updates | [Get Lifetime Pro](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
+| 🏢 **Team Edition** | **$299.00** / yr | B2B — Invoice & Quote | All 50 Industrial Pro Tools • 5 Activations | [Get Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏭 **Enterprise Site** | **$1,499.00** / yr | Unlimited Seats | All 50 Pro Tools • Unlimited Activations • Branded Reports | [Get Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
-  <a href="https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ" style="text-decoration:none;">
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">
     <kbd style="font-size: 1.25em; padding: 14px 32px; background-color: #FF6600; color: white; border-radius: 10px; font-weight: bold; border: 1px solid #d15500; cursor: pointer; box-shadow: 0 4px 18px rgba(255,102,0,0.4);">
       ⚡ Choose Plan & Start 14-Day Free Trial (Dodo Checkout)
     </kbd>

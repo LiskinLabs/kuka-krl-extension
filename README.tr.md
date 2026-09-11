@@ -39,7 +39,7 @@
 
 <p align="center">
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>🌐 İnteraktif Wiki (50 Endüstriyel Araç)</b></a> •
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>⚡ 14 Gün Ücretsiz Deneme ($9.99/ay)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>⚡ Pro Monthly ($9.99/ay)</b></a> • 
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>👑 Yıllık Pro ($79.00/yıl — %35 Tasarruf)</b></a> • 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>🛡️ Güvenlik Denetim Raporu</b></a>
 </p>
@@ -279,19 +279,21 @@ Doğrulanmış satıcımız **Dodo Payments** üzerinden esnek, endüstriyel sı
 
 ### 💳 Planlar:
 
-| Plan | Fiyat | Deneme / İndirim | Lisans Koşulları | Ödeme |
+| Plan | Fiyat | İndirim / Faturalama | Lisans Koşulları | Ödeme |
 |:---|:---:|:---|:---|:---:|
 | 🟢 **Community** | **$0** | %100 Sonsuza Kadar Ücretsiz | Kişisel ve Ticari Kullanım | [Ücretsiz Kur](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| ⏱️ **Pro Aylık** | **$9.99** / ay | **14 Gün Ücretsiz Deneme** (bugün $0.00) | 50 Endüstriyel Pro Aracın Tümü • 5 Aktivasyon | [14 Günlük Denemeyi Başlat](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| ⏱️ **Pro Aylık** | **$9.99** / ay | Aylık faturalandırılır | 50 Endüstriyel Pro Aracın Tümü • 5 Aktivasyon | [Pro Monthly Al](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
 | 👑 **Pro Yıllık** | **$79.00** / yıl | **%35 Tasarruf** (~$6.58/ay) | 50 Pro Aracın Tümü • 5 Aktivasyon • 30 Gün Çevrimdışı Tampon | [Yıllık Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | 🏆 **Pro Ömür Boyu** | **$699.00** | **Bir Kez Öde, Sonsuza Kadar Sahip Ol** | 50 Pro Aracın Tümü • 5 Aktivasyon • Ömür Boyu Güncelleme | [Ömür Boyu Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
+| 🏢 **Team Edition** | **$299.00** / yıl | B2B — Fatura ve Teklif | 50 Pro Aracın Tümü • 5 Aktivasyon | [Team Edition Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏭 **Enterprise Site** | **$1,499.00** / yıl | Sınırsız Lisans | 50 Pro Aracın Tümü • Sınırsız Aktivasyon • Markalı Raporlar | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 | 🏢 **Team Edition** | **$299.00** / yıl | B2B — Fatura ve Teklif | 50 Pro Aracın Tümü • 5 Aktivasyon | [Team Edition Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
 | 🏭 **Enterprise Site** | **$1,499.00** / yıl | Sınırsız Lisans | 50 Pro Aracın Tümü • Sınırsız Aktivasyon • Markalı Raporlar | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">
     <kbd style="font-size: 1.25em; padding: 14px 32px; background-color: #FF6600; color: white; border-radius: 10px; font-weight: bold; border: 1px solid #d15500; cursor: pointer; box-shadow: 0 4px 18px rgba(255,102,0,0.4);">
-      ⚡ Plan Seçin ve 14 Günlük Ücretsiz Denemeyi Başlatın (Dodo Checkout)
+      ⚡ Plan Seçin ve Abone Olun (Dodo Checkout)
     </kbd>
   </a>
   <p style="margin-top: 10px; font-size: 0.9em; color: #888;">VS Code'da anında 1 tık aktivasyon • 14 Günlük Grace Dönemi Koruması • 30 Günlük Çevrimdışı Tampon</p>

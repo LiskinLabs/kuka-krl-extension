@@ -285,9 +285,7 @@ Doğrulanmış satıcımız **Dodo Payments** üzerinden esnek, endüstriyel sı
 | ⏱️ **Pro Aylık** | **$9.99** / ay | Aylık faturalandırılır | 50 Endüstriyel Pro Aracın Tümü • 5 Aktivasyon | [Pro Monthly Al](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
 | 👑 **Pro Yıllık** | **$79.00** / yıl | **%35 Tasarruf** (~$6.58/ay) | 50 Pro Aracın Tümü • 5 Aktivasyon • 30 Gün Çevrimdışı Tampon | [Yıllık Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | 🏆 **Pro Ömür Boyu** | **$699.00** | **Bir Kez Öde, Sonsuza Kadar Sahip Ol** | 50 Pro Aracın Tümü • 5 Aktivasyon • Ömür Boyu Güncelleme | [Ömür Boyu Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| 🏢 **Team Edition** | **$299.00** / yıl | B2B — Fatura ve Teklif | 50 Pro Aracın Tümü • 5 Aktivasyon | [Team Edition Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| 🏭 **Enterprise Site** | **$1,499.00** / yıl | Sınırsız Lisans | 50 Pro Aracın Tümü • Sınırsız Aktivasyon • Markalı Raporlar | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
-| 🏢 **Team Edition** | **$299.00** / yıl | B2B — Fatura ve Teklif | 50 Pro Aracın Tümü • 5 Aktivasyon | [Team Edition Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏢 **Team Edition** | **$299.00** / yıl | B2B — Fatura ve Teklif | 50 Pro Aracın Tümü • 25 Aktivasyon (5 mühendis) | [Team Edition Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
 | 🏭 **Enterprise Site** | **$1,499.00** / yıl | Sınırsız Lisans | 50 Pro Aracın Tümü • Sınırsız Aktivasyon • Markalı Raporlar | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">

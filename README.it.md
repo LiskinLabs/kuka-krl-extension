@@ -285,9 +285,7 @@ Offriamo licenze flessibili di livello industriale tramite il nostro merchant ve
 | ⏱️ **Pro Mensile** | **$9.99** / mese | Fatturazione mensile | Tutti i 50 strumenti Pro industriali • 5 attivazioni | [Ottieni Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
 | 👑 **Pro Annuale** | **$79.00** / anno | **Risparmia il 35%** (~$6.58/mese) | Tutti i 50 strumenti Pro • 5 attivazioni • Buffer offline 30 giorni | [Ottieni Pro annuale](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | 🏆 **Pro Lifetime** | **$699.00** | **Paga una volta, tuo per sempre** | Tutti i 50 strumenti Pro • 5 attivazioni • Aggiornamenti a vita | [Ottieni Pro lifetime](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| 🏢 **Team Edition** | **$299.00** / anno | B2B — Fattura e preventivo | Tutti i 50 strumenti Pro • 5 attivazioni | [Ottieni Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| 🏭 **Enterprise Site** | **$1,499.00** / anno | Postazioni illimitate | Tutti i 50 strumenti Pro • Attivazioni illimitate • Report personalizzati | [Ottieni Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
-| 🏢 **Team Edition** | **$299.00** / anno | B2B — Fattura e preventivo | Tutti i 50 strumenti Pro • 5 attivazioni | [Ottieni Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏢 **Team Edition** | **$299.00** / anno | B2B — Fattura e preventivo | Tutti i 50 strumenti Pro • 25 attivazioni (5 ingegneri) | [Ottieni Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
 | 🏭 **Enterprise Site** | **$1,499.00** / anno | Postazioni illimitate | Tutti i 50 strumenti Pro • Attivazioni illimitate • Report personalizzati | [Ottieni Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">

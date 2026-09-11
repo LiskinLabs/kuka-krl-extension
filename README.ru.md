@@ -285,9 +285,7 @@
 | ⏱️ **Pro Месячный** | **$9.99** / мес | Оплата ежемесячно | Все 50 промышленных Pro-инструментов • 5 активаций | [Оформить Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
 | 👑 **Pro Годовой** | **$79.00** / год | **Экономия 35%** (~$6.58/мес) | Все 50 Pro-инструментов • 5 активаций • 30-дневный офлайн-буфер | [Оформить Pro на год](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | 🏆 **Pro Пожизненный** | **$699.00** | **Один платёж — навсегда** | Все 50 Pro-инструментов • 5 активаций • Пожизненные обновления | [Купить пожизненный Pro](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| 🏢 **Team Edition** | **$299.00** / год | B2B — счёт и коммерческое предложение | Все 50 Pro-инструментов • 5 активаций | [Купить Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| 🏭 **Enterprise Site** | **$1,499.00** / год | Безлимит рабочих мест | Все 50 Pro-инструментов • Неограниченные активации • Брендированные отчёты | [Купить Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
-| 🏢 **Team Edition** | **$299.00** / год | B2B — счёт и коммерческое предложение | Все 50 Pro-инструментов • 5 активаций | [Купить Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏢 **Team Edition** | **$299.00** / год | B2B — счёт и коммерческое предложение | Все 50 Pro-инструментов • 25 активаций (5 инженеров) | [Купить Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
 | 🏭 **Enterprise Site** | **$1,499.00** / год | Безлимит рабочих мест | Все 50 Pro-инструментов • Неограниченные активации • Брендированные отчёты | [Купить Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">

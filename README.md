@@ -285,9 +285,7 @@ We offer flexible, industrial-grade licensing through our verified merchant of r
 | ⏱️ **Pro Monthly** | **$9.99** / mo | Billed monthly | All 50 Industrial Pro Tools • 5 Activations | [Get Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
 | 👑 **Pro Annual** | **$79.00** / yr | **Save 35%** (~$6.58/mo) | All 50 Industrial Pro Tools • 5 Activations • 30-Day Offline Buffer | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | 🏆 **Pro Lifetime** | **$699.00** | **Pay Once, Own Forever** | All 50 Industrial Pro Tools • 5 Activations • Lifetime Updates | [Get Lifetime Pro](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| 🏢 **Team Edition** | **$299.00** / yr | B2B — Invoice & Quote | All 50 Industrial Pro Tools • 5 Activations | [Get Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| 🏭 **Enterprise Site** | **$1,499.00** / yr | Unlimited Seats | All 50 Pro Tools • Unlimited Activations • Branded Reports | [Get Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
-| 🏢 **Team Edition** | **$299.00** / yr | B2B — Invoice & Quote | All 50 Industrial Pro Tools • 5 Activations | [Get Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏢 **Team Edition** | **$299.00** / yr | B2B — Invoice & Quote | All 50 Industrial Pro Tools • 25 Activations (5 engineers) | [Get Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
 | 🏭 **Enterprise Site** | **$1,499.00** / yr | Unlimited Seats | All 50 Pro Tools • Unlimited Activations • Branded Reports | [Get Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">

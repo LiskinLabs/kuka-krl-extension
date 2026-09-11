@@ -2238,7 +2238,7 @@ const translations = {
     // B2B tiers (Team / Enterprise)
     p4Desc: "Annual licence for a small integration team — one invoice, 5 activations, priority support.",
     pf4_1: "All 50 Pro Tools",
-    pf4_2: "5 Activations Included",
+    pf4_2: "25 Activations (5 engineers)",
     pf4_3: "Priority Engineering Support",
     btnTeam: "Get Team Edition",
     entBadge: "UNLIMITED SEATS",
@@ -2373,7 +2373,7 @@ const translations = {
     // B2B тарифы (Team / Enterprise)
     p4Desc: "Годовая лицензия для небольшой интеграторской команды — один счёт, 5 активаций, приоритетная поддержка.",
     pf4_1: "Все 50 Pro инструментов",
-    pf4_2: "5 активаций",
+    pf4_2: "25 активаций (5 инженеров)",
     pf4_3: "Приоритетная поддержка",
     btnTeam: "Купить Team Edition",
     entBadge: "БЕЗ ОГРАНИЧЕНИЙ",
@@ -2508,7 +2508,7 @@ const translations = {
     // B2B paketleri (Team / Enterprise)
     p4Desc: "Küçük entegrasyon ekipleri için yıllık lisans — tek fatura, 5 aktivasyon, öncelikli destek.",
     pf4_1: "Tüm 50 Pro Araç",
-    pf4_2: "5 Aktivasyon",
+    pf4_2: "25 Aktivasyon (5 mühendis)",
     pf4_3: "Öncelikli Mühendislik Desteği",
     btnTeam: "Team Edition Satın Al",
     entBadge: "SINIRSIZ LİSANS",

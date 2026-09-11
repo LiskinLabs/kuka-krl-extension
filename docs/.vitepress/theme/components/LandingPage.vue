@@ -179,7 +179,6 @@
                 target="_blank"
                 class="px-4 py-3 rounded-xl bg-[#0d121d] hover:bg-[#141c2c] text-gray-200 hover:text-white font-bold tracking-wide transition-all border border-white/15 flex items-center gap-2 shadow-lg active:scale-95">
                 <span>{{ t.btnBuyPro }}</span>
-                <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">14-Day Free</span>
               </a>
 
               <!-- CLI Quick Copy Button -->

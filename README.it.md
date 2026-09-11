@@ -39,7 +39,7 @@
 
 <p align="center">
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>🌐 Wiki interattiva (50 strumenti industriali)</b></a> •
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>⚡ Prova gratuita 14 giorni ($9.99/mese)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>⚡ Pro Monthly ($9.99/mese)</b></a> • 
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>👑 Pro annuale ($79.00/anno – risparmia il 35%)</b></a> • 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>🛡️ Report audit di sicurezza</b></a>
 </p>
@@ -279,19 +279,21 @@ Offriamo licenze flessibili di livello industriale tramite il nostro merchant ve
 
 ### 💳 Piani:
 
-| Piano | Prezzo | Prova / Sconto | Termini licenza | Checkout |
+| Piano | Prezzo | Sconto / Fatturazione | Termini licenza | Checkout |
 |:---|:---:|:---|:---|:---:|
 | 🟢 **Community** | **$0** | Gratis per sempre al 100% | Uso personale e commerciale | [Installa gratis](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| ⏱️ **Pro Mensile** | **$9.99** / mese | **Prova gratuita di 14 giorni** ($0.00 oggi) | Tutti i 50 strumenti Pro industriali • 5 attivazioni | [Inizia la prova di 14 giorni](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| ⏱️ **Pro Mensile** | **$9.99** / mese | Fatturazione mensile | Tutti i 50 strumenti Pro industriali • 5 attivazioni | [Ottieni Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
 | 👑 **Pro Annuale** | **$79.00** / anno | **Risparmia il 35%** (~$6.58/mese) | Tutti i 50 strumenti Pro • 5 attivazioni • Buffer offline 30 giorni | [Ottieni Pro annuale](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | 🏆 **Pro Lifetime** | **$699.00** | **Paga una volta, tuo per sempre** | Tutti i 50 strumenti Pro • 5 attivazioni • Aggiornamenti a vita | [Ottieni Pro lifetime](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
+| 🏢 **Team Edition** | **$299.00** / anno | B2B — Fattura e preventivo | Tutti i 50 strumenti Pro • 5 attivazioni | [Ottieni Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏭 **Enterprise Site** | **$1,499.00** / anno | Postazioni illimitate | Tutti i 50 strumenti Pro • Attivazioni illimitate • Report personalizzati | [Ottieni Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 | 🏢 **Team Edition** | **$299.00** / anno | B2B — Fattura e preventivo | Tutti i 50 strumenti Pro • 5 attivazioni | [Ottieni Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
 | 🏭 **Enterprise Site** | **$1,499.00** / anno | Postazioni illimitate | Tutti i 50 strumenti Pro • Attivazioni illimitate • Report personalizzati | [Ottieni Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">
     <kbd style="font-size: 1.25em; padding: 14px 32px; background-color: #FF6600; color: white; border-radius: 10px; font-weight: bold; border: 1px solid #d15500; cursor: pointer; box-shadow: 0 4px 18px rgba(255,102,0,0.4);">
-      ⚡ Scegli il piano e inizia la prova gratuita di 14 giorni (Dodo Checkout)
+      ⚡ Scegli il piano e abbonati (Dodo Checkout)
     </kbd>
   </a>
   <p style="margin-top: 10px; font-size: 0.9em; color: #888;">Attivazione istantanea in VS Code con 1 clic • Protezione periodo di grazia 14 giorni • Buffer offline 30 giorni</p>

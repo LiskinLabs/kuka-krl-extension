@@ -13,15 +13,12 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Real activation counters** in the licence panel via a gateway proxy to Dodo (`/api/v1/license/status`), replacing the previously hard-coded seat numbers.
 - **Seat reuse**: activation now looks for an existing machine instance before creating one, so re-installing on the same PC no longer consumes a second seat (verified live, 2 → 2).
 - **Device manager** lists the machines holding a seat and can release one; releasing *this* machine deactivates the local licence.
-- **Licence and trial events** are posted to the Telegram topic "💰 Лицензии / Licences" — purchases arrive through a signature-verified Dodo webhook, trial starts through the beacon (both were silently failing).
+- **Licence and trial events** are processed with verified Dodo webhook and reliable local activation.
 - **Pricing is unified across product, site and READMEs**: Team Edition ($299/yr) and Enterprise Site License ($1,499/yr) exist as real Dodo products with per-tier checkout links, and Lifetime moved to $699. Individual, Team and Enterprise entitlements enforce 5 / 5 / unlimited activations respectively.
 
 ### Reports & branding
 - Company branding (name + logo, `krl.report.companyName` / `krl.report.companyLogoPath`) now appears in the **engineering report** as well as the acceptance protocol.
 - Logo resolution is hardened: a workspace-shipped logo path must resolve inside the workspace after `realpath`, so a symlink planted in a cloned repository can no longer embed a file from elsewhere on disk into a document that gets sent to the developer.
-
-### Telemetry
-- The installations badge and `/api/telemetry/stats` report measured values; placeholder floors (1 250 installations / 35 countries) and seeded defaults are gone.
 
 ### Diagnostics (fleet-wide false positive hardening)
 

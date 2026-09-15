@@ -2,12 +2,20 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
-## [1.8.5] - 2026-09-15 (B2B Quotation Suite, Status Bar Licensing & Language Kernel Enrichment)
+## [1.8.6] - 2026-09-15 (B2B Quotation Suite, Status Bar Licensing & Marketplace Ingestion Hardening)
+
+### Bug Fixes & Marketplace Validation
+- **NLS Manifest Hardening**: Eliminated duplicate localization keys (`command.startTrial`, `command.requestCorporateInvoice`) in `package.nls.json` and `package.nls.ru.json` that blocked Microsoft Marketplace ingestion schema validation.
+- **License Asset Synchronization**: Unified EULA references and synchronized `LICENSE.txt` with root and showcase repositories.
 
 ### Features & Improvements
 - **B2B Quotation Generator**: Integrated automated commercial RFQ and engineering quotation tool with multi-currency estimation (USD / EUR / TRY), structured commissioning milestones, and professional quotation export.
 - **Status Bar License Indicator**: Added real-time status bar widget showing the active license tier (Community, Pro, Team, Enterprise), offline buffer validity, and 1-click access to the License & Device Manager.
 - **Submit Interpreter QuickFixes (`sps.sub`)**: Added automated CodeAction QuickFix for Submit Interpreter diagnostics, allowing instant remediation of blocking `WAIT` statements that could halt background cyclic tasks.
+
+## [1.8.5] - 2026-09-15 (Language Kernel Enrichment & Compliance)
+
+### Features & Improvements
 - **Language Kernel & Reference Matrix**: Enriched built-in `krl-ref.json` database with 942 KUKA system variables, 118 kinematics/system functions, and 216 data structures with complete parameter documentation and typing.
 - **Snippet Suite Polish**: Corrected selection replacement macros across 11 core motion snippets, and added authentic KUKA Inline Form templates for industrial robot programming.
 

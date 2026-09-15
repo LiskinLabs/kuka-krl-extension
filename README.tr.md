@@ -360,3 +360,12 @@ Uzantı davranışlarını `settings.json` dosyanızda yapılandırın:
 * **Yayıncı ve Geliştirici**: [Liskin Labs](https://github.com/LiskinLabs) / [Silvestr Liskin](https://www.linkedin.com/in/silvestr-liskin-ab712920b/)
 * **Güvenlik Denetçisi**: [ReversingLabs Spectra Assure](https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension)
 * **Resmi Satıcı**: [Dodo Payments](https://dodopayments.com/)
+* **Lisans**: Ticari EULA ([LICENSE](LICENSE))
+
+---
+
+## ⚖️ Ticari Markalar ve Yasal Sorumluluk Reddi
+
+* **KUKA®, KRL®, KRC®, WorkVisual® ve SmartPAD®**, **KUKA AG** / **KUKA Deutschland GmbH** şirketinin tescilli ticari markalarıdır.
+* **Visual Studio Code® ve VS Code®**, **Microsoft Corporation** şirketinin tescilli ticari markalarıdır.
+* Bu yazılım uzantısı **Liskin Labs** tarafından geliştirilen bağımsız bir araçtır; KUKA AG veya Microsoft Corporation ile hiçbir bağlantısı, sponsorluğu, onayı veya sertifikası **yoktur**. Bahsi geçen tüm ürün adları ve markalar ilgili sahiplerinin mülkiyetindedir ve yalnızca uyumluluk tespiti amacıyla belirtilmiştir.

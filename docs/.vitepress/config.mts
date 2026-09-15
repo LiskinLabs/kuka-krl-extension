@@ -116,7 +116,7 @@ export default defineConfig({
           }
         ],
         footer: {
-          message: 'Licensed under Proprietary EULA.',
+          message: 'Licensed under Proprietary EULA. Independent tool by Liskin Labs; not affiliated with KUKA AG.',
           copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
         }
       }
@@ -161,7 +161,7 @@ export default defineConfig({
           }
         ],
         footer: {
-          message: 'Проприетарная лицензия (EULA).',
+          message: 'Проприетарная лицензия (EULA). Независимая разработка Liskin Labs; не аффилировано с KUKA AG.',
           copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
         }
       }
@@ -206,7 +206,7 @@ export default defineConfig({
           }
         ],
         footer: {
-          message: 'Özel EULA altında lisanslanmıştır.',
+          message: 'Özel EULA altında lisanslanmıştır. Liskin Labs bağımsız geliştirme; KUKA AG ile bağlantılı değildir.',
           copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
         }
       }

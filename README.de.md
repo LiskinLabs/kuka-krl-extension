@@ -360,3 +360,12 @@ Konfigurieren Sie das Verhalten der Erweiterung in Ihrer `settings.json`:
 * **Publisher & Entwickler**: [Liskin Labs](https://github.com/LiskinLabs) / [Silvestr Liskin](https://www.linkedin.com/in/silvestr-liskin-ab712920b/)
 * **Sicherheitsauditor**: [ReversingLabs Spectra Assure](https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension)
 * **Offizieller Zahlungsdienstleister**: [Dodo Payments](https://dodopayments.com/)
+* **Lizenz**: Kommerzielle EULA ([LICENSE](LICENSE))
+
+---
+
+## ⚖️ Marken & Rechtlicher Hinweis
+
+* **KUKA®, KRL®, KRC®, WorkVisual® und SmartPAD®** sind eingetragene Marken der **KUKA AG** / **KUKA Deutschland GmbH**.
+* **Visual Studio Code® und VS Code®** sind eingetragene Marken der **Microsoft Corporation**.
+* Diese Software-Erweiterung ist eine unabhängige Entwicklung von **Liskin Labs** und steht in **keiner** Verbindung zu KUKA AG oder Microsoft Corporation, wird von diesen weder gesponsert noch unterstützt oder zertifiziert. Alle genannten Produktnamen und Marken sind Eigentum der jeweiligen Inhaber und dienen ausschließlich der Kompatibilitätsbeschreibung (nominative fair use).

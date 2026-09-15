@@ -360,3 +360,12 @@ KUKA KRL Professional сертифицирован **ReversingLabs Spectra Assur
 * **Издатель и разработчик**: [Liskin Labs](https://github.com/LiskinLabs) / [Silvestr Liskin](https://www.linkedin.com/in/silvestr-liskin-ab712920b/)
 * **Аудитор безопасности**: [ReversingLabs Spectra Assure](https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension)
 * **Официальный платёжный партнёр**: [Dodo Payments](https://dodopayments.com/)
+* **Лицензия**: Коммерческая EULA ([LICENSE](LICENSE))
+
+---
+
+## ⚖️ Товарные знаки и правовой статус
+
+* **KUKA®, KRL®, KRC®, WorkVisual® и SmartPAD®** являются зарегистрированными товарными знаками **KUKA AG** / **KUKA Deutschland GmbH**.
+* **Visual Studio Code® и VS Code®** являются зарегистрированными товарными знаками **Microsoft Corporation**.
+* Данное программное расширение является независимой разработкой лаборатории **Liskin Labs** и **не** связано, не спонсируется, не одобряется и не сертифицировано KUKA AG или Microsoft Corporation. Все упомянутые торговые марки и бренды принадлежат их законным владельцам и используются исключительно для идентификации совместимости в рамках добросовестного использования (nominative fair use).

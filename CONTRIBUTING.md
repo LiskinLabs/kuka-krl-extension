@@ -34,4 +34,4 @@ First off, thank you for considering contributing to this project! It's people l
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the [GPL-3.0 License](LICENSE).
+By contributing, you agree that your contributions will be licensed under the [LiskinLabs Commercial EULA License](LICENSE).

@@ -2,6 +2,19 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.8.5] - 2026-09-15 (B2B Quotation Suite, Status Bar Licensing & Language Kernel Enrichment)
+
+### Features & Improvements
+- **B2B Quotation Generator**: Integrated automated commercial RFQ and engineering quotation tool with multi-currency estimation (USD / EUR / TRY), structured commissioning milestones, and professional quotation export.
+- **Status Bar License Indicator**: Added real-time status bar widget showing the active license tier (Community, Pro, Team, Enterprise), offline buffer validity, and 1-click access to the License & Device Manager.
+- **Submit Interpreter QuickFixes (`sps.sub`)**: Added automated CodeAction QuickFix for Submit Interpreter diagnostics, allowing instant remediation of blocking `WAIT` statements that could halt background cyclic tasks.
+- **Language Kernel & Reference Matrix**: Enriched built-in `krl-ref.json` database with 942 KUKA system variables, 118 kinematics/system functions, and 216 data structures with complete parameter documentation and typing.
+- **Snippet Suite Polish**: Corrected selection replacement macros across 11 core motion snippets, and added authentic KUKA Inline Form templates for industrial robot programming.
+
+### Legal, Security & Compliance
+- **Trademark Disclaimers**: Formally integrated Nominative Fair Use Trademark Disclaimers for KUKA AG and Microsoft Corporation across all documentation, repository manifests, and localization guides.
+- **License Integrity**: Unified internal package manifests to strictly reference LiskinLabs Commercial EULA, clarifying data protection and telemetry opt-out policies (`krl.telemetry.enabled`).
+
 ## [1.8.4] - 2026-09-11 (Acceptance Protocol Integrity, Licence Operations & Fleet Hardening)
 
 ### Acceptance protocol — corrected data

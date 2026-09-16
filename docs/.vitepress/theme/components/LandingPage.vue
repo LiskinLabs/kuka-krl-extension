@@ -149,7 +149,7 @@
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-2 w-2 bg-kuka-orange"></span>
               </span>
-              <span>[ SYS.ONLINE // KSS 8.2 - 8.7 // 50 INDUSTRIAL TOOLS ]</span>
+              <span>[ SYS.ONLINE // KSS 8.2 - 8.7 // 54 INDUSTRIAL TOOLS // v1.8.7 ]</span>
             </div>
 
             <!-- Main Heading H1 -->
@@ -1266,6 +1266,73 @@
         </div>
 
       </div>
+
+      <!-- 2.8.4.1 PRICING ECONOMICS & SELECTION GUIDE -->
+      <div class="mt-12 p-6 sm:p-8 rounded-2xl bg-[#0a0d14] border border-white/10 shadow-2xl text-left space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
+          <div class="space-y-1">
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-kuka-orange text-[10px] font-bold tracking-widest uppercase">
+              // {{ t.pricingGuideBadge || 'LICENSING ECONOMICS' }}
+            </div>
+            <h3 class="text-lg sm:text-xl font-black text-white font-sans">
+              {{ t.pricingGuideTitle || 'Which License Fits Your Workflow?' }}
+            </h3>
+          </div>
+          <div class="text-xs text-gray-400 font-mono">
+            {{ t.pricingGuideSub || 'Transparent terms for contractors, teams & automotive plants.' }}
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-gray-300">
+          <!-- Column 1: Individual Engineers -->
+          <div class="p-4 rounded-xl bg-white/[0.02] border border-white/10 space-y-3">
+            <div class="flex items-center gap-2 text-white font-bold font-sans text-sm">
+              <span class="text-orange-400">👤</span>
+              <span>{{ t.guideCol1Title || 'Individual Engineer' }}</span>
+            </div>
+            <div class="text-gray-400 text-[11px] leading-relaxed">
+              {{ t.guideCol1Desc || 'Pro Monthly ($9.99), Pro Annual ($79), or Pro Lifetime ($699).' }}
+            </div>
+            <ul class="space-y-1.5 text-[11px] text-gray-300 border-t border-white/5 pt-2">
+              <li>• <b class="text-white">5 Personal Activations:</b> {{ t.guideCol1P1 || 'Laptop, Toughbook, Office, Bench & Tablet.' }}</li>
+              <li>• <b class="text-purple-400">Why Lifetime ($699)?</b> {{ t.guideCol1P2 || 'Pay once, own forever with zero recurring fees for freelance contractors.' }}</li>
+              <li>• {{ t.guideCol1P3 || 'One prevented crash in teach-in pays for the license instantly.' }}</li>
+            </ul>
+          </div>
+
+          <!-- Column 2: Integrator Teams -->
+          <div class="p-4 rounded-xl bg-white/[0.02] border border-cyan-400/20 space-y-3">
+            <div class="flex items-center gap-2 text-white font-bold font-sans text-sm">
+              <span class="text-cyan-400">🏢</span>
+              <span>{{ t.guideCol2Title || 'Integrator Team' }}</span>
+            </div>
+            <div class="text-gray-400 text-[11px] leading-relaxed">
+              {{ t.guideCol2Desc || 'Team Edition ($299/yr) for up to 5 robotics specialists.' }}
+            </div>
+            <ul class="space-y-1.5 text-[11px] text-gray-300 border-t border-white/5 pt-2">
+              <li>• <b class="text-white">25 Activations Total:</b> {{ t.guideCol2P1 || '5 devices per engineer in your integration squad.' }}</li>
+              <li>• {{ t.guideCol2P2 || 'Centralized B2B invoice with corporate accounting reconciliation.' }}</li>
+              <li>• {{ t.guideCol2P3 || 'Unified KRL syntax and safety standards across all client cells.' }}</li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Industrial Plant / Enterprise -->
+          <div class="p-4 rounded-xl bg-white/[0.02] border border-emerald-400/30 space-y-3">
+            <div class="flex items-center gap-2 text-white font-bold font-sans text-sm">
+              <span class="text-emerald-400">🏭</span>
+              <span>{{ t.guideCol3Title || 'Enterprise Plant Site' }}</span>
+            </div>
+            <div class="text-gray-400 text-[11px] leading-relaxed">
+              {{ t.guideCol3Desc || 'Enterprise Site ($1,499/yr) — Unlimited seats for the whole factory.' }}
+            </div>
+            <ul class="space-y-1.5 text-[11px] text-gray-300 border-t border-white/5 pt-2">
+              <li>• <b class="text-emerald-400">{{ t.guideCol3P1_b || 'Unlimited Seats:' }}</b> {{ t.guideCol3P1 || 'Covers all plant technicians and operators (~$8/mo per person!).' }}</li>
+              <li>• <b class="text-white">Priority Support:</b> {{ t.guideCol3P2 || 'Direct developer engineering assistance via Telegram @kukakrlbot.' }}</li>
+              <li>• <b class="text-white">Fleet Backup Hub:</b> {{ t.guideCol3P3 || 'Cloud archiving of all robot cells + OEM-branded audits (Ford, Renault, TOGG).' }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- 2.8.5 COMPREHENSIVE FEATURE COMPARISON MATRIX (COMMUNITY VS PRO) -->
@@ -2192,7 +2259,11 @@ const translations = {
       },
       {
         q: "How many workstations can I activate with a Pro license?",
-        a: "Each Pro license allows activation on up to 3 machines simultaneously (e.g. your shop-floor rugged laptop, office workstation, and home setup)."
+        a: "Each individual Pro license allows activation on up to 5 machines simultaneously (e.g. your shop-floor rugged laptop, office workstation, home setup, bench PC, and tablet)."
+      },
+      {
+        q: "Why is Pro Lifetime $699 one-time while Enterprise Site is $1,499/yr?",
+        a: "Pro Lifetime ($699) provides 5 device activations (rugged laptop, office PC, test bench, home PC, tablet) with zero recurring fees. Enterprise Site ($1,499/yr) provides unlimited device activations across the entire factory plant, covering all plant technicians and operators (~$8/mo per seat for a 20-person team). It includes priority direct developer support via Telegram (@kukakrlbot), automated KUKA Fleet Backup Hub, and OEM-branded customer acceptance reports."
       }
     ],
 
@@ -2230,22 +2301,43 @@ const translations = {
     perYear: "/ year",
     perOnce: "/ Once",
     save35: "SAVE 35%",
-    activation5Seats: "5 Activations Included",
+    activation5Seats: "5 Device Activations",
     lifetimeF1: "All 50 Pro Tools Forever",
     lifetimeF2: "Free Future Major Updates",
     lifetimeF3: "Direct Engineering Support",
 
+    // Pricing Economics Guide
+    pricingGuideBadge: "LICENSING ECONOMICS",
+    pricingGuideTitle: "Which License Fits Your Workflow?",
+    pricingGuideSub: "Transparent terms for individual setups, integrator teams & manufacturing plants.",
+    guideCol1Title: "5-Device Tier",
+    guideCol1Desc: "Pro Monthly ($9.99), Pro Annual ($79), or Pro Lifetime ($699).",
+    guideCol1P1: "5 simultaneous device activations: Laptop, Toughbook, Office, Bench & Tablet.",
+    guideCol1P2: "Pay once, own forever with zero recurring fees for independent specialists.",
+    guideCol1P3: "One prevented crash in teach-in pays for the license instantly.",
+    guideCol2Title: "25-Device Tier",
+    guideCol2Desc: "Team Edition ($299/yr) with 25 total device activations.",
+    guideCol2P1: "25 simultaneous device activations for your entire integration squad.",
+    guideCol2P2: "Centralized B2B invoice with corporate accounting reconciliation.",
+    guideCol2P3: "Unified KRL syntax and safety standards across all client cells.",
+    guideCol3Title: "Enterprise Plant Site",
+    guideCol3Desc: "Enterprise Site ($1,499/yr) — Unlimited device activations for the whole plant.",
+    guideCol3P1_b: "Unlimited Activations:",
+    guideCol3P1: "Covers all plant technicians and operators (~$8/mo per person for a 20-person team).",
+    guideCol3P2: "Direct developer engineering assistance via Telegram (@kukakrlbot).",
+    guideCol3P3: "Cloud archiving of all robot cells + OEM-branded audits (Ford, Renault, TOGG).",
+
     // B2B tiers (Team / Enterprise)
-    p4Desc: "Annual licence for a small integration team — one invoice, 5 activations, priority support.",
+    p4Desc: "Annual licence for integration teams — one invoice, 25 device activations, priority support.",
     pf4_1: "All 50 Pro Tools",
-    pf4_2: "25 Activations (5 engineers)",
+    pf4_2: "25 Device Activations",
     pf4_3: "Priority Engineering Support",
     btnTeam: "Get Team Edition",
-    entBadge: "UNLIMITED SEATS",
-    p5Desc: "Site-wide licence for a plant or integrator — unlimited workstations and branded acceptance protocols.",
-    pf5_1: "Unlimited Activations",
-    pf5_2: "Company-Branded Reports",
-    pf5_3: "Priority Engineering Support",
+    entBadge: "UNLIMITED ACTIVATIONS",
+    p5Desc: "Site-wide licence for the entire manufacturing plant — unlimited device activations and Fleet Backup Hub.",
+    pf5_1: "Unlimited Device Activations",
+    pf5_2: "Company-Branded OEM Reports",
+    pf5_3: "Priority Telegram Support",
     btnEnterprise: "Get Enterprise",
 
     // Matrix additions
@@ -2327,7 +2419,11 @@ const translations = {
       },
       {
         q: "На скольких компьютерах можно активировать Pro лицензию?",
-        a: "Каждая лицензия Pro позволяет активировать расширение одновременно на 3 компьютерах (например, цеховой защищенный ноутбук, офисный ПК и домашняя рабочая станция)."
+        a: "Индивидуальная лицензия Pro включает одновременную активацию на 5 ваших устройствах (цеховой Toughbook, рабочий ноутбук, офисный ПК, домашняя станция, стендовый ПК или планшет)."
+      },
+      {
+        q: "Почему бессрочная лицензия Pro Lifetime стоит $699 разово, а Enterprise Site — $1,499 в год?",
+        a: "Pro Lifetime ($699) даёт 5 одновременных активаций устройств навсегда без каких-либо подписок и регулярных списаний. Enterprise Site ($1,499/год) предоставляет неограниченное число активаций на весь завод — все компьютеры и пульты предприятия работают по одной лицензии (~$8/мес на рабочее место при 20 специалистах). В тариф входит прямая поддержка от разработчика в Telegram (@kukakrlbot), автоматический KUKA Fleet Backup Hub и брендированные протоколы приемки (Ford, Renault, TOGG)."
       }
     ],
 
@@ -2365,22 +2461,43 @@ const translations = {
     perYear: "/ год",
     perOnce: "разово",
     save35: "СКИДКА 35%",
-    activation5Seats: "Активация на 5 устройствах",
+    activation5Seats: "5 Активаций Устройств",
     lifetimeF1: "Все 50 Pro инструментов навсегда",
     lifetimeF2: "Все будущие обновления бесплатны",
     lifetimeF3: "Прямая инженерная поддержка",
 
+    // Pricing Economics Guide
+    pricingGuideBadge: "ЭКОНОМИКА ТАРИФОВ",
+    pricingGuideTitle: "Какой тариф подходит именно вам?",
+    pricingGuideSub: "Прозрачные условия для частных наладчиков, интеграторских команд и заводов.",
+    guideCol1Title: "Тариф на 5 активаций",
+    guideCol1Desc: "Pro Месяц ($9.99), Pro Год ($79) или Pro Lifetime ($699).",
+    guideCol1P1: "5 одновременных активаций устройств: Toughbook, рабочий ноутбук, офис, стенд, планшет.",
+    guideCol1P2: "Оплата один раз — пожизненное владение без подписок и повторных списаний.",
+    guideCol1P3: "Один предотвращенный сбой или авария в teach-in окупает лицензию мгновенно.",
+    guideCol2Title: "Тариф на 25 активаций",
+    guideCol2Desc: "Team Edition ($299/год) с пакетом из 25 активаций устройств.",
+    guideCol2P1: "25 одновременных активаций устройств для всей команды интеграции.",
+    guideCol2P2: "Единый B2B инвойс для корпоративной бухгалтерии.",
+    guideCol2P3: "Единый стандарт чистоты кода и безопасности KRL на всех ячейках клиентов.",
+    guideCol3Title: "Enterprise для завода",
+    guideCol3Desc: "Enterprise Site ($1,499/год) — безлимитные активации на всё предприятие.",
+    guideCol3P1_b: "Безлимитные активации:",
+    guideCol3P1: "Покрывает всех наладчиков и операторов завода (~$8/мес на место при 20 специалистах).",
+    guideCol3P2: "Прямая инженерная поддержка напрямую от разработчика в Telegram (@kukakrlbot).",
+    guideCol3P3: "Облачный бэкап-хаб парка ячеек + брендированные аудиты (Ford, Renault, TOGG).",
+
     // B2B тарифы (Team / Enterprise)
-    p4Desc: "Годовая лицензия для небольшой интеграторской команды — один счёт, 5 активаций, приоритетная поддержка.",
+    p4Desc: "Годовая лицензия для команд интеграторов — один счёт, 25 активаций устройств, приоритетная поддержка.",
     pf4_1: "Все 50 Pro инструментов",
-    pf4_2: "25 активаций (5 инженеров)",
-    pf4_3: "Приоритетная поддержка",
+    pf4_2: "25 активаций устройств",
+    pf4_3: "Приоритетная инженерная поддержка",
     btnTeam: "Купить Team Edition",
-    entBadge: "БЕЗ ОГРАНИЧЕНИЙ",
-    p5Desc: "Лицензия на весь завод или интегратора — неограниченное число рабочих станций и брендированные протоколы приёмки.",
-    pf5_1: "Неограниченные активации",
-    pf5_2: "Брендированные отчёты",
-    pf5_3: "Приоритетная поддержка",
+    entBadge: "БЕЗЛИМИТНЫЕ АКТИВАЦИИ",
+    p5Desc: "Лицензия на весь производственный завод — безлимитные активации устройств и Fleet Backup Hub.",
+    pf5_1: "Безлимитные активации завода",
+    pf5_2: "Брендированные OEM-отчёты",
+    pf5_3: "Приоритетная поддержка в Telegram",
     btnEnterprise: "Купить Enterprise",
 
     // Matrix additions
@@ -2462,7 +2579,11 @@ const translations = {
       },
       {
         q: "Bir Pro lisansıyla kaç bilgisayar etkinleştirebilirim?",
-        a: "Her Pro lisansı, aynı anda 3 bilgisayara kadar etkinleştirmeye izin verir (örneğin saha dizüstü bilgisayarı, ofis bilgisayarı ve ev iş istasyonu)."
+        a: "Bireysel Pro lisansı, aynı anda 5 cihazda etkinleştirmeye izin verir (saha Toughbook'u, ofis bilgisayarı, ev iş istasyonu, test tezgahı ve tablet)."
+      },
+      {
+        q: "Pro Lifetime neden tek seferlik $699 iken Enterprise Site yıllık $1,499?",
+        a: "Pro Lifetime ($699), 5 cihaz aktivasyonu sağlar ve yinelenen ücreti olmayan kalıcı bir lisanstır. Enterprise Site ($1,499/yıl) ise tüm fabrika genelinde sınırsız cihaz aktivasyonu sunar (~$8/ay/cihaz). Telegram (@kukakrlbot) üzerinden doğrudan kıdemli mühendis desteği, merkezi KUKA Filo Yedekleme Merkezi ve OEM markalı müşteri kabul protokollerini içerir."
       }
     ],
 
@@ -2500,22 +2621,43 @@ const translations = {
     perYear: "/ yıl",
     perOnce: "tek seferlik",
     save35: "%35 TASARRUF",
-    activation5Seats: "5 Cihazda Aktivasyon",
+    activation5Seats: "5 Cihaz Aktivasyonu",
     lifetimeF1: "Tüm 50 Pro Araç Sonsuza Kadar",
     lifetimeF2: "Gelecekteki Tüm Güncellemeler Dahil",
     lifetimeF3: "Doğrudan Mühendislik Desteği",
 
+    // Pricing Economics Guide
+    pricingGuideBadge: "FİYATLANDIRMA EKONOMİSİ",
+    pricingGuideTitle: "İş Akışınıza En Uygun Lisans Hangisi?",
+    pricingGuideSub: "Bireysel kurulumlar, entegratör ekipleri ve fabrikalar için şeffaf koşullar.",
+    guideCol1Title: "5 Cihaz Aktivasyon Paketi",
+    guideCol1Desc: "Pro Aylık ($9.99), Pro Yıllık ($79) veya Pro Lifetime ($699).",
+    guideCol1P1: "Aynı anda 5 cihaz aktivasyonu: Laptop, Toughbook, Ofis, Test Tezgahı ve Tablet.",
+    guideCol1P2: "Bir kez ödeyin, kalıcı sahip olun — sıfır abonelik ve yinelenen ücret.",
+    guideCol1P3: "Devreye alma sırasında önlenen tek bir kaza veya duruş, lisans bedelini anında çıkarır.",
+    guideCol2Title: "25 Cihaz Aktivasyon Paketi",
+    guideCol2Desc: "Entegrasyon ekipleri için Team Edition ($299/yıl) — 25 cihaz aktivasyonu.",
+    guideCol2P1: "Tüm entegrasyon ekibiniz için toplam 25 eşzamanlı cihaz aktivasyonu.",
+    guideCol2P2: "Kurumsal muhasebe için merkezi B2B fatura.",
+    guideCol2P3: "Müşteri hücrelerinde standart KRL sözdizimi ve güvenlik kalitesi.",
+    guideCol3Title: "Kurumsal Fabrika (Site)",
+    guideCol3Desc: "Enterprise Site ($1,499/yıl) — Tüm fabrika için sınırsız cihaz aktivasyonu.",
+    guideCol3P1_b: "Sınırsız Aktivasyon:",
+    guideCol3P1: "Fabrikadaki tüm teknisyenleri kapsar (20 kişilik tesiste kişi başı ~$8/ay).",
+    guideCol3P2: "Telegram (@kukakrlbot) üzerinden doğrudan geliştirici mühendislik desteği.",
+    guideCol3P3: "Tüm robot hücreleri için merkezi bulut yedekleme + OEM markalı denetimler (Ford, Renault, TOGG).",
+
     // B2B paketleri (Team / Enterprise)
-    p4Desc: "Küçük entegrasyon ekipleri için yıllık lisans — tek fatura, 5 aktivasyon, öncelikli destek.",
+    p4Desc: "Entegrasyon ekipleri için yıllık lisans — tek fatura, 25 cihaz aktivasyonu, öncelikli destek.",
     pf4_1: "Tüm 50 Pro Araç",
-    pf4_2: "25 Aktivasyon (5 mühendis)",
+    pf4_2: "25 Cihaz Aktivasyonu",
     pf4_3: "Öncelikli Mühendislik Desteği",
     btnTeam: "Team Edition Satın Al",
-    entBadge: "SINIRSIZ LİSANS",
-    p5Desc: "Fabrika veya entegratör için site lisansı — sınırsız iş istasyonu ve markalı kabul protokolleri.",
-    pf5_1: "Sınırsız Aktivasyon",
-    pf5_2: "Markalı Raporlar",
-    pf5_3: "Öncelikli Mühendislik Desteği",
+    entBadge: "SINIRSIZ AKTİVASYON",
+    p5Desc: "Tüm üretim tesisi için site lisansı — sınırsız cihaz aktivasyonu ve Filo Yedekleme Merkezi.",
+    pf5_1: "Sınırsız Cihaz Aktivasyonu",
+    pf5_2: "OEM Markalı Denetim Raporları",
+    pf5_3: "Öncelikli Telegram Desteği",
     btnEnterprise: "Enterprise Satın Al",
 
     // Matrix additions

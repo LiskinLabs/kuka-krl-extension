@@ -297,6 +297,23 @@ Doğrulanmış satıcımız **Dodo Payments** üzerinden esnek, endüstriyel sı
   <p style="margin-top: 10px; font-size: 0.9em; color: #888;">VS Code'da anında 1 tık aktivasyon • 14 Günlük Grace Dönemi Koruması • 30 Günlük Çevrimdışı Tampon</p>
 </div>
 
+### 💡 İş Akışınıza Hangi Lisans Planı Uygun? (Lisans Ekonomisi):
+
+* 💻 **5 Cihaz Aktivasyon Paketi (Pro Aylık / Yıllık / Ömür Boyu):**
+  * **5 eşzamanlı cihaz aktivasyon** hakkı (saha Toughbook'u, iş laptopu, ev bilgisayarı, test masası, tablet).
+  * **Neden Pro Lifetime ($699 tek seferlik)?** Bir kez ödeyin, abonelik veya tekrar eden ücret olmadan sonsuza dek sahip olun. Sahadaki devreye alma sırasında önlenen tek bir robot çarpışması veya kazanılan 1 gün bu yatırımı anında amorti eder.
+* 🏢 **25 Cihaz Aktivasyon Paketi (Team Edition — $299/yıl):**
+  * Entegrasyon ekipleri için **25 cihaz aktivasyonu**.
+  * Resmi B2B fatura, muhasebe mutabakatı ve projeler genelinde birleşik KRL kod kalitesi standartları.
+* 🏭 **Kurumsal Fabrika (Site) (Enterprise Site — $1,499/yıl):**
+  * *5 cihazlık ömür boyu paket $699 iken yıllık Enterprise Site neden $1,499/yıl?*
+  * Çünkü bu **TÜM FABRİKA İÇİN SINIRSIZ CİHAZ AKTİVASYONUDUR (Sınırsız Kullanıcı)**! Yalnızca 5 cihazı değil, **tesisteki tüm bilgisayar, test tezgahı ve panelleri kapsar (20, 50 veya 100+ teknisyen, operatör ve bakımcı)**. 20 kişilik bir tesis için cihaz başı ayda yalnızca **~$8** maliyete denk gelir!
+  * **Doğrudan Mühendislik Desteği:** Telegram (@kukakrlbot) üzerinden doğrudan kıdemli mühendis desteği.
+  * **KUKA Fleet Backup Hub:** Yüzlerce hücre kontrolcüsünün kurumsal GitLab/Google Drive'a otomatik yedeklenmesi, çoklu yedek diff analizi ve sürüm kontrolü.
+  * **Özel Markalı Müşteri Kabul Raporları:** OEM logolarıyla (Ford, Renault, Saint-Gobain, TOGG) markalanmış resmi robot pasaportları ve güvenlik denetimleri.
+  * **Eksiksiz Kurumsal Satınalma:** Kurumsal yazılım sözleşmesi, resmi KDV faturası ve tedarikçi uyumluluğu.
+
+
 ---
 
 ## 🔒 14 Günlük Grace Dönemi ve Çevrimdışı Öncelik Garantisi

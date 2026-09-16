@@ -22,7 +22,7 @@
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://badgen.net/vs-marketplace/v/LiskinLabs.kuka-krl-extension?style=flat&label=VS%20Code%20Marketplace&color=FF6600" alt="VS Code Marketplace" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.4-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.8.4" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.7-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.8.7" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Verified-4.1M%2B%20LoC-10b981?style=flat-square" alt="Fleet Verified" /></a>
 </p>
@@ -237,6 +237,46 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
+### 17. 📜 KUKA Event Log (.evt) Çözücü (Pure-TS KRC Decoder)
+*Harici araçlara ve Windows bağımlılıklarına gerek olmadan ikili KRC olay günlüklerini çözer.*
+* **Yerel Pure-TS Çözücü**: KRC Windows EVTX günlüklerini (`KrcLogS.evt`, `KrcLogB.evt`, `KrcLogP.evt`, vb.) sıfır harici bağımlılıkla doğrudan okur.
+* **Kayıtlı Varsayılan Düzenleyici**: VS Code dosya gezgininde herhangi bir `.evt` dosyasına çift tıklamak etkileşimli görüntüleyiciyi anında açar.
+* **2.050+ KSS CrossMeld Mesaj Kataloğu**: Tüm 6 dilde (EN, DE, RU, ES, IT, TR) resmi durum, uyarı ve hata mesajları, dinamik `{0}` / `{1}` parametre değişimi ile.
+* **Akıllı Filtreleme ve Koda Atlama**: Önem derecesi (`ERROR`, `WARNING`, `INFO`, `DIALOG`), kaynak modül veya zamana göre filtreleme, KRL `.src` kaynak satırına 1 tıkla atlama ve CSV/JSON çıktısı.
+
+---
+
+### 18. ⚡ Görsel I/O Sinyal Matrisi ve PLC Donanım Çarpışma Dedektörü
+*Tüm çalışma alanı sinyallerini denetler ve PLC adres çakışmalarını önler.*
+* **Derin Çalışma Alanı Taraması**: Tüm `.src` ve `.dat` dosyalarında `$IN`, `$OUT`, `$ANIN` ve `$ANOUT` bildirimlerini tarar.
+* **Otomatik Çarpışma Algılama**: Tek bitlik bayraklardan çok bitlik kelimelere kadar bit aralıklarını hesaplar ve donanım çakışmalarını devreye almadan önce tespit eder.
+* **Etkileşimli Matris ve CSV Dışa Aktarma**: Gerçek zamanlı arama, tür filtreleri, bildirim satırına doğrudan atlama ve CSV çıktısı.
+
+---
+
+### 19. 📊 Yörünge Yol Uzunluğu ve Kaynak Çevrimi Zekası
+*Hassas 3B uzamsal hareket analizi ve kaynak prosesi zekası.*
+* **3B Öklid Uzamsal Uzunluğu**: Tüm Kartezyen hareket komutlarında milimetre ve metre cinsinden kesin yörünge uzunluğunu hesaplar.
+* **Hareket Segmentasyonu**: `PTP`, `LIN`, `CIRC` ve `SPLINE` hareketlerini otomatik sınıflandırır.
+* **Kaynak Proses Zekası**: `ARCON`/`ARCOFF` bloklarını otomatik tanır, kaynak dikişlerini ayırır, toplam dikiş uzunluğunu ve ark süresini hesaplar.
+
+---
+
+### 20. 🔄 Toplu Nokta Öteleme Dönüştürücü (BASE vs WORLD)
+*Nokta koordinatlarını cerrahi hassasiyetle toplu dönüştürün.*
+* **Çift Koordinat Çerçevesi**: İş parçası (**BASE**) veya robot Kartezyen (**WORLD**) çerçevesine göre ters Euler rotasyon matrisi ile öteleme ($R^T_{base} \cdot \vec{\Delta}_{world}$).
+* **3B İzometrik SVG Şeması**: Dinamik öteleme vektörü görselleştirmesi ile etkileşimli eksen diyagramı.
+* **Seçici Dönüştürme**: Noktaları filtreleyin, özel noktalar ekleyin, delta farklarını inceleyin ve `.dat` dosyalarına atomik olarak kaydedin.
+
+---
+
+### 21. 🌓 %100 Uyarlanabilir Temalar ve Tam Altı Dilli Yerelleştirme
+*Sıfır sabit renkle kusursuz estetik entegrasyon.*
+* **Uyarlanabilir Tema Değişkenleri**: Yalnızca `--vscode-*` CSS token'larıyla oluşturulmuştur — her Koyu, Açık (`body.vscode-light`) veya Yüksek Kontrastlı (`body.vscode-high-contrast`) VS Code temasına mükemmel uyum sağlar.
+* **6 Dilli Arayüz Değiştirici**: Tüm endüstriyel araçlarda İngilizce, Almanca, Rusça, İspanyolca, İtalyanca ve Türkçe arasında anında geçiş.
+
+---
+
 ## 📊 Özellik Karşılaştırma Matrisi (50 Endüstriyel Araç)
 
 | Özellik | Community (Ücretsiz) | Pro Industrial | Mühendislere Faydası |
@@ -257,6 +297,10 @@ Her devreye alma mühendisi bu acıyı bilir:
 | **36 Komutluk Tam Düz Kenar Çubuğu** | ✅ | ✅ | Her uzantı komutuna 1 tıkla erişim |
 | **Yerel Proje ZIP Dışa Aktarma ve Uzaktan Telepresence** | ✅ | ✅ | 1 tıkla tam yedekleme — işletim sistemi gezginine veya Telegram'a |
 | **Copilot AI Dil Modeli Araçları Entegrasyonu** | ✅ | ✅ | `krl_safety_check` doğrudan VS Code AI tarafından çağrılabilir |
+| **KUKA Event Log (.evt) Çözücü** (2.050+ mesaj) | ❌ | **✅ Pro** | Yerel pure-TS EVTX çözücü, 6 dilde katalog ve 1 tıkla koda atlama |
+| **Görsel I/O Sinyal Matrisi ve Çarpışma Dedektörü** | ❌ | **✅ Pro** | `$IN`/`$OUT` taraması, donanım bit çakışması tespiti ve CSV çıktısı |
+| **Yörünge Yol Uzunluğu ve Kaynak İstatistiği** | ❌ | **✅ Pro** | 3B Öklid mesafesi, kaynak dikiş uzunluğu ve ark süresi |
+| **Toplu Nokta Öteleme Dönüştürücü** (BASE / WORLD) | ❌ | **✅ Pro** | 3B izometrik SVG şeması, Euler ters matrisi ve `.dat` güncellemeleri |
 | **SmartPAD Yedek Kalite Kabul Raporu** | ❌ | **✅ Pro** | Robot pasaportu ve tıklanabilir köprülerle otomatik proje denetimi |
 | **Modern KRL ve iiQKA FOLD Paketi** | ❌ | **✅ Pro** | iiQKA FOLD'lar, Spline Blokları ve Çarpışma Koruması |
 | **Etkileşimli Akış Şeması Görüntüleyici** (Mermaid SVG) | ❌ | **✅ Pro** | Görsel kontrol akış mantığı ve 2 yönlü koda atlama |

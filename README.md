@@ -22,7 +22,7 @@
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://badgen.net/vs-marketplace/v/LiskinLabs.kuka-krl-extension?style=flat&label=VS%20Code%20Marketplace&color=FF6600" alt="VS Code Marketplace" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.4-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.8.4" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.7-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.8.7" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Verified-4.1M%2B%20LoC-10b981?style=flat-square" alt="Fleet Verified" /></a>
 </p>
@@ -237,6 +237,46 @@ Every commissioning robotics engineer knows the pain:
 
 ---
 
+### 17. 📜 Decode & View KUKA Event Log (.evt) (Pure-TS KRC Decoder)
+*Decode binary KUKA Event Logs without external utilities or Windows dependencies.*
+* **Native Pure-TS Decoder**: Reads KRC Windows EVTX logs (`KrcLogS.evt`, `KrcLogB.evt`, `KrcLogP.evt`, `KrcLogC.evt`, `KrcLogU.evt`) with zero external dependencies.
+* **Registered Default Editor**: Double-clicking any `.evt` file in the VS Code file explorer opens the interactive log viewer instantly.
+* **2,050+ KSS CrossMeld Message Catalog**: Offline dictionary of official KSS status, warning, and fault messages across all 6 languages (EN, DE, RU, ES, IT, TR) with dynamic `{0}` / `{1}` parameter substitution.
+* **Smart Filter & Code Jump**: Filter by severity (`ERROR`, `WARNING`, `INFO`, `DIALOG`), source module, or timestamp, with 1-click jump to referenced KRL `.src` lines and export to CSV/JSON.
+
+---
+
+### 18. ⚡ Visual I/O Signal Matrix & PLC Hardware Collision Detector
+*Audit all workspace signals and prevent electrical/PLC address conflicts.*
+* **Deep Workspace Scan**: Scans all `.src` and `.dat` declarations for `$IN`, `$OUT`, `$ANIN`, and `$ANOUT`.
+* **Automatic Collision Detection**: Calculates bit ranges (single-bit flags to multi-bit words) and flags hardware bit collisions before physical commissioning.
+* **Interactive Matrix & CSV Export**: Real-time search, signal type filters, direct jump to source declarations, and CSV export for electrical documentation.
+
+---
+
+### 19. 📊 Trajectory Path Length & Welding Cycle Intelligence
+*Exact 3D spatial motion analysis and welding process intelligence.*
+* **3D Euclidean Spatial Length**: Computes exact trajectory path length in millimeters and meters across all Cartesian motion commands.
+* **Motion Segmentation**: Classifies and segments `PTP`, `LIN`, `CIRC`, and `SPLINE` routines.
+* **Welding Process Intelligence**: Automatically detects `ARCON`/`ARCOFF` blocks, isolates weld seams, computes total weld seam length, and calculates arc-on cycle time based on process velocities.
+
+---
+
+### 20. 🔄 Batch Point Offset Transformer (BASE vs WORLD)
+*Transform point coordinates in batch with surgical precision.*
+* **Dual Coordinate Frames**: Apply offsets relative to workpiece coordinate frame (**BASE**) or robot global Cartesian frame (**WORLD**) using inverse Euler rotation matrix ($R^T_{base} \cdot \vec{\Delta}_{world}$).
+* **3D Isometric SVG Schema**: Interactive coordinate axes diagram with dynamic offset vector visualization.
+* **Selective Point Transformation**: Filter points, add custom points, preview transformed values with delta highlighting, and apply atomic updates directly to `.dat` files with full undo support.
+
+---
+
+### 21. 🌓 100% Adaptive Themes & Full Hexa-Locale Localization
+*Seamless aesthetic integration with zero hardcoded colors.*
+* **Adaptive Theme Variables**: Built exclusively with `--vscode-*` CSS tokens — perfectly adapts to any Dark, Light (`body.vscode-light`), or High Contrast (`body.vscode-high-contrast`) VS Code theme.
+* **Hexa-Locale UI Switcher**: Instant switching between English, German, Russian, Spanish, Italian, and Turkish across all industrial tools.
+
+---
+
 ## 📊 Feature Comparison Matrix (50 Industrial Tools)
 
 | Feature | Community (Free) | Pro Industrial | Benefit for Engineers |
@@ -257,6 +297,10 @@ Every commissioning robotics engineer knows the pain:
 | **Full Flat 36-Commands Sidebar Tree** | ✅ | ✅ | Every single extension command accessible in 1 click |
 | **Native Project ZIP Export & Remote Telepresence** | ✅ | ✅ | 1-click full backup to OS explorer or Telegram |
 | **Copilot AI Language Model Tools Integration** | ✅ | ✅ | `krl_safety_check` callable directly by VS Code AI |
+| **Decode & View KUKA Event Log (.evt)** | ❌ | **✅ Pro** | Native pure-TS EVTX decoder, 2,050+ msgs in 6 langs, code jump |
+| **Visual I/O Signal Matrix & Overlap Detector** | ❌ | **✅ Pro** | Scans `$IN`/`$OUT`, hardware bit collision detection & CSV export |
+| **Trajectory Path Length & Welding Stats** | ❌ | **✅ Pro** | 3D spatial Euclidean distance, weld seam length & arc-on time |
+| **Batch Point Offset Transformer** (BASE / WORLD) | ❌ | **✅ Pro** | 3D isometric SVG schema, Euler inverse math & atomic `.dat` updates |
 | **SmartPAD Backup Quality Acceptance Report** | ❌ | **✅ Pro** | Automated project audit with robot passport & clickable hyperlinks |
 | **Modern KRL & iiQKA Fold Suite** | ❌ | **✅ Pro** | iiQKA Folds, Spline Blocks & Collision Guard |
 | **Interactive Flowchart Viewer** (Mermaid SVG) | ❌ | **✅ Pro** | Visual control-flow logic & 2-way code jump |

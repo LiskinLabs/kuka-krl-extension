@@ -63,3 +63,28 @@ Context providers for AI assistants (Google Antigravity IDE / Copilot).
 
 ### 26. Quality Acceptance Report Generator
 Generates comprehensive HTML/JSON code quality reports for client sign-off.
+
+---
+
+### 27. Decode & View KUKA Event Log (.evt)
+100% pure TypeScript binary decoder (`krl.openEventLog`) for KRC Windows EVTX logs (`KrcLogS.evt`, `KrcLogB.evt`, etc.) with built-in 2,050+ KSS CrossMeld messages across 6 languages (EN, DE, RU, ES, IT, TR), 1-click code jump, and CSV/JSON export.
+
+---
+
+### 28. Visual I/O Signal Matrix & PLC Overlap Detector
+Workspace signal auditor (`krl.showIoMatrix`) scanning `$IN`, `$OUT`, `$ANIN`, and `$ANOUT` declarations to calculate bit ranges and automatically identify hardware PLC address collisions.
+
+---
+
+### 29. Trajectory Path Length & Welding Stats
+3D spatial Euclidean motion analyzer (`krl.estimateMotionStats`) with automatic classification of PTP, LIN, CIRC, and Spline motions, `ARCON`/`ARCOFF` weld seam isolation, weld seam length calculation, and arc-on cycle time estimation.
+
+---
+
+### 30. Batch Point Offset Transformer (BASE vs WORLD)
+Batch point coordinate transformer (`krl.transformPointOffsets`) with real-time 3D isometric SVG coordinate schema, dual reference frames (workpiece BASE vs robot WORLD via inverse Euler rotation matrix), and atomic `.dat` file updates with undo preservation.
+
+---
+
+### 31. 100% Adaptive Themes & Hexa-Locale Support
+Zero hardcoded colors — seamlessly integrates into any Dark, Light, or High Contrast VS Code theme via `--vscode-*` CSS variables, with an integrated 6-language switcher (EN, DE, RU, ES, IT, TR).

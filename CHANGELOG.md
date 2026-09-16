@@ -19,8 +19,13 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
   - Dynamic point selection, custom point addition/removal, live before/after delta calculation, and surgical atomic updates to `.dat` files with full undo preservation.
 - **Decode & View KUKA Event Log (.evt) (`krl.openEventLog`)**:
   - 100% pure TypeScript zero-dependency binary decoder for KRC Windows EVTX event logs (`KrcLogS.evt`, `KrcLogB.evt`, `KrcLogP.evt`, etc.).
-  - Built-in offline diagnostic dictionary of 2,050+ KUKA KSS CrossMeld messages with dual-language support (English and Russian).
+  - Registered `KukaEventLogCustomEditorProvider` as the default custom editor in VS Code for `.evt` files — double-clicking any event log in the workspace opens the interactive viewer instantly.
+  - Built-in offline diagnostic dictionary of official KUKA KSS CrossMeld messages across **all 6 supported languages**: EN (2,050), DE (2,051), RU (1,997), ES (2,048), IT (2,048), and TR (1,997).
   - Dynamic parameter substitution (`{0}`, `{1}`), fault severity classification (`ERROR`, `WARNING`, `INFO`, `DIALOG`), CSV/diagnostic report export, and one-click navigation to referenced KRL source files and line numbers.
+- **100% Adaptive Themes & Zero Fixed Colors**:
+  - Complete elimination of hardcoded/fixed CSS colors across all extension webviews.
+  - Native integration with any VS Code theme via `--vscode-*` CSS variables, with explicit adaptations for Light Themes (`body.vscode-light`) and High Contrast (`body.vscode-high-contrast`).
+  - Dynamic 6-language switcher (EN, DE, RU, ES, IT, TR) integrated into all industrial tools.
 - **Pro Licensing Protection**: All 4 industrial engineering tools are guarded with `ensurePremium`.
 
 ### KUKA.Sim & KSS 8.3–8.7 Standardization

@@ -99,6 +99,19 @@ GLOBAL DEF diagnostics_demo()
   ENDLOOP
   ENDSPLINE
 
+  ; --- 1.6 Prohibited Instructions Inside Modern SPLINE Blocks ---
+  SPLINE
+    SLIN {X 1000, Y 0, Z 500}
+    $OUT[1] = TRUE
+    WAIT SEC 1.0
+    PTP {A1 0, A2 0, A3 0, A4 0, A5 0, A6 0}
+    IF bEmptyBlock_1 THEN
+    ENDIF
+  ENDSPLINE
+
+  ; --- 1.7 Circular Motion Syntax Errors (Requires 2 Points) ---
+  CIRC {X 1000, Y 0, Z 500}
+
   ; ==========================================================================
   ; 🟡 GROUP 2: 50 SAFETY, MOTION & CODE QUALITY WARNINGS
   ; ==========================================================================

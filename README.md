@@ -297,6 +297,23 @@ We offer flexible, industrial-grade licensing through our verified merchant of r
   <p style="margin-top: 10px; font-size: 0.9em; color: #888;">Instant 1-Click VS Code activation • 14-Day Grace Period Protection • 30-Day Offline Buffer</p>
 </div>
 
+### 💡 Which License Plan Fits Your Workflow? (Licensing Economics):
+
+* 💻 **5-Device Activation Tier (Pro Monthly / Annual / Lifetime):**
+  * License with **5 simultaneous device activations** (field Toughbook, work laptop, home workstation, bench PC, tablet).
+  * **Why Pro Lifetime ($699 one-time)?** Pay once, own forever with zero recurring fees or subscriptions. A single crash prevented during on-site teach-in or one commissioning day saved repays this investment immediately.
+* 🏢 **25-Device Activation Tier (Team Edition — $299/yr):**
+  * Built for integration teams with a package of **25 device activations**.
+  * Includes formal B2B invoicing, accounting reconciliation, and unified KRL code quality standards across all projects.
+* 🏭 **Enterprise Plant Site (Enterprise Site — $1,499/yr):**
+  * *Why is annual Enterprise Site $1,499/yr when Lifetime for 5 devices is $699?*
+  * Because it provides **UNLIMITED DEVICE ACTIVATIONS FOR THE ENTIRE PLANT (Unlimited Seats)**! It covers **all plant computers, test benches, and operator stations (20, 50, or 100+ technicians, operators, and programmers)**. For a 15-person team, this is only **~$8/month per seat**!
+  * **Direct Developer Support:** priority direct line with lead developer via Telegram (@kukakrlbot).
+  * **KUKA Fleet Backup Hub:** automated centralized archiving, multi-backup diffing, and version control across hundreds of cell controllers into corporate GitLab/Google Drive.
+  * **Custom Branded Customer Acceptance Reports:** formal robotics passports and safety audits branded with OEM logos (Ford, Renault, Saint-Gobain, TOGG).
+  * **Complete Corporate Procurement:** corporate master software agreement, formal VAT invoicing, and official supplier compliance.
+
+
 ---
 
 ## 🔒 14-Day Grace Period & Offline-First Guarantee

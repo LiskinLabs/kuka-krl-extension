@@ -1,11 +1,11 @@
 &ACCESS RVP
 &REL 1
-&COMMENT Comprehensive Motion Showcase (PTP, LIN, CIRC, Splines)
+&COMMENT Comprehensive Motion Showcase (PTP, LIN, CIRC, Splines, Folds)
 GLOBAL DEF motion_and_splines()
   ; ========================================================
-  ; MOTION INSTRUCTION TEST SUITE
-  ; Tests: Axis coordinates (E6AXIS), Cartesian (E6POS),
-  ; CIRC arcs, velocity parameters, and tool/base switching
+  ; MOTION INSTRUCTION TEST SUITE (KSS 8.3 - 8.7 & KUKA.Sim)
+  ; Tests: Conventional motions, modern Splines, Inline Forms,
+  ; Torque Monitoring (CollisionGuard), and circular arcs
   ; ========================================================
   DECL E6AXIS axHomeAxis = {A1 0.0, A2 -90.0, A3 90.0, A4 0.0, A5 45.0, A6 0.0, E1 0.0}
 
@@ -13,25 +13,90 @@ GLOBAL DEF motion_and_splines()
   $TOOL = TOOL_DATA[1]
   $BASE = BASE_DATA[1]
 
-  ; PTP Axis motion
+  ; 1. Conventional Axis Motion (PTP)
   $VEL_AXIS[1] = 75
   $ACC_AXIS[1] = 50
   PTP axHomeAxis
 
-  ; Cartesian Linear motion with approximation
+  ; 2. Conventional Cartesian Motion with approximation (LIN)
   $VEL.CP = 1.8
   $APO.CDIS = 50.0
   LIN xLinPoint1 C_DIS
   LIN xLinPoint2 C_DIS
 
-  ; Circular interpolation arc
+  ; 3. Circular Interpolation Arc (CIRC: AuxPoint, TargetPoint)
   CIRC xCircAux, xCircEnd, CA 90.0 C_DIS
 
-  ; Modern KSS 8.6 Spline Segment
-  SPLINE
-    SPL xLinPoint2 WITH $VEL.CP = 1.2
-    SLIN xLinPoint1 WITH $VEL.CP = 1.5
+  ; 4. Modern KSS 8.5+ Spline Block with Trigger Synchronizations
+  ;FOLD CP Motion Sequence
+  SPLINE WITH $VEL.CP = 2.0, $ACC.CP = 10.0, $ORI_TYPE = #VAR
+    SLIN xLinPoint1
+    SPL xCircAux
+    TRIGGER WHEN PATH = 0 ONSTART DO $OUT[1] = TRUE
+    TRIGGER WHEN DISTANCE = 1 DELAY = 20 DO $OUT[2] = TRUE
+    SLIN xLinPoint2
   ENDSPLINE
+  ;ENDFOLD
+
+  ; 5. Official KSS 8.5+ Spline Inline Form (SPTP)
+  ;FOLD SPTP HOME Vel=100 % PDAT1 Tool[1]:Tool1 Base[0]:Base0 ;%{PE}
+  ;FOLD Parameters ;%{h}
+  ;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.spline; Kuka.PointName=HOME; Kuka.BlendingEnabled=False; Kuka.MoveDataPtpName=PDAT1; Kuka.VelocityPtp=100; Kuka.VelocityFieldEnabled=True; Kuka.MovementParameterFieldEnabled=True; IlfCommand=SPTP
+  ;ENDFOLD
+  SPTP XHOME WITH $VEL_AXIS[1] = SVEL_JOINT(100.0), $TOOL = STOOL2(fHOME), $BASE = SBASE(fHOME.BASE_NO), $IPO_MODE = SIPO_MODE(fHOME.IPO_FRAME), $LOAD = SLOAD(fHOME.TOOL_NO), $ACC_AXIS[1] = SACC_JOINT(PPDAT1), $COLLMON_TOL_PRO[1] = USE_CM_PRO_VALUES(0)
+  ;ENDFOLD
+
+  ; 6. Official KSS 8.5+ Spline Inline Form (SLIN)
+  ;FOLD SLIN P1 Vel=2 m/s CPDAT1 Tool[1]:Tool1 Base[0]:Base0 ;%{PE}
+  ;FOLD Parameters ;%{h}
+  ;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.spline; Kuka.PointName=P1; Kuka.BlendingEnabled=False; Kuka.MoveDataName=CPDAT1; Kuka.VelocityPath=2; Kuka.VelocityFieldEnabled=True; Kuka.MovementParameterFieldEnabled=True; IlfCommand=SLIN
+  ;ENDFOLD
+  SLIN XP1 WITH $VEL = SVEL_CP(2.0, , LCPDAT1), $TOOL = STOOL2(fP1), $BASE = SBASE(fP1.BASE_NO), $IPO_MODE = SIPO_MODE(fP1.IPO_FRAME), $LOAD = SLOAD(fP1.TOOL_NO), $ACC = SACC_CP(LCPDAT1), $ORI_TYPE = SORI_TYP(LCPDAT1), $APO = SAPO(LCPDAT1), $JERK = SJERK(LCPDAT1), $COLLMON_TOL_PRO[1] = USE_CM_PRO_VALUES(0)
+  ;ENDFOLD
+
+  ; 7. Official KSS 8.5+ Spline Inline Form (SCIRC)
+  ;FOLD SCIRC P_AUX P2 Vel=2 m/s CPDAT1 Tool[1]:Tool1 Base[0]:Base0 ;%{PE}
+  ;FOLD Parameters ;%{h}
+  ;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.spline; Kuka.PointName=P2; Kuka.HelpPointName=P_AUX; Kuka.BlendingEnabled=False; Kuka.MoveDataName=CPDAT1; Kuka.VelocityPath=2; Kuka.VelocityFieldEnabled=True; Kuka.MovementParameterFieldEnabled=True; IlfCommand=SCIRC
+  ;ENDFOLD
+  SCIRC XP_AUX, XP2 WITH $VEL = SVEL_CP(2.0, , LCPDAT1), $TOOL = STOOL2(fP2), $BASE = SBASE(fP2.BASE_NO), $IPO_MODE = SIPO_MODE(fP2.IPO_FRAME), $LOAD = SLOAD(fP2.TOOL_NO), $ACC = SACC_CP(LCPDAT1), $ORI_TYPE = SORI_TYP(LCPDAT1), $CIRC_TYPE = SCIRC_TYP(LCPDAT1), $APO = SAPO(LCPDAT1), $CIRC_MODE = SCIRC_M(LCPDAT1), $JERK = SJERK(LCPDAT1), $COLLMON_TOL_PRO[1] = USE_CM_PRO_VALUES(0)
+  ;ENDFOLD
+
+  ; 8. Official KSS CollisionGuard / Torque Monitoring Envelope
+  ;FOLD Torque Monitoring Protection ON (150% Threshold)
+  ; Store and tighten torque monitoring thresholds for collision detection
+  $TORQMON[1] = 150
+  $TORQMON[2] = 150
+  $TORQMON[3] = 150
+  $TORQMON[4] = 150
+  $TORQMON[5] = 150
+  $TORQMON[6] = 150
+  ;ENDFOLD
+  LIN xLinPoint1
+  ;FOLD Torque Monitoring Reset (KSS Defaults)
+  ; Reset torque monitoring thresholds to system defaults from $machine.dat
+  $TORQMON[1] = $TORQMON_DEF[1]
+  $TORQMON[2] = $TORQMON_DEF[2]
+  $TORQMON[3] = $TORQMON_DEF[3]
+  $TORQMON[4] = $TORQMON_DEF[4]
+  $TORQMON[5] = $TORQMON_DEF[5]
+  $TORQMON[6] = $TORQMON_DEF[6]
+  ;ENDFOLD
+
+  ; 9. Legacy Motion Inline Form (Ready for 'Convert Legacy Motions to Modern Splines')
+  ;FOLD PTP HOME Vel=100 % DEFAULT ;%{PE}
+  ;FOLD Parameters ;%{h}
+  ;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.old; Kuka.IsGlobalPoint=False; Kuka.PointName=HOME; Kuka.BlendingEnabled=False; Kuka.MoveDataPtpName=DEFAULT; Kuka.VelocityPtp=100; Kuka.CurrentCDevice=; Kuka.MovementParameterFieldEnabled=True; IlfCommand=PTP
+  ;ENDFOLD
+  $BWDSTART = FALSE
+  PDAT_ACT = PDEFAULT
+  FDAT_ACT = FDEFAULT
+  BAS(#PTP_DAT)
+  FDAT_ACT = {TOOL_NO 1, BASE_NO 0, IPO_FRAME #BASE}
+  BAS(#FRAMES)
+  BAS(#VEL_PTP, 100)
+  PTP XHOME
+  ;ENDFOLD
 
   PTP axHomeAxis
 END

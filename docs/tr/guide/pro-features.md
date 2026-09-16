@@ -53,3 +53,28 @@ Başlatılmamış `$TOOL`/`$BASE`, kilitlenmeler ve görünmeyen ASCII dışı k
 
 ### 24. Kabul Raporu Oluşturucu (Quality Report)
 Müşteri kabul teslimatları için kapsamlı HTML/JSON kod kalitesi raporları oluşturur.
+
+---
+
+### 25. KUKA Event Log (.evt) Çözücü
+KRC Windows EVTX günlükleri (`KrcLogS.evt`, `KrcLogB.evt` vb.) için 6 dilde (EN, DE, RU, ES, IT, TR) 2.050+ KSS CrossMeld mesajı içeren, tek tıkla koda atlayan %100 saf TypeScript çözücü (`krl.openEventLog`).
+
+---
+
+### 26. Görsel I/O Sinyal Matrisi ve PLC Çakışma Dedektörü
+`$IN`, `$OUT`, `$ANIN` ve `$ANOUT` bildirimlerini tarayan, donanım bit çakışmalarını tespit eden çalışma alanı sinyal denetleyicisi (`krl.showIoMatrix`).
+
+---
+
+### 27. Yörünge Yol Uzunluğu ve Kaynak İstatistikleri
+PTP, LIN, CIRC, Spline hareketlerini sınıflandıran, `ARCON`/`ARCOFF` dikişlerini ayıran ve ark süresini hesaplayan 3B Öklid hareket analizcisi (`krl.estimateMotionStats`).
+
+---
+
+### 28. Toplu Nokta Öteleme Dönüştürücü (BASE vs WORLD)
+3B izometrik SVG şeması, çift koordinat çerçevesi (BASE vs ters Euler matrisi ile WORLD) ve geri alma (Undo) destekli atomik `.dat` güncellemesi sunan toplu nokta dönüştürücü (`krl.transformPointOffsets`).
+
+---
+
+### 29. %100 Uyarlanabilir Temalar ve 6 Dilli Arayüz
+Sıfır sabit renk — `--vscode-*` CSS değişkenleri ile Açık, Koyu ve Yüksek Kontrastlı temalara tam uyum, dahili 6 dil seçici (EN, DE, RU, ES, IT, TR) ile.

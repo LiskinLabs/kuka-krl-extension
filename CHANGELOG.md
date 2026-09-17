@@ -4,6 +4,14 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 
 ## [1.8.7] - 2026-09-16 (Industrial Field Suite, KUKA.Sim 4.10 Standardization & Pure-TS KUKA Event Log Decoder)
 
+### 🛠️ Industrial Event Log & UI Hardening (v1.8.7 Update)
+- **Instant Event Log Rendering (SSR)**: Implemented Server-Side Pre-Rendering for `.evt` logs inside `EventLogViewerPanel` — all event records are rendered directly into HTML on the extension host, ensuring 0ms instantaneous display upon opening without waiting for client hydration.
+- **Content Security Policy (CSP) Compliance**: Added explicit Content Security Policy meta tags across all industrial webviews (`eventLogViewer`, `ioMatrix`, `pointOffsetTransformer`, `motionStats`), ensuring strict compatibility with VS Code / Antigravity IDE sandbox policies and permitting uninterrupted inline script execution.
+- **Dedicated `.evt` File Icon in KRL Theme**: Introduced an official vector icon (`krl-evt.svg`) for KUKA event log files (`.evt`) in the Explorer file tree.
+- **Unified Global Language Switching (`krl.locale` & `krl.switchLanguage`)**:
+  - Added interactive QuickPick command `krl.switchLanguage` to quickly change the UI and diagnostics locale across all 6 supported languages (EN, DE, RU, ES, IT, TR).
+  - Synchronized `krl.locale` setting with all industrial inspectors, status bar, and report generators.
+
 ### ⚡ Industrial Robotics Field Engineering Suite (PRO)
 - **Visual I/O Signal Matrix & Overlap Detector (`krl.showIoMatrix`)**:
   - Scans workspace declarations for `$IN`, `$OUT`, `$ANIN`, and `$ANOUT`.

@@ -23,18 +23,18 @@ KUKA KRL Professional eklentisini kurmak ve yapılandırmak için hızlı başla
 3. Dodo Payments lisans anahtarınızı yapıştırın ve **Activate** düğmesine basın.
 
 ## 5. Telegram Mühendislik Desteği
-Teknik destek için yerleşik destek panelini veya Telegram botumuz **`@kukakrlbot`**'u kullanabilirsiniz.
+Teknik destek için doğrudan VS Code içindeki yerleşik destek panelini kullanabilirsiniz.
 
 ## 6. Lisans Planları ve Mimarisi
 
-| Plan | Fiyat | Aktivasyon / Hedef Kitle | Temel Farklılaştırıcı |
+| Plan | Fiyat | Cihaz Aktivasyonu | Temel Farklılaştırıcı |
 | :--- | :--- | :--- | :--- |
-| **Bireysel Pro (Aylık)** | $9.99 / ay | 5 cihaz (Tek Mühendis) | Kısa vadeli projeler, devreye alma süreçleri |
-| **Bireysel Pro (Yıllık)** | $79.00 / yıl | 5 cihaz (Tek Mühendis) | %35 tasarruf, 50 endüstriyel aracın tamamı |
-| **Bireysel Pro (Ömür Boyu)** | $699.00 tek seferlik | 5 cihaz (Tek Mühendis) | Sıfır yinelenen ücret, bir kez al sonsuza dek sahip ol |
-| **Entegratör Team Edition** | $299.00 / yıl | 25 cihaz (5 Mühendis) | Merkezi B2B kurumsal fatura, ekip genelinde standart kod |
-| **Kurumsal Fabrika (Site)** | $1,499.00 / yıl | **Sınırsız Kullanıcı** (Tüm Fabrika) | **Tüm tesis için site lisansı** (20–100+ teknisyen, ~$8/ay/kişi), 24/7 SLA (4 saat yanıt), Filo Yedekleme Merkezi, OEM kabul raporları |
+| **Bireysel Pro (Aylık)** | $9.99 / ay | 5 Cihaz Aktivasyonu | Kısa vadeli projeler, devreye alma süreçleri |
+| **Bireysel Pro (Yıllık)** | $79.00 / yıl | 5 Cihaz Aktivasyonu | %35 tasarruf, 50 endüstriyel aracın tamamı |
+| **Bireysel Pro (Ömür Boyu)** | $699.00 tek seferlik | 5 Cihaz Aktivasyonu | Sıfır yinelenen ücret, bir kez al sonsuza dek sahip ol |
+| **Entegratör Team Edition** | $299.00 / yıl | 25 Cihaz Aktivasyonu | Merkezi B2B kurumsal fatura, ekip genelinde standart kod |
+| **Kurumsal Fabrika (Site)** | $1,499.00 / yıl | **Sınırsız Cihaz Aktivasyonu** | **Tüm tesis için site lisansı** (20 kişilik tesiste kişi başı ~$8/ay), Telegram doğrudan destek, Filo Yedekleme Merkezi, OEM kabul raporları |
 
 ### Pro Lifetime $699 Tek Seferlik İken Enterprise Site Neden Yıllık $1,499?
-- **Pro Lifetime ($699)**, **tek bir bireysel robotik uzmanı** için 5 kişisel cihazda (saha Toughbook'u, ofis iş istasyonu, test tezgahı, ev bilgisayarı, tablet) geçerlidir. Serbest çalışanları abonelik yükünden kurtarır.
-- **Enterprise Site ($1,499/yıl)** ise **tüm üretim tesisini kapsayan eksiksiz bir fabrika lisansıdır**. Tesisteki tüm robot mühendislerini, bakım personelini ve operatörleri **sınırsız koltukla** kapsar (20 mühendislik bir tesiste kişi başı ~$8/ay). Ayrıca üretim hattı duruşlarında 4 saat içinde doğrudan mühendislik yanıtı garantili 24/7 SLA, merkezi otomatik KUKA Filo Yedekleme Merkezi ve OEM markalı müşteri kabul raporlarını (Ford, Renault, TOGG, Saint-Gobain) içerir.
+- **Pro Lifetime ($699)**, **5 eşzamanlı cihaz aktivasyonu** (saha Toughbook'u, ofis iş istasyonu, test tezgahı, ev bilgisayarı, tablet) sağlar ve yinelenen ücreti yoktur.
+- **Enterprise Site ($1,499/yıl)** ise **tüm üretim tesisini kapsayan sınırsız cihaz aktivasyonlu fabrika lisansıdır**. Tesisteki tüm bilgisayar ve paneller tek lisansla çalışır (20 kişilik tesiste kişi başı ~$8/ay). Entegre Telegram destek şebekesi üzerinden doğrudan kıdemli mühendis desteği, merkezi otomatik KUKA Filo Yedekleme Merkezi ve OEM markalı müşteri kabul raporlarını (Ford, Renault, TOGG, Saint-Gobain) içerir.

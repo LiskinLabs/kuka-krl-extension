@@ -23,18 +23,18 @@ Quick start guide for installing and configuring KUKA KRL Professional.
 3. Paste your Dodo Payments license key and click **Activate**.
 
 ## 5. Telegram Engineering Support
-For technical support, connect with us using the embedded support panel or via our Telegram bot **`@kukakrlbot`**.
+For technical support, connect with us directly using the embedded support panel inside VS Code.
 
 ## 6. Licensing Plans & Architecture
 
-| Tier | Price | Activations / Target | Key Differentiator |
+| Tier | Price | Device Activations | Key Differentiator |
 | :--- | :--- | :--- | :--- |
-| **Individual Pro (Monthly)** | $9.99 / mo | 5 devices (Single Engineer) | Short projects, commissioning sprints |
-| **Individual Pro (Annual)** | $79.00 / yr | 5 devices (Single Engineer) | Save 35% on full 50 industrial tools |
-| **Individual Pro (Lifetime)** | $699.00 once | 5 devices (Single Engineer) | Zero recurring fees, buy once & own forever |
-| **Integrator Team Edition** | $299.00 / yr | 25 devices (5 Engineers) | Centralized B2B invoicing, unified quality across team |
-| **Enterprise Plant Site** | $1,499.00 / yr | **Unlimited Seats** (Whole Plant) | **Plant-wide site license** (20–100+ techs, ~$8/mo/tech), 24/7 SLA (4h response), Fleet Backup Hub, OEM-branded client acceptance reports |
+| **Individual Pro (Monthly)** | $9.99 / mo | 5 Device Activations | Short projects, commissioning sprints |
+| **Individual Pro (Annual)** | $79.00 / yr | 5 Device Activations | Save 35% on full 50 industrial tools |
+| **Individual Pro (Lifetime)** | $699.00 once | 5 Device Activations | Zero recurring fees, buy once & own forever |
+| **Integrator Team Edition** | $299.00 / yr | 25 Device Activations | Centralized B2B invoicing, unified quality across squad |
+| **Enterprise Plant Site** | $1,499.00 / yr | **Unlimited Device Activations** | **Plant-wide site license** (~$8/mo/device for 20 seats), direct Telegram support, Fleet Backup Hub, OEM-branded client acceptance reports |
 
 ### Why is Pro Lifetime $699 while Enterprise Site is $1,499/yr?
-- **Pro Lifetime ($699)** is designed for **one individual roboticist** across 5 personal machines (rugged Toughbook, office workstation, test bench, home PC, tablet). It frees freelancers from subscription overhead.
-- **Enterprise Site ($1,499/yr)** is a **complete site-wide license for an entire manufacturing plant**. It covers all plant engineers, robot operators, and maintenance technicians with **unlimited seats** (working out to ~$8/month per person for a 20-engineer facility). It also includes a guaranteed 24/7 SLA with 4-hour critical response during production line stoppages, centralized automated KUKA Fleet Backup Hub, and OEM-branded audit reports (Ford, Renault, TOGG, Saint-Gobain).
+- **Pro Lifetime ($699)** provides **5 simultaneous device activations** (rugged Toughbook, office workstation, test bench, home PC, tablet) with zero recurring fees forever.
+- **Enterprise Site ($1,499/yr)** is a **complete site-wide license with unlimited device activations** for the entire manufacturing plant. It covers all plant engineers, robot operators, and maintenance technicians (~$8/month per seat for a 20-person plant). It includes priority direct developer assistance via Telegram Support Gateway, centralized automated KUKA Fleet Backup Hub, and OEM-branded audit reports (Ford, Renault, TOGG, Saint-Gobain).

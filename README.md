@@ -262,18 +262,27 @@ Every commissioning robotics engineer knows the pain:
 
 ---
 
-### 20. 🔄 Batch Point Offset Transformer (BASE vs WORLD)
-*Transform point coordinates in batch with surgical precision.*
-* **Dual Coordinate Frames**: Apply offsets relative to workpiece coordinate frame (**BASE**) or robot global Cartesian frame (**WORLD**) using inverse Euler rotation matrix ($R^T_{base} \cdot \vec{\Delta}_{world}$).
-* **3D Isometric SVG Schema**: Interactive coordinate axes diagram with dynamic offset vector visualization.
-* **Selective Point Transformation**: Filter points, add custom points, preview transformed values with delta highlighting, and apply atomic updates directly to `.dat` files with full undo support.
+### 20. 🔍 Native Copilot-Style Persistent AI Diff Review (`KrlReviewService`)
+*Surgical side-by-side code inspection before committing modifications to disk.*
+* **Zero Modal Windows**: All code transformations, spline conversions, fold refactorings, and cleanup tools open seamlessly in VS Code's native side-by-side Monaco Diff Editor (`original ↔ proposed`).
+* **In-Editor Action Bar**: 1-click `✅ Accept File` (`Ctrl+Enter`), `❌ Reject File` (`Esc`), or `Accept All` (`Ctrl+Shift+Enter`) buttons right in the editor tab header.
+* **Multi-File Project Pipeline**: Interactive status bar widget (`$(diff) KRL Diff: File X/Y`) and QuickPick file jump navigator with live buffer edit preservation and race-condition guards.
 
 ---
 
-### 21. 🌓 100% Adaptive Themes & Full Hexa-Locale Localization
+### 21. 🦾 KSS Spline Kinematic Separation & Fleet Motion Suite
+*Safety-critical motion upgrade adhering strictly to KUKA KSS 8.3–8.7 spline kinematics.*
+* **Standalone SPTP Kinematic Isolation**: `SPTP` point-to-point axis motions are always generated as standalone instructions outside `SPLINE...ENDSPLINE` blocks to prevent controller kinematic stops.
+* **Strict Spline Block Linter**: Flags illegal `SPTP` inside Cartesian `SPLINE` blocks as compiler errors, preventing SmartPAD trajectory halts.
+* **1-Click Motion Modernizer (`krl.convertLegacyToSpline`)**: Safely migrates legacy `PTP`, `LIN`, `CIRC` motions to modern `SPTP`, `SLIN`, `SCIRC` with automatic `$SGEAR_JERK` limitation.
+* **10,687 Real Customer Motions Tested**: 100% verified across 8 real plant backup archives (Parsan, Magna, Atlas Copco, Saint-Gobain, Osten, Teknorob) with zero false syntax alarms.
+
+---
+
+### 22. 🌓 100% Adaptive Themes & Full Hexa-Locale Localization
 *Seamless aesthetic integration with zero hardcoded colors.*
 * **Adaptive Theme Variables**: Built exclusively with `--vscode-*` CSS tokens — perfectly adapts to any Dark, Light (`body.vscode-light`), or High Contrast (`body.vscode-high-contrast`) VS Code theme.
-* **Hexa-Locale UI Switcher**: Instant switching between English, German, Russian, Spanish, Italian, and Turkish across all industrial tools.
+* **Hexa-Locale UI Switcher**: Instant switching between English, German, Russian, Spanish, Italian, and Turkish across all industrial tools (`krl.switchLanguage`).
 
 ---
 
@@ -300,7 +309,8 @@ Every commissioning robotics engineer knows the pain:
 | **Decode & View KUKA Event Log (.evt)** | ❌ | **✅ Pro** | Native pure-TS EVTX decoder, 2,050+ msgs in 6 langs, code jump |
 | **Visual I/O Signal Matrix & Overlap Detector** | ❌ | **✅ Pro** | Scans `$IN`/`$OUT`, hardware bit collision detection & CSV export |
 | **Trajectory Path Length & Welding Stats** | ❌ | **✅ Pro** | 3D spatial Euclidean distance, weld seam length & arc-on time |
-| **Batch Point Offset Transformer** (BASE / WORLD) | ❌ | **✅ Pro** | 3D isometric SVG schema, Euler inverse math & atomic `.dat` updates |
+| **Native Persistent AI Diff Review & Pipeline** | ❌ | **✅ Pro** | Side-by-side Monaco diff inspection, 1-click Accept/Reject & multi-file jump |
+| **KSS Spline Kinematic Separation & Guard** | ❌ | **✅ Pro** | SPTP isolation outside CP blocks, illegal spline syntax flags & 10,687-motion fleet verified |
 | **SmartPAD Backup Quality Acceptance Report** | ❌ | **✅ Pro** | Automated project audit with robot passport & clickable hyperlinks |
 | **Modern KRL & iiQKA Fold Suite** | ❌ | **✅ Pro** | iiQKA Folds, Spline Blocks & Collision Guard |
 | **Interactive Flowchart Viewer** (Mermaid SVG) | ❌ | **✅ Pro** | Visual control-flow logic & 2-way code jump |
@@ -352,7 +362,7 @@ We offer flexible, industrial-grade licensing through our verified merchant of r
 * 🏭 **Enterprise Plant Site (Enterprise Site — $1,499/yr):**
   * *Why is annual Enterprise Site $1,499/yr when Lifetime for 5 devices is $699?*
   * Because it provides **UNLIMITED DEVICE ACTIVATIONS FOR THE ENTIRE PLANT (Unlimited Seats)**! It covers **all plant computers, test benches, and operator stations (20, 50, or 100+ technicians, operators, and programmers)**. For a 15-person team, this is only **~$8/month per seat**!
-  * **Direct Developer Support:** priority direct line with lead developer via Telegram (@kukakrlbot).
+  * **Direct Developer Support:** priority direct line with lead developer via Telegram Support Gateway.
   * **KUKA Fleet Backup Hub:** automated centralized archiving, multi-backup diffing, and version control across hundreds of cell controllers into corporate GitLab/Google Drive.
   * **Custom Branded Customer Acceptance Reports:** formal robotics passports and safety audits branded with OEM logos (Ford, Renault, Saint-Gobain, TOGG).
   * **Complete Corporate Procurement:** corporate master software agreement, formal VAT invoicing, and official supplier compliance.

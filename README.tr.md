@@ -352,7 +352,7 @@ Doğrulanmış satıcımız **Dodo Payments** üzerinden esnek, endüstriyel sı
 * 🏭 **Kurumsal Fabrika (Site) (Enterprise Site — $1,499/yıl):**
   * *5 cihazlık ömür boyu paket $699 iken yıllık Enterprise Site neden $1,499/yıl?*
   * Çünkü bu **TÜM FABRİKA İÇİN SINIRSIZ CİHAZ AKTİVASYONUDUR (Sınırsız Kullanıcı)**! Yalnızca 5 cihazı değil, **tesisteki tüm bilgisayar, test tezgahı ve panelleri kapsar (20, 50 veya 100+ teknisyen, operatör ve bakımcı)**. 20 kişilik bir tesis için cihaz başı ayda yalnızca **~$8** maliyete denk gelir!
-  * **Doğrudan Mühendislik Desteği:** Telegram (@kukakrlbot) üzerinden doğrudan kıdemli mühendis desteği.
+  * **Doğrudan Mühendislik Desteği:** Entegre Telegram destek paneli üzerinden doğrudan kıdemli mühendis desteği.
   * **KUKA Fleet Backup Hub:** Yüzlerce hücre kontrolcüsünün kurumsal GitLab/Google Drive'a otomatik yedeklenmesi, çoklu yedek diff analizi ve sürüm kontrolü.
   * **Özel Markalı Müşteri Kabul Raporları:** OEM logolarıyla (Ford, Renault, Saint-Gobain, TOGG) markalanmış resmi robot pasaportları ve güvenlik denetimleri.
   * **Eksiksiz Kurumsal Satınalma:** Kurumsal yazılım sözleşmesi, resmi KDV faturası ve tedarikçi uyumluluğu.

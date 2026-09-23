@@ -1,80 +1,90 @@
 # 👑 Pro ve Endüstriyel Sürüm Özellikleri
 
-Gelişmiş statik kod analizi, mantık görselleştirme ve endüstriyel güvenlik uyumluluk araçları.
+Gelişmiş statik kod analizi, mantık görselleştirme, endüstriyel güvenlik uyumluluğu ve filo bakım araçları.
 
 ---
 
-### 16. KUKA Control Center Kontrol Paneli (v1.8.4 Pro Hub)
-Tüm Pro araçlarına ve çalışma alanı analizlerine tek tıkla erişim sağlayan Fluent UI kontrol paneli (`krl.openControlCenter`).
+### 16. KUKA Control Center Kontrol Paneli (`krl.openControlCenter`)
+Tüm Pro tanılarına, yedek analizlerine, yörünge oluşturucularına ve teknik desteğe tek tıkla erişim sağlayan Fluent UI kontrol paneli.
 
 ![KUKA Control Center Demo](/media/kuka_control_center.gif)
 
 ---
 
-### 17. VS Code Telegram Destek Sohbeti
-**`@kukakrlbot`** ile entegre, doğrudan IDE içinden geliştirici destek sohbet penceresi (`krl.openTelegramChat`).
+### 17. VS Code Telegram Destek Sohbet Paneli (`krl.openTelegramChat`)
+Saha mühendislerinin doğrudan IDE içinden soru sormasını ve geri bildirim iletmesini sağlayan entegre Telegram destek sohbet penceresi.
 
 ---
 
-### 18. KRC Backup Diff ve Nokta Delta İnceleyicisi
-SmartPAD `.zip` yedek arşivlerini karşılaştırır ve 6 eksenli uzamsal koordinat farklarını hesaplar ($\Delta X, \Delta Y, \Delta Z, \Delta A, \Delta B, \Delta C$).
+### 18. KRC Filo Yedekleri ve Nokta Delta İnceleyicisi (`krl.compareKrcBackups`)
+Fiziksel SmartPAD `.zip` arşivlerini doğrudan karşılaştırır. Nokta versiyonları arasındaki 6 eksenli uzamsal koordinat farklarını ($\Delta X, \Delta Y, \Delta Z, \Delta A, \Delta B, \Delta C$) hesaplar ve güvenlik toleranslarını aşan tehlikeli kaymaları işaretler.
 
 ![KRC Backup Diff Demo](/media/krc_backup_diff.gif)
 
 ---
 
-### 19. Etkileşimli Hareket Yörüngesi ve Snippet Oluşturucu
-KUKA hareket komutları (`PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`, `SPLINE Block`) için dinamik SVG şemalı görsel oluşturucu.
+### 19. Etkileşimli Hareket Yörüngesi ve Spline Blok Oluşturucu (`krl.insertMotionTrajectory`, `krl.insertSplineBlock`)
+Standart ve modern KSS hareketleri (`PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`, `SPLINE Block`) için dinamik SVG vektör yörünge şemaları ve `$SGEAR_JERK` profil doğrulaması içeren görsel oluşturucu.
 
 ---
 
-### 20. Etkileşimli Akış Şeması Görüntüleyici (Control Flow Graph)
-`.src` kod mantığını etkileşimli Mermaid SVG akış şemalarına dönüştürür (`krl.showFlowchart`).
+### 20. Yerel Copilot Tarzı Kalıcı AI Fark İncelemesi (`KrlReviewService`)
+Yapay zeka refaktörleri için çok dosyalı fark hazırlama sistemi. Değişiklikleri satır içi ve yan yana görüntüleyicilerde sunar, durum çubuğu üzerinden dosya veya blok bazında kabul/reddetme imkanı sağlar (`krl.review.acceptFile`, `krl.review.rejectFile`, `krl.review.acceptHunk`, `krl.review.rejectHunk`).
+
+---
+
+### 21. KSS Spline Kinematik İzolasyonu ve Modern Spline Dönüştürücü (`krl.convertLegacyToSpline`)
+Standart klasik hareketler (`PTP`, `LIN`, `CIRC`) ile modern Spline kinematiği (`SPTP`, `SLIN`, `SCIRC`) arasında kesin mimari ayrım. Geçersiz parametre karışımlarını önler ve eski kodları tek tıkla optimize edilmiş Spline bloklarına dönüştürür.
+
+---
+
+### 22. Etkileşimli Akış Şeması Görüntüleyici ve Kontrol Akış Grafiği (`krl.showFlowchart`)
+`.src` alt program mantığını gerçek zamanlı etkileşimli Mermaid SVG akış şemalarına dönüştürür. Çift yönlü gezinme (düğüme tıklandığında kod satırına atlama) ve müşteri belgeleri için 1 tıkla vektörel SVG dışa aktarma desteği sunar.
 
 ![Control Flow Graph Demo](/media/control_flow_graph.gif)
 ![Cell Flowchart SVG](/media/cell_flowchart.svg)
 
 ---
 
-### 21. EthernetKRL (EKI) Paketi ve Kod Oluşturucu
-EthernetKRL XML şemalarını doğrular ve otomatik KRL ağ işleyicileri üretir.
+### 23. EthernetKRL (EKI) Paketi ve Telgraf Oluşturucu (`krl.generateEkiTelegram`)
+EKI XML şemalarını doğrular, soket veri paketlerini test eder ve eksiksiz KRL TCP/IP gönderme/alma yordamlarını otomatik üretir.
 
 ---
 
-### 22. Endüstriyel Güvenlik ve Teşhisler
-Başlatılmamış `$TOOL`/`$BASE`, kilitlenmeler ve görünmeyen ASCII dışı karakterleri denetleyen otomatik güvenlik müfettişi (`KRL: Run Safety Check`).
+### 24. Endüstriyel Güvenlik ve ISO 13849 Uyumluluk Denetçisi (`krl.runSafetyCheck`)
+Başlatılmamış `$TOOL`/`$BASE`, eksik `BAS(#INITMOV, 0)`, zaman aşımı korumasız `WAIT FOR` kilitlenmeleri, dizi sınır aşımları (`TOOL_DATA[16]`), çift kanallı `$SAFEIN` uyumsuzlukları ve gizli yanıltıcı karakterleri denetleyen otomatik müfettiş.
 
 ---
 
-### 23. 3 Noktalı Çerçeve Hesaplayıcı (Frame Calculator)
-3 kaydedilmiş noktadan `BASE_DATA[x]` Euler açılarını (A, B, C) hesaplayan 3B geometri aracı (`krl.showCalculator`).
+### 25. EVT İkili Olay Günlüğü Kod Çözücüsü (`krl.viewEvtLog`)
+KSS `.evt` ikili tanısal olay arşivleri için sıfır bağımlılıklı yüksek hızlı kod çözücü. Zaman damgası, önem derecesi ve modül filtreleme seçenekleriyle etkileşimli tablo görünümü sunar.
 
 ---
 
-### 24. Kabul Raporu Oluşturucu (Quality Report)
-Müşteri kabul teslimatları için kapsamlı HTML/JSON kod kalitesi raporları oluşturur.
+### 26. Sinyal Matrisi ve I/O Elektronik Tablo Görüntüleyicisi (`krl.showIoMatrix`)
+Çalışma alanındaki tüm `$IN`, `$OUT`, `$ANIN`, `$ANOUT` sinyallerini haritalandıran etkileşimli çapraz referans tablosu. Yoruma göre filtreleme, eşlenmemiş veya mükerrer kanalları bulma ve CSV/Excel dışa aktarma imkanı.
 
 ---
 
-### 25. KUKA Event Log (.evt) Çözücü
-KRC Windows EVTX günlükleri (`KrcLogS.evt`, `KrcLogB.evt` vb.) için 6 dilde (EN, DE, RU, ES, IT, TR) 2.050+ KSS CrossMeld mesajı içeren, tek tıkla koda atlayan %100 saf TypeScript çözücü (`krl.openEventLog`).
+### 27. Hareket Yörüngesi ve Kaynak İstatistikleri Profili (`krl.calculateMotionStats`)
+Toplam döngü mesafesini, hareket segmenti sayılarını, kaynak dikiş uzunluklarını ve hız dağılımını hesaplayan kapsamlı yörünge profili çıkarıcı.
 
 ---
 
-### 26. Görsel I/O Sinyal Matrisi ve PLC Çakışma Dedektörü
-`$IN`, `$OUT`, `$ANIN` ve `$ANOUT` bildirimlerini tarayan, donanım bit çakışmalarını tespit eden çalışma alanı sinyal denetleyicisi (`krl.showIoMatrix`).
+### 28. 3 Noktalı Taban/Takım Çerçeve Hesaplayıcı (`krl.showCalculator`)
+3 fiziksel temas noktasından (Orijin, X-ekseni, XY-düzlemi) Euler yönelim açılarını (A, B, C) ve `BASE_DATA[x]` / `TOOL_DATA[x]` dönüşüm matrislerini hesaplayan 3B geometri aracı.
 
 ---
 
-### 27. Yörünge Yol Uzunluğu ve Kaynak İstatistikleri
-PTP, LIN, CIRC, Spline hareketlerini sınıflandıran, `ARCON`/`ARCOFF` dikişlerini ayıran ve ark süresini hesaplayan 3B Öklid hareket analizcisi (`krl.estimateMotionStats`).
+### 29. AI Alan Bağlamı Araçları (`@kuka /get-io-matrix`, `@kuka /check-safety`)
+Google Antigravity IDE ve GitHub Copilot'un KRL mimarisini, sinyallerini ve kinematiğini derinlemesine anlamasını sağlayan yerel bağlam sağlayıcıları.
 
 ---
 
-### 28. Toplu Nokta Öteleme Dönüştürücü (BASE vs WORLD)
-3B izometrik SVG şeması, çift koordinat çerçevesi (BASE vs ters Euler matrisi ile WORLD) ve geri alma (Undo) destekli atomik `.dat` güncellemesi sunan toplu nokta dönüştürücü (`krl.transformPointOffsets`).
+### 30. Endüstriyel Kabul Kalite Raporu Oluşturucu (`krl.generateQualityReport`)
+Müşteri proje teslimatı ve fabrika kabul testleri (FAT/SAT) için güvenlik karnesi ve kod karmaşıklığı analizlerini içeren HTML/JSON raporları üretir.
 
 ---
 
-### 29. %100 Uyarlanabilir Temalar ve 6 Dilli Arayüz
-Sıfır sabit renk — `--vscode-*` CSS değişkenleri ile Açık, Koyu ve Yüksek Kontrastlı temalara tam uyum, dahili 6 dil seçici (EN, DE, RU, ES, IT, TR) ile.
+### 31. 100% Uyarlanabilir Temalar ve 6 Dilli Yerelleştirme
+Dinamik SVG işleme yeteneğine sahip endüstriyel koyu, açık ve yüksek kontrastlı OLED temaları. 6 dil arasında tek tıkla sorunsuz geçiş: İngilizce, Almanca, Rusça, İspanyolca, İtalyanca ve Türkçe.

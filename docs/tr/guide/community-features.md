@@ -40,8 +40,8 @@ Fabrika sahaları ve SmartPAD ekranları için optimize edilmiş 6 profesyonel t
 
 ---
 
-### 4. Üç Dilli Yerelleştirme (EN / RU / TR)
-İngilizce, Rusça ve Türkçe dillerinde tam yerel kullanıcı arayüzü ve ipucu desteği.
+### 4. 6 Dilli Yerelleştirme (EN / DE / RU / ES / IT / TR)
+İngilizce, Almanca, Rusça, İspanyolca, İtalyanca ve Türkçe dillerinde tam yerel kullanıcı arayüzü ve ipucu desteği.
 
 ---
 

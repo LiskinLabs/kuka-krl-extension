@@ -40,8 +40,8 @@ Intelligent dropdown for 350+ system variables (`$POS_ACT`, `$VEL.CP`, `$BASE`, 
 
 ---
 
-### 4. Trilingual NLS Localization (EN / RU / TR)
-Native UI localization for English, Russian, and Turkish.
+### 4. Hexa-Locale Localization (EN / DE / RU / ES / IT / TR)
+Native UI localization for 6 industrial languages: English, German, Russian, Spanish, Italian, and Turkish.
 
 ---
 

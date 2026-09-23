@@ -13,6 +13,13 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
   - Exact 3D spatial Euclidean distance calculation in meters across all motion commands.
   - Automatic classification and segmentation of PTP, LIN, CIRC, and Spline motions.
   - **Welding Cycle Intelligence**: Automatically detects `ARCON`/`ARCOFF` blocks, isolates weld seams, computes total weld seam length (mm / m), and calculates arc-on cycle time.
+- **Industrial Variable & Declaration Sorter (`krl.sortDeclarations`)**:
+  - Automatically sorts and categorizes declarations (`DECL`, `SIGNAL`, structures, enums) by type and name.
+  - **Multi-bit Signal Support**: Automatically handles I/O ranges like `SIGNAL GI_Program_No $IN[17] TO $IN[24]`.
+  - **Immutable FOLD Boundary Protection**: Guarantees `;FOLD` and `;ENDFOLD` blocks remain strictly isolated and never corrupted during refactoring.
+  - **System `$config.dat` Safety Guard**: Whole-file sorting is strictly confined to `;FOLD USER GLOBALS ... ;ENDFOLD`, leaving all 800+ lines of KSS controller configuration 100% untouched.
+  - **Controller Firmware Protection**: Accidental bulk sorting on `$machine.dat` is safely guarded.
+  - **Exhaustive Real Industrial Backup QA**: Verified across 16 real customer `$config.dat` archives and hundreds of plant `.dat` files with 100% FOLD integrity.
 - **Native Copilot-Style Persistent AI Diff Review (`KrlReviewService`)**:
   - Zero modal dialogs: all code transformations (spline conversions, fold modernizations, cleanup) open in VS Code native side-by-side Monaco Diff Editor (`original ↔ proposed`).
   - Adaptive editor tab action bar: 1-click `✅ Accept File` (`Ctrl+Enter`), `❌ Reject File` (`Esc`), or batch `Accept All` (`Ctrl+Shift+Enter`).

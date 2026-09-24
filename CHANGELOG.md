@@ -13,6 +13,13 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **ESLint & TypeScript Architecture Audit**: Cleaned up all unused parameters and imports across `aiTools.ts`, `foldTools.ts`, `ioMatrix.ts`, and `motionStats.ts`, reducing compiler warnings and ensuring strict code cleanliness.
 - **Exported Tool & Base Resolver**: Exported `detectActiveToolAndBase` in `foldTools.ts` for unified trajectory kinematics analysis across tools.
 
+### 🧩 Heuristic File Classifier & Workspace Disambiguation (`.src` / `.dat`)
+- **Authentic KRL Content Detection**: Introduced intelligent syntax classifier (`isAuthenticKrlContent`) recognizing KSS structural anchors (`&ACCESS`, `DEF`, `DEFDAT`, `DECL`, `;FOLD`, motion commands).
+- **Zero False Diagnostics on Non-Robotics Files**: Automatically isolates and ignores foreign non-KUKA files sharing `.dat` or `.src` extensions (such as GTA/FiveM data tables, C/C++ sources, binary blobs), preventing LSP error flooding.
+- **First-Line Grammar Disambiguation**: Added `firstLine` manifest pattern to prioritize KRL syntax mapping only when file begins with valid KRL headers or routines.
+- **Context-Aware Workspace Guard**: Guards language server indexing and notifications so foreign workspaces are never disrupted.
+
+
 ## [1.8.7] - 2026-09-16 (Industrial Field Suite, KUKA.Sim 4.10 Standardization & Pure-TS KUKA Event Log Decoder)
 
 ### ⚡ Industrial Robotics Field Engineering Suite (PRO)

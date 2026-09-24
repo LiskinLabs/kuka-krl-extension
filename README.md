@@ -336,11 +336,11 @@ We offer flexible, industrial-grade licensing through our verified merchant of r
 | Plan | Price | Discount / Billing | License Terms | Checkout |
 |:---|:---:|:---|:---|:---:|
 | 🟢 **Community** | **$0** | 100% Free Forever | Personal & Commercial Use | [Install Free](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| ⏱️ **Pro Monthly** | **$9.99** / mo | Billed monthly | All 50 Industrial Pro Tools • 5 Activations | [Get Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
-| 👑 **Pro Annual** | **$79.00** / yr | **Save 35%** (~$6.58/mo) | All 50 Industrial Pro Tools • 5 Activations • 30-Day Offline Buffer | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
-| 🏆 **Pro Lifetime** | **$699.00** | **Pay Once, Own Forever** | All 50 Industrial Pro Tools • 5 Activations • Lifetime Updates | [Get Lifetime Pro](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| 🏢 **Team Edition** | **$299.00** / yr | B2B — Invoice & Quote | All 50 Industrial Pro Tools • 25 Activations (5 engineers) | [Get Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| 🏭 **Enterprise Site** | **$1,499.00** / yr | Unlimited Seats | All 50 Pro Tools • Unlimited Activations • Branded Reports | [Get Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| ⏱️ **Pro Monthly** | **$9.99** / mo | Billed monthly | All 50 Industrial Pro Tools • 1 PC • KRC2/KRC3/KRC4/KRC5 Support | [Get Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| 👑 **Pro Annual** | **$79.00** / yr | **Save 35%** (~$6.58/mo) | All 50 Industrial Pro Tools • 1 PC • 30-Day Offline Buffer • KRC2–KRC5 | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
+| 🏆 **Pro Lifetime** | **$699.00** | **Pay Once, Own Forever** | All 50 Industrial Pro Tools • 1 PC Workstation • KRC2/KRC3/KRC4/KRC5 • Lifetime Updates | [Get Lifetime Pro](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
+| 🏢 **Team Edition** | **$299.00** / yr | B2B — Invoice & Quote | All 50 Industrial Pro Tools • 25 Workstation Activations • KRC2–KRC5 | [Get Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏭 **Enterprise Site** | **$1,499.00** / yr | Unlimited Seats | All 50 Pro Tools • Unlimited Plant Workstations • Branded Reports | [Get Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">
@@ -353,15 +353,18 @@ We offer flexible, industrial-grade licensing through our verified merchant of r
 
 ### 💡 Which License Plan Fits Your Workflow? (Licensing Economics):
 
-* 💻 **5-Device Activation Tier (Pro Monthly / Annual / Lifetime):**
-  * License with **5 simultaneous device activations** (field Toughbook, work laptop, home workstation, bench PC, tablet).
-  * **Why Pro Lifetime ($699 one-time)?** Pay once, own forever with zero recurring fees or subscriptions. A single crash prevented during on-site teach-in or one commissioning day saved repays this investment immediately.
-* 🏢 **25-Device Activation Tier (Team Edition — $299/yr):**
-  * Built for integration teams with a package of **25 device activations**.
-  * Includes formal B2B invoicing, accounting reconciliation, and unified KRL code quality standards across all projects.
+* 💻 **Individual Licenses (Pro Monthly / Annual — 1 PC):**
+  * License for **1 engineer workstation / PC**.
+  * Full industrial support for all generations: **KRC2 / KRC3 / KRC4 / KRC5 (KSS 5.x–8.7+)**.
+* 🏆 **Pro Lifetime ($699 one-time — 1 PC Workstation):**
+  * Perpetual commercial license for **1 PC** with zero subscriptions and lifetime updates.
+  * A single crash prevented during on-site teach-in or one commissioning day saved repays this investment immediately.
+* 🏢 **25 Workstation Activations (Team Edition — $299/yr):**
+  * Package of **25 workstation activations** for the plant robotics and automation department or integrator team.
+  * Full support for KRC2–KRC5, centralized B2B invoicing, accounting reconciliation, and unified code quality standards.
 * 🏭 **Enterprise Plant Site (Enterprise Site — $1,499/yr):**
-  * *Why is annual Enterprise Site $1,499/yr when Lifetime for 5 devices is $699?*
-  * Because it provides **UNLIMITED DEVICE ACTIVATIONS FOR THE ENTIRE PLANT (Unlimited Seats)**! It covers **all plant computers, test benches, and operator stations (20, 50, or 100+ technicians, operators, and programmers)**. For a 15-person team, this is only **~$8/month per seat**!
+  * *Why is annual Enterprise Site $1,499/yr when Lifetime for 1 PC is $699?*
+  * Because it provides **UNLIMITED WORKSTATION ACTIVATIONS FOR THE ENTIRE PLANT (Unlimited Seats)**! It covers **all plant computers, test benches, and operator stations (20, 50, or 100+ technicians, operators, and programmers)**. For a 15-person team, this is only **~$8/month per seat**!
   * **Direct Developer Support:** priority direct line with lead developer via Telegram Support Gateway.
   * **KUKA Fleet Backup Hub:** automated centralized archiving, multi-backup diffing, and version control across hundreds of cell controllers into corporate GitLab/Google Drive.
   * **Custom Branded Customer Acceptance Reports:** formal robotics passports and safety audits branded with OEM logos (Ford, Renault, Saint-Gobain, TOGG).

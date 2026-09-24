@@ -17,7 +17,10 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Authentic KRL Content Detection**: Introduced intelligent syntax classifier (`isAuthenticKrlContent`) recognizing KSS structural anchors (`&ACCESS`, `DEF`, `DEFDAT`, `DECL`, `;FOLD`, motion commands).
 - **Zero False Diagnostics on Non-Robotics Files**: Automatically isolates and ignores foreign non-KUKA files sharing `.dat` or `.src` extensions (such as GTA/FiveM data tables, C/C++ sources, binary blobs), preventing LSP error flooding.
 - **First-Line Grammar Disambiguation**: Added `firstLine` manifest pattern to prioritize KRL syntax mapping only when file begins with valid KRL headers or routines.
-- **Context-Aware Workspace Guard**: Guards language server indexing and notifications so foreign workspaces are never disrupted.
+### 🛡️ Safety Speed Diagnostics & Submit Interpreter (`.sub`)
+- **Safety Diagnostics on Submit Programs (`sps.sub`)**: Resolved an issue where background submit interpreter files (`.sub`) were improperly categorized as read-only MADA controller files. Full safety speed auditing (`$OV_PRO`, `$VEL_ACT`) is now active across all subroutines and background tasks.
+- **Air-Gapped License Deactivation Gateway**: Added cryptographic offline deactivation certificate support allowing clean seat unbinding from offline production laptops with automatic instance release on the cloud licensing gateway.
+- **1-Click Hardware License Re-binding**: Instant workstation migration support for factory laptop replacement.
 
 
 ## [1.8.7] - 2026-09-16 (Industrial Field Suite, KUKA.Sim 4.10 Standardization & Pure-TS KUKA Event Log Decoder)
@@ -31,13 +34,6 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
   - Exact 3D spatial Euclidean distance calculation in meters across all motion commands.
   - Automatic classification and segmentation of PTP, LIN, CIRC, and Spline motions.
   - **Welding Cycle Intelligence**: Automatically detects `ARCON`/`ARCOFF` blocks, isolates weld seams, computes total weld seam length (mm / m), and calculates arc-on cycle time.
-- **Industrial Variable & Declaration Sorter (`krl.sortDeclarations`)**:
-  - Automatically sorts and categorizes declarations (`DECL`, `SIGNAL`, structures, enums) by type and name.
-  - **Multi-bit Signal Support**: Automatically handles I/O ranges like `SIGNAL GI_Program_No $IN[17] TO $IN[24]`.
-  - **Immutable FOLD Boundary Protection**: Guarantees `;FOLD` and `;ENDFOLD` blocks remain strictly isolated and never corrupted during refactoring.
-  - **System `$config.dat` Safety Guard**: Whole-file sorting is strictly confined to `;FOLD USER GLOBALS ... ;ENDFOLD`, leaving all 800+ lines of KSS controller configuration 100% untouched.
-  - **Controller Firmware Protection**: Accidental bulk sorting on `$machine.dat` is safely guarded.
-  - **Exhaustive Real Industrial Backup QA**: Verified across 16 real customer `$config.dat` archives and hundreds of plant `.dat` files with 100% FOLD integrity.
 - **Native Copilot-Style Persistent AI Diff Review (`KrlReviewService`)**:
   - Zero modal dialogs: all code transformations (spline conversions, fold modernizations, cleanup) open in VS Code native side-by-side Monaco Diff Editor (`original ↔ proposed`).
   - Adaptive editor tab action bar: 1-click `✅ Accept File` (`Ctrl+Enter`), `❌ Reject File` (`Esc`), or batch `Accept All` (`Ctrl+Shift+Enter`).

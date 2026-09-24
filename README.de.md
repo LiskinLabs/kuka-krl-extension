@@ -282,11 +282,11 @@ Wir bieten flexible Lizenzierung auf Industrieniveau über unseren verifizierten
 | Tarif | Preis | Rabatt / Abrechnung | Lizenzbedingungen | Checkout |
 |:---|:---:|:---|:---|:---:|
 | 🟢 **Community** | **$0** | 100 % für immer kostenlos | Private & kommerzielle Nutzung | [Kostenlos installieren](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| ⏱️ **Pro Monatlich** | **$9.99** / Monat | Monatliche Abrechnung | Alle 50 Industrie-Pro-Werkzeuge • 5 Aktivierungen | [Pro Monthly sichern](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
-| 👑 **Pro Jährlich** | **$79.00** / Jahr | **35 % sparen** (~$6.58/Monat) | Alle 50 Pro-Werkzeuge • 5 Aktivierungen • 30-Tage-Offline-Puffer | [Pro jährlich sichern](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
-| 🏆 **Pro Lifetime** | **$699.00** | **Einmal zahlen, für immer besitzen** | Alle 50 Pro-Werkzeuge • 5 Aktivierungen • Lifetime-Updates | [Lifetime Pro sichern](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| 🏢 **Team Edition** | **$299.00** / Jahr | B2B — Rechnung & Angebot | Alle 50 Pro-Werkzeuge • 25 Aktivierungen (5 Ingenieure) | [Team Edition sichern](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| 🏭 **Enterprise Site** | **$1,499.00** / Jahr | Unbegrenzte Arbeitsplätze | Alle 50 Pro-Werkzeuge • Unbegrenzte Aktivierungen • Gebrandete Berichte | [Enterprise sichern](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| ⏱️ **Pro Monatlich** | **$9.99** / Monat | Monatliche Abrechnung | Alle 50 Industrie-Pro-Werkzeuge • 1 PC • KRC2–KRC5-Support | [Pro Monthly sichern](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| 👑 **Pro Jährlich** | **$79.00** / Jahr | **35 % sparen** (~$6.58/Monat) | Alle 50 Pro-Werkzeuge • 1 PC • 30-Tage-Offline-Puffer • KRC2–KRC5 | [Pro jährlich sichern](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
+| 🏆 **Pro Lifetime** | **$699.00** | **Einmal zahlen, für immer besitzen** | Alle 50 Pro-Werkzeuge • 1 PC (1 Arbeitsplatz) • Lifetime-Updates | [Lifetime Pro sichern](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
+| 🏢 **Team Edition** | **$299.00** / Jahr | B2B — Rechnung & Angebot | Alle 50 Pro-Werkzeuge • 25 Arbeitsplatz-Aktivierungen • KRC2–KRC5 | [Team Edition sichern](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏭 **Enterprise Site** | **$1,499.00** / Jahr | Unbegrenzte Arbeitsplätze | Alle 50 Pro-Werkzeuge • Unbegrenzte Werks-Arbeitsplätze • Gebrandete Berichte | [Enterprise sichern](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">

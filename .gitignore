@@ -25,6 +25,9 @@ admin-app/
 .env.*
 *.pem
 *.key
+SECRETS_AND_CREDENTIALS*
+*credentials*
+*.token
 
 # Python cache & build
 __pycache__/

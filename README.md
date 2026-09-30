@@ -10,19 +10,19 @@
 
 | Language | File |
 |---|---|
-| 🇬🇧 English | [README.md](README.md) |
-| 🇷🇺 Русский | [README.ru.md](README.ru.md) |
-| 🇹🇷 Türkçe | [README.tr.md](README.tr.md) |
-| 🇩🇪 Deutsch | [README.de.md](README.de.md) |
-| 🇮🇹 Italiano | [README.it.md](README.it.md) |
-| 🇪🇸 Español | [README.es.md](README.es.md) |
+| 🇬🇧 English | [README.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.md) |
+| 🇷🇺 Русский | [README.ru.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.ru.md) |
+| 🇹🇷 Türkçe | [README.tr.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.tr.md) |
+| 🇩🇪 Deutsch | [README.de.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.de.md) |
+| 🇮🇹 Italiano | [README.it.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.it.md) |
+| 🇪🇸 Español | [README.es.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.es.md) |
 
 </details>
 
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://badgen.net/vs-marketplace/v/LiskinLabs.kuka-krl-extension?style=flat&label=VS%20Code%20Marketplace&color=FF6600" alt="VS Code Marketplace" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.8-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.8.8" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.9-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.8.9" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Verified-4.1M%2B%20LoC-10b981?style=flat-square" alt="Fleet Verified" /></a>
 </p>
@@ -76,7 +76,7 @@ Every commissioning robotics engineer knows the pain:
 * **SVG Vector Export**: Export high-resolution vector diagrams for client handovers and automation documentation.
 
 <p align="center">
-  <img src="docs/public/media/control_flow_graph.gif" width="720" alt="Interactive Flowchart Demo" />
+  <img src="media/control_flow_graph.gif" width="720" alt="Interactive Flowchart Demo" />
 </p>
 
 ---
@@ -90,7 +90,7 @@ Every commissioning robotics engineer knows the pain:
 * **Cyrillic & Non-ASCII Blocker**: Detects accidental non-ASCII keyboard layout characters that crash older KSS compilers silently.
 
 <p align="center">
-  <img src="docs/public/media/type-validation-demo.gif" width="720" alt="Safety and Diagnostics Demo" />
+  <img src="media/type-validation-demo.gif" width="720" alt="Safety and Diagnostics Demo" />
 </p>
 
 ---
@@ -102,7 +102,7 @@ Every commissioning robotics engineer knows the pain:
 * **Side-by-Side Visual Diff**: Color-coded graphical diff viewer built directly into VS Code.
 
 <p align="center">
-  <img src="docs/public/media/krc_backup_diff.gif" width="720" alt="SmartPAD Backup Diff Demo" />
+  <img src="media/krc_backup_diff.gif" width="720" alt="SmartPAD Backup Diff Demo" />
 </p>
 
 ---
@@ -122,7 +122,7 @@ Every commissioning robotics engineer knows the pain:
 * **Zero Trigonometry Errors**: Eliminate spreadsheet calculations and manual orientation math on the plant floor.
 
 <p align="center">
-  <img src="docs/public/media/kuka_control_center.gif" width="720" alt="KUKA Control Center Demo" />
+  <img src="media/kuka_control_center.gif" width="720" alt="KUKA Control Center Demo" />
 </p>
 
 ---
@@ -133,7 +133,7 @@ Every commissioning robotics engineer knows the pain:
 * Displays human-readable labels inline next to `$IN[x]`, `$OUT[y]`, `$ANIN[z]`, and `$FLAG[k]`.
 
 <p align="center">
-  <img src="docs/public/media/inlay_hints.gif" width="720" alt="Signal Inlay Hints Demo" />
+  <img src="media/inlay_hints.gif" width="720" alt="Signal Inlay Hints Demo" />
 </p>
 
 ---
@@ -145,7 +145,7 @@ Every commissioning robotics engineer knows the pain:
 * Case standardization for KRL keywords (`DEF`, `GLOBAL`, `INTERRUPT`, `CONTINUE`).
 
 <p align="center">
-  <img src="docs/public/media/code_formatter.gif" width="720" alt="Code Formatter Demo" />
+  <img src="media/code_formatter.gif" width="720" alt="Code Formatter Demo" />
 </p>
 
 ---
@@ -161,7 +161,7 @@ Every commissioning robotics engineer knows the pain:
 * **Zero-False-Positive Fleet Audit (4.1M+ LoC)**: Verified against 107 real-world production robot backups with 0 false diagnostics.
 
 <p align="center">
-  <img src="docs/public/media/smart_autocomplete.gif" width="720" alt="Smart Autocomplete Demo" />
+  <img src="media/smart_autocomplete.gif" width="720" alt="Smart Autocomplete Demo" />
 </p>
 
 ---
@@ -170,7 +170,7 @@ Every commissioning robotics engineer knows the pain:
 *Instant AST-level indexing across your entire project folder.* Jump from any function or variable call straight to its declaration across separate `.src` and `.dat` files.
 
 <p align="center">
-  <img src="docs/public/media/goto_definition.gif" width="720" alt="Go to Definition Demo" />
+  <img src="media/goto_definition.gif" width="720" alt="Go to Definition Demo" />
 </p>
 
 ---
@@ -179,7 +179,7 @@ Every commissioning robotics engineer knows the pain:
 *Get instant parameter explanations and safety warnings.* Hover over any KSS system variable to see its physical units, read/write permissions, and KSS manual descriptions.
 
 <p align="center">
-  <img src="docs/public/media/hover_info.gif" width="720" alt="Hover Info Demo" />
+  <img src="media/hover_info.gif" width="720" alt="Hover Info Demo" />
 </p>
 
 ---
@@ -188,7 +188,7 @@ Every commissioning robotics engineer knows the pain:
 *Keep version control clean.* Strip WorkVisual headers (`&ACCESS`, `&REL`, `&PARAM`, `&COMMENT`) with one click to prevent noisy git diffs on automated commits.
 
 <p align="center">
-  <img src="docs/public/media/git_metadata_cleaner.gif" width="720" alt="Git Metadata Cleaner Demo" />
+  <img src="media/git_metadata_cleaner.gif" width="720" alt="Git Metadata Cleaner Demo" />
 </p>
 
 ---
@@ -214,7 +214,7 @@ Every commissioning robotics engineer knows the pain:
 *Manage massive programs with ease.* One-click folding of FOLD blocks, subprograms, and automatic sorting of variable declarations.
 
 <p align="center">
-  <img src="docs/public/media/quick_fold_toolbar.gif" width="720" alt="Quick Fold Toolbar Demo" />
+  <img src="media/quick_fold_toolbar.gif" width="720" alt="Quick Fold Toolbar Demo" />
 </p>
 
 ---
@@ -223,7 +223,7 @@ Every commissioning robotics engineer knows the pain:
 *Prevent code bloat and leftover test routines.* Identify uncalled subroutines, unused variables, and unreachable code branches across your entire workspace.
 
 <p align="center">
-  <img src="docs/public/media/dead-code-demo.gif" width="720" alt="Dead Code Analysis Demo" />
+  <img src="media/dead-code-demo.gif" width="720" alt="Dead Code Analysis Demo" />
 </p>
 
 ---
@@ -283,6 +283,30 @@ Every commissioning robotics engineer knows the pain:
 *Seamless aesthetic integration with zero hardcoded colors.*
 * **Adaptive Theme Variables**: Built exclusively with `--vscode-*` CSS tokens — perfectly adapts to any Dark, Light (`body.vscode-light`), or High Contrast (`body.vscode-high-contrast`) VS Code theme.
 * **Hexa-Locale UI Switcher**: Instant switching between English, German, Russian, Spanish, Italian, and Turkish across all industrial tools (`krl.switchLanguage`).
+
+---
+
+### 23. 🦾 Official KUKA Robot Specs Catalog & Reach Envelope Guard (183 Models)
+*Zero kinematic surprises and arm overextension errors before cell simulation.*
+* **183 Official Models Database**: Complete reach and payload specifications derived from KUKA Kinematics Specifications spanning Agilus, Cybertech, Iontec, Quantec (extra, prime, ultra), and Titan series.
+* **Autonomous Controller Detection**: Automatically extracts `$TRAFONAME[]` from project `$machine.dat` or `am.ini` with fuzzy match resolution.
+* **Cartesian Envelope Guard (`krl.diagnostics.checkRobotReach`)**: Flags target positions where Euclidean radius exceeds the physical reach sphere ($R = \sqrt{X^2+Y^2+Z^2} > \text{reach} + 100\text{ mm}$), taking external linear rails ($E1$) into account.
+
+---
+
+### 24. 🏭 Volkswagen, Audi, SEAT, Škoda (VASS 26 Standard) Rules Linter & VW_USER Tech Suite
+*Automotive Tier-1 standard compliance for Body-in-White automation cells.*
+* **VASS 26 Automation Rules (`krl.diagnostics.checkVassStandard`)**: Enforces mandatory exact stop (`VE=0%`) on `SPSMAKRO` calls to prevent PLC desynchronization, validates cell interlock release (`A23 = AUS` followed by `WARTE BIS E17`), and checks Folge point 1 safe speed (`VB <= 20%`).
+* **VW_USER Tech Package Knowledge Base (`krl.inlayHints.vwUserTech`)**: Full specifications for Spot Welding (`EZ/SP/KE`), Clinching (`CZ`), MIG/MAG (`MS`), Dispensing (`Kleben`), Handling, and Flowdrill ($101..501$).
+* **LSP Inlay Hints & Hover Breakdown**: In-line technology labels and rich Markdown parameter breakdown tables directly on `VW_USER` and `VW_USR_R` calls.
+
+---
+
+### 25. 🔄 Motion Point 3-Way Data Integrity & Trajectory Math Guard
+*Eliminate stealth velocity overrides and runtime motion planner aborts.*
+* **3-Way Data Integrity Validator (`krl.diagnostics.checkMotionFoldSync`)**: Detects desynchronization between user-visible `;FOLD` display comments (SmartPAD view) and actual controller `.dat` parameters (`P1_D`, `PDAT`, `LDAT`, `FDAT`).
+* **CIRC Collinear & Coincident Point Guard (`krl.diagnostics.checkPathApproximation`)**: Flags circular arcs where auxiliary and target points are collinear with start (infinite radius) or coincident ($Aux = Target$).
+* **$APO.CDIS 50% Segment Over-Approximation**: Enforces KSS trajectory constraint: flags `$APO.CDIS` exceeding 50% of the trajectory segment length.
 
 ---
 
@@ -418,6 +442,16 @@ Configure extension behaviors in your `settings.json`:
 | `krl.errorLens.enabled` | `true` | Show diagnostic errors inline at the end of lines. |
 | `krl.validateNonAscii` | `true` | Scan for Cyrillic/non-ASCII characters that break older KSS compilers. |
 | `krl.inlayHints.enabled` | `true` | Show descriptive names for I/O signals inline. |
+| `krl.diagnostics.checkRobotReach` | `true` | Validate Cartesian targets against maximum robot arm reach (183 models DB). |
+| `krl.robotModel` | `"auto"` | Active KUKA robot model (auto-detects from `$machine.dat` or select specific model). |
+| `krl.diagnostics.checkMotionFoldSync` | `true` | Detect desynchronization between `;FOLD` comments and controller `.dat` parameters. |
+| `krl.diagnostics.checkVassStandard` | `true` | Enforce Volkswagen VASS 26 rules (`VE=0%` for `SPSMAKRO`, `A23=AUS` safety interlock). |
+| `krl.diagnostics.checkPathApproximation` | `true` | Guard against collinear `CIRC` points and `$APO.CDIS > 50%` over-approximation. |
+| `krl.diagnostics.checkSwitchPoints` | `true` | Validate `TRIGGER WHEN PATH` and `Schaltpkt` against physical motion segment bounds. |
+| `krl.diagnostics.checkLongSegments` | `true` | Detect continuous seam trajectories exceeding recommended length without intermediate points (50mm). |
+| `krl.diagnostics.checkVassStrictRules` | `true` | Enforce strict VASS 26 rules (PTP sequence bounds, KLIN 20% Genau ratio, SPSTrig sync). |
+| `krl.path.longSegmentThresholdMm` | `50.0` | Maximum allowed segment length in mm for continuous seam trajectories before warning. |
+| `krl.inlayHints.vwUserTech` | `true` | Inline technology package names and decoded enum values for `VW_USER` calls. |
 
 ---
 
@@ -434,7 +468,7 @@ Configure extension behaviors in your `settings.json`:
 * **Publisher & Developer**: [Liskin Labs](https://github.com/LiskinLabs) / [Silvestr Liskin](https://www.linkedin.com/in/silvestr-liskin-ab712920b/)
 * **Security Auditor**: [ReversingLabs Spectra Assure](https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension)
 * **Official Merchant of Record**: [Dodo Payments](https://dodopayments.com/)
-* **License**: Commercial EULA ([LICENSE.txt](LICENSE))
+* **License**: Commercial EULA ([LICENSE.txt](LICENSE.txt))
 
 ---
 

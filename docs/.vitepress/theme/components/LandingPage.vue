@@ -1327,7 +1327,7 @@
             </div>
             <ul class="space-y-1.5 text-[11px] text-gray-300 border-t border-white/5 pt-2">
               <li>• <b class="text-emerald-400">{{ t.guideCol3P1_b || 'Unlimited Seats:' }}</b> {{ t.guideCol3P1 || 'Covers all plant technicians and operators (~$8/mo per person!).' }}</li>
-              <li>• <b class="text-white">Priority Support:</b> {{ t.guideCol3P2 || 'Direct developer engineering assistance via Telegram @kukakrlbot.' }}</li>
+              <li>• <b class="text-white">Priority Support:</b> {{ t.guideCol3P2 || 'Direct developer engineering assistance & priority SLA.' }}</li>
               <li>• <b class="text-white">Fleet Backup Hub:</b> {{ t.guideCol3P3 || 'Cloud archiving of all robot cells + OEM-branded audits (Ford, Renault, TOGG).' }}</li>
             </ul>
           </div>
@@ -2263,7 +2263,7 @@ const translations = {
       },
       {
         q: "Why is Pro Lifetime $699 one-time while Enterprise Site is $1,499/yr?",
-        a: "Pro Lifetime ($699) provides 5 device activations (rugged laptop, office PC, test bench, home PC, tablet) with zero recurring fees. Enterprise Site ($1,499/yr) provides unlimited device activations across the entire factory plant, covering all plant technicians and operators (~$8/mo per seat for a 20-person team). It includes priority direct developer support via Telegram (@kukakrlbot), automated KUKA Fleet Backup Hub, and OEM-branded customer acceptance reports."
+        a: "Pro Lifetime ($699) provides 5 device activations (rugged laptop, office PC, test bench, home PC, tablet) with zero recurring fees. Enterprise Site ($1,499/yr) provides unlimited device activations across the entire factory plant, covering all plant technicians and operators (~$8/mo per seat for a 20-person team). It includes priority direct developer support, automated KUKA Fleet Backup Hub, and OEM-branded customer acceptance reports."
       }
     ],
 
@@ -2324,7 +2324,7 @@ const translations = {
     guideCol3Desc: "Enterprise Site ($1,499/yr) — Unlimited device activations for the whole plant.",
     guideCol3P1_b: "Unlimited Activations:",
     guideCol3P1: "Covers all plant technicians and operators (~$8/mo per person for a 20-person team).",
-    guideCol3P2: "Direct developer engineering assistance via Telegram (@kukakrlbot).",
+    guideCol3P2: "Direct developer engineering assistance and dedicated SLA support.",
     guideCol3P3: "Cloud archiving of all robot cells + OEM-branded audits (Ford, Renault, TOGG).",
 
     // B2B tiers (Team / Enterprise)
@@ -2337,7 +2337,7 @@ const translations = {
     p5Desc: "Site-wide licence for the entire manufacturing plant — unlimited device activations and Fleet Backup Hub.",
     pf5_1: "Unlimited Device Activations",
     pf5_2: "Company-Branded OEM Reports",
-    pf5_3: "Priority Telegram Support",
+    pf5_3: "Priority Engineering Support",
     btnEnterprise: "Get Enterprise",
 
     // Matrix additions
@@ -2423,7 +2423,7 @@ const translations = {
       },
       {
         q: "Почему бессрочная лицензия Pro Lifetime стоит $699 разово, а Enterprise Site — $1,499 в год?",
-        a: "Pro Lifetime ($699) даёт 5 одновременных активаций устройств навсегда без каких-либо подписок и регулярных списаний. Enterprise Site ($1,499/год) предоставляет неограниченное число активаций на весь завод — все компьютеры и пульты предприятия работают по одной лицензии (~$8/мес на рабочее место при 20 специалистах). В тариф входит прямая поддержка от разработчика в Telegram (@kukakrlbot), автоматический KUKA Fleet Backup Hub и брендированные протоколы приемки (Ford, Renault, TOGG)."
+        a: "Pro Lifetime ($699) даёт 5 одновременных активаций устройств навсегда без каких-либо подписок и регулярных списаний. Enterprise Site ($1,499/год) предоставляет неограниченное число активаций на весь завод — все компьютеры и пульты предприятия работают по одной лицензии (~$8/мес на рабочее место при 20 специалистах). В тариф входит прямая инженерная поддержка от разработчика, автоматический KUKA Fleet Backup Hub и брендированные протоколы приемки (Ford, Renault, TOGG)."
       }
     ],
 
@@ -2484,7 +2484,7 @@ const translations = {
     guideCol3Desc: "Enterprise Site ($1,499/год) — безлимитные активации на всё предприятие.",
     guideCol3P1_b: "Безлимитные активации:",
     guideCol3P1: "Покрывает всех наладчиков и операторов завода (~$8/мес на место при 20 специалистах).",
-    guideCol3P2: "Прямая инженерная поддержка напрямую от разработчика в Telegram (@kukakrlbot).",
+    guideCol3P2: "Прямая инженерная поддержка напрямую от ведущего инженера-разработчика.",
     guideCol3P3: "Облачный бэкап-хаб парка ячеек + брендированные аудиты (Ford, Renault, TOGG).",
 
     // B2B тарифы (Team / Enterprise)
@@ -2497,7 +2497,7 @@ const translations = {
     p5Desc: "Лицензия на весь производственный завод — безлимитные активации устройств и Fleet Backup Hub.",
     pf5_1: "Безлимитные активации завода",
     pf5_2: "Брендированные OEM-отчёты",
-    pf5_3: "Приоритетная поддержка в Telegram",
+    pf5_3: "Приоритетная инженерная поддержка",
     btnEnterprise: "Купить Enterprise",
 
     // Matrix additions
@@ -2583,7 +2583,7 @@ const translations = {
       },
       {
         q: "Pro Lifetime neden tek seferlik $699 iken Enterprise Site yıllık $1,499?",
-        a: "Pro Lifetime ($699), 5 cihaz aktivasyonu sağlar ve yinelenen ücreti olmayan kalıcı bir lisanstır. Enterprise Site ($1,499/yıl) ise tüm fabrika genelinde sınırsız cihaz aktivasyonu sunar (~$8/ay/cihaz). Telegram (@kukakrlbot) üzerinden doğrudan kıdemli mühendis desteği, merkezi KUKA Filo Yedekleme Merkezi ve OEM markalı müşteri kabul protokollerini içerir."
+        a: "Pro Lifetime ($699), 5 cihaz aktivasyonu sağlar ve yinelenen ücreti olmayan kalıcı bir lisanstır. Enterprise Site ($1,499/yıl) ise tüm fabrika genelinde sınırsız cihaz aktivasyonu sunar (~$8/ay/cihaz). Doğrudan kıdemli mühendis desteği, merkezi KUKA Filo Yedekleme Merkezi ve OEM markalı müşteri kabul protokollerini içerir."
       }
     ],
 
@@ -2644,7 +2644,7 @@ const translations = {
     guideCol3Desc: "Enterprise Site ($1,499/yıl) — Tüm fabrika için sınırsız cihaz aktivasyonu.",
     guideCol3P1_b: "Sınırsız Aktivasyon:",
     guideCol3P1: "Fabrikadaki tüm teknisyenleri kapsar (20 kişilik tesiste kişi başı ~$8/ay).",
-    guideCol3P2: "Telegram (@kukakrlbot) üzerinden doğrudan geliştirici mühendislik desteği.",
+    guideCol3P2: "Doğrudan geliştirici mühendislik desteği ve öncelikli teknik yardım.",
     guideCol3P3: "Tüm robot hücreleri için merkezi bulut yedekleme + OEM markalı denetimler (Ford, Renault, TOGG).",
 
     // B2B paketleri (Team / Enterprise)
@@ -2657,7 +2657,7 @@ const translations = {
     p5Desc: "Tüm üretim tesisi için site lisansı — sınırsız cihaz aktivasyonu ve Filo Yedekleme Merkezi.",
     pf5_1: "Sınırsız Cihaz Aktivasyonu",
     pf5_2: "OEM Markalı Denetim Raporları",
-    pf5_3: "Öncelikli Telegram Desteği",
+    pf5_3: "Öncelikli Mühendislik Desteği",
     btnEnterprise: "Enterprise Satın Al",
 
     // Matrix additions

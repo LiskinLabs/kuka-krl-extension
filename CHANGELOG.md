@@ -2,6 +2,59 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.8.9] - 2026-09-30 (Automotive & OEM Standards Suite, 183 KUKA Robot Specs DB, VASS 26 Linter, VW_USER Tech Packages & Path Geometry)
+
+### 🦾 Official KUKA Robot Specs Catalog & Reach Envelope Guard (183 Models)
+- **183 Official KUKA Robot Models Catalog**: Embedded comprehensive physical reach, payload, arm series, and mounting position specifications parsed directly from KUKA Kinematics Specifications (`KRC4_robots.xml`).
+- **Autonomous Robot Model Auto-Detection**: Automatically detects active robot kinematics and serial model from controller root `$machine.dat` (`$TRAFONAME[]`) or `am.ini`, supporting fuzzy matching and edition variations (`#KR210R2700_2 C4 FLR`).
+- **Cartesian Reach Envelope Validator (`krl.diagnostics.checkRobotReach`)**: Real-time diagnostic guard that flags Cartesian target coordinates (`E6POS`, `POS`, `FRAME`, literals) exceeding the robot's physical reach sphere ($R = \sqrt{X^2+Y^2+Z^2} > \text{reach} + 100\text{ mm}$), while properly factoring external linear track axes ($E1$).
+
+### 🏭 Volkswagen, Audi, SEAT, Škoda (VASS 26 Standard) Rules Linter (`krl.diagnostics.checkVassStandard`, `krl.diagnostics.checkVassStrictRules`)
+- **Macro Call Approximation Guard**: Enforces VASS 26 exact stop rule (`SPSMAKRO` only allowed with `VE=0%`). Warns if continuous path approximation (`VE > 0%`) is programmed, preventing dangerous PLC desynchronization.
+- **Safety Interlock Gate Handshake**: Flags `A23 = AUS` (cell safety zone release) missing mandatory safety gate confirmation (`WARTE BIS E17` or `WARTE BIS E23`).
+- **Folge Safe Start Speed**: Validates that the first motion point of a Folge program (`folge*.src`) runs at safe reduced velocity (`VB <= 20%`, `VE = 0%`).
+- **Wait Condition Exact Stop (`WARTE BIS E...`)**: Flags motion points containing wait conditions programmed with continuous approximation (`VE > 0%`).
+- **Sequence End Exact Stop**: Ensures the final motion point of a sequence routine concludes with exact stop (`VE = 0%`).
+- **PTP Sequence Boundaries**: Enforces VASS standard rule requiring the first and last motion point of a Folge or UP sequence to be `PTP` (or `KPTP`/`SPTP`) for deterministic kinematic homing.
+- **KLIN Seam Genau Ratio**: Enforces VASS 26 rule for gluing/dispensing (`KLIN` seam points), requiring the `Genau` approximation parameter to equal exactly 20% of `VB` path speed (`Genau = VB * 0.2`).
+- **SPSTrig & VE Synchronization**: Validates `SPSTrig = 0` when `VE = 100%`, and `SPSTrig = 5` when `VE = 0%`.
+- **SUCHLAUF Motion Type Constraint**: Enforces `LIN` motion type for touch-sense search routines (`SUCHLAUF`).
+- **KRL Comment Length Limit**: Warns when inline form comment strings exceed KSS 128-character hardware buffer limit.
+
+### 🔄 Motion Point 3-Way Data Integrity Validator (`krl.diagnostics.checkMotionFoldSync`)
+- **Motion Point Data Integrity Engine**: Detects desynchronization between user-visible `;FOLD` comments on SmartPAD (e.g., `VB=100%`, `RobWzg=1`, `Base=0`) and the underlying `.dat` controller structures (`P1_D`, `PDAT`, `LDAT`, `FDAT`).
+- **Stealth Speed & Tool Override Detection**: Emits precise diagnostic warnings if an engineer manually altered FOLD headers or DAT structures in an external editor, preventing hazardous robot velocity jumps.
+
+### 🏷️ VW_USER & VKRC Technology Packages Suite (`krl.inlayHints.vwUserTech`)
+- **Full Technology Catalog (101..501)**: Embedded specifications for Spot Welding (`EZ/SP/KE`), Equalizing Gun (`VM-Ausgleich`), Clinching (`CZ`), MIG/MAG Arc (`MS`), Sensor Offset (`Baseverschiebung`), Stud Welding (`BS`), SafeRobot (`SFR`), Gluing/Dispensing (`Kleben`), Laser Optics (`3D-PFO`), Gripper Tech (`Handling`), Blind Riveting (`Nieten`), Seam Tracking (`NK`), and Flowdrill.
+- **LSP Inlay Hints & SPSMAKRO Integration**: Inline parameter name, macro descriptors (`Makro 340: Handling (Greifer)`), and technology labels directly in the editor for `VW_USER`, `VW_USR_R`, and `SPSMAKRO` calls.
+- **Standard System I/O Fallback Hints**: Displays standard industrial signal meanings for `$IN` and `$OUT` when unaliased.
+- **Interactive Hover & Signature Help**: Rich Markdown tables detailing parameter roles ($P1..P10$), physical units (`[1/10 mm]`, `[ms]`), and decoded enum values.
+
+### 📐 Trajectory Geometry & Path Math Guard (`krl.diagnostics.checkPathApproximation`)
+- **CIRC Collinear & Coincident Point Guard**: Mathematically verifies 3-point circular arcs (`CIRC`, `SCIRC`, `KCIR`). Detects collinear points (infinite radius) and coincident points ($Aux = Target$) that crash KUKA motion planner at runtime.
+- **$APO.CDIS 50% Segment Over-Approximation & Silent Reduction**: Enforces KSS trajectory constraint: flags `$APO.CDIS` exceeding 50% of the segment length and warns about silent approximation reduction by controller.
+- **Switch Points Range Verification (`TRIGGER WHEN PATH` & `Schaltpkt`)**: Compares switch point trigger distances against preceding and outgoing physical motion segments. Flags out-of-bounds trigger distances before controller runtime errors.
+- **Long Motion Segments Detection**: Identifies continuous seam motions (`KLIN`, `LIN`) exceeding 50 mm without intermediate support points to preserve bead application geometry.
+- **FOLD & ENDFOLD Name Matching Validation**: Validates name parity between `;FOLD <name>` and `;ENDFOLD (<name>)` to protect SmartPAD outline structure.
+
+### 🚗 Volkswagen VKRC Full Integration & Automotive Architecture
+- **Autonomous VKRC Workspace Detection (`vkrcService`)**: Heuristically analyzes project files for Volkswagen VKRC structures (Folge, UP, MakroSps, MakroStep, MakroTrigger, VW_USER) and controller root parameters.
+- **Pro Gated Industrial Standard**: Free community users receive clear, non-intrusive notifications when opening VKRC projects, with one-click access to a 14-day full-featured trial or direct corporate invoicing.
+- **Dedicated VKRC Status Bar & Diagnostics**: Real-time status bar widget showing active VKRC mode, with deep AST parsing and syntax diagnostics for automotive assembly lines.
+
+### 💳 Unified B2B Invoicing via Dodo Payments (Merchant of Record)
+- **Official Checkout & Customer Portal**: Fully retired homemade HTML quote generator in favor of hosted Dodo Payments checkout with automated EU VAT validation (VIES Reverse Charge 0% for European businesses).
+- **Direct PDF Invoice Retrieval (`krl.downloadLatestInvoice`)**: Integrated direct download of official Dodo PDF invoices directly inside VS Code with merchant details for enterprise accounting.
+
+### 🛠️ Industrial UI Refresh & Strict Codicon Standardization
+- **Complete Cartoon Emoji Eradication**: Replaced all informal emojis across the entire UI/UX with native VS Code Codicons (`ThemeIcon`), precision SVG vectors, and engineering bracketed tags (`[PRO]`, `[TECH]`, `[VASS 26]`, `[MOVE]`, `[CALL]`, `[WAIT]`, `[IO]`, `[CMD]`, `[PTP]`, `[LIN]`, `[CIRC]`).
+- **Standardized TreeViews & QuickPicks**: Clean visual hierarchy across Commands TreeView, I/O TreeView, CodeLens, Hover tooltips, and Control Flow Diagrams.
+
+### 🎛️ UI/UX Control Center Two-Way Sync & 6-Language Parity
+- **Independent Feature Switches**: Added dedicated toggles for each new automotive engine under "Critical Safety & Hardware Limits" and "Automotive & OEM Standards (Volkswagen, Audi, SEAT, Škoda — VASS 26)".
+- **Strict 6-Language NLS & Client Parity**: All configuration settings, diagnostics, and Control Center descriptions fully localized across English, Russian, German, Spanish, Italian, and Turkish with zero hardcoded strings.
+
 ## [1.8.8] - 2026-09-24 (Open VSX Automated Pipeline, DevSecOps License Protection & Clean Code Audit)
 
 ### 🚀 Open VSX & Dual-Registry Publishing Pipeline

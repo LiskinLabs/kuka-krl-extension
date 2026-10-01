@@ -44,13 +44,20 @@ jobs:
           test -s /tmp/notes.md || { echo "::error::No changelog section for ${VER}"; exit 1; }
           cat /tmp/notes.md
 
-      - name: Create GitHub Release
+      - name: Create or Update GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${{ steps.tag.outputs.value }}" \
-            --title "Release ${{ steps.tag.outputs.value }}" \
-            --notes-file /tmp/notes.md
+          if gh release view "${{ steps.tag.outputs.value }}" >/dev/null 2>&1; then
+            echo "Release ${{ steps.tag.outputs.value }} already exists; updating notes..."
+            gh release edit "${{ steps.tag.outputs.value }}" \
+              --title "Release ${{ steps.tag.outputs.value }}" \
+              --notes-file /tmp/notes.md
+          else
+            gh release create "${{ steps.tag.outputs.value }}" \
+              --title "Release ${{ steps.tag.outputs.value }}" \
+              --notes-file /tmp/notes.md
+          fi
 
       - name: Mirror VSIX asset from private core
         env:

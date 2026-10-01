@@ -2,6 +2,107 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.9.0] - 2026-10-01 (OrangeEdit 2.0 Parity, KUKA.Sim 4.10, iiQWorks.Sim 1.3 & WorkVisual 6.0 Reverse-Engineering Megarelease)
+
+### 🚀 OrangeEdit 2.0 Reverse-Engineering & Robotics Suite
+- **6D Robotics Kinematic Math Engine (Parity with `KukaMath.cs`)**:
+  - Exact 4x4 Homogeneous Transformation Matrices, Euler angle conversions ($R_z(A) \cdot R_y(B) \cdot R_x(C)$), frame inversion, and KUKA geometric operator (`:`).
+  - Bitwise manipulation of `STATUS` (0..7) and `TURN` (0..63) bitmasks matching KUKA controller specs.
+- **⭐ 6D Trajectory & Point Mirroring (`krl.mirrorTrajectory`) [Pro Tier]**:
+  - Mirrors motion paths across Cartesian planes X (YZ-plane), Y (XZ-plane), or Z (XY-plane).
+  - Inverts corresponding Turn bitmasks: Plane X ($T \oplus 32$), Plane Y ($T \oplus 40$), Plane Z ($T \oplus 48$), with optional A1 Turn bit reflection ($T \oplus 1$).
+  - Full side-by-side VS Code Diff-Preview before committing coordinate changes to `.src` and companion `.dat` files.
+- **⭐ 6D Batch Point Transformation & Shift (`krl.batchShiftPoints`) [Pro Tier]**:
+  - Batch shifts selected positions across `.src` and `.dat` using Tool Offset ($P : \Delta F$), Base Offset ($\Delta F : P$), or Cartesian Delta vector.
+  - Interactive Preview via Diff Editor before applying updates.
+- **Bidirectional Trajectory Reversal (`krl.reverseTrajectory`) [Free Tier]**:
+  - Inverts motion path order backwards with intelligent circular motion handling (swaps target and auxiliary points for `CIRC` / `SCIRC`) and preserves `;FOLD` envelopes.
+- **Point Renumbering & Symbol Synchronization (`krl.renumberPoints`) [Free Tier]**:
+  - Sequentially batch renumbers motion points in `.src` files (`XP1`, `XP2`, ...) and automatically renames corresponding companion declarations in `.dat` (`XP1`, `FP1`, `PPDAT1`).
+- **Tool & Base Coordinate Inspector & CSV Exporter (`krl.toolBaseOverview`) [Free Tier]**:
+  - Scans active files and `$config.dat` for `TOOL_DATA[1..64]`, `BASE_DATA[1..32]`, `LOAD_DATA[1..64]`.
+  - Displays coordinates, Euler angles, and names (`TOOL_NAME`, `BASE_NAME`), with one-click export to industrial spreadsheet CSV format.
+- **KUKA Form Definition (KFD) AST Parser & Linter (`kfdParser.ts`)**:
+  - Validates `.kfd` technology option package forms (`DEFTP`, `ENDTP`, `DECL PARAM`, `DECL PLIST`, `DECL FOLD`, `DECL INLINEFORM`).
+  - Detects unclosed package scopes, mismatched curly braces, duplicate parameter definitions, and size mismatches with real-time editor diagnostics.
+
+### 🔬 KUKA.Sim 4.10 Reverse-Engineering & Kinematics Parity
+- **Status (S) & Turn (T) Kinematic Validator (`validateStatusAndTurn`)**:
+  - Direct reverse-engineering of `Kuka.Sim.ProgrammingCore.Conversion.StatusByte` and `TurnByte`:
+    - Validates Status $S$ literal values and assignments: strictly enforces range $0..7$ (`'B000'`..`'B111'`). Out of range values trigger KSS error 1033 (*Status/Turn ungültig*).
+    - Validates Turn $T$ literal values and assignments: strictly enforces 6-axis range $0..63$ (`'B000000'`..`'B111111'`).
+    - **4-Axis Palletizer Kinematics Guard**: Enforces constant Status $S = 2$ (`'B010'`) for palletizer robots (e.g. `KR 300-2 PA`, `KR 470 PA`, `KR 700 PA`), preventing singular configuration faults.
+- **FOR Loop Step Zero Guard (`ForInterpreter`)**:
+  - Prohibits `STEP 0` in `FOR` loop declarations, preventing infinite interpreter loops (KSS `InterpreterException: Step 0 is not allowed`).
+- **RESUME Statement Constraints (`ResumeInterpreter`)**:
+  - Prohibits `RESUME` in background SUBMIT interpreter (`sps.sub`).
+  - Prohibits `RESUME` in main routines outside of active interrupt service routines (ISR).
+  - Flags `RESUME` for `GLOBAL INTERRUPT DECL`, preventing illegal stack unwinding across global module boundaries.
+- **SUBMIT Interpreter Motion Prohibitions (`SubmitMotionNotAllowed`, `RobotStopOnlyInSubmit`)**:
+  - Strictly forbids robot motion statements (`PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`) in background `sps.sub` files.
+  - Enforces that `ROBOT_STOP()` can only be called from SUBMIT background tasks.
+- **SYNC Followed by Spline Incompatibility Guard (`SyncFollowedBySplineNotAllowed`)**:
+  - Flags invalid sequences where `SYNC` is immediately followed by a `SPLINE` block or motion.
+
+### 📐 Official KUKA.Sim & Documents Templates & Snippets
+- **Interactive KUKA Template Scaffolding Wizard (`krl.scaffoldKrcFiles`)**:
+  - Integrates official templates discovered in `C:\Users\...\Documents\KUKA\KUKA.Sim 4.4\My Templates\KRL\Templates`:
+    - **CELL.SRC**: Production Automatic External handler with P00 handshake, $STOPMESS, and PGNO dispatch.
+    - **Standard Module**: Standard KUKA Application module (`.src` + `.dat`).
+    - **UserSubmit Task**: Multi-Submit task for KSS 8.3/8.5/8.7 background processing (`SPS1.SUB` .. `SPS5.SUB`).
+    - **⭐ VKRC Folge Module (Pro Tier)**: Full Volkswagen VASS sequence module with `TPVW`, `SPS_TRIG`, `PENTER`, `PEXIT`.
+    - **⭐ VKRC Makro Function (Pro Tier)**: Volkswagen VASS macro function with advance run `ADV` discrimination.
+- **KUKA.Sim Official Spline Inline Forms**:
+  - Added snippets for `SLINI`, `SPTI`, `SCIRCI` with `%MKUKATPBASIS,%CSPLINE`, `SVEL_CP`, `STOOL2`, `SBASE`, `USE_CM_PRO_VALUES`.
+  - Added `STOPWHEN` and `ON_ERROR_PROCEED` snippets.
+
+## [1.8.11] - 2026-10-01 (KUKA iiQWorks.Sim 1.3 Reverse-Engineering Integration, Safety Stopping Distances & Brake Test Diagnostics)
+
+### 🔬 KUKA iiQWorks.Sim 1.3 Reverse-Engineering & Architecture Parity
+- **Exact Interrupt Priority Model (`InterruptPriorityValidation`)**:
+  - Enforces strict KSS KRC interrupt priority constraints decompiled directly from `Kuka.Sim.Programming.Statements.Validation`:
+    - Valid user interrupt priorities: `1..2` and `4..39` (`value != 3`).
+    - **Priority 3 Strictly Forbidden**: Reserved by KSS system core (AutoExt / system task coordination).
+    - **Priorities 40..80 Forbidden**: Allocated strictly to KUKA technology packages (`KUKA.SafeOperation`, `KUKA.RoboTeam`, `KUKA.ArcTech`, `KUKA.LaserTech`).
+    - **Priorities 81..128**: Dedicated to background `SUBMIT` interpreter (`sps.sub`) and system tasks.
+- **RoboTeam Tool & Base Identifier Length Guard (`RoboTeamAnalyzer`)**:
+  - Enforces KUKA's 20-character maximum limit (`MaxNameLengthOfToolBase = 20`) on `TOOL_NAME[n]` and `BASE_NAME[n]` string identifiers. Prevents internal memory corruption and multi-robot RoboTeam sync failures.
+- **Brake Test Motion Approximation Prohibition (`BrakeTestConfigurationAnalyzer` & `StoppingDistanceService`)**:
+  - Prohibits continuous path approximation (`C_PTP`, `C_DIS`, `C_ORI`, `C_VEL`, `C_SPL`) on motion commands within Brake Test routines (`BRAKETEST`, `BrakeTestReq`), enforcing complete stops required for mechanical holding brake torque measurement (`BlendingNotSupported`).
+- **KRC Flat-Namespace Duplicate Module Guard (`DuplicateFileAnalyzer`)**:
+  - Detects duplicate module file names across subfolders within the same controller workspace (`KRC:\R1\...`). In KSS, module files share a global namespace in `/R1/`; duplicate basenames cause fatal loader collisions.
+- **High-Resolution Robot Photo in Quality & Audit Reports (`reportGenerator.ts`)**:
+  - Embedded real robot preview photo in Section 1 (Hardware & System Passports) of generated Project Quality and Audit reports, resolved automatically via local WorkVisual / KUKA.Sim catalog.
+- **Dynamic Stopping Distance Calculation in Acceptance Reports (`acceptanceReport.ts`)**:
+  - Integrated dynamic stopping distance and stopping time models for STOP 0, STOP 1, and STOP 2 categories per EN ISO 10218-1 and `Kuka.Sim.StoppingDistance.dll`.
+- **Enhanced Robot Model Regex Parsing & Auto-Detection**:
+  - Fixed prefix parsing so that generation-2 and variant notations (e.g., `KR210R2700_2 C4 FLR`, `KR210R2700-2 KRC5`) accurately resolve to their official robot catalog images (`KR 210 R2700 prime`).
+  - Added auto-detection paths for `KUKA.Sim 4.10` and `iiQWorks.Sim 1.3` RuntimeTools.
+
+## [1.8.10] - 2026-10-01 (KUKA WorkVisual Compiler Analyzers, Robot Image Bridge & Acceptance Reports Integration)
+
+### 📸 KUKA WorkVisual Robot Image Bridge & Acceptance Protocol Reports
+- **Official Robot Photo in Acceptance Protocols (`krl.generateAcceptanceReport`)**: Acceptance reports generated for customer site buy-offs and CE/ISO 10218 safety audits now embed the official high-resolution robot render inside "Card 1: Robot Passport ($machine.dat)".
+- **Local WorkVisual Asset Detection**: Seamlessly detects installed KUKA WorkVisual (3.0, 4.0, 5.0, 6.0) on the engineer's workstation (`C:\Program Files (x86)\KUKA\WorkVisual 6.0\Tools\RuntimeTools`).
+- **Fuzzy Kinematics Model Resolver**: Robust matching for both KRC4 and KRC5 notations (e.g., `#KR210R2700_2 C4 FLR`, `KR210R2700-2 KRC5`, `KR210R2700_2 C5 FLR` all reliably map to official kinematic render `KR 210 R2700 prime`).
+- **Copyright-Compliant Dynamic Extraction**: Extracts preview renders (`Preview.jpg`) directly from the local licensed `KRC4_robot_images.zip` using `KRC4_robots.xml` (183 official models) without redistributing proprietary assets.
+- **KUKA Fleet Robot Explorer Integration**: Discovered robot controllers and multi-robot cells in the active workspace display the official robot photo directly in the VS Code TreeView explorer.
+- **Robot Model Viewer (`krl.viewRobotImage`)**: 1-click preview of the active robot cell's photo inside VS Code editor.
+
+### 🔬 KUKA WorkVisual 6.0 Compiler Analyzers Reverse-Engineering Integration
+- **`InvalidFileHeader` Guard (`krl.diagnostics.checkFileHeaders`)**: Flags comments or blank lines preceding KSS compiler directives (`&ACCESS` and `&REL`) that break compilation on physical KRC controllers.
+- **`InvalidBrakeStatement` Guard (`krl.diagnostics.checkBrakeUsage`)**: Strictly prohibits `BRAKE` / `BRAKE F` in background Submit interpreter (`.sub`), and enforces that `BRAKE` in `.src` files can only be executed within declared `INTERRUPT` service routines.
+- **`DeclarationHidesGlobalVariable` & `HiddenModuleField` (`krl.diagnostics.checkShadowedVariables`)**: Warns when local variables in `.src` routines shadow global variables in `$config.dat` or module variables in `.dat`, preventing accidental state corruption.
+- **`FrameChangeInsideSplineBlock` (`splineFrameChangeForbidden`)**: Prohibits altering coordinate frames (`$BASE`, `$TOOL`, `BAS(#BASE/TOOL/FRAMES/INITMOV)`, `FDAT_ACT`) inside `SPLINE ... ENDSPLINE` envelopes per KSS motion planning rules.
+- **`KrlStartsWithOne` & `ArrayIndexTooBig`**: Enforces 1-based array indexing across declarations and expressions, prohibiting index 0 (with proper exemption for `$BASE_DATA[0]`), and capping array dimensions at the KSS limit of 32766.
+- **`SystemNameUsed` Guard**: Restricts user variable and subprogram declarations from beginning with `$` (reserved strictly for KSS system variables).
+- **`SwitchWithoutCase` Guard**: Flags `SWITCH` blocks that close with `ENDSWITCH` without any `CASE` or `DEFAULT` branches.
+- **`UnreachableCode` after `HALT`**: Identifies dead code paths immediately following `HALT` statements.
+
+### 🛡️ Supply Chain Security & CVE-2026-76845 Remediation
+- **Fixed `CVE-2026-76845` in `adm-zip`**: Upgraded `adm-zip` dependency to `^0.6.1` to eliminate the symbolic link extraction vulnerability ("Improper Link Resolution Before File Access") flagged by ReversingLabs Spectra Assure and NVD.
+- **Zero Supply Chain Alerts**: Manifest SBOM updated to ensure 100% compliance across automated enterprise security scanners.
+
 ## [1.8.9] - 2026-09-30 (Automotive & OEM Standards Suite, 183 KUKA Robot Specs DB, VASS 26 Linter, VW_USER Tech Packages & Path Geometry)
 
 ### 🦾 Official KUKA Robot Specs Catalog & Reach Envelope Guard (183 Models)

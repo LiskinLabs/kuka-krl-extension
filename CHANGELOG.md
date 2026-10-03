@@ -2,6 +2,20 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.9.2] - 2026-10-03 (Security Hardening, Asymmetric Airgap Licensing & VSIX Optimization)
+
+### 🔐 AppSec & Licensing Hardening
+- **Asymmetric Ed25519 Airgap Licensing**: Replaced symmetric HMAC airgap validation with asymmetric Ed25519 signature verification (`LISKIN_LABS_AIRGAP_PUBLIC_KEY`), preventing key extraction from client bundles while retaining backward compatibility via timing-safe HMAC fallback.
+- **Telemetry Command Injection Hardening**: Eliminated shell interpolation by switching from `child_process.exec` to parameterized `execFile("git", ...)`.
+- **GDPR & VS Code Telemetry Compliance**: Added strict compliance checks enforcing user opt-in (`vscode.env.telemetryConfiguration.telemetryLevel === "all"`) and workspace trust boundary verification (`vscode.workspace.isTrusted`).
+
+### ⚡ Performance & Package Optimization
+- **VSIX Bundle Slimming**: Excluded uncompressed GIF assets from the VSIX packaging manifest (`.vscodeignore`), slashing extension package size from 27.55 MB to 5.13 MB (>81% reduction).
+- **Fast Startup & Activation Events**: Removed eager `"onStartupFinished"` activation trigger in favor of declarative, lazy activation (`workspaceContains` and `onLanguage:krl`).
+- **Language Diagnostics Consolidation**: Removed redundant client-side regex diagnostic provider in favor of unified LSP server diagnostics, eliminating duplicate warning/error flags in the editor.
+- **Disposables Lifecycle**: Properly registered all tree views and providers in `context.subscriptions` to eliminate memory leaks on extension deactivation.
+- **Dependency Overrides**: Added override for `braces` (`^3.0.3`) to resolve upstream supply chain vulnerabilities.
+
 ## [1.9.1] - 2026-10-01 (Enterprise Fleet Verification, Hardened Folds & Legal Compliance)
 
 ### 🛡️ Enterprise Fleet Verification (9,804 Modules / 4.2M+ LoC Tested)

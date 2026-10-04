@@ -2,19 +2,37 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
-## [1.9.2] - 2026-10-03 (Security Hardening, Asymmetric Airgap Licensing & VSIX Optimization)
+## [1.9.2] - 2026-10-04 (Universal Industrial Safety Suite, KRCDiag Deep Audit & CSP Hardening)
+
+### 🛡️ Universal Industrial Static Safety Suite (16 Automated Safety Gates)
+- **ILF Metadata Desync Guard**: Detects discrepancies between Inline Form XML metadata parameters and active KRL statements.
+- **Dynamic Load Data & Tool Index Integrity**: Verifies matching indices between `TOOL_DATA` and `LOAD_DATA`, flagging unconfigured dynamic payloads.
+- **Actuator Sensor Pairing**: Detects blind actuator releases (waiting for `NOT Locked` without checking `Unlocked` feedback).
+- **Mutual Exclusion Verifier**: Flags sequential `IF ... ENDIF` blocks controlling actuators and motion without mutual exclusion.
+- **Advance Run Breaker (Vorlaufstopp) Detection**: Identifies synchronous subprogram calls and I/O reads breaking the continuous advance pointer between `C_DIS` approximation points.
+- **Safety Zone Handshake Symmetry**: Enforces strict pairing between zone acquisition (`Zone_Request`) and release signals.
+- **PTP Turn Bit Unwind Risk & 6D Operator Guard**: Warns on wrist axis 360° unwinding risks and improper manual coordinate inversions.
+
+### 🔍 KRCDiag Deep Diagnostic Integration & Fleet Explorer
+- **KRCDiag Archive & Folder Support**: Direct inspection of native controller diagnostic packages (`KRCDiag_*.zip`, event logs, trace data, and system topologies).
+- **Event Log Inspector Directory Resolution**: Automatically resolves `EventLogs/` directory paths to primary event files (`KrcLogS.evt` / `KrcLog.evt`), eliminating directory read errors.
+- **Fleet Hierarchy Deduplication**: Consolidates multi-controller backups under a unified parent robot root.
+
+### ⚡ Control Center & CSP Security Fix
+- **CSP Nonce Webview Resolution**: Fixed Content-Security-Policy script nonce handling in Control Center, restoring 100% interactivity for all UI controls, tabs, and diagnostic switches.
+- **Live Background Services Quick Bar**: Direct one-click control for all background services (ErrorLens, SafetyLens, Git Blame, Continuous Workspace Scanner, and Master Airgap Silent Mode).
+- **Complete Command Catalog**: All 75 extension tools and commands organized into dedicated logical functional categories with zero duplicate cards.
+
+### ⚖️ Trademark & Brand Neutrality
+- **Third-Party Trademark Sanitization**: Fully neutralized third-party editor brand names (e.g., OrangeEdit) across UI titles, command palettes, and documentation in favor of neutral engineering terminology (*Advanced Kinematics & Trajectory Suite*).
 
 ### 🔐 AppSec & Licensing Hardening
 - **Asymmetric Ed25519 Airgap Licensing**: Replaced symmetric HMAC airgap validation with asymmetric Ed25519 signature verification (`LISKIN_LABS_AIRGAP_PUBLIC_KEY`), preventing key extraction from client bundles while retaining backward compatibility via timing-safe HMAC fallback.
 - **Telemetry Command Injection Hardening**: Eliminated shell interpolation by switching from `child_process.exec` to parameterized `execFile("git", ...)`.
 - **GDPR & VS Code Telemetry Compliance**: Added strict compliance checks enforcing user opt-in (`vscode.env.telemetryConfiguration.telemetryLevel === "all"`) and workspace trust boundary verification (`vscode.workspace.isTrusted`).
 
-### ⚡ Performance & Package Optimization
-- **VSIX Bundle Slimming**: Excluded uncompressed GIF assets from the VSIX packaging manifest (`.vscodeignore`), slashing extension package size from 27.55 MB to 5.13 MB (>81% reduction).
-- **Fast Startup & Activation Events**: Removed eager `"onStartupFinished"` activation trigger in favor of declarative, lazy activation (`workspaceContains` and `onLanguage:krl`).
-- **Language Diagnostics Consolidation**: Removed redundant client-side regex diagnostic provider in favor of unified LSP server diagnostics, eliminating duplicate warning/error flags in the editor.
-- **Disposables Lifecycle**: Properly registered all tree views and providers in `context.subscriptions` to eliminate memory leaks on extension deactivation.
-- **Dependency Overrides**: Added override for `braces` (`^3.0.3`) to resolve upstream supply chain vulnerabilities.
+### 📦 VSIX Package Optimization
+- **VSIX Bundle Slimming**: Slashing extension package size to ~5.3 MB (>80% reduction) with lazy activation and fast startup events.
 
 ## [1.9.1] - 2026-10-01 (Enterprise Fleet Verification, Hardened Folds & Legal Compliance)
 

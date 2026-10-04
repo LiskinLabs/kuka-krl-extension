@@ -152,5 +152,4 @@ Visit our complete interactive documentation portal for in-depth tutorials, API 
 
 * **KUKA®, KRL®, KRC®, WorkVisual®, and SmartPAD®** are registered trademarks of **KUKA AG** / **KUKA Deutschland GmbH**.
 * **Visual Studio Code® and VS Code®** are registered trademarks of **Microsoft Corporation**.
-* **OrangeEdit®** is a registered trademark of **OrangeApps GmbH**.
-* This software extension is an independent development by **Liskin Labs** and is **not** affiliated with, sponsored, endorsed, or certified by KUKA AG, Microsoft Corporation, or OrangeApps GmbH. All product names, logos, and brands are property of their respective owners and are used solely for identification and compatibility purposes under nominative fair use.
+* This software extension is an independent development by **Liskin Labs** and is **not** affiliated with, sponsored, endorsed, or certified by KUKA AG, Microsoft Corporation. All product names, logos, and brands are property of their respective owners and are used solely for identification and compatibility purposes under nominative fair use.

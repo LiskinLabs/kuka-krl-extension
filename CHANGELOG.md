@@ -13,6 +13,14 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Safety Zone Handshake Symmetry**: Enforces strict pairing between zone acquisition (`Zone_Request`) and release signals.
 - **PTP Turn Bit Unwind Risk & 6D Operator Guard**: Warns on wrist axis 360° unwinding risks and improper manual coordinate inversions.
 
+### 📦 KUKA Backup Archive Explorer & Inspector (Zero-Unpack Engine)
+- **Direct Double-Click Opening for `.zip` Backups**: Double-clicking any KRC `.zip` backup or `KRCDiag_*.zip` in VS Code opens the KUKA Backup Archive Explorer instead of the binary file warning.
+- **In-Memory Zero-Unpack Reading**: Lightning-fast in-memory parsing (<60ms for 50MB archives) via `SimpleZipReader` without extracting files to disk.
+- **Automatic Robot Passport Extraction**: Automatically extracts Robot Name, Serial Number, KSS Version, Controller, and Kinematic Model from `am.ini`, `KRCDiag.log`, and `$machine.dat`.
+- **Virtual Document Content Provider (`krc-archive://`)**: Double-clicking any `.src`, `.dat`, `.sub`, `$config.dat`, or `$machine.dat` inside the archive opens it in a native VS Code editor tab with complete KRL syntax highlighting, folding, and search.
+- **In-Memory Static Analysis & Quality Report**: One-click static code analysis across all KRL programs inside the `.zip` archive without extracting to disk.
+- **Direct Event Log Decoding from Archive**: Decode and inspect binary `.evt` event logs directly from `.zip` packages in the KUKA Event Log Inspector.
+
 ### 🔍 KRCDiag Deep Diagnostic Integration & Fleet Explorer
 - **KRCDiag Archive & Folder Support**: Direct inspection of native controller diagnostic packages (`KRCDiag_*.zip`, event logs, trace data, and system topologies).
 - **Event Log Inspector Directory Resolution**: Automatically resolves `EventLogs/` directory paths to primary event files (`KrcLogS.evt` / `KrcLog.evt`), eliminating directory read errors.
@@ -116,7 +124,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
   - Integrated dynamic stopping distance and stopping time models for STOP 0, STOP 1, and STOP 2 categories per EN ISO 10218-1 and `Kuka.Sim.StoppingDistance.dll`.
 - **Enhanced Robot Model Regex Parsing & Auto-Detection**:
   - Fixed prefix parsing so that generation-2 and variant notations (e.g., `KR210R2700_2 C4 FLR`, `KR210R2700-2 KRC5`) accurately resolve to their official robot catalog images (`KR 210 R2700 prime`).
-  - Added auto-detection paths for offline simulation and runtime engineering tooling.
+  - Added auto-detection paths for `KUKA.Sim 4.10` and `iiQWorks.Sim 1.3` RuntimeTools.
 
 ## [1.8.10] - 2026-10-01 (KUKA WorkVisual Compiler Analyzers, Robot Image Bridge & Acceptance Reports Integration)
 

@@ -1,0 +1,1153 @@
+{
+  "extensionName": "KUKA KRL Professional VS Code Extension",
+  "version": "1.9.3",
+  "publisher": "LiskinLabs",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "pricing": "Free",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "KRL language parsing, syntax highlighting, and diagnostics are enabled. Remote communications, telemetry, and automated file packaging are disabled in Restricted Mode."
+    },
+    "virtualWorkspaces": false
+  },
+  "inventory": {
+    "Core Language Features": [
+      {
+        "type": "Language",
+        "id": "krl",
+        "title": "KUKA KRL Language Support",
+        "status": "Free",
+        "valueProposition": "Provides core language support for KUKA KRL, including syntax highlighting, file associations (.src, .dat, .sub, .kfd), and language configuration."
+      },
+      {
+        "type": "Snippet Collection",
+        "id": "krl.code-snippets",
+        "title": "KRL Code Snippets",
+        "status": "Free",
+        "valueProposition": "Offers a collection of code snippets to speed up KRL programming."
+      },
+      {
+        "type": "TextMate Grammar",
+        "id": "source.krl",
+        "title": "KRL Syntax Grammar",
+        "status": "Free",
+        "valueProposition": "Defines the TextMate grammar for accurate syntax highlighting of KRL files."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.locale",
+        "title": "Display Language",
+        "status": "Free",
+        "valueProposition": "Sets the display and interface language for the KUKA KRL extension UI, reports, and diagnostic tools."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.silentIndustrialMode",
+        "title": "Silent Industrial Mode",
+        "status": "Free",
+        "valueProposition": "Disables non-critical UI notifications and prompts for a streamlined industrial environment."
+      }
+    ],
+    "Diagnostics & Linting": [
+      {
+        "type": "Command",
+        "id": "krl.validateWorkspace",
+        "title": "Validate Workspace",
+        "status": "Free",
+        "valueProposition": "Performs a comprehensive validation of the entire KRL workspace for errors and warnings."
+      },
+      {
+        "type": "Language Model Tool",
+        "id": "krl_safety_check",
+        "title": "KUKA KRL Safety Check",
+        "status": "PRO",
+        "valueProposition": "Inspects KUKA KRL code for motion safety, velocity overshoots, and uninitialized tools using an integrated language model."
+      },
+      {
+        "type": "Command",
+        "id": "krl.safetyLens.toggle",
+        "title": "Toggle Safety Lens",
+        "status": "Free",
+        "valueProposition": "Toggles the display of safety-related inline diagnostics and warnings in the editor."
+      },
+      {
+        "type": "Command",
+        "id": "krl.errorLens.toggle",
+        "title": "Toggle Error Lens",
+        "status": "Free",
+        "valueProposition": "Toggles the display of inline error messages and diagnostics in the editor."
+      },
+      {
+        "type": "Command",
+        "id": "krl.errorLens.toggleInlineMessage",
+        "title": "Toggle Error Lens Inline Message",
+        "status": "Free",
+        "valueProposition": "Toggles the visibility of inline diagnostic messages shown by Error Lens."
+      },
+      {
+        "type": "Command",
+        "id": "krl.errorLens.copyProblemMessage",
+        "title": "Copy Problem Message",
+        "status": "Free",
+        "valueProposition": "Copies the diagnostic message of the current problem to the clipboard."
+      },
+      {
+        "type": "Command",
+        "id": "krl.errorLens.copyProblemCode",
+        "title": "Copy Problem Code",
+        "status": "Free",
+        "valueProposition": "Copies the diagnostic code of the current problem to the clipboard."
+      },
+      {
+        "type": "Command",
+        "id": "krl.errorLens.searchForProblem",
+        "title": "Search For Problem",
+        "status": "Free",
+        "valueProposition": "Opens a web search for the current diagnostic problem message."
+      },
+      {
+        "type": "Command",
+        "id": "krl.errorLens.disableLine",
+        "title": "Disable Error Lens for Line",
+        "status": "Free",
+        "valueProposition": "Disables Error Lens diagnostics for the current line."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.enabled",
+        "title": "Enable Diagnostics",
+        "status": "Free",
+        "valueProposition": "Enables or disables all KRL language diagnostics."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkGeneralSyntax",
+        "title": "Check General Syntax",
+        "status": "Free",
+        "valueProposition": "Enables or disables general KRL syntax checking."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.warnHalt",
+        "title": "Warn on HALT",
+        "status": "Free",
+        "valueProposition": "Warns when a HALT instruction is encountered in the code."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.warnWaitWithoutTimeout",
+        "title": "Warn on WAIT without Timeout",
+        "status": "Free",
+        "valueProposition": "Warns when a WAIT instruction is used without a timeout, potentially leading to deadlocks."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkSafetySpeeds",
+        "title": "Check Safety Speeds",
+        "status": "Free",
+        "valueProposition": "Checks for adherence to safety-related speed limits in motion commands."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkToolBaseInit",
+        "title": "Check Tool/Base Initialization",
+        "status": "Free",
+        "valueProposition": "Verifies that TOOL and BASE variables are properly initialized before use."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkBlockBalance",
+        "title": "Check Block Balance",
+        "status": "Free",
+        "valueProposition": "Ensures that control flow blocks (e.g., IF-ENDIF, LOOP-ENDLOOP) are correctly balanced."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkDeadCode",
+        "title": "Check Dead Code",
+        "status": "Free",
+        "valueProposition": "Identifies and warns about unreachable or unused code segments."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkTypeUsage",
+        "title": "Check Type Usage",
+        "status": "Free",
+        "valueProposition": "Verifies correct data type usage and compatibility in KRL expressions and assignments."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkKrlConstraints",
+        "title": "Check KRL Constraints",
+        "status": "Free",
+        "valueProposition": "Checks for common KRL programming constraints and best practices."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkUnusedVariables",
+        "title": "Check Unused Variables",
+        "status": "Free",
+        "valueProposition": "Identifies and warns about declared variables that are never used."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkDuplicateNames",
+        "title": "Check Duplicate Names",
+        "status": "Free",
+        "valueProposition": "Detects duplicate declarations of variables, functions, or subroutines."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkAdvanceRun",
+        "title": "Check Advance Run",
+        "status": "Free",
+        "valueProposition": "Analyzes code for potential issues related to the KUKA advance run pointer."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkIoRanges",
+        "title": "Check I/O Ranges",
+        "status": "Free",
+        "valueProposition": "Validates that I/O assignments and accesses are within defined ranges."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkDatIntegrity",
+        "title": "Check DAT Integrity",
+        "status": "Free",
+        "valueProposition": "Ensures consistency and correctness of data files (.dat) associated with source files (.src)."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkCircSyntax",
+        "title": "Check CIRC Syntax",
+        "status": "Free",
+        "valueProposition": "Validates the syntax and parameters of circular motion commands (CIRC)."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkInterrupts",
+        "title": "Check Interrupts",
+        "status": "Free",
+        "valueProposition": "Analyzes interrupt declarations and handlers for potential issues."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkFoldBalance",
+        "title": "Check Fold Balance",
+        "status": "Free",
+        "valueProposition": "Ensures that FOLD and ENDFOLD directives are correctly matched."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkWorkspaceDuplicates",
+        "title": "Check Workspace Duplicates",
+        "status": "Free",
+        "valueProposition": "Identifies duplicate files or declarations across the entire workspace."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkSubmitWait",
+        "title": "Check Submit Wait",
+        "status": "Free",
+        "valueProposition": "Checks for proper usage of WAIT commands in submit interpreter programs."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.workspaceScan",
+        "title": "Workspace Scan",
+        "status": "Free",
+        "valueProposition": "Enables or disables background scanning of the workspace for diagnostics."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkUtf8Bom",
+        "title": "Check UTF-8 BOM",
+        "status": "Free",
+        "valueProposition": "Checks for the presence of a UTF-8 Byte Order Mark (BOM) in KRL files, which can cause issues on KRC controllers."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkRobotReach",
+        "title": "Check Robot Reach",
+        "status": "Free",
+        "valueProposition": "Performs a basic check to estimate if robot target positions are within the robot's kinematic reach."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkMotionFoldSync",
+        "title": "Check Motion Fold Sync",
+        "status": "Free",
+        "valueProposition": "Ensures consistency between motion commands and their corresponding FOLD structures."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkVassStandard",
+        "title": "Check VASS Standard",
+        "status": "Free",
+        "valueProposition": "Checks KRL code against the VASS (Volkswagen Audi Seat Skoda) programming standard."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkPathApproximation",
+        "title": "Check Path Approximation",
+        "status": "Free",
+        "valueProposition": "Analyzes motion paths for excessive approximation values that might affect trajectory accuracy."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkSwitchPoints",
+        "title": "Check Switch Points",
+        "status": "Free",
+        "valueProposition": "Checks for proper usage and declaration of switch points in motion programs."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkLongSegments",
+        "title": "Check Long Segments",
+        "status": "Free",
+        "valueProposition": "Identifies unusually long linear or circular motion segments that might indicate programming errors."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkVassStrictRules",
+        "title": "Check VASS Strict Rules",
+        "status": "Free",
+        "valueProposition": "Applies stricter rules for VASS standard compliance checking."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkFileHeaders",
+        "title": "Check File Headers",
+        "status": "Free",
+        "valueProposition": "Verifies the presence and correctness of standard file headers in KRL files."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkBrakeUsage",
+        "title": "Check Brake Usage",
+        "status": "Free",
+        "valueProposition": "Analyzes code for proper usage of brake commands and conditions."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.checkShadowedVariables",
+        "title": "Check Shadowed Variables",
+        "status": "Free",
+        "valueProposition": "Detects variables that are declared in a scope where another variable with the same name already exists, potentially leading to confusion."
+      }
+    ],
+    "Code Editing & Formatting": [
+      {
+        "type": "Command",
+        "id": "krl.formatDocument",
+        "title": "Format Document",
+        "status": "Free",
+        "valueProposition": "Formats the active KRL document according to configured style rules."
+      },
+      {
+        "type": "Command",
+        "id": "krl.removeTrailingWhitespace",
+        "title": "Remove Trailing Whitespace",
+        "status": "Free",
+        "valueProposition": "Removes unnecessary trailing whitespace from KRL code lines."
+      },
+      {
+        "type": "Command",
+        "id": "krl.sortDeclarations",
+        "title": "Sort Declarations",
+        "status": "Free",
+        "valueProposition": "Sorts variable and function declarations within KRL files for better readability."
+      },
+      {
+        "type": "Command",
+        "id": "krl.insertFold",
+        "title": "Insert Fold",
+        "status": "Free",
+        "valueProposition": "Inserts a KRL FOLD/ENDFOLD block around selected code or at the cursor."
+      },
+      {
+        "type": "Command",
+        "id": "krl.unwrapFold",
+        "title": "Unwrap Fold",
+        "status": "Free",
+        "valueProposition": "Removes a KRL FOLD/ENDFOLD block while preserving its content."
+      },
+      {
+        "type": "Command",
+        "id": "krl.cleanupUnusedVariables",
+        "title": "Cleanup Unused Variables",
+        "status": "PRO",
+        "valueProposition": "Automatically removes unused variable declarations from KRL files."
+      },
+      {
+        "type": "Command",
+        "id": "krl.renameSignal",
+        "title": "Rename Signal",
+        "status": "Free",
+        "valueProposition": "Refactors KRL code by renaming a signal and updating all its references."
+      },
+      {
+        "type": "Command",
+        "id": "krl.convertToIiqkaFold",
+        "title": "Convert to IIQKA Fold",
+        "status": "PRO",
+        "valueProposition": "Converts legacy KRL folds to the IIQKA.OS-compatible fold syntax."
+      },
+      {
+        "type": "Command",
+        "id": "krl.insertCollisionGuard",
+        "title": "Insert Collision Guard",
+        "status": "PRO",
+        "valueProposition": "Inserts a code block for collision detection and reaction into the KRL program."
+      },
+      {
+        "type": "Command",
+        "id": "krl.insertSplineBlock",
+        "title": "Insert Spline Block",
+        "status": "PRO",
+        "valueProposition": "Inserts a structured spline motion block into the KRL program."
+      },
+      {
+        "type": "Command",
+        "id": "krl.mirrorTrajectory",
+        "title": "Mirror Trajectory",
+        "status": "Free",
+        "valueProposition": "Mirrors a selected robot trajectory along a specified axis or plane."
+      },
+      {
+        "type": "Command",
+        "id": "krl.batchShiftPoints",
+        "title": "Batch Shift Points",
+        "status": "Free",
+        "valueProposition": "Applies a batch shift or offset to multiple robot points in a trajectory."
+      },
+      {
+        "type": "Command",
+        "id": "krl.reverseTrajectory",
+        "title": "Reverse Trajectory",
+        "status": "Free",
+        "valueProposition": "Reverses the order of points in a selected robot trajectory."
+      },
+      {
+        "type": "Command",
+        "id": "krl.renumberPoints",
+        "title": "Renumber Points",
+        "status": "Free",
+        "valueProposition": "Renumbers robot points in a selected block of code sequentially."
+      },
+      {
+        "type": "Command",
+        "id": "krl.toolBaseOverview",
+        "title": "Tool/Base Overview",
+        "status": "Free",
+        "valueProposition": "Provides an overview of all declared and used TOOL and BASE frames in the workspace."
+      },
+      {
+        "type": "Command",
+        "id": "krl.foldAll",
+        "title": "Fold All",
+        "status": "Free",
+        "valueProposition": "Folds all foldable regions in the current KRL document."
+      },
+      {
+        "type": "Command",
+        "id": "krl.unfoldAll",
+        "title": "Unfold All",
+        "status": "Free",
+        "valueProposition": "Unfolds all folded regions in the current KRL document."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.autoFold",
+        "title": "Auto Fold",
+        "status": "Free",
+        "valueProposition": "Automatically folds KRL code blocks on file open."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.formatOnSave",
+        "title": "Format On Save",
+        "status": "Free",
+        "valueProposition": "Automatically formats KRL documents when saved."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.removeTrailingWhitespaceOnFormat",
+        "title": "Remove Trailing Whitespace On Format",
+        "status": "Free",
+        "valueProposition": "Removes trailing whitespace as part of the formatting process."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.indentWidth",
+        "title": "Indent Width",
+        "status": "Free",
+        "valueProposition": "Specifies the number of spaces or tabs to use for indentation."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.separateBeforeBlocks",
+        "title": "Separate Before Blocks",
+        "status": "Free",
+        "valueProposition": "Adds an empty line before control flow blocks during formatting."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.separateAfterBlocks",
+        "title": "Separate After Blocks",
+        "status": "Free",
+        "valueProposition": "Adds an empty line after control flow blocks during formatting."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.validateNonAscii",
+        "title": "Validate Non-ASCII Characters",
+        "status": "Free",
+        "valueProposition": "Checks for the presence of non-ASCII characters in KRL files, which can cause compatibility issues."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.indentFolds",
+        "title": "Indent Folds",
+        "status": "Free",
+        "valueProposition": "Indents the content within FOLD blocks."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.alignAssignments",
+        "title": "Align Assignments",
+        "status": "Free",
+        "valueProposition": "Aligns assignment operators (=) in KRL code for better readability."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.inlayHints.enabled",
+        "title": "Enable Inlay Hints",
+        "status": "Free",
+        "valueProposition": "Enables or disables inline hints for KRL code."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.inlayHints.vwUserTech",
+        "title": "Show WorkVisual User Tech Inlay Hints",
+        "status": "Free",
+        "valueProposition": "Displays inlay hints for WorkVisual User Technology parameters."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.codeLens.enabled",
+        "title": "Enable Code Lens",
+        "status": "Free",
+        "valueProposition": "Enables or disables Code Lens features for KRL files."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.callHierarchy.enabled",
+        "title": "Enable Call Hierarchy",
+        "status": "Free",
+        "valueProposition": "Enables or disables call hierarchy analysis for KRL functions and subroutines."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.documentHighlights.enabled",
+        "title": "Enable Document Highlights",
+        "status": "Free",
+        "valueProposition": "Enables or disables highlighting of all occurrences of a symbol in the current document."
+      }
+    ],
+    "Motion & Trajectory Tools": [
+      {
+        "type": "Command",
+        "id": "krl.estimateMotionStats",
+        "title": "Estimate Motion Stats",
+        "status": "Free",
+        "valueProposition": "Estimates motion statistics and cycle times for selected KRL motion blocks."
+      },
+      {
+        "type": "Command",
+        "id": "krl.convertLegacyToSpline",
+        "title": "Convert Legacy to Spline",
+        "status": "PRO",
+        "valueProposition": "Converts legacy PTP/LIN motion sequences into modern spline blocks."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.robotModel",
+        "title": "Robot Model",
+        "status": "Free",
+        "valueProposition": "Specifies the KUKA robot model for enhanced diagnostics and motion analysis."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.path.longSegmentThresholdMm",
+        "title": "Long Segment Threshold (mm)",
+        "status": "Free",
+        "valueProposition": "Sets the threshold in millimeters for identifying long motion segments in diagnostics."
+      }
+    ],
+    "KRC Backup & Project Management": [
+      {
+        "type": "Custom Editor",
+        "id": "krl.backupArchiveViewer",
+        "title": "KUKA Backup Archive Explorer (.zip)",
+        "status": "Free",
+        "valueProposition": "Provides a read-only explorer for KUKA KRC backup ZIP archives."
+      },
+      {
+        "type": "Command",
+        "id": "krl.openBackupZipExplorer",
+        "title": "Open Backup ZIP Explorer",
+        "status": "Free",
+        "valueProposition": "Opens a KUKA KRC backup ZIP archive in a custom explorer view."
+      },
+      {
+        "type": "Command",
+        "id": "krl.mountBackupZipAsProject",
+        "title": "Mount Backup ZIP As Project",
+        "status": "Free",
+        "valueProposition": "Unpacks a KRC backup ZIP and opens it as a native workspace project with 2-way synchronization."
+      },
+      {
+        "type": "Command",
+        "id": "krl.syncAllToBackupZip",
+        "title": "Sync All To Backup ZIP",
+        "status": "Free",
+        "valueProposition": "Synchronizes all changes in the mounted project back to the original backup ZIP archive."
+      },
+      {
+        "type": "Command",
+        "id": "krl.exportBackupZip",
+        "title": "Export Backup ZIP",
+        "status": "Free",
+        "valueProposition": "Exports the current workspace as a KUKA KRC backup ZIP archive."
+      },
+      {
+        "type": "Command",
+        "id": "krl.compareKrcBackup",
+        "title": "Compare KRC Backup",
+        "status": "PRO",
+        "valueProposition": "Compares the current workspace or a local folder against a KRC backup archive."
+      },
+      {
+        "type": "Command",
+        "id": "krl.scaffoldKrcFiles",
+        "title": "Scaffold KRC Files",
+        "status": "Free",
+        "valueProposition": "Generates boilerplate KRL files and directory structure for a new KRC project."
+      },
+      {
+        "type": "Custom Editor",
+        "id": "krl.eventLogViewer",
+        "title": "KUKA Event Log Inspector (.evt)",
+        "status": "Free",
+        "valueProposition": "Provides a viewer for KUKA robot event log files (.evt)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.openEventLog",
+        "title": "Open Event Log",
+        "status": "Free",
+        "valueProposition": "Opens a KUKA robot event log file in a custom inspector view."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.backup.defaultOpenMode",
+        "title": "Default Backup Open Mode",
+        "status": "Free",
+        "valueProposition": "Controls how KRC backup .ZIP archives are opened by default (as project or preview)."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.backup.windowMode",
+        "title": "Backup Project Window Mode",
+        "status": "Free",
+        "valueProposition": "Determines whether mounted backup projects open in the current or a new VS Code window."
+      }
+    ],
+    "I/O & Signals": [
+      {
+        "type": "Command",
+        "id": "krl.refreshIOView",
+        "title": "Refresh I/O View",
+        "status": "Free",
+        "valueProposition": "Refreshes the KRL I/O view to show current signal states and declarations."
+      },
+      {
+        "type": "Command",
+        "id": "krl.showIoMatrix",
+        "title": "Show I/O Matrix",
+        "status": "Free",
+        "valueProposition": "Displays an interactive matrix of KUKA robot inputs and outputs."
+      },
+      {
+        "type": "View",
+        "id": "krlIO",
+        "title": "KRL I/O",
+        "status": "Free",
+        "valueProposition": "Provides a dedicated view for monitoring and managing KUKA KRL inputs and outputs."
+      }
+    ],
+    "EKI & Communication": [
+      {
+        "type": "Command",
+        "id": "krl.validateEkiXml",
+        "title": "Validate EKI XML",
+        "status": "PRO",
+        "valueProposition": "Validates External KUKA Interface (EKI) XML configuration files for correctness."
+      },
+      {
+        "type": "Command",
+        "id": "krl.generateEkiCode",
+        "title": "Generate EKI Code",
+        "status": "PRO",
+        "valueProposition": "Generates boilerplate KRL code for EKI communication based on XML configurations."
+      }
+    ],
+    "Git & Version Control Integration": [
+      {
+        "type": "Command",
+        "id": "krl.cleanGitMetadata",
+        "title": "Clean Git Metadata",
+        "status": "Free",
+        "valueProposition": "Removes Git-related metadata from KRL files, useful before deploying to a robot."
+      },
+      {
+        "type": "Command",
+        "id": "krl.viewFileHistory",
+        "title": "View File History",
+        "status": "PRO",
+        "valueProposition": "Shows the Git commit history for the current KRL file."
+      },
+      {
+        "type": "Command",
+        "id": "krl.viewGitGraph",
+        "title": "View Git Graph",
+        "status": "PRO",
+        "valueProposition": "Displays a visual Git graph of the repository containing the KRL files."
+      },
+      {
+        "type": "Command",
+        "id": "krl.showLineBlameDetails",
+        "title": "Show Line Blame Details",
+        "status": "PRO",
+        "valueProposition": "Shows Git blame information (author, commit) for the current line in the editor."
+      },
+      {
+        "type": "Command",
+        "id": "krl.diffWithPrevious",
+        "title": "Diff With Previous",
+        "status": "Free",
+        "valueProposition": "Compares the current KRL file with its previous Git revision."
+      },
+      {
+        "type": "Command",
+        "id": "krl.copyCommitMessage",
+        "title": "Copy Commit Message",
+        "status": "Free",
+        "valueProposition": "Copies the commit message of the current line's Git commit to the clipboard."
+      },
+      {
+        "type": "Command",
+        "id": "krl.toggleGitLensInlineBlame",
+        "title": "Toggle GitLens Inline Blame",
+        "status": "Free",
+        "valueProposition": "Toggles the inline Git blame annotations provided by GitLens integration."
+      },
+      {
+        "type": "Command",
+        "id": "krl.viewLineHistory",
+        "title": "View Line History",
+        "status": "Free",
+        "valueProposition": "Shows the Git history for a specific line in the KRL file."
+      },
+      {
+        "type": "Command",
+        "id": "krl.compareTwoRevisions",
+        "title": "Compare Two Revisions",
+        "status": "Free",
+        "valueProposition": "Compares two arbitrary Git revisions of a KRL file."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.gitLens.currentLine.enabled",
+        "title": "Enable GitLens Current Line",
+        "status": "Free",
+        "valueProposition": "Enables or disables GitLens features for the current line in KRL files."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.gitLens.inlineBlame",
+        "title": "Toggle GitLens Inline Blame",
+        "status": "Free",
+        "valueProposition": "Toggles inline Git commit author blame annotations in KRL files."
+      }
+    ],
+    "Licensing & Support": [
+      {
+        "type": "Command",
+        "id": "krl.activateLicense",
+        "title": "Activate License",
+        "status": "Free",
+        "valueProposition": "Activates a KUKA KRL Professional license using a provided key."
+      },
+      {
+        "type": "Command",
+        "id": "krl.deactivateLicense",
+        "title": "Deactivate License",
+        "status": "Free",
+        "valueProposition": "Deactivates the current KUKA KRL Professional license on this machine."
+      },
+      {
+        "type": "Command",
+        "id": "krl.checkLicenseStatus",
+        "title": "Check License Status",
+        "status": "Free",
+        "valueProposition": "Displays the current status of the KUKA KRL Professional license."
+      },
+      {
+        "type": "Command",
+        "id": "krl.openCustomerPortal",
+        "title": "Open Customer Portal",
+        "status": "Free",
+        "valueProposition": "Opens the customer portal for managing KUKA KRL Professional licenses and subscriptions."
+      },
+      {
+        "type": "Command",
+        "id": "krl.startTrial",
+        "title": "Start Trial",
+        "status": "Free",
+        "valueProposition": "Starts a free trial period for KUKA KRL Professional features."
+      },
+      {
+        "type": "Command",
+        "id": "krl.requestCorporateInvoice",
+        "title": "Request Corporate Invoice",
+        "status": "Free",
+        "valueProposition": "Requests a corporate invoice for KUKA KRL Professional licenses."
+      },
+      {
+        "type": "Command",
+        "id": "krl.downloadLatestInvoice",
+        "title": "Download Latest Invoice",
+        "status": "Free",
+        "valueProposition": "Downloads the most recent invoice for KUKA KRL Professional purchases."
+      },
+      {
+        "type": "Command",
+        "id": "krl.activateOfflineLicense",
+        "title": "Activate Offline License",
+        "status": "Free",
+        "valueProposition": "Activates a KUKA KRL Professional license in an offline environment."
+      },
+      {
+        "type": "Command",
+        "id": "krl.copyMachineFingerprint",
+        "title": "Copy Machine Fingerprint",
+        "status": "Free",
+        "valueProposition": "Copies the unique machine fingerprint required for offline license activation."
+      },
+      {
+        "type": "Command",
+        "id": "krl.checkSupportStatus",
+        "title": "Check Support Status",
+        "status": "Free",
+        "valueProposition": "Checks the current support status and availability for the KRL extension."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.supportGatewayUrl",
+        "title": "Support Gateway URL",
+        "status": "Free",
+        "valueProposition": "Configures the URL for the KRL extension's support gateway."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.enterpriseHost",
+        "title": "Enterprise Host",
+        "status": "Free",
+        "valueProposition": "Configures the corporate enterprise host for automatic floating Pro license activation."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.licenseServerUrl",
+        "title": "License Server URL",
+        "status": "Free",
+        "valueProposition": "Configures the on-premise enterprise license server URL for offline factory networks."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.dodoApiKey",
+        "title": "Dodo Payments API Key",
+        "status": "Free",
+        "valueProposition": "Configures the API key for Dodo Payments integration."
+      }
+    ],
+    "UI & Workflow Tools": [
+      {
+        "type": "Command",
+        "id": "krl.openControlCenter",
+        "title": "Open Control Center",
+        "status": "Free",
+        "valueProposition": "Opens the KUKA KRL Control Center dashboard for an overview of features and settings."
+      },
+      {
+        "type": "Command",
+        "id": "krl.showCalculator",
+        "title": "Show Calculator",
+        "status": "Free",
+        "valueProposition": "Opens an integrated calculator for KRL-related calculations."
+      },
+      {
+        "type": "Command",
+        "id": "krl.openSnippetGenerator",
+        "title": "Open Snippet Generator",
+        "status": "Free",
+        "valueProposition": "Opens a tool to generate custom KRL code snippets."
+      },
+      {
+        "type": "Command",
+        "id": "krl.showFlowchart",
+        "title": "Show Flowchart",
+        "status": "PRO",
+        "valueProposition": "Generates and displays a visual flowchart of the KRL program's logic."
+      },
+      {
+        "type": "Command",
+        "id": "krl.activateFileIcons",
+        "title": "Activate File Icons",
+        "status": "Free",
+        "valueProposition": "Activates the custom KRL file icon theme for better file identification."
+      },
+      {
+        "type": "Command",
+        "id": "krl.sendSelectionToChat",
+        "title": "Send Selection to Telegram Chat",
+        "status": "Free",
+        "valueProposition": "Sends the currently selected code to a configured Telegram chat."
+      },
+      {
+        "type": "Command",
+        "id": "krl.openTelegramChat",
+        "title": "Open Telegram Chat",
+        "status": "Free",
+        "valueProposition": "Opens the configured Telegram chat for KRL support or discussion."
+      },
+      {
+        "type": "Command",
+        "id": "krl.sendToDeveloper",
+        "title": "Send To Developer",
+        "status": "Free",
+        "valueProposition": "Sends diagnostic information or code snippets to the extension developers for support."
+      },
+      {
+        "type": "Command",
+        "id": "krl.switchLanguage",
+        "title": "Switch Display Language",
+        "status": "Free",
+        "valueProposition": "Allows switching the display language of the KRL extension UI."
+      },
+      {
+        "type": "Command",
+        "id": "krl.review.accept",
+        "title": "Accept Review",
+        "status": "Free",
+        "valueProposition": "Accepts the current code review change or suggestion."
+      },
+      {
+        "type": "Command",
+        "id": "krl.review.acceptAll",
+        "title": "Accept All Reviews",
+        "status": "Free",
+        "valueProposition": "Accepts all pending code review changes or suggestions."
+      },
+      {
+        "type": "Command",
+        "id": "krl.review.reject",
+        "title": "Reject Review",
+        "status": "Free",
+        "valueProposition": "Rejects the current code review change or suggestion."
+      },
+      {
+        "type": "Command",
+        "id": "krl.review.rejectAll",
+        "title": "Reject All Reviews",
+        "status": "Free",
+        "valueProposition": "Rejects all pending code review changes or suggestions."
+      },
+      {
+        "type": "Command",
+        "id": "krl.fleetExplorer.refresh",
+        "title": "Refresh Fleet Explorer",
+        "status": "Free",
+        "valueProposition": "Refreshes the KRL Fleet Explorer view to update robot connection statuses."
+      },
+      {
+        "type": "Command",
+        "id": "krl.promptVkrcPro",
+        "title": "Prompt VKRC Pro",
+        "status": "Free",
+        "valueProposition": "Prompts for VKRC Pro related actions or information."
+      },
+      {
+        "type": "Command",
+        "id": "krl.checkVkrcStatus",
+        "title": "Check VKRC Status",
+        "status": "Free",
+        "valueProposition": "Checks the status of VKRC (Virtual KUKA Robot Controller) integration."
+      },
+      {
+        "type": "Command",
+        "id": "krl.viewRobotImage",
+        "title": "View Robot Image",
+        "status": "Free",
+        "valueProposition": "Displays an image of the configured KUKA robot model."
+      },
+      {
+        "type": "Command",
+        "id": "krl.configureWorkVisualPath",
+        "title": "Configure WorkVisual Path",
+        "status": "Free",
+        "valueProposition": "Configures the path to the KUKA WorkVisual installation for integration."
+      },
+      {
+        "type": "View Container",
+        "id": "kuka-krl-container",
+        "title": "KUKA KRL Professional",
+        "status": "Free",
+        "valueProposition": "Provides a dedicated activity bar container for KUKA KRL Professional views."
+      },
+      {
+        "type": "View",
+        "id": "krlFleetExplorer",
+        "title": "KRL Fleet Explorer",
+        "status": "Free",
+        "valueProposition": "Displays and manages connected KUKA robot controllers in a fleet overview."
+      },
+      {
+        "type": "View",
+        "id": "krlCommands",
+        "title": "KRL Commands",
+        "status": "Free",
+        "valueProposition": "Provides a quick access panel for frequently used KUKA KRL commands."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.telemetry.enabled",
+        "title": "Enable Telemetry",
+        "status": "Free",
+        "valueProposition": "Enables or disables telemetry data collection for extension usage."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.workVisual.path",
+        "title": "WorkVisual Path",
+        "status": "Free",
+        "valueProposition": "Specifies the installation path for KUKA WorkVisual."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.workVisual.imagesPath",
+        "title": "WorkVisual Images Path",
+        "status": "Free",
+        "valueProposition": "Specifies the path to WorkVisual image assets for display in the extension."
+      }
+    ],
+    "Reporting": [
+      {
+        "type": "Command",
+        "id": "krl.generateReport",
+        "title": "Generate Report",
+        "status": "PRO",
+        "valueProposition": "Generates a detailed report of the KRL code and workspace analysis."
+      },
+      {
+        "type": "Command",
+        "id": "krl.generateAcceptanceReport",
+        "title": "Generate Acceptance Report",
+        "status": "PRO",
+        "valueProposition": "Generates a formal acceptance report for KRL projects, often used in commissioning."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.reportLanguage",
+        "title": "Report Language",
+        "status": "Free",
+        "valueProposition": "Sets the language for generated KRL reports."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.reportCollapsible",
+        "title": "Report Collapsible Sections",
+        "status": "Free",
+        "valueProposition": "Determines if sections in generated reports are collapsible."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.report.companyName",
+        "title": "Company Name for Reports",
+        "status": "Free",
+        "valueProposition": "Sets the company name to be included in generated KRL reports."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.report.companyLogoPath",
+        "title": "Company Logo Path for Reports",
+        "status": "Free",
+        "valueProposition": "Specifies the path to a company logo image to be included in generated KRL reports."
+      }
+    ],
+    "Themes & Icons": [
+      {
+        "type": "Theme",
+        "id": "KRL Industrial Dark",
+        "title": "KRL Industrial Dark",
+        "status": "Free",
+        "valueProposition": "A dark color theme optimized for KRL programming in industrial environments."
+      },
+      {
+        "type": "Theme",
+        "id": "KRL Industrial Light",
+        "title": "KRL Industrial Light",
+        "status": "Free",
+        "valueProposition": "A light color theme optimized for KRL programming in industrial environments."
+      },
+      {
+        "type": "Theme",
+        "id": "KRL Midnight OLED",
+        "title": "KRL Midnight OLED",
+        "status": "Free",
+        "valueProposition": "A deep dark color theme designed for OLED displays, reducing eye strain."
+      },
+      {
+        "type": "Theme",
+        "id": "KRL Blueprint",
+        "title": "KRL Blueprint",
+        "status": "Free",
+        "valueProposition": "A unique dark color theme with a blueprint-like aesthetic."
+      },
+      {
+        "type": "Theme",
+        "id": "KRL WorkVisual Dark (Standard)",
+        "title": "KRL WorkVisual Dark (Standard)",
+        "status": "Free",
+        "valueProposition": "A dark color theme mimicking the default appearance of KUKA WorkVisual."
+      },
+      {
+        "type": "Theme",
+        "id": "KRL WorkVisual Light (Standard)",
+        "title": "KRL WorkVisual Light (Standard)",
+        "status": "Free",
+        "valueProposition": "A light color theme mimicking the default appearance of KUKA WorkVisual."
+      },
+      {
+        "type": "Icon Theme",
+        "id": "krl-icons",
+        "title": "KRL File Icons",
+        "status": "Free",
+        "valueProposition": "Provides custom file icons for KRL-related file types."
+      }
+    ]
+  }
+}

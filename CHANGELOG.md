@@ -16,6 +16,10 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Formal Parameter & Subprogram Vorlaufstopp Resolution**: Eliminated false positives on KRL keywords (`IF`, `WHILE`) and formal parameter declarations (`DEF Sub(param:IN)`).
 - **KUKA Firmware Integrity Isolation**: Dedicated isolated integrity section for KSS vendor modules (`/R1/System/*`, `/R1/TP/*`), focusing project health index strictly on customer application code.
 
+### 💳 Industrial Licensing & Pricing Model Standardization
+- **RoboDK Workstation Model Parity**: Transitioned commercial tiers to transparent device / workstation activations (1, 25, 200 activations) matching industrial automation and robotics CAD standards.
+- **Dodo Payments Live Synchronization**: Updated all live payment gateways, B2B invoicing endpoints, and multi-seat entitlements to reflect new Engineer Pro ($19/mo, $149/yr), Pro Lifetime ($699), Team ($499/yr, 25 seats), and Enterprise Site ($2,490/yr, 200 seats) pricing.
+
 ## [1.9.2] - 2026-10-04 (Universal Industrial Safety Suite, KRCDiag Deep Audit & CSP Hardening)
 
 ### 🛡️ Universal Industrial Static Safety Suite (16 Automated Safety Gates)

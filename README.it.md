@@ -286,7 +286,7 @@ Offriamo licenze flessibili di livello industriale tramite il nostro merchant ve
 | 👑 **Pro Annuale** | **$149.00** / anno | **Risparmia il 35%** (~$6.58/mese) | Tutti i 50 strumenti Pro • 1 PC • Buffer offline 30 giorni • KRC2–KRC5 | [Ottieni Pro annuale](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | 🏆 **Pro Lifetime** | **$699.00** | **Paga una volta, tuo per sempre** | Tutti i 50 strumenti Pro • 1 PC (1 postazione di lavoro) • Aggiornamenti a vita | [Ottieni Pro lifetime](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
 | 🏢 **Team Edition** | **$499.00** / anno | B2B — Fattura e preventivo | Tutti i 50 strumenti Pro • 25 postazioni di lavoro • KRC2–KRC5 | [Ottieni Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| 🏭 **Enterprise Site** | **$2,490.00** / anno | Postazioni illimitate | Tutti i 50 strumenti Pro • Postazioni di stabilimento illimitate • Report con marchio | [Ottieni Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| 🏭 **Enterprise Site** | **$2,490.00** / anno | 200 postazioni | Tutti i 50 strumenti Pro • 200 postazioni di stabilimento • Report con marchio | [Ottieni Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">

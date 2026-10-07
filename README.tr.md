@@ -39,8 +39,8 @@
 
 <p align="center">
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>🌐 İnteraktif Wiki (50 Endüstriyel Araç)</b></a> •
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>⚡ Pro Monthly ($9.99/ay)</b></a> • 
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>👑 Yıllık Pro ($79.00/yıl — %35 Tasarruf)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>⚡ Pro Monthly ($19.00/ay)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>👑 Yıllık Pro ($149.00/yıl — %35 Tasarruf)</b></a> • 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>🛡️ Güvenlik Denetim Raporu</b></a>
 </p>
 
@@ -326,11 +326,11 @@ Doğrulanmış satıcımız **Dodo Payments** üzerinden esnek, endüstriyel sı
 | Plan | Fiyat | İndirim / Faturalama | Lisans Koşulları | Ödeme |
 |:---|:---:|:---|:---|:---:|
 | 🟢 **Community** | **$0** | %100 Sonsuza Kadar Ücretsiz | Kişisel ve Ticari Kullanım | [Ücretsiz Kur](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| ⏱️ **Pro Aylık** | **$9.99** / ay | Aylık faturalandırılır | 50 Endüstriyel Pro Aracın Tümü • 1 PC • KRC2–KRC5 Desteği | [Pro Monthly Al](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
-| 👑 **Pro Yıllık** | **$79.00** / yıl | **%35 Tasarruf** (~$6.58/ay) | 50 Pro Aracın Tümü • 1 PC • 30 Gün Çevrimdışı Tampon • KRC2–KRC5 | [Yıllık Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
+| ⏱️ **Pro Aylık** | **$19.00** / ay | Aylık faturalandırılır | 50 Endüstriyel Pro Aracın Tümü • 1 PC • KRC2–KRC5 Desteği | [Pro Monthly Al](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| 👑 **Pro Yıllık** | **$149.00** / yıl | **%35 Tasarruf** (~$6.58/ay) | 50 Pro Aracın Tümü • 1 PC • 30 Gün Çevrimdışı Tampon • KRC2–KRC5 | [Yıllık Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | 🏆 **Pro Ömür Boyu** | **$699.00** | **Bir Kez Öde, Sonsuza Kadar Sahip Ol** | 50 Pro Aracın Tümü • 1 PC (1 İş İstasyonu) • Ömür Boyu Güncelleme | [Ömür Boyu Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| 🏢 **Team Edition** | **$299.00** / yıl | B2B — Fatura ve Teklif | 50 Pro Aracın Tümü • 25 İş İstasyonu Aktivasyonu • KRC2–KRC5 | [Team Edition Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| 🏭 **Enterprise Site** | **$1,499.00** / yıl | Sınırsız Lisans | 50 Pro Aracın Tümü • Sınırsız Tesis İş İstasyonu • Markalı Raporlar | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| 🏢 **Team Edition** | **$499.00** / yıl | B2B — Fatura ve Teklif | 50 Pro Aracın Tümü • 25 İş İstasyonu Aktivasyonu • KRC2–KRC5 | [Team Edition Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏭 **Enterprise Site** | **$2,490.00** / yıl | Sınırsız Lisans | 50 Pro Aracın Tümü • Sınırsız Tesis İş İstasyonu • Markalı Raporlar | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">
@@ -346,16 +346,16 @@ Doğrulanmış satıcımız **Dodo Payments** üzerinden esnek, endüstriyel sı
 * 💻 **5 Cihaz Aktivasyon Paketi (Pro Aylık / Yıllık / Ömür Boyu):**
   * **5 eşzamanlı cihaz aktivasyon** hakkı (saha Toughbook'u, iş laptopu, ev bilgisayarı, test masası, tablet).
   * **Neden Pro Lifetime ($699 tek seferlik)?** Bir kez ödeyin, abonelik veya tekrar eden ücret olmadan sonsuza dek sahip olun. Sahadaki devreye alma sırasında önlenen tek bir robot çarpışması veya kazanılan 1 gün bu yatırımı anında amorti eder.
-* 🏢 **25 Cihaz Aktivasyon Paketi (Team Edition — $299/yıl):**
-  * Entegrasyon ekipleri için **25 cihaz aktivasyonu**.
+* 🏢 **25 Cihaz Aktivasyon Paketi (Team Edition — $499/yıl):**
+  * Entegrasyon ekipleri için **25 cihaz aktivasyonu (5 mühendis)**.
   * Resmi B2B fatura, muhasebe mutabakatı ve projeler genelinde birleşik KRL kod kalitesi standartları.
-* 🏭 **Kurumsal Fabrika (Site) (Enterprise Site — $1,499/yıl):**
-  * *5 cihazlık ömür boyu paket $699 iken yıllık Enterprise Site neden $1,499/yıl?*
-  * Çünkü bu **TÜM FABRİKA İÇİN SINIRSIZ CİHAZ AKTİVASYONUDUR (Sınırsız Kullanıcı)**! Yalnızca 5 cihazı değil, **tesisteki tüm bilgisayar, test tezgahı ve panelleri kapsar (20, 50 veya 100+ teknisyen, operatör ve bakımcı)**. 20 kişilik bir tesis için cihaz başı ayda yalnızca **~$8** maliyete denk gelir!
-  * **Doğrudan Mühendislik Desteği:** Entegre Telegram destek paneli üzerinden doğrudan kıdemli mühendis desteği.
+* 🏭 **Kurumsal Fabrika (Site) (Enterprise Site — $2,490/yıl):**
+  * *5 cihazlık ömür boyu paket $699 iken yıllık Enterprise Site neden $2,490/yıl?*
+  * Çünkü bu **TÜM FABRİKA VEYA ENTEGRATÖR İÇİN SINIRSIZ CİHAZ AKTİVASYONUDUR (Sınırsız Kullanıcı)**! Yalnızca 5 cihazı değil, **tesisteki tüm bilgisayar, test tezgahı ve panelleri kapsar (20, 50 veya 100+ teknisyen, operatör ve bakımcı)**.
+  * **Doğrudan Mühendislik Desteği:** Katı SLA garantisiyle öncelikli doğrudan mühendis desteği.
   * **KUKA Fleet Backup Hub:** Yüzlerce hücre kontrolcüsünün kurumsal GitLab/Google Drive'a otomatik yedeklenmesi, çoklu yedek diff analizi ve sürüm kontrolü.
-  * **Özel Markalı Müşteri Kabul Raporları:** OEM logolarıyla (Ford, Renault, Saint-Gobain, TOGG) markalanmış resmi robot pasaportları ve güvenlik denetimleri.
-  * **Eksiksiz Kurumsal Satınalma:** Kurumsal yazılım sözleşmesi, resmi KDV faturası ve tedarikçi uyumluluğu.
+  * **Özel Markalı Müşteri Kabul Raporları:** OEM logolarıyla (Volkswagen, Audi, BMW, Ford, Renault, Stellantis) markalanmış resmi robot pasaportları ve güvenlik denetimleri.
+  * **Eksiksiz Kurumsal Satınalma:** Kurumsal yazılım sözleşmesi, resmi KDV faturası (AB VIES Reverse Charge) ve tedarikçi uyumluluğu.
 
 
 ---

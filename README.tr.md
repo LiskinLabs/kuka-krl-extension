@@ -330,7 +330,7 @@ Doğrulanmış satıcımız **Dodo Payments** üzerinden esnek, endüstriyel sı
 | 👑 **Pro Yıllık** | **$149.00** / yıl | **%35 Tasarruf** (~$6.58/ay) | 50 Pro Aracın Tümü • 1 PC • 30 Gün Çevrimdışı Tampon • KRC2–KRC5 | [Yıllık Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | 🏆 **Pro Ömür Boyu** | **$699.00** | **Bir Kez Öde, Sonsuza Kadar Sahip Ol** | 50 Pro Aracın Tümü • 1 PC (1 İş İstasyonu) • Ömür Boyu Güncelleme | [Ömür Boyu Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
 | 🏢 **Team Edition** | **$499.00** / yıl | B2B — Fatura ve Teklif | 50 Pro Aracın Tümü • 25 İş İstasyonu Aktivasyonu • KRC2–KRC5 | [Team Edition Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| 🏭 **Enterprise Site** | **$2,490.00** / yıl | Sınırsız Lisans | 50 Pro Aracın Tümü • Sınırsız Tesis İş İstasyonu • Markalı Raporlar | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| 🏭 **Enterprise Site** | **$2,490.00** / yıl | 200 İş İstasyonu | 50 Pro Aracın Tümü • 200 Tesis İş İstasyonu • Markalı Raporlar | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">
@@ -343,15 +343,18 @@ Doğrulanmış satıcımız **Dodo Payments** üzerinden esnek, endüstriyel sı
 
 ### 💡 İş Akışınıza Hangi Lisans Planı Uygun? (Lisans Ekonomisi):
 
-* 💻 **5 Cihaz Aktivasyon Paketi (Pro Aylık / Yıllık / Ömür Boyu):**
-  * **5 eşzamanlı cihaz aktivasyon** hakkı (saha Toughbook'u, iş laptopu, ev bilgisayarı, test masası, tablet).
-  * **Neden Pro Lifetime ($699 tek seferlik)?** Bir kez ödeyin, abonelik veya tekrar eden ücret olmadan sonsuza dek sahip olun. Sahadaki devreye alma sırasında önlenen tek bir robot çarpışması veya kazanılan 1 gün bu yatırımı anında amorti eder.
-* 🏢 **25 Cihaz Aktivasyon Paketi (Team Edition — $499/yıl):**
-  * Entegrasyon ekipleri için **25 cihaz aktivasyonu (5 mühendis)**.
-  * Resmi B2B fatura, muhasebe mutabakatı ve projeler genelinde birleşik KRL kod kalitesi standartları.
-* 🏭 **Kurumsal Fabrika (Site) (Enterprise Site — $2,490/yıl):**
-  * *5 cihazlık ömür boyu paket $699 iken yıllık Enterprise Site neden $2,490/yıl?*
-  * Çünkü bu **TÜM FABRİKA VEYA ENTEGRATÖR İÇİN SINIRSIZ CİHAZ AKTİVASYONUDUR (Sınırsız Kullanıcı)**! Yalnızca 5 cihazı değil, **tesisteki tüm bilgisayar, test tezgahı ve panelleri kapsar (20, 50 veya 100+ teknisyen, operatör ve bakımcı)**.
+* 💻 **Bireysel Lisanslar (Engineer Pro Aylık / Yıllık):**
+  * **1 iş istasyonu (1 cihaz aktivasyonu)** hakkı. Lisansı istediğiniz zaman menüden devre dışı bırakıp yeni bir bilgisayara aktarabilirsiniz.
+  * **KRC2 / KRC4 / KRC5 (KSS 5.x–8.7+)** nesillerinin tamamına tam destek.
+* 🏆 **Pro Lifetime ($699 tek seferlik):**
+  * **1 iş istasyonu** için yinelenen abonelik olmadan kalıcı ömür boyu lisans ve ömür boyu güncellemeler.
+  * İnternetsiz kapalı fabrika ağları (Air-Gapped) için kalıcı kişisel kriptografik çevrimdışı lisans sertifikası.
+* 🏢 **Takım Paketi (Team Edition — $499/yıl):**
+  * Sistem entegratörleri, robotik servis firmaları ve otomasyon departmanları için **25 cihaz aktivasyonu**.
+  * Vergi Kimlik Numarası (Tax ID / VIES KDV) ile resmi kurumsal B2B fatura ve tüm projelerde birleşik KRL kod kalitesi standartları.
+* 🏭 **Kurumsal Fabrika (Enterprise Site — $2,490/yıl):**
+  * **TÜM FABRİKA VEYA ENTEGRATÖR ŞİRKET İÇİN 200 CİHAZ AKTİVASYONU**.
+  * Tesis genelindeki tüm mühendislik dizüstü bilgisayarlarını, test istasyonlarını ve bakım panellerini kapsar.
   * **Doğrudan Mühendislik Desteği:** Katı SLA garantisiyle öncelikli doğrudan mühendis desteği.
   * **KUKA Fleet Backup Hub:** Yüzlerce hücre kontrolcüsünün kurumsal GitLab/Google Drive'a otomatik yedeklenmesi, çoklu yedek diff analizi ve sürüm kontrolü.
   * **Özel Markalı Müşteri Kabul Raporları:** OEM logolarıyla (Volkswagen, Audi, BMW, Ford, Renault, Stellantis) markalanmış resmi robot pasaportları ve güvenlik denetimleri.

@@ -32,7 +32,7 @@
             <span class="text-kuka-orange">💻</span> {{ t.navVsCodeIde || "VS Code IDE" }}
           </a>
           <a :href="withBase(t.wikiLink)" class="hover:text-kuka-orange transition-colors flex items-center gap-1">
-            <span class="text-cyan-400 font-bold">50</span> {{ t.navWiki }}
+            <span class="text-cyan-400 font-bold">159</span> {{ t.navWiki }}
           </a>
           <a href="#comparison" class="hover:text-kuka-orange transition-colors">
             {{ t.navBeforeAfter }}
@@ -88,11 +88,11 @@
       <transition name="fade">
         <div v-if="mobileMenuOpen" class="lg:hidden px-4 pt-3 pb-5 bg-[#07090e]/98 backdrop-blur-2xl border-b border-white/15 text-left font-mono text-xs space-y-3 shadow-2xl">
           <div class="grid grid-cols-2 gap-2">
-            <a @click="mobileMenuOpen = false" href="#cinematic" class="p-2.5 rounded-xl bg-[#0a0d14] border border-white/10 text-gray-300 hover:text-kuka-orange flex items-center gap-2">
-              <span>🎬</span> <span>{{ t.navShowcase }}</span>
+            <a @click="mobileMenuOpen = false" href="#vscode-ide" class="p-2.5 rounded-xl bg-[#0a0d14] border border-white/10 text-gray-300 hover:text-kuka-orange flex items-center gap-2">
+              <span>💻</span> <span>Web IDE</span>
             </a>
             <a @click="mobileMenuOpen = false" :href="withBase(t.wikiLink)" class="p-2.5 rounded-xl bg-[#0a0d14] border border-white/10 text-gray-300 hover:text-kuka-orange flex items-center gap-2">
-              <span class="text-cyan-400 font-bold">50</span> <span>{{ t.navWiki }}</span>
+              <span class="text-cyan-400 font-bold">159</span> <span>{{ t.navWiki }}</span>
             </a>
             <a @click="mobileMenuOpen = false" href="#comparison" class="p-2.5 rounded-xl bg-[#0a0d14] border border-white/10 text-gray-300 hover:text-kuka-orange flex items-center gap-2">
               <span>⚖️</span> <span>{{ t.navBeforeAfter }}</span>
@@ -2557,8 +2557,8 @@ const translations = {
     navBuyPro: "Get Pro Key",
     heroTitlePrefix: "Industrial Development Environment for ",
     heroTitleHighlight: "KUKA Robot Language",
-    heroSubtitle: "Enterprise IDE and comprehensive safety for KRC4 & KRC5 controllers. 50 industrial tools designed for maximum programming speed, collision prevention, and zero downtime.",
-    btnWiki: "Knowledge Base (50 Tools) ➔",
+    heroSubtitle: "Enterprise IDE and comprehensive safety for KRC4 & KRC5 controllers. 159 certified industrial capabilities designed for maximum programming speed, collision prevention, and zero downtime.",
+    btnWiki: "Knowledge Base (159 Tools) ➔",
     btnBuyPro: "Buy Pro License",
     wikiLink: "/guide/features",
     showcaseHeading: "Cinematic Engineering Tour: KUKA KRL Pro Suite",
@@ -2576,14 +2576,14 @@ const translations = {
     ecoHeading: "Runs Across Your Entire IDE Ecosystem",
     ecoDesc: "Built on the Language Server Protocol (LSP). Works seamlessly across all modern development platforms.",
     matrixTitle: "Community Edition ($0) vs Pro Industrial",
-    matrixDesc: "Complete capability comparison of the free core extension vs the 50-tool enterprise engineering suite.",
+    matrixDesc: "Complete capability comparison of the free core extension vs the 159-tool enterprise engineering suite.",
     pricingTitle: "TRANSPARENT INDUSTRIAL PRICING",
     pricingHeading: "Simple, Predictable Plans for Automation Engineers",
     pricingDesc: "Invest in zero downtime and rapid commissioning. Instant activation via Dodo Payments.",
     p0Desc: "Essential syntax highlighting and navigation for student or hobbyist KRL programmers.",
-    p1Desc: "Full access to all 50 tools for active commissioning and installation projects.",
+    p1Desc: "Full access to all 159 tools for active commissioning and installation projects.",
     p2Desc: "Recommended for automation teams. Full access, priority updates, and team licensing.",
-    p3Desc: "Perpetual lifetime access to all 50 Pro tools and future major updates with no recurring fees.",
+    p3Desc: "Perpetual lifetime access to all 159 Pro tools and future major updates with no recurring fees.",
     mostPopular: "RECOMMENDED",
     btnFree: "Download Free",
     btnSub: "Subscribe Monthly",
@@ -2592,7 +2592,7 @@ const translations = {
     pf0_1: "6 Industrial KUKA Themes",
     pf0_2: "Basic KRL Autocompletion",
     pf0_3: "Go-to-Definition Navigation",
-    pf1: "All 50 Industrial Tools Unlocked",
+    pf1: "All 159 Industrial Tools Unlocked",
     pf2: "Real-time Inlay Hints & Signal Tooltips",
     pf3_std: "Standard Email Support",
     pf3_pri: "Priority 24/7 Engineering Support",
@@ -2600,7 +2600,7 @@ const translations = {
     faqs: [
       {
         q: "Does this extension work 100% offline inside robotic cells without internet?",
-        a: "Yes. All 50 tools — including syntax parsing, 3-point frame calculation, AST flowcharting, and backup diffing — run 100% locally on your machine with zero cloud dependencies."
+        a: "Yes. All 159 tools — including syntax parsing, 3-point frame calculation, AST flowcharting, and backup diffing — run 100% locally on your machine with zero cloud dependencies."
       },
       {
         q: "Can this completely replace WorkVisual for code editing?",
@@ -2651,7 +2651,7 @@ const translations = {
     perOnce: "/ Once",
     save35: "SAVE 35%",
     activation5Seats: "5 Device Activations",
-    lifetimeF1: "All 50 Pro Tools Forever",
+    lifetimeF1: "All 159 Pro Tools Forever",
     lifetimeF2: "Free Future Major Updates",
     lifetimeF3: "Direct Engineering Support",
 
@@ -2678,7 +2678,7 @@ const translations = {
 
     // B2B tiers (Team / Enterprise)
     p4Desc: "Annual licence for integration teams — one invoice, 25 device activations, priority support.",
-    pf4_1: "All 50 Pro Tools",
+    pf4_1: "All 159 Pro Tools",
     pf4_2: "25 Device Activations",
     pf4_3: "Priority Engineering Support",
     btnTeam: "Get Team Edition",
@@ -2694,7 +2694,7 @@ const translations = {
     matrixColCommunity: "Community",
     matrixColFree: "Free Forever",
     matrixColPro: "Pro Industrial",
-    matrixColProSub: "Full Suite (50 Tools)",
+    matrixColProSub: "Full Suite (159 Tools)",
     matrixIncluded: "✓ Included",
     matrixFullPro: "✓ Full Pro Access",
     matrixCtaText: "Ready to equip your commissioning team with zero downtime tooling?",
@@ -2708,7 +2708,7 @@ const translations = {
   },
   ru: {
     navShowcase: "3D Обзор",
-    navWiki: "Вики (50 утилит)",
+    navWiki: "База знаний (159 утилит)",
     navBeforeAfter: "До / После",
     navPlayground: "Песочница",
     navFrameCalc: "Калькулятор",
@@ -2717,8 +2717,8 @@ const translations = {
     navBuyPro: "Купить Pro",
     heroTitlePrefix: "Промышленная среда разработки для ",
     heroTitleHighlight: "KUKA Robot Language",
-    heroSubtitle: "Корпоративная IDE и комплексная безопасность для контроллеров KRC4 и KRC5. 50 инструментов для скорости, защиты от коллизий и нулевого времени простоя.",
-    btnWiki: "База знаний (50 инструментов) ➔",
+    heroSubtitle: "Корпоративная IDE и комплексная безопасность для контроллеров KRC4 и KRC5. 159 проверенных инструментов для скорости, защиты от коллизий и нулевого времени простоя.",
+    btnWiki: "База знаний (159 инструментов) ➔",
     btnBuyPro: "Купить Pro лицензию",
     wikiLink: "/ru/guide/features",
     showcaseHeading: "Кинематографичный обзор: KUKA KRL Pro Suite",
@@ -2736,14 +2736,14 @@ const translations = {
     ecoHeading: "Работает во всех современных IDE",
     ecoDesc: "Построено на открытом протоколе Language Server Protocol (LSP). Полная совместимость со всеми платформами.",
     matrixTitle: "Сравнение: Community ($0) против Pro Industrial",
-    matrixDesc: "Полное сопоставление возможностей бесплатной версии и корпоративного пакета из 50 инструментов.",
+    matrixDesc: "Полное сопоставление возможностей бесплатной версии и корпоративного пакета из 159 инструментов.",
     pricingTitle: "ПРОЗРАЧНЫЕ ПРОМЫШЛЕННЫЕ ТАРИФЫ",
     pricingHeading: "Простые условия для инженеров автоматизации",
     pricingDesc: "Инвестируйте в отсутствие аварий и быструю сдачу проектов. Мгновенная активация через Dodo Payments.",
     p0Desc: "Базовая подсветка и навигация для студентов и начинающих наладчиков.",
-    p1Desc: "Полный доступ ко всем 50 инструментам для активных проектов пусконаладки.",
+    p1Desc: "Полный доступ ко всем 159 инструментам для активных проектов пусконаладки.",
     p2Desc: "Рекомендуемый выбор для инженеров. Полный доступ, экономия 35% и приоритетная поддержка.",
-    p3Desc: "Бессрочная пожизненная лицензия на все 50 инструментов и будущие обновления без подписок.",
+    p3Desc: "Бессрочная пожизненная лицензия на все 159 инструментов и будущие обновления без подписок.",
     mostPopular: "ВЫБОР ИНЖЕНЕРОВ",
     btnFree: "Скачать бесплатно",
     btnSub: "Месячная подписка",
@@ -2752,7 +2752,7 @@ const translations = {
     pf0_1: "6 Промышленных тем KUKA",
     pf0_2: "Базовый автокомплит KRL",
     pf0_3: "Переход к определениям (F12)",
-    pf1: "Все 50 Промышленных инструментов",
+    pf1: "Все 159 Промышленных инструментов",
     pf2: "Инлайн-подсказки сигналов I/O в коде",
     pf3_std: "Стандартная поддержка",
     pf3_pri: "Приоритетная поддержка 24/7",
@@ -2760,7 +2760,7 @@ const translations = {
     faqs: [
       {
         q: "Работает ли расширение на 100% офлайн внутри цеха без интернета?",
-        a: "Да. Все 50 инструментов — парсер синтаксиса, расчет фреймов, генератор блок-схем и diff бэкапов — работают полностью локально на вашем ПК без каких-либо внешних серверов."
+        a: "Да. Все 159 инструментов — парсер синтаксиса, расчет фреймов, генератор блок-схем и diff бэкапов — работают полностью локально на вашем ПК без каких-либо внешних серверов."
       },
       {
         q: "Может ли это расширение полностью заменить WorkVisual при написании кода?",
@@ -2811,7 +2811,7 @@ const translations = {
     perOnce: "разово",
     save35: "СКИДКА 35%",
     activation5Seats: "5 Активаций Устройств",
-    lifetimeF1: "Все 50 Pro инструментов навсегда",
+    lifetimeF1: "Все 159 Pro инструментов навсегда",
     lifetimeF2: "Все будущие обновления бесплатны",
     lifetimeF3: "Прямая инженерная поддержка",
 
@@ -2838,7 +2838,7 @@ const translations = {
 
     // B2B тарифы (Team / Enterprise)
     p4Desc: "Годовая лицензия для команд интеграторов — один счёт, 25 активаций устройств, приоритетная поддержка.",
-    pf4_1: "Все 50 Pro инструментов",
+    pf4_1: "Все 159 Pro инструментов",
     pf4_2: "25 активаций устройств",
     pf4_3: "Приоритетная инженерная поддержка",
     btnTeam: "Купить Team Edition",
@@ -2854,7 +2854,7 @@ const translations = {
     matrixColCommunity: "Community",
     matrixColFree: "Бесплатно навсегда",
     matrixColPro: "Pro Industrial",
-    matrixColProSub: "Все 50 инструментов",
+    matrixColProSub: "Все 159 инструментов",
     matrixIncluded: "✓ Включено",
     matrixFullPro: "✓ Полный доступ Pro",
     matrixCtaText: "Готовы оснастить команду пусконаладки надежными инструментами без простоя?",
@@ -2868,7 +2868,7 @@ const translations = {
   },
   tr: {
     navShowcase: "3D Tur",
-    navWiki: "Wiki (50 Araç)",
+    navWiki: "Wiki (159 Araç)",
     navBeforeAfter: "Önce / Sonra",
     navPlayground: "Canlı Editör",
     navFrameCalc: "Frame Hesabı",
@@ -2877,8 +2877,8 @@ const translations = {
     navBuyPro: "Pro Satın Al",
     heroTitlePrefix: "KUKA Robot Language için ",
     heroTitleHighlight: "Endüstriyel Geliştirme Ortamı",
-    heroSubtitle: "KRC4 ve KRC5 denetleyicileri için kurumsal IDE ve kapsamlı güvenlik. Maksimum hız, çarpışma önleme ve sıfır duruş süresi için 50 endüstriyel araç.",
-    btnWiki: "Bilgi Bankası (50 Araç) ➔",
+    heroSubtitle: "KRC4 ve KRC5 denetleyicileri için kurumsal IDE ve kapsamlı güvenlik. Maksimum hız, çarpışma önleme ve sıfır duruş süresi için 159 endüstriyel araç.",
+    btnWiki: "Bilgi Bankası (159 Araç) ➔",
     btnBuyPro: "Pro Lisans Satın Al",
     wikiLink: "/tr/guide/features",
     showcaseHeading: "Sinematik Mühendislik Turu: KUKA KRL Pro Suite",
@@ -2896,14 +2896,14 @@ const translations = {
     ecoHeading: "Tüm IDE Ekosisteminizde Sorunsuz Çalışır",
     ecoDesc: "Language Server Protocol (LSP) üzerine kurulmuştur. Tüm modern geliştirme platformlarında kusursuz çalışır.",
     matrixTitle: "Karşılaştırma: Community ($0) ve Pro Industrial",
-    matrixDesc: "Ücretsiz temel sürüm ile 50 araçlık endüstriyel mühendislik paketinin ayrıntılı karşılaştırması.",
+    matrixDesc: "Ücretsiz temel sürüm ile 159 araçlık endüstriyel mühendislik paketinin ayrıntılı karşılaştırması.",
     pricingTitle: "ŞEFFAF ENDÜSTRİYEL FİYATLANDIRMA",
     pricingHeading: "Otomasyon Mühendisleri İçin Tahmin Edilebilir Planlar",
     pricingDesc: "Sıfır duruş süresi ve hızlı devreye almaya yatırım yapın. Dodo Payments ile anında aktivasyon.",
     p0Desc: "Öğrenciler ve yeni başlayanlar için temel sözdizimi vurgulama ve gezinme.",
-    p1Desc: "Aktif devreye alma ve kurulum projeleri için 50 aracın tamamına tam erişim.",
+    p1Desc: "Aktif devreye alma ve kurulum projeleri için 159 aracın tamamına tam erişim.",
     p2Desc: "Mühendisler için önerilen seçenek. Tam erişim, %35 tasarruf ve öncelikli destek.",
-    p3Desc: "Abonelik olmadan tüm 50 araca ve gelecekteki güncellemelere ömür boyu kalıcı erişim.",
+    p3Desc: "Abonelik olmadan tüm 159 araca ve gelecekteki güncellemelere ömür boyu kalıcı erişim.",
     mostPopular: "ÖNERİLEN",
     btnFree: "Ücretsiz İndir",
     btnSub: "Aylık Abonelik",
@@ -2912,7 +2912,7 @@ const translations = {
     pf0_1: "6 Endüstriyel KUKA Teması",
     pf0_2: "Temel KRL Otomatik Tamamlama",
     pf0_3: "Tanıma Gitme (F12)",
-    pf1: "Tüm 50 Endüstriyel Araç Açık",
+    pf1: "Tüm 159 Endüstriyel Araç Açık",
     pf2: "Gerçek Zamanlı I/O Sinyal İpuçları",
     pf3_std: "Standart E-posta Desteği",
     pf3_pri: "Öncelikli 24/7 Mühendislik Desteği",
@@ -2920,7 +2920,7 @@ const translations = {
     faqs: [
       {
         q: "Bu eklenti internet olmayan fabrika ortamında %100 çevrimdışı çalışır mı?",
-        a: "Evet. Sözdizimi ayrıştırma, frame hesabı, akış şeması ve yedek karşılaştırma dahil tüm 50 araç hiçbir bulut bağımlılığı olmadan tamamen yerel olarak çalışır."
+        a: "Evet. Sözdizimi ayrıştırma, frame hesabı, akış şeması ve yedek karşılaştırma dahil tüm 159 araç hiçbir bulut bağımlılığı olmadan tamamen yerel olarak çalışır."
       },
       {
         q: "Kod yazımında WorkVisual'ın yerini tamamen alabilir mi?",
@@ -2971,7 +2971,7 @@ const translations = {
     perOnce: "tek seferlik",
     save35: "%35 TASARRUF",
     activation5Seats: "5 Cihaz Aktivasyonu",
-    lifetimeF1: "Tüm 50 Pro Araç Sonsuza Kadar",
+    lifetimeF1: "Tüm 159 Pro Araç Sonsuza Kadar",
     lifetimeF2: "Gelecekteki Tüm Güncellemeler Dahil",
     lifetimeF3: "Doğrudan Mühendislik Desteği",
 
@@ -2998,7 +2998,7 @@ const translations = {
 
     // B2B paketleri (Team / Enterprise)
     p4Desc: "Entegrasyon ekipleri için yıllık lisans — tek fatura, 25 cihaz aktivasyonu, öncelikli destek.",
-    pf4_1: "Tüm 50 Pro Araç",
+    pf4_1: "Tüm 159 Pro Araç",
     pf4_2: "25 Cihaz Aktivasyonu",
     pf4_3: "Öncelikli Mühendislik Desteği",
     btnTeam: "Team Edition Satın Al",
@@ -3014,7 +3014,7 @@ const translations = {
     matrixColCommunity: "Community",
     matrixColFree: "Sonsuza Dek Ücretsiz",
     matrixColPro: "Pro Industrial",
-    matrixColProSub: "Tam Paket (50 Araç)",
+    matrixColProSub: "Tam Paket (159 Araç)",
     matrixIncluded: "✓ Dahil",
     matrixFullPro: "✓ Tam Pro Erişim",
     matrixCtaText: "Devreye alma ekibinizi sıfır duruş süreli araçlarla donatmaya hazır mısınız?",

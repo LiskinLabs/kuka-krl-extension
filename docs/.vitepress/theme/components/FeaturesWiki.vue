@@ -76,16 +76,20 @@
     <div class="sticky top-0 z-40 py-3.5 backdrop-blur-xl bg-[#07090e]/90 border-y border-white/10 shadow-xl mb-8 sm:mb-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4">
         
-        <!-- Search Input -->
+        <!-- Search Input with Keyboard Shortcut Hint -->
         <div class="relative w-full md:w-96">
           <input
+            ref="searchInputRef"
             v-model="searchQuery"
             type="text"
             :placeholder="text.searchPlaceholder"
-            class="w-full bg-[#0d121d] text-white text-xs sm:text-sm pl-10 pr-4 py-2.5 rounded-xl border border-white/10 focus:border-kuka-orange focus:ring-1 focus:ring-kuka-orange outline-none transition-all placeholder:text-gray-500 font-mono shadow-inner"
+            class="w-full bg-[#0d121d] text-white text-xs sm:text-sm pl-10 pr-16 py-2.5 rounded-xl border border-white/10 focus:border-kuka-orange focus:ring-1 focus:ring-kuka-orange outline-none transition-all placeholder:text-gray-500 font-mono shadow-inner"
           />
           <svg class="w-4 h-4 text-gray-500 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-          <button v-if="searchQuery" @click="searchQuery = ''" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white text-xs">✕</button>
+          <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+            <span v-if="!searchQuery" class="hidden sm:inline-block px-1.5 py-0.5 rounded bg-white/10 text-[10px] text-gray-400 font-mono border border-white/10">/</span>
+            <button v-if="searchQuery" @click="searchQuery = ''" class="text-gray-500 hover:text-white text-xs">✕</button>
+          </div>
         </div>
 
         <!-- Filter Scope Pills: All, Free, Pro -->
@@ -149,12 +153,13 @@
         </button>
       </div>
 
-      <!-- Feature Cards Grid (Modern Bento Layout) -->
+      <!-- Feature Cards Grid (Modern Bento Layout with Click-to-Inspect) -->
       <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         <div
           v-for="(feat, idx) in filteredFeatures"
           :key="feat.id || idx"
-          class="group relative rounded-2xl bg-[#0a0d14]/90 border border-white/10 hover:border-kuka-orange/50 p-5 transition-all duration-300 flex flex-col justify-between hover:shadow-[0_0_25px_rgba(255,102,0,0.12)] hover:-translate-y-0.5">
+          @click="openToolDrawer(feat)"
+          class="group relative rounded-2xl bg-[#0a0d14]/90 border border-white/10 hover:border-kuka-orange/50 p-5 transition-all duration-300 flex flex-col justify-between hover:shadow-[0_0_25px_rgba(255,102,0,0.15)] hover:-translate-y-0.5 cursor-pointer">
           
           <!-- Card Header: Category & Pro/Free Badge -->
           <div>
@@ -179,19 +184,24 @@
             </p>
           </div>
 
-          <!-- Card Footer: Command Identifier / ID -->
+          <!-- Card Footer: Command Identifier / ID & Action -->
           <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono">
-            <div class="flex items-center gap-1.5 text-gray-400 truncate max-w-[220px]">
+            <div class="flex items-center gap-1.5 text-gray-400 truncate max-w-[190px]">
               <span class="text-kuka-orange">cmd:</span>
               <code class="text-gray-300 text-[10px] select-all truncate">{{ feat.id }}</code>
             </div>
             
-            <button 
-              @click="copyCommand(feat.id)"
-              :title="'Copy: ' + feat.id"
-              class="p-1 rounded hover:bg-white/10 text-gray-400 hover:text-white transition-colors">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-            </button>
+            <div class="flex items-center gap-1.5">
+              <span class="text-[11px] text-kuka-orange font-bold inline-flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
+                {{ text.inspectAction || 'Inspect' }} →
+              </span>
+              <button 
+                @click.stop="copyCommand(feat.id)"
+                :title="'Copy: ' + feat.id"
+                class="p-1 rounded hover:bg-white/10 text-gray-400 hover:text-white transition-colors">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              </button>
+            </div>
           </div>
 
         </div>
@@ -199,11 +209,156 @@
 
     </main>
 
+    <!-- Google Developer / Stripe Style Interactive Command Inspector Drawer -->
+    <transition name="drawer-slide">
+      <div v-if="selectedTool" class="fixed inset-0 z-50 overflow-hidden flex justify-end">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-black/75 backdrop-blur-sm transition-opacity" @click="closeToolDrawer"></div>
+
+        <!-- Slide Drawer Content -->
+        <div class="relative w-full max-w-2xl bg-[#0a0d14] border-l border-white/15 h-full overflow-y-auto shadow-2xl flex flex-col justify-between z-10 text-left">
+          
+          <!-- Drawer Header -->
+          <div class="p-6 sm:p-8 border-b border-white/10 bg-[#0d121d]">
+            <div class="flex items-center justify-between gap-4 mb-4">
+              <div class="flex items-center gap-2 flex-wrap font-mono text-xs">
+                <span class="px-2.5 py-1 rounded bg-white/10 text-gray-300 border border-white/10">
+                  {{ selectedTool.category }}
+                </span>
+                <span :class="['px-2.5 py-1 rounded-full font-bold border', selectedTool.status === 'PRO' ? 'bg-orange-500/15 border-orange-500/40 text-kuka-orange' : 'bg-emerald-500/15 border-emerald-500/40 text-emerald-400']">
+                  {{ selectedTool.status === 'PRO' ? 'PRO INDUSTRIAL' : 'COMMUNITY FREE' }}
+                </span>
+                <span class="px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/30 text-blue-400 text-[11px]">
+                  {{ selectedTool.type }}
+                </span>
+              </div>
+
+              <!-- Close Button (Esc) -->
+              <button 
+                @click="closeToolDrawer"
+                class="p-2 rounded-xl bg-white/5 hover:bg-white/15 text-gray-400 hover:text-white transition-colors border border-white/10"
+                title="Close (Esc)">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+
+            <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight mb-2 font-sans">
+              {{ selectedTool.title }}
+            </h2>
+
+            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed font-sans">
+              {{ selectedTool.valueProposition }}
+            </p>
+          </div>
+
+          <!-- Drawer Body -->
+          <div class="p-6 sm:p-8 space-y-6 flex-1 font-mono text-xs">
+            
+            <!-- Command Invocation HUD -->
+            <div class="p-4 rounded-xl bg-[#080a0f] border border-white/10 space-y-2">
+              <div class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">{{ text.shortcutLabel }}</div>
+              <div class="flex items-center justify-between gap-3 bg-[#0f1422] p-2.5 rounded-lg border border-white/10">
+                <div class="flex items-center gap-2 text-white truncate">
+                  <span class="text-kuka-orange font-bold">VS Code:</span>
+                  <code class="text-cyan-300 text-[11px] truncate">Ctrl+Shift+P > {{ selectedTool.id }}</code>
+                </div>
+                <button 
+                  @click="copyCommand(selectedTool.id)"
+                  class="shrink-0 px-2.5 py-1 rounded bg-kuka-orange/20 hover:bg-kuka-orange text-white text-[10px] font-bold border border-kuka-orange/40 transition-all">
+                  Copy ID
+                </button>
+              </div>
+            </div>
+
+            <!-- Interactive Before & After Code Sandbox -->
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">AST Code Verification Sandbox</span>
+                <div class="flex items-center gap-1 bg-[#080a0f] p-0.5 rounded-lg border border-white/10 text-[11px]">
+                  <button 
+                    @click="activeDrawerTab = 'before'"
+                    :class="['px-2.5 py-1 rounded transition-colors', activeDrawerTab === 'before' ? 'bg-red-500/20 text-red-300 font-bold border border-red-500/30' : 'text-gray-400 hover:text-white']">
+                    {{ text.tabBefore }}
+                  </button>
+                  <button 
+                    @click="activeDrawerTab = 'after'"
+                    :class="['px-2.5 py-1 rounded transition-colors', activeDrawerTab === 'after' ? 'bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30' : 'text-gray-400 hover:text-white']">
+                    {{ text.tabAfter }}
+                  </button>
+                </div>
+              </div>
+
+              <!-- Code Box -->
+              <div class="relative rounded-xl border overflow-hidden transition-all" :class="activeDrawerTab === 'before' ? 'bg-[#150a0a] border-red-500/30' : 'bg-[#09140e] border-emerald-500/30'">
+                <div class="px-4 py-2 border-b flex items-center justify-between text-[10px] font-mono" :class="activeDrawerTab === 'before' ? 'border-red-500/20 text-red-300 bg-red-950/40' : 'border-emerald-500/20 text-emerald-300 bg-emerald-950/40'">
+                  <span class="flex items-center gap-1.5 font-bold">
+                    <span>{{ activeDrawerTab === 'before' ? '⚠️ Legacy / Unverified KRL' : '✅ LiskinLabs AST Verified & Formatted' }}</span>
+                  </span>
+                  <button @click="copyCodeSnippet(getDrawerSnippet(selectedTool, activeDrawerTab))" class="text-gray-400 hover:text-white transition-colors">
+                    Copy Code
+                  </button>
+                </div>
+                <pre class="p-4 text-[11px] leading-relaxed overflow-x-auto text-gray-200 font-mono"><code>{{ getDrawerSnippet(selectedTool, activeDrawerTab) }}</code></pre>
+              </div>
+            </div>
+
+            <!-- Controller Compatibility Matrix -->
+            <div class="p-4 rounded-xl bg-[#080a0f] border border-white/10 space-y-2">
+              <div class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">{{ text.supportedControllers }}</div>
+              <div class="flex flex-wrap gap-2 text-[10px]">
+                <span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-gray-300">KSS 8.2</span>
+                <span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-gray-300">KSS 8.3</span>
+                <span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-gray-300">KSS 8.5</span>
+                <span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-gray-300">KSS 8.6</span>
+                <span class="px-2 py-0.5 rounded bg-orange-500/20 border border-orange-500/40 text-kuka-orange font-bold">KSS 8.7 (KRC5)</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold">Zero-Cloud Air-Gapped</span>
+              </div>
+            </div>
+
+            <!-- Settings / Schema Spec -->
+            <div class="p-4 rounded-xl bg-[#080a0f] border border-white/10 space-y-2">
+              <div class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">{{ text.configSchema }}</div>
+              <pre class="bg-[#05070a] p-3 rounded-lg border border-white/5 text-[10px] text-gray-300 overflow-x-auto"><code>{
+  "kuka.{{ selectedTool.id.replace('krl.', '') }}": true,
+  "kuka.industrialMode": "strict"
+}</code></pre>
+            </div>
+
+          </div>
+
+          <!-- Drawer Footer with CTA -->
+          <div class="p-6 sm:p-8 border-t border-white/10 bg-[#0d121d] flex flex-col sm:flex-row items-center justify-between gap-3">
+            <a 
+              :href="withBase(langKey === 'en' ? '/#vscode-ide' : `/${langKey}/#vscode-ide`)"
+              class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-kuka-orange hover:bg-orange-600 text-white font-mono text-xs font-bold text-center transition-all shadow-[0_0_15px_rgba(255,102,0,0.3)] border border-orange-400/40 flex items-center justify-center gap-2">
+              <span>💻</span>
+              <span>{{ text.testInSimulator }}</span>
+            </a>
+
+            <button 
+              @click="closeToolDrawer"
+              class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white font-mono text-xs transition-colors border border-white/10 text-center">
+              Close (Esc)
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </transition>
+
+    <!-- Floating Copy Toast Notification -->
+    <transition name="toast-fade">
+      <div v-if="toastMessage" class="fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded-xl bg-orange-600 text-white font-mono text-xs font-bold shadow-2xl flex items-center gap-2 border border-orange-400">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        <span>{{ toastMessage }}</span>
+      </div>
+    </transition>
+
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useData, withBase } from 'vitepress'
 import rawInventory from './krl_tools_inventory.json'
 
@@ -221,6 +376,10 @@ const langKey = computed(() => {
 const searchQuery = ref('')
 const activeCategory = ref('all')
 const filterTier = ref('all') // 'all', 'Free', 'PRO'
+const selectedTool = ref(null)
+const activeDrawerTab = ref('after') // 'before' | 'after'
+const toastMessage = ref('')
+const searchInputRef = ref(null)
 
 const inventoryData = rawInventory
 
@@ -283,11 +442,104 @@ function resetFilters() {
   filterTier.value = 'all'
 }
 
+function openToolDrawer(feat) {
+  selectedTool.value = feat
+  activeDrawerTab.value = 'after'
+}
+
+function closeToolDrawer() {
+  selectedTool.value = null
+}
+
 function copyCommand(id) {
-  if (navigator?.clipboard) {
+  if (typeof navigator !== 'undefined' && navigator.clipboard) {
     navigator.clipboard.writeText(id)
+    toastMessage.value = `${text.value.copiedToast || 'Copied:'} ${id}`
+    setTimeout(() => { toastMessage.value = '' }, 2500)
   }
 }
+
+function copyCodeSnippet(code) {
+  if (typeof navigator !== 'undefined' && navigator.clipboard) {
+    navigator.clipboard.writeText(code)
+    toastMessage.value = 'Code snippet copied to clipboard!'
+    setTimeout(() => { toastMessage.value = '' }, 2500)
+  }
+}
+
+function getDrawerSnippet(tool, tab) {
+  if (!tool) return ''
+  const cat = tool.category || ''
+  const id = tool.id || ''
+  const title = tool.title || ''
+
+  if (cat.includes('Diagnostics') || id.includes('validate') || id.includes('deadCode') || id.includes('collision')) {
+    if (tab === 'before') {
+      return `; === [UNVERIFIED KRL: Collision Risk & Missing Lookahead] ===\nDEF Weld_Cell_Cycle()\n  $BASE = BASE_DATA[1]\n  $TOOL = TOOL_DATA[1]\n  ; WARNING: Missing $ADVANCE check before high-speed trigger!\n  PTP XP1 C_PTP\n  TRIGGER WHEN DISTANCE=1 DELAY=0 DO $OUT[12]=TRUE\n  ; CRITICAL: Approximation not possible with fine positioning conflict\n  LIN XP2\n  ; SYNTAX ERROR: Missing END statement or mismatched fold`
+    } else {
+      return `; === [LISKINLABS AST VERIFIED: Zero-Downtime Clean Run] ===\nDEF Weld_Cell_Cycle()\n  BAS(#INITMOV, 0)\n  $BASE = BASE_DATA[1]\n  $TOOL = TOOL_DATA[1]\n  $ADVANCE = 3 ; Verified advance run pointer\n\n  ; Motion trajectory validated with smooth blending\n  PTP XP1 C_PTP\n  TRIGGER WHEN DISTANCE=1 DELAY=0 DO $OUT[12]=TRUE PRIO=-1\n  LIN XP2 C_DIS\nEND\n; Verified: 0 Errors, 0 Warnings, 100% KSS 8.7 Compliant`
+    }
+  }
+
+  if (cat.includes('Trajectory') || cat.includes('Math') || id.includes('frame') || id.includes('euler') || id.includes('points')) {
+    if (tab === 'before') {
+      return `; === [MANUAL GUESSWORK: Uncalibrated Euler Angles] ===\n; Engineering risk: trial-and-error teaching at controller\nDECL FRAME fGripperWorkpiece\nfGripperWorkpiece = {X 0.0, Y 0.0, Z 0.0, A 0.0, B 0.0, C 0.0}\n$BASE = fGripperWorkpiece ; May cause kinematic singularity!`
+    } else {
+      return `; === [3-POINT CALIBRATED FRAME: Exact Geometric Transform] ===\n; Calculated via LiskinLabs Vector Engine (Origin, X-Axis, XY-Plane)\nDECL FRAME fGripperWorkpiece\nfGripperWorkpiece = {X 1450.25, Y -320.10, Z 610.80, A 45.12, B -0.05, C 179.92}\n$BASE = fGripperWorkpiece\n$IPO_MODE = #BASE\n; Kinematics verified: singularity distance > 250mm`
+    }
+  }
+
+  if (cat.includes('Fold') || id.includes('fold')) {
+    if (tab === 'before') {
+      return `; === [CORRUPTED FOLD STRUCTURE: KRC Boot Rejection] ===\n;FOLD PTP P1 CONT Vel=100 % PDAT1 Tool[1] Base[1]\n  PTP XP1 C_PTP\n; Missing ;ENDFOLD tag!\n; Controller will refuse to load program into RAM on teach pendant!`
+    } else {
+      return `; === [LISKINLABS FOLD BALANCER: Certified Nesting] ===\n;FOLD PTP P1 CONT Vel=100 % PDAT1 Tool[1] Base[1]\n  ;FOLD BASISTECH INI\n    GLOBAL INTERRUPT DECL 3 WHEN $STOPMESS==TRUE DO IR_STOPM ( )\n  ;ENDFOLD (BASISTECH INI)\n  PTP XP1 C_PTP\n;ENDFOLD (P1)\n; Fold balance check: 2 opened, 2 closed. Clean hierarchy.`
+    }
+  }
+
+  if (cat.includes('Navigation') || cat.includes('Language') || id.includes('rename') || id.includes('definition')) {
+    if (tab === 'before') {
+      return `; === [LEGACY TEXT EDITOR: No Symbol Resolution] ===\n; 4,000 lines .SRC without cross-file definitions\nDECL INT nCounter\nnCounter = $COUNT_PARTS ; Where is this declared? No F12 Go-to-Def!\nXPICK = {X 100, Y 200, Z 300}`
+    } else {
+      return `; === [LISKINLABS LSP: Instant AST Symbol Resolution] ===\n; Resolved from $CONFIG.DAT: Line 412 [Global Signal Array]\nDECL INT nCounter\nnCounter = $COUNT_PARTS ; [F12] -> Jump to Declaration in $CONFIG.DAT\n; [Inlay Hint]: $IN[14] => 'Sens_Part_Seated'\nPTP XPICK C_PTP ; [F2] -> Smart Rename across 18 project files`
+    }
+  }
+
+  if (tab === 'before') {
+    return `; === [UNOPTIMIZED WORKSPACE: Standard Generic Editor] ===\n; No semantic token coloring\n; Missing I/O live comments\n$OUT[24] = TRUE\nPTP XHOME`
+  } else {
+    return `; === [LISKINLABS SUITE: Enterprise KUKA Environment] ===\n; Tool: ${title} (${id})\n; Real-time error lens & live signal telemetry active\n$OUT[24] = TRUE ; [Inlay]: Tool_Clamp_Cylinder_Extended\nPTP XHOME C_PTP ; KSS 8.3-8.7 Zero Downtime Verified`
+  }
+}
+
+function handleGlobalKeydown(e) {
+  if ((e.key === '/' || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k')) && !selectedTool.value) {
+    const target = e.target
+    if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) {
+      return
+    }
+    e.preventDefault()
+    searchInputRef.value?.focus()
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 380, behavior: 'smooth' })
+    }
+  }
+  if (e.key === 'Escape' && selectedTool.value) {
+    closeToolDrawer()
+  }
+}
+
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    window.addEventListener('keydown', handleGlobalKeydown)
+  }
+})
+
+onUnmounted(() => {
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('keydown', handleGlobalKeydown)
+  }
+})
 
 const translations = {
   en: {
@@ -300,11 +552,19 @@ const translations = {
     statCommunity: 'Community (Free)',
     statPro: 'Pro Industrial',
     statCategories: 'Categories',
-    searchPlaceholder: 'Search 159 tools by name, command ID, or description...',
+    searchPlaceholder: 'Search 159 tools by name, command ID, or description (Press / to search)...',
     tabAll: 'All Capabilities',
     noResultsTitle: 'No tools match your query',
     noResultsDesc: 'Try adjusting your search terms or filter selection.',
-    resetFilters: 'Reset Filters'
+    resetFilters: 'Reset Filters',
+    inspectAction: 'Inspect',
+    shortcutLabel: 'VS Code Command Palette Shortcut',
+    tabBefore: 'Before: Legacy KRL',
+    tabAfter: 'After: LiskinLabs AST Verified',
+    supportedControllers: 'Supported KSS Controllers',
+    configSchema: 'Configuration Spec (settings.json)',
+    testInSimulator: 'Test in Web IDE Simulator',
+    copiedToast: 'Command ID copied to clipboard!'
   },
   de: {
     backToLanding: 'Zurück zur Hauptseite',
@@ -316,11 +576,19 @@ const translations = {
     statCommunity: 'Community (Kostenlos)',
     statPro: 'Pro Industrie',
     statCategories: 'Kategorien',
-    searchPlaceholder: '159 Werkzeuge nach Name, Befehls-ID oder Beschreibung durchsuchen...',
+    searchPlaceholder: '159 Werkzeuge durchsuchen (/ drücken)...',
     tabAll: 'Alle Funktionen',
     noResultsTitle: 'Keine Werkzeuge gefunden',
     noResultsDesc: 'Versuchen Sie, die Suchbegriffe oder Filter anzupassen.',
-    resetFilters: 'Filter zurücksetzen'
+    resetFilters: 'Filter zurücksetzen',
+    inspectAction: 'Prüfen',
+    shortcutLabel: 'VS Code Befehlspaletten-Kürzel',
+    tabBefore: 'Vorher: Altes KRL',
+    tabAfter: 'Nachher: LiskinLabs AST-Verifiziert',
+    supportedControllers: 'Unterstützte KSS-Steuerungen',
+    configSchema: 'Konfigurationsschema (settings.json)',
+    testInSimulator: 'Im Web-IDE-Simulator testen',
+    copiedToast: 'Befehls-ID in die Zwischenablage kopiert!'
   },
   es: {
     backToLanding: 'Volver a la página principal',
@@ -332,11 +600,19 @@ const translations = {
     statCommunity: 'Comunidad (Gratis)',
     statPro: 'Pro Industrial',
     statCategories: 'Categorías',
-    searchPlaceholder: 'Buscar en las 159 herramientas por nombre, comando o descripción...',
+    searchPlaceholder: 'Buscar en 159 herramientas (presione / para buscar)...',
     tabAll: 'Todas las funciones',
     noResultsTitle: 'No se encontraron herramientas',
     noResultsDesc: 'Intente ajustar sus términos de búsqueda o filtros.',
-    resetFilters: 'Restablecer filtros'
+    resetFilters: 'Restablecer filtros',
+    inspectAction: 'Inspeccionar',
+    shortcutLabel: 'Acceso directo en VS Code',
+    tabBefore: 'Antes: KRL Antiguo',
+    tabAfter: 'Después: LiskinLabs Verificado',
+    supportedControllers: 'Controladores KSS compatibles',
+    configSchema: 'Esquema de configuración (settings.json)',
+    testInSimulator: 'Probar en Simulador Web IDE',
+    copiedToast: '¡ID de comando copiado al portapapeles!'
   },
   it: {
     backToLanding: 'Torna alla pagina principale',
@@ -348,11 +624,19 @@ const translations = {
     statCommunity: 'Community (Gratis)',
     statPro: 'Pro Industriale',
     statCategories: 'Categorie',
-    searchPlaceholder: 'Cerca tra i 159 strumenti per nome, comando o descrizione...',
+    searchPlaceholder: 'Cerca tra i 159 strumenti (premi / per cercare)...',
     tabAll: 'Tutte le funzioni',
     noResultsTitle: 'Nessuno strumento trovato',
     noResultsDesc: 'Prova a modificare i termini di ricerca o la selezione dei filtri.',
-    resetFilters: 'Reimposta filtri'
+    resetFilters: 'Reimposta filtri',
+    inspectAction: 'Ispeziona',
+    shortcutLabel: 'Scorciatoia VS Code',
+    tabBefore: 'Prima: KRL Tradizionale',
+    tabAfter: 'Dopo: LiskinLabs Verificato',
+    supportedControllers: 'Controller KSS supportati',
+    configSchema: 'Schema di configurazione (settings.json)',
+    testInSimulator: 'Testa nel simulatore Web IDE',
+    copiedToast: 'ID comando copiato negli appunti!'
   },
   ru: {
     backToLanding: 'Вернуться на главную',
@@ -364,11 +648,19 @@ const translations = {
     statCommunity: 'Бесплатно (Free)',
     statPro: 'Промышленные Pro',
     statCategories: 'Категорий',
-    searchPlaceholder: 'Поиск по названию, ID команды или описанию...',
+    searchPlaceholder: 'Поиск по 159 инструментам (нажмите / для поиска)...',
     tabAll: 'Все 159 возможностей',
     noResultsTitle: 'Инструменты не найдены',
     noResultsDesc: 'Попробуйте изменить поисковый запрос или сбросить фильтр категории.',
-    resetFilters: 'Сбросить фильтры'
+    resetFilters: 'Сбросить фильтры',
+    inspectAction: 'Смотреть',
+    shortcutLabel: 'Вызов из палитры команд VS Code',
+    tabBefore: 'До: Обычный KRL (с ошибками)',
+    tabAfter: 'После: LiskinLabs Pro (Проверено)',
+    supportedControllers: 'Поддерживаемые версии KSS',
+    configSchema: 'Параметр конфигурации (settings.json)',
+    testInSimulator: 'Тестировать в Web-симуляторе IDE',
+    copiedToast: 'ID команды скопирован в буфер обмена!'
   },
   tr: {
     backToLanding: 'Ana Sayfaya Dön',
@@ -380,11 +672,19 @@ const translations = {
     statCommunity: 'Topluluk (Ücretsiz)',
     statPro: 'Pro Endüstriyel',
     statCategories: 'Kategori',
-    searchPlaceholder: '159 araçta ada, komut kimliğine veya açıklamaya göre ara...',
+    searchPlaceholder: '159 araçta ada veya komuta göre ara (/ tuşuna basın)...',
     tabAll: 'Tüm Yetenekler',
     noResultsTitle: 'Aramanızla eşleşen araç bulunamadı',
     noResultsDesc: 'Arama terimlerini değiştirmeyi veya filtre seçimini sıfırlamayı deneyin.',
-    resetFilters: 'Filtreleri Sıfırla'
+    resetFilters: 'Filtreleri Sıfırla',
+    inspectAction: 'İncele',
+    shortcutLabel: 'VS Code Komut Paleti Kısayolu',
+    tabBefore: 'Önce: Eski KRL (Riskli)',
+    tabAfter: 'Sonra: LiskinLabs Doğrulanmış',
+    supportedControllers: 'Desteklenen KSS Kontrolcüleri',
+    configSchema: 'Yapılandırma Şeması (settings.json)',
+    testInSimulator: 'Web IDE Simülatöründe Dene',
+    copiedToast: 'Komut kimliği panoya kopyalandı!'
   }
 }
 
@@ -398,5 +698,25 @@ const text = computed(() => translations[langKey.value] || translations.en)
 .scrollbar-none {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.drawer-slide-enter-active,
+.drawer-slide-leave-active {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.drawer-slide-enter-from,
+.drawer-slide-leave-to {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.toast-fade-enter-active,
+.toast-fade-leave-active {
+  transition: all 0.25s ease-out;
+}
+.toast-fade-enter-from,
+.toast-fade-leave-to {
+  opacity: 0;
+  transform: translateY(12px);
 }
 </style>

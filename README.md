@@ -117,7 +117,7 @@ Batch motion path manipulation and standard migration:
 | **6D Trajectory Mirroring, Batch Shift & Renumbering** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
 | **Binary `.evt` Event Log Viewer (2,050+ KSS codes)** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
 | **Visual I/O Signal Matrix & Bit Collision Detector** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
-| **Air-Gapped Offline Node-Locking (Factory OT Safe)** | ❌ | **✅ Pro (5 Seats)** | **✅ Team (25 Seats)** | **✅ Site (Unlimited)** |
+| **Air-Gapped Offline Node-Locking (Factory OT Safe)** | ❌ | **✅ Pro (1 Workstation)** | **✅ Team (25 Workstations)** | **✅ Site (200 Workstations)** |
 | **Automotive VASS 26 Rules & VW_USER Tech** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
 | **B2B Invoicing with Tax ID / EU VAT Reverse Charge** | ❌ | ❌ | **✅ Team** | **✅ Enterprise** |
 | **Company-Branded Robot Acceptance Protocols (PDF)** | ❌ | ❌ | ❌ | **✅ Enterprise** |
@@ -129,14 +129,14 @@ Batch motion path manipulation and standard migration:
 
 All commercial licenses are billed through our verified merchant of record, **Dodo Payments**. Transactions support Credit Cards, SEPA Bank Wire, ACH, Apple Pay, and Google Pay across 135+ countries with instant tax invoicing and automated VAT reverse-charge compliance.
 
-| Tier | Price | Scope & Devices | Target Audience | Checkout / Quote |
+| Tier | Price | Scope & Workstations | Target Audience | Checkout / Quote |
 |:---|:---:|:---|:---|:---:|
-| 🟢 **Community** | **$0** | Single Workstation | Basic editing, syntax, formatting, file inspection | [Free Install](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| ⏱️ **Engineer Pro (Monthly)** | **$19.00** / mo | 1 Engineer (5 Activations) | Commissioning sprints, short projects, contractor audits | [Get Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
-| 👑 **Engineer Pro (Annual)** | **$149.00** / yr | 1 Engineer (5 Activations) | Senior robotics engineers, plant programmers, offline planners | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
-| 🏆 **Pro Lifetime** | **$699.00** once | 1 Engineer (5 Activations) | Independent automation contractors, perpetual offline certificate | [Get Lifetime](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
+| 🟢 **Community** | **$0** | 1 Workstation | Basic editing, syntax, formatting, file inspection | [Free Install](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
+| ⏱️ **Engineer Pro (Monthly)** | **$19.00** / mo | 1 Workstation Activation | Commissioning sprints, short projects, contractor audits | [Get Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| 👑 **Engineer Pro (Annual)** | **$149.00** / yr | 1 Workstation Activation | Senior robotics engineers, plant programmers, offline planners | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
+| 🏆 **Pro Lifetime** | **$699.00** once | 1 Workstation Activation | Perpetual license, lifetime updates, permanent offline cert | [Get Lifetime](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
 | 🏢 **Team Edition** | **$499.00** / yr | B2B — Invoice & Quote | All 50 Industrial Pro Tools • 25 Workstation Activations • KRC2–KRC5 | [Get Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| 🏭 **Enterprise Site** | **$2,490.00** / yr | Unlimited Seats | All 50 Pro Tools • Unlimited Plant Workstations • Branded Reports | [Get Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| 🏭 **Enterprise Site** | **$2,490.00** / yr | 200 Workstation Activations | All 50 Pro Tools • 200 Plant Workstations • Branded Reports | [Get Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 ---
 

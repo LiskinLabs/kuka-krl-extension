@@ -46,12 +46,6 @@
 
 ---
 
-> [!IMPORTANT]
-> ### ⚠️ Avvertenza di messa in servizio
-> Prima della consegna al cliente e della messa in servizio industriale, si raccomanda vivamente di caricare i file modificati su un controllore virtuale KUKA.OfficeLite o su un armadio KRC fisico, assicurandosi che il compilatore KSS integrato riporti uno stato modulo verde (l'indicatore «R» sullo SmartPAD) e nessun errore di sintassi o cinematica.
-
----
-
 ## ⚡ Il problema: fermo produzione da $10.000/ora
 
 Ogni ingegnere di messa in servizio conosce questo dolore:
@@ -364,8 +358,12 @@ Configura il comportamento dell'estensione nel tuo `settings.json`:
 
 ---
 
-## ⚖️ Marchi e note legali
+## ⚖️ Note legali, marchi e conformità di sicurezza
 
+### 🛡️ Conformità alla sicurezza industriale (ISO 10218-1/-2 e ISO 13849-1)
+**KUKA KRL Professional** è una suite indipendente di sviluppo, analisi statica e confronto backup sviluppata da **Liskin Labs**. **NON è un software certificato per la sicurezza (Non-SIL / Non-PL)** e **non sostituisce** le procedure obbligatorie di messa in servizio fisica, la verifica della velocità ridotta (`$OV_PRO <= 30%` in modalità T1 sullo SmartPAD fisico) o le valutazioni formali dei rischi ai sensi delle norme **ISO 10218-1/-2** e **ISO 13849-1**. Eseguire sempre prove manuali in modalità T1 prima della produzione automatica.
+
+### 🏷️ Marchi registrati ed esonero di responsabilità
 * **KUKA®, KRL®, KRC®, WorkVisual® e SmartPAD®** sono marchi registrati di **KUKA AG** / **KUKA Deutschland GmbH**.
 * **Visual Studio Code® e VS Code®** sono marchi registrati di **Microsoft Corporation**.
 * Questa estensione software è uno sviluppo indipendente di **Liskin Labs** e **non** è affiliata, sponsorizzata, approvata o certificata da KUKA AG o Microsoft Corporation. Tutti i nomi di prodotti e marchi appartengono ai rispettivi proprietari e sono utilizzati esclusivamente a scopo di identificazione della compatibilità (nominative fair use).

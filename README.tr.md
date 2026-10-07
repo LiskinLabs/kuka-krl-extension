@@ -46,12 +46,6 @@
 
 ---
 
-> [!IMPORTANT]
-> ### ⚠️ Endüstriyel Devreye Alma Uyarısı
-> Hücreyi müşteriye teslim etmeden ve endüstriyel devreye almadan önce, değiştirilen dosyaların sanal bir KUKA.OfficeLite kontrolörüne veya fiziksel KRC kabinine yüklenmesi ve gömülü KSS derleyicisinin yeşil modül durumu (SmartPAD'deki «R» göstergesi) ile sıfır sözdizimi veya kinematik hata bildirdiğinden emin olunması şiddetle önerilir.
-
----
-
 ## ⚡ Saatlik 10.000 Dolarlık Üretim Duruşu Sorunu
 
 Her devreye alma mühendisi bu acıyı bilir:
@@ -428,8 +422,12 @@ Uzantı davranışlarını `settings.json` dosyanızda yapılandırın:
 
 ---
 
-## ⚖️ Ticari Markalar ve Yasal Sorumluluk Reddi
+## ⚖️ Yasal Uyarılar, Ticari Markalar ve Güvenlik Uyumluluğu
 
+### 🛡️ Zorunlu Endüstriyel Güvenlik Bildirimi (ISO 10218-1/-2 ve ISO 13849-1)
+**KUKA KRL Professional**, **Liskin Labs** tarafından geliştirilen bağımsız bir mühendislik geliştirme, statik analiz ve yedek diff paketidir. **Güvenlik sertifikalı bir yazılım DEĞİLDİR (Non-SIL / Non-PL)** ve sahada fiziksel devreye alma prosedürlerinin, düşük hız doğrulamasının (fiziksel KUKA SmartPAD üzerinde T1 modunda `$OV_PRO <= 30%`) veya **ISO 10218-1/-2** ve **ISO 13849-1** standartlarının gerektirdiği resmi risk değerlendirmelerinin yerini **almaz**. Otomatik üretime geçmeden önce her zaman T1 modunda manuel yol testleri gerçekleştirin.
+
+### 🏷️ Ticari Markalar ve Bağımsızlık Beyanı
 * **KUKA®, KRL®, KRC®, WorkVisual® ve SmartPAD®**, **KUKA AG** / **KUKA Deutschland GmbH** şirketinin tescilli ticari markalarıdır.
 * **Visual Studio Code® ve VS Code®**, **Microsoft Corporation** şirketinin tescilli ticari markalarıdır.
-* Bu yazılım uzantısı **Liskin Labs** tarafından geliştirilen bağımsız bir araçtır; KUKA AG veya Microsoft Corporation ile hiçbir bağlantısı, sponsorluğu, onayı veya sertifikası **yoktur**. Bahsi geçen tüm ürün adları ve markalar ilgili sahiplerinin mülkiyetindedir ve yalnızca uyumluluk tespiti amacıyla belirtilmiştir.
+* Bu yazılım uzantısı **Liskin Labs** tarafından geliştirilen bağımsız bir araçtır; KUKA AG veya Microsoft Corporation ile hiçbir bağlantısı, sponsorluğu, onayı veya sertifikası **yoktur**. Bahsi geçen tüm ürün adları ve markalar ilgili sahiplerinin mülkiyetindedir ve yalnızca uyumluluk tespiti amacıyla belirtilmiştir (nominative fair use).

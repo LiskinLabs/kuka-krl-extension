@@ -79,7 +79,9 @@ Every commissioning robotics engineer knows the pain:
 
 ---
 
-### 4. 📦 SmartPAD ZIP Backup Diff & Point Delta Math
+### 4. 📦 SmartPAD ZIP Backup Suite & Live Transparent ZIP Editing
+* **Zero-Unpack Archive Explorer**: Directly inspect and explore `.zip` backups and `KRCDiag_*.zip` diagnostic packages in-memory without unzipping to disk.
+* **Live Transparent ZIP Project Mount [PRO]**: Open any backup as an active VS Code workspace (`krl.mountBackupZipAsProject`). Saving files (`Ctrl+S`) or deleting files automatically and transparently patches the original `.zip` archive on disk in <80ms without UI locking.
 * **Spatial Coordinate Deltas**: Calculates exact 6-axis shifts (**ΔX, ΔY, ΔZ, ΔA, ΔB, ΔC**) between teach versions in `.zip` archives.
 * **Zero-Touch Audit**: Instantly detect unverified point touch-ups made on the shop floor before they cause collisions.
 * **Side-by-Side Monaco Diff**: Color-coded graphical diff viewer built directly into VS Code.
@@ -113,6 +115,8 @@ Every commissioning robotics engineer knows the pain:
 | **6D Trajectory Mirroring & Batch Shifts** | ❌ | **✅ Pro** | 6D geometric operator (`:`), Planes X/Y/Z reflection & Turn bitmath |
 | **Trajectory Reversal & Point Renumbering** | ✅ | **✅ Pro** | Invert motion path sequence, synchronized `.src` and `.dat` renaming |
 | **SmartPAD ZIP Backup Diff & Point Delta Math** | ❌ | **✅ Pro** | Computes spatial coordinate deltas (ΔX, ΔY, ΔZ) |
+| **KUKA Backup Archive Explorer (Zero Unpack)** | ✅ | **✅ Pro** | In-memory exploration of `.zip` and `KRCDiag_*.zip` packages |
+| **Live Transparent ZIP Workspace Mount & Auto-Sync** | ❌ | **✅ Pro** | Open backup as workspace, transparent auto-patch on `Ctrl+S` (<80ms) |
 | **Automotive VASS 26 Linter & VW_USER Tech** | ❌ | **✅ Pro** | Tier-1 Body-in-White automation compliance |
 | **Decode & View KUKA Event Log (.evt)** | ❌ | **✅ Pro** | Native pure-TS EVTX decoder, 2,050+ msgs in 6 languages |
 | **Visual I/O Signal Matrix & Bit Collision Detector** | ❌ | **✅ Pro** | Scans signals, detects electrical address overlap & CSV export |

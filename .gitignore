@@ -40,6 +40,7 @@ logs/
 # Personal & Temporary
 project_memory/
 2026-02-23_10-13-15/
+_backup*
 
 # OS files
 .DS_Store

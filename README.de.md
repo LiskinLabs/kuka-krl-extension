@@ -1,8 +1,9 @@
-<h1 align="center">KUKA KRL Professional</h1>
+<h1 align="center">KUKA Engineering Toolkit</h1>
 
 <p align="center">
-  <b>Die definitive Industrie-IDE und Sicherheitssuite für die KUKA Robotersprache.</b><br />
-  Entwickelt für KRC2-, KRC4- und KRC5-Steuerungen (KSS 8.2 – 8.7). Gebaut für Tempo, Sicherheit und Null Ausfallzeit.
+  <b>Industrielles Engineering, Diagnose und Pre-Deployment-Analyse für KUKA-Roboter.</b><br />
+  <i>Verfügbar als VS Code Erweiterung.</i><br />
+  Entwickelt für <b>KRC2-, KRC4- und KRC5-Steuerungen (KSS 5.x – 8.7+)</b>.
 </p>
 
 <details>
@@ -22,9 +23,9 @@
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://badgen.net/vs-marketplace/v/LiskinLabs.kuka-krl-extension?style=flat&label=VS%20Code%20Marketplace&color=FF6600" alt="VS Code Marketplace" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.4-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.8.4" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.3-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.3" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Verified-4.1M%2B%20LoC-10b981?style=flat-square" alt="Fleet Verified" /></a>
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Verified-4.2M%2B%20LoC-10b981?style=flat-square" alt="Fleet Verified" /></a>
 </p>
 
 <p align="center">
@@ -43,6 +44,16 @@
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>👑 Pro jährlich ($149.00/Jahr – 35% sparen)</b></a> • 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>🛡️ Sicherheitsaudit-Bericht</b></a>
 </p>
+
+---
+
+## 🎯 Bevor der Code auf den Roboter kommt (Before the robot)
+
+> **KUKA-Programme, Backups, Ereignisprotokolle, I/O-Signale, Koordinaten und Bewegungspfade analysieren, bevor Änderungen auf die physische Steuerung übertragen werden.**
+
+* 🛑 **Produktionsstillstände verhindern**: Programmier-, Konfigurations- und Kollisionsrisiken vor dem Serienanlauf aufdecken.
+* 🔍 **Änderungen verstehen**: SmartPAD-Backups vergleichen und exakt ermitteln, was sich in `.src`- und `.dat`-Dateien geändert hat.
+* 📐 **Engineering standardisieren**: KRL-Projekte automatisiert anhand eigener Werksstandards und Automobilrichtlinien (VASS 26) prüfen.
 
 ---
 

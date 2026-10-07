@@ -1,8 +1,8 @@
-<h1 align="center">KUKA Engineering Toolkit for VS Code</h1>
+<h1 align="center">KUKA Engineering Toolkit</h1>
 
 <p align="center">
-  <b>Industrial Pre-Flight Engineering & Safety Suite for KUKA Robot Language (KRL).</b><br />
-  Comprehensive offline static analysis, SmartPAD backup diff, kinematic transforms & KRL modernization.<br />
+  <b>Industrial engineering, diagnostics and pre-deployment analysis for KUKA robots.</b><br />
+  <i>Available as a VS Code extension.</i><br />
   Engineered for <b>KRC2, KRC4 & KRC5 Controllers (KSS 5.x – 8.7+)</b>.
 </p>
 
@@ -35,6 +35,16 @@
   <a href="https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v"><b>🏢 Team Edition ($499.00/yr)</b></a> •
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>🛡️ Security Audit</b></a>
 </p>
+
+---
+
+## 🎯 Before the robot
+
+> **Analyze KUKA programs, backups, logs, I/O, coordinates, and motion paths before deploying changes to the physical controller.**
+
+* 🛑 **Prevent downtime**: Catch programming, configuration, and motion risks before production.
+* 🔍 **Understand changes**: Compare SmartPAD backups and identify exactly what changed across `.src` and `.dat` files.
+* 📐 **Standardize engineering**: Audit KRL projects against your corporate standards, automotive rules (VASS 26), and engineering guidelines.
 
 ---
 

@@ -13,14 +13,6 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Safety Zone Handshake Symmetry**: Enforces strict pairing between zone acquisition (`Zone_Request`) and release signals.
 - **PTP Turn Bit Unwind Risk & 6D Operator Guard**: Warns on wrist axis 360° unwinding risks and improper manual coordinate inversions.
 
-### 📦 KUKA Backup Archive Explorer & Inspector (Zero-Unpack Engine)
-- **Direct Double-Click Opening for `.zip` Backups**: Double-clicking any KRC `.zip` backup or `KRCDiag_*.zip` in VS Code opens the KUKA Backup Archive Explorer instead of the binary file warning.
-- **In-Memory Zero-Unpack Reading**: Lightning-fast in-memory parsing (<60ms for 50MB archives) via `SimpleZipReader` without extracting files to disk.
-- **Automatic Robot Passport Extraction**: Automatically extracts Robot Name, Serial Number, KSS Version, Controller, and Kinematic Model from `am.ini`, `KRCDiag.log`, and `$machine.dat`.
-- **Virtual Document Content Provider (`krc-archive://`)**: Double-clicking any `.src`, `.dat`, `.sub`, `$config.dat`, or `$machine.dat` inside the archive opens it in a native VS Code editor tab with complete KRL syntax highlighting, folding, and search.
-- **In-Memory Static Analysis & Quality Report**: One-click static code analysis across all KRL programs inside the `.zip` archive without extracting to disk.
-- **Direct Event Log Decoding from Archive**: Decode and inspect binary `.evt` event logs directly from `.zip` packages in the KUKA Event Log Inspector.
-
 ### 🔍 KRCDiag Deep Diagnostic Integration & Fleet Explorer
 - **KRCDiag Archive & Folder Support**: Direct inspection of native controller diagnostic packages (`KRCDiag_*.zip`, event logs, trace data, and system topologies).
 - **Event Log Inspector Directory Resolution**: Automatically resolves `EventLogs/` directory paths to primary event files (`KrcLogS.evt` / `KrcLog.evt`), eliminating directory read errors.
@@ -39,8 +31,21 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Telemetry Command Injection Hardening**: Eliminated shell interpolation by switching from `child_process.exec` to parameterized `execFile("git", ...)`.
 - **GDPR & VS Code Telemetry Compliance**: Added strict compliance checks enforcing user opt-in (`vscode.env.telemetryConfiguration.telemetryLevel === "all"`) and workspace trust boundary verification (`vscode.workspace.isTrusted`).
 
+### 📦 KUKA Backup Archive Explorer & Virtual Provider (Zero Unpack)
+- **Zero-Unpack In-Memory Inspection**: Browse files inside `*.zip` backups and `KRCDiag_*.zip` archives directly without manual extraction.
+- **Virtual Document Provider**: Open any file from backup with read-only `krc-archive://` protocol.
+- **In-Memory Fleet Static Analysis**: Run comprehensive static analysis and robot passport audit directly across all KRL modules in archive in <500ms.
+- **Integrated Event Log Viewer**: Open `.evt` logs directly from archive viewer.
+
+### 🔄 Live Transparent ZIP Workspace Mount & Auto-Sync Engine [PRO]
+- **Mount Backup as Active Workspace**: One-click extraction into isolated mount sandbox (`krl.mountBackupZipAsProject`) with instant folder switch or new window.
+- **Transparent In-Memory ZIP Patcher**: Automatically intercepts document saves (`Ctrl+S`) and patches modified files directly back into the original `.zip` on disk in <80ms without UI freezing or process locks.
+- **Deletion Synchronization**: Deleting files in mounted workspace removes them from original archive.
+- **Status Bar Integration**: Live status bar monitor displays active archive with real-time auto-sync indicators and one-click full reconcile flusher (`krl.syncAllToBackupZip`).
+- **Archive Explorer 1-Click Launch**: Direct toolbar button in Backup Explorer to seamlessly transition from in-memory inspection to live editing project.
+
 ### 📦 VSIX Package Optimization
-- **VSIX Bundle Slimming**: Slashing extension package size to ~5.3 MB (>80% reduction) with lazy activation and fast startup events.
+- **VSIX Bundle Slimming**: Slashing extension package size to ~5.4 MB (>80% reduction) with lazy activation and fast startup events.
 
 ## [1.9.1] - 2026-10-01 (Enterprise Fleet Verification, Hardened Folds & Legal Compliance)
 

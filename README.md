@@ -38,16 +38,6 @@
 
 ---
 
-> [!IMPORTANT]
-> ### ⚠️ Mandatory Safety & Legal Compliance Notice (ISO 10218-1/-2 & ISO 13849-1)
-> **KUKA KRL Professional** is an independent engineering development, static analysis, and backup diff suite developed by **Liskin Labs**. It is **NOT safety-certified software (Non-SIL / Non-PL)** and does **not** replace mandatory physical commissioning procedures, reduced override verification (`$OV_PRO <= 30%` in T1 mode on the physical KUKA SmartPAD teach pendant), or formal risk assessments required by **ISO 10218-1/-2** and **ISO 13849-1**.
-> 
-> Always perform manual path dry-runs in T1 mode before engaging automated production.
-> 
-> *KUKA®, KRL®, KRC®, SmartPAD®, and WorkVisual® are registered trademarks of KUKA AG. Liskin Labs is an independent engineering software vendor and is not affiliated with, sponsored by, or certified by KUKA AG.*
-
----
-
 ## ⚡ The Reality of Industrial Commissioning
 
 Every commissioning robotics engineer and system integrator faces the same challenges:
@@ -148,7 +138,6 @@ For corporate purchasing departments and system integrators:
 * **Tax ID & EU VAT Reverse Charge**: Dodo Payments validates company VAT numbers through official databases (EU VIES, UK HMRC, US EIN) to apply 0% Reverse-Charge VAT on cross-border business purchases.
 * **Corporate Wire Transfers**: Supports SEPA Bank Wire (EUR), ACH (USD), and wire transfers with automated remittance matching.
 * **Air-Gapped Factory Deployment**: For isolated OT environments without internet access, generate signed cryptographic offline license certificates valid for 365 days.
-* **Direct Licensing Desk**: Contact **licensing@teknorob.com** for corporate master service agreements or vendor onboarding forms.
 
 ---
 
@@ -160,8 +149,12 @@ For corporate purchasing departments and system integrators:
 
 ---
 
-## ⚖️ Trademarks & Legal Disclaimers
+## ⚖️ Legal Disclaimers, Trademarks & Safety Compliance
 
+### 🛡️ Mandatory Safety & Industrial Compliance (ISO 10218-1/-2 & ISO 13849-1)
+**KUKA KRL Professional** is an independent engineering development, static analysis, and backup diff suite developed by **Liskin Labs**. It is **NOT safety-certified software (Non-SIL / Non-PL)** and does **not** replace mandatory physical commissioning procedures, reduced override verification (`$OV_PRO <= 30%` in T1 mode on the physical KUKA SmartPAD teach pendant), or formal risk assessments required by **ISO 10218-1/-2** and **ISO 13849-1**. Always perform manual path dry-runs in T1 mode before engaging automated production.
+
+### 🏷️ Trademarks & Brand Neutrality
 * **KUKA®, KRL®, KRC®, WorkVisual®, and SmartPAD®** are registered trademarks of **KUKA AG** / **KUKA Deutschland GmbH**.
 * **Visual Studio Code® and VS Code®** are registered trademarks of **Microsoft Corporation**.
 * This software extension is an independent development by **Liskin Labs** and is **not** affiliated with, sponsored, endorsed, or certified by KUKA AG or Microsoft Corporation. All product names, logos, and brands are property of their respective owners and are used strictly for identification and interoperability purposes under nominative fair use.

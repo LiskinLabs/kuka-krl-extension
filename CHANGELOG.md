@@ -2,6 +2,20 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.9.3] - 2026-10-07 (Transparent KRC Backup Live Project Mount, 2-Way Zero-Friction ZIP Sync & Universal Safety Hardening)
+
+### ⚡ Transparent KRC Backup Live Mount & Auto-Sync Engine
+- **Native Workspace Project Opening**: Opening any KRC backup archive (`Robot1.zip`, `KRCDiag_*.zip`) now transparently unpacks the project in the background and opens it directly as a standard workspace folder in VS Code with zero intermediate webview screens.
+- **Clean Folder Naming & Auto-Open**: Workspace root folder displays cleanly as the robot backup name (`Robot1`) in VS Code Explorer, and automatically opens the primary application program (`Cell.src`) in the editor.
+- **Two-Way Zero-Friction ZIP Sync**: Transparently intercepts file modifications (Ctrl+S), deletions, additions, and renames, patching changes back into the original `.zip` archive on disk in milliseconds without blocking the UI.
+- **Full KRL Language Server Support**: Full access to AST diagnostics, autocomplete, folding, kinematics parity, and safety audits directly within the live-mounted backup.
+
+### 🛡️ Trajectory Approximation & Manipulator Dynamics Hardening
+- **Motion Approximation Tokens Validator**: Flags duplicate approximation modifiers (`LIN XP19 C_Dis C_Dis`) and invalid modifier combinations (`PTP` with Cartesian `C_DIS`, `LIN/CIRC` with axis `C_PTP`).
+- **Manipulator Payload Capacity & Dynamics Checker**: Cross-validates `$config.dat` `LOAD_DATA` arrays against nominal manipulator payload from `$TRAFONAME` (e.g. KR300 -> 300 kg), warning on payload overload and zero mass moment of inertia tensors ($J = 0$).
+- **Formal Parameter & Subprogram Vorlaufstopp Resolution**: Eliminated false positives on KRL keywords (`IF`, `WHILE`) and formal parameter declarations (`DEF Sub(param:IN)`).
+- **KUKA Firmware Integrity Isolation**: Dedicated isolated integrity section for KSS vendor modules (`/R1/System/*`, `/R1/TP/*`), focusing project health index strictly on customer application code.
+
 ## [1.9.2] - 2026-10-04 (Universal Industrial Safety Suite, KRCDiag Deep Audit & CSP Hardening)
 
 ### 🛡️ Universal Industrial Static Safety Suite (16 Automated Safety Gates)

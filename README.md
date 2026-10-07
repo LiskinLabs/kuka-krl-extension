@@ -1,8 +1,9 @@
-<h1 align="center">KUKA KRL Professional</h1>
+<h1 align="center">KUKA Engineering Toolkit for VS Code</h1>
 
 <p align="center">
-  <b>The Definitive Industrial IDE & Safety Suite for KUKA Robot Language.</b><br />
-  Engineered for KRC2, KRC4 & KRC5 Controllers (KSS 8.2 – 8.7). Built for Speed, Safety & Zero Downtime.
+  <b>Industrial Pre-Flight Engineering & Safety Suite for KUKA Robot Language (KRL).</b><br />
+  Comprehensive offline static analysis, SmartPAD backup diff, kinematic transforms & KRL modernization.<br />
+  Engineered for <b>KRC2, KRC4 & KRC5 Controllers (KSS 5.x – 8.7+)</b>.
 </p>
 
 <details>
@@ -24,212 +25,143 @@
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
   <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.3-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.3" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Verified-8%2B%20Fleets%20%7C%2010K%2B%20Files-10b981?style=flat-square" alt="Fleet Verified" /></a>
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Verified-4.2M%2B%20LoC-10b981?style=flat-square" alt="Fleet Verified" /></a>
 </p>
 
 <p align="center">
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>🌐 Complete Wiki & 159 Industrial Tools</b></a> •
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>⚡ Pro Monthly ($9.99/mo)</b></a> • 
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>👑 Annual Pro ($79.00/yr - Save 35%)</b></a> • 
-  <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>🛡️ Security Audit Report</b></a>
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>🌐 Documentation Wiki</b></a> •
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>⚡ Engineer Pro ($19.00/mo)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>👑 Annual Pro ($149.00/yr)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v"><b>🏢 Team Edition ($499.00/yr)</b></a> •
+  <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>🛡️ Security Audit</b></a>
 </p>
 
 ---
 
-## ⚡ The $10,000/Hour Production Stop Problem
-
-Every commissioning robotics engineer knows the pain:
-1.  **The Slow Cycle**: Editing files directly on the SmartPAD teach pendant or wrestling with slow, error-prone deployments.
-2.  **The Hidden Collision Risk**: A single missing `$TOOL` or `$BASE` initialization, an unverified point coordinate shift, or an accidental Cartesian `$VEL.CP` overshoot that causes a mechanical crash during the first automatic test run.
-3.  **The Unverified Changes**: Teammates touch up points on the robot pendant during the night shift with zero version control, leading to untraceable errors.
-
-**KUKA KRL Professional** transforms your editor into a high-octane **industrial robotics command center**. It catches syntax errors, kinematic faults, missing block balances, and coordinate mismatches **BEFORE** code ever touches the physical robot controller, ensuring unparalleled safety and efficiency.
-
-> **💡 The ROI Guarantee:** Catching a single syntax crash or mechanical collision before running code on the shop floor pays for a lifetime of Pro licenses in the first 5 minutes.
+> [!IMPORTANT]
+> ### ⚠️ Mandatory Safety & Legal Compliance Notice (ISO 10218-1/-2 & ISO 13849-1)
+> **KUKA KRL Professional** is an independent engineering development, static analysis, and backup diff suite developed by **Liskin Labs**. It is **NOT safety-certified software (Non-SIL / Non-PL)** and does **not** replace mandatory physical commissioning procedures, reduced override verification (`$OV_PRO <= 30%` in T1 mode on the physical KUKA SmartPAD teach pendant), or formal risk assessments required by **ISO 10218-1/-2** and **ISO 13849-1**.
+> 
+> Always perform manual path dry-runs in T1 mode before engaging automated production.
+> 
+> *KUKA®, KRL®, KRC®, SmartPAD®, and WorkVisual® are registered trademarks of KUKA AG. Liskin Labs is an independent engineering software vendor and is not affiliated with, sponsored by, or certified by KUKA AG.*
 
 ---
 
-## ✨ Trusted by Industry Leaders
+## ⚡ The Reality of Industrial Commissioning
 
-**KUKA KRL Professional** is rigorously tested and deployed across 8+ industrial fleets, including **Atlas Copco, Magna, Saint-Gobain, and more.** Our telemetry confirms:
-*   **136+ KUKA backups** processed flawlessly.
-*   **10,327+ KRL files** analyzed with zero exceptions.
-*   **0 reported production stops** attributed to extension errors.
+Every commissioning robotics engineer and system integrator faces the same challenges:
 
-This isn't just an extension; it's a battle-hardened suite designed for the most demanding industrial environments.
+1. **Unplanned Line Stops ($10,000+/hour)**: A single missing `$TOOL` or `$BASE` assignment, an Advance Run drop triggering axis jerk, or an unexpected division-by-zero in `SPS.SUB` halts the automation cell during production ramps.
+2. **Night-Shift Point Drift**: Operators touch up taught points directly on the SmartPAD pendant without revision tracking. Discovering what changed requires tedious manual comparison of dozens of `.dat` files.
+3. **Slow Feedback Loops**: Transferring code to physical controllers or booting heavy virtual setups just to catch basic syntax or fold mismatches wastes critical commissioning hours.
+
+**KUKA Engineering Toolkit for VS Code** delivers **pre-flight static verification, backup intelligence, and kinematic transformations** directly in your editor before code ever touches a physical robot.
 
 ---
 
-## 🚀 Key Industrial Pillars & 159 Certified Capabilities
+## 🎯 The Three Core Workflows
 
 <p align="center">
-  <img src="media/control_flow_graph.gif" width="720" alt="Interactive Flowchart Demo" />
+  <img src="media/control_flow_graph.gif" width="740" alt="KUKA KRL Control Flow & Safety Diagnostics" />
 </p>
 
-### 1. 🗺️ Interactive Flowcharts & Logic Visualization (15+ Capabilities)
-*   **Clickable Control Flow Diagrams**: Convert complex `.src` files into clean, interactive Mermaid SVG diagrams with bi-directional navigation to code lines.
-*   **Subroutine Drill-Down**: Click subprogram calls (`PickPart()`, `WeldSeam()`) to inspect their individual flowcharts.
-*   **SVG Vector Export**: Export high-resolution vector diagrams for customer acceptance documentation and project reviews.
-*   **Conditional Path Highlighting**: Visualize `IF/ELSE` and `CASE` statement execution paths.
-*   **Loop Iteration Analysis**: Graphically represent `FOR/WHILE/LOOP` structures and their exit conditions.
-*   **Function Call Graph**: Generate a hierarchical view of all function and subroutine calls within a project.
-
-### 2. 🛡️ Industrial Safety & Deep Logic Analyzer (ISO 13849 Compliance) (20+ Capabilities)
-*   **Strict Block Balance**: Flags orphaned `IF / ENDIF`, `FOR / ENDFOR`, `LOOP / ENDLOOP`, `SWITCH / ENDSWITCH`, `REPEAT / UNTIL` blocks before KRC compilation.
-*   **Tool/Base Guard**: Warns if motion commands (`PTP`, `LIN`, `CIRC`) execute without active frame initialization (`$TOOL`, `$BASE`).
-*   **Velocity & Acceleration Guard**: Alerts when Cartesian speed `$VEL.CP` or axis acceleration `$ACC.CP` exceeds safe commissioning limits (> 2.0 m/s, > 5.0 m/s²).
-*   **Automotive VASS 26 Rules**: Linter compliance for Volkswagen/Audi Body-in-White automation cells (`VE=0%` on `SPSMAKRO`, `A23=AUS` interlocks, `PTP_REL` usage).
-*   **Singularity Avoidance Warnings**: Proactive alerts for potential kinematic singularities in PTP motions.
-*   **Collision Detection Heuristics**: Flags common patterns leading to self-collision or environmental collision risks.
-*   **Uninitialized Variable Detection**: Identifies variables used before assignment.
-*   **Dead Code Detection**: Highlights unreachable code blocks.
-*   **Parameter Type Mismatch**: Checks function/subroutine calls against their definitions.
-*   **System Variable Overwrite Protection**: Warns against unintended modification of critical `$SYSTEM` variables.
-
-### 3. 📐 6D Offline Kinematics & Trajectory Engine (25+ Capabilities)
-*   **6D Trajectory Mirroring (`krl.mirrorTrajectory`)**: Cartesian reflection across Planes X, Y, Z with automated Turn bit manipulation ($A_1..A_6$).
-*   **Batch Point Transformation (`krl.batchShiftPoints`)**: 6D geometric operator multiplication (`:`) for Tool offsets, Base offsets, and direct vector shifts (e.g., `P1 = P1 : {X 10, Y 0, Z 0, A 0, B 0, C 0}`).
-*   **Trajectory Reversal (`krl.reverseTrajectory`)**: Inverts sequence of motion targets while preserving circular arcs (`CIRC`) and inline form folds.
-*   **Sequential Point Renumbering (`krl.renumberPoints`)**: Synchronized batch renaming of points across `.src` motions, inline form folds, and companion `.dat` symbols (`XP1`, `FP1`, `PPDAT1`).
-*   **Tool & Base Coordinate Inspector (`krl.toolBaseOverview`)**: Extracts and visualizes all 64 `$TOOL_DATA` and `$BASE_DATA` frames with CSV export.
-*   **3-Point Euler Frame Math Calculator**: Calculates `BASE_DATA`/`TOOL_DATA` origins directly in the editor from three measured points.
-*   **Kinematic Forward/Inverse Solver**: Simulate `FORWARD()` and `INVERSE()` operations for given axis positions/cartesian poses.
-*   **Path Interpolation Preview**: Visualize linear and circular path segments in a simplified 2D/3D view.
-*   **Turn Bit Optimization**: Suggests optimal turn bits for PTP motions to avoid joint limits or singularities.
-*   **Dynamic Frame Creation**: Generate `FRAME` declarations from user-defined offsets and rotations.
-
-### 4. 📦 SmartPAD ZIP Backup Suite & Live Transparent ZIP Editing (20+ Capabilities)
-*   **Zero-Unpack Archive Explorer**: Directly inspect and explore `.zip` backups and `KRCDiag_*.zip` diagnostic packages in-memory without unzipping to disk.
-*   **Live Transparent ZIP Project Mount [PRO]**: Open any backup as an active VS Code workspace (`krl.mountBackupZipAsProject`). Saving files (`Ctrl+S`) or deleting files automatically and transparently patches the original `.zip` archive on disk in <80ms without UI locking.
-*   **Spatial Coordinate Deltas**: Calculates exact 6-axis shifts (**ΔX, ΔY, ΔZ, ΔA, ΔB, ΔC**) between teach versions in `.zip` archives.
-*   **Zero-Touch Audit**: Instantly detect unverified point touch-ups made on the shop floor before they cause collisions.
-*   **Side-by-Side Monaco Diff**: Color-coded graphical diff viewer built directly into VS Code for any file within a ZIP.
-*   **Backup Integrity Check**: Verifies the structural integrity of KUKA ZIP archives.
-*   **Automated Backup Comparison**: Compare two entire KUKA backups and generate a comprehensive change report.
-*   **Point Delta History**: Track changes to individual points across multiple backup versions.
-*   **File Extraction Wizard**: Selectively extract files or folders from a ZIP archive.
-
-### 5. 🏭 Authentic KSS 8.2–8.7 System Kernel & Specs (30+ Capabilities)
-*   **957 System Variables**: Exhaustive coverage of KSS system variables (`$ACC`, `$TOOL`, `$BASE`, `$POS_ACT`) with physical units, array bounds, and read/write permissions.
-*   **116 Built-in System Functions**: Kinematics (`FORWARD`, `INVERSE`, `INV_POS`), string manipulation, message dialogs, and torque limits with real-time `signatureHelp` and documentation.
-*   **23 Official Inline Form Snippets**: Authentic KUKA templates (`ptpi`, `slini`, `sptpi`, `scirc`, `PTPCo`, `trigdist`) with complete headers (`;FOLD ... ;%{PE}`).
-*   **Native EVT Event Log Viewer**: High-speed zero-dependency decoder for binary `.evt` event archives with 2,050+ official KSS messages across 6 languages, including filtering and export.
-*   **KRL Keyword Autocomplete**: Context-aware suggestions for all KRL keywords, functions, and variables.
-*   **Syntax Highlighting & Themes**: Full AST coloring and authentic KUKA.Sim dark/light themes for `.src`, `.dat`, `.sub`, `.kfd` files.
-*   **F12 Go to Definition**: Instant jump across `.src` and companion `.dat` files for variable and subroutine definitions.
-*   **KSS Standard Library Documentation**: Integrated help for all standard KSS functions and system variables.
-*   **Error Code Lookup**: Quick access to KUKA error message explanations.
-
-### 6. 🌐 EthernetKRL (EKI) XML Suite (10+ Capabilities)
-*   **Live XML Template Generator**: Create valid EKI XML configuration files (`.xml`) with predefined structures for common communication scenarios.
-*   **Telegram Socket Validator**: Real-time validation of EKI XML telegram structures against KUKA's specifications.
-*   **XML Schema Definition (XSD) Integration**: Ensures strict compliance with EKI XML schemas.
-*   **EKI Data Type Mapping**: Visual assistance for mapping KRL data types to XML elements.
-*   **Communication Test Snippets**: Generate KRL code snippets for testing EKI communication.
-
-### 7. ⚡ AST Diagnostics & Semantic Analysis (15+ Capabilities)
-*   **Full Abstract Syntax Tree (AST) Parsing**: Deep understanding of KRL code structure.
-*   **Semantic Error Detection**: Beyond syntax, identifies logical errors like incorrect variable usage or unreachable code.
-*   **Control Flow Graph Generation**: Underlying engine for flowchart visualization.
-*   **Variable Scope Analysis**: Tracks variable visibility and lifetime.
-*   **Type Checking**: Ensures data types are used consistently.
-*   **Function Signature Validation**: Checks if function calls match their definitions.
-*   **Resource Leak Detection**: Flags potential issues with unclosed files or resources.
-
-### 8. 📊 Visual I/O Signal Matrix & Bit Collision Detector (10+ Capabilities)
-*   **I/O Signal Overview**: Scans and visualizes all declared `SIGNAL` and `E_SIGNAL` definitions in a project.
-*   **Electrical Address Overlap Detection**: Identifies potential conflicts where multiple signals share the same physical I/O address.
-*   **CSV Export**: Export I/O configuration for documentation or external analysis.
-*   **Signal Cross-Reference**: Find all usages of a specific I/O signal within the project.
-*   **Bit-Level Conflict Resolution**: Tools to identify and resolve bit-level overlaps in `E_SIGNAL` declarations.
-
-### 9. 📏 Trajectory Path Length & Seam Welding Stats (5+ Capabilities)
-*   **3D Spatial Euclidean Distance**: Calculates the precise length of linear and circular motion segments.
-*   **Seam Length Accumulator**: Sums up total weld seam lengths for process optimization and reporting.
-*   **Arc-On Time Estimation**: Estimates welding arc-on time based on path length and programmed velocity.
-*   **Cycle Time Analysis**: Basic estimation of motion cycle times.
-
-### 10. 🤖 Modern KRL & iiQKA Fold Suite (5+ Capabilities)
-*   **Legacy Motion Converter**: Convert older `PTP`, `LIN` motions to modern Splines for smoother trajectories.
-*   **Spline Block Wrapper**: Automatically wrap sequences of motions into `SPLINE` blocks (`;FOLD SPLINE ... ;ENDFOLD`).
-*   **iiQKA.OS Compatibility Checks**: Linter rules specific to KUKA's new iiQKA.OS platform.
-
-### 11. 🔄 Code Refactoring & Quality Tools (10+ Capabilities)
-*   **Code Formatter & Matrix Alignment** (`Shift+Alt+F`): 3-space KUKA indentation and assignment alignment.
-*   **Clean Git Metadata Stripper**: Strips WorkVisual headers for clean Git commits.
-*   **1-Click KRC Project Scaffolding**: Initializes standard `KRC/R1/System` folder structure.
-*   **GitLens Line Blame & Revision History**: Instant author & commit tracking for every coordinate edit.
-*   **Rename Symbol**: Refactor variables, subroutines, and points across `.src` and `.dat` files.
-*   **Extract Subroutine**: Automatically refactor selected code into a new subroutine.
-
-### 12. 🌐 Hexa-Locale Architecture & Accessibility (4+ Capabilities)
-*   **100% Native UI across 6 languages**: English, German, Italian, Spanish, Russian, Turkish.
-*   **Offline Factory Access**: Zero internet required on the plant floor (HWID node-lock for Pro).
-*   **Accessibility Features**: High contrast themes, keyboard navigation.
+### 1. 🛡️ AUDIT: Pre-Flight Safety & Static Reliability
+Static code analysis designed specifically for KRL runtime behavior:
+* **Frame & Tool Assignment Guard**: Verifies active `$TOOL` and `$BASE` initialization before any Cartesian motion (`LIN`, `CIRC`, `SLIN`, `SCIRC`) to prevent uncontrolled manipulator trajectories.
+* **Advance Run Breaker Detection**: Flags peripheral I/O statements (`$OUT`, `$IN`, `WAIT FOR`) inside motion sequences that inadvertently drop `$ADVANCE` to 0, preventing continuous path blending (`$APO`) and causing mechanical vibration.
+* **Deadlock & Wait Scanner**: Detects unconditioned `WAIT FOR $IN[...]` conditions and unhandled handshakes that can freeze production cycles.
+* **Background SPS Submit Guard**: Audits `SPS.SUB` and background tasks for blocking statements (`WAIT SEC`, `WAIT FOR`) and potential arithmetic faults that can crash the controller's safety task.
+* **Physical Reach Limit Validation**: Validates Cartesian target coordinates against reach boundaries of 183 KUKA robot models cataloged from official kinematics specifications.
+* **Turn & Status (T/S) Kinematic Sanity**: Highlights potential axis unwinding and singularity zones across joint configurations ($A_1..A_6$).
+* **Automotive VASS 26 Linter**: Enforces Volkswagen / Audi Group Body-in-White automation rules (`VE=0%` on `SPSMAKRO`, `A23=AUS` confirmation interlocks).
 
 ---
 
-## 💻 Try the In-Browser KRL Backup Inspector!
-
-No VS Code? No problem! Instantly inspect your KUKA `.zip` backups and `KRCDiag_*.zip` files directly in your web browser. Upload, explore, and even diff files without any installation.
-
-👉 **[Launch KRL Backup Inspector Playground](https://liskinlabs.github.io/kuka-krl-extension/#playground)**
-
----
-
-## 📊 Feature Comparison Matrix (159+ Capabilities)
-
-| Feature Category | Community (Free) | Pro Industrial | Benefit for Engineers |
-|:---|:---:|:---:|:---|
-| **Core Editor Experience** (Syntax, Autocomplete, Formatting, Git Integration, Multi-Locale) | ✅ | ✅ | Full AST coloring, authentic KUKA.Sim themes, KSS parameter completion, instant jump to definitions, 3-space KUKA indentation, Git blame, 6-language UI. |
-| **KSS Standard System Library** (957+ vars, 116 functions, 23 Inline Forms) | ✅ | ✅ | Exhaustive KSS parameter completion, signature help, integrated documentation, authentic KUKA templates (`ptpi`, `slini`, etc.). |
-| **KRC Project Management** (Scaffolding, Metadata Stripper) | ✅ | ✅ | Initializes standard `KRC/R1/System` folder structure, strips WorkVisual headers for clean Git commits. |
-| **Interactive Flowcharts & Logic Visualization** | ❌ | **✅ Pro** | Visual control-flow logic, 2-way code jump, SVG export, subroutine drill-down, conditional path highlighting. |
-| **Industrial Safety & Deep Logic Analyzer** (ISO 13849, VASS 26) | ❌ | **✅ Pro** | Catches unclosed `IF/LOOP/FOR` blocks, flags uninitialized frames, dangerous overspeeds, singularity risks, VASS 26 compliance, uninitialized/dead code detection. |
-| **6D Offline Kinematics & Trajectory Engine** | ❌ | **✅ Pro** | 6D geometric operator (`:`), Planes X/Y/Z reflection, Turn bitmath, batch point transformation, trajectory reversal, synchronized point renumbering, 3-point Euler calculator. |
-| **SmartPAD ZIP Backup Diff & Audit Suite** | ✅ (Explorer) | **✅ Pro** | In-memory exploration of `.zip` and `KRCDiag_*.zip`, computes spatial coordinate deltas (ΔX, ΔY, ΔZ, ΔA, ΔB, ΔC), side-by-side diff, backup integrity checks. |
-| **Live Transparent ZIP Workspace Mount** | ❌ | **✅ Pro** | Open backup as workspace, transparent auto-patch on `Ctrl+S` (<80ms), zero-touch audit for shop floor changes. |
-| **Decode & View KUKA Event Log (.evt)** | ❌ | **✅ Pro** | Native pure-TS EVTX decoder, 2,050+ msgs in 6 languages, filtering, export. |
-| **Visual I/O Signal Matrix & Bit Collision Detector** | ❌ | **✅ Pro** | Scans signals, detects electrical address overlap, CSV export, cross-referencing. |
-| **Trajectory Path Length & Seam Welding Stats** | ❌ | **✅ Pro** | 3D spatial Euclidean distance, seam lengths, arc-on times, basic cycle time estimation. |
-| **Modern KRL & iiQKA Fold Suite** | ❌ | **✅ Pro** | Convert legacy motions to modern Splines, wrap Spline blocks, iiQKA.OS compatibility checks. |
-| **EthernetKRL (EKI) XML Suite** | ❌ | **✅ Pro** | Live XML template generator, telegram socket validator, XSD integration, data type mapping. |
-| **AST Diagnostics & Semantic Analysis** | ❌ | **✅ Pro** | Full AST parsing, semantic error detection, control flow graph generation, variable scope analysis, type checking. |
-| **Code Refactoring & Quality Tools** | ✅ (Basic) | **✅ Pro** | Advanced rename symbol, extract subroutine, automated code cleanup. |
-| **100% Offline Factory Access** | ✅ | **✅ Pro** | Zero internet required on the plant floor (HWID node-lock for Pro). |
+### 2. 🔍 COMPARE: SmartPAD Backup Diff & Kinematic Math
+Deep inspection of KUKA controller backups without disk extraction:
+* **Zero-Unpack Archive Inspection**: Open and explore `.zip` backups and `KRCDiag_*.zip` diagnostic packages in-memory.
+* **Spatial Coordinate Delta ($\Delta$) Calculation**: Computes exact Cartesian and axis deltas between backup versions:
+  $$\Delta X, \Delta Y, \Delta Z, \Delta A, \Delta B, \Delta C$$
+* **Shop-Floor Touch-Up Audit**: Instantly identify which points were retaught on the robot pendant during night shifts, highlighting subtle tool offsets.
+* **Native EVT Event Log Viewer**: High-speed decoder for binary `.evt` controller logs, resolving 2,050+ official KSS diagnostic events across 6 languages.
+* **Live Transparent ZIP Project Mount [PRO]**: Open any KRC backup archive directly as a workspace (`krl.mountBackupZipAsProject`). Saving files (`Ctrl+S`) updates the `.zip` archive on disk in <80ms without UI locking.
 
 ---
 
-## 👑 Pricing & Instant Licensing
+### 3. 📐 TRANSFORM: Kinematic Math & KRL Modernization
+Batch motion path manipulation and standard migration:
+* **1-Click Spline Modernization**: Automatically converts legacy motion blocks (`PTP`, `LIN`, `CIRC`) into modern KSS 8.3–8.7 Spline blocks (`SPTP`, `SLIN`, `SCIRC`) with valid `;FOLD ... ;%{PE}` parameters and companion `.dat` data structures (`CPDAT`, `PDAT`).
+* **6D Trajectory Mirroring (`krl.mirrorTrajectory`)**: Reflects Cartesian paths across planes X, Y, or Z with automated Turn bit manipulation ($A_1..A_6$).
+* **Batch Point Transformation (`krl.batchShiftPoints`)**: Applies 6D geometric frame operations (`:`) for Tool offsets, Base re-referencing, and vector shifts.
+* **Synchronized Point Renumbering (`krl.renumberPoints`)**: Synchronizes point renaming across `.src` motions, inline form folds, and companion `.dat` declarations (`XP1`, `FP1`, `PPDAT1`).
+* **Visual I/O Signal Matrix**: Scans signal declarations and detects overlapping physical bit addresses across fieldbus mappings.
 
-We offer flexible, industrial-grade licensing through our verified merchant of record, **Dodo Payments**. All transactions support Credit Cards, Apple Pay, Google Pay, and PayPal across 135+ countries with automatic VAT/tax invoices.
+---
 
-| Plan | Price | Billing | Features & Scope | Checkout |
+## 📊 Feature Comparison Matrix
+
+| Capability | Community (Free) | Engineer Pro | Team Edition | Enterprise Site |
+|:---|:---:|:---:|:---:|:---:|
+| **KRL Syntax Highlighting & Themes** (`.src`, `.dat`, `.sub`, `.kfd`) | ✅ | ✅ | ✅ | ✅ |
+| **Smart Autocomplete & System Specs** (957+ vars, 116 functions) | ✅ | ✅ | ✅ | ✅ |
+| **KSS Standard System Library & F12 Go to Definition** | ✅ | ✅ | ✅ | ✅ |
+| **Code Formatter & Indentation Alignment** (`Shift+Alt+F`) | ✅ | ✅ | ✅ | ✅ |
+| **GitLens Line Blame & Version Tracking** | ✅ | ✅ | ✅ | ✅ |
+| **Zero-Unpack Archive Explorer** (`.zip` / `KRCDiag`) | ✅ | ✅ | ✅ | ✅ |
+| **Interactive Flowchart & Control Flow Graph** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
+| **Pre-Flight Safety Audit & Deep Logic Analyzer** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
+| **SmartPAD Backup Diff & Spatial Delta Math ($\Delta X,Y,Z$)** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
+| **Live Transparent ZIP Workspace Mount & Auto-Sync** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
+| **1-Click Modern Spline Converter & Fold Generator** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
+| **6D Trajectory Mirroring, Batch Shift & Renumbering** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
+| **Binary `.evt` Event Log Viewer (2,050+ KSS codes)** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
+| **Visual I/O Signal Matrix & Bit Collision Detector** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
+| **Air-Gapped Offline Node-Locking (Factory OT Safe)** | ❌ | **✅ Pro (5 Seats)** | **✅ Team (25 Seats)** | **✅ Site (Unlimited)** |
+| **Automotive VASS 26 Rules & VW_USER Tech** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
+| **B2B Invoicing with Tax ID / EU VAT Reverse Charge** | ❌ | ❌ | **✅ Team** | **✅ Enterprise** |
+| **Company-Branded Robot Acceptance Protocols (PDF)** | ❌ | ❌ | ❌ | **✅ Enterprise** |
+| **Custom Plant Linting Rules & Dedicated Priority SLA** | ❌ | ❌ | ❌ | **✅ Enterprise** |
+
+---
+
+## 💳 Pricing & Commercial Licensing
+
+All commercial licenses are billed through our verified merchant of record, **Dodo Payments**. Transactions support Credit Cards, SEPA Bank Wire, ACH, Apple Pay, and Google Pay across 135+ countries with instant tax invoicing and automated VAT reverse-charge compliance.
+
+| Tier | Price | Scope & Devices | Target Audience | Checkout / Quote |
 |:---|:---:|:---|:---|:---:|
-| 🟢 **Community** | **$0** | Free Forever | Core Editor Experience, KSS Standard Library, Basic Project Management | [Install Free](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| ⏱️ **Pro Monthly** | **$9.99** / mo | Monthly | All 159 Industrial Pro Tools • 1 PC • KRC2/KRC4/KRC5 • Priority Support | [Get Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
-| 👑 **Annual Pro** | **$79.00** / yr | Annual (Save 35%) | All 159 Industrial Pro Tools • 1 PC • Priority Support & Feature Requests | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
-
-> 🏢 **Enterprise & Site Invoicing:** Need multi-seat team licenses or bank wire transfers (EUR/USD)? Run `krl.requestCorporateInvoice` inside VS Code or email **licensing@teknorob.com**.
-
----
-
-## 🌐 Documentation & Knowledge Base
-
-Visit our complete interactive documentation portal for in-depth tutorials, API references, and industrial case studies:
-
-*   📖 **English Documentation**: [https://liskinlabs.github.io/kuka-krl-extension/](https://liskinlabs.github.io/kuka-krl-extension/)
-*   🇷🇺 **Русская документация и Вики**: [https://liskinlabs.github.io/kuka-krl-extension/ru/](https://liskinlabs.github.io/kuka-krl-extension/ru/)
-*   🇹🇷 **Türkçe Dokümantasyon ve Wiki**: [https://liskinlabs.github.io/kuka-krl-extension/tr/](https://liskinlabs.github.io/kuka-krl-extension/tr/)
-*   🇩🇪 **Deutsche Dokumentation und Wiki**: [https://liskinlabs.github.io/kuka-krl-extension/de/](https://liskinlabs.github.io/kuka-krl-extension/de/)
-*   🇮🇹 **Documentazione e Wiki in Italiano**: [https://liskinlabs.github.io/kuka-krl-extension/it/](https://liskinlabs.github.io/kuka-krl-extension/it/)
-*   🇪🇸 **Documentación y Wiki en Español**: [https://liskinlabs.github.io/kuka-krl-extension/es/](https://liskinlabs.github.io/kuka-krl-extension/es/)
+| 🟢 **Community** | **$0** | Single Workstation | Basic editing, syntax, formatting, file inspection | [Free Install](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
+| ⏱️ **Engineer Pro (Monthly)** | **$19.00** / mo | 1 Engineer (5 Activations) | Commissioning sprints, short projects, contractor audits | [Get Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| 👑 **Engineer Pro (Annual)** | **$149.00** / yr | 1 Engineer (5 Activations) | Senior robotics engineers, plant programmers, offline planners | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
+| 🏆 **Pro Lifetime** | **$699.00** once | 1 Engineer (5 Activations) | Independent automation contractors, perpetual offline certificate | [Get Lifetime](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
+| 🏢 **Team Edition** | **$499.00** / yr | B2B — Invoice & Quote | All 50 Industrial Pro Tools • 25 Workstation Activations • KRC2–KRC5 | [Get Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏭 **Enterprise Site** | **$2,490.00** / yr | Unlimited Seats | All 50 Pro Tools • Unlimited Plant Workstations • Branded Reports | [Get Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 ---
 
-## ⚖️ Trademarks & Legal Disclaimer
+## 🏢 B2B Procurement, Invoicing & VAT Compliance
 
-*   **KUKA®, KRL®, KRC®, WorkVisual®, SmartPAD®**, and **iiQKA.OS®** are registered trademarks of **KUKA AG** / **KUKA Deutschland GmbH**.
-*   **Visual Studio Code® and VS Code®** are registered trademarks of **Microsoft Corporation**.
-*   This software extension is an independent development by **Liskin Labs** and is **not** affiliated with, sponsored, endorsed, or certified by KUKA AG, Microsoft Corporation. All product names, logos, and brands are property of their respective owners and are used solely for identification and compatibility purposes under nominative fair use.
-```
+For corporate purchasing departments and system integrators:
+
+* **Official Quotations & Invoices**: Generate a formal PDF commercial quotation (Angebot) directly from VS Code via command `krl.requestCorporateInvoice` (`Ctrl+Shift+P`).
+* **Tax ID & EU VAT Reverse Charge**: Dodo Payments validates company VAT numbers through official databases (EU VIES, UK HMRC, US EIN) to apply 0% Reverse-Charge VAT on cross-border business purchases.
+* **Corporate Wire Transfers**: Supports SEPA Bank Wire (EUR), ACH (USD), and wire transfers with automated remittance matching.
+* **Air-Gapped Factory Deployment**: For isolated OT environments without internet access, generate signed cryptographic offline license certificates valid for 365 days.
+* **Direct Licensing Desk**: Contact **licensing@teknorob.com** for corporate master service agreements or vendor onboarding forms.
+
+---
+
+## 🌐 Documentation & Knowledge Portal
+
+* 📖 **English Documentation**: [https://liskinlabs.github.io/kuka-krl-extension/](https://liskinlabs.github.io/kuka-krl-extension/)
+* 🇷🇺 **Русская документация и база знаний**: [https://liskinlabs.github.io/kuka-krl-extension/ru/](https://liskinlabs.github.io/kuka-krl-extension/ru/)
+* 🇹🇷 **Türkçe Dokümantasyon ve Wiki**: [https://liskinlabs.github.io/kuka-krl-extension/tr/](https://liskinlabs.github.io/kuka-krl-extension/tr/)
+
+---
+
+## ⚖️ Trademarks & Legal Disclaimers
+
+* **KUKA®, KRL®, KRC®, WorkVisual®, and SmartPAD®** are registered trademarks of **KUKA AG** / **KUKA Deutschland GmbH**.
+* **Visual Studio Code® and VS Code®** are registered trademarks of **Microsoft Corporation**.
+* This software extension is an independent development by **Liskin Labs** and is **not** affiliated with, sponsored, endorsed, or certified by KUKA AG or Microsoft Corporation. All product names, logos, and brands are property of their respective owners and are used strictly for identification and interoperability purposes under nominative fair use.

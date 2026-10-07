@@ -22,7 +22,7 @@
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://badgen.net/vs-marketplace/v/LiskinLabs.kuka-krl-extension?style=flat&label=VS%20Code%20Marketplace&color=FF6600" alt="VS Code Marketplace" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.0-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.0" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.8.8-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.8.8" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Verified-4.1M%2B%20LoC-10b981?style=flat-square" alt="Fleet Verified" /></a>
 </p>
@@ -95,8 +95,10 @@
 
 ---
 
-### 3. 📦 Сравнение ZIP-бэкапов SmartPAD и расчёт дельт точек
-*Сравнивайте живой код проекта с архивными `.zip`-бэкапами SmartPAD.*
+### 3. 📦 Экосистема бэкапов SmartPAD: Archive Explorer и Live ZIP Auto-Sync [PRO]
+*Инспектируйте и редактируйте архивы бэкапов робота напрямую без ручной распаковки.*
+* **KUKA Backup Archive Explorer (Zero-Unpack)**: Мгновенный просмотр содержимого `.zip` бэкапов и `KRCDiag_*.zip` пакетов в памяти без распаковки на диск, открытие файлов через виртуальный протокол `krc-archive://` с подсветкой синтаксиса и статический анализ кода прямо из архива.
+* **Прозрачный монтаж Live ZIP в проект (`krl.mountBackupZipAsProject`) [PRO]**: Открытие любого `.zip` бэкапа как активного проекта рабочей области VS Code. При нажатии `Ctrl+S` или удалении файлов изменения автоматически патчатся напрямую в исходный `.zip` архив на диске за <80 мс без блокировки интерфейса и без лишних диалогов.
 * **Расчёт дельт**: точные 6-осевые пространственные сдвиги (**ΔX, ΔY, ΔZ, ΔA, ΔB, ΔC**) для точек `E6POS`, `POS` и `E6AXIS`.
 * **Аудит без касаний**: мгновенное обнаружение непроверенных правок точек, сделанных на линии, до того как они вызовут столкновение.
 * **Наглядный дифф**: цветной графический просмотрщик различий прямо внутри VS Code.
@@ -318,6 +320,8 @@
 | **Инспектор скорости и безопасности** ($VEL.CP) | ❌ | **✅ Pro** | Предотвращает опасные превышения декартовой скорости |
 | **Проверка Tool/Base** | ❌ | **✅ Pro** | Флаги движения до инициализации рамок |
 | **Сравнение ZIP-бэкапов SmartPAD и дельты** | ❌ | **✅ Pro** | Точные дельты координат (ΔX, ΔY, ΔZ) |
+| **KUKA Backup Archive Explorer (Zero-Unpack)** | ✅ | **✅ Pro** | Просмотр архивов `.zip` и `KRCDiag_*.zip` в памяти без распаковки |
+| **Монтаж Live ZIP в проект с автосинхронизацией** | ❌ | **✅ Pro** | Открытие бэкапа как проекта, прозрачный авто-патч при `Ctrl+S` (<80мс) |
 | **Калькулятор рамок по 3 точкам** | ❌ | **✅ Pro** | Расчёт `BASE_DATA`/`TOOL_DATA` в редакторе |
 | **Набор EthernetKRL (EKI) XML** | ❌ | **✅ Pro** | Живой генератор и валидатор XML-шаблонов |
 | **Шлюз живой поддержки и удалённое присутствие** | ❌ | **✅ Pro** | Прямой двусторонний чат техподдержки, Diff & Apply |

@@ -7,16 +7,16 @@
 </p>
 
 <details>
-<summary>🌐 Language / Язык / Dil / Sprache / Lingua / Idioma</summary>
+<summary>Language / Язык / Dil / Sprache / Lingua / Idioma</summary>
 
 | Language | File |
 |---|---|
-| 🇬🇧 English | [README.md](README.md) |
-| 🇷🇺 Русский | [README.ru.md](README.ru.md) |
-| 🇹🇷 Türkçe | [README.tr.md](README.tr.md) |
-| 🇩🇪 Deutsch | [README.de.md](README.de.md) |
-| 🇮🇹 Italiano | [README.it.md](README.it.md) |
-| 🇪🇸 Español | [README.es.md](README.es.md) |
+| English | [README.md](README.md) |
+| Русский | [README.ru.md](README.ru.md) |
+| Türkçe | [README.tr.md](README.tr.md) |
+| Deutsch | [README.de.md](README.de.md) |
+| Italiano | [README.it.md](README.it.md) |
+| Español | [README.es.md](README.es.md) |
 
 </details>
 
@@ -39,25 +39,25 @@
 </p>
 
 <p align="center">
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>🌐 İnteraktif Wiki (50 Endüstriyel Araç)</b></a> •
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>⚡ Pro Monthly ($19.00/ay)</b></a> • 
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>👑 Yıllık Pro ($149.00/yıl — %35 Tasarruf)</b></a> • 
-  <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>🛡️ Güvenlik Denetim Raporu</b></a>
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>İnteraktif Wiki (50 Endüstriyel Araç)</b></a> •
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>Pro Monthly ($19.00/ay)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>Yıllık Pro ($149.00/yıl — %35 Tasarruf)</b></a> • 
+  <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>Güvenlik Denetim Raporu</b></a>
 </p>
 
 ---
 
-## 🎯 Robot Kontrolörüne Yüklemeden Önce (Before the robot)
+## Robot Kontrolörüne Yüklemeden Önce (Before the robot)
 
 > **Değişiklikleri fiziksel kontrolöre dağıtmadan önce KUKA programlarını, yedeklerini, günlüklerini, G/Ç sinyallerini, koordinatlarını ve hareket yollarını analiz edin.**
 
-* 🛑 **Duruşları Önleyin**: Üretim başlamadan önce programlama hatalarını, konfigürasyon risklerini ve hareket tehlikelerini yakalayın.
-* 🔍 **Değişiklikleri Anlayın**: SmartPAD yedeklerini karşılaştırın ve `.src` ile `.dat` dosyalarında tam olarak neyin değiştiğini nokta deltalarıyla tespit edin.
-* 📐 **Mühendisliği Standartlaştırın**: KRL projelerini şirketinizin mühendislik kurallarına ve otomotiv standartlarına (VASS 26) göre otomatik denetleyin.
+* **Duruşları Önleyin**: Üretim başlamadan önce programlama hatalarını, konfigürasyon risklerini ve hareket tehlikelerini yakalayın.
+* **Değişiklikleri Anlayın**: SmartPAD yedeklerini karşılaştırın ve `.src` ile `.dat` dosyalarında tam olarak neyin değiştiğini nokta deltalarıyla tespit edin.
+* **Mühendisliği Standartlaştırın**: KRL projelerini şirketinizin mühendislik kurallarına ve otomotiv standartlarına (VASS 26) göre otomatik denetleyin.
 
 ---
 
-## ⚡ Saatlik 10.000 Dolarlık Üretim Duruşu Sorunu
+## Saatlik 10.000 Dolarlık Üretim Duruşu Sorunu
 
 Her devreye alma mühendisi bu acıyı bilir:
 1. **Yavaş Döngü**: Dosyaları doğrudan SmartPAD öğretim panelinde düzenlemek veya yavaş WorkVisual dağıtımlarıyla boğuşmak.
@@ -66,13 +66,13 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 **KUKA KRL Professional**, editörünüzü yüksek performanslı bir **endüstriyel robotik komuta merkezine** dönüştürür. Sözdizimi hatalarını, kinematik hataları, eksik blok dengelerini ve koordinat uyumsuzluklarını kod **fiziksel robot kontrolörüne dokunmadan ÖNCE** yakalar.
 
-> **💡 Yatırım Getirisi Garantisi:** Kodu üretim hattında çalıştırmadan önce tek bir sözdizimi hatası veya mekanik çarpışma yakalamak, ilk 5 dakikada ömür boyu Pro lisansını karşılar.
+> **Yatırım Getirisi Garantisi:** Kodu üretim hattında çalıştırmadan önce tek bir sözdizimi hatası veya mekanik çarpışma yakalamak, ilk 5 dakikada ömür boyu Pro lisansını karşılar.
 
 ---
 
-## 🚀 Temel Profesyonel Özellikler
+## Temel Profesyonel Özellikler
 
-### 1. 🗺️ Etkileşimli Akış Şeması ve Kontrol Akış Grafiği
+### 1. Etkileşimli Akış Şeması ve Kontrol Akış Grafiği
 *İç içe geçmiş mantığı elle izlemeyi bırakın.* Devasa, karmaşık `.src` programlarını temiz, etkileşimli, tıklanabilir kontrol akış diyagramlarına dönüştürün.
 * **Çift Yönlü Koda Atlama**: Herhangi bir akış şeması bloğuna tıklayarak tam kod satırına anında atlayın.
 * **Alt Program Detayı**: Alt program çağrılarına tıklayın (örn. `PickPart()`, `WeldSeam()`) ve akış şemalarını yükleyin.
@@ -86,7 +86,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 2. 🛡️ Endüstriyel Güvenlik ve Derin Mantık Analizörü
+### 2. Endüstriyel Güvenlik ve Derin Mantık Analizörü
 *Kontrolöre dokunmadan önce sözdizimi çökmelerini, kilitlenmeleri ve mekanik çarpışma risklerini ortadan kaldırın.*
 * **Sıkı Blok Dengesi**: KRC derlemesinden önce kayıp `IF / ENDIF`, `FOR / ENDFOR` ve `LOOP / ENDLOOP` bloklarını işaretler.
 * **Tool/Base Koruması**: Hareket komutları (`PTP`, `LIN`, `CIRC`) aktif `$TOOL` veya `$BASE` başlatması olmadan çalışırsa uyarır.
@@ -100,7 +100,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 3. 📦 SmartPAD ZIP Yedek Karşılaştırma ve Nokta Delta Matematiği
+### 3. SmartPAD ZIP Yedek Karşılaştırma ve Nokta Delta Matematiği
 *Canlı proje kodunu SmartPAD `.zip` arşiv yedekleriyle inceleyin ve karşılaştırın.*
 * **Delta Matematiği**: `E6POS`, `POS` ve `E6AXIS` noktaları için tam 6 eksenli uzamsal kaymaları hesaplar (**ΔX, ΔY, ΔZ, ΔA, ΔB, ΔC**).
 * **Sıfır Temas Denetimi**: Çarpışmaya neden olmadan önce üretim sahasında yapılan doğrulanmamış nokta düzeltmelerini anında tespit eder.
@@ -112,7 +112,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 4. 🔀 GitLens Seviyesinde KRL Sürüm Kontrolü
+### 4. GitLens Seviyesinde KRL Sürüm Kontrolü
 *Her koordinat düzenlemesini ve program değişikliğini hassasiyetle izleyin.*
 * **Satır Blame Notları**: Herhangi bir KRL satırı için yazar, zaman damgası ve commit detayları durum çubuğunda.
 * **Commit Denetleyicisi**: Tam commit diff'lerini, commit meta verilerini ve geçmiş revizyonları incelemek için durum çubuğu blame'ine tıklayın.
@@ -120,7 +120,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 5. 📐 3 Noktalı Euler Çerçeve Matematiği ve KUKA Control Center
+### 5. 3 Noktalı Euler Çerçeve Matematiği ve KUKA Control Center
 *Editörünüzün içine yerleştirilmiş doğrudan koordinat sistemi dönüşüm hesap makinesi.*
 * **3 Nokta Yöntemi**: Ölçülen kalibrasyon noktalarından `BASE_DATA` ve `TOOL_DATA` orijinlerini ve Euler dönüş açılarını (A, B, C) hesaplayın.
 * **Doğrudan `.dat` Ekleme**: Hesaplanan koordinat çerçevelerini tek tıkla veri dosyalarına ekleyin.
@@ -132,7 +132,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 6. 🔍 Sinyal Inlay İpuçları ve PLC Yorum Eşleme
+### 6. Sinyal Inlay İpuçları ve PLC Yorum Eşleme
 *Elektrik şemalarını karıştırmadan I/O mantığını bir bakışta anlayın.*
 * Sinyal tanımlarını doğrudan `$config.dat` ve `kuka_signals.json` dosyasından okur.
 * `$IN[x]`, `$OUT[y]`, `$ANIN[z]` ve `$FLAG[k]` yanında insan tarafından okunabilir etiketler gösterir.
@@ -143,7 +143,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 7. ⚡ Otomatik Kod Biçimlendirici ve Matris Hizalama
+### 7. Otomatik Kod Biçimlendirici ve Matris Hizalama
 *Dağınık el yazımı kodu tek tuşla (`Shift+Alt+F`) temiz, standart endüstriyel koda dönüştürün.*
 * Standartlara uygun 3 boşluklu KUKA girintisi.
 * Okunabilir koordinat matrisleri için `.dat` dosyalarında `=` atama operatörlerini hizalar.
@@ -155,7 +155,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 8. 🏭 Resmi KUKA.Sim 4.10 Çekirdek Entegrasyonu ve 957+ Sistem Değişkeni
+### 8. Resmi KUKA.Sim 4.10 Çekirdek Entegrasyonu ve 957+ Sistem Değişkeni
 *Doğrudan KUKA.Sim 4.10, WorkVisual ve KRC kontrolör çalışma zamanından çıkarılan otantik endüstriyel spesifikasyonlar.*
 * **957 Sistem Değişkeni**: KSS 8.3–8.7/9.0 sistem değişkenlerinin (`$ACC`, `$TOOL`, `$BASE`, `$POS_ACT`, `$VEL_AXIS` vb.) fiziksel birimler, dizi sınırları (217 dizi) ve Salt-Okunur durumlarıyla kapsamlı kapsamı.
 * **116 Yerleşik Sistem Fonksiyonu ve Wonderlib**: Kinematik (`FORWARD`, `INVERSE`, `INV_POS`, `TOOL_ADJ`), string işlemleri, tip dönüştürme, mesaj diyalogları, tork limitleri ve Wonderlib rutinleri için gerçek zamanlı `signatureHelp` parametre ipuçlarıyla tam destek.
@@ -171,7 +171,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 9. 🔎 Tanıma Git ve Tüm Referansları Bul
+### 9. Tanıma Git ve Tüm Referansları Bul
 *Tüm proje klasörünüzde anlık AST düzeyinde dizinleme.* Herhangi bir fonksiyon veya değişken çağrısından, ayrı `.src` ve `.dat` dosyalarındaki bildirimine doğrudan atlayın.
 
 <p align="center">
@@ -180,7 +180,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 10. ℹ️ Zengin Hover Dokümantasyonu ve Okuma/Yazma Durumu
+### 10. Zengin Hover Dokümantasyonu ve Okuma/Yazma Durumu
 *Anında parametre açıklamaları ve güvenlik uyarıları alın.* Herhangi bir KSS sistem değişkeninin üzerine gelin; fiziksel birimlerini, okuma/yazma izinlerini ve KSS kılavuz açıklamalarını görün.
 
 <p align="center">
@@ -189,7 +189,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 11. 🧹 Git Meta Verisi Temizleyici ve WorkVisual Başlık Sıyırıcı
+### 11. Git Meta Verisi Temizleyici ve WorkVisual Başlık Sıyırıcı
 *Sürüm kontrolünü temiz tutun.* Otomatik commit'lerde gürültülü git diff'lerini önlemek için WorkVisual başlıklarını (`&ACCESS`, `&REL`, `&PARAM`, `&COMMENT`) tek tıkla sıyırın.
 
 <p align="center">
@@ -198,7 +198,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 12. ⚙️ Modern KRL ve iiQKA FOLD Paketi
+### 12. Modern KRL ve iiQKA FOLD Paketi
 *Kodunuzu tek tıkla modern KUKA standartlarına yükseltin.*
 * **Seçimi iiQKA FOLD'a Dönüştür (`krl.wrapIiQkaFold`)**: Özel mantığınızı standart iiQKA daraltılabilir bloklarına sarın.
 * **Spline Bloğuna Dönüştür (`krl.wrapSplineBlock`)**: Doğrusal ve dairesel hareketleri KSS 8.3–8.7 için yüksek performanslı `SPLINE` / `ENDSPLINE` bloklarına sarın.
@@ -207,7 +207,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 13. 💬 Canlı Destek Ağ Geçidi ve Uzaktan Telepresence
+### 13. Canlı Destek Ağ Geçidi ve Uzaktan Telepresence
 *VS Code'un içinde geliştiricilerle doğrudan iki yönlü destek sohbeti.*
 * **Etkileşimli Sohbet Paneli**: Geliştirme mühendislik desteğiyle anında forum tabanlı konu senkronizasyonu.
 * **Akıllı Diff & Apply**: Teknik destek tarafından önerilen kod düzeltmelerini tek tıkla inceleyin ve otomatik uygulayın.
@@ -215,7 +215,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 14. 🗂️ Hızlı FOLD Araç Çubuğu ve Bildirim Sıralama
+### 14. Hızlı FOLD Araç Çubuğu ve Bildirim Sıralama
 *Devasa programları kolayca yönetin.* FOLD bloklarını, alt programları tek tıkla daraltma ve değişken bildirimlerini otomatik sıralama.
 
 <p align="center">
@@ -224,7 +224,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 15. 💀 Ölü Kod ve Kullanılmayan Global Fonksiyon Analizi
+### 15. Ölü Kod ve Kullanılmayan Global Fonksiyon Analizi
 *Kod şişkinliğini ve artık test rutinlerini önleyin.* Tüm çalışma alanınızda çağrılmayan alt rutinleri, kullanılmayan değişkenleri ve erişilemeyen kod dallarını tespit edin.
 
 <p align="center">
@@ -233,7 +233,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 16. 🎨 Otantik KUKA.Sim ve WorkVisual Sözdizimi Paleti ve KSS 8.7 Sistem Kütüphanesi
+### 16. Otantik KUKA.Sim ve WorkVisual Sözdizimi Paleti ve KSS 8.7 Sistem Kütüphanesi
 *Doğrudan KUKA.Sim 4.10'dan çıkarılan zengin renk paleti ve standart sistem bağlamı.*
 * **Çeşitli Yüksek Kontrastlı Palet**: KUKA.Sim (`KRLDark.xshd`) ve WorkVisual'dan (`KRL.xshd`) %100 otantik renk şemaları. Hareket komutları (kalın), bit düzeyinde/mantıksal operatörler, matematiksel semboller, sistem direktifleri (`&ACCESS`, `&REL`) ve onaltılık/ikili sayılar (`'H...'`, `'B...'`) için farklılaştırılmış kapsamlar.
 * **KSS 8.7 Standart Sistem Kütüphanesi**: `BAS()`, `MsgNotify()`, `MsgQuit()`, `MsgDialog()`, `USE_CM_PRO_VALUES()`, `TOOL_NAME[]` ve `BASE_NAME[]` için yerleşik tanımlar, parametre yardımı ve `F12` — doğrudan resmi KSS 8.7 referans modüllerine.
@@ -242,7 +242,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 17. 📜 KUKA Event Log (.evt) Çözücü (Pure-TS KRC Decoder)
+### 17. KUKA Event Log (.evt) Çözücü (Pure-TS KRC Decoder)
 *Harici araçlara ve Windows bağımlılıklarına gerek olmadan ikili KRC olay günlüklerini çözer.*
 * **Yerel Pure-TS Çözücü**: KRC Windows EVTX günlüklerini (`KrcLogS.evt`, `KrcLogB.evt`, `KrcLogP.evt`, vb.) sıfır harici bağımlılıkla doğrudan okur.
 * **Kayıtlı Varsayılan Düzenleyici**: VS Code dosya gezgininde herhangi bir `.evt` dosyasına çift tıklamak etkileşimli görüntüleyiciyi anında açar.
@@ -251,7 +251,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 18. ⚡ Görsel I/O Sinyal Matrisi ve PLC Donanım Çarpışma Dedektörü
+### 18. Görsel I/O Sinyal Matrisi ve PLC Donanım Çarpışma Dedektörü
 *Tüm çalışma alanı sinyallerini denetler ve PLC adres çakışmalarını önler.*
 * **Derin Çalışma Alanı Taraması**: Tüm `.src` ve `.dat` dosyalarında `$IN`, `$OUT`, `$ANIN` ve `$ANOUT` bildirimlerini tarar.
 * **Otomatik Çarpışma Algılama**: Tek bitlik bayraklardan çok bitlik kelimelere kadar bit aralıklarını hesaplar ve donanım çakışmalarını devreye almadan önce tespit eder.
@@ -259,7 +259,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 19. 📊 Yörünge Yol Uzunluğu ve Kaynak Çevrimi Zekası
+### 19. Yörünge Yol Uzunluğu ve Kaynak Çevrimi Zekası
 *Hassas 3B uzamsal hareket analizi ve kaynak prosesi zekası.*
 * **3B Öklid Uzamsal Uzunluğu**: Tüm Kartezyen hareket komutlarında milimetre ve metre cinsinden kesin yörünge uzunluğunu hesaplar.
 * **Hareket Segmentasyonu**: `PTP`, `LIN`, `CIRC` ve `SPLINE` hareketlerini otomatik sınıflandırır.
@@ -267,7 +267,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 20. 🔄 Toplu Nokta Öteleme Dönüştürücü (BASE vs WORLD)
+### 20. Toplu Nokta Öteleme Dönüştürücü (BASE vs WORLD)
 *Nokta koordinatlarını cerrahi hassasiyetle toplu dönüştürün.*
 * **Çift Koordinat Çerçevesi**: İş parçası (**BASE**) veya robot Kartezyen (**WORLD**) çerçevesine göre ters Euler rotasyon matrisi ile öteleme ($R^T_{base} \cdot \vec{\Delta}_{world}$).
 * **3B İzometrik SVG Şeması**: Dinamik öteleme vektörü görselleştirmesi ile etkileşimli eksen diyagramı.
@@ -275,89 +275,89 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 21. 🌓 %100 Uyarlanabilir Temalar ve Tam Altı Dilli Yerelleştirme
+### 21. %100 Uyarlanabilir Temalar ve Tam Altı Dilli Yerelleştirme
 *Sıfır sabit renkle kusursuz estetik entegrasyon.*
 * **Uyarlanabilir Tema Değişkenleri**: Yalnızca `--vscode-*` CSS token'larıyla oluşturulmuştur — her Koyu, Açık (`body.vscode-light`) veya Yüksek Kontrastlı (`body.vscode-high-contrast`) VS Code temasına mükemmel uyum sağlar.
 * **6 Dilli Arayüz Değiştirici**: Tüm endüstriyel araçlarda İngilizce, Almanca, Rusça, İspanyolca, İtalyanca ve Türkçe arasında anında geçiş.
 
 ---
 
-## 📊 Özellik Karşılaştırma Matrisi (50 Endüstriyel Araç)
+## Özellik Karşılaştırma Matrisi (50 Endüstriyel Araç)
 
 | Özellik | Community (Ücretsiz) | Pro Industrial | Mühendislere Faydası |
 |:---|:---:|:---:|:---|
-| **KRL Sözdizimi Vurgulama** (`.src`, `.dat`, `.sub`, `.kfd`) | ✅ | ✅ | KUKA.Sim çeşitli renk paletiyle tam AST renklendirme |
-| **KUKA.Sim 4.10 ve WorkVisual Temaları** | ✅ | ✅ | Otantik AvalonEdit renk şemaları (Koyu ve Açık) |
-| **Akıllı Otomatik Tamamlama ve Çekirdek Spesifikasyonları** (957+ değişken, 116 fonksiyon, 111 yapı) | ✅ | ✅ | Resmi KUKA.Sim 4.10 çekirdek tamamlama ve imza yardımı |
-| **KSS 8.7 Standart Sistem Kütüphanesi ve F12 Tanımı** | ✅ | ✅ | `bas.src`, `MsgLib.src`, `$config.dat` dosyasına anında F12 atlama |
-| **1 Tık KRC Proje İskeleti** | ✅ | ✅ | Standart `KRC/R1/System` klasör yapısını başlatır |
-| **Fabrika Varsayılanları Hover'ı ve $ADVANCE Sınırlayıcı** | ✅ | ✅ | Fabrika varsayılanlarını gösterir ve `$ADVANCE > 5` durumunda uyarır |
-| **23 Resmi Inline Form Snippet'i** (34 hareket ve mantık şablonu) | ✅ | ✅ | KUKA Roboter GmbH'den tam `;FOLD ... ;%{PE}` şablonları |
-| **Sinyal Inlay İpuçları ve Hover Dokümanları** | ✅ | ✅ | Satır içi PLC sinyal etiketleri ve parametre imzaları |
-| **Kod Biçimlendirici ve Matris Hizalama** | ✅ | ✅ | Anında 1 tık temizlik (`Shift+Alt+F`) |
-| **GitLens Satır Blame'i ve Revizyon Geçmişi** | ✅ | ✅ | Her nokta için anında yazar ve commit takibi |
-| **Altı Dilli Mimari** (EN, DE, IT, ES, RU, TR) | ✅ | ✅ | Tam yerel UI, 515 UI anahtarı ve 1.073 sistem değişkeni doküman çevirisi |
-| **Git Meta Verisi Temizleyici** | ✅ | ✅ | Kusursuz Git diff'leri için WorkVisual başlıklarını sıyırır |
-| **Control Center ve 21 Kartlı Referans Rehberi** | ✅ | ✅ | Gerçek zamanlı tanılama anahtarları ve editör içi kısayol rehberi |
-| **36 Komutluk Tam Düz Kenar Çubuğu** | ✅ | ✅ | Her uzantı komutuna 1 tıkla erişim |
-| **Yerel Proje ZIP Dışa Aktarma ve Uzaktan Telepresence** | ✅ | ✅ | 1 tıkla tam yedekleme — işletim sistemi gezginine veya Telegram'a |
-| **Copilot AI Dil Modeli Araçları Entegrasyonu** | ✅ | ✅ | `krl_safety_check` doğrudan VS Code AI tarafından çağrılabilir |
-| **KUKA Event Log (.evt) Çözücü** (2.050+ mesaj) | ❌ | **✅ Pro** | Yerel pure-TS EVTX çözücü, 6 dilde katalog ve 1 tıkla koda atlama |
-| **Görsel I/O Sinyal Matrisi ve Çarpışma Dedektörü** | ❌ | **✅ Pro** | `$IN`/`$OUT` taraması, donanım bit çakışması tespiti ve CSV çıktısı |
-| **Yörünge Yol Uzunluğu ve Kaynak İstatistiği** | ❌ | **✅ Pro** | 3B Öklid mesafesi, kaynak dikiş uzunluğu ve ark süresi |
-| **Toplu Nokta Öteleme Dönüştürücü** (BASE / WORLD) | ❌ | **✅ Pro** | 3B izometrik SVG şeması, Euler ters matrisi ve `.dat` güncellemeleri |
-| **SmartPAD Yedek Kalite Kabul Raporu** | ❌ | **✅ Pro** | Robot pasaportu ve tıklanabilir köprülerle otomatik proje denetimi |
-| **Modern KRL ve iiQKA FOLD Paketi** | ❌ | **✅ Pro** | iiQKA FOLD'lar, Spline Blokları ve Çarpışma Koruması |
-| **Etkileşimli Akış Şeması Görüntüleyici** (Mermaid SVG) | ❌ | **✅ Pro** | Görsel kontrol akış mantığı ve 2 yönlü koda atlama |
-| **Sıkı Blok Dengesi Tanılaması** | ❌ | **✅ Pro** | Kapatılmamış `IF/LOOP/FOR` bloklarını yakalar |
-| **Hız ve Güvenlik Denetleyicisi** ($VEL.CP) | ❌ | **✅ Pro** | Tehlikeli Kartezyen aşırı hızları önler |
-| **Tool / Base Koruması** | ❌ | **✅ Pro** | Çerçeve başlatmasından önce hareketi işaretler |
-| **SmartPAD ZIP Yedek Diff ve Nokta Delta** | ❌ | **✅ Pro** | Tam koordinat deltalarını hesaplar (ΔX, ΔY, ΔZ) |
-| **3 Noktalı Euler Çerçeve Hesaplayıcı** | ❌ | **✅ Pro** | Editörde `BASE_DATA`/`TOOL_DATA` hesaplar |
-| **EthernetKRL (EKI) XML Paketi** | ❌ | **✅ Pro** | Canlı XML şablon üretici ve doğrulayıcı |
-| **Canlı Destek Ağ Geçidi ve Uzaktan Telepresence** | ❌ | **✅ Pro** | Doğrudan 2 yönlü yardım masası sohbeti, Diff & Apply |
-| **Ölü Kod ve Kapsam Denetleyicisi** | ❌ | **✅ Pro** | Kullanılmayan değişkenleri ve ölü alt rutinleri bulur |
-| **Hareket Diyagramları ve Spline Üretici** | ❌ | **✅ Pro** | KSS 8.3+ için spline eğrilerini görselleştirir |
-| **%100 Çevrimdışı Fabrika Erişimi** | ✅ | **✅ Pro** | Üretim sahasında sıfır internet gerekir |
+| **KRL Sözdizimi Vurgulama** (`.src`, `.dat`, `.sub`, `.kfd`) | Evet | Evet | KUKA.Sim çeşitli renk paletiyle tam AST renklendirme |
+| **KUKA.Sim 4.10 ve WorkVisual Temaları** | Evet | Evet | Otantik AvalonEdit renk şemaları (Koyu ve Açık) |
+| **Akıllı Otomatik Tamamlama ve Çekirdek Spesifikasyonları** (957+ değişken, 116 fonksiyon, 111 yapı) | Evet | Evet | Resmi KUKA.Sim 4.10 çekirdek tamamlama ve imza yardımı |
+| **KSS 8.7 Standart Sistem Kütüphanesi ve F12 Tanımı** | Evet | Evet | `bas.src`, `MsgLib.src`, `$config.dat` dosyasına anında F12 atlama |
+| **1 Tık KRC Proje İskeleti** | Evet | Evet | Standart `KRC/R1/System` klasör yapısını başlatır |
+| **Fabrika Varsayılanları Hover'ı ve $ADVANCE Sınırlayıcı** | Evet | Evet | Fabrika varsayılanlarını gösterir ve `$ADVANCE > 5` durumunda uyarır |
+| **23 Resmi Inline Form Snippet'i** (34 hareket ve mantık şablonu) | Evet | Evet | KUKA Roboter GmbH'den tam `;FOLD ... ;%{PE}` şablonları |
+| **Sinyal Inlay İpuçları ve Hover Dokümanları** | Evet | Evet | Satır içi PLC sinyal etiketleri ve parametre imzaları |
+| **Kod Biçimlendirici ve Matris Hizalama** | Evet | Evet | Anında 1 tık temizlik (`Shift+Alt+F`) |
+| **GitLens Satır Blame'i ve Revizyon Geçmişi** | Evet | Evet | Her nokta için anında yazar ve commit takibi |
+| **Altı Dilli Mimari** (EN, DE, IT, ES, RU, TR) | Evet | Evet | Tam yerel UI, 515 UI anahtarı ve 1.073 sistem değişkeni doküman çevirisi |
+| **Git Meta Verisi Temizleyici** | Evet | Evet | Kusursuz Git diff'leri için WorkVisual başlıklarını sıyırır |
+| **Control Center ve 21 Kartlı Referans Rehberi** | Evet | Evet | Gerçek zamanlı tanılama anahtarları ve editör içi kısayol rehberi |
+| **36 Komutluk Tam Düz Kenar Çubuğu** | Evet | Evet | Her uzantı komutuna 1 tıkla erişim |
+| **Yerel Proje ZIP Dışa Aktarma ve Uzaktan Telepresence** | Evet | Evet | 1 tıkla tam yedekleme — işletim sistemi gezginine veya Telegram'a |
+| **Copilot AI Dil Modeli Araçları Entegrasyonu** | Evet | Evet | `krl_safety_check` doğrudan VS Code AI tarafından çağrılabilir |
+| **KUKA Event Log (.evt) Çözücü** (2.050+ mesaj) | — | **Pro** | Yerel pure-TS EVTX çözücü, 6 dilde katalog ve 1 tıkla koda atlama |
+| **Görsel I/O Sinyal Matrisi ve Çarpışma Dedektörü** | — | **Pro** | `$IN`/`$OUT` taraması, donanım bit çakışması tespiti ve CSV çıktısı |
+| **Yörünge Yol Uzunluğu ve Kaynak İstatistiği** | — | **Pro** | 3B Öklid mesafesi, kaynak dikiş uzunluğu ve ark süresi |
+| **Toplu Nokta Öteleme Dönüştürücü** (BASE / WORLD) | — | **Pro** | 3B izometrik SVG şeması, Euler ters matrisi ve `.dat` güncellemeleri |
+| **SmartPAD Yedek Kalite Kabul Raporu** | — | **Pro** | Robot pasaportu ve tıklanabilir köprülerle otomatik proje denetimi |
+| **Modern KRL ve iiQKA FOLD Paketi** | — | **Pro** | iiQKA FOLD'lar, Spline Blokları ve Çarpışma Koruması |
+| **Etkileşimli Akış Şeması Görüntüleyici** (Mermaid SVG) | — | **Pro** | Görsel kontrol akış mantığı ve 2 yönlü koda atlama |
+| **Sıkı Blok Dengesi Tanılaması** | — | **Pro** | Kapatılmamış `IF/LOOP/FOR` bloklarını yakalar |
+| **Hız ve Güvenlik Denetleyicisi** ($VEL.CP) | — | **Pro** | Tehlikeli Kartezyen aşırı hızları önler |
+| **Tool / Base Koruması** | — | **Pro** | Çerçeve başlatmasından önce hareketi işaretler |
+| **SmartPAD ZIP Yedek Diff ve Nokta Delta** | — | **Pro** | Tam koordinat deltalarını hesaplar (ΔX, ΔY, ΔZ) |
+| **3 Noktalı Euler Çerçeve Hesaplayıcı** | — | **Pro** | Editörde `BASE_DATA`/`TOOL_DATA` hesaplar |
+| **EthernetKRL (EKI) XML Paketi** | — | **Pro** | Canlı XML şablon üretici ve doğrulayıcı |
+| **Canlı Destek Ağ Geçidi ve Uzaktan Telepresence** | — | **Pro** | Doğrudan 2 yönlü yardım masası sohbeti, Diff & Apply |
+| **Ölü Kod ve Kapsam Denetleyicisi** | — | **Pro** | Kullanılmayan değişkenleri ve ölü alt rutinleri bulur |
+| **Hareket Diyagramları ve Spline Üretici** | — | **Pro** | KSS 8.3+ için spline eğrilerini görselleştirir |
+| **%100 Çevrimdışı Fabrika Erişimi** | Evet | **Pro** | Üretim sahasında sıfır internet gerekir |
 
 ---
 
-## 👑 Pro'ya Yükseltin: Fiyatlandırma ve Anında Lisanslama
+## Pro'ya Yükseltin: Fiyatlandırma ve Anında Lisanslama
 
 Doğrulanmış satıcımız **Dodo Payments** üzerinden esnek, endüstriyel sınıf lisanslama sunuyoruz. Tüm işlemler şifrelidir; 135+ ülkede Kredi Kartı, Apple Pay, Google Pay ve PayPal'ı otomatik KDV/vergi faturalarıyla destekler.
 
-### 💳 Planlar:
+### Planlar:
 
 | Plan | Fiyat | İndirim / Faturalama | Lisans Koşulları | Ödeme |
 |:---|:---:|:---|:---|:---:|
-| 🟢 **Community** | **$0** | %100 Sonsuza Kadar Ücretsiz | Kişisel ve Ticari Kullanım | [Ücretsiz Kur](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| ⏱️ **Pro Aylık** | **$19.00** / ay | Aylık faturalandırılır | 50 Endüstriyel Pro Aracın Tümü • 1 PC • KRC2–KRC5 Desteği | [Pro Monthly Al](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
-| 👑 **Pro Yıllık** | **$149.00** / yıl | **%35 Tasarruf** (~$6.58/ay) | 50 Pro Aracın Tümü • 1 PC • 30 Gün Çevrimdışı Tampon • KRC2–KRC5 | [Yıllık Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
-| 🏆 **Pro Ömür Boyu** | **$699.00** | **Bir Kez Öde, Sonsuza Kadar Sahip Ol** | 50 Pro Aracın Tümü • 1 PC (1 İş İstasyonu) • Ömür Boyu Güncelleme | [Ömür Boyu Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| 🏢 **Team Edition** | **$499.00** / yıl | B2B — Fatura ve Teklif | 50 Pro Aracın Tümü • 25 İş İstasyonu Aktivasyonu • KRC2–KRC5 | [Team Edition Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| 🏭 **Enterprise Site** | **$2,490.00** / yıl | 200 İş İstasyonu | 50 Pro Aracın Tümü • 200 Tesis İş İstasyonu • Markalı Raporlar | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| **Community** | **$0** | %100 Sonsuza Kadar Ücretsiz | Kişisel ve Ticari Kullanım | [Ücretsiz Kur](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
+| **Pro Aylık** | **$19.00** / ay | Aylık faturalandırılır | 50 Endüstriyel Pro Aracın Tümü • 1 PC • KRC2–KRC5 Desteği | [Pro Monthly Al](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| **Pro Yıllık** | **$149.00** / yıl | **%35 Tasarruf** (~$6.58/ay) | 50 Pro Aracın Tümü • 1 PC • 30 Gün Çevrimdışı Tampon • KRC2–KRC5 | [Yıllık Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
+| **Pro Ömür Boyu** | **$699.00** | **Bir Kez Öde, Sonsuza Kadar Sahip Ol** | 50 Pro Aracın Tümü • 1 PC (1 İş İstasyonu) • Ömür Boyu Güncelleme | [Ömür Boyu Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
+| **Team Edition** | **$499.00** / yıl | B2B — Fatura ve Teklif | 50 Pro Aracın Tümü • 25 İş İstasyonu Aktivasyonu • KRC2–KRC5 | [Team Edition Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| **Enterprise Site** | **$2,490.00** / yıl | 200 İş İstasyonu | 50 Pro Aracın Tümü • 200 Tesis İş İstasyonu • Markalı Raporlar | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">
     <kbd style="font-size: 1.25em; padding: 14px 32px; background-color: #FF6600; color: white; border-radius: 10px; font-weight: bold; border: 1px solid #d15500; cursor: pointer; box-shadow: 0 4px 18px rgba(255,102,0,0.4);">
-      ⚡ Plan Seçin ve Abone Olun (Dodo Checkout)
+      Plan Seçin ve Abone Olun (Dodo Checkout)
     </kbd>
   </a>
   <p style="margin-top: 10px; font-size: 0.9em; color: #888;">VS Code'da anında 1 tık aktivasyon • 14 Günlük Grace Dönemi Koruması • 30 Günlük Çevrimdışı Tampon</p>
 </div>
 
-### 💡 İş Akışınıza Hangi Lisans Planı Uygun? (Lisans Ekonomisi):
+### İş Akışınıza Hangi Lisans Planı Uygun? (Lisans Ekonomisi):
 
-* 💻 **Bireysel Lisanslar (Engineer Pro Aylık / Yıllık):**
+* **Bireysel Lisanslar (Engineer Pro Aylık / Yıllık):**
   * **1 iş istasyonu (1 cihaz aktivasyonu)** hakkı. Lisansı istediğiniz zaman menüden devre dışı bırakıp yeni bir bilgisayara aktarabilirsiniz.
   * **KRC2 / KRC4 / KRC5 (KSS 5.x–8.7+)** nesillerinin tamamına tam destek.
-* 🏆 **Pro Lifetime ($699 tek seferlik):**
+* **Pro Lifetime ($699 tek seferlik):**
   * **1 iş istasyonu** için yinelenen abonelik olmadan kalıcı ömür boyu lisans ve ömür boyu güncellemeler.
   * İnternetsiz kapalı fabrika ağları (Air-Gapped) için kalıcı kişisel kriptografik çevrimdışı lisans sertifikası.
-* 🏢 **Takım Paketi (Team Edition — $499/yıl):**
+* **Takım Paketi (Team Edition — $499/yıl):**
   * Sistem entegratörleri, robotik servis firmaları ve otomasyon departmanları için **25 cihaz aktivasyonu**.
   * Vergi Kimlik Numarası (Tax ID / VIES KDV) ile resmi kurumsal B2B fatura ve tüm projelerde birleşik KRL kod kalitesi standartları.
-* 🏭 **Kurumsal Fabrika (Enterprise Site — $2,490/yıl):**
+* **Kurumsal Fabrika (Enterprise Site — $2,490/yıl):**
   * **TÜM FABRİKA VEYA ENTEGRATÖR ŞİRKET İÇİN 200 CİHAZ AKTİVASYONU**.
   * Tesis genelindeki tüm mühendislik dizüstü bilgisayarlarını, test istasyonlarını ve bakım panellerini kapsar.
   * **Doğrudan Mühendislik Desteği:** Katı SLA garantisiyle öncelikli doğrudan mühendis desteği.
@@ -368,28 +368,28 @@ Doğrulanmış satıcımız **Dodo Payments** üzerinden esnek, endüstriyel sı
 
 ---
 
-## 🔒 14 Günlük Grace Dönemi ve Çevrimdışı Öncelik Garantisi
+## 14 Günlük Grace Dönemi ve Çevrimdışı Öncelik Garantisi
 
 Devreye alma mühendisleri parazitli tesislerde, temiz odalarda ve otomotiv hücrelerinde **sıfır ağ bağlantısıyla** çalışır.
 
-* 📶 **30 Günlük Çevrimdışı Tampon**: Bir kez etkinleştirin ve ağ el sıkışması olmadan sahada 30 güne kadar tamamen çevrimdışı çalışın.
-* 🛡️ **14 Günlük Grace Dönemi**: Sahadayken uluslararası bir ödeme yöntemi veya kart yenilemesi geçici olarak başarısız olursa, Pro özellikleri **devreye almanın ortasında sizi asla kilitlemez**. Uzantı, akıllı otomatik arka plan yeniden denemeleriyle 14 günlük bir grace penceresi sağlar.
+* **30 Günlük Çevrimdışı Tampon**: Bir kez etkinleştirin ve ağ el sıkışması olmadan sahada 30 güne kadar tamamen çevrimdışı çalışın.
+* **14 Günlük Grace Dönemi**: Sahadayken uluslararası bir ödeme yöntemi veya kart yenilemesi geçici olarak başarısız olursa, Pro özellikleri **devreye almanın ortasında sizi asla kilitlemez**. Uzantı, akıllı otomatik arka plan yeniden denemeleriyle 14 günlük bir grace penceresi sağlar.
 
 ---
 
-## 🛡️ Kurumsal Güvenlik Sertifikasyonu
+## Kurumsal Güvenlik Sertifikasyonu
 
 KUKA KRL Professional, **ReversingLabs Spectra Assure** tarafından **%100 Güvenlik Sağlık Skoru** ile sertifikalandırılmıştır:
-* 🟢 **0 Zararlı Yazılım** (Temiz ikili inceleme)
-* 🟢 Tüm bağımlılıklarda **0 CVE Güvenlik Açığı**
-* 🟢 **0 Gizli Bilgi / Token Sızıntısı**
-* 🟢 **0 MITRE ATT&CK Göstergesi**
+* **0 Zararlı Yazılım** (Temiz ikili inceleme)
+* Tüm bağımlılıklarda **0 CVE Güvenlik Açığı**
+* **0 Gizli Bilgi / Token Sızıntısı**
+* **0 MITRE ATT&CK Göstergesi**
 
 Resmi Güvenlik Denetimi: [https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension](https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension)
 
 ---
 
-## ⌨️ Klavye Kısayolları
+## Klavye Kısayolları
 
 | Kısayol | Eylem | Kapsam |
 |:---|:---|:---|
@@ -402,7 +402,7 @@ Resmi Güvenlik Denetimi: [https://secure.software/vscode/packages/liskinlabs/ku
 
 ---
 
-## ⚙️ Yapılandırma Ayarları
+## Yapılandırma Ayarları
 
 Uzantı davranışlarını `settings.json` dosyanızda yapılandırın:
 
@@ -416,15 +416,15 @@ Uzantı davranışlarını `settings.json` dosyanızda yapılandırın:
 
 ---
 
-## 🌐 Dokümantasyon ve Wiki
+## Dokümantasyon ve Wiki
 
-* 📖 **İngilizce Dokümantasyon**: [https://liskinlabs.github.io/kuka-krl-extension/](https://liskinlabs.github.io/kuka-krl-extension/)
-* 🇷🇺 **Русская документация и Вики**: [https://liskinlabs.github.io/kuka-krl-extension/ru/](https://liskinlabs.github.io/kuka-krl-extension/ru/)
-* 🇹🇷 **Türkçe Dokümantasyon ve Wiki**: [https://liskinlabs.github.io/kuka-krl-extension/tr/](https://liskinlabs.github.io/kuka-krl-extension/tr/)
+* **İngilizce Dokümantasyon**: [https://liskinlabs.github.io/kuka-krl-extension/](https://liskinlabs.github.io/kuka-krl-extension/)
+* **Русская документация и Вики**: [https://liskinlabs.github.io/kuka-krl-extension/ru/](https://liskinlabs.github.io/kuka-krl-extension/ru/)
+* **Türkçe Dokümantasyon ve Wiki**: [https://liskinlabs.github.io/kuka-krl-extension/tr/](https://liskinlabs.github.io/kuka-krl-extension/tr/)
 
 ---
 
-## 📄 Lisans ve Künye
+## Lisans ve Künye
 
 * **Yayıncı ve Geliştirici**: [Liskin Labs](https://github.com/LiskinLabs) / [Silvestr Liskin](https://www.linkedin.com/in/silvestr-liskin-ab712920b/)
 * **Güvenlik Denetçisi**: [ReversingLabs Spectra Assure](https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension)
@@ -433,12 +433,12 @@ Uzantı davranışlarını `settings.json` dosyanızda yapılandırın:
 
 ---
 
-## ⚖️ Yasal Uyarılar, Ticari Markalar ve Güvenlik Uyumluluğu
+## Yasal Uyarılar, Ticari Markalar ve Güvenlik Uyumluluğu
 
-### 🛡️ Zorunlu Endüstriyel Güvenlik Bildirimi (ISO 10218-1/-2 ve ISO 13849-1)
+### Zorunlu Endüstriyel Güvenlik Bildirimi (ISO 10218-1/-2 ve ISO 13849-1)
 **KUKA KRL Professional**, **Liskin Labs** tarafından geliştirilen bağımsız bir mühendislik geliştirme, statik analiz ve yedek diff paketidir. **Güvenlik sertifikalı bir yazılım DEĞİLDİR (Non-SIL / Non-PL)** ve sahada fiziksel devreye alma prosedürlerinin, düşük hız doğrulamasının (fiziksel KUKA SmartPAD üzerinde T1 modunda `$OV_PRO <= 30%`) veya **ISO 10218-1/-2** ve **ISO 13849-1** standartlarının gerektirdiği resmi risk değerlendirmelerinin yerini **almaz**. Otomatik üretime geçmeden önce her zaman T1 modunda manuel yol testleri gerçekleştirin.
 
-### 🏷️ Ticari Markalar ve Bağımsızlık Beyanı
+### Ticari Markalar ve Bağımsızlık Beyanı
 * **KUKA®, KRL®, KRC®, WorkVisual® ve SmartPAD®**, **KUKA AG** / **KUKA Deutschland GmbH** şirketinin tescilli ticari markalarıdır.
 * **Visual Studio Code® ve VS Code®**, **Microsoft Corporation** şirketinin tescilli ticari markalarıdır.
 * Bu yazılım uzantısı **Liskin Labs** tarafından geliştirilen bağımsız bir araçtır; KUKA AG veya Microsoft Corporation ile hiçbir bağlantısı, sponsorluğu, onayı veya sertifikası **yoktur**. Bahsi geçen tüm ürün adları ve markalar ilgili sahiplerinin mülkiyetindedir ve yalnızca uyumluluk tespiti amacıyla belirtilmiştir (nominative fair use).

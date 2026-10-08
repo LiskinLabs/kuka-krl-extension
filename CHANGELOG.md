@@ -2,6 +2,34 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.9.4] - 2026-10-08 (KRL Safe Auto-Repair Engine, QuickFix & Fix-All, Safety Rollback Guard & Monaco Diff Review)
+
+### 🚀 Killer Feature: KRL Safe Auto-Repair Engine (QuickFix & Fix-All)
+- **Deterministic Safe Auto-Fixes**: One-click quick repairs (`Ctrl+.` QuickFix lightbulb & `source.fixAll.krl`) for 7 critical KRL hazards:
+  1. **Advance Run Hazard Barrier**: Auto-inserts `WAIT SEC 0` before safety zone output assertions/releases (`$OUT[...]`, `$FLAG[...]`, `PULSE(...)`) following motions or subprograms, eliminating premature signal deassertion while robot is in motion.
+  2. **Missing BRAKE before RESUME**: Injects mandatory `BRAKE` deceleration command directly before `RESUME` in collision and sensor interrupt handlers.
+  3. **Uncommitted Payload Dynamic Data**: Automatically injects active tool `BAS(#PAYLOAD, nTool)` commit calls after multi-attribute `$LOAD` assignment groups (`$LOAD.MASS`, `$LOAD.COG`, `$LOAD.J`).
+  4. **BOM & Non-ASCII Purge**: Strips invisible UTF-8 BOM (`\uFEFF`) and normalizes non-ASCII typographical glyphs preventing KSS parser compiler panics.
+  5. **FOLD / ENDFOLD Desync Alignment**: Synchronizes closing `;ENDFOLD` tags with their respective `;FOLD` region headers.
+  6. **FOR Step Zero Hazard Prevention**: Replaces fatal `STEP 0` infinite controller loop conditions with safe `STEP 1`.
+  7. **Unused Local Declarations Purge**: Safely removes dangling local `DECL` variables to free memory on physical KRC controllers.
+- **Batch Fix-All Command (`krl.fixAllSafeIssuesInFile`)**: One-click batch repair of all safe syntactic and structural issues in file without altering motion kinematics.
+
+### 🛡️ Safety Verification & Rollback Guard
+- **Automated AST Validation**: Every repair undergoes an instant structural syntax validation pass (balancing `DEF`/`END`, `;FOLD`/`;ENDFOLD`, `IF`/`ENDIF`, and loops).
+- **Instant Rollback Guard**: If any proposed modification introduces regressions, broken blocks, or new syntax errors, the transaction is immediately rolled back, pristine code is preserved, and an explanatory notice is displayed.
+
+### 🔍 Native Monaco Diff Review Integration
+- **Interactive Split-Free Diff Preview**: Repaired code is displayed in VS Code's native Monaco Diff Editor (Red/Green line highlighting), giving operators absolute control to accept (`Ctrl+Enter`) or reject (`Esc`) changes before writing to disk.
+
+### 🧠 WorkVisual & iiQWorks Semantic Parity
+- **Module Pair Synchronization**: Enforces name synchronization between `.src` `DEF ModuleName()` and `.dat` `DEFDAT ModuleName()` headers matching KUKA KSS error **KSS01412**.
+- **Compiler Diagnostic Message IDs**: Integrated WorkVisual 6.0 and iiQWorks.Sim 1.3 semantic error catalogs (KSS01412, KSS01413, KSS01422, KSS01425, KSS01435, KSS02008).
+
+### 🧹 Codebase Cleanup & Hardening
+- **Unused Import & Variable Removal**: Cleaned up unreferenced imports (`fs`, `path`, `DODO_PAYMENTS_PORTAL_URL`) across client and server.
+- **Console Log Hygiene**: Eliminated extraneous debug logging from webview production bundles.
+
 ## [1.9.3] - 2026-10-07 (Transparent KRC Backup Live Project Mount, 2-Way Zero-Friction ZIP Sync & Universal Safety Hardening)
 
 ### ⚡ Transparent KRC Backup Live Mount & Auto-Sync Engine

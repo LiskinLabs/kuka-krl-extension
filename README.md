@@ -23,7 +23,7 @@
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://badgen.net/vs-marketplace/v/LiskinLabs.kuka-krl-extension?style=flat&label=VS%20Code%20Marketplace&color=FF6600" alt="VS Code Marketplace" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.3-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.3" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.4-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.4" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Verified-4.2M%2B%20LoC-10b981?style=flat-square" alt="Fleet Verified" /></a>
 </p>
@@ -60,7 +60,7 @@ Every commissioning robotics engineer and system integrator faces the same chall
 
 ---
 
-## 🎯 The Three Core Workflows
+## 🎯 The Four Core Workflows
 
 <p align="center">
   <img src="media/control_flow_graph.gif" width="740" alt="KUKA KRL Control Flow & Safety Diagnostics" />
@@ -99,6 +99,17 @@ Batch motion path manipulation and standard migration:
 
 ---
 
+### 4. 🛠️ AUTO-REPAIR: Safe QuickFix & Batch Correction [PRO]
+Deterministic one-click resolution of safety and structural issues without altering motion kinematics:
+* **Advance Run Protection**: Auto-inserts `WAIT SEC 0` before safety zone output assertions/releases following motion.
+* **BRAKE Command Injection**: Guarantees mandatory deceleration command directly before `RESUME` in interrupt handlers.
+* **Payload Commit Injection**: Inserts active tool `BAS(#PAYLOAD, nTool)` commit calls after multi-attribute `$LOAD` assignment groups.
+* **BOM & Non-ASCII Purge**: Cleans UTF-8 BOM and non-ASCII characters that trigger KSS compiler panics.
+* **FOLD Alignment & FOR STEP 0 Fix**: Replaces fatal `STEP 0` infinite loops with safe `STEP 1` and aligns mismatched `;ENDFOLD` tags.
+* **Monaco Diff Preview**: Review proposed changes in native side-by-side diff editor before committing to disk.
+
+---
+
 ## 📊 Feature Comparison Matrix
 
 | Capability | Community (Free) | Engineer Pro | Team Edition | Enterprise Site |
@@ -109,6 +120,7 @@ Batch motion path manipulation and standard migration:
 | **Code Formatter & Indentation Alignment** (`Shift+Alt+F`) | ✅ | ✅ | ✅ | ✅ |
 | **GitLens Line Blame & Version Tracking** | ✅ | ✅ | ✅ | ✅ |
 | **Zero-Unpack Archive Explorer** (`.zip` / `KRCDiag`) | ✅ | ✅ | ✅ | ✅ |
+| **KRL Safe Auto-Repair (QuickFix & Fix-All)** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
 | **Interactive Flowchart & Control Flow Graph** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
 | **Pre-Flight Safety Audit & Deep Logic Analyzer** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |
 | **SmartPAD Backup Diff & Spatial Delta Math ($\Delta X,Y,Z$)** | ❌ | **✅ Pro** | **✅ Team** | **✅ Enterprise** |

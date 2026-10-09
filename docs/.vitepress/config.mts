@@ -84,7 +84,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Home', link: '/' },
-          { text: 'Features Wiki (159 Tools)', link: '/guide/features' },
+          { text: 'Features Wiki', link: '/guide/features' },
           { text: 'Community', link: '/guide/community-features' },
           { text: 'Pro Features', link: '/guide/pro-features' },
           { text: 'Buy Pro License', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' }
@@ -99,7 +99,7 @@ export default defineConfig({
           {
             text: 'Features Wiki',
             items: [
-              { text: 'Full Features Wiki (159 Tools)', link: '/guide/features' },
+              { text: 'Full Features Wiki', link: '/guide/features' },
               { text: 'Community Features (Free)', link: '/guide/community-features' },
               { text: 'Pro & Industrial Features', link: '/guide/pro-features' }
             ]
@@ -121,141 +121,6 @@ export default defineConfig({
         }
       }
     },
-    de: {
-      label: 'Deutsch',
-      lang: 'de',
-      link: '/de/',
-      description: "Die definitive industrielle Entwicklungsumgebung für KUKA Robot Language.",
-      themeConfig: {
-        nav: [
-          { text: 'Startseite', link: '/de/' },
-          { text: 'Features Wiki (159 Tools)', link: '/de/guide/features' },
-          { text: 'Community (Kostenlos)', link: '/de/guide/community-features' },
-          { text: 'Pro-Funktionen', link: '/de/guide/pro-features' },
-          { text: 'Pro-Lizenz kaufen', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' }
-        ],
-        sidebar: [
-          {
-            text: 'Erste Schritte',
-            items: [
-              { text: 'Installation & Setup', link: '/de/guide/installation' }
-            ]
-          },
-          {
-            text: 'Features Wiki',
-            items: [
-              { text: 'Features Wiki (159 Tools)', link: '/de/guide/features' },
-              { text: 'Community-Funktionen', link: '/de/guide/community-features' },
-              { text: 'Pro & Industrie-Funktionen', link: '/de/guide/pro-features' }
-            ]
-          },
-          {
-            text: 'Pro Deep-Dives',
-            items: [
-              { text: 'Interaktiver Ablaufplan', link: '/de/guide/flowchart' },
-              { text: 'Industriediagnose & Sicherheit', link: '/de/guide/diagnostics' },
-              { text: 'Totcode-Analyse', link: '/de/guide/dead-code' },
-              { text: 'KRC Backup-Diff & Delta-Inspektor', link: '/de/guide/backup-diff' },
-              { text: 'Echtzeit-Inlay-Hinweise', link: '/de/guide/inlay-hints' }
-            ]
-          }
-        ],
-        footer: {
-          message: 'Proprietäre EULA-Lizenz. Unabhängiges Tool von Liskin Labs; nicht mit KUKA AG verbunden.',
-          copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
-        }
-      }
-    },
-    es: {
-      label: 'Español',
-      lang: 'es',
-      link: '/es/',
-      description: "La suite definitiva de desarrollo industrial para KUKA Robot Language.",
-      themeConfig: {
-        nav: [
-          { text: 'Inicio', link: '/es/' },
-          { text: 'Wiki de Funciones (159 Tools)', link: '/es/guide/features' },
-          { text: 'Community (Gratis)', link: '/es/guide/community-features' },
-          { text: 'Funciones Pro', link: '/es/guide/pro-features' },
-          { text: 'Comprar Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' }
-        ],
-        sidebar: [
-          {
-            text: 'Primeros pasos',
-            items: [
-              { text: 'Instalación y configuración', link: '/es/guide/installation' }
-            ]
-          },
-          {
-            text: 'Wiki de Funciones',
-            items: [
-              { text: 'Wiki Completa (159 Tools)', link: '/es/guide/features' },
-              { text: 'Funciones de Comunidad', link: '/es/guide/community-features' },
-              { text: 'Funciones Pro Industriales', link: '/es/guide/pro-features' }
-            ]
-          },
-          {
-            text: 'Inmersión Pro',
-            items: [
-              { text: 'Diagrama de Flujo Interactivo', link: '/es/guide/flowchart' },
-              { text: 'Diagnóstico y Seguridad Industrial', link: '/es/guide/diagnostics' },
-              { text: 'Análisis de Código Muerto', link: '/es/guide/dead-code' },
-              { text: 'KRC Backup Diff e Inspector Delta', link: '/es/guide/backup-diff' },
-              { text: 'Sugerencias de Señales (Inlay Hints)', link: '/es/guide/inlay-hints' }
-            ]
-          }
-        ],
-        footer: {
-          message: 'Licencia propietaria EULA. Herramienta independiente de Liskin Labs; no afiliada con KUKA AG.',
-          copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
-        }
-      }
-    },
-    it: {
-      label: 'Italiano',
-      lang: 'it',
-      link: '/it/',
-      description: "La suite definitiva di sviluppo industriale per KUKA Robot Language.",
-      themeConfig: {
-        nav: [
-          { text: 'Home', link: '/it/' },
-          { text: 'Wiki Funzionalità (159 Tools)', link: '/it/guide/features' },
-          { text: 'Community (Gratis)', link: '/it/guide/community-features' },
-          { text: 'Funzioni Pro', link: '/it/guide/pro-features' },
-          { text: 'Acquista Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' }
-        ],
-        sidebar: [
-          {
-            text: 'Per Iniziare',
-            items: [
-              { text: 'Installazione e Setup', link: '/it/guide/installation' }
-            ]
-          },
-          {
-            text: 'Wiki Funzionalità',
-            items: [
-              { text: 'Wiki Completa (159 Tools)', link: '/it/guide/features' },
-              { text: 'Funzioni Community', link: '/it/guide/community-features' },
-              { text: 'Funzioni Pro Industriali', link: '/it/guide/pro-features' }
-            ]
-          },
-          {
-            text: 'Approfondimenti Pro',
-            items: [
-              { text: 'Diagramma di Flusso Interattivo', link: '/it/guide/flowchart' },
-              { text: 'Diagnostica e Sicurezza Industriale', link: '/it/guide/diagnostics' },
-              { text: 'Analisi Codice Morto', link: '/it/guide/dead-code' },
-              { text: 'KRC Backup Diff e Inspector Delta', link: '/it/guide/backup-diff' },
-              { text: 'Inlay Hints Segnali in Tempo Reale', link: '/it/guide/inlay-hints' }
-            ]
-          }
-        ],
-        footer: {
-          message: 'Licenza proprietaria EULA. Strumento indipendente di Liskin Labs; non affiliato a KUKA AG.',
-          copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
-        }
-      }
-    },
     ru: {
       label: 'Русский',
       lang: 'ru',
@@ -264,7 +129,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Главная', link: '/ru/' },
-          { text: 'Вики (159 инструментов)', link: '/ru/guide/features' },
+          { text: 'Вики функций', link: '/ru/guide/features' },
           { text: 'Бесплатно (Community)', link: '/ru/guide/community-features' },
           { text: 'Pro функции', link: '/ru/guide/pro-features' },
           { text: 'Купить Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' }
@@ -279,7 +144,7 @@ export default defineConfig({
           {
             text: 'База знаний (Wiki)',
             items: [
-              { text: 'Полный справочник (159 инструментов)', link: '/ru/guide/features' },
+              { text: 'Полный справочник функций', link: '/ru/guide/features' },
               { text: 'Бесплатные функции (Community)', link: '/ru/guide/community-features' },
               { text: 'Промышленные Pro-функции', link: '/ru/guide/pro-features' }
             ]
@@ -309,7 +174,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Ana Sayfa', link: '/tr/' },
-          { text: 'Özellikler Wiki (159 Araç)', link: '/tr/guide/features' },
+          { text: 'Özellikler Wiki', link: '/tr/guide/features' },
           { text: 'Ücretsiz (Community)', link: '/tr/guide/community-features' },
           { text: 'Pro Özellikler', link: '/tr/guide/pro-features' },
           { text: 'Pro Satın Al', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' }
@@ -324,7 +189,7 @@ export default defineConfig({
           {
             text: 'Özellikler Wiki',
             items: [
-              { text: 'Tüm Özellikler Listesi (159 Araç)', link: '/tr/guide/features' },
+              { text: 'Tüm Özellikler Listesi', link: '/tr/guide/features' },
               { text: 'Ücretsiz Topluluk Özellikleri', link: '/tr/guide/community-features' },
               { text: 'Pro ve Endüstriyel Özellikler', link: '/tr/guide/pro-features' }
             ]

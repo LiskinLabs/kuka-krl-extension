@@ -31,7 +31,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Language-KRL-orange?style=flat-square" />
   <img src="https://img.shields.io/badge/Controllers-KRC2%20%7C%20KRC4%20%7C%20KRC5-007ACC?style=flat-square" />
-  <img src="https://img.shields.io/badge/Kernel-KUKA.Sim%204.10%20Inside-FF6600?style=flat-square" />
+  <img src="https://img.shields.io/badge/Compatibility-KSS%208.x%20%7C%20KSS%209.x%20(iiQWorks)-FF6600?style=flat-square" />
   <img src="https://img.shields.io/badge/Built--in%20Specs-957%20Vars%20%7C%20116%20Functions-10b981?style=flat-square" />
   <img src="https://img.shields.io/badge/Offline--First-100%25%20Factory%20Ready-green?style=flat-square" />
   <img src="https://img.shields.io/badge/Security-0%20Malware%20%7C%200%20CVEs-emerald?style=flat-square" />
@@ -39,7 +39,7 @@
 </p>
 
 <p align="center">
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>Wiki interactiva (50 herramientas industriales)</b></a> •
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>Wiki interactiva y documentación</b></a> •
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>Pro Monthly ($19.00/mes)</b></a> • 
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>Pro anual ($149.00/año – ahorra un 35%)</b></a> • 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>Informe de auditoría de seguridad</b></a>
@@ -155,13 +155,13 @@ Todo ingeniero de puesta en marcha conoce este dolor:
 
 ---
 
-### 8. Integración oficial del kernel KUKA.Sim 4.10 y 957+ variables de sistema
-*Especificaciones industriales auténticas extraídas directamente de KUKA.Sim 4.10, WorkVisual y el runtime del controlador KRC.*
+### 8. Base de especificaciones KRL y más de 957 variables de sistema
+*Especificaciones desarrolladas de forma independiente conformes con los estándares del lenguaje KRL y la documentación oficial de KSS e iiQWorks.*
 * **957 variables de sistema**: cobertura exhaustiva de las variables de KSS 8.3–8.7/9.0 (`$ACC`, `$TOOL`, `$BASE`, `$POS_ACT`, `$VEL_AXIS`, etc.) con unidades físicas, límites de arrays (217 arrays) y estados de solo lectura.
 * **116 funciones de sistema integradas y Wonderlib**: soporte completo en runtime para cinemática (`FORWARD`, `INVERSE`, `INV_POS`, `TOOL_ADJ`), manipulación de cadenas, conversión de tipos, diálogos de mensajes, límites de par y rutinas Wonderlib con `signatureHelp` en tiempo real.
 * **111 estructuras y 112 ENUM (443 literales)**: autocompletado inteligente con punto (`$TOOL.`, `$ACC.`, `POINT.`) y autocompletado de literales enum `#` (`#AUT`, `#T1`, `#P_FREE`, `#QUIT`).
-* **23 snippets oficiales de formularios inline KUKA (34 plantillas)**: plantillas auténticas de Kuka Roboter GmbH (`ptpi`, `slini`, `sptpi`, `scirc`, `PTPCo`, `ptprel`, `trigdist`, `sigin`, `wsec`, `Forr`) con cabeceras completas (`;FOLD ... ;%{PE}`).
-* **Matriz del compilador de 451 palabras clave**: integración directa de las reglas `keyword.h` de C++ de KUKA — cero falsos positivos de sintaxis.
+* **23 snippets estándar de formularios inline KRL (34 plantillas)**: plantillas estándar KRL (`ptpi`, `slini`, `sptpi`, `scirc`, `PTPCo`, `ptprel`, `trigdist`, `sigin`, `wsec`, `Forr`) con cabeceras completas (`;FOLD ... ;%{PE}`).
+* **Matriz de 451 palabras clave de KRL**: cobertura completa de las reglas sintácticas estándar de KRL — cero falsos positivos de sintaxis.
 * **Sintaxis hex/binaria con comillas simples**: pleno cumplimiento del parser y diagnóstico para `'B000001'` (binario), `'HFF'` (hexadecimal) y literales de carácter.
 * **Auditoría de flota con cero falsos positivos (4.1M+ líneas)**: verificada contra 107 copias de seguridad reales de robots en producción con 0 diagnósticos falsos.
 
@@ -189,8 +189,8 @@ Todo ingeniero de puesta en marcha conoce este dolor:
 
 ---
 
-### 11. Limpieza de metadatos Git y eliminador de cabeceras WorkVisual
-*Mantén limpio el control de versiones.* Elimina las cabeceras WorkVisual (`&ACCESS`, `&REL`, `&PARAM`, `&COMMENT`) con un clic para evitar diffs Git ruidosos en commits automatizados.
+### 11. Limpieza de metadatos Git y eliminador de cabeceras de servicio
+*Mantén limpio el control de versiones.* Elimina directivas de servicio (`&ACCESS`, `&REL`, `&PARAM`, `&COMMENT`) con un clic para evitar diffs Git ruidosos en commits automatizados.
 
 <p align="center">
   <img src="docs/public/media/git_metadata_cleaner.gif" width="720" alt="Git Metadata Cleaner Demo" />
@@ -233,35 +233,38 @@ Todo ingeniero de puesta en marcha conoce este dolor:
 
 ---
 
-### 16. Paleta de sintaxis auténtica KUKA.Sim y WorkVisual y biblioteca del sistema KSS 8.7
-*Paleta de colores rica y contexto de sistema estándar extraídos directamente de KUKA.Sim 4.10.*
-* **Paleta diversa de alto contraste**: esquemas de color 100% auténticos de KUKA.Sim (`KRLDark.xshd`) y WorkVisual (`KRL.xshd`). Ámbitos diferenciados para comandos de movimiento (negrita), operadores bit a bit/lógicos, símbolos matemáticos, directivas de sistema (`&ACCESS`, `&REL`) y números hexadecimales/binarios (`'H...'`, `'B...'`).
+### 16. Paleta de sintaxis de alto contraste y biblioteca del sistema KSS
+*Paleta de colores rica y contexto de sistema estándar para desarrollo KRL profesional.*
+* **Paleta diversa de alto contraste**: esquemas de color de estilo industrial (KRL Dark y Light). Ámbitos diferenciados para comandos de movimiento (negrita), operadores bit a bit/lógicos, símbolos matemáticos, directivas de sistema (`&ACCESS`, `&REL`) y números hexadecimales/binarios (`'H...'`, `'B...'`).
 * **Biblioteca estándar del sistema KSS 8.7**: definiciones integradas, ayuda de parámetros y `F12` (Ir a la definición) para `BAS()`, `MsgNotify()`, `MsgQuit()`, `MsgDialog()`, `USE_CM_PRO_VALUES()`, `TOOL_NAME[]` y `BASE_NAME[]` — directamente a los módulos de referencia oficiales de KSS 8.7.
 * **Andamiaje de proyecto KRC en 1 clic (`krl.scaffoldKrcFiles`)**: crea automáticamente el árbol estándar `KRC/R1/System/`, `KRC/R1/Program/` y `KRC/R1/TP/` poblado con `$config.dat`, `bas.src`, `MsgLib.src`, `collmonlib.src` y `sps.sub`.
 * **Valores de fábrica y limitador Advance Run**: visualización hover instantánea de los valores oficiales de fábrica (`operate.defaultvalues`) para `$ADVANCE = 3`, `$VEL.CP = 2.0 m/s`, `$ACC.CP = 2.3 m/s²`, `$JERK.CP = 500.0 m/s³` y advertencias lint automáticas cuando `$ADVANCE` supera el rango válido `0..5`.
 
 ---
 
-## Matriz de comparación de características (50 herramientas industriales)
+## Matriz de comparación de características
 
 | Característica | Community (gratis) | Pro Industrial | Beneficio para ingenieros |
 |:---|:---:|:---:|:---|
-| **Resaltado de sintaxis KRL** (`.src`, `.dat`, `.sub`, `.kfd`) | Sí | Sí | Coloración AST completa con la paleta diversa de KUKA.Sim |
-| **Temas KUKA.Sim 4.10 y WorkVisual** | Sí | Sí | Esquemas de color AvalonEdit auténticos (oscuro y claro) |
-| **Autocompletado inteligente y especificaciones del kernel** (957+ variables, 116 funciones, 111 estructuras) | Sí | Sí | Kernel oficial KUKA.Sim 4.10 con ayuda de firmas |
+| **Resaltado de sintaxis KRL** (`.src`, `.dat`, `.sub`, `.kfd`) | Sí | Sí | Coloración AST completa con paleta KRL |
+| **Temas KRL (Dark y Light)** | Sí | Sí | Esquemas de color industriales de alto contraste |
+| **Autocompletado inteligente y especificaciones del sistema** (957+ variables, 116 funciones, 111 estructuras) | Sí | Sí | Autocompletado completo de variables del sistema KSS y ayuda de firmas |
 | **Biblioteca estándar del sistema KSS 8.7 y definición F12** | Sí | Sí | Salto F12 instantáneo a `bas.src`, `MsgLib.src`, `$config.dat` |
 | **Andamiaje de proyecto KRC en 1 clic** | Sí | Sí | Inicializa la estructura estándar `KRC/R1/System` |
 | **Hover de valores de fábrica y limitador $ADVANCE** | Sí | Sí | Muestra valores de fábrica y advierte si `$ADVANCE > 5` |
-| **23 snippets oficiales de formularios inline** (34 plantillas de movimiento y lógica) | Sí | Sí | Plantillas completas `;FOLD ... ;%{PE}` de KUKA Roboter GmbH |
+| **23 snippets estándar de formularios inline** (34 plantillas de movimiento y lógica) | Sí | Sí | Plantillas completas `;FOLD ... ;%{PE}` |
 | **Sugerencias inline de señales y documentación hover** | Sí | Sí | Etiquetas de señales PLC inline y firmas de parámetros |
 | **Formateador de código y alineación de matrices** | Sí | Sí | Limpieza instantánea con 1 clic (`Shift+Alt+F`) |
 | **Blame por línea GitLens e historial de revisiones** | Sí | Sí | Seguimiento instantáneo de autor y commit para cada punto |
 | **Arquitectura en seis idiomas** (EN, DE, IT, ES, RU, TR) | Sí | Sí | UI nativa completa, 515 claves de UI y 1.073 traducciones de documentación de variables del sistema |
-| **Limpieza de metadatos Git** | Sí | Sí | Elimina cabeceras WorkVisual para diffs Git limpios |
+| **Limpieza de metadatos Git** | Sí | Sí | Elimina cabeceras de servicio (`&ACCESS`, `&REL`) para diffs Git limpios |
 | **Control Center y guía de referencia de 21 tarjetas** | Sí | Sí | Conmutadores de diagnóstico en tiempo real y guía de atajos en el editor |
 | **Árbol lateral completo de 36 comandos** | Sí | Sí | Cada comando de la extensión accesible con 1 clic |
 | **Exportación ZIP nativa del proyecto y telepresencia remota** | Sí | Sí | Copia completa con 1 clic al explorador o a Telegram |
-| **Integración Copilot AI Language Model Tools** | Sí | Sí | `krl_safety_check` invocable directamente por la IA de VS Code |
+| **Integración Copilot AI Language Model Tools (`krl_safety_check`)** | — | **Pro** | Verificación de seguridad invocable directamente por la IA de VS Code |
+| **Facturación B2B y presupuestos (`krl.requestCorporateInvoice`)** | Sí | Sí | Solicitud de presupuestos y facturas B2B con NIF-IVA / Reverse Charge directamente en el editor |
+| **Comprobación básica de sintaxis y diagnóstico** | Sí (Bonus) | Sí | Validación de sintaxis KRL y detección básica de errores |
+| **Compatibilidad con KSS 9.x / iiQWorks 9.+ y KSS 8.3–8.7** | Sí | Sí | Compatibilidad completa con KSS 9.x, iiQWorks y controladores KRC2–KRC5 |
 | **Informe de aceptación de calidad de copias SmartPAD** | — | **Pro** | Auditoría automática del proyecto con pasaporte del robot e hipervínculos clicables |
 | **KRL moderno y suite FOLD iiQKA** | — | **Pro** | FOLDs iiQKA, bloques Spline y protección contra colisiones |
 | **Visor de diagrama de flujo interactivo** (Mermaid SVG) | — | **Pro** | Lógica visual del flujo de control y salto al código bidireccional |
@@ -287,11 +290,11 @@ Ofrecemos licencias flexibles de grado industrial a través de nuestro comercian
 | Plan | Precio | Descuento / Facturación | Términos de licencia | Pago |
 |:---|:---:|:---|:---|:---:|
 | **Community** | **$0** | 100% gratis para siempre | Uso personal y comercial | [Instalar gratis](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| **Pro Mensual** | **$19.00** / mes | Facturación mensual | Las 50 herramientas Pro industriales • 1 PC • Soporte KRC2–KRC5 | [Obtener Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
-| **Pro Anual** | **$149.00** / año | **Ahorra un 35%** (~$6.58/mes) | Las 50 herramientas Pro • 1 PC • Buffer offline de 30 días • KRC2–KRC5 | [Obtener Pro anual](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
-| **Pro Vitalicio** | **$699.00** | **Paga una vez, tuyo para siempre** | Las 50 herramientas Pro • 1 PC (1 estación de trabajo) • Actualizaciones de por vida | [Obtener Pro vitalicio](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| **Team Edition** | **$499.00** / año | B2B — Factura y presupuesto | Las 50 herramientas Pro • 25 estaciones de trabajo • KRC2–KRC5 | [Obtener Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| **Enterprise Site** | **$2,490.00** / año | 200 estaciones | Las 50 herramientas Pro • 200 estaciones de planta • Informes con marca | [Obtener Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| **Pro Mensual** | **$19.00** / mes | Facturación mensual | Todas las herramientas Pro • 1 PC • Soporte KRC2–KRC5 | [Obtener Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| **Pro Anual** | **$149.00** / año | **Ahorra un 35%** (~$6.58/mes) | Todas las herramientas Pro • 1 PC • Buffer offline de 30 días • KRC2–KRC5 | [Obtener Pro anual](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
+| **Pro Vitalicio** | **$699.00** | **Paga una vez, tuyo para siempre** | Todas las herramientas Pro • 1 PC (1 estación de trabajo) • Actualizaciones de por vida | [Obtener Pro vitalicio](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
+| **Team Edition** | **$499.00** / año | B2B — Factura y presupuesto | Todas las herramientas Pro • 25 activaciones de trabajo • KRC2–KRC5 | [Obtener Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| **Enterprise Site** | **$2,490.00** / año | 200 estaciones | Todas las herramientas Pro • 200 estaciones de planta • Informes con marca | [Obtener Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">
@@ -375,6 +378,6 @@ Configura el comportamiento de la extensión en tu `settings.json`:
 **KUKA KRL Professional** es una suite independiente de desarrollo, análisis estático y comparación de copias de seguridad desarrollada por **Liskin Labs**. **NO es software certificado para seguridad (Non-SIL / Non-PL)** y **no reemplaza** los procedimientos obligatorios de puesta en servicio físico, la verificación de velocidad reducida (`$OV_PRO <= 30%` en modo T1 en el SmartPAD físico) ni las evaluaciones de riesgo formales según **ISO 10218-1/-2** e **ISO 13849-1**. Realice siempre pruebas manuales en modo T1 antes del ciclo automático.
 
 ### Marcas comerciales y descargo de responsabilidad
-* **KUKA®, KRL®, KRC®, WorkVisual® y SmartPAD®** son marcas registradas de **KUKA AG** / **KUKA Deutschland GmbH**.
+* **KUKA®, KRL®, KRC®, WorkVisual®, iiQWorks® y SmartPAD®** son marcas registradas de **KUKA AG** / **KUKA Deutschland GmbH**.
 * **Visual Studio Code® y VS Code®** son marcas registradas de **Microsoft Corporation**.
 * Esta extensión de software es un desarrollo independiente de **Liskin Labs** y **no** está afiliada, patrocinada, respaldada ni certificada por KUKA AG ni Microsoft Corporation. Todos los nombres de productos y marcas comerciales pertenecen a sus respectivos propietarios y se utilizan únicamente con fines de compatibilidad e identificación (nominative fair use).

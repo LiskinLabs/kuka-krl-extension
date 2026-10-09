@@ -100,8 +100,8 @@ Yörünge ve koordinat sistemi manipülasyonu:
 
 ---
 
-### 33. KUKA.Sim 4.10 & iiQWorks.Sim 1.3 Kinematik Güvenlik Denetleyicileri
-Derin simülasyon kuralları: Status (S) ve Turn (T) sınır kontrolleri, RESUME ifadesi denetimi, FOR STEP 0 sonsuz döngü engelleme, SUBMIT arka plan kısıtlamaları ve otomotiv teknoloji paketlerinin korunması.
+### 33. Kinematik Güvenlik ve Endüstriyel Simülasyon Denetleyicileri (KSS 8.x & KSS 9.x / iiQWorks 9.+)
+KSS 8.x ve KSS 9.x / iiQWorks spesifikasyonlarına uygun simülasyon ve kinematik güvenlik kuralları: Status (S) ve Turn (T) sınır kontrolleri, RESUME ifadesi denetimi, FOR STEP 0 sonsuz döngü engelleme, SUBMIT arka plan kısıtlamaları ve otomotiv teknoloji paketlerinin korunması.
 
 ---
 

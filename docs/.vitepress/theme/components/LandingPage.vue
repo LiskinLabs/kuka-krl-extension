@@ -28,11 +28,11 @@
 
         <!-- Anchor Navigation Links -->
         <div class="hidden lg:flex items-center gap-5 text-xs font-mono text-gray-300">
-          <a href="#vscode-ide" class="hover:text-kuka-orange transition-colors flex items-center gap-1 text-white font-bold">
-            <span class="text-kuka-orange">💻</span> {{ t.navVsCodeIde || "VS Code IDE" }}
+          <a href="#cinematic" class="hover:text-kuka-orange transition-colors flex items-center gap-1">
+            <span class="text-kuka-orange">🎬</span> {{ t.navShowcase }}
           </a>
           <a :href="withBase(t.wikiLink)" class="hover:text-kuka-orange transition-colors flex items-center gap-1">
-            <span class="text-cyan-400 font-bold">159</span> {{ t.navWiki }}
+            <span class="text-cyan-400 font-bold">50</span> {{ t.navWiki }}
           </a>
           <a href="#comparison" class="hover:text-kuka-orange transition-colors">
             {{ t.navBeforeAfter }}
@@ -54,12 +54,21 @@
         <!-- Language Pill Switcher & CTA -->
         <div class="flex items-center gap-3">
           <div class="inline-flex items-center gap-1 bg-[#0d121d] p-1 rounded-full border border-white/10 shadow-sm font-mono text-xs">
-            <a :href="withBase('/')" :class="['px-2 py-0.5 rounded-full font-bold transition-all', currentLang === 'en' ? 'bg-kuka-orange text-white shadow-[0_0_10px_rgba(255,102,0,0.5)]' : 'text-gray-400 hover:text-white']">EN</a>
-            <a :href="withBase('/de/')" :class="['px-2 py-0.5 rounded-full font-bold transition-all', currentLang === 'de' ? 'bg-kuka-orange text-white shadow-[0_0_10px_rgba(255,102,0,0.5)]' : 'text-gray-400 hover:text-white']">DE</a>
-            <a :href="withBase('/es/')" :class="['px-2 py-0.5 rounded-full font-bold transition-all', currentLang === 'es' ? 'bg-kuka-orange text-white shadow-[0_0_10px_rgba(255,102,0,0.5)]' : 'text-gray-400 hover:text-white']">ES</a>
-            <a :href="withBase('/it/')" :class="['px-2 py-0.5 rounded-full font-bold transition-all', currentLang === 'it' ? 'bg-kuka-orange text-white shadow-[0_0_10px_rgba(255,102,0,0.5)]' : 'text-gray-400 hover:text-white']">IT</a>
-            <a :href="withBase('/ru/')" :class="['px-2 py-0.5 rounded-full font-bold transition-all', currentLang === 'ru' ? 'bg-kuka-orange text-white shadow-[0_0_10px_rgba(255,102,0,0.5)]' : 'text-gray-400 hover:text-white']">RU</a>
-            <a :href="withBase('/tr/')" :class="['px-2 py-0.5 rounded-full font-bold transition-all', currentLang === 'tr' ? 'bg-kuka-orange text-white shadow-[0_0_10px_rgba(255,102,0,0.5)]' : 'text-gray-400 hover:text-white']">TR</a>
+            <a 
+              :href="withBase('/')" 
+              :class="['px-2.5 py-0.5 rounded-full font-bold transition-all', currentLang === 'en' ? 'bg-kuka-orange text-white shadow-[0_0_10px_rgba(255,102,0,0.5)]' : 'text-gray-400 hover:text-white']">
+              EN
+            </a>
+            <a 
+              :href="withBase('/ru/')" 
+              :class="['px-2.5 py-0.5 rounded-full font-bold transition-all', currentLang === 'ru' ? 'bg-kuka-orange text-white shadow-[0_0_10px_rgba(255,102,0,0.5)]' : 'text-gray-400 hover:text-white']">
+              RU
+            </a>
+            <a 
+              :href="withBase('/tr/')" 
+              :class="['px-2.5 py-0.5 rounded-full font-bold transition-all', currentLang === 'tr' ? 'bg-kuka-orange text-white shadow-[0_0_10px_rgba(255,102,0,0.5)]' : 'text-gray-400 hover:text-white']">
+              TR
+            </a>
           </div>
 
           <a 
@@ -88,11 +97,11 @@
       <transition name="fade">
         <div v-if="mobileMenuOpen" class="lg:hidden px-4 pt-3 pb-5 bg-[#07090e]/98 backdrop-blur-2xl border-b border-white/15 text-left font-mono text-xs space-y-3 shadow-2xl">
           <div class="grid grid-cols-2 gap-2">
-            <a @click="mobileMenuOpen = false" href="#vscode-ide" class="p-2.5 rounded-xl bg-[#0a0d14] border border-white/10 text-gray-300 hover:text-kuka-orange flex items-center gap-2">
-              <span>💻</span> <span>Web IDE</span>
+            <a @click="mobileMenuOpen = false" href="#cinematic" class="p-2.5 rounded-xl bg-[#0a0d14] border border-white/10 text-gray-300 hover:text-kuka-orange flex items-center gap-2">
+              <span>🎬</span> <span>{{ t.navShowcase }}</span>
             </a>
             <a @click="mobileMenuOpen = false" :href="withBase(t.wikiLink)" class="p-2.5 rounded-xl bg-[#0a0d14] border border-white/10 text-gray-300 hover:text-kuka-orange flex items-center gap-2">
-              <span class="text-cyan-400 font-bold">159</span> <span>{{ t.navWiki }}</span>
+              <span class="text-cyan-400 font-bold">50</span> <span>{{ t.navWiki }}</span>
             </a>
             <a @click="mobileMenuOpen = false" href="#comparison" class="p-2.5 rounded-xl bg-[#0a0d14] border border-white/10 text-gray-300 hover:text-kuka-orange flex items-center gap-2">
               <span>⚖️</span> <span>{{ t.navBeforeAfter }}</span>
@@ -140,7 +149,7 @@
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-2 w-2 bg-kuka-orange"></span>
               </span>
-              <span>[ SYS.ONLINE // KSS 8.2 - 8.7 // 159 INDUSTRIAL CAPABILITIES // v1.9.3 ]</span>
+              <span>[ SYS.ONLINE // KSS 8.2 - 8.7 // 54 INDUSTRIAL TOOLS // v1.8.7 ]</span>
             </div>
 
             <!-- Main Heading H1 -->
@@ -384,23 +393,23 @@
     </section>
 
     <!-- 2.3 Cinematic Scrollytelling Stage (Apple-Style 4-Stage Showcase) -->
-    <section id="vscode-ide" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-20">
+    <section id="cinematic" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-20">
       <div class="text-center max-w-3xl mx-auto mb-8 space-y-3">
         <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-kuka-orange text-xs font-mono font-bold">
-          <span>//</span> LIVE IN-BROWSER VS CODE WEB IDE • ZERO CLOUD • NDA SAFE
+          <span>//</span> CINEMATIC 4-STAGE SHOWCASE
         </div>
-        <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight font-sans">
-          {{ t.ideHeading || 'Complete KUKA IDE Inside Your Browser' }}
+        <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight">
+          {{ t.showcaseHeading }}
         </h2>
         <p class="text-xs sm:text-sm text-gray-400 font-mono">
-          {{ t.ideDesc || 'Test the authentic extension experience live: real KRL grammar tokens, Command Palette (Ctrl+Shift+P), ErrorLens badges, and AST diagnostics.' }}
+          {{ t.showcaseDesc }}
         </p>
       </div>
 
-      <!-- Authentic In-Browser VS Code Web IDE Simulator -->
-      <VsCodeWebSimulator />
+      <KukaScrollytelling />
     </section>
 
+    <!-- 2.4 Before vs After Interactive Split Slider -->
     <section id="comparison" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/10 relative z-10">
       <div class="text-center max-w-3xl mx-auto mb-10 space-y-3">
         <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-kuka-orange text-xs font-mono font-bold">
@@ -519,7 +528,7 @@
     <section id="playground" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/10 relative z-10">
       <div class="text-center max-w-3xl mx-auto mb-10 space-y-3">
         <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-kuka-orange text-xs font-mono font-bold">
-          <span>//</span> INTERACTIVE KRL WEB ENGINE & BACKUP INSPECTOR
+          <span>//</span> LIVE IN-BROWSER SAFETY LINT
         </div>
         <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight">
           {{ t.playgroundHeading }}
@@ -529,10 +538,95 @@
         </p>
       </div>
 
-      <!-- High-Performance Client-Side KRL Web Inspector -->
-      <KrlWebInspector />
+      <div class="rounded-2xl border border-white/15 bg-[#0a0d14] shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden font-mono text-xs">
+        
+        <!-- Preset Selector Toolbar -->
+        <div class="p-3.5 bg-[#0d121d] border-b border-white/10 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-gray-400 font-bold">PRESET:</span>
+            <button 
+              v-for="p in playgroundPresets" 
+              :key="p.id"
+              @click="loadPreset(p)"
+              :class="['px-3 py-1.5 rounded-lg transition-all font-bold', currentPresetId === p.id ? 'bg-kuka-orange text-white shadow-md' : 'bg-[#121826] text-gray-300 hover:text-white border border-white/5']">
+              {{ p.name }}
+            </button>
+          </div>
+
+          <button 
+            @click="runPlaygroundAnalysis" 
+            class="px-4 py-2 rounded-xl bg-kuka-orange hover:bg-orange-600 text-white font-bold flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,102,0,0.4)] transition-all active:scale-95">
+            <span>⚡ RUN SAFETY LINT</span>
+          </button>
+        </div>
+
+        <!-- Code Editor & Diagnostic Terminal -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+          
+          <!-- Code Editor Area -->
+          <div class="lg:col-span-7 p-5 bg-[#07090e] text-gray-200 font-mono text-xs sm:text-sm leading-relaxed border-b lg:border-b-0 lg:border-r border-white/10 text-left">
+            <div class="text-[11px] text-gray-400 pb-2 mb-3 border-b border-white/10 flex justify-between">
+              <span>// EDITABLE KRL SOURCE BUFFER</span>
+              <span class="text-kuka-orange font-bold">KSS 8.7 AST Engine</span>
+            </div>
+            <textarea 
+              v-model="playgroundCode" 
+              @input="runPlaygroundAnalysis"
+              rows="12" 
+              class="w-full bg-transparent text-gray-200 font-mono text-xs sm:text-sm focus:outline-none resize-none leading-relaxed selection:bg-kuka-orange selection:text-white"
+              spellcheck="false"></textarea>
+          </div>
+
+          <!-- Diagnostic Terminal Results -->
+          <div class="lg:col-span-5 p-5 bg-[#0a0d14] text-gray-300 font-mono flex flex-col justify-between text-left">
+            <div>
+              <div class="text-[11px] text-gray-400 pb-2 mb-3 border-b border-white/10 flex justify-between items-center">
+                <span>DIAGNOSTIC TELEMETRY</span>
+                <span :class="['px-2 py-0.5 rounded text-[10px] font-bold', playgroundErrors.length > 0 ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30']">
+                  {{ playgroundErrors.length > 0 ? `${playgroundErrors.length} FAULTS DETECTED` : '0 FAULTS // 100% PASS' }}
+                </span>
+              </div>
+
+              <!-- Errors List -->
+              <div class="space-y-2.5 text-xs max-h-[220px] overflow-y-auto pr-1">
+                <div v-for="(err, i) in playgroundErrors" :key="i" class="p-3 rounded-xl bg-rose-950/40 border border-rose-500/30 text-rose-300">
+                  <div class="font-bold flex items-center gap-1.5">
+                    <span>⚠️ Line {{ err.line }}:</span> <span>{{ err.title }}</span>
+                  </div>
+                  <div class="text-[11px] text-gray-300 mt-1 leading-relaxed">{{ err.desc }}</div>
+                </div>
+
+                <div v-if="playgroundErrors.length === 0" class="p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-300 space-y-1">
+                  <div class="font-bold flex items-center gap-1.5">
+                    <span>✓ Safety Verification Passed</span>
+                  </div>
+                  <div class="text-[11px] text-gray-300 leading-relaxed">All frame assignments, BAS(#INITMOV), velocity limits, and block balance rules validated for factory floor execution.</div>
+                </div>
+              </div>
+
+              <!-- Live Auto-Flowchart AST Nodes -->
+              <div class="mt-5 pt-3 border-t border-white/10">
+                <div class="text-[10px] text-gray-400 mb-2 font-bold">// REAL-TIME AST GRAPH NODES:</div>
+                <div class="flex flex-wrap gap-1.5 text-[10px]">
+                  <span v-for="(node, ni) in playgroundAstNodes" :key="ni" :class="['px-2.5 py-1 rounded-lg bg-[#111724] border border-white/10 font-mono flex items-center gap-1.5', node.color || 'text-cyan-300']">
+                    <span class="text-gray-500 font-bold">L{{ node.line }}:</span>
+                    <span>{{ node.label }}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-3 mt-4 border-t border-white/10 flex justify-between items-center text-[10px] text-gray-400">
+              <span>AST Latency: 0.8ms</span>
+              <span class="text-kuka-orange font-bold">Offline-First Native</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </section>
 
+    <!-- 2.6 3-Point $BASE / $TOOL Frame Calculator -->
     <section id="calculator" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/10 relative z-10 font-mono">
       <div class="text-center max-w-3xl mx-auto mb-10 space-y-3">
         <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-xs font-bold">
@@ -1348,8 +1442,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useData, withBase } from 'vitepress'
-import KrlWebInspector from './KrlWebInspector.vue'
-import VsCodeWebSimulator from './VsCodeWebSimulator.vue'
+import KukaScrollytelling from './KukaScrollytelling.vue'
 import { worldLandSvgPath } from './worldMapData'
 import { telemetryHeatPoints } from './telemetryHeatPoints'
 
@@ -1357,11 +1450,8 @@ const activeHeatPoint = ref(telemetryHeatPoints[3])
 
 const { lang } = useData()
 const currentLang = computed(() => {
-  const l = (lang.value || 'en').toLowerCase()
+  const l = lang.value || 'en'
   if (l.startsWith('ru')) return 'ru'
-  if (l.startsWith('de')) return 'de'
-  if (l.startsWith('es')) return 'es'
-  if (l.startsWith('it')) return 'it'
   if (l.startsWith('tr')) return 'tr'
   return 'en'
 })
@@ -2107,445 +2197,6 @@ onMounted(() => {
 })
 
 const translations = {
-  de: {
-    "navShowcase": "3D-Showcase",
-    "navWiki": "Werkzeug-Wiki",
-    "navBeforeAfter": "Vorher / Nachher",
-    "navPlayground": "Live-Spielplatz",
-    "navFrameCalc": "Frame-Rechner",
-    "navTelemetry": "Globale Telemetrie",
-    "navPricing": "Preise",
-    "navBuyPro": "Pro-Schlüssel erhalten",
-    "heroTitlePrefix": "Industrielle Entwicklungsumgebung für ",
-    "heroTitleHighlight": "KUKA Robotersprache",
-    "heroSubtitle": "Enterprise-IDE und umfassende Sicherheit für KRC4- & KRC5-Steuerungen. 159 industrielle Fähigkeiten für maximale Programmiergeschwindigkeit, Kollisionsvermeidung und null Ausfallzeiten.",
-    "btnWiki": "Wissensdatenbank (159 Fähigkeiten) ➔",
-    "btnBuyPro": "Pro-Lizenz kaufen",
-    "wikiLink": "/guide/features",
-    "showcaseHeading": "Kinematische Ingenieur-Tour: KUKA KRL Pro Suite",
-    "showcaseDesc": "Interaktive 4-stufige Erkundung von Kinematik, Sicherheitsbarrieren, Koordinatenmathematik und globaler Telemetrie.",
-    "sliderHeading": "Schieben Sie, um die Transformation zu erleben",
-    "sliderDesc": "Ziehen Sie den mittleren Griff nach links und rechts, um den Vergleich zwischen dem einfachen Legacy-Notepad und KUKA KRL Professional zu sehen.",
-    "playgroundHeading": "KUKA Sicherheitsdiagnose live im Browser testen",
-    "playgroundDesc": "Wählen Sie ein industrielles Szenario oder schreiben Sie Ihren eigenen KRL-Code, um Diagnosen und AST-Generierung zu testen.",
-    "calcHeading": "3-Punkt $BASE / $TOOL Frame-Rechner",
-    "calcDesc": "Berechnen Sie Euler-Rotationswinkel (A, B, C) direkt in Ihrem Browser und generieren Sie gültige KRL-Koordinatenstrukturen.",
-    "telemetryTag": "GLOBALE INBETRIEBNAHMETELEMETRIE // D1 SYNC",
-    "telemetryTitle": "Ingenieure aktiv in",
-    "telemetryCountries": "Ländern",
-    "telemetryDesc": "Von Tier-1-Automobilproduktionsstätten in Deutschland bis hin zu Robotik-Integrationszellen in den USA, der Türkei, Italien und Mexiko. Anonyme Telemetrie in Echtzeit überprüft die KSS-Kompatibilität und null Ausfallzeiten.",
-    "ecoHeading": "Läuft in Ihrem gesamten IDE-Ökosystem",
-    "ecoDesc": "Basiert auf dem Language Server Protocol (LSP). Funktioniert nahtlos auf allen modernen Entwicklungsplattformen.",
-    "matrixTitle": "Community Edition (0 $) vs. Pro Industrial",
-    "matrixDesc": "Vollständiger Funktionsvergleich der kostenlosen Kern-Erweiterung vs. der 159-Fähigkeiten-Enterprise-Engineering-Suite.",
-    "pricingTitle": "TRANSPARENTE INDUSTRIEPREISE",
-    "pricingHeading": "Einfache, vorhersehbare Pläne für Automatisierungsingenieure",
-    "pricingDesc": "Investieren Sie in null Ausfallzeiten und schnelle Inbetriebnahme. Sofortige Aktivierung über Dodo Payments.",
-    "p0Desc": "Essenzielle Syntaxhervorhebung und Navigation für Studenten oder Hobby-KRL-Programmierer.",
-    "p1Desc": "Voller Zugriff auf alle 159 Fähigkeiten für aktive Inbetriebnahme- und Installationsprojekte.",
-    "p2Desc": "Empfohlen für Automatisierungsteams. Voller Zugriff, Prioritäts-Updates und Teamlizenzierung.",
-    "p3Desc": "Dauerhafter lebenslanger Zugriff auf alle 159 Pro-Fähigkeiten und zukünftige Haupt-Updates ohne wiederkehrende Gebühren.",
-    "mostPopular": "EMPFOHLEN",
-    "btnFree": "Kostenlos herunterladen",
-    "btnSub": "Monatlich abonnieren",
-    "btnSubYr": "Jährlich abonnieren",
-    "btnLifetime": "Lebenslange Lizenz erhalten",
-    "pf0_1": "6 industrielle KUKA-Themes",
-    "pf0_2": "Grundlegende KRL-Autovervollständigung",
-    "pf0_3": "Gehe-zu-Definition-Navigation",
-    "pf1": "Alle 159 industriellen Fähigkeiten freigeschaltet",
-    "pf2": "Echtzeit-Inlay-Hints & Signal-Tooltips",
-    "pf3_std": "Standard-E-Mail-Support",
-    "pf3_pri": "Priorisierter 24/7 Ingenieur-Support",
-    "faqTitle": "Häufig gestellte Fragen",
-    "faqs": [
-        {
-            "q": "Funktioniert diese Erweiterung zu 100 % offline in Roboterzellen ohne Internet?",
-            "a": "Ja. Alle 159 Fähigkeiten – einschließlich Syntax-Parsing, 3-Punkt-Frame-Berechnung, AST-Flowcharting und Backup-Diffing – laufen zu 100 % lokal auf Ihrem Rechner ohne Cloud-Abhängigkeiten."
-        },
-        {
-            "q": "Kann dies WorkVisual für die Codebearbeitung vollständig ersetzen?",
-            "a": "Ja. Für KRL-Logik, Mathematik, Programmsequenzierung und Sicherheitsaudits ist es wesentlich schneller und sicherer als WorkVisual. WorkVisual benötigen Sie nur für die anfängliche Hardware-Bus-Konfiguration."
-        },
-        {
-            "q": "Wie viele Workstations kann ich mit einer Pro-Lizenz aktivieren?",
-            "a": "Jede einzelne Pro-Lizenz erlaubt die Aktivierung auf bis zu 5 Maschinen gleichzeitig (z.B. Ihr robuster Laptop in der Werkstatt, Büro-Workstation, Heim-Setup, Bench-PC und Tablet)."
-        },
-        {
-            "q": "Warum kostet Pro Lifetime einmalig 699 $, während Enterprise Site 1.499 $/Jahr kostet?",
-            "a": "Pro Lifetime (699 $) bietet 5 Geräteaktivierungen (robuster Laptop, Büro-PC, Teststand, Heim-PC, Tablet) ohne wiederkehrende Gebühren. Enterprise Site (1.499 $/Jahr) bietet unbegrenzte Geräteaktivierungen für das gesamte Werk, deckt alle Werkstechniker und Bediener ab (~8 $/Monat pro Platz für ein 20-köpfiges Team). Es beinhaltet priorisierten direkten Entwickler-Support, automatisierten KUKA Fleet Backup Hub und OEM-gebrandete Kundenabnahmeberichte."
-        }
-    ],
-    "activeIdesBadge": "Aktive IDEs",
-    "activeNationsBadge": "Aktive Nationen",
-    "liveD1SyncBtn": "Live D1 Sync",
-    "topRegionsTitle": "TOP ROBOTIK-REGIONEN",
-    "pctTotalLabel": "% GESAMT",
-    "gatewayTitle": "GATEWAY & COMPLIANCE",
-    "gatewayOperational": "100% BETRIEBSBEREIT",
-    "d1RelayLabel": "Cloudflare D1 Relais:",
-    "testPingBtn": "Ping testen",
-    "pingingBtn": "Pinging...",
-    "latencySuffix": "ms Latenz",
-    "d1RelayDesc": "Edge-Serverless-Telemetrie-Relais ohne Kundendatenhaltung.",
-    "airgapTitle": "100% Air-Gap & On-Premise",
-    "airgapDesc": "Ihre KRL-Logik, Punkte und Frame-Koordinaten werden rein im lokalen RAM ausgeführt. Keine externen Cloud-Abhängigkeiten.",
-    "spectraTitle": "Spectra Assure Lieferkette sauber",
-    "spectraDesc": "0 bösartige Signaturen. Vollständig verifiziert für Tier-1-Automobil- und Verteidigungsrobotiklinien.",
-    "heartbeatRelayText": "Heartbeat-Relais: Cloudflare Edge Global D1 Store",
-    "gdprComplianceText": "Zero-PII Anonyme Telemetrie // DSGVO-konform",
-    "activeClusterBadge": "AKTIVER CLUSTER",
-    "clusterDensityLabel": "Cluster-Dichte",
-    "clusterSessionsText": "Aktive IDEs",
-    "environmentLabel": "Umgebung",
-    "targetControllerLabel": "Ziel-Controller",
-    "dataPrivacyLabel": "Datenschutz",
-    "privacyGuaranteeText": "100% Air-Gap & Zero-PII",
-    "perMonth": "/ Monat",
-    "perYear": "/ Jahr",
-    "perOnce": "/ Einmalig",
-    "save35": "35% SPAREN",
-    "activation5Seats": "5 Geräteaktivierungen",
-    "lifetimeF1": "Alle 159 Pro-Fähigkeiten für immer",
-    "lifetimeF2": "Kostenlose zukünftige Haupt-Updates",
-    "lifetimeF3": "Direkter Ingenieur-Support",
-    "pricingGuideBadge": "LIZENZIERUNGSÖKONOMIE",
-    "pricingGuideTitle": "Welche Lizenz passt zu Ihrem Workflow?",
-    "pricingGuideSub": "Transparente Bedingungen für individuelle Setups, Integrator-Teams und Fertigungsanlagen.",
-    "guideCol1Title": "5-Geräte-Stufe",
-    "guideCol1Desc": "Pro Monatlich (9,99 $), Pro Jährlich (79 $) oder Pro Lifetime (699 $).",
-    "guideCol1P1": "5 gleichzeitige Geräteaktivierungen: Laptop, Toughbook, Büro, Bench & Tablet.",
-    "guideCol1P2": "Einmal zahlen, für immer besitzen mit null wiederkehrenden Gebühren für unabhängige Spezialisten.",
-    "guideCol1P3": "Ein verhinderter Absturz im Teach-in zahlt die Lizenz sofort.",
-    "guideCol2Title": "25-Geräte-Stufe",
-    "guideCol2Desc": "Team Edition (299 $/Jahr) mit insgesamt 25 Geräteaktivierungen.",
-    "guideCol2P1": "25 gleichzeitige Geräteaktivierungen für Ihr gesamtes Integrationsteam.",
-    "guideCol2P2": "Zentralisierte B2B-Rechnung mit Konzernbuchhaltungsabgleich.",
-    "guideCol2P3": "Vereinheitlichte KRL-Syntax und Sicherheitsstandards über alle Client-Zellen hinweg.",
-    "guideCol3Title": "Enterprise Werksstandort",
-    "guideCol3Desc": "Enterprise Site (1.499 $/Jahr) – Unbegrenzte Geräteaktivierungen für das gesamte Werk.",
-    "guideCol3P1_b": "Unbegrenzte Aktivierungen:",
-    "guideCol3P1": "Deckt alle Werkstechniker und Bediener ab (~8 $/Monat pro Person für ein 20-köpfiges Team).",
-    "guideCol3P2": "Direkte Entwickler-Ingenieurhilfe und dedizierter SLA-Support.",
-    "guideCol3P3": "Cloud-Archivierung aller Roboterzellen + OEM-gebrandete Audits (Ford, Renault, TOGG).",
-    "p4Desc": "Jährliche Lizenz für Integrationsteams – eine Rechnung, 25 Geräteaktivierungen, Prioritäts-Support.",
-    "pf4_1": "Alle 159 Pro-Fähigkeiten",
-    "pf4_2": "25 Geräteaktivierungen",
-    "pf4_3": "Priorisierter Ingenieur-Support",
-    "btnTeam": "Team Edition erhalten",
-    "entBadge": "UNBEGRENZTE AKTIVIERUNGEN",
-    "p5Desc": "Standortweite Lizenz für das gesamte Fertigungswerk – unbegrenzte Geräteaktivierungen und Fleet Backup Hub.",
-    "pf5_1": "Unbegrenzte Geräteaktivierungen",
-    "pf5_2": "Firmengebrandete OEM-Berichte",
-    "pf5_3": "Priorisierter Ingenieur-Support",
-    "btnEnterprise": "Enterprise erhalten",
-    "matrixColFeature": "Industrielle Funktion / Fähigkeit",
-    "matrixColCommunity": "Community",
-    "matrixColFree": "Für immer kostenlos",
-    "matrixColPro": "Pro Industrial",
-    "matrixColProSub": "Vollständige Suite (159 Fähigkeiten)",
-    "matrixIncluded": "✓ Enthalten",
-    "matrixFullPro": "✓ Voller Pro-Zugriff",
-    "matrixCtaText": "Bereit, Ihr Inbetriebnahme-Team mit Werkzeugen für null Ausfallzeiten auszustatten?",
-    "matrixBtnFree": "Kostenlose Community installieren",
-    "matrixBtnPro": "Jetzt Pro-Lizenz erhalten ➔",
-    "automotiveComplianceLabel": "AUTOMOBIL-COMPLIANCE:",
-    "allSystemsOperational": "ALLE SYSTEME BETRIEBSBEREIT // LISKIN LABS 2026",
-    "kssVerified": "KSS 8.2 - 8.7 Verifiziert"
-},
-  es: {
-    "navShowcase": "Escaparate 3D",
-    "navWiki": "Wiki de Herramientas",
-    "navBeforeAfter": "Antes / Después",
-    "navPlayground": "Patio de Juegos en Vivo",
-    "navFrameCalc": "Calculadora de Marcos",
-    "navTelemetry": "Telemetría Global",
-    "navPricing": "Precios",
-    "navBuyPro": "Obtener Clave Pro",
-    "heroTitlePrefix": "Entorno de Desarrollo Industrial para ",
-    "heroTitleHighlight": "Lenguaje de Robots KUKA",
-    "heroSubtitle": "IDE empresarial y seguridad integral para controladores KRC4 y KRC5. 159 capacidades industriales diseñadas para máxima velocidad de programación, prevención de colisiones y cero tiempo de inactividad.",
-    "btnWiki": "Base de Conocimientos (159 Capacidades) ➔",
-    "btnBuyPro": "Comprar Licencia Pro",
-    "wikiLink": "/guide/features",
-    "showcaseHeading": "Tour Cinematográfico de Ingeniería: KUKA KRL Pro Suite",
-    "showcaseDesc": "Exploración interactiva en 4 etapas de cinemática, barreras de seguridad, matemáticas de coordenadas y telemetría global.",
-    "sliderHeading": "Deslice para Experimentar la Transformación",
-    "sliderDesc": "Arrastre el control central hacia la izquierda y la derecha para comparar el bloc de notas heredado con KUKA KRL Professional.",
-    "playgroundHeading": "Pruebe el Diagnóstico de Seguridad de KUKA en Vivo en el Navegador",
-    "playgroundDesc": "Seleccione un escenario industrial o escriba su propio código KRL para probar diagnósticos y generación de AST.",
-    "calcHeading": "Calculadora de Marcos de 3 Puntos $BASE / $TOOL",
-    "calcDesc": "Calcule los ángulos de rotación de Euler (A, B, C) directamente en su navegador y genere estructuras de coordenadas KRL válidas.",
-    "telemetryTag": "TELEMETRÍA DE PUESTA EN MARCHA GLOBAL // D1 SYNC",
-    "telemetryTitle": "Ingenieros Activos en",
-    "telemetryCountries": "Países",
-    "telemetryDesc": "Desde plantas de fabricación automotriz de nivel 1 en Alemania hasta celdas de integración robótica en EE. UU., Turquía, Italia y México. La telemetría anónima en tiempo real verifica la compatibilidad con KSS y cero tiempo de inactividad.",
-    "ecoHeading": "Se Ejecuta en Todo su Ecosistema IDE",
-    "ecoDesc": "Construido sobre el Protocolo del Servidor de Lenguaje (LSP). Funciona sin problemas en todas las plataformas de desarrollo modernas.",
-    "matrixTitle": "Edición Comunitaria ($0) vs. Pro Industrial",
-    "matrixDesc": "Comparación completa de capacidades de la extensión central gratuita vs. la suite de ingeniería empresarial de 159 capacidades.",
-    "pricingTitle": "PRECIOS INDUSTRIALES TRANSPARENTES",
-    "pricingHeading": "Planes Simples y Predecibles para Ingenieros de Automatización",
-    "pricingDesc": "Invierta en cero tiempo de inactividad y puesta en marcha rápida. Activación instantánea a través de Dodo Payments.",
-    "p0Desc": "Resaltado de sintaxis esencial y navegación para programadores KRL estudiantes o aficionados.",
-    "p1Desc": "Acceso completo a las 159 capacidades para proyectos activos de puesta en marcha e instalación.",
-    "p2Desc": "Recomendado para equipos de automatización. Acceso completo, actualizaciones prioritarias y licencias de equipo.",
-    "p3Desc": "Acceso vitalicio perpetuo a todas las 159 capacidades Pro y futuras actualizaciones importantes sin tarifas recurrentes.",
-    "mostPopular": "RECOMENDADO",
-    "btnFree": "Descargar Gratis",
-    "btnSub": "Suscribirse Mensual",
-    "btnSubYr": "Suscribirse Anual",
-    "btnLifetime": "Obtener Licencia Vitalicia",
-    "pf0_1": "6 Temas Industriales KUKA",
-    "pf0_2": "Autocompletado Básico de KRL",
-    "pf0_3": "Navegación Ir-a-Definición",
-    "pf1": "Todas las 159 capacidades industriales desbloqueadas",
-    "pf2": "Sugerencias en Tiempo Real y Tooltips de Señal",
-    "pf3_std": "Soporte por Correo Electrónico Estándar",
-    "pf3_pri": "Soporte de Ingeniería Prioritario 24/7",
-    "faqTitle": "Preguntas Frecuentes",
-    "faqs": [
-        {
-            "q": "¿Funciona esta extensión 100% offline dentro de celdas robóticas sin internet?",
-            "a": "Sí. Todas las 159 capacidades — incluyendo el análisis de sintaxis, el cálculo de marcos de 3 puntos, la diagramación AST y la comparación de copias de seguridad — se ejecutan 100% localmente en su máquina sin dependencias de la nube."
-        },
-        {
-            "q": "¿Puede esto reemplazar completamente a WorkVisual para la edición de código?",
-            "a": "Sí. Para la lógica KRL, matemáticas, secuenciación de programas y auditorías de seguridad, es mucho más rápido y seguro que WorkVisual. Solo necesita WorkVisual para la configuración inicial del bus de hardware."
-        },
-        {
-            "q": "¿Cuántas estaciones de trabajo puedo activar con una licencia Pro?",
-            "a": "Cada licencia Pro individual permite la activación en hasta 5 máquinas simultáneamente (por ejemplo, su portátil robusto de taller, estación de trabajo de oficina, configuración de casa, PC de banco y tableta)."
-        },
-        {
-            "q": "¿Por qué Pro Vitalicia cuesta $699 una sola vez mientras que Enterprise Site cuesta $1,499/año?",
-            "a": "Pro Vitalicia ($699) proporciona 5 activaciones de dispositivos (portátil robusto, PC de oficina, banco de pruebas, PC de casa, tableta) sin tarifas recurrentes. Enterprise Site ($1,499/año) proporciona activaciones de dispositivos ilimitadas en toda la planta de fábrica, cubriendo a todos los técnicos y operadores de la planta (~$8/mes por puesto para un equipo de 20 personas). Incluye soporte directo prioritario del desarrollador, KUKA Fleet Backup Hub automatizado y informes de aceptación del cliente con marca OEM."
-        }
-    ],
-    "activeIdesBadge": "IDEs Activos",
-    "activeNationsBadge": "Naciones Activas",
-    "liveD1SyncBtn": "Sincronización D1 en Vivo",
-    "topRegionsTitle": "PRINCIPALES REGIONES DE ROBÓTICA",
-    "pctTotalLabel": "% TOTAL",
-    "gatewayTitle": "PUERTA DE ENLACE Y CUMPLIMIENTO",
-    "gatewayOperational": "100% OPERATIVO",
-    "d1RelayLabel": "Relé Cloudflare D1:",
-    "testPingBtn": "Probar Ping",
-    "pingingBtn": "Haciendo Ping...",
-    "latencySuffix": "ms Latencia",
-    "d1RelayDesc": "Relé de telemetría sin servidor Edge con cero retención de datos del cliente.",
-    "airgapTitle": "100% Air-Gap y Local",
-    "airgapDesc": "Su lógica KRL, puntos y coordenadas de marco se ejecutan puramente en la RAM local. Cero dependencias externas de la nube.",
-    "spectraTitle": "Cadena de Suministro Limpia Spectra Assure",
-    "spectraDesc": "0 firmas maliciosas. Totalmente verificado para líneas de robótica automotriz y de defensa de nivel 1.",
-    "heartbeatRelayText": "Relé de Latido: Cloudflare Edge Global D1 Store",
-    "gdprComplianceText": "Telemetría Anónima Sin PII // Cumple con GDPR",
-    "activeClusterBadge": "CLÚSTER ACTIVO",
-    "clusterDensityLabel": "Densidad del Clúster",
-    "clusterSessionsText": "IDEs Activos",
-    "environmentLabel": "Entorno",
-    "targetControllerLabel": "Controlador Objetivo",
-    "dataPrivacyLabel": "Privacidad de Datos",
-    "privacyGuaranteeText": "100% Air-Gap y Zero-PII",
-    "perMonth": "/ mes",
-    "perYear": "/ año",
-    "perOnce": "/ Una vez",
-    "save35": "AHORRE 35%",
-    "activation5Seats": "5 Activaciones de Dispositivos",
-    "lifetimeF1": "Todas las 159 capacidades Pro para siempre",
-    "lifetimeF2": "Futuras Actualizaciones Mayores Gratuitas",
-    "lifetimeF3": "Soporte de Ingeniería Directo",
-    "pricingGuideBadge": "ECONOMÍA DE LICENCIAS",
-    "pricingGuideTitle": "¿Qué Licencia se Adapta a su Flujo de Trabajo?",
-    "pricingGuideSub": "Términos transparentes para configuraciones individuales, equipos de integradores y plantas de fabricación.",
-    "guideCol1Title": "Nivel de 5 Dispositivos",
-    "guideCol1Desc": "Pro Mensual ($9.99), Pro Anual ($79) o Pro Vitalicia ($699).",
-    "guideCol1P1": "5 activaciones de dispositivos simultáneas: Portátil, Toughbook, Oficina, Banco y Tableta.",
-    "guideCol1P2": "Pague una vez, posea para siempre con cero tarifas recurrentes para especialistas independientes.",
-    "guideCol1P3": "Un accidente prevenido en el modo teach-in paga la licencia al instante.",
-    "guideCol2Title": "Nivel de 25 Dispositivos",
-    "guideCol2Desc": "Edición de Equipo ($299/año) con 25 activaciones de dispositivos en total.",
-    "guideCol2P1": "25 activaciones de dispositivos simultáneas para todo su equipo de integración.",
-    "guideCol2P2": "Factura B2B centralizada con conciliación contable corporativa.",
-    "guideCol2P3": "Sintaxis KRL unificada y estándares de seguridad en todas las celdas cliente.",
-    "guideCol3Title": "Sitio de Planta Empresarial",
-    "guideCol3Desc": "Sitio Empresarial ($1,499/año) — Activaciones de dispositivos ilimitadas para toda la planta.",
-    "guideCol3P1_b": "Activaciones Ilimitadas:",
-    "guideCol3P1": "Cubre a todos los técnicos y operadores de la planta (~$8/mes por persona para un equipo de 20 personas).",
-    "guideCol3P2": "Asistencia de ingeniería directa del desarrollador y soporte SLA dedicado.",
-    "guideCol3P3": "Archivo en la nube de todas las celdas de robots + auditorías con marca OEM (Ford, Renault, TOGG).",
-    "p4Desc": "Licencia anual para equipos de integración — una factura, 25 activaciones de dispositivos, soporte prioritario.",
-    "pf4_1": "Todas las 159 capacidades Pro",
-    "pf4_2": "25 Activaciones de Dispositivos",
-    "pf4_3": "Soporte de Ingeniería Prioritario",
-    "btnTeam": "Obtener Edición de Equipo",
-    "entBadge": "ACTIVACIONES ILIMITADAS",
-    "p5Desc": "Licencia para toda la planta de fabricación — activaciones de dispositivos ilimitadas y Fleet Backup Hub.",
-    "pf5_1": "Activaciones de Dispositivos Ilimitadas",
-    "pf5_2": "Informes OEM con Marca de Empresa",
-    "pf5_3": "Soporte de Ingeniería Prioritario",
-    "btnEnterprise": "Obtener Enterprise",
-    "matrixColFeature": "Característica / Capacidad Industrial",
-    "matrixColCommunity": "Comunidad",
-    "matrixColFree": "Gratis para Siempre",
-    "matrixColPro": "Pro Industrial",
-    "matrixColProSub": "Suite Completa (159 Capacidades)",
-    "matrixIncluded": "✓ Incluido",
-    "matrixFullPro": "✓ Acceso Pro Completo",
-    "matrixCtaText": "¿Listo para equipar a su equipo de puesta en marcha con herramientas de cero tiempo de inactividad?",
-    "matrixBtnFree": "Instalar Comunidad Gratuita",
-    "matrixBtnPro": "Obtener Licencia Pro Ahora ➔",
-    "automotiveComplianceLabel": "CUMPLIMIENTO AUTOMOTRIZ:",
-    "allSystemsOperational": "TODOS LOS SISTEMAS OPERATIVOS // LISKIN LABS 2026",
-    "kssVerified": "KSS 8.2 - 8.7 Verificado"
-},
-  it: {
-    "navShowcase": "Vetrina 3D",
-    "navWiki": "Wiki Strumenti",
-    "navBeforeAfter": "Prima / Dopo",
-    "navPlayground": "Playground Live",
-    "navFrameCalc": "Calcolo Frame",
-    "navTelemetry": "Telemetria Globale",
-    "navPricing": "Prezzi",
-    "navBuyPro": "Ottieni Chiave Pro",
-    "heroTitlePrefix": "Ambiente di Sviluppo Industriale per ",
-    "heroTitleHighlight": "Linguaggio Robot KUKA",
-    "heroSubtitle": "IDE aziendale e sicurezza completa per controllori KRC4 e KRC5. 159 capacità industriali progettate per la massima velocità di programmazione, prevenzione delle collisioni e zero tempi di inattività.",
-    "btnWiki": "Base di Conoscenza (159 Capacità) ➔",
-    "btnBuyPro": "Acquista Licenza Pro",
-    "wikiLink": "/guide/features",
-    "showcaseHeading": "Tour Ingegneristico Cinematografico: KUKA KRL Pro Suite",
-    "showcaseDesc": "Esplorazione interattiva in 4 fasi di cinematica, barriere di sicurezza, matematica delle coordinate e telemetria globale.",
-    "sliderHeading": "Scorri per Vivere la Trasformazione",
-    "sliderDesc": "Trascina la maniglia centrale a sinistra e a destra per confrontare il blocco note legacy con KUKA KRL Professional.",
-    "playgroundHeading": "Testa la Diagnostica di Sicurezza KUKA Live nel Browser",
-    "playgroundDesc": "Seleziona uno scenario industriale o scrivi il tuo codice KRL per testare la diagnostica e la generazione AST.",
-    "calcHeading": "Calcolatore Frame 3 Punti $BASE / $TOOL",
-    "calcDesc": "Calcola gli angoli di rotazione di Eulero (A, B, C) direttamente nel tuo browser e genera strutture di coordinate KRL valide.",
-    "telemetryTag": "TELEMETRIA DI MESSA IN SERVIZIO GLOBALE // D1 SYNC",
-    "telemetryTitle": "Ingegneri Attivi in",
-    "telemetryCountries": "Paesi",
-    "telemetryDesc": "Dagli impianti di produzione automobilistica di livello 1 in Germania alle celle di integrazione robotica negli Stati Uniti, Turchia, Italia e Messico. La telemetria anonima in tempo reale verifica la compatibilità KSS e zero tempi di inattività.",
-    "ecoHeading": "Funziona su Tutto il Tuo Ecosistema IDE",
-    "ecoDesc": "Basato sul Language Server Protocol (LSP). Funziona senza problemi su tutte le moderne piattaforme di sviluppo.",
-    "matrixTitle": "Edizione Community (0 $) vs. Pro Industriale",
-    "matrixDesc": "Confronto completo delle capacità dell'estensione core gratuita vs. la suite di ingegneria aziendale da 159 capacità.",
-    "pricingTitle": "PREZZI INDUSTRIALI TRASPARENTI",
-    "pricingHeading": "Piani Semplici e Prevedibili per Ingegneri dell'Automazione",
-    "pricingDesc": "Investi in zero tempi di inattività e messa in servizio rapida. Attivazione istantanea tramite Dodo Payments.",
-    "p0Desc": "Evidenziazione della sintassi essenziale e navigazione per programmatori KRL studenti o hobbisti.",
-    "p1Desc": "Accesso completo a tutte le 159 capacità per progetti attivi di messa in servizio e installazione.",
-    "p2Desc": "Consigliato per i team di automazione. Accesso completo, aggiornamenti prioritari e licenze di team.",
-    "p3Desc": "Accesso a vita perpetuo a tutte le 159 capacità Pro e futuri aggiornamenti importanti senza costi ricorrenti.",
-    "mostPopular": "CONSIGLIATO",
-    "btnFree": "Scarica Gratis",
-    "btnSub": "Abbonati Mensile",
-    "btnSubYr": "Abbonati Annuale",
-    "btnLifetime": "Ottieni Licenza a Vita",
-    "pf0_1": "6 Temi Industriali KUKA",
-    "pf0_2": "Autocompletamento KRL di Base",
-    "pf0_3": "Navigazione Vai-a-Definizione",
-    "pf1": "Tutte le 159 capacità industriali sbloccate",
-    "pf2": "Suggerimenti Inlay in Tempo Reale e Tooltip di Segnale",
-    "pf3_std": "Supporto Email Standard",
-    "pf3_pri": "Supporto Ingegneristico Prioritario 24/7",
-    "faqTitle": "Domande Frequenti",
-    "faqs": [
-        {
-            "q": "Questa estensione funziona al 100% offline all'interno delle celle robotiche senza internet?",
-            "a": "Sì. Tutte le 159 capacità — inclusi il parsing della sintassi, il calcolo del frame a 3 punti, il flowcharting AST e il diffing dei backup — vengono eseguite al 100% localmente sulla tua macchina senza dipendenze dal cloud."
-        },
-        {
-            "q": "Questo può sostituire completamente WorkVisual per la modifica del codice?",
-            "a": "Sì. Per la logica KRL, la matematica, la sequenziazione dei programmi e gli audit di sicurezza, è molto più veloce e sicuro di WorkVisual. Hai bisogno di WorkVisual solo per la configurazione iniziale del bus hardware."
-        },
-        {
-            "q": "Quante workstation posso attivare con una licenza Pro?",
-            "a": "Ogni singola licenza Pro consente l'attivazione su un massimo di 5 macchine contemporaneamente (ad esempio, il tuo laptop robusto da officina, workstation da ufficio, configurazione domestica, PC da banco e tablet)."
-        },
-        {
-            "q": "Perché Pro Lifetime costa $699 una tantum mentre Enterprise Site costa $1.499/anno?",
-            "a": "Pro Lifetime ($699) fornisce 5 attivazioni di dispositivi (laptop robusto, PC da ufficio, banco di prova, PC domestico, tablet) senza costi ricorrenti. Enterprise Site ($1.499/anno) fornisce attivazioni di dispositivi illimitate in tutto l'impianto di fabbrica, coprendo tutti i tecnici e gli operatori dell'impianto (~$8/mese per postazione per un team di 20 persone). Include supporto diretto prioritario dello sviluppatore, KUKA Fleet Backup Hub automatizzato e rapporti di accettazione del cliente con marchio OEM."
-        }
-    ],
-    "activeIdesBadge": "IDE Attivi",
-    "activeNationsBadge": "Nazioni Attive",
-    "liveD1SyncBtn": "Sincronizzazione D1 Live",
-    "topRegionsTitle": "PRINCIPALI REGIONI ROBOTICHE",
-    "pctTotalLabel": "% TOTALE",
-    "gatewayTitle": "GATEWAY E CONFORMITÀ",
-    "gatewayOperational": "100% OPERATIVO",
-    "d1RelayLabel": "Relay Cloudflare D1:",
-    "testPingBtn": "Testa Ping",
-    "pingingBtn": "Pinging...",
-    "latencySuffix": "ms Latenza",
-    "d1RelayDesc": "Relay di telemetria serverless Edge con zero conservazione dei dati del cliente.",
-    "airgapTitle": "100% Air-Gap e On-Premise",
-    "airgapDesc": "La tua logica KRL, i punti e le coordinate del frame vengono eseguiti puramente nella RAM locale. Zero dipendenze cloud esterne.",
-    "spectraTitle": "Spectra Assure Catena di Fornitura Pulita",
-    "spectraDesc": "0 firme malevole. Completamente verificato per linee di robotica automobilistica e di difesa di livello 1.",
-    "heartbeatRelayText": "Relay Heartbeat: Cloudflare Edge Global D1 Store",
-    "gdprComplianceText": "Telemetria Anonima Zero-PII // Conforme GDPR",
-    "activeClusterBadge": "CLUSTER ATTIVO",
-    "clusterDensityLabel": "Densità del Cluster",
-    "clusterSessionsText": "IDE Attivi",
-    "environmentLabel": "Ambiente",
-    "targetControllerLabel": "Controllore Target",
-    "dataPrivacyLabel": "Privacy dei Dati",
-    "privacyGuaranteeText": "100% Air-Gap e Zero-PII",
-    "perMonth": "/ mese",
-    "perYear": "/ anno",
-    "perOnce": "/ Una tantum",
-    "save35": "RISPARMIA IL 35%",
-    "activation5Seats": "5 Attivazioni Dispositivo",
-    "lifetimeF1": "Tutte le 159 capacità Pro per sempre",
-    "lifetimeF2": "Aggiornamenti Maggiori Futuri Gratuiti",
-    "lifetimeF3": "Supporto Ingegneristico Diretto",
-    "pricingGuideBadge": "ECONOMIA DELLE LICENZE",
-    "pricingGuideTitle": "Quale Licenza si Adatta al Tuo Workflow?",
-    "pricingGuideSub": "Termini trasparenti per configurazioni individuali, team di integratori e impianti di produzione.",
-    "guideCol1Title": "Livello 5 Dispositivi",
-    "guideCol1Desc": "Pro Mensile ($9.99), Pro Annuale ($79) o Pro Lifetime ($699).",
-    "guideCol1P1": "5 attivazioni di dispositivi simultanee: Laptop, Toughbook, Ufficio, Banco e Tablet.",
-    "guideCol1P2": "Paga una volta, possiedi per sempre con zero costi ricorrenti per specialisti indipendenti.",
-    "guideCol1P3": "Un crash prevenuto in teach-in ripaga la licenza istantaneamente.",
-    "guideCol2Title": "Livello 25 Dispositivi",
-    "guideCol2Desc": "Team Edition ($299/anno) con 25 attivazioni totali di dispositivi.",
-    "guideCol2P1": "25 attivazioni di dispositivi simultanee per l'intero team di integrazione.",
-    "guideCol2P2": "Fattura B2B centralizzata con riconciliazione contabile aziendale.",
-    "guideCol2P3": "Sintassi KRL unificata e standard di sicurezza in tutte le celle client.",
-    "guideCol3Title": "Sito Aziendale di Impianto",
-    "guideCol3Desc": "Sito Aziendale ($1.499/anno) — Attivazioni di dispositivi illimitate per l'intero impianto.",
-    "guideCol3P1_b": "Attivazioni Illimitate:",
-    "guideCol3P1": "Copre tutti i tecnici e gli operatori dell'impianto (~$8/mese per persona per un team di 20 persone).",
-    "guideCol3P2": "Assistenza ingegneristica diretta dello sviluppatore e supporto SLA dedicato.",
-    "guideCol3P3": "Archiviazione cloud di tutte le celle robot + audit con marchio OEM (Ford, Renault, TOGG).",
-    "p4Desc": "Licenza annuale per team di integrazione — una fattura, 25 attivazioni di dispositivi, supporto prioritario.",
-    "pf4_1": "Tutte le 159 capacità Pro",
-    "pf4_2": "25 Attivazioni Dispositivo",
-    "pf4_3": "Supporto Ingegneristico Prioritario",
-    "btnTeam": "Ottieni Team Edition",
-    "entBadge": "ATTIVAZIONI ILLIMITATE",
-    "p5Desc": "Licenza per l'intero impianto di produzione — attivazioni di dispositivi illimitate e Fleet Backup Hub.",
-    "pf5_1": "Attivazioni Dispositivo Illimitate",
-    "pf5_2": "Report OEM con Marchio Aziendale",
-    "pf5_3": "Supporto Ingegneristico Prioritario",
-    "btnEnterprise": "Ottieni Enterprise",
-    "matrixColFeature": "Funzionalità / Capacità Industriale",
-    "matrixColCommunity": "Community",
-    "matrixColFree": "Gratis per Sempre",
-    "matrixColPro": "Pro Industriale",
-    "matrixColProSub": "Suite Completa (159 Capacità)",
-    "matrixIncluded": "✓ Incluso",
-    "matrixFullPro": "✓ Accesso Pro Completo",
-    "matrixCtaText": "Pronto a equipaggiare il tuo team di messa in servizio con strumenti a zero tempi di inattività?",
-    "matrixBtnFree": "Installa Community Gratuita",
-    "matrixBtnPro": "Ottieni Licenza Pro Ora ➔",
-    "automotiveComplianceLabel": "CONFORMITÀ AUTOMOTIVE:",
-    "allSystemsOperational": "TUTTI I SISTEMI OPERATIVI // LISKIN LABS 2026",
-    "kssVerified": "KSS 8.2 - 8.7 Verificato"
-},
-
   en: {
     navShowcase: "3D Showcase",
     navWiki: "Tools Wiki",
@@ -2557,8 +2208,8 @@ const translations = {
     navBuyPro: "Get Pro Key",
     heroTitlePrefix: "Industrial Development Environment for ",
     heroTitleHighlight: "KUKA Robot Language",
-    heroSubtitle: "Enterprise IDE and comprehensive safety for KRC4 & KRC5 controllers. 159 certified industrial capabilities designed for maximum programming speed, collision prevention, and zero downtime.",
-    btnWiki: "Knowledge Base (159 Tools) ➔",
+    heroSubtitle: "Enterprise IDE and comprehensive safety for KRC4 & KRC5 controllers. Comprehensive industrial tools designed for maximum programming speed, collision prevention, and zero downtime.",
+    btnWiki: "Knowledge Base ➔",
     btnBuyPro: "Buy Pro License",
     wikiLink: "/guide/features",
     showcaseHeading: "Cinematic Engineering Tour: KUKA KRL Pro Suite",
@@ -2576,14 +2227,14 @@ const translations = {
     ecoHeading: "Runs Across Your Entire IDE Ecosystem",
     ecoDesc: "Built on the Language Server Protocol (LSP). Works seamlessly across all modern development platforms.",
     matrixTitle: "Community Edition ($0) vs Pro Industrial",
-    matrixDesc: "Complete capability comparison of the free core extension vs the 159-tool enterprise engineering suite.",
+    matrixDesc: "Complete capability comparison of the free core extension vs the enterprise engineering suite.",
     pricingTitle: "TRANSPARENT INDUSTRIAL PRICING",
     pricingHeading: "Simple, Predictable Plans for Automation Engineers",
     pricingDesc: "Invest in zero downtime and rapid commissioning. Instant activation via Dodo Payments.",
     p0Desc: "Essential syntax highlighting and navigation for student or hobbyist KRL programmers.",
-    p1Desc: "Full access to all 159 tools for active commissioning and installation projects.",
+    p1Desc: "Full access to all Pro tools for active commissioning and installation projects.",
     p2Desc: "Recommended for automation teams. Full access, priority updates, and team licensing.",
-    p3Desc: "Perpetual lifetime access to all 159 Pro tools and future major updates with no recurring fees.",
+    p3Desc: "Perpetual lifetime access to all Pro tools and future major updates with no recurring fees.",
     mostPopular: "RECOMMENDED",
     btnFree: "Download Free",
     btnSub: "Subscribe Monthly",
@@ -2592,7 +2243,7 @@ const translations = {
     pf0_1: "6 Industrial KUKA Themes",
     pf0_2: "Basic KRL Autocompletion",
     pf0_3: "Go-to-Definition Navigation",
-    pf1: "All 159 Industrial Tools Unlocked",
+    pf1: "All Industrial Pro Tools Unlocked",
     pf2: "Real-time Inlay Hints & Signal Tooltips",
     pf3_std: "Standard Email Support",
     pf3_pri: "Priority 24/7 Engineering Support",
@@ -2600,7 +2251,7 @@ const translations = {
     faqs: [
       {
         q: "Does this extension work 100% offline inside robotic cells without internet?",
-        a: "Yes. All 159 tools — including syntax parsing, 3-point frame calculation, AST flowcharting, and backup diffing — run 100% locally on your machine with zero cloud dependencies."
+        a: "Yes. All Pro tools — including syntax parsing, 3-point frame calculation, AST flowcharting, and backup diffing — run 100% locally on your machine with zero cloud dependencies."
       },
       {
         q: "Can this completely replace WorkVisual for code editing?",
@@ -2651,7 +2302,7 @@ const translations = {
     perOnce: "/ Once",
     save35: "SAVE 35%",
     activation5Seats: "5 Device Activations",
-    lifetimeF1: "All 159 Pro Tools Forever",
+    lifetimeF1: "All 50 Pro Tools Forever",
     lifetimeF2: "Free Future Major Updates",
     lifetimeF3: "Direct Engineering Support",
 
@@ -2678,7 +2329,7 @@ const translations = {
 
     // B2B tiers (Team / Enterprise)
     p4Desc: "Annual licence for integration teams — one invoice, 25 device activations, priority support.",
-    pf4_1: "All 159 Pro Tools",
+    pf4_1: "All 50 Pro Tools",
     pf4_2: "25 Device Activations",
     pf4_3: "Priority Engineering Support",
     btnTeam: "Get Team Edition",
@@ -2694,7 +2345,7 @@ const translations = {
     matrixColCommunity: "Community",
     matrixColFree: "Free Forever",
     matrixColPro: "Pro Industrial",
-    matrixColProSub: "Full Suite (159 Tools)",
+    matrixColProSub: "Full Pro Suite",
     matrixIncluded: "✓ Included",
     matrixFullPro: "✓ Full Pro Access",
     matrixCtaText: "Ready to equip your commissioning team with zero downtime tooling?",
@@ -2708,7 +2359,7 @@ const translations = {
   },
   ru: {
     navShowcase: "3D Обзор",
-    navWiki: "База знаний (159 утилит)",
+    navWiki: "Вики функций",
     navBeforeAfter: "До / После",
     navPlayground: "Песочница",
     navFrameCalc: "Калькулятор",
@@ -2717,8 +2368,8 @@ const translations = {
     navBuyPro: "Купить Pro",
     heroTitlePrefix: "Промышленная среда разработки для ",
     heroTitleHighlight: "KUKA Robot Language",
-    heroSubtitle: "Корпоративная IDE и комплексная безопасность для контроллеров KRC4 и KRC5. 159 проверенных инструментов для скорости, защиты от коллизий и нулевого времени простоя.",
-    btnWiki: "База знаний (159 инструментов) ➔",
+    heroSubtitle: "Корпоративная IDE и комплексная безопасность для контроллеров KRC4 и KRC5. Полный набор инструментов для скорости, защиты от коллизий и нулевого времени простоя.",
+    btnWiki: "База знаний ➔",
     btnBuyPro: "Купить Pro лицензию",
     wikiLink: "/ru/guide/features",
     showcaseHeading: "Кинематографичный обзор: KUKA KRL Pro Suite",
@@ -2736,14 +2387,14 @@ const translations = {
     ecoHeading: "Работает во всех современных IDE",
     ecoDesc: "Построено на открытом протоколе Language Server Protocol (LSP). Полная совместимость со всеми платформами.",
     matrixTitle: "Сравнение: Community ($0) против Pro Industrial",
-    matrixDesc: "Полное сопоставление возможностей бесплатной версии и корпоративного пакета из 159 инструментов.",
+    matrixDesc: "Полное сопоставление возможностей бесплатной версии и корпоративного пакета Pro.",
     pricingTitle: "ПРОЗРАЧНЫЕ ПРОМЫШЛЕННЫЕ ТАРИФЫ",
     pricingHeading: "Простые условия для инженеров автоматизации",
     pricingDesc: "Инвестируйте в отсутствие аварий и быструю сдачу проектов. Мгновенная активация через Dodo Payments.",
     p0Desc: "Базовая подсветка и навигация для студентов и начинающих наладчиков.",
-    p1Desc: "Полный доступ ко всем 159 инструментам для активных проектов пусконаладки.",
+    p1Desc: "Полный доступ ко всем Pro-инструментам для активных проектов пусконаладки.",
     p2Desc: "Рекомендуемый выбор для инженеров. Полный доступ, экономия 35% и приоритетная поддержка.",
-    p3Desc: "Бессрочная пожизненная лицензия на все 159 инструментов и будущие обновления без подписок.",
+    p3Desc: "Бессрочная пожизненная лицензия на все Pro-инструменты и будущие обновления без подписок.",
     mostPopular: "ВЫБОР ИНЖЕНЕРОВ",
     btnFree: "Скачать бесплатно",
     btnSub: "Месячная подписка",
@@ -2752,7 +2403,7 @@ const translations = {
     pf0_1: "6 Промышленных тем KUKA",
     pf0_2: "Базовый автокомплит KRL",
     pf0_3: "Переход к определениям (F12)",
-    pf1: "Все 159 Промышленных инструментов",
+    pf1: "Все промышленные Pro-инструменты",
     pf2: "Инлайн-подсказки сигналов I/O в коде",
     pf3_std: "Стандартная поддержка",
     pf3_pri: "Приоритетная поддержка 24/7",
@@ -2760,7 +2411,7 @@ const translations = {
     faqs: [
       {
         q: "Работает ли расширение на 100% офлайн внутри цеха без интернета?",
-        a: "Да. Все 159 инструментов — парсер синтаксиса, расчет фреймов, генератор блок-схем и diff бэкапов — работают полностью локально на вашем ПК без каких-либо внешних серверов."
+        a: "Да. Все Pro-инструменты — парсер синтаксиса, расчет фреймов, генератор блок-схем и diff бэкапов — работают полностью локально на вашем ПК без каких-либо внешних серверов."
       },
       {
         q: "Может ли это расширение полностью заменить WorkVisual при написании кода?",
@@ -2811,7 +2462,7 @@ const translations = {
     perOnce: "разово",
     save35: "СКИДКА 35%",
     activation5Seats: "5 Активаций Устройств",
-    lifetimeF1: "Все 159 Pro инструментов навсегда",
+    lifetimeF1: "Все 50 Pro инструментов навсегда",
     lifetimeF2: "Все будущие обновления бесплатны",
     lifetimeF3: "Прямая инженерная поддержка",
 
@@ -2838,7 +2489,7 @@ const translations = {
 
     // B2B тарифы (Team / Enterprise)
     p4Desc: "Годовая лицензия для команд интеграторов — один счёт, 25 активаций устройств, приоритетная поддержка.",
-    pf4_1: "Все 159 Pro инструментов",
+    pf4_1: "Все 50 Pro инструментов",
     pf4_2: "25 активаций устройств",
     pf4_3: "Приоритетная инженерная поддержка",
     btnTeam: "Купить Team Edition",
@@ -2854,7 +2505,7 @@ const translations = {
     matrixColCommunity: "Community",
     matrixColFree: "Бесплатно навсегда",
     matrixColPro: "Pro Industrial",
-    matrixColProSub: "Все 159 инструментов",
+    matrixColProSub: "Все Pro-инструменты",
     matrixIncluded: "✓ Включено",
     matrixFullPro: "✓ Полный доступ Pro",
     matrixCtaText: "Готовы оснастить команду пусконаладки надежными инструментами без простоя?",
@@ -2868,7 +2519,7 @@ const translations = {
   },
   tr: {
     navShowcase: "3D Tur",
-    navWiki: "Wiki (159 Araç)",
+    navWiki: "Wiki",
     navBeforeAfter: "Önce / Sonra",
     navPlayground: "Canlı Editör",
     navFrameCalc: "Frame Hesabı",
@@ -2877,8 +2528,8 @@ const translations = {
     navBuyPro: "Pro Satın Al",
     heroTitlePrefix: "KUKA Robot Language için ",
     heroTitleHighlight: "Endüstriyel Geliştirme Ortamı",
-    heroSubtitle: "KRC4 ve KRC5 denetleyicileri için kurumsal IDE ve kapsamlı güvenlik. Maksimum hız, çarpışma önleme ve sıfır duruş süresi için 159 endüstriyel araç.",
-    btnWiki: "Bilgi Bankası (159 Araç) ➔",
+    heroSubtitle: "KRC4 ve KRC5 denetleyicileri için kurumsal IDE ve kapsamlı güvenlik. Maksimum hız, çarpışma önleme ve sıfır duruş süresi için kapsamlı endüstriyel araçlar.",
+    btnWiki: "Bilgi Bankası ➔",
     btnBuyPro: "Pro Lisans Satın Al",
     wikiLink: "/tr/guide/features",
     showcaseHeading: "Sinematik Mühendislik Turu: KUKA KRL Pro Suite",
@@ -2896,14 +2547,14 @@ const translations = {
     ecoHeading: "Tüm IDE Ekosisteminizde Sorunsuz Çalışır",
     ecoDesc: "Language Server Protocol (LSP) üzerine kurulmuştur. Tüm modern geliştirme platformlarında kusursuz çalışır.",
     matrixTitle: "Karşılaştırma: Community ($0) ve Pro Industrial",
-    matrixDesc: "Ücretsiz temel sürüm ile 159 araçlık endüstriyel mühendislik paketinin ayrıntılı karşılaştırması.",
+    matrixDesc: "Ücretsiz temel sürüm ile endüstriyel mühendislik paketinin ayrıntılı karşılaştırması.",
     pricingTitle: "ŞEFFAF ENDÜSTRİYEL FİYATLANDIRMA",
     pricingHeading: "Otomasyon Mühendisleri İçin Tahmin Edilebilir Planlar",
     pricingDesc: "Sıfır duruş süresi ve hızlı devreye almaya yatırım yapın. Dodo Payments ile anında aktivasyon.",
     p0Desc: "Öğrenciler ve yeni başlayanlar için temel sözdizimi vurgulama ve gezinme.",
-    p1Desc: "Aktif devreye alma ve kurulum projeleri için 159 aracın tamamına tam erişim.",
+    p1Desc: "Aktif devreye alma ve kurulum projeleri için tüm Pro araçlara tam erişim.",
     p2Desc: "Mühendisler için önerilen seçenek. Tam erişim, %35 tasarruf ve öncelikli destek.",
-    p3Desc: "Abonelik olmadan tüm 159 araca ve gelecekteki güncellemelere ömür boyu kalıcı erişim.",
+    p3Desc: "Abonelik olmadan tüm Pro araçlara ve gelecekteki güncellemelere ömür boyu kalıcı erişim.",
     mostPopular: "ÖNERİLEN",
     btnFree: "Ücretsiz İndir",
     btnSub: "Aylık Abonelik",
@@ -2912,7 +2563,7 @@ const translations = {
     pf0_1: "6 Endüstriyel KUKA Teması",
     pf0_2: "Temel KRL Otomatik Tamamlama",
     pf0_3: "Tanıma Gitme (F12)",
-    pf1: "Tüm 159 Endüstriyel Araç Açık",
+    pf1: "Tüm Endüstriyel Pro Araçlar Açık",
     pf2: "Gerçek Zamanlı I/O Sinyal İpuçları",
     pf3_std: "Standart E-posta Desteği",
     pf3_pri: "Öncelikli 24/7 Mühendislik Desteği",
@@ -2920,7 +2571,7 @@ const translations = {
     faqs: [
       {
         q: "Bu eklenti internet olmayan fabrika ortamında %100 çevrimdışı çalışır mı?",
-        a: "Evet. Sözdizimi ayrıştırma, frame hesabı, akış şeması ve yedek karşılaştırma dahil tüm 159 araç hiçbir bulut bağımlılığı olmadan tamamen yerel olarak çalışır."
+        a: "Evet. Sözdizimi ayrıştırma, frame hesabı, akış şeması ve yedek karşılaştırma dahil tüm Pro araçlar hiçbir bulut bağımlılığı olmadan tamamen yerel olarak çalışır."
       },
       {
         q: "Kod yazımında WorkVisual'ın yerini tamamen alabilir mi?",
@@ -2971,7 +2622,7 @@ const translations = {
     perOnce: "tek seferlik",
     save35: "%35 TASARRUF",
     activation5Seats: "5 Cihaz Aktivasyonu",
-    lifetimeF1: "Tüm 159 Pro Araç Sonsuza Kadar",
+    lifetimeF1: "Tüm 50 Pro Araç Sonsuza Kadar",
     lifetimeF2: "Gelecekteki Tüm Güncellemeler Dahil",
     lifetimeF3: "Doğrudan Mühendislik Desteği",
 
@@ -2998,7 +2649,7 @@ const translations = {
 
     // B2B paketleri (Team / Enterprise)
     p4Desc: "Entegrasyon ekipleri için yıllık lisans — tek fatura, 25 cihaz aktivasyonu, öncelikli destek.",
-    pf4_1: "Tüm 159 Pro Araç",
+    pf4_1: "Tüm 50 Pro Araç",
     pf4_2: "25 Cihaz Aktivasyonu",
     pf4_3: "Öncelikli Mühendislik Desteği",
     btnTeam: "Team Edition Satın Al",
@@ -3014,7 +2665,7 @@ const translations = {
     matrixColCommunity: "Community",
     matrixColFree: "Sonsuza Dek Ücretsiz",
     matrixColPro: "Pro Industrial",
-    matrixColProSub: "Tam Paket (159 Araç)",
+    matrixColProSub: "Tam Pro Paket",
     matrixIncluded: "✓ Dahil",
     matrixFullPro: "✓ Tam Pro Erişim",
     matrixCtaText: "Devreye alma ekibinizi sıfır duruş süreli araçlarla donatmaya hazır mısınız?",

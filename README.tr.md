@@ -31,7 +31,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Language-KRL-orange?style=flat-square" />
   <img src="https://img.shields.io/badge/Controllers-KRC2%20%7C%20KRC4%20%7C%20KRC5-007ACC?style=flat-square" />
-  <img src="https://img.shields.io/badge/Kernel-KUKA.Sim%204.10%20Inside-FF6600?style=flat-square" />
+  <img src="https://img.shields.io/badge/Compatibility-KSS%208.x%20%7C%20KSS%209.x%20(iiQWorks)-FF6600?style=flat-square" />
   <img src="https://img.shields.io/badge/Built--in%20Specs-957%20Vars%20%7C%20116%20Functions-10b981?style=flat-square" />
   <img src="https://img.shields.io/badge/Offline--First-100%25%20Factory%20Ready-green?style=flat-square" />
   <img src="https://img.shields.io/badge/Security-0%20Malware%20%7C%200%20CVEs-emerald?style=flat-square" />
@@ -39,7 +39,7 @@
 </p>
 
 <p align="center">
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>İnteraktif Wiki (50 Endüstriyel Araç)</b></a> •
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>İnteraktif Wiki ve Dokümantasyon</b></a> •
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>Pro Monthly ($19.00/ay)</b></a> • 
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>Yıllık Pro ($149.00/yıl — %35 Tasarruf)</b></a> • 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>Güvenlik Denetim Raporu</b></a>
@@ -155,13 +155,13 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 8. Resmi KUKA.Sim 4.10 Çekirdek Entegrasyonu ve 957+ Sistem Değişkeni
-*Doğrudan KUKA.Sim 4.10, WorkVisual ve KRC kontrolör çalışma zamanından çıkarılan otantik endüstriyel spesifikasyonlar.*
+### 8. KRL Spesifikasyon Veritabanı ve 957+ Sistem Değişkeni
+*KRL dil standartlarına ve resmi KSS ve iiQWorks dokümantasyonuna uygun bağımsız spesifikasyonlar.*
 * **957 Sistem Değişkeni**: KSS 8.3–8.7/9.0 sistem değişkenlerinin (`$ACC`, `$TOOL`, `$BASE`, `$POS_ACT`, `$VEL_AXIS` vb.) fiziksel birimler, dizi sınırları (217 dizi) ve Salt-Okunur durumlarıyla kapsamlı kapsamı.
 * **116 Yerleşik Sistem Fonksiyonu ve Wonderlib**: Kinematik (`FORWARD`, `INVERSE`, `INV_POS`, `TOOL_ADJ`), string işlemleri, tip dönüştürme, mesaj diyalogları, tork limitleri ve Wonderlib rutinleri için gerçek zamanlı `signatureHelp` parametre ipuçlarıyla tam destek.
 * **111 Yapı ve 112 ENUM (443 Literal)**: Akıllı nokta tamamlama (`$TOOL.`, `$ACC.`, `POINT.`) ve `#` enum literal otomatik tamamlama (`#AUT`, `#T1`, `#P_FREE`, `#QUIT`).
-* **23 Resmi KUKA Inline Form Snippet'i (34 Şablon)**: Tam Inline Form başlıklarıyla (`;FOLD ... ;%{PE}`) otantik Kuka Roboter GmbH şablonları (`ptpi`, `slini`, `sptpi`, `scirc`, `PTPCo`, `ptprel`, `trigdist`, `sigin`, `wsec`, `Forr`).
-* **451 Anahtar Kelimelik Derleyici Matrisi**: KUKA C++ `keyword.h` matris kurallarının doğrudan entegrasyonu — sıfır yanlış pozitif sözdizimi uyarısı.
+* **23 Standart KRL Inline Form Snippet'i (34 Şablon)**: Tam Inline Form başlıklarıyla (`;FOLD ... ;%{PE}`) standart KRL şablonları (`ptpi`, `slini`, `sptpi`, `scirc`, `PTPCo`, `ptprel`, `trigdist`, `sigin`, `wsec`, `Forr`).
+* **451 Anahtar Kelimelik Dil Matrisi**: KRL standart sözdizimi kurallarının eksiksiz kapsamı — sıfır yanlış pozitif sözdizimi uyarısı.
 * **Tek Tırnaklı Hex ve İkili Sözdizimi**: `'B000001'` (ikili), `'HFF'` (onaltılık) ve karakter literalleri için tam ayrıştırıcı ve tanılama uyumluluğu.
 * **Sıfır Yanlış Pozitif Filo Denetimi (4.1M+ Satır)**: 107 gerçek üretim robot yedeğinde 0 yanlış tanılamayla doğrulandı.
 
@@ -189,8 +189,8 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 11. Git Meta Verisi Temizleyici ve WorkVisual Başlık Sıyırıcı
-*Sürüm kontrolünü temiz tutun.* Otomatik commit'lerde gürültülü git diff'lerini önlemek için WorkVisual başlıklarını (`&ACCESS`, `&REL`, `&PARAM`, `&COMMENT`) tek tıkla sıyırın.
+### 11. Git Meta Verisi Temizleyici ve Servis Başlığı Sıyırıcı
+*Sürüm kontrolünü temiz tutun.* Otomatik commit'lerde gürültülü git diff'lerini önlemek için servis başlıklarını (`&ACCESS`, `&REL`, `&PARAM`, `&COMMENT`) tek tıkla sıyırın.
 
 <p align="center">
   <img src="docs/public/media/git_metadata_cleaner.gif" width="720" alt="Git Metadata Cleaner Demo" />
@@ -233,9 +233,9 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-### 16. Otantik KUKA.Sim ve WorkVisual Sözdizimi Paleti ve KSS 8.7 Sistem Kütüphanesi
-*Doğrudan KUKA.Sim 4.10'dan çıkarılan zengin renk paleti ve standart sistem bağlamı.*
-* **Çeşitli Yüksek Kontrastlı Palet**: KUKA.Sim (`KRLDark.xshd`) ve WorkVisual'dan (`KRL.xshd`) %100 otantik renk şemaları. Hareket komutları (kalın), bit düzeyinde/mantıksal operatörler, matematiksel semboller, sistem direktifleri (`&ACCESS`, `&REL`) ve onaltılık/ikili sayılar (`'H...'`, `'B...'`) için farklılaştırılmış kapsamlar.
+### 16. Yüksek Kontrastlı Sözdizimi Paleti ve KSS Sistem Kütüphanesi
+*Profesyonel KRL geliştirmesi için zengin renk paleti ve sistem bağlamı.*
+* **Çeşitli Yüksek Kontrastlı Palet**: Endüstriyel stilde KRL Dark ve Light renk temaları. Hareket komutları (kalın), bit düzeyinde/mantıksal operatörler, matematiksel semboller, sistem direktifleri (`&ACCESS`, `&REL`) ve onaltılık/ikili sayılar (`'H...'`, `'B...'`) için farklılaştırılmış kapsamlar.
 * **KSS 8.7 Standart Sistem Kütüphanesi**: `BAS()`, `MsgNotify()`, `MsgQuit()`, `MsgDialog()`, `USE_CM_PRO_VALUES()`, `TOOL_NAME[]` ve `BASE_NAME[]` için yerleşik tanımlar, parametre yardımı ve `F12` — doğrudan resmi KSS 8.7 referans modüllerine.
 * **1 Tık KSS 8.7 Proje İskeleti (`krl.scaffoldKrcFiles`)**: `$config.dat`, `bas.src`, `MsgLib.src`, `collmonlib.src` ve `sps.sub` ile doldurulmuş standart `KRC/R1/System/`, `KRC/R1/Program/` ve `KRC/R1/TP/` klasör ağacını otomatik oluşturur.
 * **Fabrika Varsayılanları ve Advance Run Sınırlayıcı**: `$ADVANCE = 3`, `$VEL.CP = 2.0 m/s`, `$ACC.CP = 2.3 m/s²`, `$JERK.CP = 500.0 m/s³` için resmi fabrika değerlerinin (`operate.defaultvalues`) anlık Hover görüntüsü ve `$ADVANCE` geçerli aralığı `0..5` aştığında otomatik lint uyarıları.
@@ -282,30 +282,29 @@ Her devreye alma mühendisi bu acıyı bilir:
 
 ---
 
-## Özellik Karşılaştırma Matrisi (50 Endüstriyel Araç)
+## Özellik Karşılaştırma Matrisi
 
 | Özellik | Community (Ücretsiz) | Pro Industrial | Mühendislere Faydası |
 |:---|:---:|:---:|:---|
-| **KRL Sözdizimi Vurgulama** (`.src`, `.dat`, `.sub`, `.kfd`) | Evet | Evet | KUKA.Sim çeşitli renk paletiyle tam AST renklendirme |
-| **KUKA.Sim 4.10 ve WorkVisual Temaları** | Evet | Evet | Otantik AvalonEdit renk şemaları (Koyu ve Açık) |
-| **Akıllı Otomatik Tamamlama ve Çekirdek Spesifikasyonları** (957+ değişken, 116 fonksiyon, 111 yapı) | Evet | Evet | Resmi KUKA.Sim 4.10 çekirdek tamamlama ve imza yardımı |
+| **KRL Sözdizimi Vurgulama** (`.src`, `.dat`, `.sub`, `.kfd`) | Evet | Evet | KRL renk paletiyle tam AST renklendirme |
+| **KRL Temaları (Koyu ve Açık)** | Evet | Evet | Endüstriyel yüksek kontrastlı renk temaları |
+| **Akıllı Otomatik Tamamlama ve Sistem Spesifikasyonları** (957+ değişken, 116 fonksiyon, 111 yapı) | Evet | Evet | Tam KSS sistem değişkenleri ve imza yardımı |
 | **KSS 8.7 Standart Sistem Kütüphanesi ve F12 Tanımı** | Evet | Evet | `bas.src`, `MsgLib.src`, `$config.dat` dosyasına anında F12 atlama |
 | **1 Tık KRC Proje İskeleti** | Evet | Evet | Standart `KRC/R1/System` klasör yapısını başlatır |
 | **Fabrika Varsayılanları Hover'ı ve $ADVANCE Sınırlayıcı** | Evet | Evet | Fabrika varsayılanlarını gösterir ve `$ADVANCE > 5` durumunda uyarır |
-| **23 Resmi Inline Form Snippet'i** (34 hareket ve mantık şablonu) | Evet | Evet | KUKA Roboter GmbH'den tam `;FOLD ... ;%{PE}` şablonları |
+| **23 Standart Inline Form Snippet'i** (34 hareket ve mantık şablonu) | Evet | Evet | Tam `;FOLD ... ;%{PE}` şablonları |
 | **Sinyal Inlay İpuçları ve Hover Dokümanları** | Evet | Evet | Satır içi PLC sinyal etiketleri ve parametre imzaları |
 | **Kod Biçimlendirici ve Matris Hizalama** | Evet | Evet | Anında 1 tık temizlik (`Shift+Alt+F`) |
 | **GitLens Satır Blame'i ve Revizyon Geçmişi** | Evet | Evet | Her nokta için anında yazar ve commit takibi |
 | **Altı Dilli Mimari** (EN, DE, IT, ES, RU, TR) | Evet | Evet | Tam yerel UI, 515 UI anahtarı ve 1.073 sistem değişkeni doküman çevirisi |
-| **Git Meta Verisi Temizleyici** | Evet | Evet | Kusursuz Git diff'leri için WorkVisual başlıklarını sıyırır |
+| **Git Meta Verisi Temizleyici** | Evet | Evet | Kusursuz Git diff'leri için servis başlıklarını (`&ACCESS`, `&REL`) sıyırır |
 | **Control Center ve 21 Kartlı Referans Rehberi** | Evet | Evet | Gerçek zamanlı tanılama anahtarları ve editör içi kısayol rehberi |
 | **36 Komutluk Tam Düz Kenar Çubuğu** | Evet | Evet | Her uzantı komutuna 1 tıkla erişim |
 | **Yerel Proje ZIP Dışa Aktarma ve Uzaktan Telepresence** | Evet | Evet | 1 tıkla tam yedekleme — işletim sistemi gezginine veya Telegram'a |
-| **Copilot AI Dil Modeli Araçları Entegrasyonu** | Evet | Evet | `krl_safety_check` doğrudan VS Code AI tarafından çağrılabilir |
-| **KUKA Event Log (.evt) Çözücü** (2.050+ mesaj) | — | **Pro** | Yerel pure-TS EVTX çözücü, 6 dilde katalog ve 1 tıkla koda atlama |
-| **Görsel I/O Sinyal Matrisi ve Çarpışma Dedektörü** | — | **Pro** | `$IN`/`$OUT` taraması, donanım bit çakışması tespiti ve CSV çıktısı |
-| **Yörünge Yol Uzunluğu ve Kaynak İstatistiği** | — | **Pro** | 3B Öklid mesafesi, kaynak dikiş uzunluğu ve ark süresi |
-| **Toplu Nokta Öteleme Dönüştürücü** (BASE / WORLD) | — | **Pro** | 3B izometrik SVG şeması, Euler ters matrisi ve `.dat` güncellemeleri |
+| **Copilot AI Dil Modeli Araçları Entegrasyonu (`krl_safety_check`)** | — | **Pro** | Güvenlik kontrolleri doğrudan VS Code AI tarafından çağrılabilir |
+| **B2B Faturalama ve Teklifler (`krl.requestCorporateInvoice`)** | Evet | Evet | Vergi No / KDV Muafiyeti ile B2B teklif talebi doğrudan editörden |
+| **Temel Sözdizimi Hatası ve Tanılama Denetimi** | Evet (Bonus) | Evet | KRL sözdizimi doğrulaması ve temel hata algılama |
+| **KSS 9.x / iiQWorks 9.+ ve KSS 8.3–8.7 Uyumluluğu** | Evet | Evet | KSS 9.x, iiQWorks ve KRC2–KRC5 kontrolörleri için tam destek |
 | **SmartPAD Yedek Kalite Kabul Raporu** | — | **Pro** | Robot pasaportu ve tıklanabilir köprülerle otomatik proje denetimi |
 | **Modern KRL ve iiQKA FOLD Paketi** | — | **Pro** | iiQKA FOLD'lar, Spline Blokları ve Çarpışma Koruması |
 | **Etkileşimli Akış Şeması Görüntüleyici** (Mermaid SVG) | — | **Pro** | Görsel kontrol akış mantığı ve 2 yönlü koda atlama |
@@ -331,11 +330,11 @@ Doğrulanmış satıcımız **Dodo Payments** üzerinden esnek, endüstriyel sı
 | Plan | Fiyat | İndirim / Faturalama | Lisans Koşulları | Ödeme |
 |:---|:---:|:---|:---|:---:|
 | **Community** | **$0** | %100 Sonsuza Kadar Ücretsiz | Kişisel ve Ticari Kullanım | [Ücretsiz Kur](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| **Pro Aylık** | **$19.00** / ay | Aylık faturalandırılır | 50 Endüstriyel Pro Aracın Tümü • 1 PC • KRC2–KRC5 Desteği | [Pro Monthly Al](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
-| **Pro Yıllık** | **$149.00** / yıl | **%35 Tasarruf** (~$6.58/ay) | 50 Pro Aracın Tümü • 1 PC • 30 Gün Çevrimdışı Tampon • KRC2–KRC5 | [Yıllık Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
-| **Pro Ömür Boyu** | **$699.00** | **Bir Kez Öde, Sonsuza Kadar Sahip Ol** | 50 Pro Aracın Tümü • 1 PC (1 İş İstasyonu) • Ömür Boyu Güncelleme | [Ömür Boyu Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| **Team Edition** | **$499.00** / yıl | B2B — Fatura ve Teklif | 50 Pro Aracın Tümü • 25 İş İstasyonu Aktivasyonu • KRC2–KRC5 | [Team Edition Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| **Enterprise Site** | **$2,490.00** / yıl | 200 İş İstasyonu | 50 Pro Aracın Tümü • 200 Tesis İş İstasyonu • Markalı Raporlar | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| **Pro Aylık** | **$19.00** / ay | Aylık faturalandırılır | Tüm Pro Araçlar • 1 PC • KRC2–KRC5 Desteği | [Pro Monthly Al](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| **Pro Yıllık** | **$149.00** / yıl | **%35 Tasarruf** (~$6.58/ay) | Tüm Pro Araçlar • 1 PC • 30 Gün Çevrimdışı Tampon • KRC2–KRC5 | [Yıllık Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
+| **Pro Ömür Boyu** | **$699.00** | **Bir Kez Öde, Sonsuza Kadar Sahip Ol** | Tüm Pro Araçlar • 1 PC (1 İş İstasyonu) • Ömür Boyu Güncelleme | [Ömür Boyu Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
+| **Team Edition** | **$499.00** / yıl | B2B — Fatura ve Teklif | Tüm Pro Araçlar • 25 Aktivasyon Aktivasyonu • KRC2–KRC5 | [Team Edition Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| **Enterprise Site** | **$2,490.00** / yıl | 200 İş İstasyonu | Tüm Pro Araçlar • 200 Tesis İş İstasyonu • Markalı Raporlar | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">
@@ -439,6 +438,6 @@ Uzantı davranışlarını `settings.json` dosyanızda yapılandırın:
 **KUKA KRL Professional**, **Liskin Labs** tarafından geliştirilen bağımsız bir mühendislik geliştirme, statik analiz ve yedek diff paketidir. **Güvenlik sertifikalı bir yazılım DEĞİLDİR (Non-SIL / Non-PL)** ve sahada fiziksel devreye alma prosedürlerinin, düşük hız doğrulamasının (fiziksel KUKA SmartPAD üzerinde T1 modunda `$OV_PRO <= 30%`) veya **ISO 10218-1/-2** ve **ISO 13849-1** standartlarının gerektirdiği resmi risk değerlendirmelerinin yerini **almaz**. Otomatik üretime geçmeden önce her zaman T1 modunda manuel yol testleri gerçekleştirin.
 
 ### Ticari Markalar ve Bağımsızlık Beyanı
-* **KUKA®, KRL®, KRC®, WorkVisual® ve SmartPAD®**, **KUKA AG** / **KUKA Deutschland GmbH** şirketinin tescilli ticari markalarıdır.
+* **KUKA®, KRL®, KRC®, WorkVisual®, iiQWorks® ve SmartPAD®**, **KUKA AG** / **KUKA Deutschland GmbH** şirketinin tescilli ticari markalarıdır.
 * **Visual Studio Code® ve VS Code®**, **Microsoft Corporation** şirketinin tescilli ticari markalarıdır.
 * Bu yazılım uzantısı **Liskin Labs** tarafından geliştirilen bağımsız bir araçtır; KUKA AG veya Microsoft Corporation ile hiçbir bağlantısı, sponsorluğu, onayı veya sertifikası **yoktur**. Bahsi geçen tüm ürün adları ve markalar ilgili sahiplerinin mülkiyetindedir ve yalnızca uyumluluk tespiti amacıyla belirtilmiştir (nominative fair use).

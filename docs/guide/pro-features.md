@@ -102,8 +102,8 @@ Industrial offline trajectory and frame manipulation suite:
 
 ---
 
-### 33. KUKA.Sim 4.10 & iiQWorks.Sim 1.3 Kinematic Safety Analyzers
-Deep industrial simulation rules reverse-engineered from KUKA.Sim 4.10 & iiQWorks.Sim 1.3:
+### 33. Kinematic Safety & Industrial Simulation Analyzers (KSS 8.x & KSS 9.x / iiQWorks 9.+)
+Industrial motion simulation and kinematic safety rules conforming to KSS 8.x and KSS 9.x / iiQWorks specifications:
 - **Status (S) & Turn (T) Range Validator**: Flags illegal kinematic Status ($S \notin 0..7$) and Turn bitmasks ($T \notin 0..63$).
 - **Context-Aware RESUME Analyzer**: Flags illegal `RESUME` statements outside interrupt handling subroutines.
 - **FOR Loop STEP 0 Detector**: Identifies infinite controller loop conditions where `FOR` loop step increment equals 0.

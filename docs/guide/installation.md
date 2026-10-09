@@ -27,14 +27,14 @@ For technical support, connect with us directly using the embedded support panel
 
 ## 6. Licensing Plans & Architecture
 
-| Tier | Price | Workstations | Key Differentiator |
+| Tier | Price | Workstation Activations | Key Differentiator |
 | :--- | :--- | :--- | :--- |
-| **Individual Pro (Monthly)** | $9.99 / mo | 1 Workstation (1 PC) | KRC2/KRC3/KRC4/KRC5 support, short projects, commissioning sprints |
-| **Individual Pro (Annual)** | $79.00 / yr | 1 Workstation (1 PC) | Save 35%, 1-Year Air-Gapped offline certificate, 50 industrial tools |
-| **Individual Pro (Lifetime)** | $699.00 once | 1 Workstation (1 PC) | Perpetual license, perpetual Air-Gapped offline certificate, KRC2–KRC5 |
-| **Integrator Team Edition** | $299.00 / yr | 25 Workstation Activations | Centralized B2B invoicing, 25 seats for plant automation squad, KRC2–KRC5 |
-| **Enterprise Plant Site** | $1,499.00 / yr | **Unlimited Workstations** | **Plant-wide site license** (~$8/mo/device for 20 seats), direct Telegram support, Fleet Backup Hub, OEM-branded client acceptance reports |
+| **Engineer Pro (Monthly)** | $19.00 / mo | 1 Workstation Activation | KRC2/KRC3/KRC4/KRC5 support, short projects, commissioning sprints |
+| **Engineer Pro (Annual)** | $149.00 / yr | 1 Workstation Activation | Save 35%, 1-Year Air-Gapped offline certificate, 50 industrial tools |
+| **Engineer Pro (Lifetime)** | $699.00 once | 1 Workstation Activation | Perpetual license, perpetual updates, permanent Air-Gapped certificate |
+| **Integrator Team Edition** | $499.00 / yr | 25 Workstation Activations | Centralized B2B invoicing, 25 plant/office devices, KRC2–KRC5 |
+| **Enterprise Plant Site** | $2,490.00 / yr | 200 Workstation Activations | 200 plant workstations, direct priority SLA, Fleet Backup Hub, OEM-branded client protocols |
 
-### Why is Pro Lifetime $699 while Enterprise Site is $1,499/yr?
-- **Pro Lifetime ($699 once)** provides a perpetual license for **1 workstation (1 PC)** with zero recurring fees and lifetime updates. Includes personalized cryptographic Air-Gapped certificate generation for isolated OT factory networks.
-- **Enterprise Site ($1,499/yr)** is a **complete site-wide license with unlimited workstation activations** for the entire manufacturing plant. It covers all plant engineers, robot operators, and maintenance technicians (~$8/month per seat for a 20-person plant). It includes priority direct developer assistance via Telegram Support Gateway, centralized automated KUKA Fleet Backup Hub, and OEM-branded audit reports (Ford, Renault, TOGG, Saint-Gobain).
+### Why is Pro Lifetime $699 while Enterprise Site is $2,490/yr?
+- **Pro Lifetime ($699 once)** provides a perpetual standalone license for **1 workstation** with zero recurring subscription fees and lifetime updates. Includes personalized cryptographic Air-Gapped certificate generation for isolated OT factory networks.
+- **Enterprise Site ($2,490/yr)** provides **200 workstation activations** for the entire manufacturing plant or robotics system integrator. It covers all plant computers, engineering laptops, and diagnostic stations. It includes priority direct developer assistance via Telegram Support Gateway, centralized automated KUKA Fleet Backup Hub, custom linting rules, and OEM-branded audit reports (Volkswagen, Audi, BMW, Ford, Renault, Stellantis).

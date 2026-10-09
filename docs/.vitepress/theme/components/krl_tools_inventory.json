@@ -1,6 +1,6 @@
 {
   "extensionName": "KUKA KRL Professional VS Code Extension",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "publisher": "LiskinLabs",
   "license": "SEE LICENSE IN LICENSE.txt",
   "pricing": "Free",
@@ -1003,6 +1003,41 @@
         "title": "View Robot Image",
         "status": "Free",
         "valueProposition": "Displays an image of the configured KUKA robot model."
+      },
+      {
+        "type": "Command",
+        "id": "krl.fixAllSafeIssuesInFile",
+        "title": "Safe Auto-Repair Issues",
+        "status": "Free",
+        "valueProposition": "Batch applies verified non-destructive fixes across thousands of code issues (case normalization, P00 handshakes, block endings)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.mountBackupZipAsProject",
+        "title": "Mount Backup ZIP as Project",
+        "status": "PRO",
+        "valueProposition": "Mounts and navigates KRC backup ZIP archives in-memory as a virtual project folder with real-time bidirectional sync."
+      },
+      {
+        "type": "Command",
+        "id": "krl.viewEvtLog",
+        "title": "View Binary Event Log (.evt)",
+        "status": "PRO",
+        "valueProposition": "Decodes and inspects proprietary KUKA binary event log archives into structured chronological timelines."
+      },
+      {
+        "type": "Command",
+        "id": "krl.calculateMotionStats",
+        "title": "Calculate Motion & Welding Stats",
+        "status": "PRO",
+        "valueProposition": "Calculates total path distance, segment count, torch seam length, and lookahead speed profile."
+      },
+      {
+        "type": "Command",
+        "id": "krl.requestCorporateInvoice",
+        "title": "Request Corporate B2B Invoice",
+        "status": "Free",
+        "valueProposition": "Generates official compliant B2B invoices with EU VAT Reverse Charge and company Tax ID validation."
       },
       {
         "type": "Command",

@@ -32,7 +32,7 @@
             <span class="text-kuka-orange">🎬</span> {{ t.navShowcase }}
           </a>
           <a :href="withBase(t.wikiLink)" class="hover:text-kuka-orange transition-colors flex items-center gap-1">
-            <span class="text-cyan-400 font-bold">50</span> {{ t.navWiki }}
+            <span class="text-cyan-400 font-bold">64+</span> {{ t.navWiki }}
           </a>
           <a href="#comparison" class="hover:text-kuka-orange transition-colors">
             {{ t.navBeforeAfter }}
@@ -101,7 +101,7 @@
               <span>🎬</span> <span>{{ t.navShowcase }}</span>
             </a>
             <a @click="mobileMenuOpen = false" :href="withBase(t.wikiLink)" class="p-2.5 rounded-xl bg-[#0a0d14] border border-white/10 text-gray-300 hover:text-kuka-orange flex items-center gap-2">
-              <span class="text-cyan-400 font-bold">50</span> <span>{{ t.navWiki }}</span>
+              <span class="text-cyan-400 font-bold">64+</span> <span>{{ t.navWiki }}</span>
             </a>
             <a @click="mobileMenuOpen = false" href="#comparison" class="p-2.5 rounded-xl bg-[#0a0d14] border border-white/10 text-gray-300 hover:text-kuka-orange flex items-center gap-2">
               <span>⚖️</span> <span>{{ t.navBeforeAfter }}</span>
@@ -1152,7 +1152,7 @@
         <div class="p-6 rounded-2xl bg-[#0a0d14] border border-white/15 hover:border-kuka-orange/50 transition-all flex flex-col justify-between shadow-xl">
           <div class="space-y-4 text-left">
             <div class="text-kuka-orange text-xs font-bold tracking-widest uppercase">// PRO MONTHLY</div>
-            <div class="text-3xl font-black text-white font-sans">$9.99 <span class="text-xs text-gray-400 font-mono">{{ t.perMonth }}</span></div>
+            <div class="text-3xl font-black text-white font-sans">$19.00 <span class="text-xs text-gray-400 font-mono">{{ t.perMonth }}</span></div>
             <p class="text-xs text-gray-400 font-sans leading-relaxed">{{ t.p1Desc }}</p>
             <div class="space-y-2 text-xs text-gray-300 pt-4 border-t border-white/10">
               <div>✓ {{ t.pf1 }}</div>
@@ -1177,13 +1177,13 @@
           </div>
           <div class="space-y-4 text-left">
             <div class="text-cyan-400 text-xs font-bold tracking-widest uppercase">// PRO ANNUAL</div>
-            <div class="text-3xl font-black text-white font-sans">$79.00 <span class="text-xs text-gray-400 font-mono">{{ t.perYear }}</span></div>
+            <div class="text-3xl font-black text-white font-sans">$149.00 <span class="text-xs text-gray-400 font-mono">{{ t.perYear }}</span></div>
             <p class="text-xs text-gray-300 font-sans leading-relaxed">{{ t.p2Desc }}</p>
             <div class="space-y-2 text-xs text-gray-200 pt-4 border-t border-white/10">
               <div>✓ {{ t.pf1 }}</div>
               <div>✓ {{ t.pf2 }}</div>
               <div>✓ {{ t.pf3_pri }}</div>
-              <div class="text-emerald-400 font-bold">✓ {{ t.activation5Seats }}</div>
+              <div class="text-emerald-400 font-bold">✓ {{ t.activation1Seat }}</div>
             </div>
           </div>
           <div class="pt-6">
@@ -1222,7 +1222,7 @@
         <div class="p-6 rounded-2xl bg-[#0a0d14] border border-white/10 hover:border-cyan-400/50 transition-all flex flex-col justify-between shadow-xl">
           <div class="space-y-4 text-left">
             <div class="text-cyan-400 text-xs font-bold tracking-widest uppercase">// TEAM EDITION</div>
-            <div class="text-3xl font-black text-white font-sans">$299 <span class="text-xs text-gray-400 font-mono">{{ t.perYear }}</span></div>
+            <div class="text-3xl font-black text-white font-sans">$499.00 <span class="text-xs text-gray-400 font-mono">{{ t.perYear }}</span></div>
             <p class="text-xs text-gray-400 font-sans leading-relaxed">{{ t.p4Desc }}</p>
             <div class="space-y-2 text-xs text-gray-300 pt-4 border-t border-white/10">
               <div>✓ {{ t.pf4_1 }}</div>
@@ -1231,7 +1231,7 @@
             </div>
           </div>
           <div class="pt-6">
-            <a
+            <a 
               href="https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v"
               target="_blank"
               class="block w-full py-3 rounded-xl bg-[#0d121d] hover:bg-[#151d2d] text-cyan-400 font-bold text-center border border-cyan-400/50 text-xs transition-colors">
@@ -1247,7 +1247,7 @@
           </div>
           <div class="space-y-4 text-left">
             <div class="text-emerald-400 text-xs font-bold tracking-widest uppercase">// ENTERPRISE SITE</div>
-            <div class="text-3xl font-black text-white font-sans">$1,499 <span class="text-xs text-gray-400 font-mono">{{ t.perYear }}</span></div>
+            <div class="text-3xl font-black text-white font-sans">$2,490.00 <span class="text-xs text-gray-400 font-mono">{{ t.perYear }}</span></div>
             <p class="text-xs text-gray-400 font-sans leading-relaxed">{{ t.p5Desc }}</p>
             <div class="space-y-2 text-xs text-gray-300 pt-4 border-t border-white/10">
               <div>✓ {{ t.pf5_1 }}</div>
@@ -1256,7 +1256,7 @@
             </div>
           </div>
           <div class="pt-6">
-            <a
+            <a 
               href="https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP"
               target="_blank"
               class="block w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-center shadow-[0_0_20px_rgba(16,185,129,0.35)] text-xs transition-all border border-emerald-400/50">
@@ -1291,10 +1291,10 @@
               <span>{{ t.guideCol1Title || 'Individual Engineer' }}</span>
             </div>
             <div class="text-gray-400 text-[11px] leading-relaxed">
-              {{ t.guideCol1Desc || 'Pro Monthly ($9.99), Pro Annual ($79), or Pro Lifetime ($699).' }}
+              {{ t.guideCol1Desc || 'Pro Monthly ($19.00), Pro Annual ($149.00), or Pro Lifetime ($699.00).' }}
             </div>
             <ul class="space-y-1.5 text-[11px] text-gray-300 border-t border-white/5 pt-2">
-              <li>• <b class="text-white">5 Personal Activations:</b> {{ t.guideCol1P1 || 'Laptop, Toughbook, Office, Bench & Tablet.' }}</li>
+              <li>• <b class="text-white">1 Workstation Activation:</b> {{ t.guideCol1P1 || 'Personal activation with free hardware transfer between laptops.' }}</li>
               <li>• <b class="text-purple-400">Why Lifetime ($699)?</b> {{ t.guideCol1P2 || 'Pay once, own forever with zero recurring fees for freelance contractors.' }}</li>
               <li>• {{ t.guideCol1P3 || 'One prevented crash in teach-in pays for the license instantly.' }}</li>
             </ul>
@@ -1307,10 +1307,10 @@
               <span>{{ t.guideCol2Title || 'Integrator Team' }}</span>
             </div>
             <div class="text-gray-400 text-[11px] leading-relaxed">
-              {{ t.guideCol2Desc || 'Team Edition ($299/yr) for up to 5 robotics specialists.' }}
+              {{ t.guideCol2Desc || 'Team Edition ($499.00/yr) for up to 25 seats across robotics squads.' }}
             </div>
             <ul class="space-y-1.5 text-[11px] text-gray-300 border-t border-white/5 pt-2">
-              <li>• <b class="text-white">25 Activations Total:</b> {{ t.guideCol2P1 || '5 devices per engineer in your integration squad.' }}</li>
+              <li>• <b class="text-white">25 Activations Total:</b> {{ t.guideCol2P1 || 'Full fleet coverage for commissioning engineers and shop-floor laptops.' }}</li>
               <li>• {{ t.guideCol2P2 || 'Centralized B2B invoice with corporate accounting reconciliation.' }}</li>
               <li>• {{ t.guideCol2P3 || 'Unified KRL syntax and safety standards across all client cells.' }}</li>
             </ul>
@@ -1323,10 +1323,10 @@
               <span>{{ t.guideCol3Title || 'Enterprise Plant Site' }}</span>
             </div>
             <div class="text-gray-400 text-[11px] leading-relaxed">
-              {{ t.guideCol3Desc || 'Enterprise Site ($1,499/yr) — Unlimited seats for the whole factory.' }}
+              {{ t.guideCol3Desc || 'Enterprise Site ($2,490.00/yr) — 200 plant-wide seats for the entire facility.' }}
             </div>
             <ul class="space-y-1.5 text-[11px] text-gray-300 border-t border-white/5 pt-2">
-              <li>• <b class="text-emerald-400">{{ t.guideCol3P1_b || 'Unlimited Seats:' }}</b> {{ t.guideCol3P1 || 'Covers all plant technicians and operators (~$8/mo per person!).' }}</li>
+              <li>• <b class="text-emerald-400">{{ t.guideCol3P1_b || '200 Plant Seats:' }}</b> {{ t.guideCol3P1 || 'Covers all plant technicians, operators, and maintenance teams.' }}</li>
               <li>• <b class="text-white">Priority Support:</b> {{ t.guideCol3P2 || 'Direct developer engineering assistance & priority SLA.' }}</li>
               <li>• <b class="text-white">Fleet Backup Hub:</b> {{ t.guideCol3P3 || 'Cloud archiving of all robot cells + OEM-branded audits (Ford, Renault, TOGG).' }}</li>
             </ul>
@@ -2001,27 +2001,62 @@ const featureComparisonRows = computed(() => {
   return [
     {
       category: isRu ? 'Ядро и Редактор' : isTr ? 'Çekirdek ve Editör' : 'Core Language & Editor',
-      name: isRu ? 'Подсветка синтаксиса KRL и автоотступы' : isTr ? 'KRL Sözdizimi Vurgulama ve Girintileme' : 'KRL Syntax Highlighting & Auto-Indentation',
+      name: isRu ? 'Подсветка синтаксиса KRL и автоотступы (.src, .dat, .sub)' : isTr ? 'KRL Sözdizimi Vurgulama ve Girintileme (.src, .dat, .sub)' : 'KRL Syntax Highlighting & Auto-Indentation (.src, .dat, .sub)',
       free: true, pro: true
     },
     {
       category: isRu ? 'Ядро и Редактор' : isTr ? 'Çekirdek ve Editör' : 'Core Language & Editor',
-      name: isRu ? '6 промышленных тем (KSS Dark, KUKA Light)' : isTr ? '6 Endüstriyel Tema (KSS Dark, KUKA Light)' : '6 Industrial Themes (KSS Dark, KUKA Light)',
+      name: isRu ? '6 промышленных тем (KSS Dark, KUKA Light, OLED)' : isTr ? '6 Endüstriyel Tema (KSS Dark, KUKA Light, OLED)' : '6 Industrial Themes (KSS Dark, KUKA Light, OLED)',
       free: true, pro: true
     },
     {
       category: isRu ? 'Ядро и Редактор' : isTr ? 'Çekirdek ve Editör' : 'Core Language & Editor',
-      name: isRu ? '350+ системных переменных ($AXIS_ACT, $POS_ACT, $TORQMON)' : isTr ? '350+ Sistem Değişkeni Otomatik Tamamlama' : '350+ KSS System Variables Autocomplete',
+      name: isRu ? '957+ системных переменных и 116 встроенных функций' : isTr ? '957+ Sistem Değişkeni ve 116 Dahili Fonksiyon' : '957+ System Variables & 116 Built-in Functions',
       free: true, pro: true
     },
     {
       category: isRu ? 'Ядро и Редактор' : isTr ? 'Çekirdek ve Editör' : 'Core Language & Editor',
-      name: isRu ? 'Переход к определению и поиск ссылок в проекте' : isTr ? 'Tanıma Git ve Proje Çapında Referanslar' : 'Go-to-Definition & Workspace References',
+      name: isRu ? 'Базовая валидация синтаксиса и ошибок (бонус)' : isTr ? 'Temel Sözdizimi ve Hata Doğrulaması (Bonus)' : 'Basic Syntax Validation & Error Checks (Bonus)',
+      free: true, pro: true
+    },
+    {
+      category: isRu ? 'Ядро и Редактор' : isTr ? 'Çekirdek ve Editör' : 'Core Language & Editor',
+      name: isRu ? 'Переход к определению и поиск ссылок в проекте (F12)' : isTr ? 'Tanıma Git ve Proje Çapında Referanslar (F12)' : 'Go-to-Definition & Workspace References (F12)',
+      free: true, pro: true
+    },
+    {
+      category: isRu ? 'Ядро и Редактор' : isTr ? 'Çekirdek ve Editör' : 'Core Language & Editor',
+      name: isRu ? 'Inlay Hints для физических сигналов ($IN / $OUT / $ANIN)' : isTr ? 'Donanım Sinyali ($IN / $OUT / $ANIN) Inlay Hints' : 'Hardware Signal ($IN / $OUT / $ANIN) Inlay Hints',
+      free: true, pro: true
+    },
+    {
+      category: isRu ? 'Ядро и Редактор' : isTr ? 'Çekirdek ve Editör' : 'Core Language & Editor',
+      name: isRu ? 'KUKA Backup Archive Explorer (Zero-Unpack в памяти)' : isTr ? 'KUKA Yedek Arşiv Gezgini (Sıfır Çıkartma, Bellek İçi)' : 'KUKA Backup Archive Explorer (Zero-Unpack In-Memory)',
+      free: true, pro: true
+    },
+    {
+      category: isRu ? 'Ядро и Редактор' : isTr ? 'Çekirdek ve Editör' : 'Core Language & Editor',
+      name: isRu ? 'Совместимость с KSS 9.x / iiQWorks 9.+ и KRC2–KRC5' : isTr ? 'KSS 9.x / iiQWorks 9.+ ve KRC2–KRC5 Tam Uyumluluk' : 'Full Compatibility with KSS 9.x / iiQWorks 9.+ & KRC2–KRC5',
       free: true, pro: true
     },
     {
       category: isRu ? 'Безопасность и Линтер' : isTr ? 'Güvenlik ve Linter' : 'Safety & Diagnostics',
-      name: isRu ? 'Inlay Hints для физических сигналов ($IN / $OUT)' : isTr ? 'Donanım Sinyali ($IN / $OUT) Inlay Hints' : 'Hardware Signal ($IN / $OUT) Inlay Hints',
+      name: isRu ? 'Safe Auto-Repair Engine (Advance run WAIT SEC 0, BRAKE, $LOAD, BOM)' : isTr ? 'Güvenli Otomatik Onarım Motoru (Advance run WAIT SEC 0, BRAKE, $LOAD, BOM)' : 'Safe Auto-Repair Engine (Advance run WAIT SEC 0, BRAKE, $LOAD, BOM)',
+      free: false, pro: true
+    },
+    {
+      category: isRu ? 'Безопасность и Линтер' : isTr ? 'Güvenlik ve Linter' : 'Safety & Diagnostics',
+      name: isRu ? 'AST Rollback Guard и нативный просмотр Monaco Diff' : isTr ? 'AST Rollback Guard ve Yerel Monaco Diff Önizleme' : 'AST Rollback Guard & Native Monaco Diff Review',
+      free: false, pro: true
+    },
+    {
+      category: isRu ? 'Безопасность и Линтер' : isTr ? 'Güvenlik ve Linter' : 'Safety & Diagnostics',
+      name: isRu ? 'Предиктор сингулярности кисти (Wrist Singularity A5 ≈ 0°)' : isTr ? 'Bilek Tekilliği Öngörücüsü (Wrist Singularity A5 ≈ 0°)' : 'Wrist Singularity Predictor (A5 ≈ 0° ± 5°)',
+      free: false, pro: true
+    },
+    {
+      category: isRu ? 'Безопасность и Линтер' : isTr ? 'Güvenlik ve Linter' : 'Safety & Diagnostics',
+      name: isRu ? 'Контроль сингулярности плеча и максимального вылета (>96%)' : isTr ? 'Omuz Tekilliği ve Maksimum Erişim Sınırı (>%96)' : 'Shoulder Singularity & Workspace Reach Boundary (>96%)',
       free: false, pro: true
     },
     {
@@ -2031,7 +2066,7 @@ const featureComparisonRows = computed(() => {
     },
     {
       category: isRu ? 'Безопасность и Линтер' : isTr ? 'Güvenlik ve Linter' : 'Safety & Diagnostics',
-      name: isRu ? 'Контроль опасной скорости ($VEL.CP > 3.0 м/с ISO 13849)' : isTr ? 'Aşırı Hız Denetimi ($VEL.CP > 3.0 m/s)' : 'Excessive Velocity Guard ($VEL.CP > 3.0 m/s)',
+      name: isRu ? 'Контроль опасной скорости ($VEL.CP > 2.0 м/с ISO 13849)' : isTr ? 'Aşırı Hız Denetimi ($VEL.CP > 2.0 m/s ISO 13849)' : 'Excessive Velocity Guard ($VEL.CP > 2.0 m/s ISO 13849)',
       free: false, pro: true
     },
     {
@@ -2041,7 +2076,7 @@ const featureComparisonRows = computed(() => {
     },
     {
       category: isRu ? 'Безопасность и Линтер' : isTr ? 'Güvenlik ve Linter' : 'Safety & Diagnostics',
-      name: isRu ? 'Поиск скрытой кириллицы в переменных и метках' : isTr ? 'ASCII Dışı Karakter ve Yazım Hatası Tespiti' : 'Cyrillic / Non-ASCII Layout Confusion Linter',
+      name: isRu ? 'Поиск скрытой кириллицы и опасных символов не-ASCII' : isTr ? 'ASCII Dışı ve Gizli Kiril Karakter Tespiti' : 'Cyrillic / Non-ASCII Layout Confusion Linter',
       free: false, pro: true
     },
     {
@@ -2056,37 +2091,52 @@ const featureComparisonRows = computed(() => {
     },
     {
       category: isRu ? 'Блок-схемы и Геометрия' : isTr ? 'Akış Şeması ve Geometri' : 'Flowcharts & Coordinate Math',
-      name: isRu ? 'Анализ архивов .ZIP и 6-осевой расчет дельты точек' : isTr ? 'SmartPAD .ZIP Yedek Farkı ve 6 Eksen Delta' : 'SmartPAD .ZIP Backup Diff & 6-Axis Delta Math',
-      free: false, pro: true
-    },
-    {
-      category: isRu ? 'Блок-схемы и Геометрия' : isTr ? 'Akış Şeması ve Geometri' : 'Flowcharts & Coordinate Math',
       name: isRu ? 'Калькулятор углов Эйлера $BASE / $TOOL по 3 точкам' : isTr ? '3 Noktadan Euler Açısı Hesaplayıcı ($BASE / $TOOL)' : '3-Point $BASE / $TOOL Euler Angle Math',
       free: false, pro: true
     },
     {
-      category: isRu ? 'Интеграция и Стандарты' : isTr ? 'Entegrasyon ve Standartlar' : 'Integration & Standards',
-      name: isRu ? 'Валидация XML-схем EthernetKRL (EKI)' : isTr ? 'EthernetKRL (EKI) XML Şema Doğrulama' : 'EthernetKRL (EKI) XML Schema Validation',
+      category: isRu ? 'Блок-схемы и Геометрия' : isTr ? 'Akış Şeması ve Geometri' : 'Flowcharts & Coordinate Math',
+      name: isRu ? '3D длина траектории и расчёт сварки (ARCON/ARCOFF)' : isTr ? '3D Yörünge Uzunluğu ve Kaynak Süresi Hesabı' : '3D Trajectory Length & Arc Welding Cycle Profiler',
       free: false, pro: true
     },
     {
-      category: isRu ? 'Интеграция и Стандарты' : isTr ? 'Entegrasyon ve Standartlar' : 'Integration & Standards',
-      name: isRu ? 'Очистка метаданных WorkVisual (&ACCESS, &REL)' : isTr ? 'WorkVisual Meta Veri Temizleme (&ACCESS, &REL)' : 'WorkVisual Metadata Stripper (&ACCESS, &REL)',
+      category: isRu ? 'Бэкапы и Промышленность' : isTr ? 'Yedekler ve Endüstri' : 'Backups & Production',
+      name: isRu ? 'Монтирование Live ZIP в проект с автосинхронизацией (<80мс)' : isTr ? 'Live ZIP Proje Bağlama ve Otomatik Senkronizasyon (<80ms)' : 'Live ZIP Auto-Sync Project Mount (<80ms Direct Patch)',
       free: false, pro: true
     },
     {
-      category: isRu ? 'Интеграция и Стандарты' : isTr ? 'Entegrasyon ve Standartlar' : 'Integration & Standards',
-      name: isRu ? 'Проверка автостандартов (VASS 6/7, BMW TMO, Integra)' : isTr ? 'Otomotiv Standartları (VASS, BMW, Integra)' : 'Automotive Standards Linter (VASS, BMW, Integra)',
+      category: isRu ? 'Бэкапы и Промышленность' : isTr ? 'Yedekler ve Endüstri' : 'Backups & Production',
+      name: isRu ? 'Сравнение ZIP-бэкапов SmartPAD и 6-осевой расчет дельт' : isTr ? 'SmartPAD .ZIP Yedek Farkı ve 6 Eksen Delta Hesabı' : 'SmartPAD .ZIP Backup Diff & 6-Axis Coordinate Delta Math',
       free: false, pro: true
     },
     {
-      category: isRu ? 'Лицензия и Поддержка' : isTr ? 'Lisans ve Destek' : 'Licensing & Enterprise',
-      name: isRu ? 'Автономная Air-Gap лицензия (до 3 ПК инженера)' : isTr ? 'Çevrimdışı Air-Gap Lisansı (3 Bilgisayara Kadar)' : 'Offline Air-Gap Floating License (Up to 3 PCs)',
+      category: isRu ? 'Бэкапы и Промышленность' : isTr ? 'Yedekler ve Endüstri' : 'Backups & Production',
+      name: isRu ? 'Pure-TS Декодер логов KUKA Event Log (.evt) (2,050+ сообщений)' : isTr ? 'Pure-TS KUKA Olay Günlüğü (.evt) Çözücü (2,050+ Mesaj)' : 'Pure-TS KUKA Event Log (.evt) Decoder (2,050+ Messages)',
       free: false, pro: true
     },
     {
-      category: isRu ? 'Лицензия и Поддержка' : isTr ? 'Lisans ve Destek' : 'Licensing & Enterprise',
-      name: isRu ? 'Прямая инженерная поддержка от Сильвестра Лискина' : isTr ? 'Silvestr Liskin ile Doğrudan Mühendislik Desteği' : 'Direct Priority Engineering Support from Silvestr Liskin',
+      category: isRu ? 'Бэкапы и Промышленность' : isTr ? 'Yedekler ve Endüstri' : 'Backups & Production',
+      name: isRu ? 'Матрица I/O сигналов и детектор коллизий PLC' : isTr ? 'I/O Sinyal Matrisi ve PLC Çakışma Dedektörü' : 'I/O Signal Matrix & PLC Hardware Collision Detector',
+      free: false, pro: true
+    },
+    {
+      category: isRu ? 'Бэкапы и Промышленность' : isTr ? 'Yedekler ve Endüstri' : 'Backups & Production',
+      name: isRu ? 'Кинематическая изоляция сплайнов KSS (SPTP / SLIN / SCIRC)' : isTr ? 'KSS Spline Kinematik İzolasyonu (SPTP / SLIN / SCIRC)' : 'KSS Spline Kinematic Isolation (SPTP / SLIN / SCIRC)',
+      free: false, pro: true
+    },
+    {
+      category: isRu ? 'Интеграция и Корпоративное' : isTr ? 'Entegrasyon ve Kurumsal' : 'Integration & Enterprise',
+      name: isRu ? 'Генерация B2B коммерческих счетов (Tax ID / Reverse Charge)' : isTr ? 'B2B Kurumsal Fatura Oluşturma (Vergi No / Reverse Charge)' : 'B2B Corporate Invoice Generation (Tax ID / Reverse Charge)',
+      free: true, pro: true
+    },
+    {
+      category: isRu ? 'Интеграция и Корпоративное' : isTr ? 'Entegrasyon ve Kurumsal' : 'Integration & Enterprise',
+      name: isRu ? '100% Автономная Air-Gap лицензия на объекте' : isTr ? '%100 Çevrimdışı Sahada Air-Gap Lisansı' : '100% Offline Air-Gap Floating Field License',
+      free: false, pro: true
+    },
+    {
+      category: isRu ? 'Интеграция и Корпоративное' : isTr ? 'Entegrasyon ve Kurumsal' : 'Integration & Enterprise',
+      name: isRu ? 'Прямая инженерная поддержка со строгим SLA' : isTr ? 'Doğrudan Mühendislik Desteği ve Özel SLA' : 'Direct Priority Engineering Support with Dedicated SLA',
       free: false, pro: true
     }
   ]
@@ -2301,8 +2351,8 @@ const translations = {
     perYear: "/ year",
     perOnce: "/ Once",
     save35: "SAVE 35%",
-    activation5Seats: "5 Device Activations",
-    lifetimeF1: "All 50 Pro Tools Forever",
+    activation1Seat: "1 Workstation Activation (Transferable)",
+    lifetimeF1: "All Pro Tools & Analyzers Forever",
     lifetimeF2: "Free Future Major Updates",
     lifetimeF3: "Direct Engineering Support",
 
@@ -2310,32 +2360,32 @@ const translations = {
     pricingGuideBadge: "LICENSING ECONOMICS",
     pricingGuideTitle: "Which License Fits Your Workflow?",
     pricingGuideSub: "Transparent terms for individual setups, integrator teams & manufacturing plants.",
-    guideCol1Title: "5-Device Tier",
-    guideCol1Desc: "Pro Monthly ($9.99), Pro Annual ($79), or Pro Lifetime ($699).",
-    guideCol1P1: "5 simultaneous device activations: Laptop, Toughbook, Office, Bench & Tablet.",
+    guideCol1Title: "Individual Engineer Tier",
+    guideCol1Desc: "Pro Monthly ($19.00), Pro Annual ($149.00), or Pro Lifetime ($699.00).",
+    guideCol1P1: "Individual workstation license with 1 device activation, instantly transferable between PCs.",
     guideCol1P2: "Pay once, own forever with zero recurring fees for independent specialists.",
     guideCol1P3: "One prevented crash in teach-in pays for the license instantly.",
-    guideCol2Title: "25-Device Tier",
-    guideCol2Desc: "Team Edition ($299/yr) with 25 total device activations.",
+    guideCol2Title: "Integrator Team Tier",
+    guideCol2Desc: "Team Edition ($499.00/yr) with 25 total device activations.",
     guideCol2P1: "25 simultaneous device activations for your entire integration squad.",
     guideCol2P2: "Centralized B2B invoice with corporate accounting reconciliation.",
     guideCol2P3: "Unified KRL syntax and safety standards across all client cells.",
     guideCol3Title: "Enterprise Plant Site",
-    guideCol3Desc: "Enterprise Site ($1,499/yr) — Unlimited device activations for the whole plant.",
-    guideCol3P1_b: "Unlimited Activations:",
-    guideCol3P1: "Covers all plant technicians and operators (~$8/mo per person for a 20-person team).",
+    guideCol3Desc: "Enterprise Site ($2,490.00/yr) — 200 workstation activations enterprise-wide.",
+    guideCol3P1_b: "200 Activations Enterprise-Wide:",
+    guideCol3P1: "Covers all plant technicians, laptops, and diagnostic terminals across the factory.",
     guideCol3P2: "Direct developer engineering assistance and dedicated SLA support.",
-    guideCol3P3: "Cloud archiving of all robot cells + OEM-branded audits (Ford, Renault, TOGG).",
+    guideCol3P3: "KUKA Fleet Backup Hub + OEM-branded audit reports (Ford, Renault, TOGG).",
 
     // B2B tiers (Team / Enterprise)
     p4Desc: "Annual licence for integration teams — one invoice, 25 device activations, priority support.",
-    pf4_1: "All 50 Pro Tools",
+    pf4_1: "All Pro Tools & Analyzers",
     pf4_2: "25 Device Activations",
     pf4_3: "Priority Engineering Support",
     btnTeam: "Get Team Edition",
-    entBadge: "UNLIMITED ACTIVATIONS",
-    p5Desc: "Site-wide licence for the entire manufacturing plant — unlimited device activations and Fleet Backup Hub.",
-    pf5_1: "Unlimited Device Activations",
+    entBadge: "200 ACTIVATIONS // PLANT-WIDE",
+    p5Desc: "Site-wide licence for the entire manufacturing plant — 200 device activations and Fleet Backup Hub.",
+    pf5_1: "200 Device Activations",
     pf5_2: "Company-Branded OEM Reports",
     pf5_3: "Priority Engineering Support",
     btnEnterprise: "Get Enterprise",
@@ -2461,8 +2511,8 @@ const translations = {
     perYear: "/ год",
     perOnce: "разово",
     save35: "СКИДКА 35%",
-    activation5Seats: "5 Активаций Устройств",
-    lifetimeF1: "Все 50 Pro инструментов навсегда",
+    activation1Seat: "1 Активация Устройства (свободный перенос)",
+    lifetimeF1: "Все Pro-инструменты и анализаторы навсегда",
     lifetimeF2: "Все будущие обновления бесплатны",
     lifetimeF3: "Прямая инженерная поддержка",
 
@@ -2470,32 +2520,32 @@ const translations = {
     pricingGuideBadge: "ЭКОНОМИКА ТАРИФОВ",
     pricingGuideTitle: "Какой тариф подходит именно вам?",
     pricingGuideSub: "Прозрачные условия для частных наладчиков, интеграторских команд и заводов.",
-    guideCol1Title: "Тариф на 5 активаций",
-    guideCol1Desc: "Pro Месяц ($9.99), Pro Год ($79) или Pro Lifetime ($699).",
-    guideCol1P1: "5 одновременных активаций устройств: Toughbook, рабочий ноутбук, офис, стенд, планшет.",
+    guideCol1Title: "Индивидуальный инженер",
+    guideCol1Desc: "Pro Месяц ($19.00), Pro Год ($149.00) или Pro Lifetime ($699.00).",
+    guideCol1P1: "Индивидуальная лицензия на 1 рабочую станцию с возможностью деактивации и переноса на другой ПК в любой момент.",
     guideCol1P2: "Оплата один раз — пожизненное владение без подписок и повторных списаний.",
     guideCol1P3: "Один предотвращенный сбой или авария в teach-in окупает лицензию мгновенно.",
-    guideCol2Title: "Тариф на 25 активаций",
-    guideCol2Desc: "Team Edition ($299/год) с пакетом из 25 активаций устройств.",
+    guideCol2Title: "Команда интеграторов",
+    guideCol2Desc: "Team Edition ($499.00/год) с пакетом из 25 активаций устройств.",
     guideCol2P1: "25 одновременных активаций устройств для всей команды интеграции.",
-    guideCol2P2: "Единый B2B инвойс для корпоративной бухгалтерии.",
+    guideCol2P2: "Единый B2B инвойс для корпоративной бухгалтерии с Tax ID / Reverse Charge.",
     guideCol2P3: "Единый стандарт чистоты кода и безопасности KRL на всех ячейках клиентов.",
     guideCol3Title: "Enterprise для завода",
-    guideCol3Desc: "Enterprise Site ($1,499/год) — безлимитные активации на всё предприятие.",
-    guideCol3P1_b: "Безлимитные активации:",
-    guideCol3P1: "Покрывает всех наладчиков и операторов завода (~$8/мес на место при 20 специалистах).",
-    guideCol3P2: "Прямая инженерная поддержка напрямую от ведущего инженера-разработчика.",
-    guideCol3P3: "Облачный бэкап-хаб парка ячеек + брендированные аудиты (Ford, Renault, TOGG).",
+    guideCol3Desc: "Enterprise Site ($2,490.00/год) — корпоративная лицензия на 200 рабочих станций предприятия.",
+    guideCol3P1_b: "200 Активаций на весь завод:",
+    guideCol3P1: "Покрывает всех наладчиков, операторов завода и диагностические посты предприятия.",
+    guideCol3P2: "Прямая инженерная поддержка напрямую от ведущего разработчика со строгим SLA.",
+    guideCol3P3: "KUKA Fleet Backup Hub парка ячеек + брендированные аудиты (Volkswagen, BMW, Ford, Renault).",
 
     // B2B тарифы (Team / Enterprise)
     p4Desc: "Годовая лицензия для команд интеграторов — один счёт, 25 активаций устройств, приоритетная поддержка.",
-    pf4_1: "Все 50 Pro инструментов",
+    pf4_1: "Все Pro-инструменты и анализаторы",
     pf4_2: "25 активаций устройств",
     pf4_3: "Приоритетная инженерная поддержка",
     btnTeam: "Купить Team Edition",
-    entBadge: "БЕЗЛИМИТНЫЕ АКТИВАЦИИ",
-    p5Desc: "Лицензия на весь производственный завод — безлимитные активации устройств и Fleet Backup Hub.",
-    pf5_1: "Безлимитные активации завода",
+    entBadge: "200 АКТИВАЦИЙ // ВЕСЬ ЗАВОД",
+    p5Desc: "Лицензия на всё производственное предприятие — 200 активаций устройств и Fleet Backup Hub.",
+    pf5_1: "200 Активаций завода",
     pf5_2: "Брендированные OEM-отчёты",
     pf5_3: "Приоритетная инженерная поддержка",
     btnEnterprise: "Купить Enterprise",
@@ -2621,8 +2671,8 @@ const translations = {
     perYear: "/ yıl",
     perOnce: "tek seferlik",
     save35: "%35 TASARRUF",
-    activation5Seats: "5 Cihaz Aktivasyonu",
-    lifetimeF1: "Tüm 50 Pro Araç Sonsuza Kadar",
+    activation1Seat: "1 Cihaz Aktivasyonu (Taşınabilir)",
+    lifetimeF1: "Tüm Pro Araçlar ve Güvenlik Analizcileri Sonsuza Kadar",
     lifetimeF2: "Gelecekteki Tüm Güncellemeler Dahil",
     lifetimeF3: "Doğrudan Mühendislik Desteği",
 
@@ -2630,32 +2680,32 @@ const translations = {
     pricingGuideBadge: "FİYATLANDIRMA EKONOMİSİ",
     pricingGuideTitle: "İş Akışınıza En Uygun Lisans Hangisi?",
     pricingGuideSub: "Bireysel kurulumlar, entegratör ekipleri ve fabrikalar için şeffaf koşullar.",
-    guideCol1Title: "5 Cihaz Aktivasyon Paketi",
-    guideCol1Desc: "Pro Aylık ($9.99), Pro Yıllık ($79) veya Pro Lifetime ($699).",
-    guideCol1P1: "Aynı anda 5 cihaz aktivasyonu: Laptop, Toughbook, Ofis, Test Tezgahı ve Tablet.",
+    guideCol1Title: "Bireysel Mühendis Paketi",
+    guideCol1Desc: "Pro Aylık ($19.00), Pro Yıllık ($149.00) veya Pro Lifetime ($699.00).",
+    guideCol1P1: "İstediğiniz zaman başka bir bilgisayara aktarılabilen 1 cihaz aktivasyonlu bireysel lisans.",
     guideCol1P2: "Bir kez ödeyin, kalıcı sahip olun — sıfır abonelik ve yinelenen ücret.",
     guideCol1P3: "Devreye alma sırasında önlenen tek bir kaza veya duruş, lisans bedelini anında çıkarır.",
-    guideCol2Title: "25 Cihaz Aktivasyon Paketi",
-    guideCol2Desc: "Entegrasyon ekipleri için Team Edition ($299/yıl) — 25 cihaz aktivasyonu.",
+    guideCol2Title: "Entegratör Ekip Paketi",
+    guideCol2Desc: "Entegrasyon ekipleri için Team Edition ($499.00/yıl) — 25 cihaz aktivasyonu.",
     guideCol2P1: "Tüm entegrasyon ekibiniz için toplam 25 eşzamanlı cihaz aktivasyonu.",
-    guideCol2P2: "Kurumsal muhasebe için merkezi B2B fatura.",
+    guideCol2P2: "Kurumsal muhasebe için merkezi B2B fatura (Tax ID / Reverse Charge).",
     guideCol2P3: "Müşteri hücrelerinde standart KRL sözdizimi ve güvenlik kalitesi.",
     guideCol3Title: "Kurumsal Fabrika (Site)",
-    guideCol3Desc: "Enterprise Site ($1,499/yıl) — Tüm fabrika için sınırsız cihaz aktivasyonu.",
-    guideCol3P1_b: "Sınırsız Aktivasyon:",
-    guideCol3P1: "Fabrikadaki tüm teknisyenleri kapsar (20 kişilik tesiste kişi başı ~$8/ay).",
-    guideCol3P2: "Doğrudan geliştirici mühendislik desteği ve öncelikli teknik yardım.",
-    guideCol3P3: "Tüm robot hücreleri için merkezi bulut yedekleme + OEM markalı denetimler (Ford, Renault, TOGG).",
+    guideCol3Desc: "Enterprise Site ($2,490.00/yıl) — Tüm işletme için 200 cihaz aktivasyonu.",
+    guideCol3P1_b: "Tüm Fabrika İçin 200 Aktivasyon:",
+    guideCol3P1: "Fabrikadaki tüm teknisyenleri, dizüstü bilgisayarları ve teşhis terminallerini kapsar.",
+    guideCol3P2: "Doğrudan geliştirici mühendislik desteği ve öncelikli teknik yardım (SLA).",
+    guideCol3P3: "Tüm robot hücreleri için merkezi KUKA Fleet Backup Hub + OEM markalı denetimler (Ford, Renault, TOGG).",
 
     // B2B paketleri (Team / Enterprise)
     p4Desc: "Entegrasyon ekipleri için yıllık lisans — tek fatura, 25 cihaz aktivasyonu, öncelikli destek.",
-    pf4_1: "Tüm 50 Pro Araç",
+    pf4_1: "Tüm Pro Araçlar ve Analizciler",
     pf4_2: "25 Cihaz Aktivasyonu",
     pf4_3: "Öncelikli Mühendislik Desteği",
     btnTeam: "Team Edition Satın Al",
-    entBadge: "SINIRSIZ AKTİVASYON",
-    p5Desc: "Tüm üretim tesisi için site lisansı — sınırsız cihaz aktivasyonu ve Filo Yedekleme Merkezi.",
-    pf5_1: "Sınırsız Cihaz Aktivasyonu",
+    entBadge: "200 AKTİVASYON // TÜM FABRİKA",
+    p5Desc: "Tüm üretim tesisi için site lisansı — 200 cihaz aktivasyonu ve Filo Yedekleme Merkezi.",
+    pf5_1: "200 Cihaz Aktivasyonu",
     pf5_2: "OEM Markalı Denetim Raporları",
     pf5_3: "Öncelikli Mühendislik Desteği",
     btnEnterprise: "Enterprise Satın Al",

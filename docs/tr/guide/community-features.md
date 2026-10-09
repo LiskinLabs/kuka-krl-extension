@@ -1,6 +1,6 @@
 # 🟢 Topluluk Sürümü — Ücretsiz Temel Özellikler
 
-KUKA KRL Professional eklentisinde bulunan 15 ücretsiz temel özelliğin ayrıntılı açıklaması.
+KUKA KRL Professional eklentisinde bulunan 24 ücretsiz temel özelliğin ayrıntılı açıklaması.
 
 ---
 
@@ -33,8 +33,8 @@ Fabrika sahaları ve SmartPAD ekranları için optimize edilmiş 6 profesyonel t
 
 ---
 
-### 3. Akıllı Otomatik Tamamlama (Smart Autocomplete & KSS 8.7)
-350'den fazla sistem değişkeni (`$POS_ACT`, `$VEL.CP`, `$BASE`, `$TOOL`, `$IN`, `$OUT`) ve alt programlar için anında öneri listesi.
+### 3. Akıllı Otomatik Tamamlama (957+ KSS Sistem Değişkeni)
+957'den fazla sistem değişkeni (`$POS_ACT`, `$VEL.CP`, `$BASE`, `$TOOL`, `$IN`, `$OUT`, `$TORQMON`) ve alt programlar için anında öneri listesi.
 
 ![Smart Autocomplete Demo](/media/smart_autocomplete.gif)
 
@@ -117,3 +117,19 @@ Git diff geçmişini temiz tutmak için `&ACCESS`, `&REL`, `&PARAM` başlıklar�
 `.dat` dosyasındaki değişken bildirimlerini alfabetik ve türe göre sıralayın.
 
 ![Sort Declarations Demo](/media/sort_declarations.gif)
+
+---
+
+### 16. Güvenli Otomatik Kod Onarımı (`krl.fixAllSafeIssuesInFile`)
+Rutin kodlama hataları için tek tıkla toplu güvenli onarım: KRL anahtar kelime büyük/küçük harf normalizasyonu, P00 el sıkışmaları ve çalışan mantığı bozmadan eksik blok sonlarını tamamlama.
+
+---
+
+### 17. Kurumsal B2B Fatura ve KDV Muafiyet Üreticisi (`krl.requestCorporateInvoice`)
+Şirket vergi numarası ve AB KDV muafiyet (Reverse Charge) doğrulaması ile muhasebe onayını hızlandıran resmi proforma ve ticari faturaların anında üretimi.
+
+---
+
+### 18. Gerçek Zamanlı Sözdizimi Teşhis Bonusu
+Ücretsiz sürümde kapanmamış parantezler, eksik `THEN` / `ENDIF` blokları ve geçersiz belirteçler için anında kırmızı dalgalı alt çizgi ile hata bildirimi.
+

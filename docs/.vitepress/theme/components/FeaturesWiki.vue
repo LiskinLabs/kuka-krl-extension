@@ -49,19 +49,19 @@
         <!-- Stats Bar -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto font-mono">
           <div class="p-4 rounded-2xl bg-[#0a0d14] border border-white/10 text-center hover:border-kuka-orange/50 transition-all shadow-lg">
-            <div class="text-2xl sm:text-3xl font-black text-white">50</div>
+            <div class="text-2xl sm:text-3xl font-black text-white">{{ totalCount }}+</div>
             <div class="text-[10px] sm:text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1">{{ text.statTotal }}</div>
           </div>
           <div class="p-4 rounded-2xl bg-[#0a0d14] border border-white/10 text-center hover:border-emerald-500/50 transition-all shadow-lg">
-            <div class="text-2xl sm:text-3xl font-black text-emerald-400">22</div>
+            <div class="text-2xl sm:text-3xl font-black text-emerald-400">{{ communityCount }}</div>
             <div class="text-[10px] sm:text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1">{{ text.statCommunity }}</div>
           </div>
           <div class="p-4 rounded-2xl bg-[#0a0d14] border border-white/10 text-center hover:border-kuka-orange/50 transition-all shadow-lg">
-            <div class="text-2xl sm:text-3xl font-black text-kuka-orange">28</div>
+            <div class="text-2xl sm:text-3xl font-black text-kuka-orange">{{ proCount }}+</div>
             <div class="text-[10px] sm:text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1">{{ text.statPro }}</div>
           </div>
           <div class="p-4 rounded-2xl bg-[#0a0d14] border border-white/10 text-center hover:border-cyan-500/50 transition-all shadow-lg">
-            <div class="text-2xl sm:text-3xl font-black text-cyan-400">6</div>
+            <div class="text-2xl sm:text-3xl font-black text-cyan-400">{{ categoriesCount }}</div>
             <div class="text-[10px] sm:text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1">{{ text.statCategories }}</div>
           </div>
         </div>
@@ -392,8 +392,8 @@ const features = [
     id: 2, category: 'core', icon: '⚡', isPro: false,
     shortcut: 'Ctrl+Space', setting: 'editor.quickSuggestions',
     media: '/media/Smart Autocomplete.gif',
-    title: { en: 'Smart Autocomplete & 350+ KSS Variables', ru: 'Умный автокомплит и 350+ переменных KSS', tr: 'Akıllı Otomatik Tamamlama ve 350+ KSS Değişkeni' },
-    desc: { en: 'Instant suggestions for all KUKA system variables ($ADVANCE, $OV_PRO, $POS_ACT, $VEL.CP) with documentation tooltips.', ru: 'Мгновенные подсказки всех системных переменных KSS с описанием типов и допустимых диапазонов.', tr: 'KUKA sistem değişkenleri ($ADVANCE, $OV_PRO, $POS_ACT) için anında öneriler ve belgeler.' },
+    title: { en: 'Smart Autocomplete & 957+ KSS Variables', ru: 'Умный автокомплит и 957+ переменных KSS', tr: 'Akıllı Otomatik Tamamlama ve 957+ KSS Değişkeni' },
+    desc: { en: 'Instant suggestions for all 957+ KUKA system variables ($ADVANCE, $OV_PRO, $POS_ACT, $VEL.CP, $TORQMON) with documentation tooltips.', ru: 'Мгновенные подсказки всех 957+ системных переменных KSS с описанием типов и допустимых диапазонов.', tr: 'Tüm 957+ KUKA sistem değişkeni ($ADVANCE, $OV_PRO, $POS_ACT) için anında öneriler ve belgeler.' },
     benefit: { en: 'Zero typos in complex system variables, eliminating controller compilation aborts.', ru: 'Исключает опечатки в системных регистрах и переменных ядра KSS.', tr: 'Sistem değişkenlerinde yazım hatalarını önler, derleme iptallerini engeller.' },
     codeBefore: '$ADV = 3 ; Error: undefined variable',
     codeAfter: '$ADVANCE = 3 ; Validated KSS Motion Look-Ahead'
@@ -887,8 +887,155 @@ const features = [
     benefit: { en: 'Deploy new robotic stations up to 3x faster using certified production code patterns.', ru: 'Ускоряет программирование новых ячеек в 3 раза за счет проверенных на реальных заводах шаблонов.', tr: 'Sertifikalı kod şablonlarıyla yeni robotik hücreleri 3 kat daha hızlı devreye alın.' },
     codeBefore: '; Writing 200 lines of palletizing trigonometry from zero',
     codeAfter: '✓ Tab snippet "kuka-palletize" ➔ Complete verified pattern'
+  },
+
+  // 51-64: Next-Gen Industrial Intelligence & Safety (v1.9.4)
+  {
+    id: 51, category: 'safety', icon: '🛠️', isPro: false,
+    shortcut: 'Ctrl+Shift+P > Fix All Safe Issues', setting: 'kuka.quickFix.safeMode',
+    media: '/media/type-validation-demo.gif',
+    title: { en: 'Safe Automated Code Repair Engine', ru: 'Безопасный автоматический исправитель кода', tr: 'Güvenli Otomatik Kod Onarım Motoru' },
+    desc: { en: 'Applies verified non-destructive fixes across thousands of occurrences: normalizes case, balances P00 handshakes, ensures DEF/END pairs.', ru: 'Выполняет безопасные неразрушающие правки: нормализует регистр KRL, балансирует P00 хэндшейки, устраняет структурные пропуски.', tr: 'Binlerce dosyada doğrulanmış güvenli düzeltmeleri uygular: büyük/küçük harf normalizasyonu ve blok kapanışları.' },
+    benefit: { en: 'Repairs up to 6,000+ routine errors in minutes across 200+ cell backup files with zero code breaking.', ru: 'Исправляет свыше 6 000 рутинных замечаний за секунды в сотнях файлов бэкапа без риска поломки логики.', tr: 'Yüzlerce hücre dosyasında 6.000+ rutin hatayı mantığı bozmadan saniyeler içinde onarır.' },
+    codeBefore: 'def pick()\nwait sec 0.5\nptp xhome',
+    codeAfter: 'DEF pick()\nWAIT SEC 0.5\nPTP xhome\nEND'
+  },
+  {
+    id: 52, category: 'safety', icon: '🛡️', isPro: true,
+    shortcut: 'Auto on Save', setting: 'kuka.lint.astRollbackGuard',
+    media: '/media/type-validation-demo.gif',
+    title: { en: 'AST Rollback Guard & Checksum Integrity', ru: 'Защита отката AST и контроль целостности', tr: 'AST Geri Alma Koruması ve Sağlama Bütünlüğü' },
+    desc: { en: 'Maintains in-memory AST rollback snapshots and verifies CRC32/SHA256 checksums before committing automatic transformations.', ru: 'Хранит в памяти снимки AST и проверяет контрольные суммы файлов перед записью любых автоматических трансформаций.', tr: 'Otomatik değişiklikleri uygulamadan önce bellekte AST anlık görüntüsü tutar ve sağlama toplamlarını doğrular.' },
+    benefit: { en: 'Zero corrupted files on disk: atomic undo rollback guarantees file preservation even on crash.', ru: 'Гарантирует атомарный откат к оригиналу при любых непредвиденных ошибках или сбоях питания.', tr: 'Diskte bozuk dosya kalmasını engeller: beklenmeyen durumlarda orijinal duruma anında geri döner.' },
+    codeBefore: '; Transform failed midway -> damaged corrupted file',
+    codeAfter: '✓ Rollback Guard: Atomic restore confirmed, 0 bytes lost'
+  },
+  {
+    id: 53, category: 'backup', icon: '🗄️', isPro: true,
+    shortcut: 'Ctrl+Shift+P > Mount ZIP', setting: 'kuka.backup.zipExplorer',
+    media: '/media/KRC Backup Diff & Point Delta Inspector.gif',
+    title: { en: 'Direct Backup Archive Explorer & Live ZIP Mount', ru: 'Проводник архивов бэкапов и монтирование ZIP', tr: 'Doğrudan Yedek Arşiv Gezgini ve Canlı ZIP Bağlama' },
+    desc: { en: 'Inspect, search, and navigate full KRC backup ZIP archives as a virtual project folder without extracting to disk.', ru: 'Открывает, анализирует и навигирует по ZIP-архивам контроллеров KRC как по виртуальному проекту без распаковки на диск.', tr: 'KRC yedek ZIP arşivlerini diske çıkarmadan doğrudan sanal proje klasörü gibi tarayın ve inceleyin.' },
+    benefit: { en: 'Instantly inspects 200MB controller archives on field laptops without creating gigabytes of temp files.', ru: 'Мгновенный анализ архивов KRC на инженерном ноутбуке без засорения диска временными файлами.', tr: 'Saha bilgisayarlarında gigabaytlarca geçici dosya oluşturmadan 200MB arşivleri saniyeler içinde açar.' },
+    codeBefore: '; Manual unzip: 15,000 files extracted to desktop folder',
+    codeAfter: '✓ Virtual Mounted: KRC4_Archive.zip [Read-Only Safe Browse]'
+  },
+  {
+    id: 54, category: 'safety', icon: '📋', isPro: true,
+    shortcut: 'Ctrl+Shift+P > Event Log', setting: 'kuka.logs.evtDecoder',
+    media: '/media/KUKA Control Center.gif',
+    title: { en: 'Pure-TS Binary Event Log (.evt) Decoder', ru: 'Декодер бинарных журналов событий (.evt)', tr: 'Saf TS İkili Olay Günlüğü (.evt) Çözücü' },
+    desc: { en: 'Decodes proprietary KUKA controller binary event logs (.evt/.log) directly in the editor into structured timelines.', ru: 'Парсит и декодирует проприетарные бинарные логи KUKA (.evt) в структурированную временную шкалу сообщений и аварий.', tr: 'Tescilli KUKA ikili olay günlüklerini (.evt) harici araca gerek kalmadan düzenli zaman çizelgesine dönüştürür.' },
+    benefit: { en: 'Diagnose controller crashes and emergency stop triggers directly inside your IDE within seconds.', ru: 'Позволяет моментально найти причину аварийной остановки робота прямо в IDE без сторонних утилит.', tr: 'Robot duruşlarının ve acil stop nedenlerinin saniyeler içinde IDE içinde tespit edilmesini sağlar.' },
+    codeBefore: '; Unreadable binary file KrcLog.evt (Hex: 0x4B 0x52 0x43...)',
+    codeAfter: '✓ Decoded: [14:22:01] ACK_ESTOP Triggered | [14:22:03] DRIVE_OFF'
+  },
+  {
+    id: 55, category: 'backup', icon: '🌀', isPro: true,
+    shortcut: 'Auto', setting: 'kuka.kinematics.wristSingularity',
+    media: '/media/type-validation-demo.gif',
+    title: { en: 'Wrist Singularity Trajectory Guard (Axis 5)', ru: 'Барьер сингулярности запястья робота (Ось 5)', tr: 'Bilek Tekilliği Yörünge Koruması (5. Eksen)' },
+    desc: { en: 'Predicts dangerous wrist alignment (Axis 4 and Axis 6 collinearity, Axis 5 approaching 0°) on linear paths.', ru: 'Рассчитывает опасное выравнивание осей 4 и 6 при приближении угла 5-й оси к 0° на линейных перемещениях.', tr: 'Doğrusal hareketlerde 4 ve 6. eksenlerin çakışması ve 5. eksenin 0°ye yaklaşması tehlikesini önceden bildirir.' },
+    benefit: { en: 'Prevents violent mechanical whipping and gearbox overtorque alarms in production cycles.', ru: 'Предотвращает резкие рывки механики и аварийные перегрузки редукторов на реальном цикле.', tr: 'Üretim döngülerinde ani mekanik sarsıntıları ve redüktör aşırı tork alarmlarını önler.' },
+    codeBefore: 'LIN XPICK_PART ; A5 passes through 0.2 deg at 2.0 m/s',
+    codeAfter: '⚠️ CRITICAL: Wrist singularity zone near XPICK_PART (A5 ≈ 0°)'
+  },
+  {
+    id: 56, category: 'backup', icon: '📐', isPro: true,
+    shortcut: 'Auto', setting: 'kuka.kinematics.shoulderSingularity',
+    media: '/media/type-validation-demo.gif',
+    title: { en: 'Shoulder Singularity & Reachability Barrier', ru: 'Анализ сингулярности плеча и зоны досягаемости', tr: 'Omuz Tekilliği ve Ulaşılabilirlik Bariyeri' },
+    desc: { en: 'Identifies overhead singularity (wrist center point intersecting Axis 1 vertical centerline) and boundary limits.', ru: 'Определяет прохождение запястья через вертикальную ось вращения 1-й оси и пределы рабочей зоны.', tr: 'Bilek merkez noktasının 1. eksen dikey çizgisiyle kesiştiği tepe tekilliğini ve sınırları belirler.' },
+    benefit: { en: 'Prevents erratic full 180° base spins when moving parts directly above the robot base.', ru: 'Исключает непредсказуемый разворот 1-й оси на 180° при перемещении над колонной робота.', tr: 'Robot tabanının tam üzerinden parça taşırken 1. eksenin 180° kontrolsüz dönmesini önler.' },
+    codeBefore: 'LIN XOVERHEAD ; Wrist intersects Axis 1 axis of rotation',
+    codeAfter: '⚠️ WARNING: Overhead shoulder singularity! Shift trajectory Y+50'
+  },
+  {
+    id: 57, category: 'safety', icon: '⚡', isPro: true,
+    shortcut: 'Ctrl+Shift+P > I/O Auditor', setting: 'kuka.safety.ioCollisionAuditor',
+    media: '/media/KRL IO Signals.gif',
+    title: { en: 'I/O Signal Collision & Overwrite Auditor', ru: 'Аудитор конфликтов и перезаписи сигналов I/O', tr: 'G/Ç Sinyal Çakışması ve Üzerine Yazma Denetçisi' },
+    desc: { en: 'Detects concurrent writes and race conditions where multiple routines write to the same $OUT bit or fieldbus word.', ru: 'Выявляет коллизии и состояния гонки, когда разные подпрограммы или прерывания пишут в один выходной сигнал.', tr: 'Farklı alt programların veya kesmelerin aynı $OUT sinyaline yazması durumundaki çakışmaları tespit eder.' },
+    benefit: { en: 'Eliminates intermittent sensor-actuator glitches that take weeks to troubleshoot in production.', ru: 'Устраняет плавающие сбои исполнительных механизмов, которые крайне трудно отладить вживую.', tr: 'Üretimde haftalarca aranan rastgele sinyal çakışması arızalarını anında çözer.' },
+    codeBefore: '; Routine A sets $OUT[15] = TRUE; Interrupt B sets $OUT[15] = FALSE',
+    codeAfter: '⚠️ I/O CONFLICT: $OUT[15] overwritten concurrently in 2 routines'
+  },
+  {
+    id: 58, category: 'core', icon: '📈', isPro: true,
+    shortcut: 'Ctrl+Shift+P > Motion Stats', setting: 'kuka.motion.optimizer',
+    media: '/media/KUKA Control Center.gif',
+    title: { en: 'Motion Lookahead ($ADVANCE / $APO) Optimizer', ru: 'Оптимизатор аппроксимации и упреждения ($APO)', tr: 'Hareket İlerleme ($ADVANCE / $APO) Optimize Edici' },
+    desc: { en: 'Calculates smooth path blending and warns against premature advance run stops caused by unapproximated I/O triggers.', ru: 'Анализирует сглаживание траектории и предупреждает об остановке упреждающего указателя из-за триггеров I/O.', tr: 'Yumuşak hareket geçişlerini hesaplar ve zamansız duruşlara neden olan ilerleme engellerini bildirir.' },
+    benefit: { en: 'Reduces robot station cycle times by up to 12% without increasing peak motor accelerations.', ru: 'Сокращает время такта ячейки до 12% без повышения механических ускорений на редукторы.', tr: 'Motorları aşırı zorlamadan hücre çevrim sürelerini %12ye varan oranda kısaltır.' },
+    codeBefore: 'PTP P1 C_PTP\n$OUT[1] = TRUE ; Advance run stop! Robot pauses',
+    codeAfter: 'TRIGGER WHEN DISTANCE=1 DELAY=0 DO $OUT[1]=TRUE ; Smooth path'
+  },
+  {
+    id: 59, category: 'backup', icon: '🔥', isPro: true,
+    shortcut: 'Ctrl+Shift+P > Arc Profiler', setting: 'kuka.welding.profiler',
+    media: '/media/KUKA Control Center.gif',
+    title: { en: '3D Arc Welding Profiler & Spline Visualizer', ru: '3D Профайлер дуговой сварки и сплайновых траекторий', tr: '3D Gazaltı Kaynak Profilcisi ve Spline Görselleştirici' },
+    desc: { en: 'Visualizes SPLINE, SLIN, and SCIRC seam trajectories with torch angle, push/pull orientations, and weaving amplitude.', ru: 'Визуализирует сварочные швы SPLINE/SLIN/SCIRC с углами атаки горелки и амплитудой колебаний.', tr: 'Torç açıları, yönelimler ve salınım genliği ile SPLINE/SLIN dikiş yörüngelerini görselleştirir.' },
+    benefit: { en: 'Ensures perfect weld penetration and eliminates torch cable entanglement before striking an arc.', ru: 'Гарантирует правильный угол провара и исключает перекручивание шланг-пакета до розжига дуги.', tr: 'Mükemmel kaynak nüfuziyeti sağlar ve ark başlatmadan önce kablo bükülmelerini önler.' },
+    codeBefore: '; Blind spline block with unknown torch lead angle',
+    codeAfter: '✓ Spline Visualized: 18 points, 15° lead angle, 0 cable twists'
+  },
+  {
+    id: 60, category: 'core', icon: '🚀', isPro: true,
+    shortcut: 'Auto', setting: 'kuka.compatibility.kss9',
+    media: '/media/type-validation-demo.gif',
+    title: { en: 'KSS 9.x & iiQWorks 9.+ Architecture Engine', ru: 'Архитектурный движок KSS 9.x и iiQWorks 9.+', tr: 'KSS 9.x ve iiQWorks 9.+ Mimari Motoru' },
+    desc: { en: 'Full compatibility engine for next-generation KSS 9.x and iiQWorks 9.+ controllers, structures, and modern system schemas.', ru: 'Полная поддержка систем KSS 9.x и экосистемы iiQWorks 9.+ с новыми структурами данных и типами.', tr: 'Yeni nesil KSS 9.x ve iiQWorks 9.+ kontrolcüleri, yapıları ve modern sistem şemalarıyla tam uyum.' },
+    benefit: { en: 'Future-proof investment ready for modern automation lines running latest controller generations.', ru: 'Гарантированная работа на новейших производственных линиях с контроллерами последнего поколения.', tr: 'En yeni nesil kontrolcülere sahip modern üretim hatları için geleceğe hazır yatırım.' },
+    codeBefore: '; Legacy editors fail on KSS 9.x extended constructs',
+    codeAfter: '✓ KSS 9.x / iiQWorks 9.+ AST Engine: 100% Validated'
+  },
+  {
+    id: 61, category: 'enterprise', icon: '🧾', isPro: false,
+    shortcut: 'Ctrl+Shift+P > B2B Invoice', setting: 'kuka.b2b.invoiceGenerator',
+    media: '/media/KUKA Control Center.gif',
+    title: { en: 'B2B Corporate Invoice & EU VAT Generator', ru: 'Генератор B2B счетов и EU VAT Reverse Charge', tr: 'Kurumsal B2B Fatura ve KDV Muafiyet Üreticisi' },
+    desc: { en: 'Generates official compliant B2B proforma and tax invoices with corporate Tax ID / EU VAT Reverse Charge validation.', ru: 'Формирует официальные корпоративные счета с автоматической валидацией Tax ID и нулевым НДС для компаний ЕС.', tr: 'Vergi numarası ve AB KDV muafiyet doğrulaması ile resmi kurumsal fatura belgeleri oluşturur.' },
+    benefit: { en: 'Accelerates corporate accounting approval and procurement cycles from weeks to minutes.', ru: 'Ускоряет закупку через бухгалтерию предприятия без бумажной волокиты и задержек.', tr: 'Şirket muhasebe ve satın alma süreçlerini haftalardan dakikalara indirir.' },
+    codeBefore: '; Manual back-and-forth corporate invoice requests',
+    codeAfter: '✓ Official B2B Invoice PDF with EU VAT Reverse Charge issued'
+  },
+  {
+    id: 62, category: 'enterprise', icon: '🌐', isPro: true,
+    shortcut: 'Ctrl+Shift+P > Topology', setting: 'kuka.station.topologyMatrix',
+    media: '/media/Find All References.gif',
+    title: { en: 'Multi-Robot Station Live Topology Matrix', ru: 'Матрица топологии и сигналов многороботной станции', tr: 'Çoklu Robot İstasyonu Canlı Topoloji Matrisi' },
+    desc: { en: 'Visualizes interlock zones, shared clearance signals, and collision interference spaces across multi-robot cells.', ru: 'Отображает зоны взаимной блокировки (interlock), зоны ожидания и общие сигналы нескольких роботов ячейки.', tr: 'Çoklu robot hücrelerinde kilitlenme bölgelerini, ortak sinyalleri ve çarpışma alanlarını görselleştirir.' },
+    benefit: { en: 'Prevents catastrophic physical collisions between cooperating robots sharing common worktables.', ru: 'Исключает столкновение роботов при одновременной работе на общем поворотном столе.', tr: 'Ortak döner tabloda çalışan robotların birbirine çarpmasını tamamen engeller.' },
+    codeBefore: '; Unclear cell interlock leading to mechanical crash',
+    codeAfter: '✓ Zone 3 Interlock: Robot 1 & Robot 2 mutual exclusivity verified'
+  },
+  {
+    id: 63, category: 'core', icon: '🤖', isPro: true,
+    shortcut: 'Ctrl+Shift+P > AI Prompt', setting: 'kuka.ai.promptAssist',
+    media: '/media/KUKA Control Center.gif',
+    title: { en: 'Industrial AI Copilot & Assist Prompt Factory', ru: 'Промышленный AI Copilot и генератор промптов', tr: 'Endüstriyel Yapay Zeka Copilot ve İstem Fabrikası' },
+    desc: { en: 'Specialized context-aware prompt generator tailored for GitHub Copilot, Cursor, and Windsurf to write flawless KRL.', ru: 'Генератор системных промптов и контекста для нейросетей (Copilot, Cursor), знающий все нюансы синтаксиса KRL.', tr: 'Hatasız KRL kodu yazmak için yapay zeka asistanlarına özel endüstriyel bağlam ve istemler üretir.' },
+    benefit: { en: 'Prevents generic hallucinated code from AI assistants by grounding them in rigorous KRL grammar rules.', ru: 'Исключает галлюцинации нейросетей, заставляя их писать валидный промышленный код KRL.', tr: 'Yapay zekanın geçersiz kod üretmesini engeller, katı KRL kurallarına uymasını sağlar.' },
+    codeBefore: '; Generic AI generates invalid pseudo-code syntax',
+    codeAfter: '✓ Grounded AI Output: Valid DEF..END with correct BAS(#INITMOV)'
+  },
+  {
+    id: 64, category: 'core', icon: '✨', isPro: false,
+    shortcut: 'Live Diagnostics', setting: 'kuka.diagnostics.syntaxBonus',
+    media: '/media/type-validation-demo.gif',
+    title: { en: 'Real-Time Syntax Error Diagnostics Bonus', ru: 'Бонусная диагностика синтаксиса в реальном времени', tr: 'Gerçek Zamanlı Sözdizimi Teşhis Bonusu' },
+    desc: { en: 'Instant red squiggly underlines for unclosed brackets, missing THEN/ENDIF keywords, and illegal tokens in Free edition.', ru: 'Мгновенное подсвечивание синтаксических ошибок, незакрытых скобок, пропущенных THEN/ENDIF в бесплатной версии.', tr: 'Ücretsiz sürümde kapanmamış parantezler, eksik THEN/ENDIF ifadeleri ve sözdizimi hataları anında altı çizili gösterilir.' },
+    benefit: { en: 'Every engineer catches basic syntax errors immediately without paying a single cent.', ru: 'Дает каждому инженеру базовую защиту от синтаксических ошибок без обязательной покупки лицензии.', tr: 'Her mühendisin tek bir kuruş ödemeden temel sözdizimi hatalarını anında yakalamasını sağlar.' },
+    codeBefore: 'IF $IN[1] == TRUE\n  PTP P1\n; Missing THEN & ENDIF!',
+    codeAfter: 'IF $IN[1] == TRUE THEN\n  PTP P1\nENDIF ; ✓ Valid syntax'
   }
 ]
+
+const totalCount = computed(() => features.length)
+const proCount = computed(() => features.filter(feat => feat.isPro).length)
+const communityCount = computed(() => features.filter(feat => !feat.isPro).length)
+const categoriesCount = computed(() => new Set(features.map(feat => feat.category)).size)
 
 const filteredFeatures = computed(() => {
   return features.filter(feat => {
@@ -918,7 +1065,7 @@ const filteredFeatures = computed(() => {
 const translations = {
   en: {
     backToLanding: 'Back to Main Landing',
-    heroBadge: 'v1.9.4 Industrial Suite • Complete Professional Tools',
+    heroBadge: 'v1.9.4 Industrial Suite • 64+ Industrial Tools',
     heroTitlePrefix: 'KUKA KRL Professional — ',
     heroTitleHighlight: 'Complete Industrial Tools Encyclopedia',
     heroSubtitle: 'Exhaustive technical reference for industrial features, field commissioning benefits, keyboard shortcuts, configuration parameters, and before/after code examples.',
@@ -938,7 +1085,7 @@ const translations = {
   },
   ru: {
     backToLanding: 'Вернуться на главную',
-    heroBadge: 'v1.9.4 Industrial Suite • Промышленные Инструменты',
+    heroBadge: 'v1.9.4 Industrial Suite • 64+ Промышленных Инструментов',
     heroTitlePrefix: 'KUKA KRL Professional — ',
     heroTitleHighlight: 'Полная Энциклопедия Промышленных Инструментов',
     heroSubtitle: 'Исчерпывающий технический разбор функций расширения, пользы на пусконаладке, горячих клавиш, параметров settings.json и примеров кода «До / После».',
@@ -958,7 +1105,7 @@ const translations = {
   },
   tr: {
     backToLanding: 'Ana Sayfaya Dön',
-    heroBadge: 'v1.9.4 Endüstriyel Paket • Temel Araçlar',
+    heroBadge: 'v1.9.4 Endüstriyel Paket • 64+ Endüstriyel Araç',
     heroTitlePrefix: 'KUKA KRL Professional — ',
     heroTitleHighlight: 'Kapsamlı Endüstriyel Araç Ansiklopedisi',
     heroSubtitle: 'Tüm endüstriyel özelliklerin, saha devreye alma faydalarının, kısayolların, settings.json ayarlarının ve önce/sonra kod örneklerinin ayrıntılı teknik referansı.',

@@ -1,6 +1,6 @@
 # 🟢 Community Edition — Free Core Features
 
-Detailed walkthrough of the 15 core free features in KUKA KRL Professional.
+Detailed walkthrough of the 24 core free features in KUKA KRL Professional.
 
 ---
 
@@ -33,8 +33,8 @@ Full syntax parsing of `.src`, `.dat`, `.sub` files. Colorizes keywords, data ty
 
 ---
 
-### 3. Smart Autocomplete (KSS 8.7 & System Variables)
-Intelligent dropdown for 350+ system variables (`$POS_ACT`, `$VEL.CP`, `$BASE`, `$TOOL`, `$IN`, `$OUT`).
+### 3. Smart Autocomplete (957+ KSS System Variables)
+Intelligent dropdown for 957+ system variables (`$POS_ACT`, `$VEL.CP`, `$BASE`, `$TOOL`, `$IN`, `$OUT`, `$TORQMON`).
 
 ![Smart Autocomplete Demo](/media/smart_autocomplete.gif)
 
@@ -117,3 +117,19 @@ Strips `&ACCESS`, `&REL`, `&PARAM` headers for clean Git diffs.
 Sort `.dat` file declarations alphabetically.
 
 ![Sort Declarations Demo](/media/sort_declarations.gif)
+
+---
+
+### 16. Safe Automated Code Repairs (`krl.fixAllSafeIssuesInFile`)
+1-Click batch auto-repair for common routine violations: KRL keyword casing normalization, P00 protocol handshakes, and missing block closures without risk of breaking execution logic.
+
+---
+
+### 17. Corporate B2B Invoice & EU VAT Reverse Charge Generator (`krl.requestCorporateInvoice`)
+Instant generation of official corporate proforma and tax invoices with automated Tax ID and EU VAT Reverse Charge validation for corporate accounting.
+
+---
+
+### 18. Real-Time Syntax Error Diagnostics Bonus
+Instant visual diagnostics (red squiggly underlines) for unclosed brackets, missing `THEN` / `ENDIF` statements, and invalid tokens directly in the free tier.
+

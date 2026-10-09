@@ -9,7 +9,7 @@ Quick start guide for installing and configuring KUKA KRL Professional.
 4. Click **Install**.
 
 ## 2. Install from VSIX (Offline Installation)
-1. Download the `kuka-krl-extension-1.8.8.vsix` file.
+1. Download the `kuka-krl-extension-1.9.4.vsix` file.
 2. In VS Code, click the `...` menu in the top-right corner of the Extensions panel.
 3. Select **Install from VSIX...** and choose the `.vsix` file.
 
@@ -30,7 +30,7 @@ For technical support, connect with us directly using the embedded support panel
 | Tier | Price | Workstation Activations | Key Differentiator |
 | :--- | :--- | :--- | :--- |
 | **Engineer Pro (Monthly)** | $19.00 / mo | 1 Workstation Activation | KRC2/KRC3/KRC4/KRC5 support, short projects, commissioning sprints |
-| **Engineer Pro (Annual)** | $149.00 / yr | 1 Workstation Activation | Save 35%, 1-Year Air-Gapped offline certificate, 50 industrial tools |
+| **Engineer Pro (Annual)** | $149.00 / yr | 1 Workstation Activation | Save 35%, 1-Year Air-Gapped offline certificate, 64+ industrial tools suite |
 | **Engineer Pro (Lifetime)** | $699.00 once | 1 Workstation Activation | Perpetual license, perpetual updates, permanent Air-Gapped certificate |
 | **Integrator Team Edition** | $499.00 / yr | 25 Workstation Activations | Centralized B2B invoicing, 25 plant/office devices, KRC2–KRC5 |
 | **Enterprise Plant Site** | $2,490.00 / yr | 200 Workstation Activations | 200 plant workstations, direct priority SLA, Fleet Backup Hub, OEM-branded client protocols |

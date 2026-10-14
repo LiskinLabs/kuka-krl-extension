@@ -1,5 +1,5 @@
 def formatting_demo()
-; unformatted demonstration code to test krl.formatDocument
+; unformatted demonstration code to test document formatting (Shift+Alt+F / editor.action.formatDocument)
 decl int nCounter
 decl bool bReady
 $TOOL = TOOL_DATA[1]

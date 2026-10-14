@@ -19,7 +19,7 @@
 | **[`diagnostics_demo.src`](diagnostics_demo.src)** | Эталонная витрина всех диагностик KRL | Валидация длины имен (>24 симв.), баланс блоков, строгий контроль типов `SWITCH`/`CASE`, мертвый код. |
 | **[`eki_comm_demo.src`](eki_comm_demo.src)** / **[`eki_demo.xml`](eki_demo.xml)** | Модуль связи EthernetKRL (EKI) | Проверка XML схемы (`krl.validateEkiXml`), генератор кода KRL (`krl.generateEkiCode`). |
 | **[`flowchart_demo.src`](flowchart_demo.src)** | Сложный граф логики выполнения | Построение графа потока управления (Flowchart / Mermaid viewer: `krl.showFlowchart`). |
-| **[`formatting_demo.src`](formatting_demo.src)** | Неформатированный тестовый листинг | Форматирование документа (`krl.formatDocument`), отступы и выравнивание присваиваний `=`. |
+| **[`formatting_demo.src`](formatting_demo.src)** | Неформатированный тестовый листинг | Форматирование документа (`Shift+Alt+F` / `editor.action.formatDocument`), отступы и выравнивание присваиваний `=`. |
 | **[`git_clean_demo.src`](git_clean_demo.src)** / **[`git_clean_demo.dat`](git_clean_demo.dat)** | Файл с метаданными WorkVisual | Очистка служебных заголовков `&ACCESS`, `&REL`, `&PARAM` (`krl.cleanGitMetadata`). |
 | **[`backup_delta_demo.dat`](backup_delta_demo.dat)** | Точки с дельтами координат | Инспектор бэкапов KRC и сравнение смещения точек (`krl.compareKrcBackup`). |
 | **[`$config.dat`](%24config.dat)** | Общесистемный реестр сигналов и баз | Глобальные сигналы, структуры, перечисления `ENUM`, инструменты `TOOL_DATA` и `BASE_DATA`. |

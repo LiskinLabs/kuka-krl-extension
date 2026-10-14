@@ -341,20 +341,6 @@
     "Code Editing & Formatting": [
       {
         "type": "Command",
-        "id": "krl.formatDocument",
-        "title": "Format Document",
-        "status": "Free",
-        "valueProposition": "Formats the active KRL document according to configured style rules."
-      },
-      {
-        "type": "Command",
-        "id": "krl.removeTrailingWhitespace",
-        "title": "Remove Trailing Whitespace",
-        "status": "Free",
-        "valueProposition": "Removes unnecessary trailing whitespace from KRL code lines."
-      },
-      {
-        "type": "Command",
         "id": "krl.sortDeclarations",
         "title": "Sort Declarations",
         "status": "Free",

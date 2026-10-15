@@ -2,6 +2,32 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.9.5] - 2026-10-15 (Unified Event Log Inspector, Bracket-Tolerant Resolution, Anti-Tamper & Gemini 4 Argon QA Hardening)
+
+### 📊 Unified KUKA Event Log Inspector (`krl.openAllEventLogs`)
+- **Multi-Source Event Log Parsing**: Simultaneously parses classic `<LE>` event logs and modern flat logs (`CrossMisc`, `SmartHMI`, `System`, `KSS01xxx`).
+- **Chronological Multi-Log Merge**: Merges all available controller logs into a unified timeline with sub-millisecond precision.
+- **Multilingual Error Resolution**: Resolves numeric KSS message identifiers against localized database catalogs across 6 languages.
+
+### 🎯 Bracket-Tolerant Identifier Resolution & Smart Auto-Selection
+- **Bracket Navigation Parity**: Cursor placement directly on or adjacent to brackets (`[`, `]`, `(`, `)`) accurately resolves the underlying identifier (`$TIMER[1]`, `$OUT[601]`, `MySub()`).
+- **Smart Auto-Select (`krl.toggleAutoSelectSymbol`)**: Automatically selects complete identifier token upon click or jump.
+- **Subprogram & Structure Element Navigation**: Instant switching between `.src` `DEF` and companion `.dat` `DEFDAT` data structures.
+
+### 🛡️ Anti-Tamper, Integrity Seal & Licensing
+- **Cryptographic Entitlement Tokens**: Secure Ed25519/HMAC-SHA256 signature verification for Pro/Team activations.
+- **Monotonic Time-Lock**: Detects clock rollbacks (>120s) and preserves last-seen timestamp in secure storage.
+- **Byte-Level Bundle Integrity Verification**: SHA-256 manifest validation guaranteeing authentic untampered production bundles.
+
+### 🔬 Gemini 4 Argon Industrial QA & LSP Hardening
+- **Local Variable Precedence (Variable Shadowing Fix)**: References and Rename now prioritize local routine scope over global variables, preventing project-wide shadowing collisions.
+- **Division-by-Zero False Positive Elimination**: Removed mathematical false alarms inside string literals (e.g. `CWRITE(..., "RUN /R1/CELL()")`).
+- **Motion Inline Form Trajectory Counting**: Excluded `;FOLD` comment headers from motion counters in `pathGeometry` and `dynamicAnalysis`, eliminating motion duplication.
+- **CIRC Motion Target Endpoint Correction**: Corrected target point resolution to the second argument (`CIRC AuxPoint, TargetPoint`).
+- **IEEE 754 Exponential Notation Support**: Numbers with scientific exponents (`-3.41509E-05`) now parse with full precision.
+- **Comprehensive Executable Statement Boundary**: Updated `declarationSorter` to recognize all control flow, motion, and subroutine calls before code execution.
+- **Outline & Document Symbols Hardening**: Handled trailing comments on `END ; comment` block closures, prevented duplicate `STRUC`/`ENUM`/`SIGNAL` symbols, and tightened `GOTO` label extraction.
+
 ## [1.9.4] - 2026-10-08 (KRL Safe Auto-Repair Engine, QuickFix & Fix-All, Safety Rollback Guard & Monaco Diff Review)
 
 ### 🚀 Killer Feature: KRL Safe Auto-Repair Engine (QuickFix & Fix-All)

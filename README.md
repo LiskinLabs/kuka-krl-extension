@@ -1,4 +1,4 @@
-﻿<h1 align="center">KUKA Engineering Toolkit for VS Code</h1>
+<h1 align="center">KUKA Engineering Toolkit for VS Code</h1>
 
 <p align="center">
   <b>Industrial static analysis, pre-deployment diagnostics, backup intelligence & safe auto-repair for KUKA robotics.</b><br />
@@ -7,16 +7,16 @@
 </p>
 
 <details>
-<summary>Language / Ğ¯Ğ·Ñ‹Ğº / Dil / Sprache / Lingua / Idioma</summary>
+<summary>Language / Язык / Dil / Sprache / Lingua / Idioma</summary>
 
 | Language | File |
 |---|---|
 | English | [README.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.md) |
-| Ğ ÑƒÑÑĞºĞ¸Ğ¹ | [README.ru.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.ru.md) |
-| TÃ¼rkÃ§e | [README.tr.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.tr.md) |
+| Русский | [README.ru.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.ru.md) |
+| Türkçe | [README.tr.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.tr.md) |
 | Deutsch | [README.de.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.de.md) |
 | Italiano | [README.it.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.it.md) |
-| EspaÃ±ol | [README.es.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.es.md) |
+| Español | [README.es.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.es.md) |
 
 </details>
 
@@ -62,11 +62,11 @@ Every robotics commissioning engineer and plant system integrator knows the stak
 
 ---
 
-## The Five Core Engineering Workflows
+## The Six Core Engineering Workflows
 
 ### 1. AUDIT & REPORT: Pre-Flight Safety & Quality Acceptance Protocols [PRO]
 Static code analysis designed specifically for KRL runtime behavior:
-* **Automated Cell Quality & Acceptance Protocol (`krl.generateAcceptanceReport`)**: Generates complete technical handover reports with Health Score (0â€“100%), Vorlaufstopp cycle time penalty calculation (~250â€“450 ms per point), deadlock detection, and reach envelope validation across 183 cataloged KUKA robot models. Exportable to Markdown and PDF for customer acceptance.
+* **Automated Cell Quality & Acceptance Protocol (`krl.generateAcceptanceReport`)**: Generates complete technical handover reports with Health Score (0–100%), Vorlaufstopp cycle time penalty calculation (~250–450 ms per point), deadlock detection, and reach envelope validation across 183 cataloged KUKA robot models. Exportable to Markdown and PDF for customer acceptance.
 * **Frame & Tool Assignment Guard**: Verifies active `$TOOL` and `$BASE` initialization before any Cartesian motion (`LIN`, `CIRC`, `SLIN`, `SCIRC`) to prevent uncontrolled manipulator trajectories.
 * **Advance Run & Path Blending Guard**: Identifies peripheral I/O statements (`$OUT`, `$IN`, `WAIT FOR`) inside motion sequences that drop `$ADVANCE` to 0, with precision recommendations for `TRIGGER WHEN PATH / DISTANCE` and `CONTINUE`.
 * **Deadlock & Wait Scanner**: Detects unconditioned `WAIT FOR $IN[...]` conditions and unhandled handshakes that can freeze production cycles.
@@ -107,7 +107,8 @@ Deep inspection of KUKA controller backups without disk extraction:
 ---
 
 ### 4. AUTO-REPAIR: Safe QuickFix & Batch Correction with Monaco Diff Review [PRO]
-Deterministic one-click resolution of safety and structural issues without altering motion kinematics (`krl.fixAllSafeIssues`):
+Deterministic one-click resolution of safety and structural issues without altering motion kinematics (`krl.fixAllSafeIssuesInFile`):
+* **Inline Form Metadata Desync Auto-Repair**: Synchronizes motion instructions in `;FOLD PTP/LIN` folds with hidden XML metadata comments (`%MKUKATPBASIS,%CMOVE,...`), safely fixing up to 150+ warnings per archive.
 * **FOLD Header Synchronization**: Normalizes and aligns mismatched `;FOLD` and `;ENDFOLD` headers and strips malformed parentheses across hundreds of files in seconds.
 * **Unclosed FOLD Auto-Capping**: Safely closes dangling `;FOLD INI` and system sections before routine termination.
 * **FOR STEP 0 Elimination**: Replaces fatal `STEP 0` infinite loops with safe `STEP 1` to prevent controller lockup.
@@ -126,7 +127,7 @@ Deterministic one-click resolution of safety and structural issues without alter
 ### 5. TRANSFORM: Fieldbus I/O Matrix & Kinematic Modernization
 Batch motion path manipulation and standard migration:
 * **Visual I/O Signal Matrix**: Scans signal declarations and detects overlapping physical bit addresses across fieldbus mappings (`$IN`, `$OUT`, `$ANIN`, `$ANOUT`).
-* **1-Click Spline Modernization**: Automatically converts legacy motion blocks (`PTP`, `LIN`, `CIRC`) into modern KSS 8.3â€“8.7 Spline blocks (`SPTP`, `SLIN`, `SCIRC`) with valid `;FOLD ... ;%{PE}` parameters and companion `.dat` data structures (`CPDAT`, `PDAT`).
+* **1-Click Spline Modernization**: Automatically converts legacy motion blocks (`PTP`, `LIN`, `CIRC`) into modern KSS 8.3–8.7 Spline blocks (`SPTP`, `SLIN`, `SCIRC`) with valid `;FOLD ... ;%{PE}` parameters and companion `.dat` data structures (`CPDAT`, `PDAT`).
 * **6D Trajectory Mirroring (`krl.mirrorTrajectory`)**: Reflects Cartesian paths across planes X, Y, or Z with automated Turn bit manipulation ($A_1..A_6$).
 * **Batch Point Transformation (`krl.batchShiftPoints`)**: Applies 6D geometric frame operations (`:`) for Tool offsets, Base re-referencing, and vector shifts.
 * **Synchronized Point Renumbering (`krl.renumberPoints`)**: Synchronizes point renaming across `.src` motions, inline form folds, and companion `.dat` declarations (`XP1`, `FP1`, `PPDAT1`).
@@ -134,6 +135,17 @@ Batch motion path manipulation and standard migration:
 <p align="center">
   <img src="docs/public/media/krl_io_signals.gif" width="740" alt="Visual Fieldbus I/O Signal Matrix" />
 </p>
+
+---
+
+### 6. LIVE & SCADA BRIDGE: Online Controller Connection & Telemetry Diagnostics [PRO]
+Direct real-time hardware telemetry and diagnostic link to physical KUKA KRC4/KRC5 and OfficePC controllers over CrossComm WCF, OPC UA, or EthernetKRL (`krl.live.connect`, `krl.live.openDashboard`):
+* **Real-Time Kinematic Telemetry**: Live stream of Cartesian coordinates ($X, Y, Z, A, B, C$), active Tool & Base, and all 6 individual axis angles ($A_1..A_6$).
+* **Controller Operating Mode & Safety Interlocks**: Live readout of operating mode (T1, T2, AUT, EXT), drives enabled (`$PERI_RDY`), emergency stop (`$ALARM_STOP`), and safety fence interlocks.
+* **Interpreter & Program Pointer Tracking**: Real-time tracking of `$PRO_STATE`, background `$SPS`, active routine (`$PRO_NAME`), and current program step pointer (`$PRO_IP`) right in VS Code.
+* **Dynamic Speed Override Control**: View and adjust robot execution speed override (`$OV_PRO`) in real time.
+* **Live Fieldbus I/O Diagnostic Probe**: Monitor digital inputs and outputs (`$IN` / `$OUT` 1..4096) and software flags (`$FLAG`) in real-time.
+* **Unified .EVT Multi-Log Inspector (`krl.openAllEventLogs`)**: Aggregate and synchronize all controller diagnostic files (`KrcLog.evt`, `KSSLog.evt`, `SafetyLog.evt`, `SystemLog.evt`, `CrossLog.evt`) in a unified timeline with real-time multilingual KSS error translation.
 
 ---
 
@@ -147,24 +159,28 @@ Batch motion path manipulation and standard migration:
 | **Code Formatter & Indentation Alignment** (`Shift+Alt+F`) | Yes | Yes | Yes | Yes |
 | **GitLens Line Blame & Version Tracking** | Yes | Yes | Yes | Yes |
 | **Zero-Unpack Archive Explorer** (`.zip` / `KRCDiag`) | Yes | Yes | Yes | Yes |
-| **KRL Safe Auto-Repair with AST Rollback Guard** | â€” | **Pro** | **Team** | **Enterprise** |
-| **Interactive Flowchart & Control Flow Graph** | â€” | **Pro** | **Team** | **Enterprise** |
-| **Pre-Flight Safety Audit & Deep Logic Analyzer** | â€” | **Pro** | **Team** | **Enterprise** |
-| **Automated Cell Quality & Acceptance Reports (Markdown/PDF)** | â€” | **Pro** | **Team** | **Enterprise** |
-| **SmartPAD Backup Diff & Spatial Delta Math ($\Delta X,Y,Z$)** | â€” | **Pro** | **Team** | **Enterprise** |
-| **Live Transparent ZIP Workspace Mount & Auto-Sync** | â€” | **Pro** | **Team** | **Enterprise** |
-| **1-Click Modern Spline Converter & Fold Generator** | â€” | **Pro** | **Team** | **Enterprise** |
-| **6D Trajectory Mirroring, Batch Shift & Renumbering** | â€” | **Pro** | **Team** | **Enterprise** |
-| **Binary `.evt` Event Log Viewer (2,050+ KSS codes)** | â€” | **Pro** | **Team** | **Enterprise** |
-| **Visual I/O Signal Matrix & Bit Collision Detector** | â€” | **Pro** | **Team** | **Enterprise** |
-| **Air-Gapped Offline Node-Locking (Factory OT Safe)** | â€” | **Pro (1 Workstation)** | **Team (25 Activations)** | **Site (200 Workstations)** |
-| **Automotive VASS 26 Rules & VW_USER Tech** | â€” | **Pro** | **Team** | **Enterprise** |
-| **Copilot AI Language Model Tools (`krl_safety_check`)** | â€” | **Pro** | **Team** | **Enterprise** |
+| **SCADA Live Bridge & Online Robot Controller Connection** | — | **Pro** | **Team** | **Enterprise** |
+| **Live Telemetry & Fieldbus I/O Diagnostic Probe** | — | **Pro** | **Team** | **Enterprise** |
+| **Unified .EVT Multi-Log Inspector & Timeline (`krl.openAllEventLogs`)** | — | **Pro** | **Team** | **Enterprise** |
+| **KRL Safe Auto-Repair with AST Rollback Guard** | — | **Pro** | **Team** | **Enterprise** |
+| **Inline Form (ILF) Metadata Desync Auto-Repair** | — | **Pro** | **Team** | **Enterprise** |
+| **Interactive Flowchart & Control Flow Graph** | — | **Pro** | **Team** | **Enterprise** |
+| **Pre-Flight Safety Audit & Deep Logic Analyzer** | — | **Pro** | **Team** | **Enterprise** |
+| **Automated Cell Quality & Acceptance Reports (Markdown/PDF)** | — | **Pro** | **Team** | **Enterprise** |
+| **SmartPAD Backup Diff & Spatial Delta Math ($\Delta X,Y,Z$)** | — | **Pro** | **Team** | **Enterprise** |
+| **Live Transparent ZIP Workspace Mount & Auto-Sync** | — | **Pro** | **Team** | **Enterprise** |
+| **1-Click Modern Spline Converter & Fold Generator** | — | **Pro** | **Team** | **Enterprise** |
+| **6D Trajectory Mirroring, Batch Shift & Renumbering** | — | **Pro** | **Team** | **Enterprise** |
+| **Binary `.evt` Event Log Viewer (2,050+ KSS codes)** | — | **Pro** | **Team** | **Enterprise** |
+| **Visual I/O Signal Matrix & Bit Collision Detector** | — | **Pro** | **Team** | **Enterprise** |
+| **Air-Gapped Offline Node-Locking (Factory OT Safe)** | — | **Pro (1 Workstation)** | **Team (25 Activations)** | **Site (200 Workstations)** |
+| **Automotive VASS 26 Rules & VW_USER Tech** | — | **Pro** | **Team** | **Enterprise** |
+| **Copilot AI Language Model Tools (`krl_safety_check`)** | — | **Pro** | **Team** | **Enterprise** |
 | **B2B Invoicing & Quotations (`krl.requestCorporateInvoice`)** | Yes | Yes | Yes | Yes |
 | **Basic Syntax Error & Diagnostic Checking** | Yes (Bonus) | Yes | Yes | Yes |
-| **KSS 9.x / iiQWorks 9.+ & KSS 8.3â€“8.7 Compatibility** | Yes | Yes | Yes | Yes |
-| **Company-Branded Robot Acceptance Protocols (PDF)** | â€” | â€” | â€” | **Enterprise** |
-| **Custom Plant Linting Rules & Dedicated Priority SLA** | â€” | â€” | â€” | **Enterprise** |
+| **KSS 9.x / iiQWorks 9.+ & KSS 8.3–8.7 Compatibility** | Yes | Yes | Yes | Yes |
+| **Company-Branded Robot Acceptance Protocols (PDF)** | — | — | — | **Enterprise** |
+| **Custom Plant Linting Rules & Dedicated Priority SLA** | — | — | — | **Enterprise** |
 
 ---
 

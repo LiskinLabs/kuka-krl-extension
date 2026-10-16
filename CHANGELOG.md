@@ -2,31 +2,40 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
-## [1.9.5] - 2026-10-15 (Unified Event Log Inspector, Bracket-Tolerant Resolution, Anti-Tamper & Gemini 4 Argon QA Hardening)
+## [1.9.5] - 2026-10-16 (SCADA Live Bridge & Online Controller Telemetry [PRO], Unified Event Log Timeline, Bracket-Tolerant Resolution, KSS 8.7 Parity & Industrial UI Hardening)
 
-### 📊 Unified KUKA Event Log Inspector (`krl.openAllEventLogs`)
-- **Multi-Source Event Log Parsing**: Simultaneously parses classic `<LE>` event logs and modern flat logs (`CrossMisc`, `SmartHMI`, `System`, `KSS01xxx`).
-- **Chronological Multi-Log Merge**: Merges all available controller logs into a unified timeline with sub-millisecond precision.
-- **Multilingual Error Resolution**: Resolves numeric KSS message identifiers against localized database catalogs across 6 languages.
+### ⚡ SCADA Live Bridge & Real-Time Online Controller Telemetry [PRO]
+- **Direct Online Controller Connection (`krl.openLiveBridge`, `krl.connectKukaRobot`)**: Live Ethernet connection to physical KUKA KRC2, KRC4, and KRC5 controllers over industrial network interfaces (CrossComm, WCF, EthernetKRL, WinGate port 49000 & 7000).
+- **Real-Time 6-Axis Telemetry Gauges**: Live visualization of `$AXIS_ACT` and `$AXIS_MOT` with dynamic axis limit bars and angular velocity indicators for axes A1 through A6.
+- **Real-Time Cartesian TCP Telemetry**: Live readout of `$POS_ACT` (X, Y, Z, A, B, C) with active `$TOOL` and `$BASE` frame indicators.
+- **Dynamic Digital I/O Matrix**: Live visual grid for `$IN`, `$OUT`, and `$FLAG` states with real-time state change pulse animations.
+- **Live KSS Alarm Stream & Multilingual Translation Subtitles (`KSS_LOOKUP`)**: Live stream of active controller messages with automatic severity badges (Error, Warning, Notice). Regardless of the controller installed language (Turkish, German, Italian, etc.), the extension automatically renders clear English and Russian translation subtitles beneath raw controller message codes (`KSS00203`, `KSS01442`, `KSS01123`, `KSS01422`, `KSS00020`, etc.).
+- **Live 1-Click Toolbar Language Switcher (`LNG: [EN | RU | TR | DE]`)**: Seamless language switching in the SCADA Live Monitor toolbar with bidirectional synchronization to `krl.locale`.
+- **Variable Watcher & Config Variable Inspector**: Real-time polling and inspection of `PGNO`, `PGNO_REQ`, `PGNO_TYPE`, `$LOAD`, and custom user variables.
+
+### 📊 Unified KUKA Event Log Inspector & Multi-Log Timeline (`krl.openAllEventLogs`) [PRO]
+- **Multi-Source Event Log Parsing**: Simultaneously decodes and inspects classic `<LE>` binary archives and flat XML logs (`KUKA_HMI.evt`, `CrossMisc.evt`, `SmartHMI.evt`, `System.evt`).
+- **Chronological Multi-Log Merge**: Merges all controller event logs into a unified timeline with sub-millisecond sorting.
+- **Multilingual Error Resolution**: Resolves numeric KSS message identifiers against localized database catalogs across 6 languages with CSV export.
 
 ### 🎯 Bracket-Tolerant Identifier Resolution & Smart Auto-Selection
-- **Bracket Navigation Parity**: Cursor placement directly on or adjacent to brackets (`[`, `]`, `(`, `)`) accurately resolves the underlying identifier (`$TIMER[1]`, `$OUT[601]`, `MySub()`).
+- **Bracket Navigation Parity**: Cursor placement directly on or adjacent to brackets (`[`, `]`, `(`, `)`) accurately resolves the underlying identifier (`$TIMER[1]`, `$OUT[601]`, `MySub()`, array elements).
 - **Smart Auto-Select (`krl.toggleAutoSelectSymbol`)**: Automatically selects complete identifier token upon click or jump.
-- **Subprogram & Structure Element Navigation**: Instant switching between `.src` `DEF` and companion `.dat` `DEFDAT` data structures.
+- **Subprogram & Companion DAT Navigation**: Instant switching between `.src` `DEF` and companion `.dat` `DEFDAT` data structures.
 
-### 🛡️ Anti-Tamper, Integrity Seal & Licensing
-- **Cryptographic Entitlement Tokens**: Secure Ed25519/HMAC-SHA256 signature verification for Pro/Team activations.
-- **Monotonic Time-Lock**: Detects clock rollbacks (>120s) and preserves last-seen timestamp in secure storage.
-- **Byte-Level Bundle Integrity Verification**: SHA-256 manifest validation guaranteeing authentic untampered production bundles.
+### 🔧 Enhanced KRL Safe Auto-Repair v1.9.5 (QuickFix & Fix-All) [PRO]
+- **Inline Form Metadata Desync Repair (`repairInlineFormMetadataDesyncInText`)**: Synchronizes XML parameter metadata with executing KRL statements, preventing SmartPAD Touch-Up overwrite bugs.
+- **Duplicate Motion Approximation Modifier Cleanup**: Safely normalizes accidental duplicate approximation modifiers (`C_DIS C_DIS` -> `C_DIS`, `C_PTP C_PTP` -> `C_PTP`).
+- **Mismatched `;ENDFOLD` Tag Alignment**: Automatically synchronizes closing `;ENDFOLD` tags with opening region headers.
 
-### 🔬 Gemini 4 Argon Industrial QA & LSP Hardening
-- **Local Variable Precedence (Variable Shadowing Fix)**: References and Rename now prioritize local routine scope over global variables, preventing project-wide shadowing collisions.
-- **Division-by-Zero False Positive Elimination**: Removed mathematical false alarms inside string literals (e.g. `CWRITE(..., "RUN /R1/CELL()")`).
-- **Motion Inline Form Trajectory Counting**: Excluded `;FOLD` comment headers from motion counters in `pathGeometry` and `dynamicAnalysis`, eliminating motion duplication.
-- **CIRC Motion Target Endpoint Correction**: Corrected target point resolution to the second argument (`CIRC AuxPoint, TargetPoint`).
-- **IEEE 754 Exponential Notation Support**: Numbers with scientific exponents (`-3.41509E-05`) now parse with full precision.
-- **Comprehensive Executable Statement Boundary**: Updated `declarationSorter` to recognize all control flow, motion, and subroutine calls before code execution.
-- **Outline & Document Symbols Hardening**: Handled trailing comments on `END ; comment` block closures, prevented duplicate `STRUC`/`ENUM`/`SIGNAL` symbols, and tightened `GOTO` label extraction.
+### 🤖 KSS 8.7.9 System Parity & Cybertech KR50R2500 Integration
+- **KSS 8.7 Motion Structures & Enums**: Registered modern `PDAT` and `LDAT` extension fields (`GEAR_JERK`, `EXAX_IGN`, `JERK_FAC`, `CB`, `OUT_MODETYPE`).
+- **TechPackage Global Procedures**: Integrated global system library procedures and signature help for `GripperSpotTech` v5.0.5 and `SafeOperation`.
+- **Robot Model Passport**: Integrated hardware validation and envelope parameters for the Cybertech `KR50R2500` manipulator (50 kg payload, 2500 mm reach).
+
+### 🎨 Industrial UI/UX Zero-Emoji Compliance
+- **Crisp SVG Vector Styling**: Replaced all casual emojis across SCADA Live Monitor, diagnostic reports, and views with crisp vector SVG icons (`currentColor`) adhering to industrial SCADA standards.
+- **GitHub Alert Blocks**: Formatted diagnostic notices using standard GitHub markdown alerts (`> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`).
 
 ## [1.9.4] - 2026-10-08 (KRL Safe Auto-Repair Engine, QuickFix & Fix-All, Safety Rollback Guard & Monaco Diff Review)
 

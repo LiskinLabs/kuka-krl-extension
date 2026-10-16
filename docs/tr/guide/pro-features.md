@@ -133,3 +133,43 @@ Robot programını sahaya yüklemeden önce kinematiği simüle etme:
 - **Bilek Tekilliği (Wrist Singularity)**: $A_5 \approx 0^\circ \pm 5^\circ$ yakınındaki doğrusal hareketleri tespit etme.
 - **Erişim Sınırları**: Maksimum uzanma sınırının %96'sını aşan hedefleri uyarma.
 - **Çevrim Süresi Kaybı Analizi**: Vorlaufstopp duraklamalarından kaynaklanan tahmini gecikmeleri hesaplama.
+
+---
+
+### 38. SCADA Canlı Köprü ve Gerçek Zamanlı Kontrolör Bağlantısı (`krl.live.connect`, `krl.live.openDashboard`) [PRO]
+CrossComm WCF, OPC UA veya EthernetKRL üzerinden fiziksel KUKA KRC4/KRC5 ve OfficePC kontrolörlerine doğrudan donanımsal telemetri ve SCADA bağlantısı:
+- **Gerçek Zamanlı Koordinat ve Durum İzleme**: Kartezyen TCP pozisyonları ($X, Y, Z, A, B, C$), aktif Tool/Base indeksleri ve eksen açıları ($A_1..A_6$).
+- **Çalışma Modları ve Güvenlik Kilitleri**: Çalışma modu (T1, T2, AUT, EXT), sürücü hazır bilgisi (`$PERI_RDY`), acil stop (`$ALARM_STOP`) ve hücre güvenlik kilidi göstergeleri.
+- **Yorumlayıcı ve Program İşaretçisi**: Arka plan submit (`$SPS`) ve robot yorumlayıcı durumu (`$PRO_STATE`), aktif program adı (`$PRO_NAME`) ve çalışan satır işaretçisi (`$PRO_IP`).
+- **Dinamik Program Override Değeri**: Robot çalışma hızı override değerini (`$OV_PRO`) canlı izleme ve ayarlama.
+- **Saha Veriyolu G/Ç Teşhisi**: Dijital giriş ve çıkışların (`$IN` / `$OUT` 1..4096) ve bayrakların (`$FLAG`) canlı sinyal takibi.
+- **Ağ İçi Kontrolör Keşfi**: Fabrika ağındaki aktif KRC kontrolörlerini otomatik alt ağ taraması ile tespit etme.
+
+---
+
+### 39. Birleşik KSS Olay Günlüğü Çoklu İnceleyicisi ve Zaman Çizelgesi (`krl.openAllEventLogs`) [PRO]
+KUKA kontrolör teşhis ve hata kayıtları için çoklu günlük zaman çizelgesi:
+- **Tüm Günlükleri Eşzamanlı Birleştirme**: Kontrolör teşhis dosyalarını (`KrcLog.evt`, `KSSLog.evt`, `SafetyLog.evt`, `SystemLog.evt`, `CrossLog.evt`) tek bir kronolojik akışta toplama.
+- **Canlı KSS Hata Kodu Çevirisi**: KUKA hata ve mesaj kodlarını 6 dilde (EN, DE, RU, TR, ES, IT) açıklamalar ve altyazılarla otomatik çevirme.
+- **Öncelik Filtreleme ve Arama**: Önem derecesine göre (Fatal, Error, Warning, Info, State) anında filtreleme ve serbest metin araması.
+- **KRL Kaynak Koduna Doğrudan Geçiş**: Günlükteki hataya tıklayarak doğrudan ilgili `.src` / `.dat` satırına atlama.
+
+---
+
+### 40. Köşeli Parantez ve Dizi Elemanlarına Uyumlu Sembol Çözümleme
+Endüstriyel KRL kod yapıları için geliştirilmiş AST dayanıklılığı:
+- **Karmaşık İfadeler ve Dizi Desteği**: Köşeli parantez, yapı elemanları ve indeksli değişkenleri sözdizimi hatası üretmeden ayrıştırma (ör. `$OUT[12]`, `$COUNT_I[1]`, `LOAD_DATA[1].M`, `P1.X`).
+- **Telemetri ve İpucu Desteği**: Dizi indeksli sistem değişkenleri ve yapılar için tam dokümantasyon ve referans gezintisi.
+
+---
+
+### 41. Inline Form (ILF) Meta Veri Eşzamanlama ve Otomatik Onarım (`krl.fixAllSafeIssuesInFile`) [PRO]
+Hareket parametrelerindeki meta veri uyumsuzluklarını otomatik onaran motor:
+- **XML Meta Veri Senkronizasyonu**: `;FOLD PTP/LIN` hareket komutları ile gizli XML yorumları (`%MKUKATPBASIS,%CMOVE,...`) arasındaki tutarsızlıkları düzeltme.
+- **Toplu ve Güvenli Onarım**: Endüstriyel yedeklerdeki 150+ inline form uyarısını AST Rollback Guard güvencesiyle tek tıkla giderme.
+
+---
+
+### 42. KSS 8.7.9 Uyumluluğu ve Robot Modeli Genişletmeleri
+- **Genişletilmiş Kinematik Kataloğu**: KR 50 R2500 serisi ve GripperSpotTech dahil KSS 8.7.9 için tam kinematik ve yük sınırları tanımları.
+- **Dinamik Yük Modeli Doğrulaması**: Yüksek hızlı hareketlerde yörünge sapmalarını ve eksen aşırı yüklenmelerini önlemek için kütle ($M$), ağırlık merkezi ($COG: X, Y, Z$) ve atalet tensörlerini ($J_X, J_Y, J_Z$) titizlikle denetleme.

@@ -116,3 +116,56 @@ Deep industrial simulation rules reverse-engineered from KUKA.Sim 4.10 & iiQWork
 ### 34. Enterprise Fleet Reliability & Non-Destructive Code Verification
 Verified across 9,804 real industrial plant modules (4.2M+ LoC across 17 robotics installations and 8 automotive/Tier-1 clients) with 0 line truncations, 0 block regressions, and 100% code preservation.
 
+---
+
+### 35. KRL Sichere automatische Reparatur (`krl.fixAllSafeIssuesInFile`)
+Deterministische One-Click-Behebung sicherer syntaktischer und struktureller Fehler ohne Änderung der Bewegungskinematik:
+- **Vorlaufstopp-Schutzbarriere**: Fügt automatisch `WAIT SEC 0` vor Sicherheitszonen-Signalen (`$OUT`, `$FLAG`, `PULSE`) ein.
+- **Fehlendes BRAKE vor RESUME**: Ergänzt den erforderlichen `BRAKE`-Befehl direkt vor `RESUME` in Interrupt-Routinen.
+- **Nutzlast-Commit ($LOAD)**: Fügt `BAS(#PAYLOAD, nTool)`-Aufrufe nach `$LOAD`-Zuweisungen ein.
+- **BOM- und Nicht-ASCII-Bereinigung**: Entfernt UTF-8 BOM und bereinigt Sonderzeichen.
+- **FOLD / ENDFOLD Desynchronisationsausgleich**: Gleicht schließende `;ENDFOLD`-Tags mit ihren `;FOLD`-Headern ab.
+
+---
+
+### 36. Transparente KRC-Backup Live-Einbindung & 2-Wege-ZIP-Synchronisation (`krl.mountBackupZipAsProject`)
+Öffnen von SmartPAD-Backups (`Robot1.zip`, `KRCDiag_*.zip`) direkt als Arbeitsbereich in VS Code ohne vorheriges Entpacken. Speichern (`Ctrl+S`) aktualisiert das ZIP-Archiv in <80ms direkt auf der Festplatte.
+
+---
+
+### 37. Dynamischer Bahnprofiler & Singularitätsprädiktor
+Kinematische Vorab-Simulation und Singularitätsrisikoanalyse vor dem Laden auf den Roboter:
+- **Handachsen-Singularität (Wrist)**: Erkennung von Linearbewegungen nahe $A_5 \approx 0^\circ \pm 5^\circ$.
+- **Reichweitengrenzen**: Warnung bei Überschreitung von 96% des maximalen Arbeitsbereichs.
+- **Taktzeitverlustanalyse**: Berechnung von Verzögerungen durch Vorlaufstopps.
+
+---
+
+### 38. SCADA Live Bridge & Echtzeit-Steuerungsanbindung (`krl.live.connect`, `krl.live.openDashboard`) [PRO]
+Direkte bidirektionale Telemetrie- und Diagnoseanbindung an physikalische KUKA KRC4/KRC5 und OfficePC-Steuerungen über CrossComm WCF, OPC UA oder EthernetKRL:
+- **Echtzeit-Koordinaten**: Kartesische TCP-Positionen ($X, Y, Z, A, B, C$) und Achswinkel ($A_1..A_6$).
+- **Betriebsarten & Sicherheitskreise**: Betriebsarten (T1, T2, AUT, EXT), Antriebsbereitschaft (`$PERI_RDY`) und Not-Halt-Status (`$ALARM_STOP`).
+- **Interpreter- und Zeigerverfolgung**: Status von Submit (`$SPS`) und Roboter-Interpreter (`$PRO_STATE`), Programmname (`$PRO_NAME`) und Zeilenzeiger (`$PRO_IP`).
+- **Dynamischer Override**: Anzeige und Anpassung des Programm-Overrides (`$OV_PRO`).
+- **Feldbus E/A-Diagnose**: Live-Monitoring digitaler Ein-/Ausgänge (`$IN` / `$OUT` 1..4096) und Merker (`$FLAG`).
+
+---
+
+### 39. KSS Multi-Log Event-Inspektor & Zeitleiste (`krl.openAllEventLogs`) [PRO]
+Zusammenführung aller Steuerungs- und Diagnoseprotokolle (`KrcLog.evt`, `KSSLog.evt`, etc.) in einer synchronisierten Zeitleiste mit automatischer mehrsprachiger KSS-Fehlercode-Übersetzung.
+
+---
+
+### 40. Klammer- und Array-tolerante Symbolauflösung
+Robuste AST-Verarbeitung für komplexe KRL-Ausdrücke, Array-Indizierung und Strukturzugriffe (z. B. `$OUT[12]`, `$COUNT_I[1]`, `LOAD_DATA[1].M`).
+
+---
+
+### 41. Inline-Formular (ILF) Metadaten-Reparatur (`krl.fixAllSafeIssuesInFile`) [PRO]
+Automatischer Abgleich und Reparatur von Parameter-Desynchronisationen zwischen KRL-Bewegungsbefehlen und internen XML-Metadatenkommentaren.
+
+---
+
+### 42. KSS 8.7.9 Kompatibilität & Robotermodell-Erweiterungen
+Erweiterte Kinematikmodelle für KSS 8.7.9 (inkl. KR 50 R2500, GripperSpotTech) sowie Prüfung dynamischer Lastdaten (Masse, Schwerpunkt, Trägheitstensor).
+

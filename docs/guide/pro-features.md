@@ -146,3 +146,43 @@ Pre-flight kinematic simulation and singularity risk analysis directly in the ed
 - **Signal Race Condition Detector**: Catches peripheral output toggles placed immediately around motion statements without hardware `TRIGGER`.
 - **Cycle Time & Motion Profiler**: Computes cycle path lengths, estimated acceleration/deceleration profiles, and Vorlaufstopp deceleration penalties.
 
+---
+
+### 38. SCADA Live Bridge & Real-Time Controller Connection (`krl.live.connect`, `krl.live.openDashboard`) [PRO]
+Direct bidirectional hardware telemetry and telemetry bridge to physical KUKA KRC4, KRC5, and OfficePC controllers over CrossComm WCF, OPC UA, or EthernetKRL:
+- **Live State & Kinematic Coordinates**: Real-time streaming of Cartesian TCP positions ($X, Y, Z, A, B, C$), active Tool/Base indices, and individual axis angles ($A_1..A_6$).
+- **Controller Operating Modes & Interlocks**: Live indicators for operating mode (T1, T2, AUT, EXT), drives enabled (`$PERI_RDY`), emergency stop status (`$ALARM_STOP`), and safety gate interlocks.
+- **Interpreter & Pointer Tracking**: Tracks background submit (`$SPS`) and robot interpreter state (`$PRO_STATE`), active program name (`$PRO_NAME`), and current execution step pointer (`$PRO_IP`) directly inside VS Code.
+- **Dynamic Program Override**: Real-time display and adjustment of robot execution speed override (`$OV_PRO`).
+- **Fieldbus I/O Diagnostic Probe**: Live monitoring and inspection of digital inputs/outputs (`$IN` / `$OUT` bits 1..4096) and software flags (`$FLAG`).
+- **Multi-Subnet Controller Discovery**: Automated subnet scanning to detect active KRC controllers on the industrial plant network.
+
+---
+
+### 39. Unified KSS Event Log Multi-Inspector & Cross-Log Timeline (`krl.openAllEventLogs`) [PRO]
+Industrial multi-log timeline aggregator for KUKA controller diagnostics:
+- **Simultaneous Multi-Archive Aggregation**: Merges and chronologically sorts events across all controller diagnostic files (`KrcLog.evt`, `KSSLog.evt`, `SafetyLog.evt`, `SystemLog.evt`, `CrossLog.evt`).
+- **Real-Time KSS Error Code Translation**: Resolves proprietary numeric KSS error and message codes with instant translation and bilingual subtitles across 6 languages (EN, DE, RU, TR, ES, IT).
+- **Severity Filtering & Search**: Instant filtering by severity level (Fatal, Error, Warning, Info, State) and free-text search across timestamps and message bodies.
+- **Direct Source Jump**: Correlates runtime diagnostic faults with active KRL module lines, jumping directly to the corresponding `.src` / `.dat` statement.
+
+---
+
+### 40. Bracket-Tolerant Identifier & Symbol Resolution
+Engineered AST and symbol table resilience for industrial KRL code patterns:
+- **Complex Expression & Array Index Support**: Resolves nested bracket expressions, structured member access, and variable indexing without parser faults (e.g., `$OUT[12]`, `$COUNT_I[1]`, `LOAD_DATA[1].M`, `P1.X`).
+- **Telemetry Probe & Hover Parity**: Full hover documentation, type inference, and cross-reference jumping for array-indexed system variables and user structures.
+
+---
+
+### 41. Inline Form (ILF) Metadata Desync Auto-Repair (`krl.fixAllSafeIssuesInFile`) [PRO]
+Deterministic repair engine for motion parameter desynchronization:
+- **XML Metadata Synchronization**: Scans and repairs parameter desynchronizations between KRL motion commands in `;FOLD PTP/LIN` folds and internal hidden XML metadata comments (`%MKUKATPBASIS,%CMOVE,...`).
+- **Zero-Touch Mass Repair**: Safely eliminates up to 150+ inline form warnings in industrial archives in seconds with 100% AST rollback guarantee.
+
+---
+
+### 42. KSS 8.7.9 Parity & Industrial Robot Model Expansions
+- **Expanded Kinematics Catalog**: Comprehensive kinematic definitions, payload boundaries, and envelope specifications for KSS 8.7.9, including the KR 50 R2500 series and GripperSpotTech packages.
+- **Dynamic Load Model Verification**: Rigorous auditing of dynamic payload definitions (`LOAD_DATA`), verifying mass ($M$), center of gravity ($COG: X, Y, Z$), and inertia tensor components ($J_X, J_Y, J_Z$) to safeguard against high-speed trajectory deviations or axis overload.
+

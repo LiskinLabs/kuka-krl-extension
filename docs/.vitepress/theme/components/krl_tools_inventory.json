@@ -1,6 +1,6 @@
 {
   "extensionName": "KUKA KRL Professional VS Code Extension",
-  "version": "1.9.4",
+  "version": "1.9.5",
   "publisher": "LiskinLabs",
   "license": "SEE LICENSE IN LICENSE.txt",
   "pricing": "Free",
@@ -1010,6 +1010,41 @@
         "title": "View Binary Event Log (.evt)",
         "status": "PRO",
         "valueProposition": "Decodes and inspects proprietary KUKA binary event log archives into structured chronological timelines."
+      },
+      {
+        "type": "Command",
+        "id": "krl.openAllEventLogs",
+        "title": "Unified Multi-Log Event Inspector",
+        "status": "PRO",
+        "valueProposition": "Aggregates and synchronizes all controller .evt log archives into a single unified interactive timeline with multilingual KSS error code translation."
+      },
+      {
+        "type": "Command",
+        "id": "krl.live.connect",
+        "title": "Connect to KUKA Robot Controller",
+        "status": "PRO",
+        "valueProposition": "Establishes live bidirectional SCADA bridge to physical KRC4/KRC5 or OfficePC controllers over CrossComm WCF, OPC UA, or EthernetKRL."
+      },
+      {
+        "type": "Command",
+        "id": "krl.live.disconnect",
+        "title": "Disconnect from KUKA Robot Controller",
+        "status": "PRO",
+        "valueProposition": "Safely disconnects active real-time SCADA telemetry session and releases network sockets."
+      },
+      {
+        "type": "Command",
+        "id": "krl.live.openDashboard",
+        "title": "Open SCADA Live Bridge Dashboard",
+        "status": "PRO",
+        "valueProposition": "Opens real-time SCADA dashboard displaying 3D Cartesian coordinates, axis angles, drives state, operating modes, override, and fieldbus I/O bits."
+      },
+      {
+        "type": "Command",
+        "id": "krl.live.fetchBackup",
+        "title": "Fetch Live Backup over Network",
+        "status": "PRO",
+        "valueProposition": "Pulls current project and system files directly from active online KUKA controller over network connection."
       },
       {
         "type": "Command",

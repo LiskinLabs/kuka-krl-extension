@@ -184,13 +184,12 @@ Agreement shall not constitute a waiver of such right or provision.
 rights granted hereunder without the prior written consent of Licensor. Licensor
 may assign this Agreement freely.
 
-11.5. NOTICES: All notices under this Agreement shall be sent to
-silvlis@outlook.com or to the email address associated with the Licensee's
-purchase.
+11.5. NOTICES: All notices under this Agreement shall be submitted via
+the official website contact channels or in-editor support relay.
 
 ---
 
-For questions about licensing, contact: silvlis@outlook.com
+For questions about licensing, visit: https://liskinlabs.github.io/kuka-krl-extension/
 Purchase licenses at: https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ
 Official website: https://liskinlabs.github.io/kuka-krl-extension/
 

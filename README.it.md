@@ -295,8 +295,8 @@ Offriamo licenze flessibili di livello industriale tramite il nostro merchant ve
 | **Pro Mensile** | **$19.99** / mese | Fatturazione mensile | Tutti gli strumenti Pro â€¢ 1 PC â€¢ Supporto KRC2â€“KRC5 | [Ottieni Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
 | **Pro Annuale** | **$149.00** / anno | **Risparmia il 35%** (~$6.58/mese) | Tutti gli strumenti Pro â€¢ 1 PC â€¢ Buffer offline 30 giorni â€¢ KRC2â€“KRC5 | [Ottieni Pro annuale](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | **Pro Lifetime** | **$699.00** | **Paga una volta, tuo per sempre** | Tutti gli strumenti Pro â€¢ 1 PC (1 postazione di lavoro) â€¢ Aggiornamenti a vita | [Ottieni Pro lifetime](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| 🏢 **Team Edition** | **$499.00** / anno | B2B — 5 postazioni | Tutti gli strumenti Pro e analizzatori • 5 postazioni di lavoro • KRC2–KRC5 | [Ottieni Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| 🏛️ **Department / Integrator** | **$1,499.00** / anno | B2B — Fino a 20 postazioni | Per integratori di robotica e reparti di automazione (fino a 20 PC) | [Ottieni Department](https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn) |
+| 🏢 **Team Edition** | **$499.90** / anno | B2B — 5 postazioni | Tutti gli strumenti Pro e analizzatori • 5 postazioni di lavoro • KRC2–KRC5 | [Ottieni Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏛️ **Department / Integrator** | **$999.00** / anno | B2B — Fino a 20 postazioni | Per integratori di robotica e reparti di automazione (fino a 20 PC) | [Ottieni Department](https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn) |
 | 🏭 **Enterprise Site** | **$4,999.00** / anno | B2B — Fino a 100 postazioni | Tutti gli strumenti Pro e analizzatori • 100 postazioni di stabilimento • Report con marchio | [Ottieni Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">

@@ -32,8 +32,8 @@ For technical support, connect with us directly using the embedded support panel
 | **Engineer Pro (Monthly)** | $19.99 / mo | 1 Workstation Activation | KRC2/KRC3/KRC4/KRC5 support, short projects, commissioning sprints |
 | **Engineer Pro (Annual)** | $149.00 / yr | 1 Workstation Activation | Save 35%, 1-Year Air-Gapped offline certificate, 50 industrial tools |
 | **Engineer Pro (Lifetime)** | $699.00 once | 1 Workstation Activation | Perpetual license, perpetual updates, permanent Air-Gapped certificate |
-| **Team Edition** | $499.00 / yr | Up to 5 Workstation Activations | Centralized B2B invoicing, 5 plant/office devices, KRC2–KRC5 |
-| **Department / Integrator** | $1,499.00 / yr | Up to 20 Workstation Activations | Up to 20 workstations, unlimited integration projects, dedicated engineering support |
+| **Team Edition** | $499.90 / yr | Up to 5 Workstation Activations | Centralized B2B invoicing, 5 plant/office devices, KRC2–KRC5 |
+| **Department / Integrator** | $999.00 / yr | Up to 20 Workstation Activations | Up to 20 workstations, unlimited integration projects, dedicated engineering support |
 | **Enterprise Plant Site** | $4,999.00 / yr | Up to 100 Workstation Activations | 100 plant workstations, direct 4-hr SLA, offline Air-Gap license, OEM-branded client protocols |
 
 ### Why is Pro Lifetime $699 while Enterprise Site is $4,999/yr?

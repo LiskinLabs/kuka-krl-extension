@@ -334,7 +334,8 @@ DoÄŸrulanmÄ±ÅŸ satÄ±cÄ±mÄ±z **Dodo Payments** Ã¼zerinden esnek, en
 | **Pro YÄ±llÄ±k** | **$149.00** / yÄ±l | **%35 Tasarruf** (~$6.58/ay) | TÃ¼m Pro AraÃ§lar â€¢ 1 PC â€¢ 30 GÃ¼n Ã‡evrimdÄ±ÅŸÄ± Tampon â€¢ KRC2â€“KRC5 | [YÄ±llÄ±k Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | **Pro Ã–mÃ¼r Boyu** | **$699.00** | **Bir Kez Ã–de, Sonsuza Kadar Sahip Ol** | TÃ¼m Pro AraÃ§lar â€¢ 1 PC (1 Ä°ÅŸ Ä°stasyonu) â€¢ Ã–mÃ¼r Boyu GÃ¼ncelleme | [Ã–mÃ¼r Boyu Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
 | **Team Edition** | **$499.00** / yÄ±l | B2B â€” Fatura ve Teklif | TÃ¼m Pro AraÃ§lar â€¢ 25 Aktivasyon Aktivasyonu â€¢ KRC2â€“KRC5 | [Team Edition SatÄ±n Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| **Enterprise Site** | **$2,490.00** / yÄ±l | 200 Ä°ÅŸ Ä°stasyonu | TÃ¼m Pro AraÃ§lar â€¢ 200 Tesis Ä°ÅŸ Ä°stasyonu â€¢ MarkalÄ± Raporlar | [Enterprise SatÄ±n Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| **Department / Integrator** | **$1,499.00** / yıl | B2B — 20 İstasyona Kadar | Entegratörler ve otomasyon departmanları için 20 istasyona kadar • Tam AST Teşhisi | [Department Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| **Enterprise Site** | **$4,999.00** / yıl | 100 İş İstasyonu | Tüm Pro Araçlar • 100 Tesis İş İstasyonu • Markalı Raporlar & SLA | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">
@@ -356,7 +357,7 @@ DoÄŸrulanmÄ±ÅŸ satÄ±cÄ±mÄ±z **Dodo Payments** Ã¼zerinden esnek, en
 * **TakÄ±m Paketi (Team Edition â€” $499/yÄ±l):**
   * Sistem entegratÃ¶rleri, robotik servis firmalarÄ± ve otomasyon departmanlarÄ± iÃ§in **25 cihaz aktivasyonu**.
   * Vergi Kimlik NumarasÄ± (Tax ID / VIES KDV) ile resmi kurumsal B2B fatura ve tÃ¼m projelerde birleÅŸik KRL kod kalitesi standartlarÄ±.
-* **Kurumsal Fabrika (Enterprise Site â€” $2,490/yÄ±l):**
+* **Kurumsal Fabrika (Enterprise Site â€” $4,999.00/yÄ±l):**
   * **TÃœM FABRÄ°KA VEYA ENTEGRATÃ–R ÅÄ°RKET Ä°Ã‡Ä°N 200 CÄ°HAZ AKTÄ°VASYONU**.
   * Tesis genelindeki tÃ¼m mÃ¼hendislik dizÃ¼stÃ¼ bilgisayarlarÄ±nÄ±, test istasyonlarÄ±nÄ± ve bakÄ±m panellerini kapsar.
   * **DoÄŸrudan MÃ¼hendislik DesteÄŸi:** KatÄ± SLA garantisiyle Ã¶ncelikli doÄŸrudan mÃ¼hendis desteÄŸi.

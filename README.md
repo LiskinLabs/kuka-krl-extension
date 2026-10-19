@@ -75,7 +75,7 @@ Static code analysis designed specifically for KRL runtime behavior:
 * **Automotive VASS 26 Linter**: Enforces Volkswagen / Audi Group Body-in-White automation rules (`VE=0%` on `SPSMAKRO`, `A23=AUS` confirmation interlocks).
 
 <p align="center">
-  <img src="docs/public/media/type-validation-demo.gif" width="740" alt="KUKA Pre-Flight Static Analysis & Quality Audit" />
+  <img src="extension/media/type-validation-demo.gif" width="740" alt="KUKA Pre-Flight Static Analysis & Quality Audit" />
 </p>
 
 ---
@@ -90,7 +90,7 @@ Deep inspection of KUKA controller backups without disk extraction:
 * **Live Transparent ZIP Project Mount (`krl.mountBackupZipAsProject`)**: Open any KRC backup archive directly as a workspace. Saving files (`Ctrl+S`) updates the `.zip` archive on disk in <80ms without UI locking.
 
 <p align="center">
-  <img src="docs/public/media/krc_backup_diff.gif" width="740" alt="KUKA SmartPAD Backup Diff & Coordinate Delta Math" />
+  <img src="extension/media/krc_backup_diff.gif" width="740" alt="KUKA SmartPAD Backup Diff & Coordinate Delta Math" />
 </p>
 
 ---
@@ -101,7 +101,7 @@ Deep inspection of KUKA controller backups without disk extraction:
 * **Quick FOLD Toolbar & Declaration Sorter**: Instant fold unfolding/folding, declaration sorting, and WorkVisual metadata cleaner (`&ACCESS`, `&REL`) for clean version control commits.
 
 <p align="center">
-  <img src="docs/public/media/control_flow_graph.gif" width="740" alt="Interactive Control Flow Graph & Visual Safety Inspector" />
+  <img src="extension/media/control_flow_graph.gif" width="740" alt="Interactive Control Flow Graph & Visual Safety Inspector" />
 </p>
 
 ---
@@ -119,7 +119,7 @@ Deterministic one-click resolution of safety and structural issues without alter
 * **Interactive Monaco Diff Review**: Inspect candidate changes in side-by-side Red/Green diff with "Accept All", "Accept (Ctrl+Enter)", or "Reject (Esc)" before writing to disk.
 
 <p align="center">
-  <img src="docs/public/media/kuka_control_center.gif" width="740" alt="KUKA Control Center and Safe Auto-Repair" />
+  <img src="extension/media/kuka_control_center.gif" width="740" alt="KUKA Control Center and Safe Auto-Repair" />
 </p>
 
 ---
@@ -133,7 +133,7 @@ Batch motion path manipulation and standard migration:
 * **Synchronized Point Renumbering (`krl.renumberPoints`)**: Synchronizes point renaming across `.src` motions, inline form folds, and companion `.dat` declarations (`XP1`, `FP1`, `PPDAT1`).
 
 <p align="center">
-  <img src="docs/public/media/krl_io_signals.gif" width="740" alt="Visual Fieldbus I/O Signal Matrix" />
+  <img src="extension/media/krl_io_signals.gif" width="740" alt="Visual Fieldbus I/O Signal Matrix" />
 </p>
 
 ---
@@ -173,7 +173,7 @@ Direct real-time hardware telemetry and diagnostic link to physical KUKA KRC4/KR
 | **6D Trajectory Mirroring, Batch Shift & Renumbering** | — | **Pro** | **Team** | **Enterprise** |
 | **Binary `.evt` Event Log Viewer (2,050+ KSS codes)** | — | **Pro** | **Team** | **Enterprise** |
 | **Visual I/O Signal Matrix & Bit Collision Detector** | — | **Pro** | **Team** | **Enterprise** |
-| **Air-Gapped Offline Node-Locking (Factory OT Safe)** | — | **Pro (1 Workstation)** | **Team (25 Activations)** | **Site (200 Workstations)** |
+| **Air-Gapped Offline Node-Locking (Factory OT Safe)** | — | **Pro (1 Workstation)** | **Team (5 Activations)** | **Site (100 Workstations)** |
 | **Automotive VASS 26 Rules & VW_USER Tech** | — | **Pro** | **Team** | **Enterprise** |
 | **Copilot AI Language Model Tools (`krl_safety_check`)** | — | **Pro** | **Team** | **Enterprise** |
 | **B2B Invoicing & Quotations (`krl.requestCorporateInvoice`)** | Yes | Yes | Yes | Yes |
@@ -194,8 +194,9 @@ All commercial licenses are billed through our verified merchant of record, **Do
 | **Engineer Pro (Monthly)** | **$19.00** / mo | 1 Workstation Activation | Commissioning sprints, short projects, contractor audits | [Get Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
 | **Engineer Pro (Annual)** | **$149.00** / yr | 1 Workstation Activation | Senior robotics engineers, plant programmers, offline planners | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | **Pro Lifetime** | **$699.00** once | 1 Workstation Activation | Perpetual license, lifetime updates, permanent offline cert | [Get Lifetime](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| **Team Edition** | **$499.00** / yr | B2B â€” Invoice & Quote | All Industrial Pro Tools & Analyzers â€¢ 25 Workstation Activations â€¢ KRC2â€“KRC5 | [Get Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| **Enterprise Site** | **$2,490.00** / yr | 200 Workstation Activations | All Industrial Pro Tools & Analyzers â€¢ 200 Plant Workstations â€¢ Branded Reports | [Get Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| **Team Edition** | **$499.00** / yr | B2B — 5 Workstations | Small plant automation squad • 5 Workstation Activations • KRC2–KRC5 | [Get Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| **Department / Integrator** | **$1,499.00** / yr | B2B — Up to 20 Workstations | Robotics integrators, line builders, plant engineering departments (up to 20 PCs) | [Get Department License](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| **Enterprise Site** | **$4,999.00** / yr | B2B — Up to 100 Workstations | Full manufacturing plant or large integrator • 100 Workstations • Branded Reports & Priority SLA | [Get Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 ---
 

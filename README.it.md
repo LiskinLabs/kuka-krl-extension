@@ -40,7 +40,7 @@
 
 <p align="center">
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>Wiki interattiva e documentazione</b></a> â€¢
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>Pro Monthly ($19.00/mese)</b></a> â€¢ 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>Pro Monthly ($19.99/mese)</b></a> â€¢ 
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>Pro annuale ($149.00/anno â€“ risparmia il 35%)</b></a> â€¢ 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>Report audit di sicurezza</b></a>
 </p>
@@ -292,12 +292,12 @@ Offriamo licenze flessibili di livello industriale tramite il nostro merchant ve
 | Piano | Prezzo | Sconto / Fatturazione | Termini licenza | Checkout |
 |:---|:---:|:---|:---|:---:|
 | **Community** | **$0** | Gratis per sempre al 100% | Uso personale e commerciale | [Installa gratis](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| **Pro Mensile** | **$19.00** / mese | Fatturazione mensile | Tutti gli strumenti Pro â€¢ 1 PC â€¢ Supporto KRC2â€“KRC5 | [Ottieni Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| **Pro Mensile** | **$19.99** / mese | Fatturazione mensile | Tutti gli strumenti Pro â€¢ 1 PC â€¢ Supporto KRC2â€“KRC5 | [Ottieni Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
 | **Pro Annuale** | **$149.00** / anno | **Risparmia il 35%** (~$6.58/mese) | Tutti gli strumenti Pro â€¢ 1 PC â€¢ Buffer offline 30 giorni â€¢ KRC2â€“KRC5 | [Ottieni Pro annuale](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | **Pro Lifetime** | **$699.00** | **Paga una volta, tuo per sempre** | Tutti gli strumenti Pro â€¢ 1 PC (1 postazione di lavoro) â€¢ Aggiornamenti a vita | [Ottieni Pro lifetime](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| **Team Edition** | **$499.00** / anno | B2B â€” Fattura e preventivo | Tutti gli strumenti Pro â€¢ 25 attivazioni di lavoro â€¢ KRC2â€“KRC5 | [Ottieni Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| **Department / Integrator** | **$1,499.00** / anno | B2B — Fino a 20 postazioni | Fino a 20 postazioni per integratori e reparti • Diagnostica AST completa | [Ottieni Department](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| **Enterprise Site** | **$4,999.00** / anno | 100 postazioni | Tutti gli strumenti Pro • 100 postazioni di stabilimento • Report con marchio & SLA | [Ottieni Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| 🏢 **Team Edition** | **$499.00** / anno | B2B — 5 postazioni | Tutti gli strumenti Pro e analizzatori • 5 postazioni di lavoro • KRC2–KRC5 | [Ottieni Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏛️ **Department / Integrator** | **$1,499.00** / anno | B2B — Fino a 20 postazioni | Per integratori di robotica e reparti di automazione (fino a 20 PC) | [Ottieni Department](https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn) |
+| 🏭 **Enterprise Site** | **$4,999.00** / anno | B2B — Fino a 100 postazioni | Tutti gli strumenti Pro e analizzatori • 100 postazioni di stabilimento • Report con marchio | [Ottieni Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">

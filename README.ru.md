@@ -30,7 +30,7 @@
 
 <p align="center">
   <a href="https://liskinlabs.github.io/kuka-krl-extension/ru/"><b>Ğ”Ğ¾ĞºÑƒĞ¼ĞµĞ½Ñ‚Ğ°Ñ†Ğ¸Ñ Ğ¸ Ğ±Ğ°Ğ·Ğ° Ğ·Ğ½Ğ°Ğ½Ğ¸Ğ¹</b></a> â€¢
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>Engineer Pro ($19.00/Ğ¼ĞµÑ)</b></a> â€¢ 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>Engineer Pro ($19.99/Ğ¼ĞµÑ)</b></a> â€¢ 
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>Pro Ğ½Ğ° Ğ³Ğ¾Ğ´ ($149.00/Ğ³Ğ¾Ğ´)</b></a> â€¢ 
   <a href="https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v"><b>Team Edition ($499.00/Ğ³Ğ¾Ğ´)</b></a> â€¢
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>ĞÑ‚Ñ‡Ñ‘Ñ‚ Ğ°ÑƒĞ´Ğ¸Ñ‚Ğ° Ğ±ĞµĞ·Ğ¾Ğ¿Ğ°ÑĞ½Ğ¾ÑÑ‚Ğ¸</b></a>
@@ -340,12 +340,9 @@
 | Ğ¢Ğ°Ñ€Ğ¸Ñ„ | Ğ¦ĞµĞ½Ğ° | Ğ¡ĞºĞ¸Ğ´ĞºĞ° / Ğ¾Ğ¿Ğ»Ğ°Ñ‚Ğ° | Ğ£ÑĞ»Ğ¾Ğ²Ğ¸Ñ Ğ»Ğ¸Ñ†ĞµĞ½Ğ·Ğ¸Ğ¸ | ĞÑ„Ğ¾Ñ€Ğ¼Ğ»ĞµĞ½Ğ¸Ğµ |
 |:---|:---:|:---|:---|:---:|
 | **Community** | **$0** | Ğ‘ĞµÑĞ¿Ğ»Ğ°Ñ‚Ğ½Ğ¾ Ğ½Ğ°Ğ²ÑĞµĞ³Ğ´Ğ° | Ğ›Ğ¸Ñ‡Ğ½Ğ¾Ğµ Ğ¸ Ğ±Ğ°Ğ·Ğ¾Ğ²Ğ¾Ğµ Ğ¸Ğ½Ğ¶ĞµĞ½ĞµÑ€Ğ½Ğ¾Ğµ Ğ¸ÑĞ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ğ½Ğ¸Ğµ (1 ĞŸĞš) | [Ğ£ÑÑ‚Ğ°Ğ½Ğ¾Ğ²Ğ¸Ñ‚ÑŒ Ğ±ĞµÑĞ¿Ğ»Ğ°Ñ‚Ğ½Ğ¾](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| **Engineer Pro (ĞœĞµÑÑÑ†)** | **$19.00** / Ğ¼ĞµÑ | ĞĞ¿Ğ»Ğ°Ñ‚Ğ° ĞµĞ¶ĞµĞ¼ĞµÑÑÑ‡Ğ½Ğ¾ | Ğ’ÑĞµ Pro-Ğ¸Ğ½ÑÑ‚Ñ€ÑƒĞ¼ĞµĞ½Ñ‚Ñ‹ Ğ¸ Ğ°Ğ½Ğ°Ğ»Ğ¸Ğ·Ğ°Ñ‚Ğ¾Ñ€Ñ‹ Ğ±ĞµĞ·Ğ¾Ğ¿Ğ°ÑĞ½Ğ¾ÑÑ‚Ğ¸ â€¢ 1 Ğ°ĞºÑ‚Ğ¸Ğ²Ğ°Ñ†Ğ¸Ñ ÑƒÑÑ‚Ñ€Ğ¾Ğ¹ÑÑ‚Ğ²Ğ° â€¢ KRC2â€“KRC5 | [ĞÑ„Ğ¾Ñ€Ğ¼Ğ¸Ñ‚ÑŒ Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| **Engineer Pro (ĞœĞµÑÑÑ†)** | **$19.99** / Ğ¼ĞµÑ | ĞĞ¿Ğ»Ğ°Ñ‚Ğ° ĞµĞ¶ĞµĞ¼ĞµÑÑÑ‡Ğ½Ğ¾ | Ğ’ÑĞµ Pro-Ğ¸Ğ½ÑÑ‚Ñ€ÑƒĞ¼ĞµĞ½Ñ‚Ñ‹ Ğ¸ Ğ°Ğ½Ğ°Ğ»Ğ¸Ğ·Ğ°Ñ‚Ğ¾Ñ€Ñ‹ Ğ±ĞµĞ·Ğ¾Ğ¿Ğ°ÑĞ½Ğ¾ÑÑ‚Ğ¸ â€¢ 1 Ğ°ĞºÑ‚Ğ¸Ğ²Ğ°Ñ†Ğ¸Ñ ÑƒÑÑ‚Ñ€Ğ¾Ğ¹ÑÑ‚Ğ²Ğ° â€¢ KRC2â€“KRC5 | [ĞÑ„Ğ¾Ñ€Ğ¼Ğ¸Ñ‚ÑŒ Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
 | **Engineer Pro (Ğ“Ğ¾Ğ´)** | **$149.00** / Ğ³Ğ¾Ğ´ | **Ğ ĞµĞºĞ¾Ğ¼ĞµĞ½Ğ´ÑƒĞµĞ¼Ñ‹Ğ¹ Ñ‚Ğ°Ñ€Ğ¸Ñ„** | Ğ’ÑĞµ Pro-Ğ¸Ğ½ÑÑ‚Ñ€ÑƒĞ¼ĞµĞ½Ñ‚Ñ‹ Ğ¸ Ğ°Ğ½Ğ°Ğ»Ğ¸Ğ·Ğ°Ñ‚Ğ¾Ñ€Ñ‹ Ğ±ĞµĞ·Ğ¾Ğ¿Ğ°ÑĞ½Ğ¾ÑÑ‚Ğ¸ â€¢ 1 Ğ°ĞºÑ‚Ğ¸Ğ²Ğ°Ñ†Ğ¸Ñ ÑƒÑÑ‚Ñ€Ğ¾Ğ¹ÑÑ‚Ğ²Ğ° â€¢ 30-Ğ´Ğ½ĞµĞ²Ğ½Ñ‹Ğ¹ Ğ¾Ñ„Ğ»Ğ°Ğ¹Ğ½-Ğ±ÑƒÑ„ĞµÑ€ | [ĞÑ„Ğ¾Ñ€Ğ¼Ğ¸Ñ‚ÑŒ Pro Ğ½Ğ° Ğ³Ğ¾Ğ´](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | **Pro ĞŸĞ¾Ğ¶Ğ¸Ğ·Ğ½ĞµĞ½Ğ½Ñ‹Ğ¹** | **$699.00** | **ĞĞ´Ğ¸Ğ½ Ğ¿Ğ»Ğ°Ñ‚Ñ‘Ğ¶ â€” Ğ½Ğ°Ğ²ÑĞµĞ³Ğ´Ğ°** | Ğ’ÑĞµ Pro-Ğ¸Ğ½ÑÑ‚Ñ€ÑƒĞ¼ĞµĞ½Ñ‚Ñ‹ Ğ¸ Ğ°Ğ½Ğ°Ğ»Ğ¸Ğ·Ğ°Ñ‚Ğ¾Ñ€Ñ‹ Ğ±ĞµĞ·Ğ¾Ğ¿Ğ°ÑĞ½Ğ¾ÑÑ‚Ğ¸ â€¢ 1 Ğ°ĞºÑ‚Ğ¸Ğ²Ğ°Ñ†Ğ¸Ñ ÑƒÑÑ‚Ñ€Ğ¾Ğ¹ÑÑ‚Ğ²Ğ° â€¢ Ğ‘ĞµÑÑÑ€Ğ¾Ñ‡Ğ½Ñ‹Ğµ Ğ¾Ğ±Ğ½Ğ¾Ğ²Ğ»ĞµĞ½Ğ¸Ñ Ğ¸ Ğ¾Ñ„Ğ»Ğ°Ğ¹Ğ½-ÑĞµÑ€Ñ‚Ğ¸Ñ„Ğ¸ĞºĞ°Ñ‚ | [ĞšÑƒĞ¿Ğ¸Ñ‚ÑŒ Ğ¿Ğ¾Ğ¶Ğ¸Ğ·Ğ½ĞµĞ½Ğ½Ñ‹Ğ¹ Pro](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| **Team Edition** | **$499.00** / Ğ³Ğ¾Ğ´ | B2B â€” ÑÑ‡Ñ‘Ñ‚ Ğ¸ ĞºĞ¾Ğ¼Ğ¼ĞµÑ€Ñ‡ĞµÑĞºĞ¾Ğµ Ğ¿Ñ€ĞµĞ´Ğ»Ğ¾Ğ¶ĞµĞ½Ğ¸Ğµ | Ğ’ÑĞµ Pro-Ğ¸Ğ½ÑÑ‚Ñ€ÑƒĞ¼ĞµĞ½Ñ‚Ñ‹ Ğ¸ Ğ°Ğ½Ğ°Ğ»Ğ¸Ğ·Ğ°Ñ‚Ğ¾Ñ€Ñ‹ Ğ±ĞµĞ·Ğ¾Ğ¿Ğ°ÑĞ½Ğ¾ÑÑ‚Ğ¸ â€¢ 5 Ñ€Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ñ… ÑÑ‚Ğ°Ğ½Ñ†Ğ¸Ğ¹ Ğ·Ğ°Ğ²Ğ¾Ğ´Ğ° â€¢ ĞŸĞ¾Ğ´Ğ´ĞµÑ€Ğ¶ĞºĞ° KRC2â€“KRC5 | [ĞšÑƒĞ¿Ğ¸Ñ‚ÑŒ Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| **Department / Integrator** | **$1,499.00** / год | B2B — счёт и закрывающие акты | До 20 рабочих станций для интеграторов и отделов АСУ ТП • Полная диагностика AST • KRC2–KRC5 | [Купить Department](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| **Enterprise Site** | **$4,999.00** / год | До 100 рабочих станций | Все Pro-инструменты и анализаторы безопасности • 100 рабочих станций завода • Брендированные отчёты и SLA | [Купить Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">

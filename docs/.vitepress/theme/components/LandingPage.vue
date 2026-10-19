@@ -604,10 +604,10 @@
                 <span class="text-[10px] px-1.5 py-0.5 border border-zinc-700 bg-zinc-800 text-[#00D68F] font-bold">5 SEATS</span>
               </div>
               <div class="flex items-baseline gap-1">
-                <span class="text-3xl font-black font-mono text-white">{{ formatPrice(499.90) }}</span>
+                <span class="text-3xl font-black font-mono text-white">{{ formatPrice(499) }}</span>
                 <span class="text-xs font-mono text-zinc-500">/ year</span>
               </div>
-              <p class="text-xs text-zinc-400">For commissioning teams and automation cells. Up to 5 workstations ($99.98/seat/yr).</p>
+              <p class="text-xs text-zinc-400">For commissioning teams and automation cells. Up to 5 workstations ($99.80/seat/yr).</p>
               <ul class="text-xs font-mono space-y-1.5 pt-2 border-t border-zinc-800 text-zinc-300">
                 <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Up to 5 Workstations</li>
                 <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Centralized Key Management</li>
@@ -618,7 +618,7 @@
             <a 
               href="https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v"
               class="mt-6 w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-mono text-xs font-bold text-center block transition-colors">
-              DEPLOY TEAM ({{ formatPrice(499.90) }})
+              DEPLOY TEAM ({{ formatPrice(499) }})
             </a>
           </div>
 
@@ -630,10 +630,10 @@
                 <span class="text-[10px] px-1.5 py-0.5 border border-zinc-700 bg-zinc-800 text-cyan-400 font-bold">20 SEATS</span>
               </div>
               <div class="flex items-baseline gap-1">
-                <span class="text-3xl font-black font-mono text-white">{{ formatPrice(999) }}</span>
+                <span class="text-3xl font-black font-mono text-white">{{ formatPrice(1499) }}</span>
                 <span class="text-xs font-mono text-zinc-500">/ year</span>
               </div>
-              <p class="text-xs text-zinc-400">For system integration companies. Up to 20 workstations ($49.95/seat/yr).</p>
+              <p class="text-xs text-zinc-400">For system integration companies. Up to 20 workstations ($74.95/seat/yr).</p>
               <ul class="text-xs font-mono space-y-1.5 pt-2 border-t border-zinc-800 text-zinc-300">
                 <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Up to 20 Workstations</li>
                 <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Unlimited OEM Line Projects</li>
@@ -645,7 +645,7 @@
               <a 
                 href="https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn"
                 class="w-full py-2 bg-cyan-700 hover:bg-cyan-600 text-white font-mono text-xs font-bold text-center block transition-colors">
-                DEPLOY INTEGRATOR ({{ formatPrice(999) }})
+                DEPLOY INTEGRATOR ({{ formatPrice(1499) }})
               </a>
               <button 
                 @click="openQuoteModal"
@@ -657,14 +657,14 @@
 
         </div>
 
-        <!-- Additional Tiers Bar: Monthly ($19.99), Lifetime ($699), Enterprise Site ($4,999) -->
+        <!-- Additional Tiers Bar: Monthly ($19), Lifetime ($699), Enterprise Site ($4,999) -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
           
           <!-- Monthly -->
           <div :class="['border p-4 flex items-center justify-between', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
             <div>
               <span class="text-zinc-400 block font-bold">PRO MONTHLY</span>
-              <span class="text-lg font-black text-white">{{ formatPrice(19.99) }} / mo</span>
+              <span class="text-lg font-black text-white">{{ formatPrice(19) }} / mo</span>
               <span class="text-[10px] text-zinc-500 block">1 Seat • Cancel anytime</span>
             </div>
             <a 
@@ -1296,9 +1296,9 @@ const annualSavings = computed(() => preventedHours.value * calcDowntimeCost.val
 
 const recommendedTier = computed(() => {
   if (calcEngineers.value <= 5) {
-    return { name: 'Team Edition', seats: 5, priceUsd: 499.90 }
+    return { name: 'Team Edition', seats: 5, priceUsd: 499 }
   } else if (calcEngineers.value <= 20) {
-    return { name: 'Department / Integrator', seats: 20, priceUsd: 999 }
+    return { name: 'Department / Integrator', seats: 20, priceUsd: 1499 }
   } else {
     return { name: 'Enterprise Site', seats: 100, priceUsd: 4999 }
   }

@@ -29,12 +29,12 @@ Teknik destek için doğrudan VS Code içindeki yerleşik destek panelini kullan
 
 | Plan | Fiyat | Cihaz Aktivasyonu | Temel Farklılaştırıcı |
 | :--- | :--- | :--- | :--- |
-| **Engineer Pro (Aylık)** | $19.99 / ay | 1 Cihaz Aktivasyonu | KRC2/KRC3/KRC4/KRC5 desteği, kısa vadeli projeler, devreye alma süreçleri |
-| **Engineer Pro (Yıllık)** | $149.00 / yıl | 1 Cihaz Aktivasyonu | %35 tasarruf, 1 Yıllık Air-Gapped çevrimdışı sertifika, tüm Pro endüstriyel araçlar |
-| **Engineer Pro (Ömür Boyu)** | $699.00 tek seferlik | 1 Cihaz Aktivasyonu | Kalıcı lisans, ömür boyu güncellemeler, kalıcı Air-Gapped çevrimdışı sertifika |
-| **Team Edition** | $499.90 / yıl | 5 Cihaz Aktivasyonuna Kadar | Merkezi B2B fatura, 5 fabrika/ofis cihazı, KRC2–KRC5 |
-| **Department / Integrator** | $999.00 / yıl | 20 Cihaz Aktivasyonuna Kadar | 20 iş istasyonuna kadar, sınırsız entegrasyon projeleri, özel mühendislik desteği |
-| **Kurumsal Fabrika (Site)** | $4,999.00 / yıl | 100 Cihaz Aktivasyonuna Kadar | 100 tesis iş istasyonu, 4 saatlik katı SLA desteği, çevrimdışı Air-Gap lisansı, OEM kabul raporları |
+| **Engineer Pro (Aylık)** | $19 / ay | 1 Cihaz Aktivasyonu | KRC2/KRC3/KRC4/KRC5 desteği, kısa vadeli projeler, devreye alma süreçleri |
+| **Engineer Pro (Yıllık)** | $149 / yıl | 1 Cihaz Aktivasyonu | %35 tasarruf, 1 Yıllık Air-Gapped çevrimdışı sertifika, tüm Pro endüstriyel araçlar |
+| **Engineer Pro (Ömür Boyu)** | $699 tek seferlik | 1 Cihaz Aktivasyonu | Kalıcı lisans, ömür boyu güncellemeler, kalıcı Air-Gapped çevrimdışı sertifika |
+| **Team Edition** | $499 / yıl | 5 Cihaz Aktivasyonuna Kadar | Merkezi B2B fatura, 5 fabrika/ofis cihazı, KRC2–KRC5 |
+| **Department / Integrator** | $999,499 / yıl | 20 Cihaz Aktivasyonuna Kadar | 20 iş istasyonuna kadar, sınırsız entegrasyon projeleri, özel mühendislik desteği |
+| **Kurumsal Fabrika (Site)** | $4,999 / yıl | 100 Cihaz Aktivasyonuna Kadar | 100 tesis iş istasyonu, 4 saatlik katı SLA desteği, çevrimdışı Air-Gap lisansı, OEM kabul raporları |
 
 ### Pro Lifetime $699 Tek Seferlik İken Enterprise Site Neden Yıllık $4,999?
 - **Pro Lifetime ($699 tek seferlik)**, **1 iş istasyonu** için ömür boyu kalıcı lisans sağlar ve yinelenen ücreti yoktur. İzole fabrika OT ağlarında internet olmadan çalışmak üzere kişisel kriptografik Air-Gapped sertifika üretimini destekler.

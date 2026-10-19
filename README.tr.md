@@ -333,6 +333,9 @@ DoÄŸrulanmÄ±ÅŸ satÄ±cÄ±mÄ±z **Dodo Payments** Ã¼zerinden esnek, en
 | **Pro AylÄ±k** | **$19.99** / ay | AylÄ±k faturalandÄ±rÄ±lÄ±r | TÃ¼m Pro AraÃ§lar â€¢ 1 PC â€¢ KRC2â€“KRC5 DesteÄŸi | [Pro Monthly Al](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
 | **Pro YÄ±llÄ±k** | **$149.00** / yÄ±l | **%35 Tasarruf** (~$6.58/ay) | TÃ¼m Pro AraÃ§lar â€¢ 1 PC â€¢ 30 GÃ¼n Ã‡evrimdÄ±ÅŸÄ± Tampon â€¢ KRC2â€“KRC5 | [YÄ±llÄ±k Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | **Pro Ã–mÃ¼r Boyu** | **$699.00** | **Bir Kez Ã–de, Sonsuza Kadar Sahip Ol** | TÃ¼m Pro AraÃ§lar â€¢ 1 PC (1 Ä°ÅŸ Ä°stasyonu) â€¢ Ã–mÃ¼r Boyu GÃ¼ncelleme | [Ã–mÃ¼r Boyu Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
+| 🏢 **Team Edition** | **$499.90** / yıl | B2B — 5 İş İstasyonu | Tüm Pro Araçlar ve Güvenlik Analizörleri • 5 İş İstasyonu Aktivasyonu • KRC2–KRC5 | [Team Edition Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏛️ **Department / Integrator** | **$999.00** / yıl | B2B — 20 İstasyona Kadar | Entegratörler ve otomasyon departmanları için 20 istasyona kadar • Tam AST Teşhisi | [Department Satın Al](https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn) |
+| 🏭 **Enterprise Site** | **$4,999.00** / yıl | B2B — 100 İş İstasyonu | Tüm Pro Araçlar ve Güvenlik Analizörleri • 100 Tesis İş İstasyonu • Markalı Raporlar & SLA | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">
@@ -351,7 +354,7 @@ DoÄŸrulanmÄ±ÅŸ satÄ±cÄ±mÄ±z **Dodo Payments** Ã¼zerinden esnek, en
 * **Pro Lifetime ($699 tek seferlik):**
   * **1 iÅŸ istasyonu** iÃ§in yinelenen abonelik olmadan kalÄ±cÄ± Ã¶mÃ¼r boyu lisans ve Ã¶mÃ¼r boyu gÃ¼ncellemeler.
   * Ä°nternetsiz kapalÄ± fabrika aÄŸlarÄ± (Air-Gapped) iÃ§in kalÄ±cÄ± kiÅŸisel kriptografik Ã§evrimdÄ±ÅŸÄ± lisans sertifikasÄ±.
-* **TakÄ±m Paketi (Team Edition â€” $499/yÄ±l):**
+* **TakÄ±m Paketi (Team Edition â€” $499.90/yÄ±l):**
   * Sistem entegratÃ¶rleri, robotik servis firmalarÄ± ve otomasyon departmanlarÄ± iÃ§in **25 cihaz aktivasyonu**.
   * Vergi Kimlik NumarasÄ± (Tax ID / VIES KDV) ile resmi kurumsal B2B fatura ve tÃ¼m projelerde birleÅŸik KRL kod kalitesi standartlarÄ±.
 * **Kurumsal Fabrika (Enterprise Site â€” $4,999.00/yÄ±l):**

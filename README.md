@@ -3,7 +3,7 @@
 <p align="center">
   <b>Industrial static analysis, pre-deployment diagnostics, backup intelligence & safe auto-repair for KUKA robotics.</b><br />
   <i>The complete offline engineering suite for VS Code.</i><br />
-  Engineered for <b>KRC2, KRC4 & KRC5 Controllers (KSS 5.x â€“ 8.7+)</b> and <b>VKRC (VASS 26)</b>.
+  Engineered for <b>KRC2, KRC4 & KRC5 Controllers (KSS 5.x – 8.7+)</b> and <b>VKRC (VASS 26)</b>.
 </p>
 
 <details>
@@ -23,17 +23,17 @@
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://badgen.net/vs-marketplace/v/LiskinLabs.kuka-krl-extension?style=flat&label=VS%20Code%20Marketplace&color=FF6600" alt="VS Code Marketplace" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.5-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.5" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.4-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.4" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Verified-4.2M%2B%20LoC-10b981?style=flat-square" alt="Fleet Verified" /></a>
   <img src="https://img.shields.io/badge/Factory%20OT-Air--Gapped%20Safe-blue?style=flat-square" alt="Air-Gapped Safe" />
 </p>
 
 <p align="center">
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>Documentation Wiki</b></a> â€¢
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>Engineer Pro ($19.99/mo)</b></a> â€¢ 
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>Annual Pro ($149.00/yr)</b></a> â€¢ 
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v"><b>Team Edition ($499.90/yr)</b></a> â€¢
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>Documentation Wiki</b></a> •
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>Engineer Pro ($19/mo)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>Annual Pro ($149/yr)</b></a> • 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v"><b>Team Edition ($499/yr)</b></a> •
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>Security Audit</b></a>
 </p>
 
@@ -58,11 +58,11 @@ Every robotics commissioning engineer and plant system integrator knows the stak
 2. **Night-Shift Point Drift**: Operators touch up taught points directly on the SmartPAD pendant without revision tracking. Discovering what changed requires tedious manual comparison of dozens of `.dat` files.
 3. **Slow Feedback Loops**: Transferring code to physical controllers or booting heavy virtual setups just to catch basic syntax or fold mismatches wastes critical commissioning hours.
 
-> ğŸ’¡ **ROI Guarantee:** Catching a single uninitialized coordinate frame, reach envelope violation, or unclosed FOLD before downloading to the controller pays for an entire year of Team Edition in the first 5 minutes.
+> 💡 **ROI Guarantee:** Catching a single uninitialized coordinate frame, reach envelope violation, or unclosed FOLD before downloading to the controller pays for an entire year of Team Edition in the first 5 minutes.
 
 ---
 
-## The Six Core Engineering Workflows
+## The Five Core Engineering Workflows
 
 ### 1. AUDIT & REPORT: Pre-Flight Safety & Quality Acceptance Protocols [PRO]
 Static code analysis designed specifically for KRL runtime behavior:
@@ -107,8 +107,7 @@ Deep inspection of KUKA controller backups without disk extraction:
 ---
 
 ### 4. AUTO-REPAIR: Safe QuickFix & Batch Correction with Monaco Diff Review [PRO]
-Deterministic one-click resolution of safety and structural issues without altering motion kinematics (`krl.fixAllSafeIssuesInFile`):
-* **Inline Form Metadata Desync Auto-Repair**: Synchronizes motion instructions in `;FOLD PTP/LIN` folds with hidden XML metadata comments (`%MKUKATPBASIS,%CMOVE,...`), safely fixing up to 150+ warnings per archive.
+Deterministic one-click resolution of safety and structural issues without altering motion kinematics (`krl.fixAllSafeIssues`):
 * **FOLD Header Synchronization**: Normalizes and aligns mismatched `;FOLD` and `;ENDFOLD` headers and strips malformed parentheses across hundreds of files in seconds.
 * **Unclosed FOLD Auto-Capping**: Safely closes dangling `;FOLD INI` and system sections before routine termination.
 * **FOR STEP 0 Elimination**: Replaces fatal `STEP 0` infinite loops with safe `STEP 1` to prevent controller lockup.
@@ -138,17 +137,6 @@ Batch motion path manipulation and standard migration:
 
 ---
 
-### 6. LIVE & SCADA BRIDGE: Online Controller Connection & Telemetry Diagnostics [PRO]
-Direct real-time hardware telemetry and diagnostic link to physical KUKA KRC4/KRC5 and OfficePC controllers over CrossComm WCF, OPC UA, or EthernetKRL (`krl.live.connect`, `krl.live.openDashboard`):
-* **Real-Time Kinematic Telemetry**: Live stream of Cartesian coordinates ($X, Y, Z, A, B, C$), active Tool & Base, and all 6 individual axis angles ($A_1..A_6$).
-* **Controller Operating Mode & Safety Interlocks**: Live readout of operating mode (T1, T2, AUT, EXT), drives enabled (`$PERI_RDY`), emergency stop (`$ALARM_STOP`), and safety fence interlocks.
-* **Interpreter & Program Pointer Tracking**: Real-time tracking of `$PRO_STATE`, background `$SPS`, active routine (`$PRO_NAME`), and current program step pointer (`$PRO_IP`) right in VS Code.
-* **Dynamic Speed Override Control**: View and adjust robot execution speed override (`$OV_PRO`) in real time.
-* **Live Fieldbus I/O Diagnostic Probe**: Monitor digital inputs and outputs (`$IN` / `$OUT` 1..4096) and software flags (`$FLAG`) in real-time.
-* **Unified .EVT Multi-Log Inspector (`krl.openAllEventLogs`)**: Aggregate and synchronize all controller diagnostic files (`KrcLog.evt`, `KSSLog.evt`, `SafetyLog.evt`, `SystemLog.evt`, `CrossLog.evt`) in a unified timeline with real-time multilingual KSS error translation.
-
----
-
 ## Feature Comparison Matrix
 
 | Capability | Community (Free) | Engineer Pro | Team Edition | Enterprise Site |
@@ -159,11 +147,7 @@ Direct real-time hardware telemetry and diagnostic link to physical KUKA KRC4/KR
 | **Code Formatter & Indentation Alignment** (`Shift+Alt+F`) | Yes | Yes | Yes | Yes |
 | **GitLens Line Blame & Version Tracking** | Yes | Yes | Yes | Yes |
 | **Zero-Unpack Archive Explorer** (`.zip` / `KRCDiag`) | Yes | Yes | Yes | Yes |
-| **SCADA Live Bridge & Online Robot Controller Connection** | — | **Pro** | **Team** | **Enterprise** |
-| **Live Telemetry & Fieldbus I/O Diagnostic Probe** | — | **Pro** | **Team** | **Enterprise** |
-| **Unified .EVT Multi-Log Inspector & Timeline (`krl.openAllEventLogs`)** | — | **Pro** | **Team** | **Enterprise** |
 | **KRL Safe Auto-Repair with AST Rollback Guard** | — | **Pro** | **Team** | **Enterprise** |
-| **Inline Form (ILF) Metadata Desync Auto-Repair** | — | **Pro** | **Team** | **Enterprise** |
 | **Interactive Flowchart & Control Flow Graph** | — | **Pro** | **Team** | **Enterprise** |
 | **Pre-Flight Safety Audit & Deep Logic Analyzer** | — | **Pro** | **Team** | **Enterprise** |
 | **Automated Cell Quality & Acceptance Reports (Markdown/PDF)** | — | **Pro** | **Team** | **Enterprise** |
@@ -173,7 +157,7 @@ Direct real-time hardware telemetry and diagnostic link to physical KUKA KRC4/KR
 | **6D Trajectory Mirroring, Batch Shift & Renumbering** | — | **Pro** | **Team** | **Enterprise** |
 | **Binary `.evt` Event Log Viewer (2,050+ KSS codes)** | — | **Pro** | **Team** | **Enterprise** |
 | **Visual I/O Signal Matrix & Bit Collision Detector** | — | **Pro** | **Team** | **Enterprise** |
-| **Air-Gapped Offline Node-Locking (Factory OT Safe)** | — | **Pro (1 Workstation)** | **Team (5 Activations)** | **Site (100 Workstations)** |
+| **Air-Gapped Offline Node-Locking (Factory OT Safe)** | — | **Pro (1 Workstation)** | **Team (5 Workstations)** | **Site (100 Workstations)** |
 | **Automotive VASS 26 Rules & VW_USER Tech** | — | **Pro** | **Team** | **Enterprise** |
 | **Copilot AI Language Model Tools (`krl_safety_check`)** | — | **Pro** | **Team** | **Enterprise** |
 | **B2B Invoicing & Quotations (`krl.requestCorporateInvoice`)** | Yes | Yes | Yes | Yes |
@@ -191,12 +175,17 @@ All commercial licenses are billed through our verified merchant of record, **Do
 | Tier | Price | Scope & Workstations | Target Audience | Checkout / Quote |
 |:---|:---:|:---|:---|:---:|
 | **Community** | **$0** | 1 Workstation | Basic editing, syntax, formatting, file inspection | [Free Install](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| **Engineer Pro (Monthly)** | **$19.99** / mo | 1 Workstation Activation | Commissioning sprints, short projects, contractor audits | [Get Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
-| **Engineer Pro (Annual)** | **$149.00** / yr | 1 Workstation Activation | Senior robotics engineers, plant programmers, offline planners | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
-| **Pro Lifetime** | **$699.00** once | 1 Workstation Activation | Perpetual license, lifetime updates, permanent offline cert | [Get Lifetime](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| 🏢 **Team Edition** | **$499.90** / yr | B2B — 5 Workstations | All Industrial Pro Tools & Analyzers • 5 Workstation Activations • KRC2–KRC5 | [Get Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| 🏛️ **Department / Integrator** | **$999.00** / yr | B2B — Up to 20 Workstations | Robotics integrators, line builders, plant engineering departments (up to 20 PCs) | [Get Department License](https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn) |
-| 🏭 **Enterprise Site** | **$4,999.00** / yr | B2B — Up to 100 Workstations | Full manufacturing plant or large integrator • 100 Workstations • Branded Reports & Priority SLA | [Get Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| **Engineer Pro (Monthly)** | **$19** / mo | 1 Workstation Activation | Commissioning sprints, short projects, contractor audits | [Get Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| **Engineer Pro (Annual)** | **$149** / yr | 1 Workstation Activation | Senior robotics engineers, plant programmers, offline planners | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
+| **Pro Lifetime** | **$699** once | 1 Workstation Activation | Perpetual license, lifetime updates, permanent offline cert | [Get Lifetime](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
+| **Team Edition** | **$499** / yr | B2B — 5 Workstations | All Industrial Pro Tools & Analyzers • 5 Workstation Activations • KRC2–KRC5 | [Get Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| **Department / Integrator** | **$1,499** / yr | B2B — Up to 20 Workstations | Robotics integrators, line builders, plant engineering departments (up to 20 PCs) | [Get Department License](https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn) |
+| **Enterprise Site** | **$4,999** / yr | B2B — Up to 100 Workstations | Full manufacturing plant or large integrator • 100 Workstations • Branded Reports & Priority SLA | [Get Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+
+### Anti-Chargeback Buyer Guarantees (Zero Risk)
+* **Clear Bank Statement Descriptor**: Transactions appear cleanly as **LISKINLABS KUKA** or **KUKA KRL VSCODE** on your credit card or bank statement.
+* **In-Editor Subscription Management & 1-Click Cancel**: Easily view your status or cancel subscriptions anytime directly within VS Code via Command Palette (`Ctrl+Shift+P` → `KUKA KRL: Manage Subscription / Support`).
+* **100% Immediate Refund Guarantee**: If you ever experience an issue or require a refund, simply reach out to us via the in-editor support chat; refunds are processed immediately without dispute delays.
 
 ---
 
@@ -214,8 +203,8 @@ For corporate purchasing departments and system integrators:
 ## Documentation & Knowledge Portal
 
 * **English Documentation**: [https://liskinlabs.github.io/kuka-krl-extension/](https://liskinlabs.github.io/kuka-krl-extension/)
-* **Ğ ÑƒÑÑĞºĞ°Ñ Ğ´Ğ¾ĞºÑƒĞ¼ĞµĞ½Ñ‚Ğ°Ñ†Ğ¸Ñ Ğ¸ Ğ±Ğ°Ğ·Ğ° Ğ·Ğ½Ğ°Ğ½Ğ¸Ğ¹**: [https://liskinlabs.github.io/kuka-krl-extension/ru/](https://liskinlabs.github.io/kuka-krl-extension/ru/)
-* **TÃ¼rkÃ§e DokÃ¼mantasyon ve Wiki**: [https://liskinlabs.github.io/kuka-krl-extension/tr/](https://liskinlabs.github.io/kuka-krl-extension/tr/)
+* **Русская документация и база знаний**: [https://liskinlabs.github.io/kuka-krl-extension/ru/](https://liskinlabs.github.io/kuka-krl-extension/ru/)
+* **Türkçe Dokümantasyon ve Wiki**: [https://liskinlabs.github.io/kuka-krl-extension/tr/](https://liskinlabs.github.io/kuka-krl-extension/tr/)
 
 ---
 
@@ -225,6 +214,6 @@ For corporate purchasing departments and system integrators:
 **KUKA Engineering Toolkit** is an independent engineering development, static analysis, and backup diff suite developed by **Liskin Labs**. It is **NOT safety-certified software (Non-SIL / Non-PL)** and does **not** replace mandatory physical commissioning procedures, reduced override verification (`$OV_PRO <= 30%` in T1 mode on the physical KUKA SmartPAD teach pendant), or formal risk assessments required by **ISO 10218-1/-2** and **ISO 13849-1**. Always perform manual path dry-runs in T1 mode before engaging automated production.
 
 ### Trademarks & Brand Neutrality
-* **KUKAÂ®, KRLÂ®, KRCÂ®, WorkVisualÂ®, iiQWorksÂ®, and SmartPADÂ®** are registered trademarks of **KUKA AG** / **KUKA Deutschland GmbH**.
-* **Visual Studio CodeÂ® and VS CodeÂ®** are registered trademarks of **Microsoft Corporation**.
+* **KUKA®, KRL®, KRC®, WorkVisual®, iiQWorks®, and SmartPAD®** are registered trademarks of **KUKA AG** / **KUKA Deutschland GmbH**.
+* **Visual Studio Code® and VS Code®** are registered trademarks of **Microsoft Corporation**.
 * This software extension is an independent development by **Liskin Labs** and is **not** affiliated with, sponsored, endorsed, or certified by KUKA AG or Microsoft Corporation. All product names, logos, and brands are property of their respective owners and are used strictly for identification and interoperability purposes under nominative fair use.

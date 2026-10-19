@@ -721,7 +721,7 @@
           <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">
             <div class="text-[#00D68F] font-bold mb-1">✓ 100% UNCONDITIONAL REFUND</div>
             <p class="text-zinc-400 text-[10px] leading-relaxed">
-              14-day money-back guarantee. If not completely satisfied, email <span class="text-white">support@liskinlabs.com</span> for an instant 100% refund, no questions asked.
+              14-day money-back guarantee. If not completely satisfied, request a refund directly via built-in VS Code chat (<span class="text-white">krl.openTelegramChat</span>) for an instant 100% refund, no questions asked.
             </p>
           </div>
           <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">

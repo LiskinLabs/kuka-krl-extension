@@ -81,6 +81,5 @@ When either setting is set to disabled, all outbound diagnostic heartbeats are i
 For questions regarding this Privacy Policy, data subject rights (GDPR Articles 15–22), or enterprise compliance audits, please contact:
 
 - **Engineering Lead:** Silvestr Liskin
-- **Organization:** Liskin Labs (Teknorob Robot ve Otomasyon)
-- **Email:** `support@liskinlabs.com` / `silvestr.liskin@teknorob.com`
+- **In-Editor Contact:** VS Code command `krl.openTelegramChat` / `silvestr.liskin@teknorob.com`
 - **Issue Tracker:** [GitHub Issues](https://github.com/LiskinLabs/kuka-krl-extension/issues)

@@ -31,7 +31,7 @@
 
 <p align="center">
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>Documentation Wiki</b></a> â€¢
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>Engineer Pro ($19.00/mo)</b></a> â€¢ 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>Engineer Pro ($19.99/mo)</b></a> â€¢ 
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>Annual Pro ($149.00/yr)</b></a> â€¢ 
   <a href="https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v"><b>Team Edition ($499.00/yr)</b></a> â€¢
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>Security Audit</b></a>
@@ -191,12 +191,12 @@ All commercial licenses are billed through our verified merchant of record, **Do
 | Tier | Price | Scope & Workstations | Target Audience | Checkout / Quote |
 |:---|:---:|:---|:---|:---:|
 | **Community** | **$0** | 1 Workstation | Basic editing, syntax, formatting, file inspection | [Free Install](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| **Engineer Pro (Monthly)** | **$19.00** / mo | 1 Workstation Activation | Commissioning sprints, short projects, contractor audits | [Get Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| **Engineer Pro (Monthly)** | **$19.99** / mo | 1 Workstation Activation | Commissioning sprints, short projects, contractor audits | [Get Pro Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
 | **Engineer Pro (Annual)** | **$149.00** / yr | 1 Workstation Activation | Senior robotics engineers, plant programmers, offline planners | [Get Annual Pro](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | **Pro Lifetime** | **$699.00** once | 1 Workstation Activation | Perpetual license, lifetime updates, permanent offline cert | [Get Lifetime](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| **Team Edition** | **$499.00** / yr | B2B — 5 Workstations | Small plant automation squad • 5 Workstation Activations • KRC2–KRC5 | [Get Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| **Department / Integrator** | **$1,499.00** / yr | B2B — Up to 20 Workstations | Robotics integrators, line builders, plant engineering departments (up to 20 PCs) | [Get Department License](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| **Enterprise Site** | **$4,999.00** / yr | B2B — Up to 100 Workstations | Full manufacturing plant or large integrator • 100 Workstations • Branded Reports & Priority SLA | [Get Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| 🏢 **Team Edition** | **$499.00** / yr | B2B — 5 Workstations | All Industrial Pro Tools & Analyzers • 5 Workstation Activations • KRC2–KRC5 | [Get Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏛️ **Department / Integrator** | **$1,499.00** / yr | B2B — Up to 20 Workstations | Robotics integrators, line builders, plant engineering departments (up to 20 PCs) | [Get Department License](https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn) |
+| 🏭 **Enterprise Site** | **$4,999.00** / yr | B2B — Up to 100 Workstations | Full manufacturing plant or large integrator • 100 Workstations • Branded Reports & Priority SLA | [Get Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 ---
 

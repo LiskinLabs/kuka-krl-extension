@@ -9,7 +9,7 @@ KUKA KRL Professional eklentisini kurmak ve yapılandırmak için hızlı başla
 4. **Install** düğmesine tıklayın.
 
 ## 2. VSIX Dosyası İle Kurulum (Çevrimdışı Kurulum)
-1. `kuka-krl-extension-1.9.4.vsix` dosyasını indirin.
+1. `kuka-krl-extension-1.8.8.vsix` dosyasını indirin.
 2. VS Code'da Eklentiler panelinin sağ üst köşesindeki `...` menüsünü tıklayın.
 3. **Install from VSIX...** seçeneğini seçip dosyayı belirleyin.
 
@@ -29,7 +29,7 @@ Teknik destek için doğrudan VS Code içindeki yerleşik destek panelini kullan
 
 | Plan | Fiyat | Cihaz Aktivasyonu | Temel Farklılaştırıcı |
 | :--- | :--- | :--- | :--- |
-| **Engineer Pro (Aylık)** | $19.00 / ay | 1 Cihaz Aktivasyonu | KRC2/KRC3/KRC4/KRC5 desteği, kısa vadeli projeler, devreye alma süreçleri |
+| **Engineer Pro (Aylık)** | $19.99 / ay | 1 Cihaz Aktivasyonu | KRC2/KRC3/KRC4/KRC5 desteği, kısa vadeli projeler, devreye alma süreçleri |
 | **Engineer Pro (Yıllık)** | $149.00 / yıl | 1 Cihaz Aktivasyonu | %35 tasarruf, 1 Yıllık Air-Gapped çevrimdışı sertifika, tüm Pro endüstriyel araçlar |
 | **Engineer Pro (Ömür Boyu)** | $699.00 tek seferlik | 1 Cihaz Aktivasyonu | Kalıcı lisans, ömür boyu güncellemeler, kalıcı Air-Gapped çevrimdışı sertifika |
 | **Team Edition** | $499.00 / yıl | 5 Cihaz Aktivasyonuna Kadar | Merkezi B2B fatura, 5 fabrika/ofis cihazı, KRC2–KRC5 |

@@ -641,23 +641,30 @@
                 <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Dedicated Slack Channel</li>
               </ul>
             </div>
-            <button 
-              @click="openQuoteModal"
-              class="mt-6 w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-mono text-xs font-bold text-center block transition-colors">
-              REQUEST QUOTE ({{ formatPrice(1499) }})
-            </button>
+            <div class="mt-6 flex flex-col gap-2">
+              <a 
+                href="https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn"
+                class="w-full py-2 bg-cyan-700 hover:bg-cyan-600 text-white font-mono text-xs font-bold text-center block transition-colors">
+                DEPLOY INTEGRATOR ({{ formatPrice(1499) }})
+              </a>
+              <button 
+                @click="openQuoteModal"
+                class="w-full py-1.5 border border-zinc-700 hover:border-zinc-500 text-zinc-300 font-mono text-[11px] text-center block transition-colors">
+                REQUEST INVOICE / B2B QUOTE
+              </button>
+            </div>
           </div>
 
         </div>
 
-        <!-- Additional Tiers Bar: Monthly ($19), Lifetime ($699), Enterprise Site ($4,999) -->
+        <!-- Additional Tiers Bar: Monthly ($19.99), Lifetime ($699), Enterprise Site ($4,999) -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
           
           <!-- Monthly -->
           <div :class="['border p-4 flex items-center justify-between', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
             <div>
               <span class="text-zinc-400 block font-bold">PRO MONTHLY</span>
-              <span class="text-lg font-black text-white">{{ formatPrice(19) }} / mo</span>
+              <span class="text-lg font-black text-white">{{ formatPrice(19.99) }} / mo</span>
               <span class="text-[10px] text-zinc-500 block">1 Seat • Cancel anytime</span>
             </div>
             <a 
@@ -695,6 +702,34 @@
             </a>
           </div>
 
+        </div>
+
+        <!-- BUYER TRUST & ANTI-CHARGEBACK GUARANTEES GRID -->
+        <div class="mt-8 pt-6 border-t border-zinc-800 grid grid-cols-1 md:grid-cols-4 gap-4 font-mono text-[11px]">
+          <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">
+            <div class="text-[#00D68F] font-bold mb-1">✓ CLEAR BANK DESCRIPTOR</div>
+            <p class="text-zinc-400 text-[10px] leading-relaxed">
+              Charges clearly appear as <span class="text-white font-bold">DODOPAY_LISKINLABS</span> or <span class="text-white font-bold">LISKINLABS KUKA</span> so plant finance teams immediately recognize invoices.
+            </p>
+          </div>
+          <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">
+            <div class="text-[#00D68F] font-bold mb-1">✓ 1-CLICK IN-EDITOR CANCEL</div>
+            <p class="text-zinc-400 text-[10px] leading-relaxed">
+              Cancel subscriptions anytime right from VS Code status bar (<span class="text-white">krl.manageSubscription</span>) or Dodo Customer Portal without waiting.
+            </p>
+          </div>
+          <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">
+            <div class="text-[#00D68F] font-bold mb-1">✓ 100% UNCONDITIONAL REFUND</div>
+            <p class="text-zinc-400 text-[10px] leading-relaxed">
+              14-day money-back guarantee. If not completely satisfied, email <span class="text-white">support@liskinlabs.com</span> for an instant 100% refund, no questions asked.
+            </p>
+          </div>
+          <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">
+            <div class="text-[#00D68F] font-bold mb-1">✓ EU VAT 0% & WIRE TRANSFERS</div>
+            <p class="text-zinc-400 text-[10px] leading-relaxed">
+              Automatic reverse-charge VAT validation (EU VIES / UK HMRC) and automated corporate SEPA / ACH wire transfer clearing.
+            </p>
+          </div>
         </div>
 
       </section>
@@ -1124,8 +1159,9 @@ const currencyRates = {
 const formatPrice = (usd) => {
   if (usd === 0) return 'Free'
   const cur = currencyRates[currentCurrency.value] || currencyRates.USD
-  const val = Math.round(usd * cur.rate)
-  return cur.isPrefix ? `${cur.symbol}${val.toLocaleString()}` : `${val.toLocaleString()} ${cur.symbol}`
+  const raw = usd * cur.rate
+  const valStr = (usd % 1 !== 0 && cur.rate === 1.0) ? raw.toFixed(2) : Math.round(raw).toLocaleString()
+  return cur.isPrefix ? `${cur.symbol}${valStr}` : `${valStr} ${cur.symbol}`
 }
 
 // Translations Dictionary

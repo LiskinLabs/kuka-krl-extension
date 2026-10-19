@@ -40,7 +40,7 @@
 
 <p align="center">
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>Interaktives Wiki & Dokumentation</b></a> â€¢
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>Pro Monthly ($19.00/Monat)</b></a> â€¢ 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>Pro Monthly ($19.99/Monat)</b></a> â€¢ 
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>Pro jÃ¤hrlich ($149.00/Jahr â€“ 35% sparen)</b></a> â€¢ 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>Sicherheitsaudit-Bericht</b></a>
 </p>
@@ -290,12 +290,12 @@ Wir bieten flexible Lizenzierung auf Industrieniveau Ã¼ber unseren verifiziert
 | Tarif | Preis | Rabatt / Abrechnung | Lizenzbedingungen | Checkout |
 |:---|:---:|:---|:---|:---:|
 | **Community** | **$0** | 100 % fÃ¼r immer kostenlos | Private & kommerzielle Nutzung | [Kostenlos installieren](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| **Pro Monatlich** | **$19.00** / Monat | Monatliche Abrechnung | Alle Pro-Werkzeuge â€¢ 1 PC â€¢ KRC2â€“KRC5-Support | [Pro Monthly sichern](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| **Pro Monatlich** | **$19.99** / Monat | Monatliche Abrechnung | Alle Pro-Werkzeuge â€¢ 1 PC â€¢ KRC2â€“KRC5-Support | [Pro Monthly sichern](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
 | **Pro JÃ¤hrlich** | **$149.00** / Jahr | **35 % sparen** (~$6.58/Monat) | Alle Pro-Werkzeuge â€¢ 1 PC â€¢ 30-Tage-Offline-Puffer â€¢ KRC2â€“KRC5 | [Pro jÃ¤hrlich sichern](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | **Pro Lifetime** | **$699.00** | **Einmal zahlen, fÃ¼r immer besitzen** | Alle Pro-Werkzeuge â€¢ 1 PC (1 Arbeitsplatz) â€¢ Lifetime-Updates | [Lifetime Pro sichern](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| **Team Edition** | **$499.00** / Jahr | B2B â€” Rechnung & Angebot | Alle Pro-Werkzeuge â€¢ 5 atz-Aktivierungen â€¢ KRC2â€“KRC5 | [Team Edition sichern](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| **Department / Integrator** | **$1,499.00** / Jahr | B2B — Bis zu 20 Arbeitsplätze | Bis zu 20 Arbeitsplätze für Integratoren und Fachabteilungen • Volle AST-Diagnostik | [Department sichern](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| **Enterprise Site** | **$4,999.00** / Jahr | 100 Arbeitsplätze | Alle Pro-Werkzeuge • 100 Werks-Arbeitsplätze • Gebrandete Berichte & SLA | [Enterprise sichern](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| 🏢 **Team Edition** | **$499.00** / Jahr | B2B — 5 Arbeitsplätze | Alle Pro-Werkzeuge & Sicherheitsanalysatoren • 5 Arbeitsplatz-Aktivierungen • KRC2–KRC5 | [Team Edition sichern](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| 🏛️ **Department / Integrator** | **$1,499.00** / Jahr | B2B — Bis zu 20 Arbeitsplätze | Für Systemintegratoren und Automatisierungsabteilungen (bis 20 PCs) • Volle AST-Diagnose | [Department sichern](https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn) |
+| 🏭 **Enterprise Site** | **$4,999.00** / Jahr | B2B — Bis zu 100 Arbeitsplätze | Alle Pro-Werkzeuge & Sicherheitsanalysatoren • 100 Werks-Arbeitsplätze • Gebrandete Berichte | [Enterprise sichern](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">

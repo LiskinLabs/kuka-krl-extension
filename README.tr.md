@@ -40,7 +40,7 @@
 
 <p align="center">
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>Ä°nteraktif Wiki ve DokÃ¼mantasyon</b></a> â€¢
-  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>Pro Monthly ($19.00/ay)</b></a> â€¢ 
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"><b>Pro Monthly ($19.99/ay)</b></a> â€¢ 
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>YÄ±llÄ±k Pro ($149.00/yÄ±l â€” %35 Tasarruf)</b></a> â€¢ 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>GÃ¼venlik Denetim Raporu</b></a>
 </p>
@@ -330,12 +330,9 @@ DoÄŸrulanmÄ±ÅŸ satÄ±cÄ±mÄ±z **Dodo Payments** Ã¼zerinden esnek, en
 | Plan | Fiyat | Ä°ndirim / Faturalama | Lisans KoÅŸullarÄ± | Ã–deme |
 |:---|:---:|:---|:---|:---:|
 | **Community** | **$0** | %100 Sonsuza Kadar Ãœcretsiz | KiÅŸisel ve Ticari KullanÄ±m | [Ãœcretsiz Kur](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| **Pro AylÄ±k** | **$19.00** / ay | AylÄ±k faturalandÄ±rÄ±lÄ±r | TÃ¼m Pro AraÃ§lar â€¢ 1 PC â€¢ KRC2â€“KRC5 DesteÄŸi | [Pro Monthly Al](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
+| **Pro AylÄ±k** | **$19.99** / ay | AylÄ±k faturalandÄ±rÄ±lÄ±r | TÃ¼m Pro AraÃ§lar â€¢ 1 PC â€¢ KRC2â€“KRC5 DesteÄŸi | [Pro Monthly Al](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp) |
 | **Pro YÄ±llÄ±k** | **$149.00** / yÄ±l | **%35 Tasarruf** (~$6.58/ay) | TÃ¼m Pro AraÃ§lar â€¢ 1 PC â€¢ 30 GÃ¼n Ã‡evrimdÄ±ÅŸÄ± Tampon â€¢ KRC2â€“KRC5 | [YÄ±llÄ±k Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | **Pro Ã–mÃ¼r Boyu** | **$699.00** | **Bir Kez Ã–de, Sonsuza Kadar Sahip Ol** | TÃ¼m Pro AraÃ§lar â€¢ 1 PC (1 Ä°ÅŸ Ä°stasyonu) â€¢ Ã–mÃ¼r Boyu GÃ¼ncelleme | [Ã–mÃ¼r Boyu Pro Al](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
-| **Team Edition** | **$499.00** / yÄ±l | B2B â€” Fatura ve Teklif | TÃ¼m Pro AraÃ§lar â€¢ 25 Aktivasyon Aktivasyonu â€¢ KRC2â€“KRC5 | [Team Edition SatÄ±n Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| **Department / Integrator** | **$1,499.00** / yıl | B2B — 20 İstasyona Kadar | Entegratörler ve otomasyon departmanları için 20 istasyona kadar • Tam AST Teşhisi | [Department Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| **Enterprise Site** | **$4,999.00** / yıl | 100 İş İstasyonu | Tüm Pro Araçlar • 100 Tesis İş İstasyonu • Markalı Raporlar & SLA | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">

@@ -32,9 +32,10 @@ Teknik destek için doğrudan VS Code içindeki yerleşik destek panelini kullan
 | **Engineer Pro (Aylık)** | $19.00 / ay | 1 Cihaz Aktivasyonu | KRC2/KRC3/KRC4/KRC5 desteği, kısa vadeli projeler, devreye alma süreçleri |
 | **Engineer Pro (Yıllık)** | $149.00 / yıl | 1 Cihaz Aktivasyonu | %35 tasarruf, 1 Yıllık Air-Gapped çevrimdışı sertifika, tüm Pro endüstriyel araçlar |
 | **Engineer Pro (Ömür Boyu)** | $699.00 tek seferlik | 1 Cihaz Aktivasyonu | Kalıcı lisans, ömür boyu güncellemeler, kalıcı Air-Gapped çevrimdışı sertifika |
-| **Entegratör Team Edition** | $499.00 / yıl | 25 Cihaz Aktivasyonu | Merkezi B2B fatura, 25 fabrika/ofis cihazı, KRC2–KRC5 |
-| **Kurumsal Fabrika (Site)** | $2,490.00 / yıl | 200 Cihaz Aktivasyonu | 200 tesis iş istasyonu, katı SLA desteği, Filo Yedekleme Merkezi, OEM kabul raporları |
+| **Team Edition** | $499.00 / yıl | 5 Cihaz Aktivasyonuna Kadar | Merkezi B2B fatura, 5 fabrika/ofis cihazı, KRC2–KRC5 |
+| **Department / Integrator** | $1,499.00 / yıl | 20 Cihaz Aktivasyonuna Kadar | 20 iş istasyonuna kadar, sınırsız entegrasyon projeleri, özel mühendislik desteği |
+| **Kurumsal Fabrika (Site)** | $4,999.00 / yıl | 100 Cihaz Aktivasyonuna Kadar | 100 tesis iş istasyonu, 4 saatlik katı SLA desteği, çevrimdışı Air-Gap lisansı, OEM kabul raporları |
 
-### Pro Lifetime $699 Tek Seferlik İken Enterprise Site Neden Yıllık $2,490?
+### Pro Lifetime $699 Tek Seferlik İken Enterprise Site Neden Yıllık $4,999?
 - **Pro Lifetime ($699 tek seferlik)**, **1 iş istasyonu** için ömür boyu kalıcı lisans sağlar ve yinelenen ücreti yoktur. İzole fabrika OT ağlarında internet olmadan çalışmak üzere kişisel kriptografik Air-Gapped sertifika üretimini destekler.
-- **Enterprise Site ($2,490/yıl)** ise **tüm üretim tesisi veya sistem entegratörü için 200 cihaz aktivasyonlu kurumsal lisansıdır**. Tesisteki tüm mühendislik bilgisayarlarını ve panelleri kapsar. Entegre destek şebekesi üzerinden doğrudan kıdemli mühendis desteği (katı SLA), merkezi otomatik KUKA Filo Yedekleme Merkezi, özel kural denetimi ve OEM markalı müşteri kabul raporlarını (Volkswagen, Audi, BMW, Ford, Renault, Stellantis) içerir.
+- **Enterprise Site ($4,999/yıl)** ise **tüm üretim tesisi veya sistem entegratörü için 100 cihaza kadar kurumsal lisansıdır**. Tesisteki tüm mühendislik bilgisayarlarını ve panelleri kapsar. Entegre destek şebekesi üzerinden doğrudan kıdemli mühendis desteği (katı SLA), merkezi otomatik KUKA Filo Yedekleme Merkezi, özel kural denetimi ve OEM markalı müşteri kabul raporlarını (Volkswagen, Audi, BMW, Ford, Renault, Stellantis) içerir.

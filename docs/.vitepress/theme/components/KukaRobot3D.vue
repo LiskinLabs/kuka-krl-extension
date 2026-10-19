@@ -1,47 +1,50 @@
 <template>
-  <div class="relative w-full h-full min-h-[500px] sm:min-h-[580px] rounded-3xl overflow-hidden bg-gradient-to-b from-[#0d121c] via-[#080c13] to-[#05070a] border border-white/15 shadow-[0_0_60px_rgba(255,102,0,0.2)] flex flex-col">
+  <div class="relative w-full h-full min-h-[500px] sm:min-h-[580px] bg-[#09090B] border border-zinc-800 flex flex-col">
     
     <!-- Top HUD Toolbar -->
-    <div class="absolute top-4 left-4 right-4 z-20 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
+    <div class="absolute top-3 left-3 right-3 z-20 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
       <!-- Status Badge -->
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-orange-500/30 text-xs font-mono text-gray-200 pointer-events-auto shadow-xl">
-        <span class="flex h-2 w-2 rounded-full bg-kuka-orange animate-ping"></span>
-        <span class="text-kuka-orange font-bold uppercase tracking-wider">KUKA KR300 Articulated CAD</span>
-        <span class="text-gray-500">|</span>
-        <span class="text-emerald-400 font-semibold">6-Axis Real FK</span>
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-zinc-950/90 border border-zinc-800 text-[11px] font-mono text-zinc-300 pointer-events-auto">
+        <span class="flex h-1.5 w-1.5 rounded-full bg-kuka-orange"></span>
+        <span class="text-kuka-orange font-bold uppercase tracking-wider">[SYS.CAD] KR300 R2500</span>
+        <span class="text-zinc-600">|</span>
+        <span class="text-emerald-400 font-medium">6-AXIS FK ONLINE</span>
       </div>
 
       <!-- Mode Selector Buttons -->
-      <div class="inline-flex items-center p-1 rounded-xl bg-black/80 backdrop-blur-md border border-white/15 pointer-events-auto gap-1 shadow-xl">
+      <div class="inline-flex items-center p-0.5 bg-zinc-950/90 border border-zinc-800 pointer-events-auto gap-1">
         <button
           @click="setMode('interactive')"
           :class="[
-            'px-3 py-1 rounded-lg text-xs font-mono transition-all',
-            mode === 'interactive' ? 'bg-kuka-orange text-white shadow-md font-bold' : 'text-gray-400 hover:text-white'
+            'px-2.5 py-1 text-[11px] font-mono transition-all flex items-center gap-1.5',
+            mode === 'interactive' ? 'bg-kuka-orange text-white font-bold' : 'text-zinc-400 hover:text-white'
           ]"
           title="Track mouse motion via kinematics"
         >
-          🎮 Mouse Track
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span>MOUSE TRACK</span>
         </button>
         <button
           @click="setMode('auto')"
           :class="[
-            'px-3 py-1 rounded-lg text-xs font-mono transition-all',
-            mode === 'auto' ? 'bg-kuka-orange text-white shadow-md font-bold' : 'text-gray-400 hover:text-white'
+            'px-2.5 py-1 text-[11px] font-mono transition-all flex items-center gap-1.5',
+            mode === 'auto' ? 'bg-kuka-orange text-white font-bold' : 'text-zinc-400 hover:text-white'
           ]"
           title="Simulate KRL motion cycle"
         >
-          ⚡ KRL Cycle
+          <svg class="w-3 h-3 text-kuka-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <span>KRL CYCLE</span>
         </button>
         <button
           @click="toggleWireframe"
           :class="[
-            'px-3 py-1 rounded-lg text-xs font-mono transition-all',
-            isWireframe ? 'bg-cyan-500 text-black font-bold shadow-md' : 'text-gray-400 hover:text-white'
+            'px-2.5 py-1 text-[11px] font-mono transition-all flex items-center gap-1.5',
+            isWireframe ? 'bg-zinc-800 text-white font-bold' : 'text-zinc-400 hover:text-white'
           ]"
-          title="Toggle Cyber Hologram wireframe"
+          title="Toggle wireframe mode"
         >
-          🌐 Cyber Wire
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          <span>WIREFRAME</span>
         </button>
       </div>
     </div>
@@ -65,35 +68,35 @@
     </div>
 
     <!-- Bottom Telemetry HUD Bar (Live Axis Angles) -->
-    <div class="absolute bottom-4 left-4 right-4 z-20 grid grid-cols-2 sm:grid-cols-4 gap-2 pointer-events-none">
-      <div class="p-2 sm:p-2.5 rounded-xl bg-black/75 backdrop-blur-md border border-white/10 font-mono text-[11px] text-gray-300 shadow-lg">
-        <div class="text-gray-500 text-[10px] uppercase">A1 / A2 (Base / Rocker)</div>
+    <div class="absolute bottom-3 left-3 right-3 z-20 grid grid-cols-2 sm:grid-cols-4 gap-2 pointer-events-none">
+      <div class="p-2 bg-zinc-950/90 border border-zinc-800 font-mono text-[11px] text-zinc-300">
+        <div class="text-zinc-500 text-[10px] uppercase font-bold tracking-wider">A1 / A2 (BASE / ROCKER)</div>
         <div class="text-kuka-orange font-bold truncate">
           {{ jointAngles.a1.toFixed(1) }}° / {{ jointAngles.a2.toFixed(1) }}°
         </div>
       </div>
-      <div class="p-2 sm:p-2.5 rounded-xl bg-black/75 backdrop-blur-md border border-white/10 font-mono text-[11px] text-gray-300 shadow-lg">
-        <div class="text-gray-500 text-[10px] uppercase">A3 / A4 / A5 (Arm / Wrist)</div>
-        <div class="text-cyan-400 font-bold truncate">
+      <div class="p-2 bg-zinc-950/90 border border-zinc-800 font-mono text-[11px] text-zinc-300">
+        <div class="text-zinc-500 text-[10px] uppercase font-bold tracking-wider">A3 / A4 / A5 (ARM / WRIST)</div>
+        <div class="text-zinc-200 font-bold truncate">
           {{ jointAngles.a3.toFixed(1) }}° / {{ jointAngles.a4.toFixed(1) }}° / {{ jointAngles.a5.toFixed(1) }}°
         </div>
       </div>
-      <div class="p-2 sm:p-2.5 rounded-xl bg-black/75 backdrop-blur-md border border-white/10 font-mono text-[11px] text-gray-300 shadow-lg">
-        <div class="text-gray-500 text-[10px] uppercase">KRL Trajectory Command</div>
+      <div class="p-2 bg-zinc-950/90 border border-zinc-800 font-mono text-[11px] text-zinc-300">
+        <div class="text-zinc-500 text-[10px] uppercase font-bold tracking-wider">KRL COMMAND</div>
         <div class="text-emerald-400 font-bold truncate">
           {{ currentKrlCommand }}
         </div>
       </div>
-      <div class="p-2 sm:p-2.5 rounded-xl bg-black/75 backdrop-blur-md border border-white/10 font-mono text-[11px] text-gray-300 flex items-center justify-between pointer-events-auto shadow-lg">
+      <div class="p-2 bg-zinc-950/90 border border-zinc-800 font-mono text-[11px] text-zinc-300 flex items-center justify-between pointer-events-auto">
         <div>
-          <div class="text-gray-500 text-[10px] uppercase">Laser Optics</div>
-          <div :class="laserActive ? 'text-red-400 font-bold' : 'text-gray-400'">
+          <div class="text-zinc-500 text-[10px] uppercase font-bold tracking-wider">LASER OPTICS</div>
+          <div :class="laserActive ? 'text-red-400 font-bold' : 'text-zinc-400'">
             {{ laserActive ? '1.2kW ACTIVE' : 'STANDBY' }}
           </div>
         </div>
         <button 
           @click="laserActive = !laserActive" 
-          class="px-2 py-1 bg-red-500/20 hover:bg-red-500/40 text-red-300 border border-red-500/30 rounded text-[10px] font-bold uppercase transition-all"
+          class="px-2 py-0.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-700 text-[10px] font-bold uppercase transition-all"
         >
           {{ laserActive ? 'OFF' : 'ON' }}
         </button>

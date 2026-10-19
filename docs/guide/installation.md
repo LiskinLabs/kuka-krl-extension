@@ -32,9 +32,10 @@ For technical support, connect with us directly using the embedded support panel
 | **Engineer Pro (Monthly)** | $19.00 / mo | 1 Workstation Activation | KRC2/KRC3/KRC4/KRC5 support, short projects, commissioning sprints |
 | **Engineer Pro (Annual)** | $149.00 / yr | 1 Workstation Activation | Save 35%, 1-Year Air-Gapped offline certificate, 64+ industrial tools suite |
 | **Engineer Pro (Lifetime)** | $699.00 once | 1 Workstation Activation | Perpetual license, perpetual updates, permanent Air-Gapped certificate |
-| **Integrator Team Edition** | $499.00 / yr | 25 Workstation Activations | Centralized B2B invoicing, 25 plant/office devices, KRC2–KRC5 |
-| **Enterprise Plant Site** | $2,490.00 / yr | 200 Workstation Activations | 200 plant workstations, direct priority SLA, Fleet Backup Hub, OEM-branded client protocols |
+| **Team Edition** | $499.00 / yr | Up to 5 Workstation Activations | Centralized B2B invoicing, 5 plant/office devices, KRC2–KRC5 |
+| **Department / Integrator** | $1,499.00 / yr | Up to 20 Workstation Activations | Up to 20 workstations, unlimited integration projects, dedicated engineering support |
+| **Enterprise Plant Site** | $4,999.00 / yr | Up to 100 Workstation Activations | 100 plant workstations, direct 4-hr SLA, offline Air-Gap license, OEM-branded client protocols |
 
-### Why is Pro Lifetime $699 while Enterprise Site is $2,490/yr?
+### Why is Pro Lifetime $699 while Enterprise Site is $4,999/yr?
 - **Pro Lifetime ($699 once)** provides a perpetual standalone license for **1 workstation** with zero recurring subscription fees and lifetime updates. Includes personalized cryptographic Air-Gapped certificate generation for isolated OT factory networks.
-- **Enterprise Site ($2,490/yr)** provides **200 workstation activations** for the entire manufacturing plant or robotics system integrator. It covers all plant computers, engineering laptops, and diagnostic stations. It includes priority direct developer assistance via Telegram Support Gateway, centralized automated KUKA Fleet Backup Hub, custom linting rules, and OEM-branded audit reports (Volkswagen, Audi, BMW, Ford, Renault, Stellantis).
+- **Enterprise Site ($4,999/yr)** provides **up to 100 workstation activations** for the entire manufacturing plant or robotics system integrator. It covers all plant computers, engineering laptops, and diagnostic stations. It includes priority direct developer assistance via Telegram Support Gateway, centralized automated KUKA Fleet Backup Hub, custom linting rules, and OEM-branded audit reports (Volkswagen, Audi, BMW, Ford, Renault, Stellantis).

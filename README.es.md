@@ -294,7 +294,8 @@ Ofrecemos licencias flexibles de grado industrial a travÃ©s de nuestro comerci
 | **Pro Anual** | **$149.00** / aÃ±o | **Ahorra un 35%** (~$6.58/mes) | Todas las herramientas Pro â€¢ 1 PC â€¢ Buffer offline de 30 dÃ­as â€¢ KRC2â€“KRC5 | [Obtener Pro anual](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6) |
 | **Pro Vitalicio** | **$699.00** | **Paga una vez, tuyo para siempre** | Todas las herramientas Pro â€¢ 1 PC (1 estaciÃ³n de trabajo) â€¢ Actualizaciones de por vida | [Obtener Pro vitalicio](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr) |
 | **Team Edition** | **$499.00** / aÃ±o | B2B â€” Factura y presupuesto | Todas las herramientas Pro â€¢ 25 activaciones de trabajo â€¢ KRC2â€“KRC5 | [Obtener Team Edition](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
-| **Enterprise Site** | **$2,490.00** / aÃ±o | 200 estaciones | Todas las herramientas Pro â€¢ 200 estaciones de planta â€¢ Informes con marca | [Obtener Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
+| **Department / Integrator** | **$1,499.00** / año | B2B — Hasta 20 estaciones | Hasta 20 estaciones para integradores y departamentos de planta • Diagnóstico AST completo | [Obtener Department](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v) |
+| **Enterprise Site** | **$4,999.00** / año | 100 estaciones | Todas las herramientas Pro • 100 estaciones de planta • Informes con marca & SLA | [Obtener Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 <div align="center" style="margin: 25px 0;">
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6" style="text-decoration:none;">

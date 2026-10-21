@@ -2,6 +2,25 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.9.6] - 2026-10-20 (Universal Backup & Unused Variable Purge Engine [PRO], Dual-Scope Workspace Cleaner, AST Rollback Guard, Structure Tokenizer Fix & External Interface Protection)
+
+### 🧹 Industrial Unused Variables & Dead Code Purge Engine (`krl.cleanupUnusedVariables`) [PRO]
+- **Dual-Scope Cleanup Selector (Interactive QuickPick)**:
+  - **Active Module Only (`.src` / `.dat`)**: Scans the active program and companion data list for unused points and local variables inside `DEF...END`.
+  - **Entire Project / Open Backup Workspace**: Comprehensive cross-module dependency graph scan across all `.src`, `.dat`, `.sub`, and `.xml` files in the workspace.
+- **Robust Structure & Coordinate Tokenizer**:
+  - Full depth tracking for structures `{...}` (`E6POS`, `FDAT`, `FRAME`, `POS`), arrays `[...]`, and string literals (`'...'`, `"..."`). Completely eliminates false positive splitting of coordinate components (`Y 20.0`, `Z 30.0`).
+- **Universal Motion Parameter Resolution**:
+  - Dynamic resolution of KUKA motion points and parameters for standard names (`XP1`, `FP1`, `PPDAT1`, `LCPDAT1`) as well as custom semantic identifiers (`XPICK`, `FPICK`, `PPDAT_PICK`, `PDAT_APPROACH`, `XHOME`). Accurately matches against `PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`, `SPL` and Inline Form FOLD headers.
+- **External Interface & Safety Protection**:
+  - **Public Module Guard**: Detects `DEFDAT ... PUBLIC` declarations and issues safety alerts to prevent deleting variables shared across controller programs.
+  - **Background Task (`sps.sub`) Protection**: Cross-checks candidate variables against background cyclic logic to prevent breaking safety and status handshakes.
+  - **EthernetKRL (EKI) XML Protection**: Cross-checks variables against `.xml` communication descriptors (tags and variables mapped to vision sensors and PLC data streams).
+  - **System File Lockdown**: Hardcoded immunity for `$config.dat`, `$machine.dat`, `$robcor.dat`, and KUKA.Sim aliases (`_config.dat`).
+- **Safe Rollback Mode & Multi-File Diff Review**:
+  - **Comment Out Default**: Defaults to non-destructive commenting (`; DECL ...`) to ensure immediate field rollback from the SmartPAD teach pendant without loss of taught robot coordinates.
+  - **Multi-File Side-by-Side Diff Review (`DiffPreviewService.showDiffPerFile`)**: Integrates with AST Safety Validator and Monaco Diff Review before applying any changes across the backup.
+
 ## [1.9.5] - 2026-10-16 (SCADA Live Bridge & Online Controller Telemetry [PRO], Unified Event Log Timeline, Bracket-Tolerant Resolution, KSS 8.7 Parity & Industrial UI Hardening)
 
 ### ⚡ SCADA Live Bridge & Real-Time Online Controller Telemetry [PRO]
@@ -37,7 +56,14 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Crisp SVG Vector Styling**: Replaced all casual emojis across SCADA Live Monitor, diagnostic reports, and views with crisp vector SVG icons (`currentColor`) adhering to industrial SCADA standards.
 - **GitHub Alert Blocks**: Formatted diagnostic notices using standard GitHub markdown alerts (`> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`).
 
-## [1.9.4] - 2026-10-08 (KRL Safe Auto-Repair Engine, QuickFix & Fix-All, Safety Rollback Guard & Monaco Diff Review)
+## [1.9.4] - 2026-10-09 (KRL Safe Auto-Repair Engine, QuickFix & Fix-All, Industrial Safety Audit Parity & Monaco Diff Review)
+
+### 🐛 Industrial Safety Audit Parity & Report Engine Refinements
+- **Full Industrial Safety Report Inclusion**: Removed restrictive client-side diagnostic source filtering (`d.source === "krl-language-support"`), restoring full inclusion of `krl-industrial-safety`, `Motion Point Data Integrity`, `Path Geometry`, and `krl-reach-guard` diagnostics in generated Project Quality & Acceptance reports.
+- **Integrator Library Vendor Exemption**: Exempted user application and integrator library subdirectories inside `/R1/TP/` (such as `/TRB_Library/`, `/user_library/`, `/cell_library/`) from vendor exclusion filters so real actuator and gripper routines are thoroughly inspected.
+- **Timer Millisecond Underflow Rule (`$TIMER[n] = -val`)**: Added validation catching dangerous sub-100ms timer timeouts ($TIMER values under 100 ms expire within a single ~12ms controller cycle, causing immediate premature timeout faults).
+- **WorkVisual Fold Template Normalization**: Normalized `DECLERATION` / `DECLARATIONS` typo variants in `;FOLD` / `;ENDFOLD` tags, eliminating over 112 false positive fold mismatch warnings on standard WorkVisual templates.
+- **Kinematic Base-Aware Reach Calculations**: Resolved points declared in user workpiece/fixture coordinates against companion `FDAT.BASE_NO` transformations in `$config.dat`, eliminating false boundary reach errors.
 
 ### 🚀 Killer Feature: KRL Safe Auto-Repair Engine (QuickFix & Fix-All)
 - **Deterministic Safe Auto-Fixes**: One-click quick repairs (`Ctrl+.` QuickFix lightbulb & `source.fixAll.krl`) for 7 critical KRL hazards:

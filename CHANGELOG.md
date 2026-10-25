@@ -2,7 +2,15 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
-## [1.9.8] - 2026-10-25 (KUKA.Sim VCMX Intelligence Suite [PRO], KUKA.RSI 4ms Real-Time Suite [PRO], CAM CNC G-Code & SVG Importer [PRO], Vision Hand-Eye Calibration & PLC Tag Exporter [PRO])
+## [1.9.8] - 2026-10-25 (WorkVisual .wvs Topology Parser [PRO], Point Normalizer & Auto-Sync [PRO], KUKA.Sim VCMX Intelligence Suite [PRO], KUKA.RSI 4ms Real-Time Suite [PRO], CAM CNC G-Code & SVG Importer [PRO], Vision Hand-Eye Calibration & PLC Tag Exporter [PRO])
+
+### 🗄️ Module 5: WorkVisual (`.wvs` / `.wvps`) Bus Topology & KOP Catalogs Parser (`krl.inspectWvsTopology`) [PRO]
+- **Direct WorkVisual Archive Inspection**: Zero-unpack analysis of binary WorkVisual projects (`.wvs`, `.wvps`). Decodes hex-encoded XML metadata (`_x003C_`, `_x0022_`) to extract installed KOP option package catalogs (`KUKA.EthernetKRL`, `KUKA.SafeOperation`, `KUKA.GripperSpotTech`, etc.), target KSS runtime version, controller identity, and kinematic robot models (`SafeMaDaBusTopology.xml`).
+- **Fieldbus Topology & I/O Mapping**: Parses EtherCAT coupler/slice slaves (`EcatDiag_*.xml`), Virtual I/O buses (`VIO_USER_BUS.xml`, `VIO_PLC_BUS.xml`), and Profinet configurations. Extracts full `$IN` / `$OUT` signal connections from `Fieldbus.krcVariables.xml` with automatic cross-export to Siemens TIA Portal XML/SDF, Beckhoff TwinCAT 3 GVL, and EPLAN CSV.
+
+### 🔄 Module 6: Auto-Sync Missing Points & Inline Form Normalizer (`krl.syncPointsToDat`) [PRO]
+- **Automated Point Synchronization**: Scans active `.src` program AST and motion commands (`PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`) and Inline Form FOLD headers (`PDAT_ACT`, `FDAT_ACT`, `LDAT_ACT`).
+- **Companion `.dat` Auto-Generation**: Deterministically compares referenced motion coordinates against declared structures in companion `.dat` file. If `.dat` is missing, generates valid `DEFDAT <MODULE> PUBLIC` structure; if `.dat` exists, injects clean `;FOLD Auto-Synchronized Points` declarations before `ENDDAT` with industrial defaults (`DECL E6POS`, `DECL FDAT`, `DECL PDAT`, `DECL LDAT`) without duplicating existing taught coordinates.
 
 ### 🏭 Module 1: KUKA.Sim & Visual Components (`.vcmx` / `layout.rsc`) Intelligence Suite [PRO]
 - **Simulation Workcell Inspector (`krl.inspectVcmxLayout`) [PRO]**: Two-layer `layout.rsc` parser extracting `rSimNode` robot/workcell components, `rSimBooleanSignal` definitions, `ProductType` transport links, and `ProgramData` process routines directly from `.vcmx` archives without unpacking.

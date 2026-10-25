@@ -14,18 +14,23 @@ GLOBAL DEF pick_and_place()
   $ACC_PTP = 70
 
   ; Motion to home safety position
-  ;FOLD PTP HomeVel 85% ;%{PE}%R 8.3
-  PTP xPickHome
+  ;FOLD SPTP HomeVel Vel=100 % PDAT1 Tool[1] Base[0] ;%{PE}
+  ;FOLD Parameters ;%{h}
+  ;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.spline; Kuka.PointName=HomeVel; Kuka.BlendingEnabled=False; Kuka.MoveDataPtpName=PDAT1; Kuka.VelocityPtp=100; Kuka.VelocityFieldEnabled=True; Kuka.MovementParameterFieldEnabled=True; IlfCommand=SPTP
+  ;ENDFOLD
+  SPTP XHomeVel WITH $VEL_AXIS[1] = SVEL_JOINT(100.0), $TOOL = STOOL2(FHomeVel), $BASE = SBASE(FHomeVel.BASE_NO), $IPO_MODE = SIPO_MODE(FHomeVel.IPO_FRAME), $LOAD = SLOAD(FHomeVel.TOOL_NO), $ACC_AXIS[1] = SACC_JOINT(PPDAT1), $APO = SAPO_PTP(PPDAT1), $GEAR_JERK[1] = SGEAR_JERK(PPDAT1), $COLLMON_TOL_PRO[1] = USE_CM_PRO_VALUES(0)
   ;ENDFOLD
 
   ; Approach infeed station fixture
-  ;FOLD LIN Approach Infeed ;%{PE}%R 8.3
-  $VEL.CP = 1.5
-  LIN xApproachInfeed C_DIS
+  ;FOLD SLIN Approach Vel=2 m/s CPDAT1 Tool[1] Base[0] ;%{PE}
+  ;FOLD Parameters ;%{h}
+  ;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.spline; Kuka.PointName=Approach; Kuka.BlendingEnabled=False; Kuka.MoveDataName=CPDAT1; Kuka.VelocityPath=2; Kuka.VelocityFieldEnabled=True; Kuka.MovementParameterFieldEnabled=True; IlfCommand=SLIN
+  ;ENDFOLD
+  SLIN XApproach WITH $VEL = SVEL_CP(2.0, , LCPDAT1), $TOOL = STOOL2(FApproach), $BASE = SBASE(FApproach.BASE_NO), $IPO_MODE = SIPO_MODE(FApproach.IPO_FRAME), $LOAD = SLOAD(FApproach.TOOL_NO), $ACC = SACC_CP(LCPDAT1), $ORI_TYPE = SORI_TYP(LCPDAT1), $APO = SAPO(LCPDAT1), $JERK = SJERK(LCPDAT1), $COLLMON_TOL_PRO[1] = USE_CM_PRO_VALUES(0)
   ;ENDFOLD
 
   ; Move into grip position
-  LIN xPickGrip
+  SLIN xPickGrip
 
   ; Command pneumatic gripper to clamp workpiece
   $OUT[4] = FALSE ; doGripperOpenCmd
@@ -48,14 +53,14 @@ GLOBAL DEF pick_and_place()
 
   ; Retract with component inside CollisionGuard envelope
   ;FOLD CollisionGuard ClampedMotion ;%{PE}%R 8.3
-  LIN xApproachInfeed
-  PTP xTransitPoint C_PTP
+  SLIN xApproachInfeed
+  SPTP xTransitPoint WITH $APO.CPTP = 100.0
   ;ENDFOLD
 
   ; Switch coordinate system to Outfeed Conveyor (BASE 2)
   $BASE = BASE_DATA[2]
-  LIN xPlaceApproach C_DIS
-  LIN xPlaceDrop
+  SLIN xPlaceApproach WITH $APO.CDIS = 50.0
+  SLIN xPlaceDrop
 
   ; Release workpiece
   $OUT[5] = FALSE ; doGripperCloseCmd
@@ -68,7 +73,7 @@ GLOBAL DEF pick_and_place()
   $TIMER_STOP[1] = TRUE
 
   ; Retract and return home
-  LIN xPlaceApproach
+  SLIN xPlaceApproach
   $BASE = BASE_DATA[1]
-  PTP xPickHome
+  SPTP xPickHome
 END

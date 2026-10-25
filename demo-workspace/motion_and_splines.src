@@ -16,16 +16,16 @@ GLOBAL DEF motion_and_splines()
   ; 1. Conventional Axis Motion (PTP)
   $VEL_AXIS[1] = 75
   $ACC_AXIS[1] = 50
-  PTP axHomeAxis
+  SPTP axHomeAxis
 
   ; 2. Conventional Cartesian Motion with approximation (LIN)
   $VEL.CP = 1.8
   $APO.CDIS = 50.0
-  LIN xLinPoint1 C_DIS
-  LIN xLinPoint2 C_DIS
+  SLIN xLinPoint1 WITH $APO.CDIS = 50.0
+  SLIN xLinPoint2 WITH $APO.CDIS = 50.0
 
   ; 3. Circular Interpolation Arc (CIRC: AuxPoint, TargetPoint)
-  CIRC xCircAux, xCircEnd, CA 90.0 C_DIS
+  SCIRC xCircAux, xCircEnd
 
   ; 4. Modern KSS 8.5+ Spline Block with Trigger Synchronizations
   ;FOLD CP Motion Sequence
@@ -72,7 +72,7 @@ GLOBAL DEF motion_and_splines()
   $TORQMON[5] = 150
   $TORQMON[6] = 150
   ;ENDFOLD
-  LIN xLinPoint1
+  SLIN xLinPoint1
   ;FOLD Torque Monitoring Reset (KSS Defaults)
   ; Reset torque monitoring thresholds to system defaults from $machine.dat
   $TORQMON[1] = $TORQMON_DEF[1]
@@ -84,19 +84,12 @@ GLOBAL DEF motion_and_splines()
   ;ENDFOLD
 
   ; 9. Legacy Motion Inline Form (Ready for 'Convert Legacy Motions to Modern Splines')
-  ;FOLD PTP HOME Vel=100 % DEFAULT ;%{PE}
+  ;FOLD SPTP HOME Vel=100 % DEFAULT Tool[1] Base[0] ;%{PE}
   ;FOLD Parameters ;%{h}
-  ;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.old; Kuka.IsGlobalPoint=False; Kuka.PointName=HOME; Kuka.BlendingEnabled=False; Kuka.MoveDataPtpName=DEFAULT; Kuka.VelocityPtp=100; Kuka.CurrentCDevice=; Kuka.MovementParameterFieldEnabled=True; IlfCommand=PTP
+  ;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.spline; Kuka.PointName=HOME; Kuka.BlendingEnabled=False; Kuka.MoveDataPtpName=DEFAULT; Kuka.VelocityPtp=100; Kuka.VelocityFieldEnabled=True; Kuka.MovementParameterFieldEnabled=True; IlfCommand=SPTP
   ;ENDFOLD
-  $BWDSTART = FALSE
-  PDAT_ACT = PDEFAULT
-  FDAT_ACT = FDEFAULT
-  BAS(#PTP_DAT)
-  FDAT_ACT = {TOOL_NO 1, BASE_NO 0, IPO_FRAME #BASE}
-  BAS(#FRAMES)
-  BAS(#VEL_PTP, 100)
-  PTP XHOME
+  SPTP XHOME WITH $VEL_AXIS[1] = SVEL_JOINT(100.0), $TOOL = STOOL2(FDEFAULT), $BASE = SBASE(FDEFAULT.BASE_NO), $IPO_MODE = SIPO_MODE(FDEFAULT.IPO_FRAME), $LOAD = SLOAD(FDEFAULT.TOOL_NO), $ACC_AXIS[1] = SACC_JOINT(PDEFAULT), $APO = SAPO_PTP(PDEFAULT), $GEAR_JERK[1] = SGEAR_JERK(PDEFAULT), $COLLMON_TOL_PRO[1] = USE_CM_PRO_VALUES(0)
   ;ENDFOLD
 
-  PTP axHomeAxis
+  SPTP axHomeAxis
 END

@@ -50,6 +50,23 @@
   * **`krl.exportPlcTags` — Export I/O Signals to Siemens TIA Portal & Beckhoff TwinCAT [PRO]:**
     * Извлечение сигналов `SIGNAL` / `$IN` / `$OUT` из проекта KRL и архивов WorkVisual (`.wvs`) с экспортом в таблицы тегов **Siemens TIA Portal XML / SDF (`%I` / `%Q`)**, **Beckhoff TwinCAT 3 GVL (`.TcGVL`)** и **EPLAN CSV**.
 
+### 5. 🗄️ WorkVisual (`.wvs` / `.wvps`) Bus Topology & KOP Catalogs Parser [PRO]
+* **Цель:** Прямой анализ топологии полевых шин (EtherCAT, Profinet, Virtual IO) и установленных каталогов опций KOP без распаковки архива WorkVisual.
+* **Функционал и команда:**
+  * **`krl.inspectWvsTopology` — WorkVisual (.wvs) Topology & Bus Inspector [PRO]:**
+    * Декодирование XML-метаданных `Solution.MetaData` (включая hex-экранированные теги `_x003C_Catalog ...`).
+    * Извлечение установленных KOP-пакетов опций (`KUKA.EthernetKRL`, `KUKA.SafeOperation`, `KUKA.GripperSpotTech`), целевой версии KSS, модели кинематики робота (`SafeMaDaBusTopology.xml`) и конфигурации осей A1–A6.
+    * Извлечение шинной структуры из `EcatDiag_*.xml`, `VIO_USER_BUS.xml`, `VIO_PLC_BUS.xml`.
+    * Извлечение привязок сигналов I/O из `Fieldbus.krcVariables.xml` с прямой интеграцией в мастер экспорта тегов ПЛК (`krl.exportPlcTags`).
+
+### 6. 🔄 Auto-Sync Missing Points & Inline Form Normalizer (`.dat` from `.src`) [PRO]
+* **Цель:** Автоматическая синхронизация и генерация недостающих точек движения и параметров Inline Form в файле данных `.dat` из кода `.src`.
+* **Функционал и команда:**
+  * **`krl.syncPointsToDat` — Auto-Sync Missing Points & Inline Forms to .dat [PRO]:**
+    * Сканирование активного `.src` на все команды движения (`PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`) и inline form заголовки (`PDAT_ACT`, `FDAT_ACT`, `LDAT_ACT`).
+    * Сравнение с существующими декларациями в парном `.dat` (создание файла с заголовком `DEFDAT ... PUBLIC`, если он отсутствует).
+    * Детерминированная генерация недостающих деклараций `DECL E6POS`, `DECL FDAT`, `DECL PDAT`, `DECL LDAT` перед `ENDDAT` внутри компактного блока `;FOLD Auto-Synchronized Points` без дублирования уже обученных координат.
+
 ---
 
 ## 🗺️ Версия 1.9.9 — Interactive 3D Trajectory & Point Inspector (Отложено на следующий спринт)

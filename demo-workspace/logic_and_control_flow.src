@@ -91,7 +91,7 @@ GLOBAL DEF logic_and_control_flow()
   $TOOL = TOOL_DATA[1]
   $BASE = BASE_DATA[1]
   $VEL_PTP = 40
-  PTP xSafeStagingPoint
+  SPTP xSafeStagingPoint
 
   INTERRUPT OFF 10
 

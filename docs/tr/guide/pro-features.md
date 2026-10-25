@@ -1,4 +1,4 @@
-# 👑 Pro ve Endüstriyel Sürüm Özellikleri
+# Pro ve Endüstriyel Sürüm Özellikleri
 
 Gelişmiş statik kod analizi, mantık görselleştirme, endüstriyel güvenlik uyumluluğu ve filo bakım araçları.
 

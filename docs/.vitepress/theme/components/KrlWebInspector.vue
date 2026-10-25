@@ -110,7 +110,7 @@
           <button 
             @click="activeTab = 'audit'"
             :class="['flex-1 py-3 text-center transition-all border-b-2 flex items-center justify-center gap-1.5', activeTab === 'audit' ? 'border-kuka-orange text-white bg-white/5 font-bold' : 'border-transparent text-gray-400 hover:text-gray-200']">
-            <span>📊 Report</span>
+            <span> Report</span>
             <span v-if="diagnostics.errors.length > 0" class="px-1.5 py-0.2 rounded-full bg-red-500/20 text-red-400 text-[10px]">
               {{ diagnostics.errors.length }}
             </span>
@@ -118,12 +118,12 @@
           <button 
             @click="activeTab = 'flowchart'"
             :class="['flex-1 py-3 text-center transition-all border-b-2 flex items-center justify-center gap-1.5', activeTab === 'flowchart' ? 'border-kuka-orange text-white bg-white/5 font-bold' : 'border-transparent text-gray-400 hover:text-gray-200']">
-            <span>🔀 Flowchart</span>
+            <span> Flowchart</span>
           </button>
           <button 
             @click="activeTab = 'points'"
             :class="['flex-1 py-3 text-center transition-all border-b-2 flex items-center justify-center gap-1.5', activeTab === 'points' ? 'border-kuka-orange text-white bg-white/5 font-bold' : 'border-transparent text-gray-400 hover:text-gray-200']">
-            <span>📍 Trajectory</span>
+            <span> Trajectory</span>
           </button>
         </div>
 
@@ -157,7 +157,7 @@
             </div>
 
             <div v-if="diagnostics.errors.length === 0 && diagnostics.warnings.length === 0" class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-center text-xs text-emerald-300 font-mono">
-              ✓ No syntax or safety violations detected! Clean production KRL code.
+              [OK] No syntax or safety violations detected! Clean production KRL code.
             </div>
 
             <div class="space-y-2 max-h-[260px] overflow-y-auto pr-1">
@@ -190,7 +190,7 @@
           <!-- Conversion Pro Callout -->
           <div class="p-3.5 rounded-xl bg-gradient-to-r from-orange-500/15 to-amber-500/10 border border-orange-500/30">
             <div class="flex items-center gap-2 text-kuka-orange text-xs font-mono font-bold">
-              <span>⚡ AUTO-FIX AVAILABLE IN VS CODE</span>
+              <span> AUTO-FIX AVAILABLE IN VS CODE</span>
             </div>
             <p class="text-[11px] text-gray-300 mt-1 leading-relaxed">
               Our VS Code Extension automatically resolves unclosed FOLDs, removes dead variables, repairs Delta Math coordinates, and verifies robot kinematic reachability.
@@ -234,7 +234,7 @@
           </div>
 
           <div class="mt-4 p-3 rounded-lg bg-blue-500/10 border border-blue-500/20 text-xs font-mono text-blue-300">
-            💡 Full interactive SVG block-diagrams with jump-to-source are generated in the Pro Extension with <code class="text-white">krl.showFlowchart</code>.
+             Full interactive SVG block-diagrams with jump-to-source are generated in the Pro Extension with <code class="text-white">krl.showFlowchart</code>.
           </div>
         </div>
 
@@ -466,7 +466,7 @@ function runAnalysis() {
       // Check folds inside comments (KUKA standard: ; FOLD ...)
       if (upper.startsWith('; FOLD') || upper.startsWith(';FOLD')) {
         foldStack.push({ line: lineNum, name: trimmed.substring(6).trim() })
-        nodes.push({ icon: '📁', title: 'FOLD: ' + (trimmed.substring(6, 30) || 'Block'), line: lineNum, type: 'fold' })
+        nodes.push({ icon: '', title: 'FOLD: ' + (trimmed.substring(6, 30) || 'Block'), line: lineNum, type: 'fold' })
       } else if (upper.startsWith('; ENDFOLD') || upper.startsWith(';ENDFOLD')) {
         if (foldStack.length > 0) {
           foldStack.pop()
@@ -479,10 +479,10 @@ function runAnalysis() {
 
     // Program Boundaries
     if (upper.startsWith('DEF ') || upper.startsWith('GLOBAL DEF ')) {
-      nodes.push({ icon: '🏁', title: 'PROGRAM START (' + trimmed.split(' ')[1] + ')', line: lineNum, type: 'start' })
+      nodes.push({ icon: '', title: 'PROGRAM START (' + trimmed.split(' ')[1] + ')', line: lineNum, type: 'start' })
     }
     if (upper === 'END' || upper.startsWith('ENDDEF')) {
-      nodes.push({ icon: '🛑', title: 'PROGRAM END', line: lineNum, type: 'end' })
+      nodes.push({ icon: '', title: 'PROGRAM END', line: lineNum, type: 'end' })
     }
 
     // Motion Commands
@@ -492,7 +492,7 @@ function runAnalysis() {
       const type = parts[0].toUpperCase()
       const ptName = parts[1] || 'POINT'
       points.push({ type, name: ptName, line: lineNum })
-      nodes.push({ icon: '🦾', title: `${type} Motion -> ${ptName}`, line: lineNum, type: 'motion' })
+      nodes.push({ icon: '', title: `${type} Motion -> ${ptName}`, line: lineNum, type: 'motion' })
     }
 
     // Dangerous Statements
@@ -528,7 +528,7 @@ function runAnalysis() {
 
     // I/O Operations
     if (upper.startsWith('$OUT[') && upper.includes('=')) {
-      nodes.push({ icon: '⚡', title: 'I/O Signal: ' + trimmed, line: lineNum, type: 'io' })
+      nodes.push({ icon: '', title: 'I/O Signal: ' + trimmed, line: lineNum, type: 'io' })
     }
   })
 

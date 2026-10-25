@@ -1,4 +1,4 @@
-# 👑 Pro & Industrial Edition Features
+# Pro & Industrial Edition Features
 
 Advanced static code analysis, logic visualization, industrial safety compliance, and fleet maintenance suite.
 

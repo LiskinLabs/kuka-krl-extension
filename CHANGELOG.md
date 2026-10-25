@@ -4,32 +4,32 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 
 ## [1.9.8] - 2026-10-25 (WorkVisual .wvs Topology Parser [PRO], Point Normalizer & Auto-Sync [PRO], KUKA.Sim VCMX Intelligence Suite [PRO], KUKA.RSI 4ms Real-Time Suite [PRO], CAM CNC G-Code & SVG Importer [PRO], Vision Hand-Eye Calibration & PLC Tag Exporter [PRO])
 
-### 🗄️ Module 5: WorkVisual (`.wvs` / `.wvps`) Bus Topology & KOP Catalogs Parser (`krl.inspectWvsTopology`) [PRO]
+### [ARCHIVE] Module 5: WorkVisual (`.wvs` / `.wvps`) Bus Topology & KOP Catalogs Parser (`krl.inspectWvsTopology`) [PRO]
 - **Direct WorkVisual Archive Inspection**: Zero-unpack analysis of binary WorkVisual projects (`.wvs`, `.wvps`). Decodes hex-encoded XML metadata (`_x003C_`, `_x0022_`) to extract installed KOP option package catalogs (`KUKA.EthernetKRL`, `KUKA.SafeOperation`, `KUKA.GripperSpotTech`, etc.), target KSS runtime version, controller identity, and kinematic robot models (`SafeMaDaBusTopology.xml`).
 - **Fieldbus Topology & I/O Mapping**: Parses EtherCAT coupler/slice slaves (`EcatDiag_*.xml`), Virtual I/O buses (`VIO_USER_BUS.xml`, `VIO_PLC_BUS.xml`), and Profinet configurations. Extracts full `$IN` / `$OUT` signal connections from `Fieldbus.krcVariables.xml` with automatic cross-export to Siemens TIA Portal XML/SDF, Beckhoff TwinCAT 3 GVL, and EPLAN CSV.
 
-### 🔄 Module 6: Auto-Sync Missing Points & Inline Form Normalizer (`krl.syncPointsToDat`) [PRO]
+### [SYNC] Module 6: Auto-Sync Missing Points & Inline Form Normalizer (`krl.syncPointsToDat`) [PRO]
 - **Automated Point Synchronization**: Scans active `.src` program AST and motion commands (`PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`) and Inline Form FOLD headers (`PDAT_ACT`, `FDAT_ACT`, `LDAT_ACT`).
 - **Companion `.dat` Auto-Generation**: Deterministically compares referenced motion coordinates against declared structures in companion `.dat` file. If `.dat` is missing, generates valid `DEFDAT <MODULE> PUBLIC` structure; if `.dat` exists, injects clean `;FOLD Auto-Synchronized Points` declarations before `ENDDAT` with industrial defaults (`DECL E6POS`, `DECL FDAT`, `DECL PDAT`, `DECL LDAT`) without duplicating existing taught coordinates.
 
-### 🏭 Module 1: KUKA.Sim & Visual Components (`.vcmx` / `layout.rsc`) Intelligence Suite [PRO]
+### [SIMULATION] Module 1: KUKA.Sim & Visual Components (`.vcmx` / `layout.rsc`) Intelligence Suite [PRO]
 - **Simulation Workcell Inspector (`krl.inspectVcmxLayout`) [PRO]**: Two-layer `layout.rsc` parser extracting `rSimNode` robot/workcell components, `rSimBooleanSignal` definitions, `ProductType` transport links, and `ProgramData` process routines directly from `.vcmx` archives without unpacking.
 - **VCMX Simulation Validator & Safe Auto-Repair (`krl.validateVcmxSimulation`) [PRO]**: Detects and surgically repairs 4 fatal simulation bugs (`VCMX001` edge-triggered pulse signal / trailing ack-wait deadlocks, `VCMX002` `WaitSignal` timeout fallthroughs, `VCMX003` product variable list accumulation after `TransportOut`/`RemoveProduct`, `VCMX004` unresolved signal references) with automatic versioned `.bk1`, `.bk2` backup preservation.
 - **VCMX-to-KRL Post-Processor (`krl.exportVcmxToKrl`) [PRO]**: Converts KUKA.Sim / Visual Components `ProgramData` routines (`LinMotion`, `PtpMotion`, `SetSignal`, `WaitSignal`, `Delay`) directly into synchronized KUKA KRL `.src` + `.dat` modules.
 
-### ⚡ Module 2: KUKA.RobotSensorInterface (RSI) Real-Time Control Suite [PRO]
+### [REALTIME] Module 2: KUKA.RobotSensorInterface (RSI) Real-Time Control Suite [PRO]
 - **RSI XML Schema Validator (`krl.validateRsiXml`) [PRO]**: Validates KUKA.RSI `SensorInterface/*.xml` configurations (`<ROOT>`, `<CONFIG>`, `<SEN_TYPE>`, `<IP_NUMBER>`, `<PORT>`, `<SEND>`, `<RECEIVE>`, `<ELEMENT>` tags, data types, and `INDX="1..N"` continuity).
 - **4ms / 12ms Real-Time RSI Driver Generator (`krl.generateRsiCode`) [PRO]**: Generates production-ready `#IPO_FAST` (4ms) and `#IPO` (12ms) KRL real-time sensor correction loops (`RSI_CREATE`, `RSI_ON`, `RSI_MOVECORR`, `RSI_OFF`, `RSI_DELETE`) paired with matching XML descriptors for Cartesian (`RKorr`) or ROS 2 Axis (`AK.A1..A6`) control.
 - **Built-in RSI System Library Intrinsics**: Added 10 RSI functions and status constants (`RSIOK`, `RSIINVCONTAINER`, `RSIINVPARAM`, `RSITIMEOUT`) with full signature help.
 
-### 🛠️ Module 3: CAM CNC G-Code (`.nc`/`.gcode`) & Vector SVG (`.svg`) Importer [PRO]
+### [TOOLS] Module 3: CAM CNC G-Code (`.nc`/`.gcode`) & Vector SVG (`.svg`) Importer [PRO]
 - **CNC G-Code & 2D Vector SVG to KRL Converter (`krl.importGcodeToKrl`) [PRO]**: Converts ISO CNC G-Code (`G0` -> `PTP`/`SPTP`, `G1` -> `LIN`/`SLIN`, `G2`/`G3` -> `CIRC`/`SCIRC` with exact 3D arc midpoint `XAUX` calculation from `I,J` or `R`, `F` feedrate mm/min -> `$VEL.CP` m/s, `M3/M5` -> `$OUT`) and 2D vector `.svg` contours (`<path>`, `<line>`, `<polyline>`, `<polygon>`, `<rect>`, `<circle>`) into synchronized `.src` and `.dat` files.
 
-### 👁️ Module 4: 2D/3D Vision Hand-Eye Calibration Wizard & PLC Fieldbus Tag Exporter [PRO]
+### [VISION] Module 4: 2D/3D Vision Hand-Eye Calibration Wizard & PLC Fieldbus Tag Exporter [PRO]
 - **Vision Hand-Eye Calibration Wizard (`krl.generateVisionCalibration`) [PRO]**: Generates a 9-pose Hand-Eye calibration pyramid (`Eye-in-Hand` / `Eye-to-Hand`) with 3D Look-At rotation matrix -> KUKA Euler Z-Y'-X'' (A, B, C) angle calculation, geometric `Pre-Grasp Approach` (`xDetectedTarget : {X 0, Y 0, Z -Approach, ...}`), and EthernetKRL camera trigger handshake.
 - **PLC Fieldbus Tag Exporter (`krl.exportPlcTags`) [PRO]**: Extracts workspace `SIGNAL` and `$IN`/`$OUT` declarations with automatic IEC 61131-3 byte.bit calculation (`%I0.0`, `%IB1`, `%Q0.0`, `%QW2`) and exports to **Siemens TIA Portal XML (`.xml`)**, **TIA Portal SDF (`.sdf`)**, **Beckhoff TwinCAT 3 GVL (`.TcGVL`)**, and **Industrial EPLAN CSV (`.csv`)**.
 
-### 🚀 Dual-Registry Distribution & Registry Parity
+### [RELEASE] Dual-Registry Distribution & Registry Parity
 - **Open VSX Synchronization**: Full release alignment across both official marketplaces (Visual Studio Code Marketplace & Eclipse Open VSX Registry) ensuring immediate availability for Eclipse Theia, VSCodium, and Gitpod.
 - **Prepublish Network Resilience**: Upgraded remote marketplace collision check timeout threshold (15s) to guarantee deterministic pre-publish verification across industrial proxy and VPN gateways.
 - **Runtime Version Fallback Modernization**: Synchronized runtime version fallback resolvers in `version.ts` and packaging pipeline integrity manifests.
@@ -37,7 +37,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 
 ## [1.9.6] - 2026-10-20 (Universal Backup & Unused Variable Purge Engine [PRO], Dual-Scope Workspace Cleaner, AST Rollback Guard, Structure Tokenizer Fix & External Interface Protection)
 
-### 🧹 Industrial Unused Variables & Dead Code Purge Engine (`krl.cleanupUnusedVariables`) [PRO]
+### [CLEANUP] Industrial Unused Variables & Dead Code Purge Engine (`krl.cleanupUnusedVariables`) [PRO]
 - **Dual-Scope Cleanup Selector (Interactive QuickPick)**:
   - **Active Module Only (`.src` / `.dat`)**: Scans the active program and companion data list for unused points and local variables inside `DEF...END`.
   - **Entire Project / Open Backup Workspace**: Comprehensive cross-module dependency graph scan across all `.src`, `.dat`, `.sub`, and `.xml` files in the workspace.
@@ -56,7 +56,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 
 ## [1.9.5] - 2026-10-16 (SCADA Live Bridge & Online Controller Telemetry [PRO], Unified Event Log Timeline, Bracket-Tolerant Resolution, KSS 8.7 Parity & Industrial UI Hardening)
 
-### ⚡ SCADA Live Bridge & Real-Time Online Controller Telemetry [PRO]
+### [REALTIME] SCADA Live Bridge & Real-Time Online Controller Telemetry [PRO]
 - **Direct Online Controller Connection (`krl.openLiveBridge`, `krl.connectKukaRobot`)**: Live Ethernet connection to physical KUKA KRC2, KRC4, and KRC5 controllers over industrial network interfaces (CrossComm, WCF, EthernetKRL, WinGate port 49000 & 7000).
 - **Real-Time 6-Axis Telemetry Gauges**: Live visualization of `$AXIS_ACT` and `$AXIS_MOT` with dynamic axis limit bars and angular velocity indicators for axes A1 through A6.
 - **Real-Time Cartesian TCP Telemetry**: Live readout of `$POS_ACT` (X, Y, Z, A, B, C) with active `$TOOL` and `$BASE` frame indicators.
@@ -65,40 +65,40 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Live 1-Click Toolbar Language Switcher (`LNG: [EN | RU | TR | DE]`)**: Seamless language switching in the SCADA Live Monitor toolbar with bidirectional synchronization to `krl.locale`.
 - **Variable Watcher & Config Variable Inspector**: Real-time polling and inspection of `PGNO`, `PGNO_REQ`, `PGNO_TYPE`, `$LOAD`, and custom user variables.
 
-### 📊 Unified KUKA Event Log Inspector & Multi-Log Timeline (`krl.openAllEventLogs`) [PRO]
+### [METRICS] Unified KUKA Event Log Inspector & Multi-Log Timeline (`krl.openAllEventLogs`) [PRO]
 - **Multi-Source Event Log Parsing**: Simultaneously decodes and inspects classic `<LE>` binary archives and flat XML logs (`KUKA_HMI.evt`, `CrossMisc.evt`, `SmartHMI.evt`, `System.evt`).
 - **Chronological Multi-Log Merge**: Merges all controller event logs into a unified timeline with sub-millisecond sorting.
 - **Multilingual Error Resolution**: Resolves numeric KSS message identifiers against localized database catalogs across 6 languages with CSV export.
 
-### 🎯 Bracket-Tolerant Identifier Resolution & Smart Auto-Selection
+### [TARGET] Bracket-Tolerant Identifier Resolution & Smart Auto-Selection
 - **Bracket Navigation Parity**: Cursor placement directly on or adjacent to brackets (`[`, `]`, `(`, `)`) accurately resolves the underlying identifier (`$TIMER[1]`, `$OUT[601]`, `MySub()`, array elements).
 - **Smart Auto-Select (`krl.toggleAutoSelectSymbol`)**: Automatically selects complete identifier token upon click or jump.
 - **Subprogram & Companion DAT Navigation**: Instant switching between `.src` `DEF` and companion `.dat` `DEFDAT` data structures.
 
-### 🔧 Enhanced KRL Safe Auto-Repair v1.9.5 (QuickFix & Fix-All) [PRO]
+### [REPAIR] Enhanced KRL Safe Auto-Repair v1.9.5 (QuickFix & Fix-All) [PRO]
 - **Inline Form Metadata Desync Repair (`repairInlineFormMetadataDesyncInText`)**: Synchronizes XML parameter metadata with executing KRL statements, preventing SmartPAD Touch-Up overwrite bugs.
 - **Duplicate Motion Approximation Modifier Cleanup**: Safely normalizes accidental duplicate approximation modifiers (`C_DIS C_DIS` -> `C_DIS`, `C_PTP C_PTP` -> `C_PTP`).
 - **Mismatched `;ENDFOLD` Tag Alignment**: Automatically synchronizes closing `;ENDFOLD` tags with opening region headers.
 
-### 🤖 KSS 8.7.9 System Parity & Cybertech KR50R2500 Integration
+### [ROBOTICS] KSS 8.7.9 System Parity & Cybertech KR50R2500 Integration
 - **KSS 8.7 Motion Structures & Enums**: Registered modern `PDAT` and `LDAT` extension fields (`GEAR_JERK`, `EXAX_IGN`, `JERK_FAC`, `CB`, `OUT_MODETYPE`).
 - **TechPackage Global Procedures**: Integrated global system library procedures and signature help for `GripperSpotTech` v5.0.5 and `SafeOperation`.
 - **Robot Model Passport**: Integrated hardware validation and envelope parameters for the Cybertech `KR50R2500` manipulator (50 kg payload, 2500 mm reach).
 
-### 🎨 Industrial UI/UX Zero-Emoji Compliance
+### [UI/UX] Industrial UI/UX Zero-Emoji Compliance
 - **Crisp SVG Vector Styling**: Replaced all casual emojis across SCADA Live Monitor, diagnostic reports, and views with crisp vector SVG icons (`currentColor`) adhering to industrial SCADA standards.
 - **GitHub Alert Blocks**: Formatted diagnostic notices using standard GitHub markdown alerts (`> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`).
 
 ## [1.9.4] - 2026-10-09 (KRL Safe Auto-Repair Engine, QuickFix & Fix-All, Industrial Safety Audit Parity & Monaco Diff Review)
 
-### 🐛 Industrial Safety Audit Parity & Report Engine Refinements
+### [FIX] Industrial Safety Audit Parity & Report Engine Refinements
 - **Full Industrial Safety Report Inclusion**: Removed restrictive client-side diagnostic source filtering (`d.source === "krl-language-support"`), restoring full inclusion of `krl-industrial-safety`, `Motion Point Data Integrity`, `Path Geometry`, and `krl-reach-guard` diagnostics in generated Project Quality & Acceptance reports.
 - **Integrator Library Vendor Exemption**: Exempted user application and integrator library subdirectories inside `/R1/TP/` (such as `/TRB_Library/`, `/user_library/`, `/cell_library/`) from vendor exclusion filters so real actuator and gripper routines are thoroughly inspected.
 - **Timer Millisecond Underflow Rule (`$TIMER[n] = -val`)**: Added validation catching dangerous sub-100ms timer timeouts ($TIMER values under 100 ms expire within a single ~12ms controller cycle, causing immediate premature timeout faults).
 - **WorkVisual Fold Template Normalization**: Normalized `DECLERATION` / `DECLARATIONS` typo variants in `;FOLD` / `;ENDFOLD` tags, eliminating over 112 false positive fold mismatch warnings on standard WorkVisual templates.
 - **Kinematic Base-Aware Reach Calculations**: Resolved points declared in user workpiece/fixture coordinates against companion `FDAT.BASE_NO` transformations in `$config.dat`, eliminating false boundary reach errors.
 
-### 🚀 Killer Feature: KRL Safe Auto-Repair Engine (QuickFix & Fix-All)
+### [RELEASE] Killer Feature: KRL Safe Auto-Repair Engine (QuickFix & Fix-All)
 - **Deterministic Safe Auto-Fixes**: One-click quick repairs (`Ctrl+.` QuickFix lightbulb & `source.fixAll.krl`) for 7 critical KRL hazards:
   1. **Advance Run Hazard Barrier**: Auto-inserts `WAIT SEC 0` before safety zone output assertions/releases (`$OUT[...]`, `$FLAG[...]`, `PULSE(...)`) following motions or subprograms, eliminating premature signal deassertion while robot is in motion.
   2. **Missing BRAKE before RESUME**: Injects mandatory `BRAKE` deceleration command directly before `RESUME` in collision and sensor interrupt handlers.
@@ -109,42 +109,42 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
   7. **Unused Local Declarations Purge**: Safely removes dangling local `DECL` variables to free memory on physical KRC controllers.
 - **Batch Fix-All Command (`krl.fixAllSafeIssuesInFile`)**: One-click batch repair of all safe syntactic and structural issues in file without altering motion kinematics.
 
-### 🛡️ Safety Verification & Rollback Guard
+### [SECURITY] Safety Verification & Rollback Guard
 - **Automated AST Validation**: Every repair undergoes an instant structural syntax validation pass (balancing `DEF`/`END`, `;FOLD`/`;ENDFOLD`, `IF`/`ENDIF`, and loops).
 - **Instant Rollback Guard**: If any proposed modification introduces regressions, broken blocks, or new syntax errors, the transaction is immediately rolled back, pristine code is preserved, and an explanatory notice is displayed.
 
-### 🔍 Native Monaco Diff Review Integration
+### [INSPECTOR] Native Monaco Diff Review Integration
 - **Interactive Split-Free Diff Preview**: Repaired code is displayed in VS Code's native Monaco Diff Editor (Red/Green line highlighting), giving operators absolute control to accept (`Ctrl+Enter`) or reject (`Esc`) changes before writing to disk.
 
-### 🧠 WorkVisual & iiQWorks Semantic Parity
+### [AI] WorkVisual & iiQWorks Semantic Parity
 - **Module Pair Synchronization**: Enforces name synchronization between `.src` `DEF ModuleName()` and `.dat` `DEFDAT ModuleName()` headers matching KUKA KSS error **KSS01412**.
 - **Compiler Diagnostic Message IDs**: Integrated WorkVisual 6.0 and iiQWorks.Sim 1.3 semantic error catalogs (KSS01412, KSS01413, KSS01422, KSS01425, KSS01435, KSS02008).
 
-### 🧹 Codebase Cleanup & Hardening
+### [CLEANUP] Codebase Cleanup & Hardening
 - **Unused Import & Variable Removal**: Cleaned up unreferenced imports (`fs`, `path`, `DODO_PAYMENTS_PORTAL_URL`) across client and server.
 - **Console Log Hygiene**: Eliminated extraneous debug logging from webview production bundles.
 
 ## [1.9.3] - 2026-10-07 (Transparent KRC Backup Live Project Mount, 2-Way Zero-Friction ZIP Sync & Universal Safety Hardening)
 
-### ⚡ Transparent KRC Backup Live Mount & Auto-Sync Engine
+### [REALTIME] Transparent KRC Backup Live Mount & Auto-Sync Engine
 - **Native Workspace Project Opening**: Opening any KRC backup archive (`Robot1.zip`, `KRCDiag_*.zip`) now transparently unpacks the project in the background and opens it directly as a standard workspace folder in VS Code with zero intermediate webview screens.
 - **Clean Folder Naming & Auto-Open**: Workspace root folder displays cleanly as the robot backup name (`Robot1`) in VS Code Explorer, and automatically opens the primary application program (`Cell.src`) in the editor.
 - **Two-Way Zero-Friction ZIP Sync**: Transparently intercepts file modifications (Ctrl+S), deletions, additions, and renames, patching changes back into the original `.zip` archive on disk in milliseconds without blocking the UI.
 - **Full KRL Language Server Support**: Full access to AST diagnostics, autocomplete, folding, kinematics parity, and safety audits directly within the live-mounted backup.
 
-### 🛡️ Trajectory Approximation & Manipulator Dynamics Hardening
+### [SECURITY] Trajectory Approximation & Manipulator Dynamics Hardening
 - **Motion Approximation Tokens Validator**: Flags duplicate approximation modifiers (`LIN XP19 C_Dis C_Dis`) and invalid modifier combinations (`PTP` with Cartesian `C_DIS`, `LIN/CIRC` with axis `C_PTP`).
 - **Manipulator Payload Capacity & Dynamics Checker**: Cross-validates `$config.dat` `LOAD_DATA` arrays against nominal manipulator payload from `$TRAFONAME` (e.g. KR300 -> 300 kg), warning on payload overload and zero mass moment of inertia tensors ($J = 0$).
 - **Formal Parameter & Subprogram Vorlaufstopp Resolution**: Eliminated false positives on KRL keywords (`IF`, `WHILE`) and formal parameter declarations (`DEF Sub(param:IN)`).
 - **KUKA Firmware Integrity Isolation**: Dedicated isolated integrity section for KSS vendor modules (`/R1/System/*`, `/R1/TP/*`), focusing project health index strictly on customer application code.
 
-### 💳 Industrial Licensing & Pricing Model Standardization
+### [BILLING] Industrial Licensing & Pricing Model Standardization
 - **RoboDK Workstation Model Parity**: Transitioned commercial tiers to transparent device / workstation activations (1, 25, 200 activations) matching industrial automation and robotics CAD standards.
 - **Dodo Payments Live Synchronization**: Updated all live payment gateways, B2B invoicing endpoints, and multi-seat entitlements to reflect new Engineer Pro ($19/mo, $149/yr), Pro Lifetime ($699), Team ($499/yr, 25 seats), and Enterprise Site ($2,490/yr, 200 seats) pricing.
 
 ## [1.9.2] - 2026-10-04 (Universal Industrial Safety Suite, KRCDiag Deep Audit & CSP Hardening)
 
-### 🛡️ Universal Industrial Static Safety Suite (16 Automated Safety Gates)
+### [SECURITY] Universal Industrial Static Safety Suite (16 Automated Safety Gates)
 - **ILF Metadata Desync Guard**: Detects discrepancies between Inline Form XML metadata parameters and active KRL statements.
 - **Dynamic Load Data & Tool Index Integrity**: Verifies matching indices between `TOOL_DATA` and `LOAD_DATA`, flagging unconfigured dynamic payloads.
 - **Actuator Sensor Pairing**: Detects blind actuator releases (waiting for `NOT Locked` without checking `Unlocked` feedback).
@@ -153,43 +153,43 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Safety Zone Handshake Symmetry**: Enforces strict pairing between zone acquisition (`Zone_Request`) and release signals.
 - **PTP Turn Bit Unwind Risk & 6D Operator Guard**: Warns on wrist axis 360° unwinding risks and improper manual coordinate inversions.
 
-### 🔍 KRCDiag Deep Diagnostic Integration & Fleet Explorer
+### [INSPECTOR] KRCDiag Deep Diagnostic Integration & Fleet Explorer
 - **KRCDiag Archive & Folder Support**: Direct inspection of native controller diagnostic packages (`KRCDiag_*.zip`, event logs, trace data, and system topologies).
 - **Event Log Inspector Directory Resolution**: Automatically resolves `EventLogs/` directory paths to primary event files (`KrcLogS.evt` / `KrcLog.evt`), eliminating directory read errors.
 - **Fleet Hierarchy Deduplication**: Consolidates multi-controller backups under a unified parent robot root.
 
-### ⚡ Control Center & CSP Security Fix
+### [REALTIME] Control Center & CSP Security Fix
 - **CSP Nonce Webview Resolution**: Fixed Content-Security-Policy script nonce handling in Control Center, restoring 100% interactivity for all UI controls, tabs, and diagnostic switches.
 - **Live Background Services Quick Bar**: Direct one-click control for all background services (ErrorLens, SafetyLens, Git Blame, Continuous Workspace Scanner, and Master Airgap Silent Mode).
 - **Complete Command Catalog**: All 75 extension tools and commands organized into dedicated logical functional categories with zero duplicate cards.
 
-### ⚖️ Trademark & Brand Neutrality
+### [PARITY] Trademark & Brand Neutrality
 - **Third-Party Trademark Sanitization**: Fully neutralized third-party editor brand names (e.g., OrangeEdit) across UI titles, command palettes, and documentation in favor of neutral engineering terminology (*Advanced Kinematics & Trajectory Suite*).
 
-### 🔐 AppSec & Licensing Hardening
+### [CIPHER] AppSec & Licensing Hardening
 - **Asymmetric Ed25519 Airgap Licensing**: Replaced symmetric HMAC airgap validation with asymmetric Ed25519 signature verification (`LISKIN_LABS_AIRGAP_PUBLIC_KEY`), preventing key extraction from client bundles while retaining backward compatibility via timing-safe HMAC fallback.
 - **Telemetry Command Injection Hardening**: Eliminated shell interpolation by switching from `child_process.exec` to parameterized `execFile("git", ...)`.
 - **GDPR & VS Code Telemetry Compliance**: Added strict compliance checks enforcing user opt-in (`vscode.env.telemetryConfiguration.telemetryLevel === "all"`) and workspace trust boundary verification (`vscode.workspace.isTrusted`).
 
-### 📦 KUKA Backup Archive Explorer & Virtual Provider (Zero Unpack)
+### [PACKAGE] KUKA Backup Archive Explorer & Virtual Provider (Zero Unpack)
 - **Zero-Unpack In-Memory Inspection**: Browse files inside `*.zip` backups and `KRCDiag_*.zip` archives directly without manual extraction.
 - **Virtual Document Provider**: Open any file from backup with read-only `krc-archive://` protocol.
 - **In-Memory Fleet Static Analysis**: Run comprehensive static analysis and robot passport audit directly across all KRL modules in archive in <500ms.
 - **Integrated Event Log Viewer**: Open `.evt` logs directly from archive viewer.
 
-### 🔄 Live Transparent ZIP Workspace Mount & Auto-Sync Engine [PRO]
+### [SYNC] Live Transparent ZIP Workspace Mount & Auto-Sync Engine [PRO]
 - **Mount Backup as Active Workspace**: One-click extraction into isolated mount sandbox (`krl.mountBackupZipAsProject`) with instant folder switch or new window.
 - **Transparent In-Memory ZIP Patcher**: Automatically intercepts document saves (`Ctrl+S`) and patches modified files directly back into the original `.zip` on disk in <80ms without UI freezing or process locks.
 - **Deletion Synchronization**: Deleting files in mounted workspace removes them from original archive.
 - **Status Bar Integration**: Live status bar monitor displays active archive with real-time auto-sync indicators and one-click full reconcile flusher (`krl.syncAllToBackupZip`).
 - **Archive Explorer 1-Click Launch**: Direct toolbar button in Backup Explorer to seamlessly transition from in-memory inspection to live editing project.
 
-### 📦 VSIX Package Optimization
+### [PACKAGE] VSIX Package Optimization
 - **VSIX Bundle Slimming**: Slashing extension package size to ~5.4 MB (>80% reduction) with lazy activation and fast startup events.
 
 ## [1.9.1] - 2026-10-01 (Enterprise Fleet Verification, Hardened Folds & Legal Compliance)
 
-### 🛡️ Enterprise Fleet Verification (9,804 Modules / 4.2M+ LoC Tested)
+### [SECURITY] Enterprise Fleet Verification (9,804 Modules / 4.2M+ LoC Tested)
 - **100% Non-Destructive Code Modernization**: Hardened `convertLegacyToSpline` and `insertSplineBlock` against runaway fold scans in legacy robot programs with missing or malformed `;ENDFOLD` tags.
 - **Tech Package Protection**: Automated preservation of specialized welding and dispensing packages (KUKA.ServoGun `%MKUKATPSERVOTECH`, SpotTech, ArcTech, GlueTech).
 - **Fleet Quality Audit**: Verified across all 17 customer robotics installations and 8 automotive/Tier-1 clients with zero line losses, zero block regressions, and 100% preservation of companion `.dat` symbols.
@@ -197,7 +197,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 
 ## [1.9.0] - 2026-10-01 (Industrial 6D Kinematics, Advanced Simulation Safety & KSS 8.7 Megarelease)
 
-### 🚀 Industrial 6D Kinematics & Offline Transformation Suite
+### [RELEASE] Industrial 6D Kinematics & Offline Transformation Suite
 - **6D Robotics Kinematic Math Engine (KRL Euler Matrix Formulation)**:
   - Exact 4x4 Homogeneous Transformation Matrices, Euler angle conversions ($R_z(A) \cdot R_y(B) \cdot R_x(C)$), frame inversion, and KUKA geometric operator (`:`).
   - Bitwise manipulation of `STATUS` (0..7) and `TURN` (0..63) bitmasks matching KUKA controller specs.
@@ -219,7 +219,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
   - Validates `.kfd` technology option package forms (`DEFTP`, `ENDTP`, `DECL PARAM`, `DECL PLIST`, `DECL FOLD`, `DECL INLINEFORM`).
   - Detects unclosed package scopes, mismatched curly braces, duplicate parameter definitions, and size mismatches with real-time editor diagnostics.
 
-### 🔬 Advanced Kinematic & Simulation Safety Analyzers (KSS 8.3–8.7)
+### [ANALYSIS] Advanced Kinematic & Simulation Safety Analyzers (KSS 8.3–8.7)
 - **Status (S) & Turn (T) Kinematic Validator (`validateStatusAndTurn`)**:
   - Validates Status $S$ literal values and assignments: strictly enforces range $0..7$ (`'B000'`..`'B111'`). Out of range values trigger KSS error 1033 (*Status/Turn ungültig*).
   - Validates Turn $T$ literal values and assignments: strictly enforces 6-axis range $0..63$ (`'B000000'`..`'B111111'`).
@@ -236,7 +236,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **SYNC Followed by Spline Incompatibility Guard (`SyncFollowedBySplineNotAllowed`)**:
   - Flags invalid sequences where `SYNC` is immediately followed by a `SPLINE` block or motion.
 
-### 📐 KSS Standard Project Templates & Snippets
+### [GEOMETRY] KSS Standard Project Templates & Snippets
 - **Interactive KUKA Template Scaffolding Wizard (`krl.scaffoldKrcFiles`)**:
   - Generates verified project templates:
     - **CELL.SRC**: Production Automatic External handler with P00 handshake, $STOPMESS, and PGNO dispatch.
@@ -250,7 +250,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 
 ## [1.8.11] - 2026-10-01 (Advanced Industrial Stopping Distances & Brake Test Diagnostics)
 
-### 🔬 Industrial Diagnostics & Safe Stopping Distances
+### [ANALYSIS] Industrial Diagnostics & Safe Stopping Distances
 - **Exact Interrupt Priority Model (`InterruptPriorityValidation`)**:
   - Enforces strict KSS KRC interrupt priority constraints decompiled directly from `Kuka.Sim.Programming.Statements.Validation`:
     - Valid user interrupt priorities: `1..2` and `4..39` (`value != 3`).
@@ -273,7 +273,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 
 ## [1.8.10] - 2026-10-01 (KUKA WorkVisual Compiler Analyzers, Robot Image Bridge & Acceptance Reports Integration)
 
-### 📸 KUKA WorkVisual Robot Image Bridge & Acceptance Protocol Reports
+### [BACKUP] KUKA WorkVisual Robot Image Bridge & Acceptance Protocol Reports
 - **Official Robot Photo in Acceptance Protocols (`krl.generateAcceptanceReport`)**: Acceptance reports generated for customer site buy-offs and CE/ISO 10218 safety audits now embed the official high-resolution robot render inside "Card 1: Robot Passport ($machine.dat)".
 - **Local WorkVisual Asset Detection**: Seamlessly detects installed KUKA WorkVisual (3.0, 4.0, 5.0, 6.0) on the engineer's workstation (`C:\Program Files (x86)\KUKA\WorkVisual 6.0\Tools\RuntimeTools`).
 - **Fuzzy Kinematics Model Resolver**: Robust matching for both KRC4 and KRC5 notations (e.g., `#KR210R2700_2 C4 FLR`, `KR210R2700-2 KRC5`, `KR210R2700_2 C5 FLR` all reliably map to official kinematic render `KR 210 R2700 prime`).
@@ -281,7 +281,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **KUKA Fleet Robot Explorer Integration**: Discovered robot controllers and multi-robot cells in the active workspace display the official robot photo directly in the VS Code TreeView explorer.
 - **Robot Model Viewer (`krl.viewRobotImage`)**: 1-click preview of the active robot cell's photo inside VS Code editor.
 
-### 🔬 KUKA WorkVisual 6.0 Compiler Analyzers Reverse-Engineering Integration
+### [ANALYSIS] KUKA WorkVisual 6.0 Compiler Analyzers Reverse-Engineering Integration
 - **`InvalidFileHeader` Guard (`krl.diagnostics.checkFileHeaders`)**: Flags comments or blank lines preceding KSS compiler directives (`&ACCESS` and `&REL`) that break compilation on physical KRC controllers.
 - **`InvalidBrakeStatement` Guard (`krl.diagnostics.checkBrakeUsage`)**: Strictly prohibits `BRAKE` / `BRAKE F` in background Submit interpreter (`.sub`), and enforces that `BRAKE` in `.src` files can only be executed within declared `INTERRUPT` service routines.
 - **`DeclarationHidesGlobalVariable` & `HiddenModuleField` (`krl.diagnostics.checkShadowedVariables`)**: Warns when local variables in `.src` routines shadow global variables in `$config.dat` or module variables in `.dat`, preventing accidental state corruption.
@@ -291,18 +291,18 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **`SwitchWithoutCase` Guard**: Flags `SWITCH` blocks that close with `ENDSWITCH` without any `CASE` or `DEFAULT` branches.
 - **`UnreachableCode` after `HALT`**: Identifies dead code paths immediately following `HALT` statements.
 
-### 🛡️ Supply Chain Security & CVE-2026-76845 Remediation
+### [SECURITY] Supply Chain Security & CVE-2026-76845 Remediation
 - **Fixed `CVE-2026-76845` in `adm-zip`**: Upgraded `adm-zip` dependency to `^0.6.1` to eliminate the symbolic link extraction vulnerability ("Improper Link Resolution Before File Access") flagged by ReversingLabs Spectra Assure and NVD.
 - **Zero Supply Chain Alerts**: Manifest SBOM updated to ensure 100% compliance across automated enterprise security scanners.
 
 ## [1.8.9] - 2026-09-30 (Automotive & OEM Standards Suite, 183 KUKA Robot Specs DB, VASS 26 Linter, VW_USER Tech Packages & Path Geometry)
 
-### 🦾 Official KUKA Robot Specs Catalog & Reach Envelope Guard (183 Models)
+### [KINEMATICS] Official KUKA Robot Specs Catalog & Reach Envelope Guard (183 Models)
 - **183 Official KUKA Robot Models Catalog**: Embedded comprehensive physical reach, payload, arm series, and mounting position specifications parsed directly from KUKA Kinematics Specifications (`KRC4_robots.xml`).
 - **Autonomous Robot Model Auto-Detection**: Automatically detects active robot kinematics and serial model from controller root `$machine.dat` (`$TRAFONAME[]`) or `am.ini`, supporting fuzzy matching and edition variations (`#KR210R2700_2 C4 FLR`).
 - **Cartesian Reach Envelope Validator (`krl.diagnostics.checkRobotReach`)**: Real-time diagnostic guard that flags Cartesian target coordinates (`E6POS`, `POS`, `FRAME`, literals) exceeding the robot's physical reach sphere ($R = \sqrt{X^2+Y^2+Z^2} > \text{reach} + 100\text{ mm}$), while properly factoring external linear track axes ($E1$).
 
-### 🏭 Volkswagen, Audi, SEAT, Škoda (VASS 26 Standard) Rules Linter (`krl.diagnostics.checkVassStandard`, `krl.diagnostics.checkVassStrictRules`)
+### [SIMULATION] Volkswagen, Audi, SEAT, Škoda (VASS 26 Standard) Rules Linter (`krl.diagnostics.checkVassStandard`, `krl.diagnostics.checkVassStrictRules`)
 - **Macro Call Approximation Guard**: Enforces VASS 26 exact stop rule (`SPSMAKRO` only allowed with `VE=0%`). Warns if continuous path approximation (`VE > 0%`) is programmed, preventing dangerous PLC desynchronization.
 - **Safety Interlock Gate Handshake**: Flags `A23 = AUS` (cell safety zone release) missing mandatory safety gate confirmation (`WARTE BIS E17` or `WARTE BIS E23`).
 - **Folge Safe Start Speed**: Validates that the first motion point of a Folge program (`folge*.src`) runs at safe reduced velocity (`VB <= 20%`, `VE = 0%`).
@@ -314,56 +314,56 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **SUCHLAUF Motion Type Constraint**: Enforces `LIN` motion type for touch-sense search routines (`SUCHLAUF`).
 - **KRL Comment Length Limit**: Warns when inline form comment strings exceed KSS 128-character hardware buffer limit.
 
-### 🔄 Motion Point 3-Way Data Integrity Validator (`krl.diagnostics.checkMotionFoldSync`)
+### [SYNC] Motion Point 3-Way Data Integrity Validator (`krl.diagnostics.checkMotionFoldSync`)
 - **Motion Point Data Integrity Engine**: Detects desynchronization between user-visible `;FOLD` comments on SmartPAD (e.g., `VB=100%`, `RobWzg=1`, `Base=0`) and the underlying `.dat` controller structures (`P1_D`, `PDAT`, `LDAT`, `FDAT`).
 - **Stealth Speed & Tool Override Detection**: Emits precise diagnostic warnings if an engineer manually altered FOLD headers or DAT structures in an external editor, preventing hazardous robot velocity jumps.
 
-### 🏷️ VW_USER & VKRC Technology Packages Suite (`krl.inlayHints.vwUserTech`)
+### [TAG] VW_USER & VKRC Technology Packages Suite (`krl.inlayHints.vwUserTech`)
 - **Full Technology Catalog (101..501)**: Embedded specifications for Spot Welding (`EZ/SP/KE`), Equalizing Gun (`VM-Ausgleich`), Clinching (`CZ`), MIG/MAG Arc (`MS`), Sensor Offset (`Baseverschiebung`), Stud Welding (`BS`), SafeRobot (`SFR`), Gluing/Dispensing (`Kleben`), Laser Optics (`3D-PFO`), Gripper Tech (`Handling`), Blind Riveting (`Nieten`), Seam Tracking (`NK`), and Flowdrill.
 - **LSP Inlay Hints & SPSMAKRO Integration**: Inline parameter name, macro descriptors (`Makro 340: Handling (Greifer)`), and technology labels directly in the editor for `VW_USER`, `VW_USR_R`, and `SPSMAKRO` calls.
 - **Standard System I/O Fallback Hints**: Displays standard industrial signal meanings for `$IN` and `$OUT` when unaliased.
 - **Interactive Hover & Signature Help**: Rich Markdown tables detailing parameter roles ($P1..P10$), physical units (`[1/10 mm]`, `[ms]`), and decoded enum values.
 
-### 📐 Trajectory Geometry & Path Math Guard (`krl.diagnostics.checkPathApproximation`)
+### [GEOMETRY] Trajectory Geometry & Path Math Guard (`krl.diagnostics.checkPathApproximation`)
 - **CIRC Collinear & Coincident Point Guard**: Mathematically verifies 3-point circular arcs (`CIRC`, `SCIRC`, `KCIR`). Detects collinear points (infinite radius) and coincident points ($Aux = Target$) that crash KUKA motion planner at runtime.
 - **$APO.CDIS 50% Segment Over-Approximation & Silent Reduction**: Enforces KSS trajectory constraint: flags `$APO.CDIS` exceeding 50% of the segment length and warns about silent approximation reduction by controller.
 - **Switch Points Range Verification (`TRIGGER WHEN PATH` & `Schaltpkt`)**: Compares switch point trigger distances against preceding and outgoing physical motion segments. Flags out-of-bounds trigger distances before controller runtime errors.
 - **Long Motion Segments Detection**: Identifies continuous seam motions (`KLIN`, `LIN`) exceeding 50 mm without intermediate support points to preserve bead application geometry.
 - **FOLD & ENDFOLD Name Matching Validation**: Validates name parity between `;FOLD <name>` and `;ENDFOLD (<name>)` to protect SmartPAD outline structure.
 
-### 🚗 Volkswagen VKRC Full Integration & Automotive Architecture
+### [AUTOMOTIVE] Volkswagen VKRC Full Integration & Automotive Architecture
 - **Autonomous VKRC Workspace Detection (`vkrcService`)**: Heuristically analyzes project files for Volkswagen VKRC structures (Folge, UP, MakroSps, MakroStep, MakroTrigger, VW_USER) and controller root parameters.
 - **Pro Gated Industrial Standard**: Free community users receive clear, non-intrusive notifications when opening VKRC projects, with one-click access to a 14-day full-featured trial or direct corporate invoicing.
 - **Dedicated VKRC Status Bar & Diagnostics**: Real-time status bar widget showing active VKRC mode, with deep AST parsing and syntax diagnostics for automotive assembly lines.
 
-### 💳 Unified B2B Invoicing via Dodo Payments (Merchant of Record)
+### [BILLING] Unified B2B Invoicing via Dodo Payments (Merchant of Record)
 - **Official Checkout & Customer Portal**: Fully retired homemade HTML quote generator in favor of hosted Dodo Payments checkout with automated EU VAT validation (VIES Reverse Charge 0% for European businesses).
 - **Direct PDF Invoice Retrieval (`krl.downloadLatestInvoice`)**: Integrated direct download of official Dodo PDF invoices directly inside VS Code with merchant details for enterprise accounting.
 
-### 🛠️ Industrial UI Refresh & Strict Codicon Standardization
+### [TOOLS] Industrial UI Refresh & Strict Codicon Standardization
 - **Complete Cartoon Emoji Eradication**: Replaced all informal emojis across the entire UI/UX with native VS Code Codicons (`ThemeIcon`), precision SVG vectors, and engineering bracketed tags (`[PRO]`, `[TECH]`, `[VASS 26]`, `[MOVE]`, `[CALL]`, `[WAIT]`, `[IO]`, `[CMD]`, `[PTP]`, `[LIN]`, `[CIRC]`).
 - **Standardized TreeViews & QuickPicks**: Clean visual hierarchy across Commands TreeView, I/O TreeView, CodeLens, Hover tooltips, and Control Flow Diagrams.
 
-### 🎛️ UI/UX Control Center Two-Way Sync & 6-Language Parity
+### [CONTROL] UI/UX Control Center Two-Way Sync & 6-Language Parity
 - **Independent Feature Switches**: Added dedicated toggles for each new automotive engine under "Critical Safety & Hardware Limits" and "Automotive & OEM Standards (Volkswagen, Audi, SEAT, Škoda — VASS 26)".
 - **Strict 6-Language NLS & Client Parity**: All configuration settings, diagnostics, and Control Center descriptions fully localized across English, Russian, German, Spanish, Italian, and Turkish with zero hardcoded strings.
 
 ## [1.8.8] - 2026-09-24 (Open VSX Automated Pipeline, DevSecOps License Protection & Clean Code Audit)
 
-### 🚀 Open VSX & Dual-Registry Publishing Pipeline
+### [RELEASE] Open VSX & Dual-Registry Publishing Pipeline
 - **Dedicated Open VSX Workflow Scripts**: Added `publish:ovsx` and `publish:all` commands with `--no-dependencies` bundler isolation to `package.json` to enable automated dual publishing to both VS Code Marketplace and Eclipse Open VSX.
 - **Pre-Publish Dual Collision Verification**: Hardened `scripts/prepublish_check.js` to ensure version availability and manifest parity across both registries simultaneously before publishing.
 
-### 🛡️ DevSecOps & License Protection Hardening
+### [SECURITY] DevSecOps & License Protection Hardening
 - **CI License Integrity Guard**: Fixed `.github/workflows/ci.yml` to prevent overwriting the comprehensive 8.8KB Commercial EULA (`extension/LICENSE.txt`) with the root stub during continuous integration runs.
 - **ESLint & TypeScript Architecture Audit**: Cleaned up all unused parameters and imports across `aiTools.ts`, `foldTools.ts`, `ioMatrix.ts`, and `motionStats.ts`, reducing compiler warnings and ensuring strict code cleanliness.
 - **Exported Tool & Base Resolver**: Exported `detectActiveToolAndBase` in `foldTools.ts` for unified trajectory kinematics analysis across tools.
 
-### 🧩 Heuristic File Classifier & Workspace Disambiguation (`.src` / `.dat`)
+### [MODULE] Heuristic File Classifier & Workspace Disambiguation (`.src` / `.dat`)
 - **Authentic KRL Content Detection**: Introduced intelligent syntax classifier (`isAuthenticKrlContent`) recognizing KSS structural anchors (`&ACCESS`, `DEF`, `DEFDAT`, `DECL`, `;FOLD`, motion commands).
 - **Zero False Diagnostics on Non-Robotics Files**: Automatically isolates and ignores foreign non-KUKA files sharing `.dat` or `.src` extensions (such as GTA/FiveM data tables, C/C++ sources, binary blobs), preventing LSP error flooding.
 - **First-Line Grammar Disambiguation**: Added `firstLine` manifest pattern to prioritize KRL syntax mapping only when file begins with valid KRL headers or routines.
-### 🛡️ Safety Speed Diagnostics & Submit Interpreter (`.sub`)
+### [SECURITY] Safety Speed Diagnostics & Submit Interpreter (`.sub`)
 - **Safety Diagnostics on Submit Programs (`sps.sub`)**: Resolved an issue where background submit interpreter files (`.sub`) were improperly categorized as read-only MADA controller files. Full safety speed auditing (`$OV_PRO`, `$VEL_ACT`) is now active across all subroutines and background tasks.
 - **Air-Gapped License Deactivation Gateway**: Added cryptographic offline deactivation certificate support allowing clean seat unbinding from offline production laptops with automatic instance release on the cloud licensing gateway.
 - **1-Click Hardware License Re-binding**: Instant workstation migration support for factory laptop replacement.
@@ -371,7 +371,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 
 ## [1.8.7] - 2026-09-16 (Industrial Field Suite, KUKA.Sim 4.10 Standardization & Pure-TS KUKA Event Log Decoder)
 
-### ⚡ Industrial Robotics Field Engineering Suite (PRO)
+### [REALTIME] Industrial Robotics Field Engineering Suite (PRO)
 - **Visual I/O Signal Matrix & Overlap Detector (`krl.showIoMatrix`)**:
   - Scans workspace declarations for `$IN`, `$OUT`, `$ANIN`, and `$ANOUT`.
   - Calculates multi-bit signal spans and automatically identifies overlapping PLC hardware addresses.
@@ -382,7 +382,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
   - **Welding Cycle Intelligence**: Automatically detects `ARCON`/`ARCOFF` blocks, isolates weld seams, computes total weld seam length (mm / m), and calculates arc-on cycle time.
 - **Native Copilot-Style Persistent AI Diff Review (`KrlReviewService`)**:
   - Zero modal dialogs: all code transformations (spline conversions, fold modernizations, cleanup) open in VS Code native side-by-side Monaco Diff Editor (`original ↔ proposed`).
-  - Adaptive editor tab action bar: 1-click `✅ Accept File` (`Ctrl+Enter`), `❌ Reject File` (`Esc`), or batch `Accept All` (`Ctrl+Shift+Enter`).
+  - Adaptive editor tab action bar: 1-click `[VERIFIED] Accept File` (`Ctrl+Enter`), `[EXCLUDED] Reject File` (`Esc`), or batch `Accept All` (`Ctrl+Shift+Enter`).
   - Multi-file project pipeline with accurate remaining counters, QuickPick jump navigator, live buffer edit preservation, and race-condition guards.
 - **KSS Spline Kinematic Separation & Safety-Critical Motion Suite (`krl.convertLegacyToSpline`, `krl.insertSplineBlock`)**:
   - `SPTP` point-to-point axis motions are strictly generated as standalone instructions outside `SPLINE...ENDSPLINE` blocks to prevent controller kinematic stops.

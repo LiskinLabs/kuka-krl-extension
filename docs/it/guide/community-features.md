@@ -1,4 +1,4 @@
-# 🟢 Community Edition — Free Core Features
+# Community Edition — Free Core Features
 
 Detailed walkthrough of the 15 core free features in KUKA KRL Professional.
 
@@ -81,7 +81,7 @@ Formats assignments and `IF/FOR/WHILE` nesting via `Shift + Alt + F`.
 ---
 
 ### 10. Quick Fold Toolbar Buttons
-Top bar icons 🙈 (`krl.foldAll`) and 📖 (`krl.unfoldAll`) for instant FOLD collapse/expand.
+Top bar icons [Fold All] (`krl.foldAll`) and [Unfold All] (`krl.unfoldAll`) for instant FOLD collapse/expand.
 
 ![Quick Fold Toolbar Demo](/media/quick_fold_toolbar.gif)
 

@@ -4,12 +4,12 @@
 
 ---
 
-## 🔥 Версия 1.9.8 — KUKA.Sim (.vcmx) Layout Intelligence, KUKA.RSI Real-Time, G-Code/SVG CAM Importer & PLC Fieldbus Suite [PRO]
+## [RELEASE] Версия 1.9.8 — KUKA.Sim (.vcmx) Layout Intelligence, KUKA.RSI Real-Time, G-Code/SVG CAM Importer & PLC Fieldbus Suite [PRO]
 
 > **Лицензионная политика (Strict PRO Tier Enforcement):**  
 > Базовая поддержка языка (подсветка синтаксиса, базовое форматирование, FOLD/UNFOLD) остается в бесплатном режиме **Community**. Весь инженерный, аналитический, симуляционный, CAM и кодогенерирующий функционал работает строго в режиме **PRO (`ensurePremium`)**.
 
-### 1. 🧩 KUKA.Sim & Visual Components (`.vcmx` / `layout.rsc`) Intelligence Suite [PRO]
+### 1. [MODULE] KUKA.Sim & Visual Components (`.vcmx` / `layout.rsc`) Intelligence Suite [PRO]
 * **Цель:** Глубокий нативный анализ, валидация, авторемонт и пост-процессинг имитационных 3D-моделей **KUKA.Sim 4.x / Visual Components (`.vcmx`)** без запуска тяжелой среды симуляции (на базе архитектуры `VCMX-Handling` и `Post-Processor`).
 * **Функционал и команды:**
   * **`krl.inspectVcmxLayout` — KUKA.Sim / VCMX Layout & Process Inspector [PRO]:**
@@ -25,7 +25,7 @@
   * **`krl.exportVcmxToKrl` — VCMX to KUKA KRL Post-Processor (`.src` + `.dat`) [PRO]:**
     * Прямое извлечение и компиляция робот-процессов, точек движения, захватов и сигналов (`IWaitSignalStatement` $\rightarrow$ `WAIT FOR $IN[...]`, `ISendSignalStatement` $\rightarrow$ `$OUT[...]`, `IProcessDelayStatement` $\rightarrow$ `WAIT SEC`) из `.vcmx` / `layout.rsc` в чистые модули `.src` и `.dat`.
 
-### 2. ⚡ KUKA.RobotSensorInterface (RSI) & ROS 2 Real-Time Control Suite [PRO]
+### 2. [REALTIME] KUKA.RobotSensorInterface (RSI) & ROS 2 Real-Time Control Suite [PRO]
 * **Цель:** Поддержка жесткого реального времени (Hard Real-Time, такт интерполятора IPO 4 мс / 12 мс, 250 Гц) для управления роботом от внешних контроллеров, ROS 2 (`kuka_rsi_driver`), датчиков силы-момента (FT sensors) и лазерных трекеров шва.
 * **Функционал и команды:**
   * **LSP & Language Support:** Полная поддержка системных функций и констант `KUKA.RSI` (`RSI_CREATE`, `RSI_ON`, `RSI_MOVECORR`, `RSI_OFF`, `RSI_DELETE`, `RSI_RESET`, `RSI_SETPARAM`, `RSI_GETPARAM`, `RSI_ENABLE`, `RSI_DISABLE`, `RSISTAT`, `RSIOK`, `#ABSOLUTE`, `#RELATIVE`, `#IPO`, `#IPO_FAST`).
@@ -34,7 +34,7 @@
   * **`krl.generateRsiCode` — KUKA.RSI Real-Time 4ms Code & XML Generator [PRO]:**
     * Генерация готовой связки KRL-драйвера реального времени (`.src`) и XML-конфигурации сокета (`.xml`) для режимов декартовой коррекции (`#POSCORR`) и осевой коррекции (`#AXISCORR` / ROS 2).
 
-### 3. 🛠️ CAM CNC G-Code (`.nc`/`.gcode`) & Vector SVG to KUKA KRL Importer [PRO]
+### 3. [TOOLS] CAM CNC G-Code (`.nc`/`.gcode`) & Vector SVG to KUKA KRL Importer [PRO]
 * **Цель:** Прямая конвертация управляющих программ ЧПУ и векторных контуров в готовые траектории роботов KUKA для фрезеровки, резки, сварки и нанесения герметика.
 * **Функционал и команда:**
   * **`krl.importGcodeToKrl` — Convert CNC G-Code / SVG to KUKA KRL (`.src` + `.dat`) [PRO]:**
@@ -42,7 +42,7 @@
     * Парсинг векторной графики `.svg` (`<path>`, `<line>`, `<polyline>`, `<polygon>`, `<rect>`, `<circle>`) с аппроксимацией кривых Безье и генерацией высот безопасного перехода `Z_Safe` и рабочей плоскости `Z_Work`.
     * Синхронная генерация пары `.src` + `.dat` (`E6POS`, `FDAT`, `LDAT`, `PDAT`).
 
-### 4. 👁️ Vision Hand-Eye Calibration Wizard & PLC Fieldbus Tag Exporter [PRO]
+### 4. [VISION] Vision Hand-Eye Calibration Wizard & PLC Fieldbus Tag Exporter [PRO]
 * **Цель:** Автоматизация калибровки 3D-камер машинного зрения и мгновенная выгрузка таблиц сигналов I/O в САПР ПЛК.
 * **Функционал и команды:**
   * **`krl.generateVisionCalibration` — Vision Hand-Eye Calibration & Pre-Grasp Generator [PRO]:**
@@ -50,7 +50,7 @@
   * **`krl.exportPlcTags` — Export I/O Signals to Siemens TIA Portal & Beckhoff TwinCAT [PRO]:**
     * Извлечение сигналов `SIGNAL` / `$IN` / `$OUT` из проекта KRL и архивов WorkVisual (`.wvs`) с экспортом в таблицы тегов **Siemens TIA Portal XML / SDF (`%I` / `%Q`)**, **Beckhoff TwinCAT 3 GVL (`.TcGVL`)** и **EPLAN CSV**.
 
-### 5. 🗄️ WorkVisual (`.wvs` / `.wvps`) Bus Topology & KOP Catalogs Parser [PRO]
+### 5. [ARCHIVE] WorkVisual (`.wvs` / `.wvps`) Bus Topology & KOP Catalogs Parser [PRO]
 * **Цель:** Прямой анализ топологии полевых шин (EtherCAT, Profinet, Virtual IO) и установленных каталогов опций KOP без распаковки архива WorkVisual.
 * **Функционал и команда:**
   * **`krl.inspectWvsTopology` — WorkVisual (.wvs) Topology & Bus Inspector [PRO]:**
@@ -59,7 +59,7 @@
     * Извлечение шинной структуры из `EcatDiag_*.xml`, `VIO_USER_BUS.xml`, `VIO_PLC_BUS.xml`.
     * Извлечение привязок сигналов I/O из `Fieldbus.krcVariables.xml` с прямой интеграцией в мастер экспорта тегов ПЛК (`krl.exportPlcTags`).
 
-### 6. 🔄 Auto-Sync Missing Points & Inline Form Normalizer (`.dat` from `.src`) [PRO]
+### 6. [SYNC] Auto-Sync Missing Points & Inline Form Normalizer (`.dat` from `.src`) [PRO]
 * **Цель:** Автоматическая синхронизация и генерация недостающих точек движения и параметров Inline Form в файле данных `.dat` из кода `.src`.
 * **Функционал и команда:**
   * **`krl.syncPointsToDat` — Auto-Sync Missing Points & Inline Forms to .dat [PRO]:**
@@ -69,9 +69,9 @@
 
 ---
 
-## 🗺️ Версия 1.9.9 — Interactive 3D Trajectory & Point Inspector (Отложено на следующий спринт)
+## [ROADMAP] Версия 1.9.9 — Interactive 3D Trajectory & Point Inspector (Отложено на следующий спринт)
 
-### 5. 🌐 Interactive 3D Trajectory & Point Inspector (Webview + Three.js)
+### 5. [ONLINE] Interactive 3D Trajectory & Point Inspector (Webview + Three.js)
 * **Цель:** Визуализация траекторий инструмента робота прямо внутри VS Code рядом с кодом `.src` (запланировано на следующий релиз после `v1.9.7`).
 * **Функционал:**
   * Парсинг команд движения (`PTP`, `LIN`, `CIRC`, `SLIN`, `SPTP`, `SCIRC`, `SPLINE`) из `.src` и координат точек (`E6POS`, `POS`, `FRAME`) из связанного `.dat`.
@@ -83,16 +83,16 @@
 
 ---
 
-## 🗺️ Версия 1.9.0 — Базовая платформа визуализации I/O и кинематики (Выполнено)
+## [ROADMAP] Версия 1.9.0 — Базовая платформа визуализации I/O и кинематики (Выполнено)
 
-### 2. ⚡ Visual I/O Signal Matrix & PLC Cross-Reference
+### 2. [REALTIME] Visual I/O Signal Matrix & PLC Cross-Reference
 * **Цель:** Управление промышленными интерфейсами робот-ПЛК (Siemens TIA Portal, Beckhoff TwinCAT, Profinet).
 * **Функционал:**
   * Интерактивная матрица всех дискретных и групповых сигналов `$IN[...]`, `$OUT[...]`, `SIGNAL`.
   * Диагностика перекрытия адресов (overlap detection) — предупреждение, если биты группового сигнала пересекаются с другими сигналами.
   * Двусторонний экспорт/импорт сигналов в `.xlsx` и `.csv` для мгновенной сверки с электрическими схемами (EPLAN) и таблицами тегов ПЛК.
 
-### 3. 📐 KUKA Batch Point Offset Transformer & Kinematic Frame Shift Engine (PRO)
+### 3. [GEOMETRY] KUKA Batch Point Offset Transformer & Kinematic Frame Shift Engine (PRO)
 * **Цель:** Промышленный инструмент пакетного смещения и вращения координат точек робота (`E6POS`, `POS`, `FRAME`) с пересчётом кинематических систем отсчёта ($BASE, $TOOL, $WORLD), аналогичный функциям Frame/Path Offset в ABB RobotStudio, KUKA WorkVisual и Tecnomatix Process Simulate.
 
 #### 1. Практическая ценность для инженера на объекте
@@ -145,9 +145,9 @@
 
 ---
 
-## 🌐 Версия 1.9.5 — Vision-Guided Robotics & Real-Time Control (EKI & RSI / ROS 2)
+## [ONLINE] Версия 1.9.5 — Vision-Guided Robotics & Real-Time Control (EKI & RSI / ROS 2)
 
-### 4. 👁️ KUKA.EthernetKRL (EKI) & Vision-Guided Robotics (VGR) Suite
+### 4. [VISION] KUKA.EthernetKRL (EKI) & Vision-Guided Robotics (VGR) Suite
 * **Цель:** Комплексная интеграция KUKA с промышленными 3D-сканерами и системами машинного зрения (Roboception rc_visard, Photoneo PhoXi/MotionCam, Cognex, Keyence, Zivid) и SCADA по протоколу TCP/IP (XML / Binary Stream).
 * **Практическая ценность для инженера на объекте:**
   * **Zero-Boilerplate EKI Integration:** Мгновенное развертывание сетевого сокета без необходимости вручную писать десятки строк инициализации каналов и обработки ошибок связи.
@@ -167,7 +167,7 @@
   * **EKI XML Configuration Wizard & Linter:**
     * Интерактивная генерация и проверка XML-схем конфигурации EthernetKRL (`C:\KRC\ROBOTER\Config\User\Common\EthernetKRL\*.xml`) для TCP Client / Server.
 
-### 5. ⚡ KUKA.RobotSensorInterface (RSI) & ROS 2 Real-Time Control Suite
+### 5. [REALTIME] KUKA.RobotSensorInterface (RSI) & ROS 2 Real-Time Control Suite
 * **Цель:** Поддержка жесткого реального времени (Hard Real-Time, такт интерполятора IPO 4 мс / 12 мс, 250 Гц) для прямого управления роботом KUKA от внешних контроллеров, ROS 2 (`ros2_control` / `kuka_rsi_driver`), датчиков силы-момента (FT sensors) и систем лазерного слежения за швом.
 * **Практическая ценность для инженера на объекте:**
   * **Быстрый запуск ROS 2 / MoveIt 2:** Готовая инфраструктура для подключения робота KRC4/KRC5 к современным пакетам планирования траекторий без изучения внутренних тонкостей конфигурирования блоков RSI.
@@ -185,9 +185,9 @@
 
 ---
 
-## 🚀 Версия 2.0.0 — KUKA Live Bridge & Debugger Platform
+## [RELEASE] Версия 2.0.0 — KUKA Live Bridge & Debugger Platform
 
-### 6. 📡 KUKA Live Controller Bridge (KRC4 / KRC5 / OfficeLite)
+### 6. [TELEMETRY] KUKA Live Controller Bridge (KRC4 / KRC5 / OfficeLite)
 * **Цель:** Прямое подключение к роботу из VS Code (аналог ABB RAPID Live).
 * **Каналы связи:**
   * **KukavarProxy / OpenShowVar** (TCP порт 7000).
@@ -198,7 +198,7 @@
   * **Live Controller Status Bar:** Индикация `$MODE_OP` (T1, T2, AUT, EXT), `$OV_PRO` (Override %), `$PRO_STATE` (STOPPED, ACTIVE), текущих координат `$POS_ACT` и углов осей `$AXIS_ACT`.
   * **Remote Deploy & Sync (`Ctrl+Shift+U`):** Выгрузка и загрузка модулей на робот в 1 клик с предварительной валидацией синтаксиса и diff-сравнением.
 
-### 7. 🐞 KRL Offline Step-Debugger (DAP — Debug Adapter Protocol)
+### 7. [DEBUG] KRL Offline Step-Debugger (DAP — Debug Adapter Protocol)
 * **Цель:** Пошаговая отладка KRL-алгоритмов без физического контроллера.
 * **Функционал:**
   * Собственный легковесный KRL Interpreter на базе нашего AST-парсера.
@@ -209,12 +209,12 @@
 
 ---
 
-## 🌐 Версия 2.1.0 — Web Platform, Online Simulator & Client Backup Inspector
+## [ONLINE] Версия 2.1.0 — Web Platform, Online Simulator & Client Backup Inspector
 
 > **Синхронизация задач и статус выполнения (Google Keep Tracker):**  
-> 🔗 [Google Keep Task Board](https://keep.google.com/u/0/?ec=wgc-keep-[module]-goto#LIST/1ieaaju5UbDaIPtdC8Z3xDWc4LJ31m6P0dp2yNahGEEu-f3CwQHUELZ-BXD-Wa23AL8e8)
+> [LINK] [Google Keep Task Board](https://keep.google.com/u/0/?ec=wgc-keep-[module]-goto#LIST/1ieaaju5UbDaIPtdC8Z3xDWc4LJ31m6P0dp2yNahGEEu-f3CwQHUELZ-BXD-Wa23AL8e8)
 
-### 8. 📦 In-Browser KUKA Archive (.zip) Inspector & Full Fleet Audit Engine
+### 8. [PACKAGE] In-Browser KUKA Archive (.zip) Inspector & Full Fleet Audit Engine
 * **Цель:** Мгновенный глубокий аудит промышленных программ KUKA прямо на веб-сайте через перетаскивание стандартного клиентского архива робота (`.zip`) без установки ПО и без отправки конфиденциального кода на сервер.
 * **100% Client-Side Privacy (Zero-Upload Guarantee):**
   * Полная распаковка архива в памяти браузера (`fflate` / Web Streams API) в фоновом Web Worker.
@@ -236,7 +236,7 @@
   * Построение интерактивного графа вызовов подпрограмм (Call Graph).
   * 2D/3D схематичная визуализация траекторий инструмента робота на основе разобранных точек `E6POS`.
 
-### 9. 🚀 VS Code for the Web Port (vscode.dev / Zero Feature Degradation)
+### 9. [RELEASE] VS Code for the Web Port (vscode.dev / Zero Feature Degradation)
 * **Цель:** Полноценный запуск расширения KUKA KRL в браузерной среде (`vscode.dev`, `github.dev`) и встраивание в фирменный веб-портал Liskin Labs с нулевым урезанием возможностей по сравнению с десктопной версией.
 * **Архитектура Web Extension (Microsoft Guidelines):**
   * Конфигурация манифеста `package.json`:
@@ -262,7 +262,7 @@
 * **Встраивание в веб-портал через Monaco VS Code API:**
   * Интеграция `@codingame/monaco-vscode-api` для создания максимально приближенной к реальной VS Code рабочей среды прямо в окне браузера.
 
-### 10. 💎 Продающий портал Liskin Labs & Редизайн документации
+### 10. [PRO] Продающий портал Liskin Labs & Редизайн документации
 * **Цель:** Превращение сайта в премиальный интерактивный инструмент продаж и витрину возможностей расширения в стиле лучших мировых инженерных порталов (Google Developer, Stripe, Linear).
 * **Каталог на 159 сертифицированных инструментов:**
   * Интерактивная фильтрация по 8 ключевым промышленным категориям.
@@ -277,7 +277,7 @@
 
 ---
 
-## 📋 Итоги сегодняшнего дня (Completed Sprint Highlights)
+## [REPORT] Итоги сегодняшнего дня (Completed Sprint Highlights)
 1. **Редизайн VitePress документации (`kuka-krl-extension-public`):**
    * Демонтированы устаревшие шаблонные изображения Midjourney и громоздкие компоненты (резервная копия сохранена в `_backup_docs_20261007` и теге `v-backup-pre-redesign`).
    * Реализован компонент `FeaturesWiki.vue` с каталогом на 159 инструментов, шорткатом `/`, фильтрами и AST инспектором.

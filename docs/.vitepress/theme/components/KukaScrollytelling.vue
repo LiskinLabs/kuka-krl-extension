@@ -120,7 +120,7 @@
               v-for="(tag, tIdx) in currentScene.tags[currentLang] || currentScene.tags.en" 
               :key="tIdx"
               class="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg bg-slate-900/80 backdrop-blur-md border border-white/15 text-gray-200 text-[10px] sm:text-xs font-mono shadow-sm flex items-center gap-1">
-              <span class="text-kuka-orange font-bold">✓</span> {{ tag }}
+              <span class="text-kuka-orange font-bold">[OK]</span> {{ tag }}
             </span>
           </div>
         </div>
@@ -175,7 +175,7 @@ let autoPlayTimer = null
 const scenes = [
   {
     id: 'hero',
-    icon: '🤖',
+    icon: '',
     image: '/media/cinematic/kuka_hero.jpg',
     badge: 'STAGE 01 // CORE ARCHITECTURE',
     shortTitle: { en: 'Robot IDE', ru: 'Главная IDE', tr: 'Robot IDE' },
@@ -215,7 +215,7 @@ const scenes = [
   },
   {
     id: 'safety',
-    icon: '🛡️',
+    icon: '',
     image: '/media/cinematic/kuka_safety.jpg',
     badge: 'STAGE 02 // REAL-TIME SAFETY LINT',
     shortTitle: { en: 'Safety Guard', ru: 'Безопасность', tr: 'Güvenlik Teşhisi' },
@@ -247,7 +247,7 @@ const scenes = [
   },
   {
     id: 'wrist',
-    icon: '📐',
+    icon: '',
     image: '/media/cinematic/kuka_wrist.jpg',
     badge: 'STAGE 03 // 6-AXIS DELTA & EULER MATH',
     shortTitle: { en: '6-Axis Delta', ru: 'Дельта Точек', tr: '6 Eksenli Delta' },
@@ -279,7 +279,7 @@ const scenes = [
   },
   {
     id: 'factory',
-    icon: '🌐',
+    icon: '',
     image: '/media/cinematic/kuka_factory.jpg',
     badge: 'STAGE 04 // GLOBAL COMMISSIONING NETWORK',
     shortTitle: { en: 'Global Radar', ru: 'Глобальный Радар', tr: 'Küresel Radar' },

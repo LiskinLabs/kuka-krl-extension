@@ -9,7 +9,7 @@
 
 Liskin Labs designs and engineers industrial-grade development tooling for roboticists, automation engineers, and manufacturing plants worldwide. We are strictly committed to data privacy, industrial confidentiality, and full compliance with the European Union General Data Protection Regulation (**GDPR - Regulation (EU) 2016/679**), the **ePrivacy Directive**, and international cybersecurity standards.
 
-### 🛡️ The Industrial Air-Gap Guarantee
+### [SECURITY] The Industrial Air-Gap Guarantee
 - **Zero Proprietary Code Exfiltration:** All KRL syntax parsing, AST analysis, kinematics calculations, coordinate transformations (`BASE_DATA`, `TOOL_DATA`), block diagrams, and variable inspections execute **100% locally in your computer's RAM**.
 - **No Remote Code Processing:** Your robot programs (`.src`), data lists (`.dat`), safety configurations, and proprietary automation formulas never leave your local environment and are never transmitted to any cloud service.
 - **Air-Gap Capable:** The extension operates seamlessly in high-security, air-gapped industrial environments without internet connectivity.
@@ -30,10 +30,10 @@ To maintain software reliability across diverse KUKA System Software (KSS) versi
 | **Software Metadata** | Extension version, VS Code engine version, license tier (`COMMUNITY` / `PRO`) | **Operational Data:** Required for update delivery and entitlement verification. |
 
 ### What We NEVER Collect
-- ❌ **No Robot Code or File Contents:** Never read, uploaded, or transmitted.
-- ❌ **No Personal Identifiers:** Personal Windows usernames are strictly replaced with `anonymous`.
-- ❌ **No Personal File Trees or Installed Applications:** No auditing of unrelated personal software or directories.
-- ❌ **No Keystrokes or Source Diff:** No tracking of edits or project source contents.
+- [EXCLUDED] **No Robot Code or File Contents:** Never read, uploaded, or transmitted.
+- [EXCLUDED] **No Personal Identifiers:** Personal Windows usernames are strictly replaced with `anonymous`.
+- [EXCLUDED] **No Personal File Trees or Installed Applications:** No auditing of unrelated personal software or directories.
+- [EXCLUDED] **No Keystrokes or Source Diff:** No tracking of edits or project source contents.
 
 ---
 

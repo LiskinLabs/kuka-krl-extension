@@ -83,7 +83,7 @@
         <!-- Sidebar Title -->
         <div class="px-3 py-2 uppercase tracking-wider text-[11px] font-bold text-[#858585] flex items-center justify-between border-b border-[#252525]">
           <span>{{ activeSideTab === 'explorer' ? 'Explorer' : activeSideTab === 'krlTools' ? 'KRL Control Center' : 'Source Control' }}</span>
-          <button @click="sidebarVisible = false" class="hover:text-white text-xs">✕</button>
+          <button @click="sidebarVisible = false" class="hover:text-white text-xs">&times;</button>
         </div>
 
         <!-- EXPLORER TAB CONTENT -->
@@ -96,7 +96,7 @@
           <div class="pl-2 space-y-0.5">
             <div class="text-[#858585] px-1.5 py-0.5 flex items-center gap-1">
               <span>▼</span>
-              <span>📁 R1/Program</span>
+              <span> R1/Program</span>
             </div>
 
             <!-- Program Files List -->
@@ -107,7 +107,7 @@
               :class="['w-full text-left pl-6 pr-2 py-1 rounded flex items-center justify-between gap-1.5 transition-colors', activeFileName === file.name ? 'bg-[#37373d] text-white font-bold' : 'hover:bg-[#2a2d2e] text-[#cccccc]']">
               <span class="flex items-center gap-1.5 truncate">
                 <span :class="file.name.endsWith('.src') ? 'text-kuka-orange' : file.name.endsWith('.dat') ? 'text-cyan-400' : 'text-emerald-400'">
-                  {{ file.name.endsWith('.src') ? '⚡' : file.name.endsWith('.dat') ? '📍' : '⚙️' }}
+                  {{ file.name.endsWith('.src') ? '' : file.name.endsWith('.dat') ? '' : '️' }}
                 </span>
                 <span class="truncate">{{ file.name }}</span>
               </span>
@@ -119,7 +119,7 @@
           <div class="pt-3 pl-2">
             <div class="text-[#858585] px-1.5 py-0.5 flex items-center gap-1">
               <span>▼</span>
-              <span>📦 KRCDiag_2026.zip [MOUNT]</span>
+              <span> KRCDiag_2026.zip [MOUNT]</span>
             </div>
             <div class="pl-6 text-[10px] text-gray-500 py-0.5">
               • Auto-Patch Enabled (&lt;80ms)
@@ -164,10 +164,10 @@
             :key="tab.name"
             @click="activeFileName = tab.name"
             :class="['h-full px-3.5 flex items-center gap-2 border-r border-[#181818] text-xs font-mono transition-colors border-t-2', activeFileName === tab.name ? 'bg-[#1e1e1e] text-white border-t-kuka-orange font-bold' : 'bg-[#2d2d2d] text-[#969696] hover:text-[#cccccc] border-t-transparent']">
-            <span>{{ tab.name.endsWith('.src') ? '⚡' : '📍' }}</span>
+            <span>{{ tab.name.endsWith('.src') ? '' : '' }}</span>
             <span>{{ tab.name }}</span>
             <span v-if="tab.isDirty" class="w-2 h-2 rounded-full bg-white"></span>
-            <span @click.stop="closeTab(tab.name)" class="hover:text-white ml-1 text-xs">✕</span>
+            <span @click.stop="closeTab(tab.name)" class="hover:text-white ml-1 text-xs">&times;</span>
           </button>
         </div>
 
@@ -215,7 +215,7 @@
 
               <!-- Inline ErrorLens Badge -->
               <span v-if="line.hasError" class="ml-3 px-2 py-0.2 rounded text-[10px] bg-red-900/60 text-red-200 border border-red-500/40 select-none font-mono">
-                ⚠️ {{ line.errorMsg }}
+                [WARN] {{ line.errorMsg }}
               </span>
             </div>
           </div>
@@ -251,19 +251,19 @@
                 <span>OUTPUT (AST Engine)</span>
               </button>
             </div>
-            <button @click="bottomPanelOpen = false" class="hover:text-white">✕</button>
+            <button @click="bottomPanelOpen = false" class="hover:text-white">&times;</button>
           </div>
 
           <!-- Panel Tab 1: Problems -->
           <div v-if="panelTab === 'problems'" class="flex-1 p-2.5 overflow-y-auto space-y-1.5 text-[11px]">
             <div v-if="activeFileErrors.length === 0" class="text-emerald-400 py-3 text-center">
-              ✓ No problems detected in workspace. Controller AST check passed (100%).
+              [OK] No problems detected in workspace. Controller AST check passed (100%).
             </div>
             <div 
               v-for="(err, idx) in activeFileErrors" 
               :key="idx"
               class="flex items-center gap-2 p-1.5 rounded hover:bg-[#252526] text-red-300 cursor-pointer">
-              <span class="text-red-400">❌</span>
+              <span class="text-red-400">[ERROR]</span>
               <span class="text-gray-300">{{ err.msg }}</span>
               <span class="text-gray-500">[{{ activeFileName }} : Line {{ err.line }}]</span>
               <span class="text-[10px] px-1.5 py-0.2 rounded bg-white/5 text-gray-400 border border-white/5">{{ err.rule }}</span>
@@ -274,13 +274,13 @@
           <div v-if="panelTab === 'flowchart'" class="flex-1 p-3 overflow-y-auto flex items-center justify-center bg-[#0e1117]">
             <div class="flex items-center gap-2 font-mono text-xs">
               <div class="p-2 rounded bg-purple-500/20 border border-purple-500/40 text-purple-300 font-bold">DEF Start()</div>
-              <span class="text-gray-500">➔</span>
+              <span class="text-gray-500">&rarr;</span>
               <div class="p-2 rounded bg-amber-500/20 border border-amber-500/40 text-amber-300">FOLD INI</div>
-              <span class="text-gray-500">➔</span>
+              <span class="text-gray-500">&rarr;</span>
               <div class="p-2 rounded bg-cyan-500/20 border border-cyan-500/40 text-cyan-300">PTP XHOME</div>
-              <span class="text-gray-500">➔</span>
+              <span class="text-gray-500">&rarr;</span>
               <div class="p-2 rounded bg-emerald-500/20 border border-emerald-500/40 text-emerald-300">PickLoop()</div>
-              <span class="text-gray-500">➔</span>
+              <span class="text-gray-500">&rarr;</span>
               <div class="p-2 rounded bg-purple-500/20 border border-purple-500/40 text-purple-300">END</div>
             </div>
           </div>
@@ -302,10 +302,10 @@
     <div class="h-6 bg-[#007acc] text-white px-3 flex items-center justify-between text-[11px] font-mono select-none">
       <div class="flex items-center gap-3">
         <span class="flex items-center gap-1 font-bold">
-          <span>⚡</span> KUKA KRL Pro
+          <span></span> KUKA KRL Pro
         </span>
         <span class="flex items-center gap-1">
-          <span>❌</span> {{ activeFileErrors.length }}
+          <span>[ERROR]</span> {{ activeFileErrors.length }}
         </span>
         <span class="hidden sm:inline">KSS 8.7 AST: Ready</span>
       </div>
@@ -334,7 +334,7 @@
             type="text" 
             placeholder="Type a KRL command (e.g. format, lint, diff, backup)..."
             class="w-full bg-transparent text-white outline-none placeholder:text-gray-500 text-xs" />
-          <button @click="commandPaletteOpen = false" class="text-gray-400 hover:text-white">✕</button>
+          <button @click="commandPaletteOpen = false" class="text-gray-400 hover:text-white">&times;</button>
         </div>
 
         <div class="max-h-64 overflow-y-auto p-1 space-y-0.5">

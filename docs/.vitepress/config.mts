@@ -25,15 +25,15 @@ export default defineConfig({
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/kuka-krl-extension/favicon.svg' }],
     ['link', { rel: 'icon', type: 'image/png', href: '/kuka-krl-extension/logo.png' }],
     ['meta', { name: 'theme-color', content: '#FF6600' }],
-    ['meta', { name: 'keywords', content: 'KUKA, KRL, KRC4, KRC5, Robot, Robotics, Industrial Automation, WorkVisual, VS Code' }],
+    ['meta', { name: 'keywords', content: 'KUKA, KRL, KRC4, KRC5, Robot, Robotics, Industrial Automation, WorkVisual, VS Code, SCADA, MCP' }],
     ['meta', { property: 'og:title', content: 'KUKA KRL Professional — Industrial Robotics IDE Suite' }],
-    ['meta', { property: 'og:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
+    ['meta', { property: 'og:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Live SCADA, Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
     ['meta', { property: 'og:image', content: '/kuka-krl-extension/logo.png' }],
     ['meta', { property: 'og:site_name', content: 'KUKA KRL Professional' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
     ['meta', { name: 'twitter:title', content: 'KUKA KRL Professional — Industrial Robotics IDE Suite' }],
-    ['meta', { name: 'twitter:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
+    ['meta', { name: 'twitter:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Live SCADA, Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
     ['meta', { name: 'twitter:image', content: '/kuka-krl-extension/logo.png' }]
   ],
   vite: {
@@ -84,6 +84,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Home', link: '/' },
+          { text: 'SCADA Live', link: '/guide/scada-live-monitor' },
           { text: 'Features Wiki', link: '/guide/features' },
           { text: 'Community', link: '/guide/community-features' },
           { text: 'Pro Features', link: '/guide/pro-features' },
@@ -94,6 +95,16 @@ export default defineConfig({
             text: 'Getting Started',
             items: [
               { text: 'Installation & Setup', link: '/guide/installation' }
+            ]
+          },
+          {
+            text: 'v1.9.8 Engineering Suites',
+            items: [
+              { text: 'SCADA Live Monitor & Telemetry', link: '/guide/scada-live-monitor' },
+              { text: 'Point Table & .DAT Synchronizer', link: '/guide/point-synchronizer' },
+              { text: 'WorkVisual & KUKA.Sim (VCMX)', link: '/guide/wvs-and-vcmx' },
+              { text: 'KUKA.RSI Real-Time & CAM Importer', link: '/guide/rsi-and-cam' },
+              { text: 'Model Context Protocol (MCP) Bridge', link: '/guide/mcp-ai-copilot' }
             ]
           },
           {
@@ -129,6 +140,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Главная', link: '/ru/' },
+          { text: 'SCADA Live', link: '/ru/guide/scada-live-monitor' },
           { text: 'Вики функций', link: '/ru/guide/features' },
           { text: 'Бесплатно (Community)', link: '/ru/guide/community-features' },
           { text: 'Pro функции', link: '/ru/guide/pro-features' },
@@ -139,6 +151,16 @@ export default defineConfig({
             text: 'С чего начать',
             items: [
               { text: 'Установка и настройка', link: '/ru/guide/installation' }
+            ]
+          },
+          {
+            text: 'Инженерные комплексы v1.9.8',
+            items: [
+              { text: 'SCADA Live Monitor реального времени', link: '/ru/guide/scada-live-monitor' },
+              { text: 'Таблица точек и синхронизатор .DAT', link: '/ru/guide/point-synchronizer' },
+              { text: 'WorkVisual и KUKA.Sim (VCMX)', link: '/ru/guide/wvs-and-vcmx' },
+              { text: 'KUKA.RSI реального времени и CAM-импортер', link: '/ru/guide/rsi-and-cam' },
+              { text: 'Мост Model Context Protocol (MCP) ИИ', link: '/ru/guide/mcp-ai-copilot' }
             ]
           },
           {
@@ -174,6 +196,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Ana Sayfa', link: '/tr/' },
+          { text: 'SCADA Canlı', link: '/tr/guide/scada-live-monitor' },
           { text: 'Özellikler Wiki', link: '/tr/guide/features' },
           { text: 'Ücretsiz (Community)', link: '/tr/guide/community-features' },
           { text: 'Pro Özellikler', link: '/tr/guide/pro-features' },
@@ -184,6 +207,16 @@ export default defineConfig({
             text: 'Başlangıç',
             items: [
               { text: 'Kurulum ve Ayarlar', link: '/tr/guide/installation' }
+            ]
+          },
+          {
+            text: 'v1.9.8 Mühendislik Paketleri',
+            items: [
+              { text: 'SCADA Canlı İzleyici ve Telemetri', link: '/tr/guide/scada-live-monitor' },
+              { text: 'Nokta Tablosu ve .DAT Senkronizasyonu', link: '/tr/guide/point-synchronizer' },
+              { text: 'WorkVisual ve KUKA.Sim (VCMX)', link: '/tr/guide/wvs-and-vcmx' },
+              { text: 'KUKA.RSI Gerçek Zamanlı ve CAM İçe Aktarıcı', link: '/tr/guide/rsi-and-cam' },
+              { text: 'Model Context Protocol (MCP) Yapay Zeka', link: '/tr/guide/mcp-ai-copilot' }
             ]
           },
           {

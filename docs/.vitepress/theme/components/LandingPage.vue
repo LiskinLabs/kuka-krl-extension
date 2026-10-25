@@ -9,7 +9,7 @@
       <div class="flex items-center gap-6">
         <span class="inline-flex items-center gap-2 font-bold text-[#FF5500]">
           <span class="w-1.5 h-1.5 bg-[#FF5500] animate-pulse"></span>
-          KUKA KRL PROFESSIONAL v1.9.5
+          KUKA KRL PROFESSIONAL v1.9.8
         </span>
         <span class="hidden md:inline-flex items-center gap-1.5 text-[#00D68F]">
           <svg class="w-3.5 h-3.5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -557,9 +557,9 @@
               <div class="text-3xl font-black font-mono text-white">Free</div>
               <p class="text-xs text-zinc-400">Essential KRL syntax, snippets, document symbols, and diagnostics up to 500 lines.</p>
               <ul class="text-xs font-mono space-y-1.5 pt-2 border-t border-zinc-800 text-zinc-300">
-                <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Full KRL Syntax Highlighting</li>
-                <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Document Symbol Outline</li>
-                <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Up to 500 lines per file</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Full KRL Syntax Highlighting</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Document Symbol Outline</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Up to 500 lines per file</li>
               </ul>
             </div>
             <a 
@@ -583,10 +583,10 @@
               </div>
               <p class="text-xs text-zinc-400">Full professional robotics toolset. Save 35% compared to monthly billing.</p>
               <ul class="text-xs font-mono space-y-1.5 pt-2 border-t border-zinc-800 text-zinc-300">
-                <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Unlimited Lines of Code</li>
-                <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> All 80+ Industrial Tools</li>
-                <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Advance Run Stop Detection</li>
-                <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> 3-Point Frame Kinematic Solver</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Unlimited Lines of Code</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> All 80+ Industrial Tools</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Advance Run Stop Detection</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> 3-Point Frame Kinematic Solver</li>
               </ul>
             </div>
             <a 
@@ -609,10 +609,10 @@
               </div>
               <p class="text-xs text-zinc-400">For commissioning teams and automation cells. Up to 5 workstations ($99.80/seat/yr).</p>
               <ul class="text-xs font-mono space-y-1.5 pt-2 border-t border-zinc-800 text-zinc-300">
-                <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Up to 5 Workstations</li>
-                <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Centralized Key Management</li>
-                <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Single Corporate Invoice</li>
-                <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Priority In-Editor Support Gateway</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Up to 5 Workstations</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Centralized Key Management</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Single Corporate Invoice</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Priority In-Editor Support Gateway</li>
               </ul>
             </div>
             <a 
@@ -635,10 +635,10 @@
               </div>
               <p class="text-xs text-zinc-400">For system integration companies. Up to 20 workstations ($74.95/seat/yr).</p>
               <ul class="text-xs font-mono space-y-1.5 pt-2 border-t border-zinc-800 text-zinc-300">
-                <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Up to 20 Workstations</li>
-                <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Unlimited OEM Line Projects</li>
-                <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Offline Air-Gap Activation</li>
-                <li class="flex items-center gap-1.5"><span class="text-[#00D68F] font-bold">✓</span> Priority Support Relay</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Up to 20 Workstations</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Unlimited OEM Line Projects</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Offline Air-Gap Activation</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Priority Support Relay</li>
               </ul>
             </div>
             <div class="mt-6 flex flex-col gap-2">
@@ -707,25 +707,25 @@
         <!-- BUYER TRUST & ANTI-CHARGEBACK GUARANTEES GRID -->
         <div class="mt-8 pt-6 border-t border-zinc-800 grid grid-cols-1 md:grid-cols-4 gap-4 font-mono text-[11px]">
           <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">
-            <div class="text-[#00D68F] font-bold mb-1">✓ CLEAR BANK DESCRIPTOR</div>
+            <div class="text-[#00D68F] font-bold mb-1">[VERIFIED] CLEAR BANK DESCRIPTOR</div>
             <p class="text-zinc-400 text-[10px] leading-relaxed">
               Charges clearly appear as <span class="text-white font-bold">DODOPAY_LISKINLABS</span> or <span class="text-white font-bold">LISKINLABS KUKA</span> so plant finance teams immediately recognize invoices.
             </p>
           </div>
           <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">
-            <div class="text-[#00D68F] font-bold mb-1">✓ 1-CLICK IN-EDITOR CANCEL</div>
+            <div class="text-[#00D68F] font-bold mb-1">[VERIFIED] 1-CLICK IN-EDITOR CANCEL</div>
             <p class="text-zinc-400 text-[10px] leading-relaxed">
               Cancel subscriptions anytime right from VS Code status bar (<span class="text-white">krl.manageSubscription</span>) or Dodo Customer Portal without waiting.
             </p>
           </div>
           <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">
-            <div class="text-[#00D68F] font-bold mb-1">✓ 100% UNCONDITIONAL REFUND</div>
+            <div class="text-[#00D68F] font-bold mb-1">[VERIFIED] 100% UNCONDITIONAL REFUND</div>
             <p class="text-zinc-400 text-[10px] leading-relaxed">
               14-day money-back guarantee. If not completely satisfied, request a refund directly via built-in VS Code chat (<span class="text-white">krl.openTelegramChat</span>) for an instant 100% refund, no questions asked.
             </p>
           </div>
           <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">
-            <div class="text-[#00D68F] font-bold mb-1">✓ EU VAT 0% & WIRE TRANSFERS</div>
+            <div class="text-[#00D68F] font-bold mb-1">[VERIFIED] EU VAT 0% & WIRE TRANSFERS</div>
             <p class="text-zinc-400 text-[10px] leading-relaxed">
               Automatic reverse-charge VAT validation (EU VIES / UK HMRC) and automated corporate SEPA / ACH wire transfer clearing.
             </p>
@@ -745,7 +745,7 @@
             <div class="font-mono text-xs text-[#FF5500] font-bold tracking-wider">[06 // CAPABILITIES DIRECTORY]</div>
             <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">80+ PRODUCTION TOOLS & DIAGNOSTICS</h2>
             <p :class="['text-sm', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">
-              Complete inventory of commands, language servers, kinematic solvers, and safety checkers included in KUKA KRL Professional v1.9.5.
+              Complete inventory of commands, language servers, kinematic solvers, and safety checkers included in KUKA KRL Professional v1.9.8.
             </p>
           </div>
 
@@ -790,7 +790,7 @@
             </div>
             <div class="mt-3 pt-2 border-t border-zinc-800 flex justify-between items-center text-[10px] font-mono text-zinc-500">
               <span>{{ tool.type }}</span>
-              <span class="text-[#FF5500] font-bold">VIEW DEMO ➔</span>
+              <span class="text-[#FF5500] font-bold">VIEW DEMO &rarr;</span>
             </div>
           </div>
         </div>
@@ -954,7 +954,7 @@
         <button 
           @click="showQuoteModal = false"
           class="absolute top-4 right-4 text-zinc-500 hover:text-black font-mono text-sm">
-          [✕ CLOSE]
+          [CLOSE]
         </button>
 
         <!-- Printable Document Header (Letterhead) -->
@@ -987,7 +987,7 @@
             <tbody>
               <tr class="border-b border-zinc-200">
                 <td class="p-2 font-bold">{{ recommendedTier.name }}</td>
-                <td class="p-2">KUKA KRL Professional IDE v1.9.5 Suite (80+ Industrial Tools, Air-Gap License, Spectra Assure 0 CVE)</td>
+                <td class="p-2">KUKA KRL Professional IDE v1.9.8 Suite (80+ Industrial Tools, Air-Gap License, Spectra Assure 0 CVE)</td>
                 <td class="p-2 text-center">{{ recommendedTier.seats }} Seats</td>
                 <td class="p-2 text-right font-bold">{{ formatPrice(recommendedTier.priceUsd) }}</td>
               </tr>
@@ -1038,7 +1038,7 @@
         <button 
           @click="showTrialModal = false"
           class="absolute top-4 right-4 text-zinc-500 hover:text-white">
-          [✕]
+          [&times;]
         </button>
 
         <div class="text-sm font-bold text-[#FF5500]">ACTIVATE 14-DAY PRO TRIAL</div>
@@ -1076,7 +1076,7 @@
         <button 
           @click="selectedTool = null"
           class="absolute top-4 right-4 text-zinc-500 hover:text-white">
-          [✕ CLOSE]
+          [CLOSE]
         </button>
 
         <div class="flex items-center gap-2">

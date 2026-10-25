@@ -1,4 +1,4 @@
-# 🟢 Community Edition — Бесплатные базовые функции KUKA KRL Professional
+# Community Edition — Бесплатные базовые функции KUKA KRL Professional
 
 Подробный обзор 24 бесплатных базовых функций расширения для разработчиков и инженеров-робототехников.
 
@@ -81,7 +81,7 @@
 ---
 
 ### 10. Быстрое сворачивание / разворачивание FOLD (Quick Fold Toolbar)
-Иконки 🙈 (`krl.foldAll`) и 📖 (`krl.unfoldAll`) в тулбаре для сжатия и разворачивания всех блоков FOLD.
+Иконки [Fold All] (`krl.foldAll`) и [Unfold All] (`krl.unfoldAll`) в тулбаре для сжатия и разворачивания всех блоков FOLD.
 
 ![Quick Fold Toolbar Demo](/media/quick_fold_toolbar.gif)
 

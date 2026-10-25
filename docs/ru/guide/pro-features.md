@@ -1,4 +1,4 @@
-# 👑 Pro & Industrial Edition — Премиум функции KUKA KRL Professional
+# Pro & Industrial Edition — Премиум функции KUKA KRL Professional
 
 Инструменты статического анализа, визуализации алгоритмов, промышленной безопасности и обслуживания роботов для системных интеграторов.
 

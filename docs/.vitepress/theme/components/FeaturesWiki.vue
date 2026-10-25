@@ -85,7 +85,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
           <button v-if="searchQuery" @click="searchQuery = ''" class="absolute right-3 top-2.5 text-gray-400 hover:text-white text-xs">
-            ✕
+            &times;
           </button>
         </div>
 
@@ -143,7 +143,7 @@
 
       <!-- Empty Search State -->
       <div v-if="filteredFeatures.length === 0" class="text-center py-20 bg-[#0a0d14] rounded-2xl border border-white/10 shadow-xl font-mono">
-        <div class="text-4xl mb-3">🔍</div>
+        <div class="text-4xl mb-3"></div>
         <h3 class="text-lg font-bold text-white mb-1">{{ text.noResultsTitle }}</h3>
         <p class="text-gray-400 text-xs mb-5">{{ text.noResultsDesc }}</p>
         <button @click="searchQuery = ''; activeCategory = 'all'" class="px-4 py-2 bg-kuka-orange text-white rounded-xl font-bold text-xs hover:bg-orange-600 transition-colors">
@@ -179,8 +179,8 @@
                       : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
                   ]"
                 >
-                  <span v-if="feat.isPro">👑 PRO</span>
-                  <span v-else>🟢 COMMUNITY</span>
+                  <span v-if="feat.isPro">[PRO]</span>
+                  <span v-else>[FREE]</span>
                 </span>
               </div>
 
@@ -203,7 +203,7 @@
 
             <!-- Industrial Benefit Callout -->
             <div v-if="feat.benefit" class="mb-4 p-3 rounded-xl bg-orange-500/10 border border-orange-500/30 text-xs text-orange-200 leading-relaxed flex items-start gap-2.5">
-              <span class="text-sm flex-shrink-0">⚡</span>
+              <span class="text-sm flex-shrink-0"></span>
               <div>
                 <strong class="text-kuka-orange font-bold block mb-0.5 uppercase tracking-wider text-[10px]">{{ text.fieldBenefitLabel }}:</strong>
                 <span class="font-sans text-[11px]">{{ feat.benefit[langKey] }}</span>
@@ -214,15 +214,15 @@
             <div v-if="feat.codeBefore || feat.codeAfter" class="mb-4 rounded-xl bg-[#07090e] border border-white/10 p-3 text-[11px] space-y-2 overflow-x-auto">
               <div v-if="feat.codeBefore" class="space-y-1">
                 <div class="text-[10px] text-rose-400 font-bold uppercase tracking-wider flex items-center gap-1">
-                  <span>✗</span> <span>Before (Legacy / Fault Risk):</span>
+                  <span>[FAULT]</span> <span>Before (Legacy / Fault Risk):</span>
                 </div>
                 <pre class="text-gray-400 text-[10px] font-mono select-all"><code>{{ feat.codeBefore }}</code></pre>
               </div>
               <div v-if="feat.codeAfter" class="space-y-1 pt-2 border-t border-white/10">
                 <div class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider flex items-center justify-between">
-                  <span class="flex items-center gap-1"><span>✓</span> <span>With KUKA KRL Pro:</span></span>
+                  <span class="flex items-center gap-1"><span>[OK]</span> <span>With KUKA KRL Pro:</span></span>
                   <button @click="copyCode(feat.codeAfter, feat.id)" class="text-kuka-orange hover:text-white transition-colors text-[9px]">
-                    {{ copiedCodeId === feat.id ? '✓ Copied!' : '[ Copy ]' }}
+                    {{ copiedCodeId === feat.id ? '[OK] Copied!' : '[ Copy ]' }}
                   </button>
                 </div>
                 <pre class="text-cyan-300 text-[10px] font-mono select-all"><code>{{ feat.codeAfter }}</code></pre>
@@ -320,7 +320,7 @@
           <div class="flex items-center justify-between w-full mb-3 text-white font-mono text-xs">
             <h3 class="text-base font-bold text-kuka-orange">{{ lightboxTitle }}</h3>
             <button @click="lightboxImage = null" class="px-3 py-1 bg-[#161f30] hover:bg-red-600 rounded-lg transition-colors text-white font-bold">
-              ✕ {{ text.close }}
+              &times; {{ text.close }}
             </button>
           </div>
           <img :src="lightboxImage" class="max-w-full max-h-[80vh] object-contain rounded-2xl border border-white/15 shadow-2xl" @click.stop />
@@ -368,18 +368,18 @@ const langKey = computed(() => {
 })
 
 const categories = [
-  { id: 'core', icon: '📝', title: { en: 'Core Editor', ru: 'Редактор & Язык', tr: 'Temel Editör' } },
-  { id: 'safety', icon: '🛡️', title: { en: 'Safety & Diagnostics', ru: 'Безопасность & Диагностика', tr: 'Güvenlik & Teşhis' } },
-  { id: 'flowchart', icon: '📊', title: { en: 'Flowcharts & Logic', ru: 'Блок-схемы & Логика', tr: 'Akış Şemaları' } },
-  { id: 'backup', icon: '📦', title: { en: 'Backups & Math', ru: 'Бэкапы & Математика', tr: 'Yedek & Matematik' } },
-  { id: 'iot', icon: '⚡', title: { en: 'Communication & IoT', ru: 'Связь & IoT / EKI', tr: 'İletişim & IoT' } },
-  { id: 'enterprise', icon: '🏢', title: { en: 'Enterprise & Git', ru: 'Enterprise & Git', tr: 'Kurumsal & Git' } }
+  { id: 'core', icon: '', title: { en: 'Core Editor', ru: 'Редактор & Язык', tr: 'Temel Editör' } },
+  { id: 'safety', icon: '', title: { en: 'Safety & Diagnostics', ru: 'Безопасность & Диагностика', tr: 'Güvenlik & Teşhis' } },
+  { id: 'flowchart', icon: '', title: { en: 'Flowcharts & Logic', ru: 'Блок-схемы & Логика', tr: 'Akış Şemaları' } },
+  { id: 'backup', icon: '', title: { en: 'Backups & Math', ru: 'Бэкапы & Математика', tr: 'Yedek & Matematik' } },
+  { id: 'iot', icon: '', title: { en: 'Communication & IoT', ru: 'Связь & IoT / EKI', tr: 'İletişim & IoT' } },
+  { id: 'enterprise', icon: '', title: { en: 'Enterprise & Git', ru: 'Enterprise & Git', tr: 'Kurumsal & Git' } }
 ]
 
 const features = [
   // 1-10: Core Language & Editor
   {
-    id: 1, category: 'core', icon: '🎨', isPro: false,
+    id: 1, category: 'core', icon: '', isPro: false,
     shortcut: 'Ctrl+K Ctrl+T', setting: 'workbench.colorTheme',
     media: '/media/kuka_theme_1.png',
     title: { en: '6 Industrial KUKA Themes', ru: '6 Промышленных тем KUKA', tr: '6 Endüstriyel KUKA Teması' },
@@ -389,7 +389,7 @@ const features = [
     codeAfter: '; KUKA Dark Theme with vivid syntax highlighting\nPTP XHOME Vel=100% DEFAULT'
   },
   {
-    id: 2, category: 'core', icon: '⚡', isPro: false,
+    id: 2, category: 'core', icon: '', isPro: false,
     shortcut: 'Ctrl+Space', setting: 'editor.quickSuggestions',
     media: '/media/Smart Autocomplete.gif',
     title: { en: 'Smart Autocomplete & 957+ KSS Variables', ru: 'Умный автокомплит и 957+ переменных KSS', tr: 'Akıllı Otomatik Tamamlama ve 957+ KSS Değişkeni' },
@@ -399,7 +399,7 @@ const features = [
     codeAfter: '$ADVANCE = 3 ; Validated KSS Motion Look-Ahead'
   },
   {
-    id: 3, category: 'core', icon: '🔗', isPro: false,
+    id: 3, category: 'core', icon: '', isPro: false,
     shortcut: 'F12', setting: 'kuka.navigation.crossFile',
     media: '/media/Go-to-Definition.gif',
     title: { en: 'Cross-File Go-to-Definition (.src ↔ .dat)', ru: 'Навигация Go-to-Definition (.src ↔ .dat)', tr: 'Çapraz Dosya Tanıma Gitme (.src ↔ .dat)' },
@@ -409,7 +409,7 @@ const features = [
     codeAfter: '; F12 on XPICK_PART jumps directly to DECL E6POS in .dat'
   },
   {
-    id: 4, category: 'core', icon: '💡', isPro: true,
+    id: 4, category: 'core', icon: '', isPro: true,
     shortcut: 'Alt+Shift+H', setting: 'kuka.inlayHints.signals',
     media: '/media/Inlay Hints.gif',
     title: { en: 'Real-Time Hardware Signal Inlay Hints', ru: 'Инлайн-подсказки аппаратных сигналов I/O', tr: 'Gerçek Zamanlı Donanım Sinyali İpuçları' },
@@ -419,7 +419,7 @@ const features = [
     codeAfter: 'IF $IN[27] /* Part_Clamped_OK */ == TRUE THEN'
   },
   {
-    id: 5, category: 'core', icon: '📐', isPro: false,
+    id: 5, category: 'core', icon: '', isPro: false,
     shortcut: 'Shift+Alt+F', setting: 'editor.formatOnSave',
     media: '/media/Code Formatter & Indentation.gif',
     title: { en: 'Code Formatter & Indentation Engine', ru: 'Форматирование кода и выравнивание отступов', tr: 'Kod Biçimlendirici ve Girinti Motoru' },
@@ -429,7 +429,7 @@ const features = [
     codeAfter: 'DEF Test()\n  PTP XHOME\nEND'
   },
   {
-    id: 6, category: 'core', icon: '📂', isPro: false,
+    id: 6, category: 'core', icon: '', isPro: false,
     shortcut: 'Ctrl+K Ctrl+0', setting: 'editor.folding',
     media: '/media/Quick Fold Toolbar.gif',
     title: { en: 'Quick Fold Toolbar (FOLD / ENDFOLD)', ru: 'Быстрое сворачивание блоков FOLD / ENDFOLD', tr: 'Hızlı Blok Katlama (FOLD / ENDFOLD)' },
@@ -439,7 +439,7 @@ const features = [
     codeAfter: '▸ ; FOLD BAS INI ... [50 lines folded]'
   },
   {
-    id: 7, category: 'core', icon: '🔍', isPro: false,
+    id: 7, category: 'core', icon: '', isPro: false,
     shortcut: 'Shift+F12', setting: 'kuka.references.search',
     media: '/media/Find All References.gif',
     title: { en: 'Find All References Workspace Search', ru: 'Поиск всех ссылок и использований символа', tr: 'Tüm Referansları Bulma Araması' },
@@ -449,7 +449,7 @@ const features = [
     codeAfter: '; Found 8 references in Cell.src, Routine1.src, Safety.src'
   },
   {
-    id: 8, category: 'core', icon: '📊', isPro: false,
+    id: 8, category: 'core', icon: '', isPro: false,
     shortcut: 'Ctrl+Shift+P > Sort', setting: 'kuka.declarations.sort',
     media: '/media/Sort Declarations.gif',
     title: { en: 'Declaration Sorter (INT, REAL, FRAME)', ru: 'Сортировка деклараций по типам данных', tr: 'Tanımlama Sıralayıcı (INT, REAL, FRAME)' },
@@ -459,7 +459,7 @@ const features = [
     codeAfter: '; Integers:\nDECL INT A, B\n; Reals:\nDECL REAL Y\n; Frames:\nDECL FRAME F'
   },
   {
-    id: 9, category: 'core', icon: 'ℹ️', isPro: false,
+    id: 9, category: 'core', icon: '', isPro: false,
     shortcut: 'Hover Mouse', setting: 'editor.hover.enabled',
     media: '/media/Hover Info & Read Write Status.gif',
     title: { en: 'Hover Telemetry & Read/Write Status', ru: 'Информационные тултипы и статус Read/Write', tr: 'Üzerine Gelme Bilgisi ve Okuma/Yazma Durumu' },
@@ -469,7 +469,7 @@ const features = [
     codeAfter: 'ℹ️ $POS_ACT: E6POS (READ-ONLY System Variable)'
   },
   {
-    id: 10, category: 'core', icon: '🎨', isPro: false,
+    id: 10, category: 'core', icon: '', isPro: false,
     shortcut: 'Auto', setting: 'editor.semanticHighlighting',
     media: '/media/kuka_theme_4.png',
     title: { en: 'Semantic Token & Scope Highlighting', ru: 'Семантическая подсветка областей видимости', tr: 'Anlamsal Belirteç ve Kapsam Vurgulama' },
@@ -481,27 +481,27 @@ const features = [
 
   // 11-19: Safety & Diagnostics
   {
-    id: 11, category: 'safety', icon: '🛡️', isPro: true,
+    id: 11, category: 'safety', icon: '', isPro: true,
     shortcut: 'Auto on Save', setting: 'kuka.safety.blockBalance',
     media: '/media/block-balance.gif',
     title: { en: 'Block Scope Balance Validator (IF/LOOP)', ru: 'Контроль баланса блоков IF/ENDIF и LOOP', tr: 'Blok Dengesi Doğrulayıcısı (IF/LOOP)' },
     desc: { en: 'Flags missing or unmatched ENDIF, ENDFOR, and ENDLOOP tags in real time before code reaches the robot.', ru: 'Выявляет пропущенные или лишние ENDIF, ENDFOR, ENDLOOP прямо в процессе набора кода.', tr: 'Kapanmamış IF, FOR ve LOOP bloklarını koda robota gitmeden önce tespit eder.' },
     benefit: { en: 'Prevents controller compiler lockups and emergency stops on program selection.', ru: 'Исключает аварийный сброс селектора программ на пульте из-за синтаксического сбоя.', tr: 'Kumandada sözdizimi hatası nedeniyle program seçiminin iptal edilmesini önler.' },
     codeBefore: 'IF $IN[1] == TRUE THEN\n  PTP XPICK\n; Missing ENDIF statement!',
-    codeAfter: 'IF $IN[1] == TRUE THEN\n  PTP XPICK\nENDIF ; ✓ Balanced'
+    codeAfter: 'IF $IN[1] == TRUE THEN\n  PTP XPICK\nENDIF ; [OK] Balanced'
   },
   {
-    id: 12, category: 'safety', icon: '⚡', isPro: true,
+    id: 12, category: 'safety', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Lint', setting: 'kuka.safety.velocityGuard',
     media: '/media/type-validation-demo.gif',
     title: { en: 'Velocity Collision Inspector ($VEL.CP)', ru: 'Инспектор опасных скоростей ($VEL.CP)', tr: 'Hız ve Çarpışma Denetçisi ($VEL.CP)' },
     desc: { en: 'Scans for excessive Cartesian speeds ($VEL.CP > 3.0 m/s) in proximity to fixtures or gripping positions.', ru: 'Находит опасные скорости линейных перемещений в зонах захвата деталей и работы с оснасткой.', tr: 'Fikstür ve parça alma bölgelerindeki aşırı hızları ($VEL.CP > 3.0 m/s) uyarır.' },
     benefit: { en: 'Eliminates mechanical robot collisions and bent tooling during first dry runs.', ru: 'Предотвращает механические удары робота и поломку инструмента при первом прогоне.', tr: 'İlk deneme çalıştırmalarında takım kırılmalarını ve mekanik çarpmaları önler.' },
     codeBefore: 'LIN XPICK_PART Vel=3.5 m/s ; DANGEROUS HIGH SPEED',
-    codeAfter: 'LIN XPICK_PART Vel=0.5 m/s ; ✓ Safe Touchdown'
+    codeAfter: 'LIN XPICK_PART Vel=0.5 m/s ; [OK] Safe Touchdown'
   },
   {
-    id: 13, category: 'safety', icon: '🛑', isPro: true,
+    id: 13, category: 'safety', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Torq', setting: 'kuka.safety.torqmonGuard',
     media: '/media/KUKA Control Center.gif',
     title: { en: 'Collision Torque Guard ($TORQMON)', ru: 'Инъекция барьера момента $TORQMON_GUARD', tr: 'Tork Çarpışma Koruması ($TORQMON)' },
@@ -511,7 +511,7 @@ const features = [
     codeAfter: '$TORQMON_GUARD(120) ; Barrier active\nLIN XINSERT_PIN\n$TORQMON_RESET()'
   },
   {
-    id: 14, category: 'safety', icon: '💀', isPro: true,
+    id: 14, category: 'safety', icon: '', isPro: true,
     shortcut: 'Auto', setting: 'kuka.diagnostics.deadCode',
     media: '/media/dead-code.gif',
     title: { en: 'Dead-Code & Unreachable Path Analyzer', ru: 'Детектор мертвого и недостижимого кода', tr: 'Ölü ve Ulaşılamaz Kod Analizörü' },
@@ -521,47 +521,47 @@ const features = [
     codeAfter: '; Dead code highlighted and flagged with warning'
   },
   {
-    id: 15, category: 'safety', icon: '🔄', isPro: true,
+    id: 15, category: 'safety', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Sync', setting: 'kuka.diagnostics.datSync',
     media: '/media/type-validation-demo.gif',
     title: { en: 'Type Validation & .DAT Sync Inspector', ru: 'Валидатор типов и синхронизации с .DAT', tr: 'Tür Doğrulama ve .DAT Senkronizasyonu' },
     desc: { en: 'Checks that variables declared in .src match the exact datatype defined in corresponding .dat files.', ru: 'Проверяет соответствие типов данных переменных и точек между кодом в .src и объявлением в .dat.', tr: '.src dosyasındaki değişkenlerin .dat dosyasındaki türlerle tam eşleştiğini doğrular.' },
     benefit: { en: 'Stops runtime type mismatch faults when running on physical KRC controllers.', ru: 'Устраняет трудноуловимые ошибки несовпадения типов при старте ячейки.', tr: 'Robot çalışırken ortaya çıkabilecek tür uyuşmazlığı çökmelerini engeller.' },
     codeBefore: '; .src: DECL INT COUNT / .dat: DECL REAL COUNT',
-    codeAfter: '✓ Verified: COUNT is INT in both .src and .dat'
+    codeAfter: '[OK] Verified: COUNT is INT in both .src and .dat'
   },
   {
-    id: 16, category: 'safety', icon: '🔤', isPro: false,
+    id: 16, category: 'safety', icon: '', isPro: false,
     shortcut: 'Auto', setting: 'kuka.diagnostics.nonAscii',
     media: '/media/KUKA COMMANDS.gif',
     title: { en: 'Non-ASCII & Cyrillic Layout Detector', ru: 'Детектор случайных русских символов и не-ASCII', tr: 'ASCII Dışı ve Hatalı Klavye Karakteri Tespiti' },
     desc: { en: 'Detects look-alike Cyrillic or non-ASCII characters (e.g. Cyrillic "С", "О", "А") inside variable names.', ru: 'Моментально подсвечивает русские буквы, случайно введенные в именах переменных на латинице.', tr: 'Değişken adları içine yanlışlıkla yazılmış yabancı veya benzer harfleri yakalar.' },
     benefit: { en: 'Eliminates mysterious KSS compiler errors that take hours to diagnose visually.', ru: 'Ликвидирует необъяснимые ошибки компилятора, на поиск которых уходили часы.', tr: 'Gözle fark edilmesi imkansız olan derleyici hatalarını saniyeler içinde çözer.' },
     codeBefore: 'PTP XHОME ; Hidden Cyrillic "О" causes compile abort!',
-    codeAfter: 'PTP XHOME ; ✓ Verified pure ASCII identifier'
+    codeAfter: 'PTP XHOME ; [OK] Verified pure ASCII identifier'
   },
   {
-    id: 17, category: 'safety', icon: '📏', isPro: true,
+    id: 17, category: 'safety', icon: '', isPro: true,
     shortcut: 'Auto', setting: 'kuka.safety.arrayBounds',
     media: '/media/type-validation-demo.gif',
     title: { en: 'Array Bounds & Index Overrun Guard', ru: 'Контроль выхода за границы массивов', tr: 'Dizi Sınırları ve Aşım Koruması' },
     desc: { en: 'Warns against indexes exceeding bounds in TOOL_DATA[16], BASE_DATA[32], and custom arrays.', ru: 'Предупреждает об обращении к несуществующим номерам инструментов TOOL_DATA и баз BASE_DATA.', tr: 'TOOL_DATA, BASE_DATA veya özel dizilerde sınır dışı indeks kullanımını engeller.' },
     benefit: { en: 'Avoids KSS Array Index Out of Range emergency line stops.', ru: 'Предотвращает аварийный останов робота по ошибке Index Out of Bounds.', tr: 'Robot çalışırken dizi sınır aşımı kaynaklı acil duruşları engeller.' },
     codeBefore: '$TOOL = TOOL_DATA[17] ; KSS limit is 16!',
-    codeAfter: '$TOOL = TOOL_DATA[16] ; ✓ In valid 1..16 bounds'
+    codeAfter: '$TOOL = TOOL_DATA[16] ; [OK] In valid 1..16 bounds'
   },
   {
-    id: 18, category: 'safety', icon: '🚀', isPro: true,
+    id: 18, category: 'safety', icon: '', isPro: true,
     shortcut: 'Auto', setting: 'kuka.safety.initmovCheck',
     media: '/media/KUKA Control Center.gif',
     title: { en: 'BAS(#INITMOV) Motion Init Guard', ru: 'Контроль инициализации BAS(#INITMOV)', tr: 'BAS(#INITMOV) Hareket Başlatma Kontrolü' },
     desc: { en: 'Verifies that every motion program properly calls BAS(#INITMOV, 0) before executing Cartesian moves.', ru: 'Проверяет наличие обязательного вызова BAS(#INITMOV, 0) перед любыми командами перемещения.', tr: 'Tüm hareket programlarının önce BAS(#INITMOV, 0) çağrısı yaptığını doğrular.' },
     benefit: { en: 'Prevents uncontrolled acceleration jumps caused by uninitialized motion interpolators.', ru: 'Исключает рывки и резкие удары при старте робота с неинициализированным профилем.', tr: 'Başlatılmamış hareket profillerinin neden olduğu kontrolsüz sarsıntıları önler.' },
     codeBefore: 'DEF Bad_Cycle()\n  PTP XHOME ; Missing BAS(#INITMOV)!',
-    codeAfter: 'DEF Safe_Cycle()\n  BAS(#INITMOV, 0) ; ✓ Interpolator ready\n  PTP XHOME'
+    codeAfter: 'DEF Safe_Cycle()\n  BAS(#INITMOV, 0) ; [OK] Interpolator ready\n  PTP XHOME'
   },
   {
-    id: 19, category: 'safety', icon: '🎯', isPro: true,
+    id: 19, category: 'safety', icon: '', isPro: true,
     shortcut: 'Auto', setting: 'kuka.safety.activeFrameCheck',
     media: '/media/KUKA COMMANDS.gif',
     title: { en: 'Unassigned Active Frame Guard ($TOOL / $BASE)', ru: 'Контроль назначения $TOOL и $BASE', tr: 'Atanmamış Aktif Frame Koruması ($TOOL / $BASE)' },
@@ -573,7 +573,7 @@ const features = [
 
   // 20-27: Visual Flowcharts & Logic
   {
-    id: 20, category: 'flowchart', icon: '📊', isPro: true,
+    id: 20, category: 'flowchart', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Graph', setting: 'kuka.flowchart.autoGenerate',
     media: '/media/Control Flow Graph.gif',
     title: { en: 'Interactive Mermaid Flowchart Visualizer', ru: 'Интерактивные блок-схемы на базе Mermaid', tr: 'Etkileşimli Mermaid Akış Şeması' },
@@ -583,47 +583,47 @@ const features = [
     codeAfter: '; Visual flowchart rendered instantly in side panel'
   },
   {
-    id: 21, category: 'flowchart', icon: '🖱️', isPro: true,
+    id: 21, category: 'flowchart', icon: '', isPro: true,
     shortcut: 'Click Node', setting: 'kuka.flowchart.bidirectional',
     media: '/media/Control Flow Graph.gif',
     title: { en: 'Bidirectional Graph-to-Code Jumping', ru: 'Двунаправленный переход Граф ↔ Код', tr: 'İki Yönlü Grafik ↔ Kod Atlaması' },
     desc: { en: 'Clicking any node in the flowchart jumps cursor straight to the corresponding line in the editor.', ru: 'Клик по любому блоку на схеме моментально переносит курсор на соответствующую строку в коде.', tr: 'Akış şemasındaki herhangi bir düğüme tıklandığında imleç doğrudan kod satırına gider.' },
     benefit: { en: 'Effortless debugging of deep decision trees and branching logic.', ru: 'Быстрый поиск нужной ветки условий при отладке последовательности ячейки.', tr: 'Karmaşık karar ağaçlarında hata ayıklamayı son derece kolaylaştırır.' },
     codeBefore: '; Manually searching for where an alarm was triggered',
-    codeAfter: '✓ Click [AlarmNode] ➔ Jumps to line 412 in editor'
+    codeAfter: '[OK] Click [AlarmNode] &rarr; Jumps to line 412 in editor'
   },
   {
-    id: 22, category: 'flowchart', icon: '🖼️', isPro: true,
+    id: 22, category: 'flowchart', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Export SVG', setting: 'kuka.flowchart.exportSvg',
     media: '/media/cell_flowchart.svg',
     title: { en: 'Vector SVG Flowchart Export for Handover', ru: 'Экспорт блок-схем в векторный SVG для сдачи', tr: 'Teslimat İçin Vektörel SVG Akış Şeması Dışa Aktarma' },
     desc: { en: 'Export crisp, scalable vector diagrams suitable for customer documentation, Word, and PDF manuals.', ru: 'Экспорт схем в масштабируемый SVG для вставки в отчеты, инструкции и проектную документацию.', tr: 'Müşteri raporları ve teknik kılavuzlar için net, ölçeklenebilir SVG dışa aktarımı.' },
     benefit: { en: 'Saves days of drawing manual flowcharts in Visio during project handover.', ru: 'Экономит дни ручного рисования алгоритмов в Visio при сдаче проекта заказчику.', tr: 'Proje teslimlerinde Visio ile günlerce şema çizme zahmetini ortadan kaldırır.' },
     codeBefore: '; Manual redrawing of logic in MS Visio (8 hours)',
-    codeAfter: '✓ 1-Click SVG Export: Complete cell diagram ready'
+    codeAfter: '[OK] 1-Click SVG Export: Complete cell diagram ready'
   },
   {
-    id: 23, category: 'flowchart', icon: '🏷️', isPro: true,
+    id: 23, category: 'flowchart', icon: '', isPro: true,
     shortcut: 'Auto', setting: 'kuka.flowchart.showBadges',
     media: '/media/Control Flow Graph.gif',
     title: { en: 'Signal & Timer Badges in Flowchart', ru: 'Бейджи сигналов и таймеров в блок-схеме', tr: 'Akış Şemasında Sinyal ve Zamanlayıcı Rozetleri' },
     desc: { en: 'Renders dedicated I/O indicators ($IN, $OUT) and $TIMER values directly inside decision diamonds.', ru: 'Отображает номера задействованных сигналов и таймеров прямо внутри блоков условий.', tr: 'Koşul kutucukları içinde I/O sinyallerini ve zamanlayıcı değerlerini görsel olarak gösterir.' },
     benefit: { en: 'Instantly identifies which physical sensors control each step of the sequence.', ru: 'Наглядно видно, какие физические датчики управляют каждым шагом робота.', tr: 'Hangi sensörün robotun hangi adımını tetiklediğini bir bakışta gösterir.' },
     codeBefore: '; Condition: ($IN[14] && !$IN[15])',
-    codeAfter: 'Node: [Part Check] ➔ IN[14]:ON, IN[15]:OFF'
+    codeAfter: 'Node: [Part Check] &rarr; IN[14]:ON, IN[15]:OFF'
   },
   {
-    id: 24, category: 'flowchart', icon: '🌳', isPro: true,
+    id: 24, category: 'flowchart', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Tree', setting: 'kuka.flowchart.callTree',
     media: '/media/Control Flow Graph.gif',
     title: { en: 'Subroutine Call-Tree Hierarchy', ru: 'Иерархическое дерево вызовов подпрограмм', tr: 'Alt Program Çağrı Ağacı Hiyerarşisi' },
     desc: { en: 'Visualizes the entire call tree starting from Cell.src down to individual gripping routines.', ru: 'Строит дерево вызовов всех подпрограмм ячейки, начиная от главного цикла Cell.src.', tr: 'Cell.src dosyasından en küçük alt programa kadar tüm çağrı hiyerarşisini görselleştirir.' },
     benefit: { en: 'Guarantees complete coverage when auditing cell execution sequences.', ru: 'Дает полную картину архитектуры ячейки перед внесением изменений.', tr: 'Değişiklik yapmadan önce hücrenin tüm kod mimarisini eksiksiz gösterir.' },
     codeBefore: '; Tracing nested subroutines manually through 15 files',
-    codeAfter: 'Cell.src ➔ PickPart() ➔ GripClose() ➔ CheckVacuum()'
+    codeAfter: 'Cell.src &rarr; PickPart() &rarr; GripClose() &rarr; CheckVacuum()'
   },
   {
-    id: 25, category: 'flowchart', icon: '🔀', isPro: false,
+    id: 25, category: 'flowchart', icon: '', isPro: false,
     shortcut: 'Auto', setting: 'kuka.flowchart.switchCase',
     media: '/media/Control Flow Graph.gif',
     title: { en: 'SWITCH-CASE Branch Isolation', ru: 'Изоляция ветвлений SWITCH-CASE', tr: 'SWITCH-CASE Dal İzolasyonu' },
@@ -633,17 +633,17 @@ const features = [
     codeAfter: 'Branching diagram clearly displaying all 10 part routes'
   },
   {
-    id: 26, category: 'flowchart', icon: '♾️', isPro: true,
+    id: 26, category: 'flowchart', icon: '', isPro: true,
     shortcut: 'Auto', setting: 'kuka.safety.infiniteLoopDetector',
     media: '/media/dead-code.gif',
     title: { en: 'Infinite Loop Lockup Detector', ru: 'Детектор зависающих бесконечных циклов', tr: 'Sonsuz Döngü Kilitlenme Dedektörü' },
     desc: { en: 'Flags LOOP/WHILE structures lacking exit conditions or WAIT instructions that would freeze the CPU.', ru: 'Находит циклы без условий выхода или пауз, приводящие к 100% загрузке процессора KRC.', tr: 'Çıkış koşulu veya bekleme komutu olmayan, CPU\'yu kilitleyecek döngüleri tespit eder.' },
     benefit: { en: 'Prevents controller watchdog resets during autonomous operation.', ru: 'Предотвращает зависание планировщика задач и сторожевого таймера робота.', tr: 'Robotun otonom çalışırken donmasını ve kilitlenmesini engeller.' },
     codeBefore: 'WHILE $IN[1] == FALSE\n  ; No wait! CPU freezes at 100%\nENDWHILE',
-    codeAfter: 'WHILE $IN[1] == FALSE\n  WAIT SEC 0.05 ; ✓ Non-blocking polling\nENDWHILE'
+    codeAfter: 'WHILE $IN[1] == FALSE\n  WAIT SEC 0.05 ; [OK] Non-blocking polling\nENDWHILE'
   },
   {
-    id: 27, category: 'flowchart', icon: '⏳', isPro: true,
+    id: 27, category: 'flowchart', icon: '', isPro: true,
     shortcut: 'Auto', setting: 'kuka.safety.waitTimeoutCheck',
     media: '/media/KRL IO Signals.gif',
     title: { en: 'WAIT Signal & Timeout Validator', ru: 'Валидатор условий WAIT FOR и таймаутов', tr: 'WAIT Sinyal ve Zaman Aşımı Doğrulayıcısı' },
@@ -655,17 +655,17 @@ const features = [
 
   // 28-35: SmartPAD Backups & Math
   {
-    id: 28, category: 'backup', icon: '📦', isPro: true,
+    id: 28, category: 'backup', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Diff', setting: 'kuka.backup.directZipDiff',
     media: '/media/KRC Backup Diff & Point Delta Inspector.gif',
     title: { en: 'SmartPAD ZIP Archive Direct Diff', ru: 'Прямое сравнение архивов SmartPAD .ZIP', tr: 'SmartPAD ZIP Arşivi Doğrudan Farkı' },
     desc: { en: 'Compares active development files directly against USB SmartPAD .ZIP archives without extraction.', ru: 'Сравнивает рабочий проект напрямую с архивным .ZIP бэкапом пульта без ручной распаковки.', tr: 'Dosyaları açmaya gerek kalmadan doğrudan USB .ZIP yedekleriyle karşılaştırır.' },
     benefit: { en: 'Instantly identifies unrecorded changes made by operators on the night shift.', ru: 'Моментально показывает, какие строчки и точки изменили на пульте операторы в ночную смену.', tr: 'Gece vardiyasında operatörler tarafından kumandada yapılan değişiklikleri anında bulur.' },
     codeBefore: '; Manually unzipping and searching through 400 files',
-    codeAfter: '✓ Side-by-side diff with SmartPAD_Backup_2026.zip'
+    codeAfter: '[OK] Side-by-side diff with SmartPAD_Backup_2026.zip'
   },
   {
-    id: 29, category: 'backup', icon: '📐', isPro: true,
+    id: 29, category: 'backup', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Delta', setting: 'kuka.math.pointDeltaInspector',
     media: '/media/KRC Backup Diff & Point Delta Inspector.gif',
     title: { en: '6-Axis Point Delta Spatial Inspector', ru: '6-Осевой расчет дельты точек (ΔX, ΔY, ΔZ)', tr: '6 Eksenli Nokta Deltası Uzamsal Denetçisi' },
@@ -675,7 +675,7 @@ const features = [
     codeAfter: 'ΔX: +0.00mm, ΔY: +12.45mm (HAZARD SHIFT DETECTED)'
   },
   {
-    id: 30, category: 'backup', icon: '🎯', isPro: true,
+    id: 30, category: 'backup', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Calc', setting: 'kuka.math.frameCalculator',
     media: '/media/KUKA Control Center.gif',
     title: { en: '3-Point Base/Tool Frame Calculator', ru: '3-Точечный калькулятор фреймов $BASE / $TOOL', tr: '3 Noktalı Base/Tool Frame Hesaplayıcı' },
@@ -685,27 +685,27 @@ const features = [
     codeAfter: 'DECL FRAME BASE_DATA[1] = {X 1250, Y 350, Z 820, A 0, B 0, C 0}'
   },
   {
-    id: 31, category: 'backup', icon: '🔄', isPro: true,
+    id: 31, category: 'backup', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > TCP', setting: 'kuka.math.tcpInverter',
     media: '/media/KUKA Control Center.gif',
     title: { en: 'Tool Center Point (TCP) Shift Inverter', ru: 'Инспектор пересчета TCP при замене инструмента', tr: 'Takım Merkezi (TCP) Kayma Dönüştürücüsü' },
     desc: { en: 'Recalculates point targets when a damaged welding torch or gripper is replaced with new offsets.', ru: 'Автоматически пересчитывает координаты всех точек траектории при изменении вылета инструмента.', tr: 'Hasar gören kaynak torcu veya tutucu değiştiğinde tüm yörüngeyi yeniden hesaplar.' },
     benefit: { en: 'Eliminates reteaching hundreds of weld seams after mechanical tool repair.', ru: 'Избавляет от необходимости заново обучать сотни точек сварки после ремонта горелки.', tr: 'Takım tamirinden sonra yüzlerce kaynak noktasını yeniden öğretme zahmetini bitirir.' },
     codeBefore: '; Retouching 150 points manually after torch change',
-    codeAfter: '✓ 150 Points transformed automatically for new TCP'
+    codeAfter: '[OK] 150 Points transformed automatically for new TCP'
   },
   {
-    id: 32, category: 'backup', icon: '➗', isPro: false,
+    id: 32, category: 'backup', icon: '', isPro: false,
     shortcut: 'Auto', setting: 'kuka.math.geometricOperator',
     media: '/media/KUKA COMMANDS.gif',
     title: { en: 'Geometric Operator (Frame Multiplication)', ru: 'Помощник геометрического оператора (:)', tr: 'Geometrik Operatör (Frame Çarpımı) Yardımcısı' },
     desc: { en: 'Validates and visually models KRL frame transformations combining offsets via the colon operator (:).', ru: 'Проверяет правильность и последовательность перемножения систем координат через оператор двоеточия (:).', tr: 'İki koordinat sistemini birleştiren iki nokta üst üste (:) operatörünü doğrular.' },
     benefit: { en: 'Prevents inverted matrix transformations in dynamic palletizing offsets.', ru: 'Исключает ошибки направления смещений при динамическом расчете слоев паллеты.', tr: 'Dinamik paletleme hesaplarında ters yönde hareket hatalarını önler.' },
     codeBefore: 'fTarget = fOffset : fBase ; Wrong order!',
-    codeAfter: 'fTarget = fBase : fOffset ; ✓ Validated frame product'
+    codeAfter: 'fTarget = fBase : fOffset ; [OK] Validated frame product'
   },
   {
-    id: 33, category: 'backup', icon: '📐', isPro: false,
+    id: 33, category: 'backup', icon: '', isPro: false,
     shortcut: 'Ctrl+Shift+P > Euler', setting: 'kuka.math.eulerConverter',
     media: '/media/KUKA Control Center.gif',
     title: { en: 'Euler Angles & Quaternion Converter', ru: 'Конвертер углов Эйлера и кватернионов', tr: 'Euler Açıları ve Kuaterniyon Dönüştürücü' },
@@ -715,17 +715,17 @@ const features = [
     codeAfter: 'Euler KUKA: {A 90.0, B 0.0, C 90.0}'
   },
   {
-    id: 34, category: 'backup', icon: '🌀', isPro: true,
+    id: 34, category: 'backup', icon: '', isPro: true,
     shortcut: 'Auto', setting: 'kuka.safety.singularityCheck',
     media: '/media/type-validation-demo.gif',
     title: { en: 'Singularity & Axis Status/Turn Inspector', ru: 'Инспектор сингулярностей и статуса/поворота (S, T)', tr: 'Tekillik ve Eksen Durumu/Dönüş Denetçisi (S, T)' },
     desc: { en: 'Warns against wrist singularity postures (Axis 5 near 0°) during continuous linear moves.', ru: 'Предупреждает о прохождении через сингулярность 5-й оси (угол A5 близко к 0°) на линейных траекториях.', tr: 'Doğrusal hareketlerde 5. eksenin tekilliğe (A5 ≈ 0°) girmesini önceden bildirir.' },
     benefit: { en: 'Avoids violent high-speed axis whipping in singularity zones.', ru: 'Исключает резкие неконтролируемые развороты осей робота на максимальной скорости.', tr: 'Tekillik bölgelerinde eksenlerin kontrolsüz ve ani savrulmalarını önler.' },
     codeBefore: 'LIN XAPPROACH ; Axis 5 reaches 0.1° (Singularity trap)',
-    codeAfter: '⚠️ WARNING: Axis 5 singularity on linear path near XAPPROACH'
+    codeAfter: '[WARN] WARNING: Axis 5 singularity on linear path near XAPPROACH'
   },
   {
-    id: 35, category: 'backup', icon: '⚖️', isPro: true,
+    id: 35, category: 'backup', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Load', setting: 'kuka.safety.loadDataValidator',
     media: '/media/KUKA Control Center.gif',
     title: { en: 'Load Data & Inertia Validator (LOAD_DATA)', ru: 'Валидатор параметров нагрузки LOAD_DATA', tr: 'Yük ve Eylemsizlik Doğrulayıcısı (LOAD_DATA)' },
@@ -737,27 +737,27 @@ const features = [
 
   // 36-42: Communication & IoT
   {
-    id: 36, category: 'iot', icon: '📡', isPro: true,
+    id: 36, category: 'iot', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > EKI', setting: 'kuka.eki.xmlValidator',
     media: '/media/KUKA Control Center.gif',
     title: { en: 'EthernetKRL (EKI) XML Schema Validator', ru: 'Валидатор XML схем EthernetKRL (EKI)', tr: 'EthernetKRL (EKI) XML Şema Doğrulayıcısı' },
     desc: { en: 'Validates EKI XML configuration schemas and telegram buffers for robot-to-server TCP/IP links.', ru: 'Проверяет синтаксис и валидность XML-схем передачи данных по протоколу EthernetKRL.', tr: 'Robot ile sunucu arasındaki TCP/IP veri paketlerini ve XML şemalarını denetler.' },
     benefit: { en: 'Fixes malformed XML telegram structures before field commissioning.', ru: 'Устраняет ошибки парсинга XML пакетов до подключения к реальному серверу.', tr: 'Gerçek bağlantı öncesinde hatalı XML paket yapılarını tespit eder.' },
     codeBefore: '<RECEIVE><ELEMENT Tag="Pose" Type="REAL"/> ; Unclosed tag',
-    codeAfter: '<RECEIVE><ELEMENT Tag="Pose" Type="REAL"/></RECEIVE> ; ✓ Valid'
+    codeAfter: '<RECEIVE><ELEMENT Tag="Pose" Type="REAL"/></RECEIVE> ; [OK] Valid'
   },
   {
-    id: 37, category: 'iot', icon: '🔌', isPro: true,
+    id: 37, category: 'iot', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Fieldbus', setting: 'kuka.fieldbus.auditor',
     media: '/media/KRL IO Signals.gif',
     title: { en: 'Profinet & EtherCAT Signal Mapping Auditor', ru: 'Аудитор маппинга шин Profinet и EtherCAT', tr: 'Profinet ve EtherCAT Sinyal Eşleme Denetçisi' },
     desc: { en: 'Cross-audits configured fieldbus byte offsets with physical robot digital inputs and outputs.', ru: 'Сверяет адреса байтов в конфигурации промышленной сети с номерами сигналов в коде робота.', tr: 'Haberleşme veri baytlarını robotun fiziksel giriş çıkışlarıyla karşılaştırır.' },
     benefit: { en: 'Prevents signal displacement faults between PLC and robot controllers.', ru: 'Исключает сдвиг сигналов обмена между контроллером PLC и роботом.', tr: 'PLC ile robot arasındaki sinyal kayması hatalarını tamamen ortadan kaldırır.' },
     codeBefore: '; PLC byte 4 mapped to $IN[25] instead of $IN[33]',
-    codeAfter: '✓ Byte Alignment Confirmed: PLC Word 2 ➔ $IN[17..32]'
+    codeAfter: '[OK] Byte Alignment Confirmed: PLC Word 2 &rarr; $IN[17..32]'
   },
   {
-    id: 38, category: 'iot', icon: '🤝', isPro: true,
+    id: 38, category: 'iot', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Handshake', setting: 'kuka.templates.handshake',
     media: '/media/KUKA COMMANDS.gif',
     title: { en: 'PLC Handshake Protocol Generator', ru: 'Генератор протоколов квитирования PLC', tr: 'PLC El Sıkışma (Handshake) Protokol Üreticisi' },
@@ -767,131 +767,131 @@ const features = [
     codeAfter: '; Safe 4-phase handshake with timeout recovery generated'
   },
   {
-    id: 39, category: 'iot', icon: '☁️', isPro: true,
+    id: 39, category: 'iot', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > OPC', setting: 'kuka.templates.opcua',
     media: '/media/KUKA Control Center.gif',
     title: { en: 'OPC UA & Modbus TCP Packet Templates', ru: 'Шаблоны телеметрии OPC UA и Modbus TCP', tr: 'OPC UA ve Modbus TCP Paket Şablonları' },
     desc: { en: 'Generates telemetry publishing routines transmitting real-time robot coordinates to SCADA dashboards.', ru: 'Генерирует готовые шаблоны отправки координат и статусов робота в диспетчерские SCADA и облако.', tr: 'Robot koordinatlarını SCADA ve bulut panolarına aktaran hazır şablonlar üretir.' },
     benefit: { en: 'Zero-effort Industrial IoT integration for Industry 4.0 production monitoring.', ru: 'Быстрое подключение робота к системам сбора производственной аналитики Industry 4.0.', tr: 'Endüstri 4.0 üretim izleme sistemlerine zahmetsiz entegrasyon.' },
     codeBefore: '; Writing socket routines from scratch',
-    codeAfter: '✓ Complete OPC UA state publisher routine generated'
+    codeAfter: '[OK] Complete OPC UA state publisher routine generated'
   },
   {
-    id: 40, category: 'iot', icon: '🔄', isPro: false,
+    id: 40, category: 'iot', icon: '', isPro: false,
     shortcut: 'Ctrl+Shift+P > KVP', setting: 'kuka.kvp.formatter',
     media: '/media/KUKA COMMANDS.gif',
     title: { en: 'KUKAVARPROXY Protocol Formatter', ru: 'Форматтер протокола KUKAVARPROXY', tr: 'KUKAVARPROXY Protokol Biçimlendirici' },
     desc: { en: 'Formats and tests external variable read/write packets for Python and C# integration scripts.', ru: 'Форматирует пакеты удаленного чтения и записи переменных для интеграции с Python и C# скриптами.', tr: 'Python ve C# uygulamaları için harici değişken okuma paketlerini biçimlendirir.' },
     benefit: { en: 'Instant communication testing for custom vision and automated test benches.', ru: 'Упрощает тестирование обмена при разработке стендов и нестандартных систем.', tr: 'Özel test sistemleri ve kameralar için anında iletişim testi sağlar.' },
     codeBefore: 'RAW: 00 05 00 01 00 0A 24 4F 56 5F 50 52 4F',
-    codeAfter: 'READ: $OV_PRO ➔ Value: 100%'
+    codeAfter: 'READ: $OV_PRO &rarr; Value: 100%'
   },
   {
-    id: 41, category: 'iot', icon: '📡', isPro: true,
+    id: 41, category: 'iot', icon: '', isPro: true,
     shortcut: 'Auto', setting: 'kuka.rsi.streamHelper',
     media: '/media/KUKA Control Center.gif',
     title: { en: 'RobotSensorInterface (RSI) Stream Helper', ru: 'Помощник потоков RobotSensorInterface (RSI)', tr: 'RobotSensorInterface (RSI) Akış Yardımcısı' },
     desc: { en: 'Pre-configures real-time 4ms and 12ms deterministic correction channels for seam tracking.', ru: 'Настраивает детерминированные каналы коррекции 4мс и 12мс для лазерного слежения за швом.', tr: 'Lazer dikiş takibi için 4ms ve 12ms gerçek zamanlı düzeltme kanallarını yapılandırır.' },
     benefit: { en: 'Guarantees deterministic cycle timing without jitter or communication dropouts.', ru: 'Гарантирует стабильное время цикла без задержек и потери управляющих пакетов.', tr: 'Gecikme veya paket kaybı olmadan kararlı gerçek zamanlı kontrol sağlar.' },
     codeBefore: '; Manual XML channel configuration with timing jitter',
-    codeAfter: '✓ Deterministic 4ms RSI interpolation channel validated'
+    codeAfter: '[OK] Deterministic 4ms RSI interpolation channel validated'
   },
   {
-    id: 42, category: 'iot', icon: '🦺', isPro: true,
+    id: 42, category: 'iot', icon: '', isPro: true,
     shortcut: 'Auto', setting: 'kuka.safety.dualChannelSafety',
     media: '/media/type-validation-demo.gif',
     title: { en: 'Safety I/O ($SAFEIN/$SAFEOUT) Dual-Channel Checker', ru: 'Проверка двухканальных сигналов $SAFEIN / $SAFEOUT', tr: 'Çift Kanallı Güvenlik Sinyali Denetimi ($SAFEIN)' },
     desc: { en: 'Validates redundant dual-channel safety signal pairings for light curtains and emergency stops.', ru: 'Проверяет парность и синхронность обработки сигналов безопасности световых барьеров и кнопок E-Stop.', tr: 'Işık bariyerleri ve acil durdurma butonları için çift kanallı sinyalleri denetler.' },
     benefit: { en: 'Ensures ISO 13849-1 Performance Level d/e safety compliance.', ru: 'Обеспечивает строгое соответствие нормам безопасности ISO 13849-1 (категория безопасности 4).', tr: 'ISO 13849-1 Seviye d/e endüstriyel güvenlik standartlarına uyum sağlar.' },
     codeBefore: 'IF $SAFEIN[1] == TRUE ; Incomplete single-channel check!',
-    codeAfter: 'IF $SAFEIN[1] AND $SAFEIN[2] ; ✓ Dual-channel verified'
+    codeAfter: 'IF $SAFEIN[1] AND $SAFEIN[2] ; [OK] Dual-channel verified'
   },
 
   // 43-50: Enterprise & Git
   {
-    id: 43, category: 'enterprise', icon: '🌿', isPro: false,
+    id: 43, category: 'enterprise', icon: '', isPro: false,
     shortcut: 'Ctrl+Shift+P > Git', setting: 'kuka.git.graph',
     media: '/media/Git Metadata Cleaner.gif',
     title: { en: 'Embedded KRL Git Graph & Branch Visualizer', ru: 'Встроенный KRL Git Graph и визуализатор веток', tr: 'Gömülü KRL Git Grafiği ve Dal Görselleştirici' },
     desc: { en: 'Visual branch and commit history viewer tuned specifically for multi-robot Git repositories.', ru: 'Наглядный график истории коммитов и веток, оптимизированный под репозитории робототехники.', tr: 'Robotik projeleri için özel olarak ayarlanmış görsel Git geçmişi ve dal görüntüleyici.' },
     benefit: { en: 'Enables safe collaboration between multiple commissioning engineers on site.', ru: 'Обеспечивает комфортную совместную работу нескольких наладчиков на объекте.', tr: 'Sahadaki birden fazla mühendisin güvenle eş zamanlı çalışmasını sağlar.' },
     codeBefore: '; Chaos with USB drives and conflicting file copies',
-    codeAfter: '✓ Clean visual Git branches: main ➔ cell_welding ➔ tuning'
+    codeAfter: '[OK] Clean visual Git branches: main &rarr; cell_welding &rarr; tuning'
   },
   {
-    id: 44, category: 'enterprise', icon: '🧹', isPro: false,
+    id: 44, category: 'enterprise', icon: '', isPro: false,
     shortcut: 'Shift+Alt+C', setting: 'kuka.git.cleanMetadata',
     media: '/media/Git Metadata Cleaner.gif',
     title: { en: 'WorkVisual Metadata Cleaner (&ACCESS, &REL)', ru: 'Очиститель метаданных WorkVisual (&ACCESS, &REL)', tr: 'WorkVisual Üstveri Temizleyici (&ACCESS, &REL)' },
     desc: { en: 'Strips noisy WorkVisual proprietary header lines (&ACCESS, &REL, &COMMENT) from git staging.', ru: 'Очищает служебные заголовки WorkVisual (&ACCESS RVP, &REL 1), которые засоряют историю коммитов.', tr: 'Git geçmişini kirleten gereksiz WorkVisual başlık satırlarını tek tıkla temizler.' },
     benefit: { en: 'Produces pristine Git diffs showing only real engineering code modifications.', ru: 'Оставляет в Git diff только реальные изменения алгоритмов без лишнего системного мусора.', tr: 'Git farklarında yalnızca gerçek mühendislik kod değişikliklerini gösterir.' },
     codeBefore: '&ACCESS RVP\n&REL 1\n&PARAM EDITMASK = *\nDEF MyProg()',
-    codeAfter: 'DEF MyProg() ; ✓ Pure clean source code'
+    codeAfter: 'DEF MyProg() ; [OK] Pure clean source code'
   },
   {
-    id: 45, category: 'enterprise', icon: '🔎', isPro: false,
+    id: 45, category: 'enterprise', icon: '', isPro: false,
     shortcut: 'Ctrl+Shift+F', setting: 'kuka.search.cellScope',
     media: '/media/Find All References.gif',
     title: { en: 'Multi-Robot Station Mass Search & Replace', ru: 'Массовый поиск и замена по всей станции', tr: 'Çoklu Robot İstasyonu Toplu Arama ve Değiştirme' },
     desc: { en: 'Fast regex search across multiple robot folders in a single cell with KRL syntax filtering.', ru: 'Быстрый поиск с поддержкой регулярных выражений по каталогам всех роботов ячейки одновременно.', tr: 'Tek bir hücredeki tüm robot klasörlerinde hızlı ve akıllı arama yapın.' },
     benefit: { en: 'Renames shared signals across 8 robots in seconds without missing occurrences.', ru: 'Позволяет переименовать общий сигнал во всей группе роботов за пару секунд без ошибок.', tr: '8 robottaki ortak sinyal adlarını saniyeler içinde hatasız günceller.' },
     codeBefore: '; Opening 8 robot project folders one by one',
-    codeAfter: '✓ Replaced $OUT[15] in 24 files across Robot_1..Robot_8'
+    codeAfter: '[OK] Replaced $OUT[15] in 24 files across Robot_1..Robot_8'
   },
   {
-    id: 46, category: 'enterprise', icon: '🚗', isPro: true,
+    id: 46, category: 'enterprise', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > OEM', setting: 'kuka.lint.oemStandards',
     media: '/media/type-validation-demo.gif',
     title: { en: 'Automotive Standard Linter (VASS, BMW, Integra)', ru: 'Линтер стандартов автоконцернов (VASS, BMW, Integra)', tr: 'Otomotiv Standartları Denetçisi (VASS, BMW, Integra)' },
     desc: { en: 'Validates compliance with German automotive OEM standards (VW VASS, BMW TMO, Mercedes Integra).', ru: 'Проверяет структуру программ и именование на соответствие немецким автомобильным стандартам.', tr: 'Alman otomotiv standartlarına (VW VASS, BMW TMO, Integra) tam uyumu denetler.' },
     benefit: { en: 'Guarantees first-time approval during official OEM factory buy-offs.', ru: 'Гарантирует успешную сдачу ячейки с первого раза без замечаний аудиторов автоконцерна.', tr: 'Fabrika kabul testlerinde (FAT/SAT) ilk seferde tam onay alınmasını sağlar.' },
     codeBefore: 'DEF my_routine() ; Rejected by VASS naming convention',
-    codeAfter: 'DEF FB_CELL_START() ; ✓ Fully VASS 6/7 Compliant'
+    codeAfter: 'DEF FB_CELL_START() ; [OK] Fully VASS 6/7 Compliant'
   },
   {
-    id: 47, category: 'enterprise', icon: '⏱️', isPro: false,
+    id: 47, category: 'enterprise', icon: '', isPro: false,
     shortcut: 'Auto on Save', setting: 'kuka.git.cleanTimestamps',
     media: '/media/Git Metadata Cleaner.gif',
     title: { en: 'Automated .DAT Timestamp Touch-up Cleaner', ru: 'Подавление фиктивных правок времени в .DAT', tr: 'Otomatik .DAT Zaman Damgası Temizleyicisi' },
     desc: { en: 'Suppresses false git modifications caused by SmartPAD touching timestamps without coordinate changes.', ru: 'Игнорирует фиктивные изменения файлов, когда пульт робота просто перезаписывает дату без изменения точек.', tr: 'Kumandanın koordinat değişmeden sadece tarihi güncellemesiyle oluşan sahte farkları önler.' },
     benefit: { en: 'Eliminates hundreds of false merge conflicts in version control.', ru: 'Устраняет сотни ложных конфликтов слияния в Git репозиториях.', tr: 'Sürüm kontrolünde yüzlerce sahte birleştirme çakışmasını engeller.' },
     codeBefore: '; 40 .dat files marked modified only because of timestamp',
-    codeAfter: '✓ 0 False changes: Only genuine coordinate shifts staged'
+    codeAfter: '[OK] 0 False changes: Only genuine coordinate shifts staged'
   },
   {
-    id: 48, category: 'enterprise', icon: '📦', isPro: true,
+    id: 48, category: 'enterprise', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Pack', setting: 'kuka.archive.builder',
     media: '/media/KRC Backup Diff & Point Delta Inspector.gif',
     title: { en: 'KUKA Deployment Archive Builder (.KRA / .ZIP)', ru: 'Сборщик архивов развертывания (.KRA / .ZIP)', tr: 'KUKA Dağıtım Arşivi Oluşturucu (.KRA / .ZIP)' },
     desc: { en: 'Bundles code files into official KUKA SmartPAD archive structures ready for direct USB restoration.', ru: 'Упаковывает файлы в правильную структуру папок KUKA, готовую к немедленной загрузке с флешки.', tr: 'Kodları kumandadan doğrudan geri yüklemeye hazır resmi KUKA arşiv yapısında paketler.' },
     benefit: { en: 'Zero "Corrupted Archive" errors when restoring backups on physical KRC controllers.', ru: 'Исключает ошибку «Архив поврежден» при попытке восстановления проекта на пульте.', tr: 'Fiziksel kumandada yedek yüklerken "Bozuk Arşiv" hatalarını önler.' },
     codeBefore: '; Manually zipping files into wrong folder depth',
-    codeAfter: '✓ Valid KRC_Archive.zip ready for USB restore'
+    codeAfter: '[OK] Valid KRC_Archive.zip ready for USB restore'
   },
   {
-    id: 49, category: 'enterprise', icon: '🔑', isPro: false,
+    id: 49, category: 'enterprise', icon: '', isPro: false,
     shortcut: 'Ctrl+Shift+P > License', setting: 'kuka.license.manager',
     media: '/media/KUKA Control Center.gif',
     title: { en: 'Offline License Manager (Up to 3 Machines)', ru: 'Менеджер офлайн-лицензий (до 3 ПК)', tr: 'Çevrimdışı Lisans Yöneticisi (3 Bilgisayara Kadar)' },
     desc: { en: 'Manage offline activation keys with 1-click license transfer between commissioning laptops.', ru: 'Удобное управление ключом лицензии и перенос между рабочими компьютерами без интернета.', tr: 'Saha bilgisayarları arasında internet olmadan tek tıkla lisans aktarımı ve yönetimi.' },
     benefit: { en: 'Guaranteed license validity even inside electromagnetic-shielded plant basements.', ru: 'Гарантированная работа лицензии даже в экранированных цехах без связи.', tr: 'Hücre içinde internet kesilse bile lisansınızın kesintisiz çalışmasını garanti eder.' },
     codeBefore: '; Internet requirement stalls work in offline facility',
-    codeAfter: '✓ Cached Offline License: Active on Field Laptop'
+    codeAfter: '[OK] Cached Offline License: Active on Field Laptop'
   },
   {
-    id: 50, category: 'enterprise', icon: '🏭', isPro: false,
+    id: 50, category: 'enterprise', icon: '', isPro: false,
     shortcut: 'Ctrl+Shift+P > Snippets', setting: 'kuka.snippets.enabled',
     media: '/media/KUKA COMMANDS.gif',
     title: { en: 'Industrial Snippet Factory (40+ Patterns)', ru: 'Библиотека промышленных сниппетов (40+ шаблонов)', tr: 'Endüstriyel Kod Parçacığı Fabrikası (40+ Şablon)' },
     desc: { en: 'Rich library of pre-tested production templates for palletizing, spot welding, dispensing, and safety cycles.', ru: 'Коллекция из 40+ готовых промышленных шаблонов для паллетирования, точечной сварки, нанесения клея и т.д.', tr: 'Paletleme, punta kaynağı, yapıştırıcı ve güvenlik için 40+ hazır endüstriyel şablon.' },
     benefit: { en: 'Deploy new robotic stations up to 3x faster using certified production code patterns.', ru: 'Ускоряет программирование новых ячеек в 3 раза за счет проверенных на реальных заводах шаблонов.', tr: 'Sertifikalı kod şablonlarıyla yeni robotik hücreleri 3 kat daha hızlı devreye alın.' },
     codeBefore: '; Writing 200 lines of palletizing trigonometry from zero',
-    codeAfter: '✓ Tab snippet "kuka-palletize" ➔ Complete verified pattern'
+    codeAfter: '[OK] Tab snippet "kuka-palletize" &rarr; Complete verified pattern'
   },
 
   // 51-64: Next-Gen Industrial Intelligence & Safety (v1.9.4)
   {
-    id: 51, category: 'safety', icon: '🛠️', isPro: false,
+    id: 51, category: 'safety', icon: '', isPro: false,
     shortcut: 'Ctrl+Shift+P > Fix All Safe Issues', setting: 'kuka.quickFix.safeMode',
     media: '/media/type-validation-demo.gif',
     title: { en: 'Safe Automated Code Repair Engine', ru: 'Безопасный автоматический исправитель кода', tr: 'Güvenli Otomatik Kod Onarım Motoru' },
@@ -901,67 +901,67 @@ const features = [
     codeAfter: 'DEF pick()\nWAIT SEC 0.5\nPTP xhome\nEND'
   },
   {
-    id: 52, category: 'safety', icon: '🛡️', isPro: true,
+    id: 52, category: 'safety', icon: '', isPro: true,
     shortcut: 'Auto on Save', setting: 'kuka.lint.astRollbackGuard',
     media: '/media/type-validation-demo.gif',
     title: { en: 'AST Rollback Guard & Checksum Integrity', ru: 'Защита отката AST и контроль целостности', tr: 'AST Geri Alma Koruması ve Sağlama Bütünlüğü' },
     desc: { en: 'Maintains in-memory AST rollback snapshots and verifies CRC32/SHA256 checksums before committing automatic transformations.', ru: 'Хранит в памяти снимки AST и проверяет контрольные суммы файлов перед записью любых автоматических трансформаций.', tr: 'Otomatik değişiklikleri uygulamadan önce bellekte AST anlık görüntüsü tutar ve sağlama toplamlarını doğrular.' },
     benefit: { en: 'Zero corrupted files on disk: atomic undo rollback guarantees file preservation even on crash.', ru: 'Гарантирует атомарный откат к оригиналу при любых непредвиденных ошибках или сбоях питания.', tr: 'Diskte bozuk dosya kalmasını engeller: beklenmeyen durumlarda orijinal duruma anında geri döner.' },
     codeBefore: '; Transform failed midway -> damaged corrupted file',
-    codeAfter: '✓ Rollback Guard: Atomic restore confirmed, 0 bytes lost'
+    codeAfter: '[OK] Rollback Guard: Atomic restore confirmed, 0 bytes lost'
   },
   {
-    id: 53, category: 'backup', icon: '🗄️', isPro: true,
+    id: 53, category: 'backup', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Mount ZIP', setting: 'kuka.backup.zipExplorer',
     media: '/media/KRC Backup Diff & Point Delta Inspector.gif',
     title: { en: 'Direct Backup Archive Explorer & Live ZIP Mount', ru: 'Проводник архивов бэкапов и монтирование ZIP', tr: 'Doğrudan Yedek Arşiv Gezgini ve Canlı ZIP Bağlama' },
     desc: { en: 'Inspect, search, and navigate full KRC backup ZIP archives as a virtual project folder without extracting to disk.', ru: 'Открывает, анализирует и навигирует по ZIP-архивам контроллеров KRC как по виртуальному проекту без распаковки на диск.', tr: 'KRC yedek ZIP arşivlerini diske çıkarmadan doğrudan sanal proje klasörü gibi tarayın ve inceleyin.' },
     benefit: { en: 'Instantly inspects 200MB controller archives on field laptops without creating gigabytes of temp files.', ru: 'Мгновенный анализ архивов KRC на инженерном ноутбуке без засорения диска временными файлами.', tr: 'Saha bilgisayarlarında gigabaytlarca geçici dosya oluşturmadan 200MB arşivleri saniyeler içinde açar.' },
     codeBefore: '; Manual unzip: 15,000 files extracted to desktop folder',
-    codeAfter: '✓ Virtual Mounted: KRC4_Archive.zip [Read-Only Safe Browse]'
+    codeAfter: '[OK] Virtual Mounted: KRC4_Archive.zip [Read-Only Safe Browse]'
   },
   {
-    id: 54, category: 'safety', icon: '📋', isPro: true,
+    id: 54, category: 'safety', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Event Log', setting: 'kuka.logs.evtDecoder',
     media: '/media/KUKA Control Center.gif',
     title: { en: 'Pure-TS Binary Event Log (.evt) Decoder', ru: 'Декодер бинарных журналов событий (.evt)', tr: 'Saf TS İkili Olay Günlüğü (.evt) Çözücü' },
     desc: { en: 'Decodes proprietary KUKA controller binary event logs (.evt/.log) directly in the editor into structured timelines.', ru: 'Парсит и декодирует проприетарные бинарные логи KUKA (.evt) в структурированную временную шкалу сообщений и аварий.', tr: 'Tescilli KUKA ikili olay günlüklerini (.evt) harici araca gerek kalmadan düzenli zaman çizelgesine dönüştürür.' },
     benefit: { en: 'Diagnose controller crashes and emergency stop triggers directly inside your IDE within seconds.', ru: 'Позволяет моментально найти причину аварийной остановки робота прямо в IDE без сторонних утилит.', tr: 'Robot duruşlarının ve acil stop nedenlerinin saniyeler içinde IDE içinde tespit edilmesini sağlar.' },
     codeBefore: '; Unreadable binary file KrcLog.evt (Hex: 0x4B 0x52 0x43...)',
-    codeAfter: '✓ Decoded: [14:22:01] ACK_ESTOP Triggered | [14:22:03] DRIVE_OFF'
+    codeAfter: '[OK] Decoded: [14:22:01] ACK_ESTOP Triggered | [14:22:03] DRIVE_OFF'
   },
   {
-    id: 55, category: 'backup', icon: '🌀', isPro: true,
+    id: 55, category: 'backup', icon: '', isPro: true,
     shortcut: 'Auto', setting: 'kuka.kinematics.wristSingularity',
     media: '/media/type-validation-demo.gif',
     title: { en: 'Wrist Singularity Trajectory Guard (Axis 5)', ru: 'Барьер сингулярности запястья робота (Ось 5)', tr: 'Bilek Tekilliği Yörünge Koruması (5. Eksen)' },
     desc: { en: 'Predicts dangerous wrist alignment (Axis 4 and Axis 6 collinearity, Axis 5 approaching 0°) on linear paths.', ru: 'Рассчитывает опасное выравнивание осей 4 и 6 при приближении угла 5-й оси к 0° на линейных перемещениях.', tr: 'Doğrusal hareketlerde 4 ve 6. eksenlerin çakışması ve 5. eksenin 0°ye yaklaşması tehlikesini önceden bildirir.' },
     benefit: { en: 'Prevents violent mechanical whipping and gearbox overtorque alarms in production cycles.', ru: 'Предотвращает резкие рывки механики и аварийные перегрузки редукторов на реальном цикле.', tr: 'Üretim döngülerinde ani mekanik sarsıntıları ve redüktör aşırı tork alarmlarını önler.' },
     codeBefore: 'LIN XPICK_PART ; A5 passes through 0.2 deg at 2.0 m/s',
-    codeAfter: '⚠️ CRITICAL: Wrist singularity zone near XPICK_PART (A5 ≈ 0°)'
+    codeAfter: '[WARN] CRITICAL: Wrist singularity zone near XPICK_PART (A5 ≈ 0°)'
   },
   {
-    id: 56, category: 'backup', icon: '📐', isPro: true,
+    id: 56, category: 'backup', icon: '', isPro: true,
     shortcut: 'Auto', setting: 'kuka.kinematics.shoulderSingularity',
     media: '/media/type-validation-demo.gif',
     title: { en: 'Shoulder Singularity & Reachability Barrier', ru: 'Анализ сингулярности плеча и зоны досягаемости', tr: 'Omuz Tekilliği ve Ulaşılabilirlik Bariyeri' },
     desc: { en: 'Identifies overhead singularity (wrist center point intersecting Axis 1 vertical centerline) and boundary limits.', ru: 'Определяет прохождение запястья через вертикальную ось вращения 1-й оси и пределы рабочей зоны.', tr: 'Bilek merkez noktasının 1. eksen dikey çizgisiyle kesiştiği tepe tekilliğini ve sınırları belirler.' },
     benefit: { en: 'Prevents erratic full 180° base spins when moving parts directly above the robot base.', ru: 'Исключает непредсказуемый разворот 1-й оси на 180° при перемещении над колонной робота.', tr: 'Robot tabanının tam üzerinden parça taşırken 1. eksenin 180° kontrolsüz dönmesini önler.' },
     codeBefore: 'LIN XOVERHEAD ; Wrist intersects Axis 1 axis of rotation',
-    codeAfter: '⚠️ WARNING: Overhead shoulder singularity! Shift trajectory Y+50'
+    codeAfter: '[WARN] WARNING: Overhead shoulder singularity! Shift trajectory Y+50'
   },
   {
-    id: 57, category: 'safety', icon: '⚡', isPro: true,
+    id: 57, category: 'safety', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > I/O Auditor', setting: 'kuka.safety.ioCollisionAuditor',
     media: '/media/KRL IO Signals.gif',
     title: { en: 'I/O Signal Collision & Overwrite Auditor', ru: 'Аудитор конфликтов и перезаписи сигналов I/O', tr: 'G/Ç Sinyal Çakışması ve Üzerine Yazma Denetçisi' },
     desc: { en: 'Detects concurrent writes and race conditions where multiple routines write to the same $OUT bit or fieldbus word.', ru: 'Выявляет коллизии и состояния гонки, когда разные подпрограммы или прерывания пишут в один выходной сигнал.', tr: 'Farklı alt programların veya kesmelerin aynı $OUT sinyaline yazması durumundaki çakışmaları tespit eder.' },
     benefit: { en: 'Eliminates intermittent sensor-actuator glitches that take weeks to troubleshoot in production.', ru: 'Устраняет плавающие сбои исполнительных механизмов, которые крайне трудно отладить вживую.', tr: 'Üretimde haftalarca aranan rastgele sinyal çakışması arızalarını anında çözer.' },
     codeBefore: '; Routine A sets $OUT[15] = TRUE; Interrupt B sets $OUT[15] = FALSE',
-    codeAfter: '⚠️ I/O CONFLICT: $OUT[15] overwritten concurrently in 2 routines'
+    codeAfter: '[WARN] I/O CONFLICT: $OUT[15] overwritten concurrently in 2 routines'
   },
   {
-    id: 58, category: 'core', icon: '📈', isPro: true,
+    id: 58, category: 'core', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Motion Stats', setting: 'kuka.motion.optimizer',
     media: '/media/KUKA Control Center.gif',
     title: { en: 'Motion Lookahead ($ADVANCE / $APO) Optimizer', ru: 'Оптимизатор аппроксимации и упреждения ($APO)', tr: 'Hareket İlerleme ($ADVANCE / $APO) Optimize Edici' },
@@ -971,64 +971,64 @@ const features = [
     codeAfter: 'TRIGGER WHEN DISTANCE=1 DELAY=0 DO $OUT[1]=TRUE ; Smooth path'
   },
   {
-    id: 59, category: 'backup', icon: '🔥', isPro: true,
+    id: 59, category: 'backup', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Arc Profiler', setting: 'kuka.welding.profiler',
     media: '/media/KUKA Control Center.gif',
     title: { en: '3D Arc Welding Profiler & Spline Visualizer', ru: '3D Профайлер дуговой сварки и сплайновых траекторий', tr: '3D Gazaltı Kaynak Profilcisi ve Spline Görselleştirici' },
     desc: { en: 'Visualizes SPLINE, SLIN, and SCIRC seam trajectories with torch angle, push/pull orientations, and weaving amplitude.', ru: 'Визуализирует сварочные швы SPLINE/SLIN/SCIRC с углами атаки горелки и амплитудой колебаний.', tr: 'Torç açıları, yönelimler ve salınım genliği ile SPLINE/SLIN dikiş yörüngelerini görselleştirir.' },
     benefit: { en: 'Ensures perfect weld penetration and eliminates torch cable entanglement before striking an arc.', ru: 'Гарантирует правильный угол провара и исключает перекручивание шланг-пакета до розжига дуги.', tr: 'Mükemmel kaynak nüfuziyeti sağlar ve ark başlatmadan önce kablo bükülmelerini önler.' },
     codeBefore: '; Blind spline block with unknown torch lead angle',
-    codeAfter: '✓ Spline Visualized: 18 points, 15° lead angle, 0 cable twists'
+    codeAfter: '[OK] Spline Visualized: 18 points, 15° lead angle, 0 cable twists'
   },
   {
-    id: 60, category: 'core', icon: '🚀', isPro: true,
+    id: 60, category: 'core', icon: '', isPro: true,
     shortcut: 'Auto', setting: 'kuka.compatibility.kss9',
     media: '/media/type-validation-demo.gif',
     title: { en: 'KSS 9.x & iiQWorks 9.+ Architecture Engine', ru: 'Архитектурный движок KSS 9.x и iiQWorks 9.+', tr: 'KSS 9.x ve iiQWorks 9.+ Mimari Motoru' },
     desc: { en: 'Full compatibility engine for next-generation KSS 9.x and iiQWorks 9.+ controllers, structures, and modern system schemas.', ru: 'Полная поддержка систем KSS 9.x и экосистемы iiQWorks 9.+ с новыми структурами данных и типами.', tr: 'Yeni nesil KSS 9.x ve iiQWorks 9.+ kontrolcüleri, yapıları ve modern sistem şemalarıyla tam uyum.' },
     benefit: { en: 'Future-proof investment ready for modern automation lines running latest controller generations.', ru: 'Гарантированная работа на новейших производственных линиях с контроллерами последнего поколения.', tr: 'En yeni nesil kontrolcülere sahip modern üretim hatları için geleceğe hazır yatırım.' },
     codeBefore: '; Legacy editors fail on KSS 9.x extended constructs',
-    codeAfter: '✓ KSS 9.x / iiQWorks 9.+ AST Engine: 100% Validated'
+    codeAfter: '[OK] KSS 9.x / iiQWorks 9.+ AST Engine: 100% Validated'
   },
   {
-    id: 61, category: 'enterprise', icon: '🧾', isPro: false,
+    id: 61, category: 'enterprise', icon: '', isPro: false,
     shortcut: 'Ctrl+Shift+P > B2B Invoice', setting: 'kuka.b2b.invoiceGenerator',
     media: '/media/KUKA Control Center.gif',
     title: { en: 'B2B Corporate Invoice & EU VAT Generator', ru: 'Генератор B2B счетов и EU VAT Reverse Charge', tr: 'Kurumsal B2B Fatura ve KDV Muafiyet Üreticisi' },
     desc: { en: 'Generates official compliant B2B proforma and tax invoices with corporate Tax ID / EU VAT Reverse Charge validation.', ru: 'Формирует официальные корпоративные счета с автоматической валидацией Tax ID и нулевым НДС для компаний ЕС.', tr: 'Vergi numarası ve AB KDV muafiyet doğrulaması ile resmi kurumsal fatura belgeleri oluşturur.' },
     benefit: { en: 'Accelerates corporate accounting approval and procurement cycles from weeks to minutes.', ru: 'Ускоряет закупку через бухгалтерию предприятия без бумажной волокиты и задержек.', tr: 'Şirket muhasebe ve satın alma süreçlerini haftalardan dakikalara indirir.' },
     codeBefore: '; Manual back-and-forth corporate invoice requests',
-    codeAfter: '✓ Official B2B Invoice PDF with EU VAT Reverse Charge issued'
+    codeAfter: '[OK] Official B2B Invoice PDF with EU VAT Reverse Charge issued'
   },
   {
-    id: 62, category: 'enterprise', icon: '🌐', isPro: true,
+    id: 62, category: 'enterprise', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > Topology', setting: 'kuka.station.topologyMatrix',
     media: '/media/Find All References.gif',
     title: { en: 'Multi-Robot Station Live Topology Matrix', ru: 'Матрица топологии и сигналов многороботной станции', tr: 'Çoklu Robot İstasyonu Canlı Topoloji Matrisi' },
     desc: { en: 'Visualizes interlock zones, shared clearance signals, and collision interference spaces across multi-robot cells.', ru: 'Отображает зоны взаимной блокировки (interlock), зоны ожидания и общие сигналы нескольких роботов ячейки.', tr: 'Çoklu robot hücrelerinde kilitlenme bölgelerini, ortak sinyalleri ve çarpışma alanlarını görselleştirir.' },
     benefit: { en: 'Prevents catastrophic physical collisions between cooperating robots sharing common worktables.', ru: 'Исключает столкновение роботов при одновременной работе на общем поворотном столе.', tr: 'Ortak döner tabloda çalışan robotların birbirine çarpmasını tamamen engeller.' },
     codeBefore: '; Unclear cell interlock leading to mechanical crash',
-    codeAfter: '✓ Zone 3 Interlock: Robot 1 & Robot 2 mutual exclusivity verified'
+    codeAfter: '[OK] Zone 3 Interlock: Robot 1 & Robot 2 mutual exclusivity verified'
   },
   {
-    id: 63, category: 'core', icon: '🤖', isPro: true,
+    id: 63, category: 'core', icon: '', isPro: true,
     shortcut: 'Ctrl+Shift+P > AI Prompt', setting: 'kuka.ai.promptAssist',
     media: '/media/KUKA Control Center.gif',
     title: { en: 'Industrial AI Copilot & Assist Prompt Factory', ru: 'Промышленный AI Copilot и генератор промптов', tr: 'Endüstriyel Yapay Zeka Copilot ve İstem Fabrikası' },
     desc: { en: 'Specialized context-aware prompt generator tailored for GitHub Copilot, Cursor, and Windsurf to write flawless KRL.', ru: 'Генератор системных промптов и контекста для нейросетей (Copilot, Cursor), знающий все нюансы синтаксиса KRL.', tr: 'Hatasız KRL kodu yazmak için yapay zeka asistanlarına özel endüstriyel bağlam ve istemler üretir.' },
     benefit: { en: 'Prevents generic hallucinated code from AI assistants by grounding them in rigorous KRL grammar rules.', ru: 'Исключает галлюцинации нейросетей, заставляя их писать валидный промышленный код KRL.', tr: 'Yapay zekanın geçersiz kod üretmesini engeller, katı KRL kurallarına uymasını sağlar.' },
     codeBefore: '; Generic AI generates invalid pseudo-code syntax',
-    codeAfter: '✓ Grounded AI Output: Valid DEF..END with correct BAS(#INITMOV)'
+    codeAfter: '[OK] Grounded AI Output: Valid DEF..END with correct BAS(#INITMOV)'
   },
   {
-    id: 64, category: 'core', icon: '✨', isPro: false,
+    id: 64, category: 'core', icon: '', isPro: false,
     shortcut: 'Live Diagnostics', setting: 'kuka.diagnostics.syntaxBonus',
     media: '/media/type-validation-demo.gif',
     title: { en: 'Real-Time Syntax Error Diagnostics Bonus', ru: 'Бонусная диагностика синтаксиса в реальном времени', tr: 'Gerçek Zamanlı Sözdizimi Teşhis Bonusu' },
     desc: { en: 'Instant red squiggly underlines for unclosed brackets, missing THEN/ENDIF keywords, and illegal tokens in Free edition.', ru: 'Мгновенное подсвечивание синтаксических ошибок, незакрытых скобок, пропущенных THEN/ENDIF в бесплатной версии.', tr: 'Ücretsiz sürümde kapanmamış parantezler, eksik THEN/ENDIF ifadeleri ve sözdizimi hataları anında altı çizili gösterilir.' },
     benefit: { en: 'Every engineer catches basic syntax errors immediately without paying a single cent.', ru: 'Дает каждому инженеру базовую защиту от синтаксических ошибок без обязательной покупки лицензии.', tr: 'Her mühendisin tek bir kuruş ödemeden temel sözdizimi hatalarını anında yakalamasını sağlar.' },
     codeBefore: 'IF $IN[1] == TRUE\n  PTP P1\n; Missing THEN & ENDIF!',
-    codeAfter: 'IF $IN[1] == TRUE THEN\n  PTP P1\nENDIF ; ✓ Valid syntax'
+    codeAfter: 'IF $IN[1] == TRUE THEN\n  PTP P1\nENDIF ; [OK] Valid syntax'
   }
 ]
 

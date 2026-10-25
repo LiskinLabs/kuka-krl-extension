@@ -1,4 +1,4 @@
-# 🟢 Topluluk Sürümü — Ücretsiz Temel Özellikler
+# Topluluk Sürümü — Ücretsiz Temel Özellikler
 
 KUKA KRL Professional eklentisinde bulunan 24 ücretsiz temel özelliğin ayrıntılı açıklaması.
 
@@ -81,7 +81,7 @@ Sistem değişkenlerinin üzerine gelindiğinde resmi KSS kılavuz bilgilerini, 
 ---
 
 ### 10. Hızlı FOLD Daraltma / Genişletme Düğmeleri
-Üst araç çubuğundaki 🙈 (`krl.foldAll`) ve 📖 (`krl.unfoldAll`) simgeleri ile FOLD yapılarını tek tıkla daraltın veya açın.
+Üst araç çubuğundaki [Fold All] (`krl.foldAll`) ve [Unfold All] (`krl.unfoldAll`) simgeleri ile FOLD yapılarını tek tıkla daraltın veya açın.
 
 ![Quick Fold Toolbar Demo](/media/quick_fold_toolbar.gif)
 

@@ -2,6 +2,31 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
+## [1.9.8] - 2026-10-25 (KUKA.Sim VCMX Intelligence Suite [PRO], KUKA.RSI 4ms Real-Time Suite [PRO], CAM CNC G-Code & SVG Importer [PRO], Vision Hand-Eye Calibration & PLC Tag Exporter [PRO])
+
+### 🏭 Module 1: KUKA.Sim & Visual Components (`.vcmx` / `layout.rsc`) Intelligence Suite [PRO]
+- **Simulation Workcell Inspector (`krl.inspectVcmxLayout`) [PRO]**: Two-layer `layout.rsc` parser extracting `rSimNode` robot/workcell components, `rSimBooleanSignal` definitions, `ProductType` transport links, and `ProgramData` process routines directly from `.vcmx` archives without unpacking.
+- **VCMX Simulation Validator & Safe Auto-Repair (`krl.validateVcmxSimulation`) [PRO]**: Detects and surgically repairs 4 fatal simulation bugs (`VCMX001` edge-triggered pulse signal / trailing ack-wait deadlocks, `VCMX002` `WaitSignal` timeout fallthroughs, `VCMX003` product variable list accumulation after `TransportOut`/`RemoveProduct`, `VCMX004` unresolved signal references) with automatic versioned `.bk1`, `.bk2` backup preservation.
+- **VCMX-to-KRL Post-Processor (`krl.exportVcmxToKrl`) [PRO]**: Converts KUKA.Sim / Visual Components `ProgramData` routines (`LinMotion`, `PtpMotion`, `SetSignal`, `WaitSignal`, `Delay`) directly into synchronized KUKA KRL `.src` + `.dat` modules.
+
+### ⚡ Module 2: KUKA.RobotSensorInterface (RSI) Real-Time Control Suite [PRO]
+- **RSI XML Schema Validator (`krl.validateRsiXml`) [PRO]**: Validates KUKA.RSI `SensorInterface/*.xml` configurations (`<ROOT>`, `<CONFIG>`, `<SEN_TYPE>`, `<IP_NUMBER>`, `<PORT>`, `<SEND>`, `<RECEIVE>`, `<ELEMENT>` tags, data types, and `INDX="1..N"` continuity).
+- **4ms / 12ms Real-Time RSI Driver Generator (`krl.generateRsiCode`) [PRO]**: Generates production-ready `#IPO_FAST` (4ms) and `#IPO` (12ms) KRL real-time sensor correction loops (`RSI_CREATE`, `RSI_ON`, `RSI_MOVECORR`, `RSI_OFF`, `RSI_DELETE`) paired with matching XML descriptors for Cartesian (`RKorr`) or ROS 2 Axis (`AK.A1..A6`) control.
+- **Built-in RSI System Library Intrinsics**: Added 10 RSI functions and status constants (`RSIOK`, `RSIINVCONTAINER`, `RSIINVPARAM`, `RSITIMEOUT`) with full signature help.
+
+### 🛠️ Module 3: CAM CNC G-Code (`.nc`/`.gcode`) & Vector SVG (`.svg`) Importer [PRO]
+- **CNC G-Code & 2D Vector SVG to KRL Converter (`krl.importGcodeToKrl`) [PRO]**: Converts ISO CNC G-Code (`G0` -> `PTP`/`SPTP`, `G1` -> `LIN`/`SLIN`, `G2`/`G3` -> `CIRC`/`SCIRC` with exact 3D arc midpoint `XAUX` calculation from `I,J` or `R`, `F` feedrate mm/min -> `$VEL.CP` m/s, `M3/M5` -> `$OUT`) and 2D vector `.svg` contours (`<path>`, `<line>`, `<polyline>`, `<polygon>`, `<rect>`, `<circle>`) into synchronized `.src` and `.dat` files.
+
+### 👁️ Module 4: 2D/3D Vision Hand-Eye Calibration Wizard & PLC Fieldbus Tag Exporter [PRO]
+- **Vision Hand-Eye Calibration Wizard (`krl.generateVisionCalibration`) [PRO]**: Generates a 9-pose Hand-Eye calibration pyramid (`Eye-in-Hand` / `Eye-to-Hand`) with 3D Look-At rotation matrix -> KUKA Euler Z-Y'-X'' (A, B, C) angle calculation, geometric `Pre-Grasp Approach` (`xDetectedTarget : {X 0, Y 0, Z -Approach, ...}`), and EthernetKRL camera trigger handshake.
+- **PLC Fieldbus Tag Exporter (`krl.exportPlcTags`) [PRO]**: Extracts workspace `SIGNAL` and `$IN`/`$OUT` declarations with automatic IEC 61131-3 byte.bit calculation (`%I0.0`, `%IB1`, `%Q0.0`, `%QW2`) and exports to **Siemens TIA Portal XML (`.xml`)**, **TIA Portal SDF (`.sdf`)**, **Beckhoff TwinCAT 3 GVL (`.TcGVL`)**, and **Industrial EPLAN CSV (`.csv`)**.
+
+### 🚀 Dual-Registry Distribution & Registry Parity
+- **Open VSX Synchronization**: Full release alignment across both official marketplaces (Visual Studio Code Marketplace & Eclipse Open VSX Registry) ensuring immediate availability for Eclipse Theia, VSCodium, and Gitpod.
+- **Prepublish Network Resilience**: Upgraded remote marketplace collision check timeout threshold (15s) to guarantee deterministic pre-publish verification across industrial proxy and VPN gateways.
+- **Runtime Version Fallback Modernization**: Synchronized runtime version fallback resolvers in `version.ts` and packaging pipeline integrity manifests.
+- **Cryptographic Bundle Seal**: Re-sealed SHA-256 production bundle integrity manifest (`integrity.manifest.json`).
+
 ## [1.9.6] - 2026-10-20 (Universal Backup & Unused Variable Purge Engine [PRO], Dual-Scope Workspace Cleaner, AST Rollback Guard, Structure Tokenizer Fix & External Interface Protection)
 
 ### 🧹 Industrial Unused Variables & Dead Code Purge Engine (`krl.cleanupUnusedVariables`) [PRO]

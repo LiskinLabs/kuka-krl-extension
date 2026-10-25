@@ -48,7 +48,7 @@
 
 * **Prevent Costly Line Stops ($10,000+ / hour)**: Verify Tool/Base coordinate systems, motion envelope boundaries, and `SPS.SUB` cyclic tasks before production starts.
 * **Online SCADA Live Monitor**: Direct Ethernet connection to physical KR C4 / KR C5 controllers with live TCP tracking, 6-axis torque gauges, 4096-pin I/O grid, and multilingual alarm subtitles.
-* **DReS 6.7 Parity & Superiority**: 3-way fold integrity audit, SVD Kabsch Base Calibration, Point Table Engine (split view, orphan detection, tool/base recalculation, smart duplicate), KFD Form Engine, bidirectional KRC <-> VKRC converter, and Tech Points 3D diff.
+* **Automotive OLP & VKRC Suite**: 3-way fold integrity audit, SVD Kabsch Base Calibration, Point Table Engine (split view, orphan detection, tool/base recalculation, smart duplicate), KFD Form Engine, bidirectional KRC <-> VKRC converter, and Tech Points 3D diff.
 * **SmartPAD Backup Intelligence**: Audit backup archives (`.zip` / `KRCDiag`) and detect night-shift point touch-ups with exact $\Delta X, \Delta Y, \Delta Z$ coordinate deltas.
 * **WorkVisual (.wvs) & KUKA.Sim (.vcmx) Suites**: In-memory bus topology inspection, fieldbus signal mapping (EtherCAT/Profinet), simulation race validator (`VCMX001` - `VCMX004`), and post-processor.
 * **KUKA.RSI & CAM Tooling**: 4ms `#IPO_FAST` real-time sensor control loop generator, ISO G-Code and 2D Vector SVG importer, and 9-pose Vision Hand-Eye calibration wizard.

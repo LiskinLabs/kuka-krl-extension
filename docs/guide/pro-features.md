@@ -119,15 +119,18 @@ Verified across 9,804 real industrial plant modules (4.2M+ LoC across 17 robotic
 ---
 
 ### 35. KRL Safe Auto-Repair Engine & QuickFix (`krl.fixAllSafeIssuesInFile`)
-Deterministic one-click auto-repair engine for safe syntactic and structural issues without altering motion kinematics:
-- **Advance Run Hazard Barrier**: Auto-inserts `WAIT SEC 0` before safety zone output assertions/releases (`$OUT[...]`, `$FLAG[...]`, `PULSE(...)`) following motions or subprograms.
-- **Missing BRAKE before RESUME**: Injects mandatory `BRAKE` deceleration command directly before `RESUME` in collision and sensor interrupt handlers.
-- **Uncommitted Payload Dynamic Data**: Automatically injects active tool `BAS(#PAYLOAD, nTool)` commit calls after multi-attribute `$LOAD` assignment groups (`$LOAD.MASS`, `$LOAD.COG`, `$LOAD.J`).
-- **BOM & Non-ASCII Purge**: Strips invisible UTF-8 BOM (`\uFEFF`) and normalizes non-ASCII typographical glyphs preventing KSS parser compiler panics.
-- **FOLD / ENDFOLD Desync Alignment**: Synchronizes closing `;ENDFOLD` tags with their respective `;FOLD` region headers.
+Deterministic one-click auto-repair engine for 7 classes of safe syntactic and structural issues without altering motion kinematics or trajectory:
+- **BOM & Non-ASCII Purge**: Strips invisible UTF-8 BOM (`\uFEFF`), smart quotes, typographical dashes, non-breaking spaces, and transliterates German umlauts outside strings, preventing KSS compiler panics.
+- **FOLD / ENDFOLD Desync Alignment**: Synchronizes closing `;ENDFOLD` tags with their respective opening `;FOLD` region headers.
 - **FOR Step Zero Hazard Prevention**: Replaces fatal `STEP 0` infinite controller loop conditions with safe `STEP 1`.
-- **Unused Local Declarations Purge**: Safely removes dangling local `DECL` variables to free memory on physical KRC controllers.
+- **Missing BRAKE before RESUME**: Injects mandatory `BRAKE` deceleration command directly before `RESUME` in collision and sensor interrupt handlers (eliminating KSS01442).
+- **Uncommitted Payload Dynamic Data**: Automatically injects active tool `BAS(#TOOL, currentTool)` commit calls after multi-attribute `$LOAD` assignment groups (`$LOAD.MASS`, `$LOAD.COG`, `$LOAD.J`), preventing motor overload.
+- **Duplicate Motion Approximation Modifiers**: Normalizes duplicate or triple motion blending tokens (`C_DIS`, `C_PTP`) without altering legitimate KSS CP dual-tokens.
+- **Inline Form Metadata Desync Alignment**: Synchronizes XML parameter metadata with executing KRL statements (`$OUT[...]`), preventing SmartPAD Touch-Up from overwriting programmer logic.
 - **Instant Rollback Guard & Monaco Diff Preview**: Structural AST validation guarantees that any repair introducing regressions is instantly rolled back. All changes are previewed in VS Code's native Monaco Diff Editor before disk write.
+
+> [!NOTE]
+> **Unused Variable & Dead Code Purge:** Handled exclusively by the dedicated **Universal Backup & Unused Variable Purge Engine [PRO]** (`krl.cleanupUnusedVariables`) with interactive scope selection, structure tokenizer, and full protection for `$config.dat`, `sps.sub`, and EthernetKRL interfaces.
 
 ---
 

@@ -111,13 +111,18 @@ KSS 8.x ve KSS 9.x / iiQWorks spesifikasyonlarına uygun simülasyon ve kinemati
 ---
 
 ### 35. KRL Güvenli Otomatik Düzeltme Motoru (Safe Auto-Repair & QuickFix)
-Kinematiği bozmadan sözdizimi ve yapısal hataları tek tıkla (`Ctrl+.` QuickFix ve `krl.fixAllSafeIssuesInFile`) onarma:
-- **İlerletici Okuma (Advance Run) Bariyeri**: Güvenlik çıkışları öncesinde otomatik `WAIT SEC 0` ekleme.
-- **RESUME Öncesi Zorunlu BRAKE**: Kesme alt programlarında durma komutunu ekleme.
-- **Dinamik Yük ($LOAD) Doğrulama**: Yük atamalarından sonra `BAS(#PAYLOAD, nTool)` çağrısını otomatik ekleme.
-- **BOM ve ASCII Dışı Karakter Temizliği**: UTF-8 BOM ve KSS derleyicisini bozan karakterleri temizleme.
+Kinematiği ve yörüngeyi bozmadan 7 sınıf sözdizimi ve yapısal hatayı tek tıkla (`Ctrl+.` QuickFix ve `krl.fixAllSafeIssuesInFile`) onarma:
+- **BOM ve ASCII Dışı Karakter Temizliği**: UTF-8 BOM (`\xEF\xBB\xBF`), tipografik tırnaklar, uzun çizgiler ve KSS derleyicisini bozan özel karakterleri temizleme.
 - **FOLD / ENDFOLD Senkronizasyonu**: Kapanış etiketlerini uyumlu hale getirme.
+- **FOR STEP 0 Sonsuz Döngü Koruması**: KRC kilitlenmesine neden olan `STEP 0` adımını güvenli `STEP 1` ile değiştirme.
+- **RESUME Öncesi Zorunlu BRAKE**: Kesme alt programlarında durma komutunu ekleme (KSS01442 hatasını önler).
+- **Dinamik Yük ($LOAD) Doğrulama**: Yük atamalarından sonra `BAS(#TOOL, currentTool)` çağrısını otomatik ekleme (motor aşırı yüklenmelerini önler).
+- **Yinelenen Yaklaşım Belirteçleri Temizliği**: Kazara eklenen yinelenen `C_DIS` veya `C_PTP` belirteçlerini normalleştirme.
+- **Satır İçi Form Meta Veri Senkronizasyonu**: XML parametrelerini KRL kodlarıyla (`$OUT[...]`) senkronize ederek SmartPAD Touch-Up sırasında kodun üzerine yazılmasını engelleme.
 - **Geri Alma Koruması (Rollback Guard)**: Hata durumunda işlemi anında geri alma ve Monaco Diff Editörü ile onaylama.
+
+> [!NOTE]
+> **Kullanılmayan Değişkenleri Temizleme:** `$config.dat`, `sps.sub` ve EthernetKRL korumalı özel `krl.cleanupUnusedVariables` (**Universal Backup & Unused Variable Purge Engine [PRO]**) aracıyla ayrı olarak yönetilir.
 
 ---
 

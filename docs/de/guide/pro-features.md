@@ -119,12 +119,18 @@ Verified across 9,804 real industrial plant modules (4.2M+ LoC across 17 robotic
 ---
 
 ### 35. KRL Sichere automatische Reparatur (`krl.fixAllSafeIssuesInFile`)
-Deterministische One-Click-Behebung sicherer syntaktischer und struktureller Fehler ohne Änderung der Bewegungskinematik:
-- **Vorlaufstopp-Schutzbarriere**: Fügt automatisch `WAIT SEC 0` vor Sicherheitszonen-Signalen (`$OUT`, `$FLAG`, `PULSE`) ein.
-- **Fehlendes BRAKE vor RESUME**: Ergänzt den erforderlichen `BRAKE`-Befehl direkt vor `RESUME` in Interrupt-Routinen.
-- **Nutzlast-Commit ($LOAD)**: Fügt `BAS(#PAYLOAD, nTool)`-Aufrufe nach `$LOAD`-Zuweisungen ein.
-- **BOM- und Nicht-ASCII-Bereinigung**: Entfernt UTF-8 BOM und bereinigt Sonderzeichen.
+Deterministische One-Click-Behebung von 7 Klassen syntaktischer und struktureller Fehler ohne Änderung der Bewegungskinematik:
+- **BOM- und Nicht-ASCII-Bereinigung**: Entfernt UTF-8 BOM (`\xEF\xBB\xBF`), typografische Anführungszeichen, Gedankenstriche und bereinigt Sonderzeichen zur Vermeidung von KSS-Compilerfehlern.
 - **FOLD / ENDFOLD Desynchronisationsausgleich**: Gleicht schließende `;ENDFOLD`-Tags mit ihren `;FOLD`-Headern ab.
+- **FOR Step-Zero-Schutz**: Ersetzt fatale `STEP 0`-Endlosschleifen durch sichere `STEP 1`.
+- **Fehlendes BRAKE vor RESUME**: Ergänzt den erforderlichen `BRAKE`-Befehl direkt vor `RESUME` in Interrupt-Routinen (verhindert KSS01442).
+- **Nutzlast-Commit ($LOAD)**: Fügt `BAS(#TOOL, currentTool)`-Aufrufe nach `$LOAD`-Zuweisungen ein, um Motorüberlastungen zu verhindern.
+- **Doppelte Überschleifparameter-Bereinigung**: Normalisiert versehentlich duplizierte Blending-Token (`C_DIS`, `C_PTP`).
+- **Inline-Formular-Metadaten-Synchronisation**: Synchronisiert XML-Parameter mit KRL-Anweisungen (`$OUT[...]`), um fehlerhafte SmartPAD Touch-Up-Überschreibungen zu verhindern.
+- **Rollback Guard & Monaco Diff**: Automatischer Rückrollschutz bei Syntaxfehlern und visuelle Vorschau im Monaco Diff Editor vor dem Speichern.
+
+> [!NOTE]
+> **Bereinigung ungenutzter Variablen:** Wird dediziert über das Werkzeug `krl.cleanupUnusedVariables` (**Universal Backup & Unused Variable Purge Engine [PRO]**) mit Schutz für `$config.dat`, `sps.sub` und EthernetKRL gesteuert.
 
 ---
 

@@ -87,14 +87,15 @@ Instant in-memory comparison of KUKA robot backup archives (`.zip`, `KRCDiag_*.z
 <br>
 
 Automated resolution of 7 critical classes of industrial hazards in 1 click (`Ctrl+.` QuickFix & `krl.fixAllSafeIssuesInFile`):
-1. **Advance Run Hazard Barrier**: Auto-inserts `WAIT SEC 0` before safety zone output assertions/releases (`$OUT[...]`, `$FLAG[...]`, `PULSE(...)`) following motions or subprograms, preventing premature zone deassertion.
-2. **Mandatory BRAKE before RESUME**: Injects mandatory `BRAKE` deceleration commands directly before `RESUME` in collision and sensor interrupt handlers.
-3. **Committed Dynamic Payload**: Injects `BAS(#PAYLOAD, nTool)` commit calls after multi-attribute `$LOAD` assignment groups.
-4. **BOM & Non-ASCII Purge**: Strips invisible UTF-8 BOM (`\uFEFF`) and normalizes non-ASCII typographical glyphs preventing KSS parser compiler panics.
-5. **FOLD / ENDFOLD Desync Alignment**: Synchronizes closing `;ENDFOLD` tags with their respective `;FOLD` region headers.
-6. **FOR Step Zero Hazard Prevention**: Replaces fatal `STEP 0` infinite controller loop conditions with safe `STEP 1`.
-7. **Unused Local Declarations Purge**: Safely removes dangling local `DECL` variables to free memory on physical KRC controllers.
+1. **BOM & Non-ASCII Purge**: Strips invisible UTF-8 BOM (`\xEF\xBB\xBF`), typographical quotes, dashes, and umlauts, preventing KSS compiler panics.
+2. **Mandatory BRAKE before RESUME**: Injects mandatory `BRAKE` deceleration commands directly before `RESUME` in collision and sensor interrupt handlers (eliminating KSS01442).
+3. **Committed Dynamic Payload BAS(#TOOL)**: Injects `BAS(#TOOL, currentTool)` commit calls after `$LOAD` / `LOAD_DATA` mutations, preventing motor overload.
+4. **FOLD / ENDFOLD Desync Alignment**: Synchronizes closing `;ENDFOLD` tags with their respective `;FOLD` region headers.
+5. **FOR Step Zero Hazard Prevention**: Replaces fatal `STEP 0` infinite controller loop conditions with safe `STEP 1`.
+6. **Duplicate Approximation Modifiers Cleanup**: Normalizes accidental duplicate blending modifiers (`C_DIS`, `C_PTP`).
+7. **Inline Form Metadata Desync Alignment**: Synchronizes XML parameter metadata with executing KRL statements (`$OUT[...]`), preventing SmartPAD Touch-Up from overwriting programmer logic.
 
+*For deep unused variable and dead code purge across entire project backups, use the dedicated **Universal Backup & Unused Variable Purge Engine** (`krl.cleanupUnusedVariables`) with `$config.dat`, `sps.sub`, and EthernetKRL protections.*
 *The native Monaco Diff Editor enables operators to review changes line-by-line (`Ctrl+Enter` to accept, `Esc` to reject) with AST Rollback Guard safety.*
 
 <p align="center">

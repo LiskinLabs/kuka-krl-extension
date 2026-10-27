@@ -119,12 +119,18 @@ Verified across 9,804 real industrial plant modules (4.2M+ LoC across 17 robotic
 ---
 
 ### 35. Riparazione automatica sicura di KRL (`krl.fixAllSafeIssuesInFile`)
-Risoluzione deterministica in 1 clic di difetti sintattici e strutturali sicuri senza alterare la cinematica:
-- **Barriera di arresto anticipato (Advance Run)**: Inserimento automatico di `WAIT SEC 0` prima dei segnali di sicurezza (`$OUT`, `$FLAG`, `PULSE`).
-- **BRAKE obbligatorio prima di RESUME**: Iniezione dell'istruzione di frenata `BRAKE` prima di `RESUME` nelle routine di interrupt.
-- **Convalida carico utile ($LOAD)**: Aggiunta delle chiamate `BAS(#PAYLOAD, nTool)` dopo le assegnazioni a `$LOAD`.
-- **Pulizia BOM e caratteri non ASCII**: Rimozione di UTF-8 BOM e caratteri tipografici speciali.
-- **Sincronizzazione FOLD / ENDFOLD**: Allineamento delle intestazioni di chiusura `;ENDFOLD` con i rispettivi `;FOLD`.
+Risoluzione deterministica in 1 clic di 7 classi di difetti sintattici e strutturali sicuri senza alterare la cinematica:
+- **Pulizia BOM e caratteri non ASCII**: Rimozione di UTF-8 BOM (`\xEF\xBB\xBF`), virgolette tipografiche, trattini lunghi e normalizzazione dei caratteri speciali per evitare errori del compilatore KSS.
+- **Sincronizzazione FOLD / ENDFOLD**: Allineamento dei tag di chiusura `;ENDFOLD` con i rispettivi `;FOLD`.
+- **Prevenzione loop infinito FOR STEP 0**: Sostituzione del passo critico `STEP 0` con l'incremento sicuro `STEP 1`.
+- **BRAKE obbligatorio prima di RESUME**: Iniezione dell'istruzione di frenata `BRAKE` prima di `RESUME` nelle routine di interrupt (elimina KSS01442).
+- **Convalida carico utile ($LOAD)**: Aggiunta delle chiamate `BAS(#TOOL, currentTool)` dopo le assegnazioni a `$LOAD` per prevenire sovraccarichi dei motori.
+- **Normalizzazione modificatori di approssimazione duplicati**: Pulizia dei token di blending duplicati accidentalmente (`C_DIS`, `C_PTP`).
+- **Sincronizzazione metadati Inline Form**: Allineamento dei parametri XML con le istruzioni KRL (`$OUT[...]`), impedendo sovrascritture indesiderate durante il Touch-Up su SmartPAD.
+- **Rollback Guard e Monaco Diff**: Protezione con ripristino immediato in caso di regressioni e anteprima visiva su Monaco Diff Editor.
+
+> [!NOTE]
+> **Eliminazione delle variabili inutilizzate:** Gestita in modo dedicato tramite `krl.cleanupUnusedVariables` (**Universal Backup & Unused Variable Purge Engine [PRO]**) con protezione per `$config.dat`, `sps.sub` e interfacce EthernetKRL.
 
 ---
 

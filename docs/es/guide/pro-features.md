@@ -119,12 +119,18 @@ Verified across 9,804 real industrial plant modules (4.2M+ LoC across 17 robotic
 ---
 
 ### 35. Reparación automática segura de KRL (`krl.fixAllSafeIssuesInFile`)
-Corrección determinista en 1 clic de problemas sintácticos y estructurales seguros sin alterar la cinemática de movimiento:
-- **Barrera de parada de avance (Advance Run)**: Inserta automáticamente `WAIT SEC 0` antes de señales de zonas de seguridad (`$OUT`, `$FLAG`, `PULSE`).
-- **BRAKE obligatorio antes de RESUME**: Inyecta la instrucción de frenado `BRAKE` antes de `RESUME` en rutinas de interrupción.
-- **Confirmación de carga útil ($LOAD)**: Agrega llamadas `BAS(#PAYLOAD, nTool)` tras asignaciones a `$LOAD`.
-- **Limpieza de BOM y caracteres no ASCII**: Elimina UTF-8 BOM y normaliza caracteres tipográficos especiales.
+Corrección determinista en 1 clic de 7 clases de problemas sintácticos y estructurales seguros sin alterar la cinemática de movimiento:
+- **Limpieza de BOM y caracteres no ASCII**: Elimina UTF-8 BOM (`\xEF\xBB\xBF`), comillas tipográficas, guiones largos y normaliza caracteres especiales evitando fallos del compilador KSS.
 - **Sincronización FOLD / ENDFOLD**: Ajusta etiquetas de cierre `;ENDFOLD` con sus cabeceras `;FOLD`.
+- **Prevención de bucle infinito FOR STEP 0**: Sustituye el paso fatal `STEP 0` por el incremento seguro `STEP 1`.
+- **BRAKE obligatorio antes de RESUME**: Inyecta la instrucción de frenado `BRAKE` antes de `RESUME` en rutinas de interrupción (evita KSS01442).
+- **Confirmación de carga útil ($LOAD)**: Agrega llamadas `BAS(#TOOL, currentTool)` tras asignaciones a `$LOAD` para evitar sobrecargas de motores.
+- **Normalización de modificadores de aproximación duplicados**: Limpia tokens duplicados accidentales (`C_DIS`, `C_PTP`).
+- **Sincronización de metadatos de formulario en línea**: Sincroniza parámetros XML con sentencias KRL (`$OUT[...]`), evitando que el Touch-Up de SmartPAD sobrescriba la lógica.
+- **Rollback Guard y Monaco Diff**: Protección de reversión inmediata ante errores y vista previa nativa en Monaco Diff Editor.
+
+> [!NOTE]
+> **Depuración de variables no utilizadas:** Se gestiona de forma dedicada mediante la herramienta `krl.cleanupUnusedVariables` (**Universal Backup & Unused Variable Purge Engine [PRO]**) con protecciones para `$config.dat`, `sps.sub` e interfaces EthernetKRL.
 
 ---
 

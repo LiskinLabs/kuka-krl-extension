@@ -186,3 +186,61 @@ Deterministic repair engine for motion parameter desynchronization:
 - **Expanded Kinematics Catalog**: Comprehensive kinematic definitions, payload boundaries, and envelope specifications for KSS 8.7.9, including the KR 50 R2500 series and GripperSpotTech packages.
 - **Dynamic Load Model Verification**: Rigorous auditing of dynamic payload definitions (`LOAD_DATA`), verifying mass ($M$), center of gravity ($COG: X, Y, Z$), and inertia tensor components ($J_X, J_Y, J_Z$) to safeguard against high-speed trajectory deviations or axis overload.
 
+---
+
+### 43. WorkVisual (.wvs / .wvps) Bus Topology & KOP Catalogs Parser (`krl.inspectWvsTopology`) [PRO]
+In-memory inspection of binary WorkVisual projects without manual archive extraction:
+- **KOP Option Catalogs**: Extracts installed technology option packages (`KUKA.EthernetKRL`, `KUKA.SafeOperation`, `KUKA.GripperSpotTech`, `KUKA.Profinet`), target KSS runtime version, and robot kinematic profiles from `Solution.MetaData`.
+- **Fieldbus Topology & Slice I/O**: Parses EtherCAT coupler/slice slaves (`EcatDiag_*.xml`), Virtual I/O buses, and Profinet networks.
+- **Cross-Export to PLC CAD**: Direct signal table export for `$IN` and `$OUT` connections to **Siemens TIA Portal XML/SDF**, **Beckhoff TwinCAT 3 GVL**, and **EPLAN CSV**.
+
+---
+
+### 44. Auto-Sync Missing Points & Companion .dat Normalizer (`krl.syncPointsToDat`) [PRO]
+Deterministic synchronization of spatial points and motion parameters between `.src` and `.dat`:
+- **AST Scan of Motion Commands**: Inspects all motion commands (`PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`) and Inline Form headers (`PDAT_ACT`, `FDAT_ACT`, `LDAT_ACT`).
+- **Companion `.dat` Creation**: Automatically generates a valid `DEFDAT <MODULE> PUBLIC` structure when the companion file is missing.
+- **Missing Declaration Injection**: Adds required declarations (`DECL E6POS`, `DECL FDAT`, `DECL PDAT`, `DECL LDAT`) into a clean `;FOLD Auto-Synchronized Points` block before `ENDDAT`, preserving existing taught coordinates.
+
+---
+
+### 45. KUKA.Sim & Visual Components (.vcmx) Intelligence Suite [PRO]
+Direct validation and post-processing of `.vcmx` simulation archives (`krl.inspectVcmxLayout`, `krl.validateVcmxSimulation`, `krl.exportVcmxToKrl`):
+- **VCMX Workcell Inspector**: Two-layer `layout.rsc` parser extracting robot kinematics (`rSimKinController`), discrete signals (`rSimBooleanSignal`), conveyor links, and process routines without launching heavy 3D CAD simulators.
+- **Simulation Deadlock & Race Validator**: Detects and surgically fixes 4 fatal simulation bugs (`VCMX001` edge-trigger deadlocks, `VCMX002` wait timeouts, `VCMX003` product variable leaks, `VCMX004` dangling signal references) with `.bk1`/`.bk2` backup safety.
+- **VCMX-to-KRL Post-Processor**: Converts simulation routines (`LinMotion`, `PtpMotion`, `SetSignal`, `WaitSignal`) directly into synchronized `.src` and `.dat` modules.
+
+---
+
+### 46. KUKA.RobotSensorInterface (RSI) Real-Time 4ms Suite [PRO]
+Development and validation of hard real-time sensor control loops (`krl.validateRsiXml`, `krl.generateRsiCode`):
+- **RSI XML Schema Validator**: Validates `SensorInterface/*.xml` descriptors, network parameters (`<IP_NUMBER>`, `<PORT>`), data types (`BOOL`, `LONG`, `DOUBLE`), and `INDX` index continuity.
+- **4ms / 12ms RSI Driver Generator**: Generates industrial `#IPO_FAST` (4ms / 250Hz) and `#IPO` (12ms / 83Hz) KRL control loops for Cartesian offsets (`#POSCORR`) and ROS 2 axis control (`#AXISCORR`).
+- **Intrinsic System Library**: Signature help and type definitions for `RSI_CREATE`, `RSI_ON`, `RSI_MOVECORR`, `RSI_OFF`, `RSI_DELETE`, and status constants.
+
+---
+
+### 47. CAM CNC G-Code & SVG Vector Importer (`krl.importGcodeToKrl`) [PRO]
+Converts CAD/CAM toolpaths and 2D contours into production KRL code:
+- **ISO CNC G-Code Parsing**: Converts `G0` $\rightarrow$ `PTP`/`SPTP`, `G1` $\rightarrow$ `LIN`/`SLIN`, and arc commands `G2`/`G3` $\rightarrow$ `CIRC`/`SCIRC` with exact 3D midpoint `AuxPoint` calculation. Maps feedrates to `$VEL.CP` and M-codes (`M3`, `M5`) to `$OUT[...]`.
+- **SVG Vector Parsing**: Converts `<path>`, `<polyline>`, `<polygon>`, `<circle>` elements with Bezier curve approximation, inserting safe transition planes `Z_Safe` and process planes `Z_Work`.
+
+---
+
+### 48. Vision Hand-Eye Calibration Wizard & PLC Fieldbus Exporter [PRO]
+- **9-Pose Calibration Pyramid (`krl.generateVisionCalibration`)**: Computes Look-At rotation matrix Euler angles ($A, B, C$) for `Eye-in-Hand` and `Eye-to-Hand` cameras with pre-grasp approach vectors.
+- **PLC Fieldbus Tag Exporter (`krl.exportPlcTags`)**: Extracts workspace `SIGNAL`, `$IN`, and `$OUT` declarations with IEC 61131-3 byte.bit mapping (`%I0.0`, `%Q0.0`) to TIA Portal XML/SDF, TwinCAT 3 GVL, and EPLAN CSV.
+
+---
+
+### 49. Embedded Model Context Protocol (MCP) AI Bridge [PRO]
+Local authenticated AI gateway (`127.0.0.1`):
+- **Direct Bridge to Cursor, Antigravity, Claude Code, and Windsurf**: Exposes real-time robot telemetry (`krl_live_telemetry`), workspace static diagnostics (`krl_workspace_diagnostics`), safe auto-repairs (`krl_safe_auto_repair`), and full specifications for 957+ KSS system variables.
+- **One-Click Configuration Copy**: Command `krl.copyMcpConfig` copies ready-to-paste configurations for Cursor and Claude Desktop.
+
+---
+
+### 50. Enterprise Air-Gap Offline Licensing (.lic File Exchange) [PRO]
+- **Hardware ID Request (.lic) Export (`krl.exportHardwareIdFile`)**: Exports a cryptographically signed machine fingerprint file `liskin-hardware-id.lic` for secure transfer across air-gapped plant boundaries.
+- **Asymmetric Offline License (.lic) Import (`krl.importOfflineLicenseFile`)**: Instantly verifies Ed25519 digital signatures from `liskin-krl-license.lic` completely offline without network polling, permanently activating PRO mode.
+

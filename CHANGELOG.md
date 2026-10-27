@@ -2,7 +2,17 @@
 
 All notable changes to the **KUKA KRL Extension** will be documented in this file.
 
-## [1.9.8] - 2026-10-25 (WorkVisual .wvs Topology Parser [PRO], Point Normalizer & Auto-Sync [PRO], KUKA.Sim VCMX Intelligence Suite [PRO], KUKA.RSI 4ms Real-Time Suite [PRO], CAM CNC G-Code & SVG Importer [PRO], Vision Hand-Eye Calibration & PLC Tag Exporter [PRO])
+## [1.9.8] - 2026-10-27 (Enterprise Air-Gap .lic Licensing [PRO], WorkVisual .wvs Topology Parser [PRO], Point Normalizer & Auto-Sync [PRO], KUKA.Sim VCMX Intelligence Suite [PRO], KUKA.RSI 4ms Real-Time Suite [PRO], CAM CNC G-Code & SVG Importer [PRO], Vision Hand-Eye Calibration & PLC Tag Exporter [PRO], Full 6-Locale Multilingual Engine)
+
+### [LICENSING] Enterprise Air-Gap Offline Activation & File Integration (.lic) [PRO]
+- **Air-Gap Hardware ID Request (.lic) Export**: Export machine fingerprint Hardware ID directly as a structured `.lic` request file (`krl.exportHardwareIdFile`) for transfer across physical factory security boundaries via secure USB or optical media.
+- **Asymmetric Offline License (.lic) File Import**: Seamlessly load signed Ed25519 offline license files (`krl.importOfflineLicenseFile`) directly into VS Code Extension with instantaneous cryptographic verification and immediate offline activation.
+- **Airgap Licensing Gateway Overhaul**: Redesigned Air-Gap Activation Portal (`/airgap`) with high-tech procedural 3D robotic arm visualization, dropzone support for `.lic` request files, and immediate `.lic` license token download.
+
+### [I18N] Full 6-Locale Multilingual Coverage & UI/UX Audit
+- **Complete Localization Across 6 Languages**: 100% complete language parity across English (EN), Russian (RU), German (DE), Spanish (ES), Italian (IT), and Turkish (TR).
+- **Command Palette & Control Center Parity**: All 75+ commands, Webview Control Center action cards, profile subtabs, and status bars are localized with zero missing keys or untranslated fallbacks.
+- **Strict Brand & IP Isolation**: Full compliance with independent Liskin Labs industrial engineering specifications and zero third-party proprietary software trademark references.
 
 ### [ARCHIVE] Module 5: WorkVisual (`.wvs` / `.wvps`) Bus Topology & KOP Catalogs Parser (`krl.inspectWvsTopology`) [PRO]
 - **Direct WorkVisual Archive Inspection**: Zero-unpack analysis of binary WorkVisual projects (`.wvs`, `.wvps`). Decodes hex-encoded XML metadata (`_x003C_`, `_x0022_`) to extract installed KOP option package catalogs (`KUKA.EthernetKRL`, `KUKA.SafeOperation`, `KUKA.GripperSpotTech`, etc.), target KSS runtime version, controller identity, and kinematic robot models (`SafeMaDaBusTopology.xml`).
@@ -164,7 +174,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Complete Command Catalog**: All 75 extension tools and commands organized into dedicated logical functional categories with zero duplicate cards.
 
 ### [PARITY] Trademark & Brand Neutrality
-- **Third-Party Trademark Sanitization**: Fully neutralized third-party editor brand names (e.g., OrangeEdit) across UI titles, command palettes, and documentation in favor of neutral engineering terminology (*Advanced Kinematics & Trajectory Suite*).
+- **Third-Party Trademark Sanitization**: Fully neutralized legacy and proprietary editor brand names across UI titles, command palettes, and documentation in favor of neutral engineering terminology (*Advanced Kinematics & Trajectory Suite*).
 
 ### [CIPHER] AppSec & Licensing Hardening
 - **Asymmetric Ed25519 Airgap Licensing**: Replaced symmetric HMAC airgap validation with asymmetric Ed25519 signature verification (`LISKIN_LABS_AIRGAP_PUBLIC_KEY`), preventing key extraction from client bundles while retaining backward compatibility via timing-safe HMAC fallback.

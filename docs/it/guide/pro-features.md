@@ -169,3 +169,61 @@ Allineamento deterministico tra istruzioni di movimento KRL nei fold `;FOLD PTP/
 ### 42. Compatibilità KSS 8.7.9 ed espansione modelli robot
 Modelli cinematici aggiornati per KSS 8.7.9 (inclusi KR 50 R2500 e GripperSpotTech) e verifica completa dei parametri di carico dinamico (massa, baricentro e tensori d'inerzia).
 
+---
+
+### 43. Analizzatore topologia bus e cataloghi pacchetti KOP WorkVisual (`krl.inspectWvsTopology`) [PRO]
+Analisi diretta in memoria dei progetti binari KUKA WorkVisual senza estrazione manuale:
+- **Cataloghi opzioni KOP**: Estrazione dei pacchetti tecnologici (`KUKA.EthernetKRL`, `KUKA.SafeOperation`, `KUKA.GripperSpotTech`, `KUKA.Profinet`), versione runtime KSS e profili cinematici da `Solution.MetaData`.
+- **Topologia bus EtherCAT e Profinet**: Analisi dei moduli slave EtherCAT (`EcatDiag_*.xml`), bus Virtual I/O e reti Profinet con mappatura degli indirizzi.
+- **Esportazione segnali verso CAD PLC**: Esportazione immediata delle tabelle `$IN` e `$OUT` nei formati **Siemens TIA Portal XML/SDF**, **Beckhoff TwinCAT 3 GVL** ed **EPLAN CSV**.
+
+---
+
+### 44. Autosincronizzazione punti e normalizzatore companion .DAT (`krl.syncPointsToDat`) [PRO]
+Sincronizzazione deterministica di coordinate spaziali e parametri di movimento tra `.src` e `.dat`:
+- **Scansione comandi di movimento AST**: Ispezione di tutte le istruzioni (`PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`) e delle intestazioni dei moduli (`PDAT_ACT`, `FDAT_ACT`, `LDAT_ACT`).
+- **Creazione automatica file .DAT**: Generazione automatica di una struttura valida `DEFDAT <MODULE> PUBLIC` se il file dati è assente.
+- **Inserimento dichiarazioni mancanti**: Aggiunta delle definizioni (`DECL E6POS`, `DECL FDAT`, `DECL PDAT`, `DECL LDAT`) in un blocco ordinato `;FOLD Auto-Synchronized Points` prima di `ENDDAT`, preservando le coordinate acquisite.
+
+---
+
+### 45. Suite intelligente KUKA.Sim e Visual Components (.vcmx) [PRO]
+Validazione e post-elaborazione di archivi di simulazione 3D `.vcmx` (`krl.inspectVcmxLayout`, `krl.validateVcmxSimulation`, `krl.exportVcmxToKrl`):
+- **Ispettore isola robotica VCMX**: Parser a due livelli di `layout.rsc` per estrarre cinematica robot, segnali e logiche di processo senza avviare software CAD complessi.
+- **Validatore deadlock e corse critiche di simulazione**: Rileva e ripara 4 errori critici (`VCMX001` deadlock sui fronti, `VCMX002` timeout di attesa, `VCMX003` perdite variabili di prodotto, `VCMX004` segnali orfani) con backup `.bk1`/`.bk2`.
+- **Post-processore da VCMX a KRL**: Converte sequenze di simulazione (`LinMotion`, `PtpMotion`, `SetSignal`, `WaitSignal`) in moduli KRL sincronizzati `.src` + `.dat`.
+
+---
+
+### 46. Suite in tempo reale KUKA.RobotSensorInterface (RSI) 4ms [PRO]
+Sviluppo e convalida di anelli di controllo sensori ad alta frequenza (`krl.validateRsiXml`, `krl.generateRsiCode`):
+- **Validatore schemi RSI XML**: Verifica di `SensorInterface/*.xml`, parametri socket, tipi di dato e continuità indici `INDX`.
+- **Generatore driver RSI 4ms / 12ms**: Generazione di loop KRL `#IPO_FAST` (4ms / 250Hz) e `#IPO` (12ms / 83Hz) per correzione cartesiana (`#POSCORR`) e controllo assi ROS 2 (`#AXISCORR`).
+- **Libreria intrinseca di sistema**: Supporto per `RSI_CREATE`, `RSI_ON`, `RSI_MOVECORR`, `RSI_OFF`, `RSI_DELETE` e relative costanti.
+
+---
+
+### 47. Importatore CAM CNC G-Code e vettori SVG (`krl.importGcodeToKrl`) [PRO]
+Converte percorsi utensile CAD/CAM e profili 2D in codice KRL operativo:
+- **Elaborazione ISO G-Code**: Conversione `G0` $\rightarrow$ `PTP`/`SPTP`, `G1` $\rightarrow$ `LIN`/`SLIN` e archi `G2`/`G3` $\rightarrow$ `CIRC`/`SCIRC` calcolando il punto intermedio 3D `AuxPoint`. Mappatura avanzamento in `$VEL.CP` e comandi M su `$OUT[...]`.
+- **Importazione grafica vettoriale SVG**: Analisi di elementi `<path>`, `<polyline>`, `<polygon>`, `<circle>` con approssimazione curve di Bézier e piani di sicurezza `Z_Safe` e lavoro `Z_Work`.
+
+---
+
+### 48. Calibrazione visiva Hand-Eye a 9 punti ed esportatore tag PLC [PRO]
+- **Piramide di calibrazione Hand-Eye (`krl.generateVisionCalibration`)**: Calcolo degli angoli di Eulero KUKA ($A, B, C$) tramite matrice Look-At per telecamere `Eye-in-Hand` ed `Eye-to-Hand`.
+- **Esportatore tag bus di campo PLC (`krl.exportPlcTags`)**: Mappatura delle dichiarazioni `SIGNAL`, `$IN`, `$OUT` in indirizzi IEC 61131-3 (`%I0.0`, `%Q0.0`) per TIA Portal XML/SDF, TwinCAT 3 GVL ed EPLAN CSV.
+
+---
+
+### 49. Ponte integrato Model Context Protocol (MCP) per IA [PRO]
+Gateway locale sicuro per assistenti di intelligenza artificiale (`127.0.0.1`):
+- **Integrazione diretta con Cursor, Antigravity, Claude Code e Windsurf**: Espone telemetria in tempo reale (`krl_live_telemetry`), diagnostica statica (`krl_workspace_diagnostics`), autoriparazione del codice (`krl_safe_auto_repair`) e specifiche di 957+ variabili di sistema KSS.
+- **Copia configurazione rapida**: Comando `krl.copyMcpConfig` per copiare le impostazioni JSON pronte per Claude Desktop e Cursor.
+
+---
+
+### 50. Licenze Enterprise Air-Gap offline (.lic) [PRO]
+- **Esportazione richiesta Hardware ID (.lic) (`krl.exportHardwareIdFile`)**: Crea il file firmato `liskin-hardware-id.lic` per il trasferimento sicuro tramite USB in impianti industriali isolati.
+- **Importazione licenza firmata (.lic) (`krl.importOfflineLicenseFile`)**: Valida la firma crittografica Ed25519 da `liskin-krl-license.lic` istantaneamente offline e attiva la modalità PRO in modo permanente.
+

@@ -1,40 +1,76 @@
-# Installation & Setup Guide
+# Installations- und Einrichtungsleitfaden
 
-Quick start guide for installing and configuring KUKA KRL Professional.
+Schnellstartanleitung zur Installation, Konfiguration und Offline-Aktivierung von KUKA KRL Professional.
 
-## 1. Install via VS Code Marketplace
-1. Open VS Code.
-2. Go to the Extensions view (`Ctrl + Shift + X`).
-3. Search for `KUKA KRL Professional`.
-4. Click **Install**.
+---
 
-## 2. Install from VSIX (Offline Installation)
-1. Download the `kuka-krl-extension-1.8.8.vsix` file.
-2. In VS Code, click the `...` menu in the top-right corner of the Extensions panel.
-3. Select **Install from VSIX...** and choose the `.vsix` file.
+## 1. Installation über den VS Code Marketplace
+1. Öffnen Sie VS Code.
+2. Gehen Sie zur Ansicht "Erweiterungen" (`Ctrl + Shift + X`).
+3. Suchen Sie nach `KUKA KRL Professional` (Liskin Labs).
+4. Klicken Sie auf **Installieren**.
 
-## 3. Selecting a KUKA Theme
-1. Press `Ctrl + K`, then `Ctrl + T`.
-2. Select one of the 6 signature themes: **Industrial Dark**, **WorkVisual Dark**, **WorkVisual Light**, **Midnight OLED**, **Blueprint**, **Industrial Light**.
+---
 
-## 4. Activating Pro License
-1. Open the **KUKA Control Center** by clicking the KUKA icon in the Activity Bar or running `KRL: Open Control Center`.
-2. Click **Enter License Key**.
-3. Paste your Dodo Payments license key and click **Activate**.
+## 2. Installation aus VSIX-Datei (Air-Gapped Offline-Installation)
+1. Laden Sie das neueste Paket `kuka-krl-extension-1.9.8.vsix` aus dem offiziellen Release-Repository herunter.
+2. Klicken Sie im Erweiterungsbereich von VS Code (`Ctrl + Shift + X`) auf das Drei-Punkte-Menü `...` oben rechts.
+3. Wählen Sie **Aus VSIX installieren...** und wählen Sie die `.vsix`-Datei aus.
+4. Kein Editor-Neustart erforderlich — alle Sprachserver und Parser starten sofort.
 
-## 5. Telegram Engineering Support
-For technical support, connect with us directly using the embedded support panel inside VS Code.
+---
 
-## 6. Licensing Plans & Architecture
+## 3. KUKA-Farbthema auswählen
+1. Drücken Sie `Ctrl + K`, dann `Ctrl + T`.
+2. Wählen Sie eines der 6 technischen Themes:
+   * **Industrial Dark** (kontraststarkes dunkles Theme für Industriehallen)
+   * **WorkVisual Dark** (KUKA WorkVisual-Farbpalette)
+   * **WorkVisual Light** (Tageslicht-WorkVisual-Design)
+   * **Midnight OLED** (tiefes Schwarz für OLED-Stromersparnis)
+   * **Blueprint** (technischer CAD-Schaltplanstil)
+   * **Industrial Light** (klassisches helles Industriedesign)
 
-| Tier | Price | Workstations | Key Differentiator |
+---
+
+## 4. Online Pro-Lizenz aktivieren
+1. Öffnen Sie das **KUKA Control Center**, indem Sie auf das KUKA-Symbol in der Aktivitätsleiste klicken oder `KRL: Open Control Center` (`Ctrl + Shift + P`) ausführen.
+2. Klicken Sie auf **Enter License Key**.
+3. Fügen Sie Ihren Lizenzschlüssel von Dodo Payments ein und bestätigen Sie die Eingabe.
+
+---
+
+## 5. Offline-Aktivierung in isolierten Fabriknetzwerken (Air-Gap .lic)
+
+Für sicherheitskritische Produktionsanlagen ohne Internetverbindung wird der asymmetrische kryptografische Lizenzaustausch (Ed25519) mittels `.lic`-Dateien unterstützt:
+
+### Schritt 1: Hardware-ID-Anforderungsdatei (.lic) exportieren
+1. Öffnen Sie auf dem Offline-Programmierlaptop **KUKA Control Center** -> Reiter **Einstellungen & Konto** (`Settings & Account`).
+2. Klicken Sie im Bereich **Air-Gapped Offline Activation** auf **[Hardware-ID-Anforderung exportieren (.lic)]** oder führen Sie `krl.exportHardwareIdFile` aus.
+3. Speichern Sie die Datei `liskin-hardware-id.lic` auf einem USB-Stick.
+
+### Schritt 2: Signierte Lizenz im Webportal generieren
+1. Schließen Sie den USB-Stick an einen PC mit Internetzugang an.
+2. Rufen Sie das Liskin Labs-Aktivierungsportal auf:  
+   👉 **[Air-Gap Offline-Lizenzportal](https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap)**
+3. Ziehen Sie Ihre Datei `liskin-hardware-id.lic` in das Upload-Feld — der Hardware-Fingerabdruck wird automatisch eingetragen.
+4. Geben Sie Ihren Lizenzschlüssel ein und klicken Sie auf **Offline-Lizenz generieren**.
+5. Laden Sie die signierte Datei `liskin-krl-license.lic` auf den USB-Stick herunter.
+
+### Schritt 3: Lizenzdatei in VS Code importieren
+1. Kehren Sie zum Offline-Laptop im Werk zurück.
+2. Klicken Sie im KUKA Control Center auf **[Offline-Lizenzdatei laden (.lic)]** oder führen Sie `krl.importOfflineLicenseFile` aus.
+3. Wählen Sie die Datei `liskin-krl-license.lic` aus.
+4. Die Ed25519-Signatur wird sofort offline geprüft und schaltet dauerhaft alle 50+ PRO-Funktionen frei.
+
+---
+
+## 6. Lizenzierungsmodelle & Preise
+
+| Tarif | Preis | Arbeitsplatz-Aktivierungen | Hauptmerkmale |
 | :--- | :--- | :--- | :--- |
-| **Individual Pro (Monthly)** | $9.99 / mo | 1 Workstation (1 PC) | KRC2/KRC3/KRC4/KRC5 support, short projects, commissioning sprints |
-| **Individual Pro (Annual)** | $79.00 / yr | 1 Workstation (1 PC) | Save 35%, 1-Year Air-Gapped offline certificate, 50 industrial tools |
-| **Individual Pro (Lifetime)** | $699.00 once | 1 Workstation (1 PC) | Perpetual license, perpetual Air-Gapped offline certificate, KRC2–KRC5 |
-| **Integrator Team Edition** | $299.00 / yr | 25 Workstation Activations | Centralized B2B invoicing, 25 seats for plant automation squad, KRC2–KRC5 |
-| **Enterprise Plant Site** | $1,499.00 / yr | **Unlimited Workstations** | **Plant-wide site license** (~$8/mo/device for 20 seats), direct Telegram support, Fleet Backup Hub, OEM-branded client acceptance reports |
-
-### Why is Pro Lifetime $699 while Enterprise Site is $1,499/yr?
-- **Pro Lifetime ($699 once)** provides a perpetual license for **1 workstation (1 PC)** with zero recurring fees and lifetime updates. Includes personalized cryptographic Air-Gapped certificate generation for isolated OT factory networks.
-- **Enterprise Site ($1,499/yr)** is a **complete site-wide license with unlimited workstation activations** for the entire manufacturing plant. It covers all plant engineers, robot operators, and maintenance technicians (~$8/month per seat for a 20-person plant). It includes priority direct developer assistance via Telegram Support Gateway, centralized automated KUKA Fleet Backup Hub, and OEM-branded audit reports (Ford, Renault, TOGG, Saint-Gobain).
+| **Engineer Pro (Monatlich)** | $19 / Monat | 1 Arbeitsplatz | KRC2/KRC4/KRC5-Unterstützung, Inbetriebnahme-Sprints |
+| **Engineer Pro (Jährlich)** | $149 / Jahr | 1 Arbeitsplatz | 35% Ersparnis, 1 Jahr Air-Gapped Offline-Zertifikat, 50 Werkzeuge |
+| **Engineer Pro (Lifetime)** | $699 einmalig | 1 Arbeitsplatz | Dauerhafte Einzellizenz, lebenslange Updates, permanentes Air-Gap-Zertifikat |
+| **Team Edition** | $499 / Jahr | Bis zu 5 Arbeitsplätze | B2B-Rechnung, 5 Arbeitsplätze Werk/Büro, KRC2–KRC5 |
+| **Department / Integrator** | $999 / Jahr | Bis zu 20 Arbeitsplätze | Bis zu 20 Arbeitsplätze, unbegrenzte Integrationsprojekte |
+| **Enterprise Plant Site** | $4.999 / Jahr | Bis zu 100 Arbeitsplätze | 100 Werksarbeitsplätze, 4h-SLA, Offline Air-Gap-Lizenz, OEM-Prüfprotokolle |

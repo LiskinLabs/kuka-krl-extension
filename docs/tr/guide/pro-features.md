@@ -173,3 +173,61 @@ Hareket parametrelerindeki meta veri uyumsuzluklarını otomatik onaran motor:
 ### 42. KSS 8.7.9 Uyumluluğu ve Robot Modeli Genişletmeleri
 - **Genişletilmiş Kinematik Kataloğu**: KR 50 R2500 serisi ve GripperSpotTech dahil KSS 8.7.9 için tam kinematik ve yük sınırları tanımları.
 - **Dinamik Yük Modeli Doğrulaması**: Yüksek hızlı hareketlerde yörünge sapmalarını ve eksen aşırı yüklenmelerini önlemek için kütle ($M$), ağırlık merkezi ($COG: X, Y, Z$) ve atalet tensörlerini ($J_X, J_Y, J_Z$) titizlikle denetleme.
+
+---
+
+### 43. WorkVisual (.wvs / .wvps) Veriyolu Topolojisi ve KOP Paket Ayrıştırıcısı (`krl.inspectWvsTopology`) [PRO]
+KUKA WorkVisual ikili projelerinin arşivleri açmadan doğrudan bellek içinde analizi:
+- **KOP Opsiyon Paketleri**: Yüklü teknoloji paketlerini (`KUKA.EthernetKRL`, `KUKA.SafeOperation`, `KUKA.GripperSpotTech`, `KUKA.Profinet`), hedef KSS çalışma zamanını ve robot modelini `Solution.MetaData` üzerinden çıkarma.
+- **EtherCAT ve Profinet Topolojisi**: EtherCAT dilim modülleri (`EcatDiag_*.xml`), Virtual I/O ve Profinet ağlarının adres haritalarını ayrıştırma.
+- **PLC CAD İçe Aktarma Dışa Aktarımı**: `$IN` ve `$OUT` sinyal tablolarını **Siemens TIA Portal XML/SDF**, **Beckhoff TwinCAT 3 GVL** ve **EPLAN CSV** formatlarına tek tıkla aktarma.
+
+---
+
+### 44. Nokta Otomatik Senkronizasyonu ve Eşlikçi .DAT Normalleştirici (`krl.syncPointsToDat`) [PRO]
+`.src` ve `.dat` dosyaları arasındaki uzamsal noktaların ve hareket parametrelerinin deterministik uyumu:
+- **AST Hareket Taraması**: Tüm hareket komutlarını (`PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`) ve Inline Form başlıklarını (`PDAT_ACT`, `FDAT_ACT`, `LDAT_ACT`) analiz etme.
+- **Otomatik `.dat` Oluşturma**: Eşlikçi veri dosyası yoksa otomatik olarak geçerli `DEFDAT <MODULE> PUBLIC` yapısı üretme.
+- **Eksik Nokta Bildirimlerini Ekleme**: Mevcut öğretilmiş koordinatları koruyarak eksik bildirimleri (`DECL E6POS`, `DECL FDAT`, `DECL PDAT`, `DECL LDAT`) `ENDDAT` öncesine temiz `;FOLD Auto-Synchronized Points` bloku içine yerleştirme.
+
+---
+
+### 45. KUKA.Sim ve Visual Components (.vcmx) Akıllı Analiz Paketi [PRO]
+`.vcmx` simülasyon arşivlerinin CAD yazılımlarını açmadan doğrudan analizi ve son işlemesi (`krl.inspectVcmxLayout`, `krl.validateVcmxSimulation`, `krl.exportVcmxToKrl`):
+- **VCMX Hücre İnceleyicisi**: Robot kinematiğini (`rSimKinController`), sinyalleri ve süreç rutinlerini iki katmanlı `layout.rsc` ayrıştırıcısıyla bellekten çıkarma.
+- **Simülasyon Kilitlenme ve Yarış Doğrulayıcısı**: 4 kritik simülasyon hatasını (`VCMX001` sinyal kilitlenmesi, `VCMX002` bekleme zaman aşımı, `VCMX003` değişken sızıntısı, `VCMX004` kayıp sinyaller) `.bk1`/`.bk2` yedekleriyle güvenli şekilde onarma.
+- **VCMX'ten KRL'ye Son İşlemci**: Simülasyon süreçlerini (`LinMotion`, `PtpMotion`, `SetSignal`, `WaitSignal`) hazır `.src` + `.dat` modüllerine dönüştürme.
+
+---
+
+### 46. KUKA.RobotSensorInterface (RSI) Gerçek Zamanlı 4ms Paketi [PRO]
+Katı gerçek zamanlı sensör kontrol döngülerinin geliştirilmesi ve doğrulanması (`krl.validateRsiXml`, `krl.generateRsiCode`):
+- **RSI XML Şema Doğrulayıcısı**: `SensorInterface/*.xml` yapılandırmalarını, soket parametrelerini (`<IP_NUMBER>`, `<PORT>`), veri tiplerini ve `INDX` dizin sürekliliğini denetleme.
+- **4ms / 12ms Gerçek Zamanlı RSI Sürücü Üreticisi**: Kartezyen düzeltme (`#POSCORR`) ve ROS 2 eksen kontrolü (`#AXISCORR`) için endüstriyel `#IPO_FAST` (4ms / 250Hz) ve `#IPO` (12ms / 83Hz) KRL döngüleri üretme.
+- **Yerleşik RSI Sistem Kütüphanesi**: `RSI_CREATE`, `RSI_ON`, `RSI_MOVECORR`, `RSI_OFF`, `RSI_DELETE` fonksiyonları için tam imza ve sabit desteği.
+
+---
+
+### 47. CAM CNC G-Code ve SVG Vektör İçe Aktarıcısı (`krl.importGcodeToKrl`) [PRO]
+CNC işleme yörüngelerini ve 2D konturları doğrudan KRL koduna dönüştürme:
+- **ISO G-Code Ayrıştırma**: `G0` $\rightarrow$ `PTP`/`SPTP`, `G1` $\rightarrow$ `LIN`/`SLIN`, ve `G2`/`G3` yay komutlarını `CIRC`/`SCIRC` komutlarına dönüştürerek `I, J, K` veya `R` parametrelerinden uzamsal `AuxPoint` hesaplama. İlerleme hızını `$VEL.CP` değerine ve M kodlarını (`M3`, `M5`) `$OUT[...]` çıkışlarına eşleme.
+- **SVG Vektör İçe Aktarma**: `<path>`, `<polyline>`, `<polygon>`, `<circle>` elemanlarını Bezier eğri yaklaşımı ile ayrıştırma, güvenli geçiş `Z_Safe` ve kesme `Z_Work` düzlemlerini otomatik yerleştirme.
+
+---
+
+### 48. 9 Noktalı Görsel El-Göz Kalibrasyon Sihirbazı ve PLC Etiket Aktarıcısı [PRO]
+- **El-Göz Kalibrasyon Piramidi (`krl.generateVisionCalibration`)**: `Eye-in-Hand` ve `Eye-to-Hand` kameralar için Look-At rotasyon matrisinden KUKA Euler ($A, B, C$) açılarını hesaplama ve yaklaşma vektörleri üretme.
+- **PLC Saha Veriyolu Etiket Dışa Aktarıcısı (`krl.exportPlcTags`)**: Çalışma alanı `SIGNAL`, `$IN` ve `$OUT` bildirimlerini IEC 61131-3 adreslerine (`%I0.0`, `%Q0.0`) dönüştürerek TIA Portal XML/SDF, TwinCAT 3 GVL ve EPLAN CSV olarak kaydetme.
+
+---
+
+### 49. Yapay Zeka Asistanları İçin Model Context Protocol (MCP) Köprüsü [PRO]
+Yerel güvenli yapay zeka entegrasyon ağ geçidi (`127.0.0.1`):
+- **Cursor, Antigravity, Claude Code ve Windsurf Bağlantısı**: Dış yapay zeka ajanlarına gerçek zamanlı robot telemetrisi (`krl_live_telemetry`), statik kod teşhisi (`krl_workspace_diagnostics`), güvenli otomatik onarım (`krl_safe_auto_repair`) ve 957+ KSS sistem değişkeni spesifikasyonu sunma.
+- **Tek Tıkla Yapılandırma Kopyalama**: `krl.copyMcpConfig` komutu ile Cursor ve Claude Desktop için hazır JSON ayarlarını panoya kopyalama.
+
+---
+
+### 50. Kurumsal Air-Gap Çevrimdışı Lisanslama ve .lic Dosya Değişimi [PRO]
+- **Donanım Kimliği İstek Dosyası (.lic) Dışa Aktarma (`krl.exportHardwareIdFile`)**: İnternetsiz fabrika ortamlarında USB ile taşınabilir `liskin-hardware-id.lic` parmak izi dosyası oluşturma.
+- **İmzalı Çevrimdışı Lisans (.lic) İçe Aktarma (`krl.importOfflineLicenseFile`)**: `liskin-krl-license.lic` dosyasındaki Ed25519 dijital imzasını ağ bağlantısına gerek kalmadan anında doğrulayarak PRO modunu kalıcı olarak etkinleştirme.

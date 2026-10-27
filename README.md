@@ -237,7 +237,7 @@ For corporate purchasing departments and system integrators:
 * **Official Quotations & Invoices**: Generate a formal PDF commercial quotation (Angebot) directly from VS Code via command `krl.requestCorporateInvoice` (`Ctrl+Shift+P`).
 * **Tax ID & EU VAT Reverse Charge**: Dodo Payments validates company VAT numbers through official databases (EU VIES, UK HMRC, US EIN) to apply 0% Reverse-Charge VAT on cross-border business purchases.
 * **Corporate Wire Transfers**: Supports SEPA Bank Wire (EUR), ACH (USD), and wire transfers with automated remittance matching.
-* **Air-Gapped Factory Deployment**: For isolated OT plant environments without internet access, generate signed cryptographic offline license certificates valid for 365 days.
+* **Air-Gapped Factory Deployment**: For isolated OT plant environments without internet access, import and export cryptographically signed `.lic` license files (Ed25519) via the offline portal `https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap` with 100% offline verification.
 
 ---
 

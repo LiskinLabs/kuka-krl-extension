@@ -239,22 +239,28 @@
           <div class="lg:col-span-5 flex flex-col relative min-h-[460px] lg:min-h-full">
             <div class="relative w-full h-full flex flex-col border border-zinc-800 overflow-hidden bg-black">
               <ClientOnly>
-                <KukaRobot3D />
+                <iframe
+                  :src="withBase('/sim/?embed=1')"
+                  title="KUKA KR 50 R2500 3D Digital Twin"
+                  class="w-full h-full min-h-[460px] border-0 bg-black"
+                  loading="lazy"
+                  allow="fullscreen"
+                ></iframe>
               </ClientOnly>
 
               <!-- Real-time Kinematic Telemetry HUD Banner -->
               <div class="bg-[#111114] border-t border-zinc-800 p-2.5 font-mono text-[10px] grid grid-cols-2 gap-2 text-zinc-400 select-none">
                 <div>
                   <span class="text-zinc-600 block">ACTIVE TOOL:</span>
-                  <span class="text-white font-bold truncate block">TOOL_DATA[1] (MigTorch)</span>
+                  <span class="text-white font-bold truncate block">TOOL_DATA[1] (BJ_GRP)</span>
                 </div>
                 <div>
                   <span class="text-zinc-600 block">ACTIVE BASE:</span>
-                  <span class="text-white font-bold truncate block">BASE_DATA[2] (Fixture)</span>
+                  <span class="text-white font-bold truncate block">BASE_DATA[29] (CIKIS_KONVEYOR)</span>
                 </div>
                 <div>
                   <span class="text-zinc-600 block">INTERPOLATION:</span>
-                  <span class="text-[#00D68F] font-bold block">CP LIN (Approx 100%)</span>
+                  <span class="text-[#00D68F] font-bold block">PTP / LIN (C_DIS)</span>
                 </div>
                 <div>
                   <span class="text-zinc-600 block">ADVANCE RUN:</span>
@@ -1114,7 +1120,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { withBase, useData } from 'vitepress'
-import KukaRobot3D from './KukaRobot3D.vue'
 import VsCodeWebSimulator from './VsCodeWebSimulator.vue'
 import KrlWebInspector from './KrlWebInspector.vue'
 import inventoryData from './krl_tools_inventory.json'

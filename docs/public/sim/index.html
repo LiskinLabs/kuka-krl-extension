@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Liskin Labs | KUKA 3D Digital Twin & Simulation Platform</title>
   <link rel="icon" type="image/png" href="./liskinlabs_logo.png" />
-  <script type="module" crossorigin src="./assets/index-9YySfHnI.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BLTvMN2t.css">
+  <script type="module" crossorigin src="./assets/index-CJZkQaH5.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-hlqaO7Ua.css">
 </head>
 <body>
   <div id="app-container">
@@ -283,7 +283,7 @@
           <div id="drop-zone" class="drop-zone">
             <div class="drop-icon">📁</div>
             <p>Перетащите сюда <strong>.src</strong>, <strong>.dat</strong> или весь бекап <strong>.zip</strong></p>
-            <span class="drop-sub">инструмент и база подхватятся из $config.dat / $machine.dat</span>
+            <span class="drop-sub">ZIP компилируется на сервере: TOOL/BASE, лимиты осей, S/T и IK</span>
             <input type="file" id="file-input" multiple accept=".src,.dat,.zip" style="display:none;" />
             <button id="btn-browse" class="btn-secondary">Обзор файлов</button>
           </div>
@@ -317,6 +317,48 @@
           <button id="btn-apply-code" class="btn-primary">Загрузить в симулятор</button>
         </div>
       </div>
+    </div>
+
+    <!-- Server upload consent -->
+    <div id="consent-modal" class="modal-backdrop consent-backdrop" style="display:none;">
+      <div class="modal-window glass-panel consent-window">
+        <div class="modal-header">
+          <div class="modal-title">
+            <span class="modal-icon">⚠</span>
+            <h3>Экспериментальная модель</h3>
+          </div>
+          <button id="consent-close" class="btn-close">✕</button>
+        </div>
+        <div class="modal-body consent-body">
+          <p>
+            Бекап загружается на сервер и <strong>сохраняется на Google Drive</strong> владельца
+            проекта. Скомпилированная модель используется для обучения и улучшения симулятора.
+          </p>
+          <ul class="consent-list">
+            <li>Парсер KRL, IK и S/T выполняются только на сервере.</li>
+            <li>В браузере остаётся готовая траектория (суставы), без исходных алгоритмов.</li>
+            <li>Если бекап не читается, файл всё равно сохраняется в папку <code>unparsed/</code>.</li>
+          </ul>
+          <label class="consent-check">
+            <input type="checkbox" id="consent-check" />
+            <span>Я согласен на загрузку и сохранение бекапа. Если не согласен — не загружайте файл.</span>
+          </label>
+        </div>
+        <div class="modal-footer">
+          <button id="consent-cancel" class="btn-secondary">Отмена</button>
+          <button id="consent-continue" class="btn-primary" disabled>Загрузить и скомпилировать</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Server compilation progress -->
+    <div id="server-progress" class="server-progress glass-panel" style="display:none;">
+      <div class="server-progress-head">
+        <span id="server-progress-title">СЕРВЕРНАЯ КОМПИЛЯЦИЯ</span>
+        <button id="server-progress-close" class="mini-btn" title="Скрыть">✕</button>
+      </div>
+      <div class="server-progress-bar"><div id="server-progress-fill"></div></div>
+      <div id="server-progress-text">Загрузка…</div>
     </div>
   </div>
 

@@ -1,0 +1,13 @@
+{
+  "id": "KL_250_4",
+  "name": "KL 250-4",
+  "folder": "KL_250_4",
+  "mountFrame": [0,-1,0,0,1,0,0,0,0,0,1,0,0,-0.035,0.4055,1],
+  "e1ModelMin": -2162.968,
+  "e1ModelMax": 445,
+  "e1DisplayMin": 0,
+  "e1DisplayMax": 2607.968,
+  "travelMm": 2607.968,
+  "staticMeshes": [{"file":"KL_250-4.obj","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]},{"file":"cablemoveshort.obj","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]},{"file":"cablecurvemove.obj","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]}],
+  "carriageMeshes": [{"file":"linearmove.obj","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0.387,1]}]
+}

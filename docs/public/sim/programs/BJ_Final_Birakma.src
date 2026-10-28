@@ -1,0 +1,193 @@
+&ACCESS RVO1
+&REL 82
+&PARAM DISKPATH = KRC:\R1\Trb_TRJ\Final_Parca_Birakma_Sub
+DEF BJ_Final_Birakma( )
+;FOLD INI
+  ;FOLD BASISTECH INI
+    GLOBAL INTERRUPT DECL 3 WHEN $STOPMESS==TRUE DO IR_STOPM ( )
+    INTERRUPT ON 3 
+    BAS (#INITMOV,0 )
+  ;ENDFOLD (BASISTECH INI)
+  ;FOLD USER INI
+    ;Make your modifications here
+
+  ;ENDFOLD (USER INI)
+;ENDFOLD (INI)
+
+;FOLD PTP HOME CONT Vel=80 % DEFAULT ;%{PE}
+;FOLD Parameters ;%{h}
+;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.old; Kuka.IsGlobalPoint=False; Kuka.PointName=HOME; Kuka.BlendingEnabled=True; Kuka.MoveDataPtpName=DEFAULT; Kuka.VelocityPtp=80; Kuka.CurrentCDSetIndex=0; Kuka.MovementParameterFieldEnabled=True; IlfCommand=PTP
+;ENDFOLD
+$BWDSTART = FALSE
+PDAT_ACT = PDEFAULT
+FDAT_ACT = FHOME
+BAS(#PTP_PARAMS, 80.0)
+SET_CD_PARAMS (0)
+PTP XHOME C_Dis
+;ENDFOLD
+;FOLD PTP p1 CONT Vel=80 % PDAT1 Tool[1]:BJ_GRP Base[29]:CIKIS_KONVEYOR ;%{PE}
+;FOLD Parameters ;%{h}
+;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.old; Kuka.IsGlobalPoint=False; Kuka.PointName=p1; Kuka.BlendingEnabled=True; Kuka.MoveDataPtpName=PDAT1; Kuka.VelocityPtp=80; Kuka.CurrentCDSetIndex=0; Kuka.MovementParameterFieldEnabled=True; IlfCommand=PTP
+;ENDFOLD
+$BWDSTART = FALSE
+PDAT_ACT = PPDAT1
+FDAT_ACT = Fp1
+BAS(#PTP_PARAMS, 80.0)
+SET_CD_PARAMS (0)
+PTP Xp1 C_Dis
+;ENDFOLD
+;FOLD PTP p3 CONT Vel=80 % PDAT3 Tool[1]:BJ_GRP Base[29]:CIKIS_KONVEYOR ;%{PE}
+;FOLD Parameters ;%{h}
+;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.old; Kuka.IsGlobalPoint=False; Kuka.PointName=p3; Kuka.BlendingEnabled=True; Kuka.MoveDataPtpName=PDAT3; Kuka.VelocityPtp=80; Kuka.CurrentCDSetIndex=0; Kuka.MovementParameterFieldEnabled=True; IlfCommand=PTP
+;ENDFOLD
+$BWDSTART = FALSE
+PDAT_ACT = PPDAT3
+FDAT_ACT = Fp3
+BAS(#PTP_PARAMS, 80.0)
+SET_CD_PARAMS (0)
+PTP Xp3 C_Dis
+;ENDFOLD
+;FOLD PTP p4 CONT Vel=80 % PDAT4 Tool[1]:BJ_GRP Base[29]:CIKIS_KONVEYOR ;%{PE}
+;FOLD Parameters ;%{h}
+;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.old; Kuka.IsGlobalPoint=False; Kuka.PointName=p4; Kuka.BlendingEnabled=True; Kuka.MoveDataPtpName=PDAT4; Kuka.VelocityPtp=80; Kuka.CurrentCDSetIndex=0; Kuka.MovementParameterFieldEnabled=True; IlfCommand=PTP
+;ENDFOLD
+$BWDSTART = FALSE
+PDAT_ACT = PPDAT4
+FDAT_ACT = Fp4
+BAS(#PTP_PARAMS, 80.0)
+SET_CD_PARAMS (0)
+PTP Xp4 C_Dis
+;ENDFOLD
+;FOLD PTP p5 CONT Vel=80 % PDAT5 Tool[1]:BJ_GRP Base[29]:CIKIS_KONVEYOR ;%{PE}
+;FOLD Parameters ;%{h}
+;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.old; Kuka.IsGlobalPoint=False; Kuka.PointName=p5; Kuka.BlendingEnabled=True; Kuka.MoveDataPtpName=PDAT5; Kuka.VelocityPtp=80; Kuka.CurrentCDSetIndex=0; Kuka.MovementParameterFieldEnabled=True; IlfCommand=PTP
+;ENDFOLD
+$BWDSTART = FALSE
+PDAT_ACT = PPDAT5
+FDAT_ACT = Fp5
+BAS(#PTP_PARAMS, 80.0)
+SET_CD_PARAMS (0)
+PTP Xp5 C_Dis
+;ENDFOLD
+;FOLD PTP p12 CONT Vel=80 % PDAT10 Tool[1]:BJ_GRP Base[29]:CIKIS_KONVEYOR ;%{PE}
+;FOLD Parameters ;%{h}
+;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.old; Kuka.IsGlobalPoint=False; Kuka.PointName=p12; Kuka.BlendingEnabled=True; Kuka.MoveDataPtpName=PDAT10; Kuka.VelocityPtp=80; Kuka.CurrentCDSetIndex=0; Kuka.MovementParameterFieldEnabled=True; IlfCommand=PTP
+;ENDFOLD
+$BWDSTART = FALSE
+PDAT_ACT = PPDAT10
+FDAT_ACT = Fp12
+BAS(#PTP_PARAMS, 80.0)
+SET_CD_PARAMS (0)
+PTP Xp12 C_Dis
+;ENDFOLD
+;FOLD LIN FINAL_DROP Vel=1 m/s CPDAT01 Tool[1]:BJ_GRP Base[29]:CIKIS_KONVEYOR ;%{PE}
+;FOLD Parameters ;%{h}
+;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.old; Kuka.IsGlobalPoint=False; Kuka.PointName=FINAL_DROP; Kuka.BlendingEnabled=False; Kuka.MoveDataName=CPDAT01; Kuka.VelocityPath=1; Kuka.CurrentCDSetIndex=0; Kuka.MovementParameterFieldEnabled=True; IlfCommand=LIN
+;ENDFOLD
+$BWDSTART = FALSE
+LDAT_ACT = LCPDAT01
+FDAT_ACT = FFINAL_DROP
+BAS(#CP_PARAMS, 1)
+SET_CD_PARAMS (0)
+LIN XFINAL_DROP
+;ENDFOLD
+$FLAG[1]=FALSE
+;
+;FOLD OUT 610 'BJ_VAKUM_START' State=False  ;%{PE}
+;FOLD Parameters ;%{h}
+;Params IlfProvider=kukaroboter.basistech.inlineforms.logics.out.out; Kuka.Logics.Io=610; Kuka.Logics.IoName=BJ_VAKUM_START; Kuka.Logics.State=False; Kuka.Logics.Cont=False
+;ENDFOLD
+$OUT[610] = False
+;ENDFOLD
+;FOLD WAIT FOR ( NOT IN 615 'BJ_RESERVE_ON' )  ;%{PE}
+;FOLD Parameters ;%{h}
+;Params IlfProvider=kukaroboter.basistech.inlineforms.logics.waitfor; Kuka.WaitLogicTerm1=None; Kuka.WaitForNot1=False; Kuka.WaitLogicOp2.Term1=None; Kuka.WaitForNot2.Term1=True; Kuka.WaitForSysVar2.Term1=IN; Kuka.WaitForIndex2.Term1=615; Kuka.WaitForIndexName2.Term1=BJ_RESERVE_ON; Kuka.WaitForTermNumbers=1; Kuka.WaitForOpNumbers=2; Kuka.WaitForCont=False
+;ENDFOLD
+WAIT FOR  ( NOT $IN[615] )
+;ENDFOLD
+;FOLD OUT 302 'Part_Dropped' State=True  ;%{PE}
+;FOLD Parameters ;%{h}
+;Params IlfProvider=kukaroboter.basistech.inlineforms.logics.out.out; Kuka.Logics.Io=302; Kuka.Logics.IoName=Part_Dropped; Kuka.Logics.State=True; Kuka.Logics.Cont=False
+;ENDFOLD
+$OUT[302] = True
+;ENDFOLD
+;
+;FOLD LIN p17 CONT Vel=2 m/s CPDAT02 Tool[1]:BJ_GRP Base[29]:CIKIS_KONVEYOR ;%{PE}
+;FOLD Parameters ;%{h}
+;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.old; Kuka.IsGlobalPoint=False; Kuka.PointName=p17; Kuka.BlendingEnabled=True; Kuka.MoveDataName=CPDAT02; Kuka.VelocityPath=2; Kuka.CurrentCDSetIndex=0; Kuka.MovementParameterFieldEnabled=True; IlfCommand=LIN
+;ENDFOLD
+$BWDSTART = FALSE
+LDAT_ACT = LCPDAT02
+FDAT_ACT = Fp17
+BAS(#CP_PARAMS, 2.0)
+SET_CD_PARAMS (0)
+LIN Xp17 C_Dis C_Dis
+;ENDFOLD
+;FOLD PTP p11 CONT Vel=80 % PDAT12 Tool[1]:BJ_GRP Base[29]:CIKIS_KONVEYOR ;%{PE}
+;FOLD Parameters ;%{h}
+;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.old; Kuka.IsGlobalPoint=False; Kuka.PointName=p11; Kuka.BlendingEnabled=True; Kuka.MoveDataPtpName=PDAT12; Kuka.VelocityPtp=80; Kuka.CurrentCDSetIndex=0; Kuka.MovementParameterFieldEnabled=True; IlfCommand=PTP
+;ENDFOLD
+$BWDSTART = FALSE
+PDAT_ACT = PPDAT12
+FDAT_ACT = Fp11
+BAS(#PTP_PARAMS, 80.0)
+SET_CD_PARAMS (0)
+PTP Xp11 C_Dis
+;ENDFOLD
+;FOLD OUT 41 'Zone_Area_Clear_01' State=True  ;%{PE}
+   ;FOLD Parameters ;%{h}
+      ;Params IlfProvider=kukaroboter.basistech.inlineforms.logics.out.out; Kuka.Logics.Io=41; Kuka.Logics.IoName=Zone_Area_Clear_01; Kuka.Logics.State=True; Kuka.Logics.Cont=False
+   ;ENDFOLD
+   $OUT[41] = True
+   ;ENDFOLD
+;FOLD PTP p14 CONT Vel=100 % PDAT13 Tool[1]:BJ_GRP Base[29]:CIKIS_KONVEYOR ;%{PE}
+   ;FOLD Parameters ;%{h}
+      ;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.old; Kuka.IsGlobalPoint=False; Kuka.PointName=p14; Kuka.BlendingEnabled=True; Kuka.MoveDataPtpName=PDAT13; Kuka.VelocityPtp=100; Kuka.CurrentCDSetIndex=0; Kuka.MovementParameterFieldEnabled=True; IlfCommand=PTP
+   ;ENDFOLD
+   $BWDSTART = FALSE
+   PDAT_ACT = PPDAT13
+   FDAT_ACT = Fp14
+   BAS(#PTP_PARAMS, 100.0)
+   SET_CD_PARAMS (0)
+   PTP Xp14 C_Dis
+;ENDFOLD
+;FOLD PTP p15 CONT Vel=100 % PDAT14 Tool[1]:BJ_GRP Base[29]:CIKIS_KONVEYOR ;%{PE}
+   ;FOLD Parameters ;%{h}
+      ;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.old; Kuka.IsGlobalPoint=False; Kuka.PointName=p15; Kuka.BlendingEnabled=True; Kuka.MoveDataPtpName=PDAT14; Kuka.VelocityPtp=100; Kuka.CurrentCDSetIndex=0; Kuka.MovementParameterFieldEnabled=True; IlfCommand=PTP
+   ;ENDFOLD
+   $BWDSTART = FALSE
+   PDAT_ACT = PPDAT14
+   FDAT_ACT = Fp15
+   BAS(#PTP_PARAMS, 100.0)
+   SET_CD_PARAMS (0)
+   PTP Xp15 C_Dis
+;ENDFOLD
+;FOLD PTP p16 CONT Vel=100 % PDAT15 Tool[1]:BJ_GRP Base[29]:CIKIS_KONVEYOR ;%{PE}
+   ;FOLD Parameters ;%{h}
+      ;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.old; Kuka.IsGlobalPoint=False; Kuka.PointName=p16; Kuka.BlendingEnabled=True; Kuka.MoveDataPtpName=PDAT15; Kuka.VelocityPtp=100; Kuka.CurrentCDSetIndex=0; Kuka.MovementParameterFieldEnabled=True; IlfCommand=PTP
+   ;ENDFOLD
+   $BWDSTART = FALSE
+   PDAT_ACT = PPDAT15
+   FDAT_ACT = Fp16
+   BAS(#PTP_PARAMS, 100.0)
+   SET_CD_PARAMS (0)
+   PTP Xp16 C_Dis
+;ENDFOLD
+;FOLD PTP HOME Vel=100 % DEFAULT ;%{PE}
+   ;FOLD Parameters ;%{h}
+      ;Params IlfProvider=kukaroboter.basistech.inlineforms.movement.old; Kuka.IsGlobalPoint=False; Kuka.PointName=HOME; Kuka.BlendingEnabled=False; Kuka.MoveDataPtpName=DEFAULT; Kuka.VelocityPtp=100; Kuka.CurrentCDSetIndex=0; Kuka.MovementParameterFieldEnabled=True; IlfCommand=PTP
+   ;ENDFOLD
+   $BWDSTART = FALSE
+   PDAT_ACT = PDEFAULT
+   FDAT_ACT = FHOME
+   BAS(#PTP_PARAMS, 100.0)
+   SET_CD_PARAMS (0)
+   PTP XHOME
+;ENDFOLD
+;FOLD OUT 302 'Part_Dropped' State=False  ;%{PE}
+;FOLD Parameters ;%{h}
+;Params IlfProvider=kukaroboter.basistech.inlineforms.logics.out.out; Kuka.Logics.Io=302; Kuka.Logics.IoName=Part_Dropped; Kuka.Logics.State=True; Kuka.Logics.Cont=False
+;ENDFOLD
+$OUT[302] = False
+;ENDFOLD
+END

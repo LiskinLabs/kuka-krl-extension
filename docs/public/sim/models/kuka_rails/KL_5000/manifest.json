@@ -1,0 +1,13 @@
+{
+  "id": "KL_5000",
+  "name": "KL 5000",
+  "folder": "KL_5000",
+  "mountFrame": [0,-1,0,0,1,0,0,0,0,0,1,0,0,0,0.749,1],
+  "e1ModelMin": -6600,
+  "e1ModelMax": 150,
+  "e1DisplayMin": 0,
+  "e1DisplayMax": 6750,
+  "travelMm": 6750,
+  "staticMeshes": [{"file":"KL5000.obj","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]},{"file":"cableShortMove.obj","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]},{"file":"cableCurve_L_R_M.obj","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]}],
+  "carriageMeshes": [{"file":"linearmoveCarriage.obj","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]}]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "KL_4000_2",
+  "name": "KL 4000-2",
+  "folder": "KL_4000_2",
+  "mountFrame": [0,-1,0.000001,0,1,0,0,0,0,0.000001,1,0,0,0,0.689,1],
+  "e1ModelMin": -6700,
+  "e1ModelMax": 200,
+  "e1DisplayMin": 0,
+  "e1DisplayMax": 6900,
+  "travelMm": 6900,
+  "staticMeshes": [{"file":"cableMove.obj","matrix":[0,0,1,0,0,1,0,0,-1,0,0,0,-0.424995,0,0.539,1]},{"file":"cableCurveMove.obj","matrix":[0,0,1,0,0,1,0,0,-1,0,0,0,0,0,0,1]},{"file":"GuideRail.obj","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]},{"file":"TrackTransform.obj","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]}],
+  "carriageMeshes": [{"file":"LinearMoveCarriage.obj","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]}]
+}

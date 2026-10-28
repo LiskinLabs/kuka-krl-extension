@@ -1,0 +1,69 @@
+{
+  "name": "KR 10 R1100 CR",
+  "key": "KR_10_R1100_CR",
+  "family": "AGILUS",
+  "payloadKg": 0,
+  "maxReachMm": 0,
+  "dof": 6,
+  "source": "C:\\Projects\\01_Robotics\\Simulation\\raw_assets\\vcmx_static\\KR_10_R1100_CR.vcmx",
+  "units": "m",
+  "joints": ["A1","A2","A3","A4","A5","A6"],
+  "kinematics": { "d1": 400, "a1": 25, "a2": 560, "a3": -35, "d4": 515, "d6": 80, "jointSigns": [-1,1,1,-1,1,-1], "jointZeroOffsets": [0,-90,0,0,0,0], "a45": -90 },
+  "nodes": [
+    {
+      "name": "KR 10 R1100 CR",
+      "parent": null,
+      "mesh": "KR_10_R1100_CR.obj",
+      "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+    }
+,
+    {
+      "name": "A1",
+      "parent": "KR 10 R1100 CR",
+      "mesh": "A1.obj",
+      "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+    }
+,
+    {
+      "name": "A2",
+      "parent": "A1",
+      "mesh": "A2.obj",
+      "matrix": [0,0,1,0,0,1,0,0,-1,0,0,0,0,0,0,1]
+    }
+,
+    {
+      "name": "A3",
+      "parent": "A2",
+      "mesh": "A3.obj",
+      "matrix": [0,0,-1,0,0,1,0,0,1,0,0,0,0,0,0,1]
+    }
+,
+    {
+      "name": "A4",
+      "parent": "A3",
+      "mesh": "A4.obj",
+      "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+    }
+,
+    {
+      "name": "A5",
+      "parent": "A4",
+      "mesh": "A5.obj",
+      "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+    }
+,
+    {
+      "name": "A6",
+      "parent": "A5",
+      "mesh": "A6.obj",
+      "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+    }
+,
+    {
+      "name": "mountplate",
+      "parent": "A6",
+      "mesh": null,
+      "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "KL_100_2",
+  "name": "KL 100-2",
+  "folder": "KL_100_2",
+  "mountFrame": [0,-1,0,0,1,0,0,0,0,0,1,0,0,0,0.356,1],
+  "e1ModelMin": -1000,
+  "e1ModelMax": 1000,
+  "e1DisplayMin": 0,
+  "e1DisplayMax": 2000,
+  "travelMm": 2000,
+  "staticMeshes": [{"file":"KL_100-2.obj","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]},{"file":"cableshortmove.obj","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]},{"file":"cablecurvemove.obj","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]}],
+  "carriageMeshes": [{"file":"linearmove.obj","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]}]
+}

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liskin Labs | KUKA 3D Digital Twin & Simulation Platform</title>
+  <link rel="icon" type="image/png" href="./liskinlabs_logo.png" />
+  <script type="module" crossorigin src="./assets/index-9YySfHnI.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BLTvMN2t.css">
+</head>
+<body>
+  <div id="app-container">
+    <!-- Top Header -->
+    <header id="top-bar">
+      <div class="brand-badge">
+        <img src="./liskinlabs_logo.png" alt="LiskinLabs" class="brand-logo" />
+        <div class="brand-info">
+          <span class="brand-name">LiskinLabs</span>
+          <span class="brand-tag">KUKA DIGITAL TWIN SIMULATOR</span>
+        </div>
+      </div>
+
+      <div class="top-controls">
+        <div class="selector-group">
+          <span class="selector-label">Робот:</span>
+          <select id="model-select" class="dropdown-select">
+            <option value="IIWA14" selected>⭐ KUKA LBR iiwa 14 (MuJoCo Menagerie)</option>
+          </select>
+        </div>
+
+        <div class="selector-group">
+          <span class="selector-label">Рельс ($E1):</span>
+          <select id="rail-select" class="dropdown-select">
+            <option value="NONE" selected>Без рельса (стационарный)</option>
+            <option value="KL_100_2">KL 100-2 · 2.0 м</option>
+            <option value="KL_250_4">KL 250-4 · 2.6 м</option>
+            <option value="KL_4000_S">KL 4000 S · 6.9 м</option>
+            <option value="KL_4000_2">KL 4000-2 · 6.9 м</option>
+            <option value="KL_5000">KL 5000 · 6.75 м</option>
+          </select>
+        </div>
+
+        <button id="btn-open-flowchart" class="btn-ghost" title="Блок-схема бекапа">
+          <span class="btn-icon-text">🧩</span> Блок-схема
+        </button>
+
+        <button id="btn-open-code-modal" class="btn-primary">
+          <span class="btn-icon-text">⚡</span> Загрузить KRL код
+        </button>
+      </div>
+
+      <div class="view-presets">
+        <button id="btn-view-3d" class="btn-icon active" title="3D Перспектива">3D</button>
+        <button id="btn-view-top" class="btn-icon" title="Сверху">Top</button>
+        <button id="btn-view-front" class="btn-icon" title="Спереди">Front</button>
+        <button id="btn-view-side" class="btn-icon" title="Сбоку">Side</button>
+      </div>
+    </header>
+
+    <!-- Main Viewport Area -->
+    <main id="viewport-container">
+      <canvas id="three-canvas"></canvas>
+      <a id="embed-open" class="embed-open" href="./" target="_top">Открыть симулятор →</a>
+
+      <!-- Telemetry HUD Overlay -->
+      <div id="telemetry-hud" class="hud-panel">
+        <div class="hud-title">
+          <span class="hud-indicator"></span> <span id="hud-title">ФЛАНЕЦ РОБОТА ($TOOL)</span>
+        </div>
+        <div class="coords-grid">
+          <div class="coord-box"><span class="lbl">X</span><span class="val" id="val-x">0.0</span><span class="unit">mm</span></div>
+          <div class="coord-box"><span class="lbl">Y</span><span class="val" id="val-y">0.0</span><span class="unit">mm</span></div>
+          <div class="coord-box"><span class="lbl">Z</span><span class="val" id="val-z">0.0</span><span class="unit">mm</span></div>
+          <div class="coord-box"><span class="lbl">A</span><span class="val" id="val-a">0.0°</span></div>
+          <div class="coord-box"><span class="lbl">B</span><span class="val" id="val-b">0.0°</span></div>
+          <div class="coord-box"><span class="lbl">C</span><span class="val" id="val-c">0.0°</span></div>
+          <div class="coord-box rail-coord" id="hud-box-e1" style="display:none;"><span class="lbl">E1</span><span class="val" id="val-e1">0.0</span><span class="unit">mm</span></div>
+        </div>
+      </div>
+
+      <!-- Right Inspector Sidebar -->
+      <aside id="inspector-panel" class="glass-panel">
+        <div class="inspector-head">
+          <span class="inspector-title">ПАНЕЛЬ</span>
+          <button id="inspector-collapse" class="inspector-collapse" title="Свернуть панель">⟩</button>
+        </div>
+        <div class="tab-headers">
+          <button class="tab-btn active" data-tab="waypoints">Траектория</button>
+          <button class="tab-btn" data-tab="joint-jog">Оси</button>
+          <button class="tab-btn" data-tab="smartpad">SmartPAD</button>
+        </div>
+
+        <!-- Tab 1: Waypoints -->
+        <div class="tab-content active" id="tab-waypoints">
+          <div class="program-info-bar">
+            <span id="program-name">BJ_Final_Birakma.src</span>
+            <span id="program-stats" class="stats-badge">0 pts | 0 mm</span>
+          </div>
+          <div id="waypoints-list"></div>
+        </div>
+
+        <!-- Tab 2: Joint Jogging -->
+        <div class="tab-content" id="tab-joint-jog">
+          <div class="joint-controls" id="joint-sliders-container"></div>
+          <div id="rail-jog-section" style="display:none; margin-top: 14px;">
+            <span class="subhead">Линейный рельс ($E1):</span>
+            <div class="joint-row">
+              <div class="joint-row-head">
+                <span class="joint-name">E1</span>
+                <span class="joint-val" id="rail-e1-val">1000 mm</span>
+              </div>
+              <input type="range" class="joint-slider" id="rail-e1-slider" min="0" max="2000" step="1" value="1000" />
+            </div>
+            <div class="wpt-coords" id="rail-e1-limits">0 … 2000 mm</div>
+            <div class="cart-grid rail-row">
+              <button class="jog-btn" data-axis="E1" data-dir="1">E1 +</button>
+              <button class="jog-btn" data-axis="E1" data-dir="-1">E1 −</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: SmartPAD -->
+        <div class="tab-content" id="tab-smartpad">
+          <div class="smartpad-box">
+            <span class="subhead">Шаг ручного перемещения:</span>
+            <div class="step-selector">
+              <button class="step-btn" data-step="1">1 mm</button>
+              <button class="step-btn active" data-step="10">10 mm</button>
+              <button class="step-btn" data-step="50">50 mm</button>
+              <button class="step-btn" data-step="100">100 mm</button>
+            </div>
+
+            <span class="subhead">Декартово смещение фланца:</span>
+            <div class="cart-grid">
+              <button class="jog-btn" data-axis="X" data-dir="1">X +</button>
+              <button class="jog-btn" data-axis="X" data-dir="-1">X −</button>
+              <button class="jog-btn" data-axis="Y" data-dir="1">Y +</button>
+              <button class="jog-btn" data-axis="Y" data-dir="-1">Y −</button>
+              <button class="jog-btn" data-axis="Z" data-dir="1">Z +</button>
+              <button class="jog-btn" data-axis="Z" data-dir="-1">Z −</button>
+            </div>
+
+            <span class="subhead">Вращение инструмента:</span>
+            <div class="cart-grid">
+              <button class="jog-btn" data-axis="A" data-dir="1">A +</button>
+              <button class="jog-btn" data-axis="A" data-dir="-1">A −</button>
+              <button class="jog-btn" data-axis="B" data-dir="1">B +</button>
+              <button class="jog-btn" data-axis="B" data-dir="-1">B −</button>
+              <button class="jog-btn" data-axis="C" data-dir="1">C +</button>
+              <button class="jog-btn" data-axis="C" data-dir="-1">C −</button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Program pad: PLC / operator signals -->
+        <div id="program-pad" class="program-pad" data-state="idle">
+          <div class="pad-head">
+            <span class="pad-dot"></span>
+            <span class="pad-title">ПУЛЬТ ПРОГРАММЫ</span>
+            <span id="pad-module" class="pad-module">Cell.src</span>
+            <button id="pad-collapse" class="pad-collapse" title="Свернуть пульт">▾</button>
+          </div>
+          <div id="pad-body" class="pad-body">
+            <div id="pad-state" class="pad-state">Ожидание запуска</div>
+            <div id="pad-request" class="pad-request" style="display:none;">
+              <div id="pad-request-title" class="pad-request-title">Ожидание сигнала</div>
+              <div id="pad-request-detail" class="pad-request-detail"></div>
+              <div id="pad-request-actions" class="pad-request-actions"></div>
+            </div>
+            <div class="pad-controls">
+              <button id="pad-reset" class="pad-btn">↺ Перезапуск Cell</button>
+            </div>
+            <div id="pad-log" class="pad-log"></div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Separate flowchart window (right, collapsible, resizable) -->
+      <aside id="flow-panel" class="glass-panel">
+        <div class="flow-panel-head">
+          <span class="flow-panel-title">БЛОК-СХЕМА</span>
+          <span id="flow-panel-module" class="flow-panel-module">Cell.src</span>
+          <button id="btn-flow-full" class="mini-btn">Открыть</button>
+          <button id="flow-panel-collapse" class="inspector-collapse" title="Свернуть схему">⟨</button>
+          <button id="flow-panel-close" class="inspector-collapse flow-close-panel" title="Закрыть схему">✕</button>
+        </div>
+        <div id="mini-flow" class="mini-flow"></div>
+        <div id="flow-panel-grip" class="flow-panel-grip" title="Изменить ширину"></div>
+      </aside>
+
+      <!-- Bottom Playback Controls -->
+      <footer id="playback-bar" class="glass-panel">
+        <div class="playback-controls">
+          <button id="btn-prev" class="btn-ctrl" title="Предыдущая точка">⏮</button>
+          <button id="btn-play" class="btn-ctrl btn-play" title="Старт / Пауза">▶</button>
+          <button id="btn-next" class="btn-ctrl" title="Следующая точка">⏭</button>
+          <button id="btn-reset" class="btn-ctrl" title="В начало">↺</button>
+        </div>
+
+        <div class="timeline-box">
+          <span id="time-cur" class="time-readout">0.0s</span>
+          <div class="slider-container">
+            <input type="range" id="timeline-slider" min="0" max="1000" value="0" />
+            <div id="timeline-progress" class="timeline-progress-fill"></div>
+          </div>
+          <span id="time-total" class="time-readout">0.0s</span>
+        </div>
+
+        <div class="playback-tools">
+          <select id="speed-select" class="dropdown-select speed-select">
+            <option value="0.25">0.25x</option>
+            <option value="0.5">0.5x</option>
+            <option value="1" selected>1.0x</option>
+            <option value="2">2.0x</option>
+            <option value="4">4.0x</option>
+          </select>
+          <button id="btn-loop" class="btn-icon active" title="Зациклить воспроизведение">🔁</button>
+        </div>
+      </footer>
+    </main>
+
+    <!-- KRL Backup Flowchart Overlay -->
+    <div id="flow-overlay" class="flow-overlay" style="display:none;">
+      <div class="flow-toolbar">
+        <div class="flow-brand">
+          <span class="flow-brand-mark">KRL</span>
+          <span class="flow-brand-name">FLOW</span>
+        </div>
+        <div id="flow-breadcrumbs" class="flow-breadcrumbs"></div>
+        <select id="flow-program-select" class="dropdown-select flow-program-select"></select>
+        <div class="flow-actions">
+          <button id="flow-back" class="flow-btn" title="Назад">←</button>
+          <button id="flow-zoom-out" class="flow-btn" title="Уменьшить">−</button>
+          <button id="flow-zoom-reset" class="flow-btn" title="Сброс масштаба">100%</button>
+          <button id="flow-zoom-in" class="flow-btn" title="Увеличить">+</button>
+          <button id="flow-fit" class="flow-btn" title="Вписать">Fit</button>
+          <button id="flow-follow" class="flow-btn active" title="Следить за выполнением">
+            ● Следить
+          </button>
+          <button id="flow-svg" class="flow-btn" title="Скачать SVG">SVG</button>
+          <span class="flow-sep"></span>
+          <label class="flow-btn flow-import" for="flow-backup-input">Бекап ZIP</label>
+          <input id="flow-backup-input" type="file" accept=".zip" hidden />
+          <label class="flow-btn flow-import" for="flow-folder-input">Папка</label>
+          <input id="flow-folder-input" type="file" webkitdirectory hidden />
+          <button id="flow-close" class="flow-btn flow-close" title="Закрыть">✕</button>
+        </div>
+      </div>
+      <div class="flow-main">
+        <div id="flow-chart" class="flow-chart"></div>
+        <div id="flow-source" class="flow-source" style="display:none;">
+          <div class="flow-source-head">
+            <span id="flow-source-title">Cell.src</span>
+            <button id="flow-source-close" class="flow-btn">✕</button>
+          </div>
+          <pre id="flow-source-code" class="flow-source-code"></pre>
+        </div>
+      </div>
+      <div id="flow-status" class="flow-status">Загрузка бекапа…</div>
+    </div>
+
+    <!-- Code Loader Modal -->
+    <div id="code-modal" class="modal-backdrop" style="display:none;">
+      <div class="modal-window glass-panel">
+        <div class="modal-header">
+          <div class="modal-title">
+            <span class="modal-icon">⚡</span>
+            <h3>Загрузка KRL программы (.src / .dat)</h3>
+          </div>
+          <button id="btn-close-modal" class="btn-close">✕</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="backup-program-bar">
+            <span class="backup-program-label">Программа из бекапа:</span>
+            <select id="backup-program-select" class="dropdown-select"></select>
+            <span id="backup-frames-info" class="backup-frames-info">
+              $config.dat / $machine.dat не загружены
+            </span>
+          </div>
+
+          <div id="drop-zone" class="drop-zone">
+            <div class="drop-icon">📁</div>
+            <p>Перетащите сюда <strong>.src</strong>, <strong>.dat</strong> или весь бекап <strong>.zip</strong></p>
+            <span class="drop-sub">инструмент и база подхватятся из $config.dat / $machine.dat</span>
+            <input type="file" id="file-input" multiple accept=".src,.dat,.zip" style="display:none;" />
+            <button id="btn-browse" class="btn-secondary">Обзор файлов</button>
+          </div>
+
+          <div class="divider"><span>ИЛИ РЕДАКТИРУЙТЕ КОД ВРУЧНУЮ</span></div>
+
+          <div class="code-editor-grid">
+            <div class="editor-col">
+              <div class="col-head">.SRC (Команды движения PTP, LIN, CIRC):</div>
+              <textarea id="src-code-input" spellcheck="false"></textarea>
+            </div>
+            <div class="editor-col">
+              <div class="col-head">.DAT (Объявления координат E6POS / POS):</div>
+              <textarea id="dat-code-input" spellcheck="false"></textarea>
+            </div>
+          </div>
+
+          <div class="presets-row">
+            <span class="presets-label">Готовые примеры программ:</span>
+            <div class="chips-list">
+              <button class="preset-chip" data-sample="backup">Robot1 · BJ_Final_Birakma (KR 50, BASE 29)</button>
+              <button class="preset-chip" data-sample="birakma">BJ_Final_Birakma (Рельс $E1)</button>
+              <button class="preset-chip" data-sample="weld">Сварочный контур (LIN / CIRC)</button>
+              <button class="preset-chip" data-sample="pallet">Паллетирование (PTP Сетка)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button id="btn-cancel-modal" class="btn-secondary">Отмена</button>
+          <button id="btn-apply-code" class="btn-primary">Загрузить в симулятор</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

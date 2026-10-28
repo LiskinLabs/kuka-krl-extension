@@ -1,0 +1,44 @@
+{
+  "rails": [
+    {
+      "id": "KL_100_2",
+      "name": "KL 100-2",
+      "folder": "KL_100_2",
+      "travelMm": 2000,
+      "e1ModelMin": -1000,
+      "e1ModelMax": 1000
+    },
+    {
+      "id": "KL_250_4",
+      "name": "KL 250-4",
+      "folder": "KL_250_4",
+      "travelMm": 2607.968,
+      "e1ModelMin": -2162.968,
+      "e1ModelMax": 445
+    },
+    {
+      "id": "KL_5000",
+      "name": "KL 5000",
+      "folder": "KL_5000",
+      "travelMm": 6750,
+      "e1ModelMin": -6600,
+      "e1ModelMax": 150
+    },
+    {
+      "id": "KL_4000_2",
+      "name": "KL 4000-2",
+      "folder": "KL_4000_2",
+      "travelMm": 6900,
+      "e1ModelMin": -6700,
+      "e1ModelMax": 200
+    },
+    {
+      "id": "KL_4000_S",
+      "name": "KL 4000 S",
+      "folder": "KL_4000_S",
+      "travelMm": 6900,
+      "e1ModelMin": -6700,
+      "e1ModelMax": 200
+    }
+  ]
+}

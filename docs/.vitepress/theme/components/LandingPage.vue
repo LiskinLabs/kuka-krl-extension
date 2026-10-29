@@ -240,7 +240,7 @@
             <div class="relative w-full h-full flex flex-col border border-zinc-800 overflow-hidden bg-black">
               <ClientOnly>
                 <iframe
-                  :src="withBase('/sim/?embed=1')"
+                  :src="withBase(`/sim/?embed=1&lang=${lang}`)"
                   title="KUKA KR 50 R2500 3D Digital Twin"
                   class="w-full h-full min-h-[460px] border-0 bg-black"
                   loading="lazy"

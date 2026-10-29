@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Liskin Labs | KUKA 3D Digital Twin & Simulation Platform</title>
   <link rel="icon" type="image/png" href="/favicon.png" />
-  <script type="module" crossorigin src="./assets/index-B6ujEHI9.js"></script>
+  <script type="module" crossorigin src="./assets/index-DFb0JMdR.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-DTnpYeDe.css">
 </head>
 <body>
@@ -103,7 +103,7 @@
       <aside id="inspector-panel" class="glass-panel">
         <div class="inspector-head">
           <span class="inspector-title" data-i18n="panel.title">ПАНЕЛЬ</span>
-          <button id="inspector-collapse" class="inspector-collapse" title="Свернуть панель">⟩</button>
+          <button id="inspector-collapse" class="inspector-collapse" data-i18n-title="panel.collapse" title="Свернуть панель">⟩</button>
         </div>
         <div class="tab-headers">
           <button class="tab-btn active" data-tab="waypoints" data-i18n="tab.trajectory">Траектория</button>
@@ -180,10 +180,10 @@
             <span class="pad-dot"></span>
             <span class="pad-title" data-i18n="pad.title">ПУЛЬТ ПРОГРАММЫ</span>
             <span id="pad-module" class="pad-module">Cell.src</span>
-            <button id="pad-collapse" class="pad-collapse" title="Свернуть пульт">▾</button>
+            <button id="pad-collapse" class="pad-collapse" data-i18n-title="pad.collapse" title="Свернуть пульт">▾</button>
           </div>
           <div id="pad-body" class="pad-body">
-            <div id="pad-state" class="pad-state">Ожидание запуска</div>
+            <div id="pad-state" class="pad-state" data-i18n="pad.idle">Ожидание запуска</div>
             <div id="pad-request" class="pad-request" style="display:none;">
               <div id="pad-request-title" class="pad-request-title">Ожидание сигнала</div>
               <div id="pad-request-detail" class="pad-request-detail"></div>
@@ -203,8 +203,8 @@
           <span class="flow-panel-title" data-i18n="flow.title">БЛОК-СХЕМА</span>
           <span id="flow-panel-module" class="flow-panel-module">Cell.src</span>
           <button id="btn-flow-full" class="mini-btn" data-i18n="flow.open">Открыть</button>
-          <button id="flow-panel-collapse" class="inspector-collapse" title="Свернуть схему">⟨</button>
-          <button id="flow-panel-close" class="inspector-collapse flow-close-panel" title="Закрыть схему"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+          <button id="flow-panel-collapse" class="inspector-collapse" data-i18n-title="flow.collapse" title="Свернуть схему">⟨</button>
+          <button id="flow-panel-close" class="inspector-collapse flow-close-panel" data-i18n-title="flow.close" title="Закрыть схему"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
         </div>
         <div class="flow-live-bar">
           <span class="flow-live-dot"></span>

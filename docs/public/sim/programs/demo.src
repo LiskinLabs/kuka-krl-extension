@@ -1,6 +1,8 @@
 &ACCESS RVP
 DEF Demo( )
   ;FOLD INI
+    $TOOL = $TOOL
+    $BASE = $BASE
     $VEL.PTP = 35
   ;ENDFOLD (INI)
 

@@ -24,7 +24,7 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/kuka-krl-extension/favicon.svg' }],
     ['link', { rel: 'icon', type: 'image/png', href: '/kuka-krl-extension/logo.png' }],
-    ['meta', { name: 'theme-color', content: '#FF6600' }],
+    ['meta', { name: 'theme-color', content: '#FF5500' }],
     ['meta', { name: 'keywords', content: 'KUKA, KRL, KRC4, KRC5, Robot, Robotics, Industrial Automation, WorkVisual, VS Code, SCADA, MCP' }],
     ['meta', { property: 'og:title', content: 'KUKA KRL Professional — Industrial Robotics IDE Suite' }],
     ['meta', { property: 'og:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Live SCADA, Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
@@ -52,11 +52,11 @@ export default defineConfig({
             theme: {
               extend: {
                 colors: {
-                  'kuka-orange': '#FF6600',
-                  'kuka-dark': '#0D1117',
-                  'kuka-darker': '#090C10',
-                  'kuka-gray': '#161B22',
-                  'kuka-border': '#30363D'
+                  'kuka-orange': '#FF5500',
+                  'kuka-dark': '#09090B',
+                  'kuka-darker': '#09090B',
+                  'kuka-gray': '#111114',
+                  'kuka-border': '#27272A'
                 },
                 fontFamily: {
                   sans: ['Inter', 'Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],

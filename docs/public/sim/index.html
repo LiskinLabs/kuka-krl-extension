@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Liskin Labs | KUKA 3D Digital Twin & Simulation Platform</title>
-  <link rel="icon" type="image/png" href="/favicon.png" />
-  <script type="module" crossorigin src="./assets/index-BZnHz1rE.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DTnpYeDe.css">
+  <link rel="icon" type="image/png" sizes="256x256" href="./favicon.png" />
+  <script type="module" crossorigin src="./assets/index-CJdVnGWD.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BQbZ1IaN.css">
 </head>
 <body>
   <!-- Inline SVG icon sprite: the UI uses vector icons only, no emoji. -->
@@ -22,6 +22,7 @@
     <symbol id="i-loop" viewBox="0 0 24 24"><path d="M7 7h9v3l4-4-4-4v3H5v7h2zM17 17H8v-3l-4 4 4 4v-3h11v-7h-2z"/></symbol>
     <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12 19 17.6 17.6 19 12 13.4 6.4 19 5 17.6 10.6 12 5 6.4z"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
     <symbol id="i-warning" viewBox="0 0 24 24"><path d="M12 2 1 21h22zm0 5.5 7.2 12.5H4.8zM11 9h2v6h-2zm0 7.5h2v2h-2z"/></symbol>
     <symbol id="i-live" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16z" opacity=".55"/></symbol>
     <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></symbol>
@@ -40,9 +41,34 @@
       <div class="top-controls">
         <div class="selector-group">
           <span class="selector-label" data-i18n="label.robot">Робот:</span>
-          <select id="model-select" class="dropdown-select">
-            <option value="IIWA14" selected>KUKA LBR iiwa 14 (MuJoCo Menagerie)</option>
-          </select>
+          <div id="robot-picker" class="robot-picker">
+            <button
+              id="robot-picker-button"
+              class="robot-picker-button"
+              type="button"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+            >
+              <span id="robot-picker-label" class="robot-picker-label">KR 50 R2500</span>
+              <svg class="icon robot-picker-chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            </button>
+            <select id="model-select" class="native-model-select" aria-hidden="true" tabindex="-1">
+              <option value="KR_50_R2500" selected>KR 50 R2500</option>
+            </select>
+            <div id="robot-picker-popover" class="robot-picker-popover" hidden>
+              <div class="robot-picker-search-wrap">
+                <input
+                  id="robot-picker-search"
+                  class="robot-picker-search"
+                  type="search"
+                  placeholder="Поиск модели, семейства или ID…"
+                  autocomplete="off"
+                  spellcheck="false"
+                />
+              </div>
+              <div id="robot-picker-list" class="robot-picker-list" role="listbox" aria-label="KUKA robots"></div>
+            </div>
+          </div>
         </div>
 
         <div class="selector-group">
@@ -80,6 +106,20 @@
 
     <!-- Main Viewport Area -->
     <main id="viewport-container">
+      <!-- Persistent project context: never let the operator lose track of
+           which backup/robot/program is on screen. -->
+      <div id="project-bar" class="project-bar">
+        <div class="project-identity">
+          <span id="project-name" class="project-name">Demo</span>
+          <span class="project-sep">·</span>
+          <span id="project-meta" class="project-meta">KRC · KR 50 R2500</span>
+        </div>
+        <div class="project-state">
+          <span id="project-program" class="project-program">Demo.src</span>
+          <span id="project-programs" class="project-stat">1 программа</span>
+          <span id="project-status" class="status-pill status-demo">ДЕМО</span>
+        </div>
+      </div>
       <canvas id="three-canvas"></canvas>
       <a id="embed-open" class="embed-open" href="./" target="_top" data-i18n="embed.open">Открыть симулятор →</a>
 

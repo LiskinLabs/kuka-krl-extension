@@ -4,34 +4,51 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Liskin Labs | KUKA 3D Digital Twin & Simulation Platform</title>
-  <link rel="icon" type="image/png" href="./liskinlabs_logo.png" />
-  <script type="module" crossorigin src="./assets/index-ktkXnpLs.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-B1lv3kpD.css">
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <script type="module" crossorigin src="./assets/index-wSDEFpin.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Dn0CV3aL.css">
 </head>
 <body>
+  <!-- Inline SVG icon sprite: the UI uses vector icons only, no emoji. -->
+  <svg class="icon-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-flow" viewBox="0 0 24 24"><path d="M4 3h6v5H4zM14 10h6v5h-6zM4 16h6v5H4zM10 5.5h4v2h-4zM10 16.5h4v2h-4z" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2 2 9.3l6.9-1z"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path d="M6 5h2v14H6zM19 5v14L9 12z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM5 5v14l10-7z"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></symbol>
+    <symbol id="i-loop" viewBox="0 0 24 24"><path d="M7 7h9v3l4-4-4-4v3H5v7h2zM17 17H8v-3l-4 4 4 4v-3h11v-7h-2z"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12 19 17.6 17.6 19 12 13.4 6.4 19 5 17.6 10.6 12 5 6.4z"/></symbol>
+    <symbol id="i-warning" viewBox="0 0 24 24"><path d="M12 2 1 21h22zm0 5.5 7.2 12.5H4.8zM11 9h2v6h-2zm0 7.5h2v2h-2z"/></symbol>
+    <symbol id="i-live" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16z" opacity=".55"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></symbol>
+  </svg>
   <div id="app-container">
     <!-- Top Header -->
     <header id="top-bar">
       <div class="brand-badge">
-        <img src="./liskinlabs_logo.png" alt="LiskinLabs" class="brand-logo" />
+        <div class="brand-mark"><img src="./liskinlabs_logo.png" alt="LiskinLabs" class="brand-logo" /></div>
         <div class="brand-info">
           <span class="brand-name">LiskinLabs</span>
-          <span class="brand-tag">KUKA DIGITAL TWIN SIMULATOR</span>
+          <span class="brand-tag" data-i18n="brand.tag">KUKA DIGITAL TWIN SIMULATOR</span>
         </div>
       </div>
 
       <div class="top-controls">
         <div class="selector-group">
-          <span class="selector-label">Робот:</span>
+          <span class="selector-label" data-i18n="label.robot">Робот:</span>
           <select id="model-select" class="dropdown-select">
-            <option value="IIWA14" selected>⭐ KUKA LBR iiwa 14 (MuJoCo Menagerie)</option>
+            <option value="IIWA14" selected>KUKA LBR iiwa 14 (MuJoCo Menagerie)</option>
           </select>
         </div>
 
         <div class="selector-group">
-          <span class="selector-label">Рельс ($E1):</span>
+          <span class="selector-label" data-i18n="label.rail">Рельс ($E1):</span>
           <select id="rail-select" class="dropdown-select">
-            <option value="NONE" selected>Без рельса (стационарный)</option>
+            <option value="NONE" selected data-i18n="rail.stationary">Без рельса (стационарный)</option>
             <option value="KL_100_2">KL 100-2 · 2.0 м</option>
             <option value="KL_250_4">KL 250-4 · 2.6 м</option>
             <option value="KL_4000_S">KL 4000 S · 6.9 м</option>
@@ -40,32 +57,36 @@
           </select>
         </div>
 
-        <button id="btn-open-flowchart" class="btn-ghost" title="Блок-схема бекапа">
-          <span class="btn-icon-text">🧩</span> Блок-схема
+        <button id="btn-open-flowchart" class="btn-ghost" data-i18n-title="btn.flowchart.title" title="Блок-схема бекапа">
+          <svg class="icon" aria-hidden="true"><use href="#i-flow"/></svg>
+          <span data-i18n="btn.flowchart">Блок-схема</span>
         </button>
 
         <button id="btn-open-code-modal" class="btn-primary">
-          <span class="btn-icon-text">⚡</span> Загрузить KRL код
+          <svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg>
+          <span data-i18n="btn.loadKrl">Загрузить KRL код</span>
         </button>
+
+        <select id="lang-select" class="dropdown-select lang-select" data-i18n-title="lang.label" title="Язык"></select>
       </div>
 
       <div class="view-presets">
-        <button id="btn-view-3d" class="btn-icon active" title="3D Перспектива">3D</button>
-        <button id="btn-view-top" class="btn-icon" title="Сверху">Top</button>
-        <button id="btn-view-front" class="btn-icon" title="Спереди">Front</button>
-        <button id="btn-view-side" class="btn-icon" title="Сбоку">Side</button>
+        <button id="btn-view-3d" class="btn-icon active" data-i18n-title="view.3d.title" title="3D Перспектива">3D</button>
+        <button id="btn-view-top" class="btn-icon" data-i18n-title="view.top.title" data-i18n="view.top" title="Сверху">Top</button>
+        <button id="btn-view-front" class="btn-icon" data-i18n-title="view.front.title" data-i18n="view.front" title="Спереди">Front</button>
+        <button id="btn-view-side" class="btn-icon" data-i18n-title="view.side.title" data-i18n="view.side" title="Сбоку">Side</button>
       </div>
     </header>
 
     <!-- Main Viewport Area -->
     <main id="viewport-container">
       <canvas id="three-canvas"></canvas>
-      <a id="embed-open" class="embed-open" href="./" target="_top">Открыть симулятор →</a>
+      <a id="embed-open" class="embed-open" href="./" target="_top" data-i18n="embed.open">Открыть симулятор →</a>
 
       <!-- Telemetry HUD Overlay -->
       <div id="telemetry-hud" class="hud-panel">
         <div class="hud-title">
-          <span class="hud-indicator"></span> <span id="hud-title">ФЛАНЕЦ РОБОТА ($TOOL)</span>
+          <span class="hud-indicator"></span> <span id="hud-title" data-i18n="hud.tool">ФЛАНЕЦ РОБОТА ($TOOL)</span>
         </div>
         <div class="coords-grid">
           <div class="coord-box"><span class="lbl">X</span><span class="val" id="val-x">0.0</span><span class="unit">mm</span></div>
@@ -81,12 +102,12 @@
       <!-- Right Inspector Sidebar -->
       <aside id="inspector-panel" class="glass-panel">
         <div class="inspector-head">
-          <span class="inspector-title">ПАНЕЛЬ</span>
+          <span class="inspector-title" data-i18n="panel.title">ПАНЕЛЬ</span>
           <button id="inspector-collapse" class="inspector-collapse" title="Свернуть панель">⟩</button>
         </div>
         <div class="tab-headers">
-          <button class="tab-btn active" data-tab="waypoints">Траектория</button>
-          <button class="tab-btn" data-tab="joint-jog">Оси</button>
+          <button class="tab-btn active" data-tab="waypoints" data-i18n="tab.trajectory">Траектория</button>
+          <button class="tab-btn" data-tab="joint-jog" data-i18n="tab.axes">Оси</button>
           <button class="tab-btn" data-tab="smartpad">SmartPAD</button>
         </div>
 
@@ -103,7 +124,7 @@
         <div class="tab-content" id="tab-joint-jog">
           <div class="joint-controls" id="joint-sliders-container"></div>
           <div id="rail-jog-section" style="display:none; margin-top: 14px;">
-            <span class="subhead">Линейный рельс ($E1):</span>
+            <span class="subhead" data-i18n="rail.slider">Линейный рельс ($E1):</span>
             <div class="joint-row">
               <div class="joint-row-head">
                 <span class="joint-name">E1</span>
@@ -122,7 +143,7 @@
         <!-- Tab 3: SmartPAD -->
         <div class="tab-content" id="tab-smartpad">
           <div class="smartpad-box">
-            <span class="subhead">Шаг ручного перемещения:</span>
+            <span class="subhead" data-i18n="smartpad.step">Шаг ручного перемещения:</span>
             <div class="step-selector">
               <button class="step-btn" data-step="1">1 mm</button>
               <button class="step-btn active" data-step="10">10 mm</button>
@@ -130,7 +151,7 @@
               <button class="step-btn" data-step="100">100 mm</button>
             </div>
 
-            <span class="subhead">Декартово смещение фланца:</span>
+            <span class="subhead" data-i18n="smartpad.cart">Декартово смещение фланца:</span>
             <div class="cart-grid">
               <button class="jog-btn" data-axis="X" data-dir="1">X +</button>
               <button class="jog-btn" data-axis="X" data-dir="-1">X −</button>
@@ -140,7 +161,7 @@
               <button class="jog-btn" data-axis="Z" data-dir="-1">Z −</button>
             </div>
 
-            <span class="subhead">Вращение инструмента:</span>
+            <span class="subhead" data-i18n="smartpad.rot">Вращение инструмента:</span>
             <div class="cart-grid">
               <button class="jog-btn" data-axis="A" data-dir="1">A +</button>
               <button class="jog-btn" data-axis="A" data-dir="-1">A −</button>
@@ -157,7 +178,7 @@
         <div id="program-pad" class="program-pad" data-state="idle">
           <div class="pad-head">
             <span class="pad-dot"></span>
-            <span class="pad-title">ПУЛЬТ ПРОГРАММЫ</span>
+            <span class="pad-title" data-i18n="pad.title">ПУЛЬТ ПРОГРАММЫ</span>
             <span id="pad-module" class="pad-module">Cell.src</span>
             <button id="pad-collapse" class="pad-collapse" title="Свернуть пульт">▾</button>
           </div>
@@ -169,7 +190,7 @@
               <div id="pad-request-actions" class="pad-request-actions"></div>
             </div>
             <div class="pad-controls">
-              <button id="pad-reset" class="pad-btn">↺ Перезапуск Cell</button>
+              <button id="pad-reset" class="pad-btn"><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg> <span data-i18n="pad.reset">Перезапуск Cell</span></button>
             </div>
             <div id="pad-log" class="pad-log"></div>
           </div>
@@ -179,16 +200,16 @@
       <!-- Separate flowchart window (right, collapsible, resizable) -->
       <aside id="flow-panel" class="glass-panel">
         <div class="flow-panel-head">
-          <span class="flow-panel-title">БЛОК-СХЕМА</span>
+          <span class="flow-panel-title" data-i18n="flow.title">БЛОК-СХЕМА</span>
           <span id="flow-panel-module" class="flow-panel-module">Cell.src</span>
-          <button id="btn-flow-full" class="mini-btn">Открыть</button>
+          <button id="btn-flow-full" class="mini-btn" data-i18n="flow.open">Открыть</button>
           <button id="flow-panel-collapse" class="inspector-collapse" title="Свернуть схему">⟨</button>
-          <button id="flow-panel-close" class="inspector-collapse flow-close-panel" title="Закрыть схему">✕</button>
+          <button id="flow-panel-close" class="inspector-collapse flow-close-panel" title="Закрыть схему"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
         </div>
         <div class="flow-live-bar">
           <span class="flow-live-dot"></span>
           <span id="flow-current" class="flow-current">—</span>
-          <button id="flow-panel-live" class="flow-live-btn" title="Показать исполняемую программу">◎</button>
+          <button id="flow-panel-live" class="flow-live-btn" data-i18n-title="flow.live.title" title="Показать исполняемую программу"><svg class="icon" aria-hidden="true"><use href="#i-live"/></svg></button>
         </div>
         <div id="mini-flow" class="mini-flow"></div>
         <div id="flow-panel-grip" class="flow-panel-grip" title="Изменить ширину"></div>
@@ -197,10 +218,10 @@
       <!-- Bottom Playback Controls -->
       <footer id="playback-bar" class="glass-panel">
         <div class="playback-controls">
-          <button id="btn-prev" class="btn-ctrl" title="Предыдущая точка">⏮</button>
-          <button id="btn-play" class="btn-ctrl btn-play" title="Старт / Пауза">▶</button>
-          <button id="btn-next" class="btn-ctrl" title="Следующая точка">⏭</button>
-          <button id="btn-reset" class="btn-ctrl" title="В начало">↺</button>
+          <button id="btn-prev" class="btn-ctrl" data-i18n-title="playback.prev" title="Предыдущая точка"><svg class="icon" aria-hidden="true"><use href="#i-prev"/></svg></button>
+          <button id="btn-play" class="btn-ctrl btn-play" data-i18n-title="playback.play" title="Старт / Пауза"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg></button>
+          <button id="btn-next" class="btn-ctrl" data-i18n-title="playback.next" title="Следующая точка"><svg class="icon" aria-hidden="true"><use href="#i-next"/></svg></button>
+          <button id="btn-reset" class="btn-ctrl" data-i18n-title="playback.reset" title="В начало"><svg class="icon" aria-hidden="true"><use href="#i-reset"/></svg></button>
         </div>
 
         <div class="timeline-box">
@@ -220,7 +241,7 @@
             <option value="2">2.0x</option>
             <option value="4">4.0x</option>
           </select>
-          <button id="btn-loop" class="btn-icon active" title="Зациклить воспроизведение">🔁</button>
+          <button id="btn-loop" class="btn-icon active" data-i18n-title="playback.loop" title="Зациклить воспроизведение"><svg class="icon" aria-hidden="true"><use href="#i-loop"/></svg></button>
         </div>
       </footer>
     </main>
@@ -235,21 +256,22 @@
         <div id="flow-breadcrumbs" class="flow-breadcrumbs"></div>
         <select id="flow-program-select" class="dropdown-select flow-program-select"></select>
         <div class="flow-actions">
-          <button id="flow-back" class="flow-btn" title="Назад">←</button>
-          <button id="flow-zoom-out" class="flow-btn" title="Уменьшить">−</button>
-          <button id="flow-zoom-reset" class="flow-btn" title="Сброс масштаба">100%</button>
-          <button id="flow-zoom-in" class="flow-btn" title="Увеличить">+</button>
-          <button id="flow-fit" class="flow-btn" title="Вписать">Fit</button>
-          <button id="flow-follow" class="flow-btn active" title="Следить за выполнением">
-            ● Следить
+          <button id="flow-back" class="flow-btn" data-i18n-title="flow.back" title="Назад">←</button>
+          <button id="flow-zoom-out" class="flow-btn" data-i18n-title="flow.zoomOut" title="Уменьшить">−</button>
+          <button id="flow-zoom-reset" class="flow-btn" data-i18n-title="flow.zoomReset" title="Сброс масштаба">100%</button>
+          <button id="flow-zoom-in" class="flow-btn" data-i18n-title="flow.zoomIn" title="Увеличить">+</button>
+          <button id="flow-fit" class="flow-btn" data-i18n-title="flow.fit" title="Вписать">Fit</button>
+          <button id="flow-follow" class="flow-btn active" data-i18n-title="flow.follow.title" title="Следить за выполнением">
+            <svg class="icon" aria-hidden="true"><use href="#i-live"/></svg>
+            <span data-i18n="flow.follow">Следить</span>
           </button>
-          <button id="flow-svg" class="flow-btn" title="Скачать SVG">SVG</button>
+          <button id="flow-svg" class="flow-btn" data-i18n-title="flow.svg.title" title="Скачать SVG">SVG</button>
           <span class="flow-sep"></span>
-          <label class="flow-btn flow-import" for="flow-backup-input">Бекап ZIP</label>
+          <label class="flow-btn flow-import" for="flow-backup-input" data-i18n="flow.backupZip">Бекап ZIP</label>
           <input id="flow-backup-input" type="file" accept=".zip" hidden />
-          <label class="flow-btn flow-import" for="flow-folder-input">Папка</label>
+          <label class="flow-btn flow-import" for="flow-folder-input" data-i18n="flow.folder">Папка</label>
           <input id="flow-folder-input" type="file" webkitdirectory hidden />
-          <button id="flow-close" class="flow-btn flow-close" title="Закрыть">✕</button>
+          <button id="flow-close" class="flow-btn flow-close" data-i18n-title="flow.close" title="Закрыть"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
         </div>
       </div>
       <div class="flow-main">
@@ -257,12 +279,12 @@
         <div id="flow-source" class="flow-source" style="display:none;">
           <div class="flow-source-head">
             <span id="flow-source-title">Cell.src</span>
-            <button id="flow-source-close" class="flow-btn">✕</button>
+            <button id="flow-source-close" class="flow-btn"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
           </div>
           <pre id="flow-source-code" class="flow-source-code"></pre>
         </div>
       </div>
-      <div id="flow-status" class="flow-status">Загрузка бекапа…</div>
+      <div id="flow-status" class="flow-status" data-i18n="flow.loading">Загрузка бекапа…</div>
     </div>
 
     <!-- Code Loader Modal -->
@@ -270,44 +292,44 @@
       <div class="modal-window glass-panel">
         <div class="modal-header">
           <div class="modal-title">
-            <span class="modal-icon">⚡</span>
-            <h3>Загрузка KRL программы (.src / .dat)</h3>
+            <svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg>
+            <h3 data-i18n="modal.title">Загрузка KRL программы (.src / .dat)</h3>
           </div>
-          <button id="btn-close-modal" class="btn-close">✕</button>
+          <button id="btn-close-modal" class="btn-close"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
         </div>
 
         <div class="modal-body">
           <div class="backup-program-bar">
-            <span class="backup-program-label">Программа из бекапа:</span>
+            <span class="backup-program-label" data-i18n="modal.fromBackup">Программа из бекапа:</span>
             <select id="backup-program-select" class="dropdown-select"></select>
-            <span id="backup-frames-info" class="backup-frames-info">
+            <span id="backup-frames-info" class="backup-frames-info" data-i18n="modal.framesMissing">
               $config.dat / $machine.dat не загружены
             </span>
           </div>
 
           <div id="drop-zone" class="drop-zone">
-            <div class="drop-icon">📁</div>
-            <p>Перетащите сюда <strong>.src</strong>, <strong>.dat</strong> или весь бекап <strong>.zip</strong></p>
-            <span class="drop-sub">ZIP компилируется на сервере: TOOL/BASE, лимиты осей, S/T и IK</span>
+            <div class="drop-icon"><svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg></div>
+            <p data-i18n="modal.drop">Перетащите сюда .src, .dat или весь бекап .zip</p>
+            <span class="drop-sub" data-i18n="modal.dropSub">ZIP компилируется на сервере: TOOL/BASE, лимиты осей, S/T и IK</span>
             <input type="file" id="file-input" multiple accept=".src,.dat,.zip" style="display:none;" />
-            <button id="btn-browse" class="btn-secondary">Обзор файлов</button>
+            <button id="btn-browse" class="btn-secondary" data-i18n="modal.browse">Обзор файлов</button>
           </div>
 
-          <div class="divider"><span>ИЛИ РЕДАКТИРУЙТЕ КОД ВРУЧНУЮ</span></div>
+          <div class="divider"><span data-i18n="modal.orManual">ИЛИ РЕДАКТИРУЙТЕ КОД ВРУЧНУЮ</span></div>
 
           <div class="code-editor-grid">
             <div class="editor-col">
-              <div class="col-head">.SRC (Команды движения PTP, LIN, CIRC):</div>
+              <div class="col-head" data-i18n="modal.srcHead">.SRC (Команды движения PTP, LIN, CIRC):</div>
               <textarea id="src-code-input" spellcheck="false"></textarea>
             </div>
             <div class="editor-col">
-              <div class="col-head">.DAT (Объявления координат E6POS / POS):</div>
+              <div class="col-head" data-i18n="modal.datHead">.DAT (Объявления координат E6POS / POS):</div>
               <textarea id="dat-code-input" spellcheck="false"></textarea>
             </div>
           </div>
 
           <div class="presets-row">
-            <span class="presets-label">Готовые примеры программ:</span>
+            <span class="presets-label" data-i18n="modal.presets">Готовые примеры программ:</span>
             <div class="chips-list">
               <button class="preset-chip" data-sample="backup">Robot1 · BJ_Final_Birakma (KR 50, BASE 29)</button>
               <button class="preset-chip" data-sample="birakma">BJ_Final_Birakma (Рельс $E1)</button>
@@ -318,8 +340,8 @@
         </div>
 
         <div class="modal-footer">
-          <button id="btn-cancel-modal" class="btn-secondary">Отмена</button>
-          <button id="btn-apply-code" class="btn-primary">Загрузить в симулятор</button>
+          <button id="btn-cancel-modal" class="btn-secondary" data-i18n="modal.cancel">Отмена</button>
+          <button id="btn-apply-code" class="btn-primary" data-i18n="modal.apply">Загрузить в симулятор</button>
         </div>
       </div>
     </div>
@@ -329,29 +351,29 @@
       <div class="modal-window glass-panel consent-window">
         <div class="modal-header">
           <div class="modal-title">
-            <span class="modal-icon">⚠</span>
-            <h3>Экспериментальная модель</h3>
+            <svg class="icon" aria-hidden="true"><use href="#i-warning"/></svg>
+            <h3 data-i18n="consent.title">Экспериментальная модель</h3>
           </div>
-          <button id="consent-close" class="btn-close">✕</button>
+          <button id="consent-close" class="btn-close"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
         </div>
         <div class="modal-body consent-body">
-          <p>
+          <p data-i18n="consent.body">
             Бекап загружается на сервер и <strong>сохраняется на Google Drive</strong> владельца
             проекта. Скомпилированная модель используется для обучения и улучшения симулятора.
           </p>
           <ul class="consent-list">
-            <li>Парсер KRL, IK и S/T выполняются только на сервере.</li>
-            <li>В браузере остаётся готовая траектория (суставы), без исходных алгоритмов.</li>
-            <li>Если бекап не читается, файл всё равно сохраняется в папку <code>unparsed/</code>.</li>
+            <li data-i18n="consent.list1">Парсер KRL, IK и S/T выполняются только на сервере.</li>
+            <li data-i18n="consent.list2">В браузере остаётся готовая траектория (суставы), без исходных алгоритмов.</li>
+            <li data-i18n="consent.list3">Если бекап не читается, файл всё равно сохраняется в папку <code>unparsed/</code>.</li>
           </ul>
           <label class="consent-check">
             <input type="checkbox" id="consent-check" />
-            <span>Я согласен на загрузку и сохранение бекапа. Если не согласен — не загружайте файл.</span>
+            <span data-i18n="consent.check">Я согласен на загрузку и сохранение бекапа. Если не согласен — не загружайте файл.</span>
           </label>
         </div>
         <div class="modal-footer">
-          <button id="consent-cancel" class="btn-secondary">Отмена</button>
-          <button id="consent-continue" class="btn-primary" disabled>Загрузить и скомпилировать</button>
+          <button id="consent-cancel" class="btn-secondary" data-i18n="modal.cancel">Отмена</button>
+          <button id="consent-continue" class="btn-primary" disabled data-i18n="consent.upload">Загрузить и скомпилировать</button>
         </div>
       </div>
     </div>
@@ -359,8 +381,8 @@
     <!-- Server compilation progress -->
     <div id="server-progress" class="server-progress glass-panel" style="display:none;">
       <div class="server-progress-head">
-        <span id="server-progress-title">СЕРВЕРНАЯ КОМПИЛЯЦИЯ</span>
-        <button id="server-progress-close" class="mini-btn" title="Скрыть">✕</button>
+        <span id="server-progress-title" data-i18n="server.title">СЕРВЕРНАЯ КОМПИЛЯЦИЯ</span>
+        <button id="server-progress-close" class="mini-btn" title="Скрыть"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
       </div>
       <div class="server-progress-bar"><div id="server-progress-fill"></div></div>
       <div id="server-progress-text">Загрузка…</div>

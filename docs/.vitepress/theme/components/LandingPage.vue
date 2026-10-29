@@ -579,9 +579,14 @@
           <div class="border-2 border-[#FF5500] bg-black p-5 flex flex-col justify-between relative shadow-lg">
             <span class="absolute -top-3 right-4 px-2 py-0.5 bg-[#FF5500] text-white font-mono text-[10px] font-bold">RECOMMENDED</span>
             <div class="space-y-3">
-              <div class="flex justify-between items-center text-xs font-mono">
-                <span class="text-[#FF5500] font-bold">PRO ANNUAL</span>
-                <span class="text-[10px] px-1.5 py-0.5 bg-[#FF5500]/20 text-[#FF5500] font-bold">1 SEAT</span>
+              <div class="space-y-1">
+                <div class="flex justify-between items-center text-xs font-mono">
+                  <span class="text-[#FF5500] font-bold">PRO ANNUAL</span>
+                  <span class="text-[10px] px-1.5 py-0.5 bg-[#FF5500]/20 text-[#FF5500] font-bold">1 SEAT</span>
+                </div>
+                <div class="inline-flex items-center gap-1.5 px-2 py-0.5 bg-[#FF5500]/15 border border-[#FF5500]/30 text-[#FF5500] font-mono text-[10px] font-bold">
+                  🔥 15% OFF TRIAL PROMO CODE: LAUNCH30
+                </div>
               </div>
               <div class="flex items-baseline gap-1">
                 <span class="text-3xl sm:text-4xl font-black font-mono text-white">{{ formatPrice(149) }}</span>
@@ -597,7 +602,7 @@
             </div>
             <div class="mt-6 flex flex-col gap-2">
               <a 
-                href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"
+                href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?showDiscounts=true"
                 class="w-full py-2.5 bg-[#FF5500] hover:bg-orange-600 text-white font-mono text-xs font-bold text-center block transition-colors">
                 GET ANNUAL PRO ({{ formatPrice(149) }})
               </a>
@@ -633,7 +638,7 @@
             </div>
             <div class="mt-6 flex flex-col gap-2">
               <a 
-                href="https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v"
+                href="https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v?showDiscounts=true"
                 class="w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-mono text-xs font-bold text-center block transition-colors">
                 DEPLOY TEAM ({{ formatPrice(499) }})
               </a>
@@ -669,7 +674,7 @@
             </div>
             <div class="mt-6 flex flex-col gap-2">
               <a 
-                href="https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn"
+                href="https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn?showDiscounts=true"
                 class="w-full py-2 bg-cyan-700 hover:bg-cyan-600 text-white font-mono text-xs font-bold text-center block transition-colors">
                 DEPLOY INTEGRATOR ({{ formatPrice(1499) }})
               </a>
@@ -698,7 +703,7 @@
                 <span class="text-[10px] text-zinc-500 block">1 Seat • Cancel anytime</span>
               </div>
               <a 
-                href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"
+                href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp?showDiscounts=true"
                 class="px-3 py-1.5 border border-zinc-700 hover:border-white font-bold text-white transition-colors">
                 BUY MONTHLY
               </a>
@@ -721,7 +726,7 @@
                 <span class="text-[10px] text-zinc-500 block">1 Seat • Perpetual updates</span>
               </div>
               <a 
-                href="https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr"
+                href="https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr?showDiscounts=true"
                 class="px-3 py-1.5 border border-zinc-700 hover:border-white font-bold text-white transition-colors">
                 BUY LIFETIME
               </a>
@@ -744,7 +749,7 @@
                 <span class="text-[10px] text-zinc-400 block">100 Workstations • Priority Support Gateway</span>
               </div>
               <a 
-                href="https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP"
+                href="https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP?showDiscounts=true"
                 class="px-3 py-1.5 bg-cyan-600 hover:bg-cyan-500 font-bold text-white transition-colors">
                 DEPLOY PLANT
               </a>
@@ -802,9 +807,9 @@
             </p>
           </div>
           <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">
-            <div class="text-[#00D68F] font-bold mb-1">[VERIFIED] EU VAT 0% & WIRE TRANSFERS</div>
+            <div class="text-[#00D68F] font-bold mb-1">[VERIFIED] MINIMAL CHECKOUT & 0% EU VAT</div>
             <p class="text-zinc-400 text-[10px] leading-relaxed">
-              Automatic reverse-charge VAT validation (EU VIES / UK HMRC) and automated corporate SEPA / ACH wire transfer clearing.
+              Fast single-page checkout (Country &amp; Postal code only). Instant EU Reverse-Charge 0% VAT validation via VIES / HMRC.
             </p>
           </div>
         </div>

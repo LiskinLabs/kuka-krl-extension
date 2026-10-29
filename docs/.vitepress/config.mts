@@ -88,7 +88,8 @@ export default defineConfig({
           { text: 'Features Wiki', link: '/guide/features' },
           { text: 'Community', link: '/guide/community-features' },
           { text: 'Pro Features', link: '/guide/pro-features' },
-          { text: 'Buy Pro License', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' }
+          { text: 'Buy Pro License', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' },
+          { text: 'Invoices / Portal', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
           {
@@ -144,7 +145,8 @@ export default defineConfig({
           { text: 'Вики функций', link: '/ru/guide/features' },
           { text: 'Бесплатно (Community)', link: '/ru/guide/community-features' },
           { text: 'Pro функции', link: '/ru/guide/pro-features' },
-          { text: 'Купить Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' }
+          { text: 'Купить Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' },
+          { text: 'Инвойсы / Портал', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
           {
@@ -200,7 +202,8 @@ export default defineConfig({
           { text: 'Özellikler Wiki', link: '/tr/guide/features' },
           { text: 'Ücretsiz (Community)', link: '/tr/guide/community-features' },
           { text: 'Pro Özellikler', link: '/tr/guide/pro-features' },
-          { text: 'Pro Satın Al', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' }
+          { text: 'Pro Satın Al', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' },
+          { text: 'Faturalar / Portal', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
           {
@@ -256,7 +259,8 @@ export default defineConfig({
           { text: 'Features Wiki', link: '/de/guide/features' },
           { text: 'Community (Kostenlos)', link: '/de/guide/community-features' },
           { text: 'Pro-Funktionen', link: '/de/guide/pro-features' },
-          { text: 'Pro kaufen', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' }
+          { text: 'Pro kaufen', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' },
+          { text: 'Rechnungen / Portal', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
           {
@@ -312,7 +316,8 @@ export default defineConfig({
           { text: 'Wiki de Funciones', link: '/es/guide/features' },
           { text: 'Community (Gratis)', link: '/es/guide/community-features' },
           { text: 'Funciones Pro', link: '/es/guide/pro-features' },
-          { text: 'Comprar Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' }
+          { text: 'Comprar Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' },
+          { text: 'Facturas / Portal', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
           {
@@ -368,7 +373,8 @@ export default defineConfig({
           { text: 'Wiki Funzioni', link: '/it/guide/features' },
           { text: 'Community (Gratis)', link: '/it/guide/community-features' },
           { text: 'Funzioni Pro', link: '/it/guide/pro-features' },
-          { text: 'Acquista Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' }
+          { text: 'Acquista Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' },
+          { text: 'Fatture / Portale', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
           {

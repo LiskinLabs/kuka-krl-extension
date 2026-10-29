@@ -161,7 +161,7 @@
                   KSS 8.3–8.7 & KRC5 READY
                 </span>
                 <span class="px-2 py-1 border border-blue-500/30 bg-blue-500/10 text-blue-400 font-medium">
-                  ISO-13849 AUDIT PASS
+                  ISO 13849 LOGIC CHECKS
                 </span>
               </div>
 
@@ -561,11 +561,11 @@
                 <span class="text-[10px] px-1.5 py-0.5 border border-zinc-700 bg-zinc-800 text-zinc-300">1 SEAT</span>
               </div>
               <div class="text-3xl font-black font-mono text-white">Free</div>
-              <p class="text-xs text-zinc-400">Essential KRL syntax, snippets, document symbols, and diagnostics up to 500 lines.</p>
+              <p class="text-xs text-zinc-400">Essential KRL syntax, snippets, document symbols, outline and static diagnostics without file size limits.</p>
               <ul class="text-xs font-mono space-y-1.5 pt-2 border-t border-zinc-800 text-zinc-300">
                 <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Full KRL Syntax Highlighting</li>
                 <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Document Symbol Outline</li>
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Up to 500 lines per file</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Unlimited Lines of Code (Free Forever)</li>
               </ul>
             </div>
             <a 
@@ -589,17 +589,27 @@
               </div>
               <p class="text-xs text-zinc-400">Full professional robotics toolset. Save 35% compared to monthly billing.</p>
               <ul class="text-xs font-mono space-y-1.5 pt-2 border-t border-zinc-800 text-zinc-300">
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Unlimited Lines of Code</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Interactive Logic Flowcharts v2.0</li>
                 <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> All 80+ Industrial Tools</li>
                 <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Advance Run Stop Detection</li>
                 <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> 3-Point Frame Kinematic Solver</li>
               </ul>
             </div>
-            <a 
-              href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"
-              class="mt-6 w-full py-2.5 bg-[#FF5500] hover:bg-orange-600 text-white font-mono text-xs font-bold text-center block transition-colors">
-              GET ANNUAL PRO ({{ formatPrice(149) }})
-            </a>
+            <div class="mt-6 flex flex-col gap-2">
+              <a 
+                href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"
+                class="w-full py-2.5 bg-[#FF5500] hover:bg-orange-600 text-white font-mono text-xs font-bold text-center block transition-colors">
+                GET ANNUAL PRO ({{ formatPrice(149) }})
+              </a>
+              <a 
+                href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full py-1.5 border border-zinc-700 hover:border-zinc-500 text-zinc-300 font-mono text-[11px] text-center block transition-colors flex items-center justify-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                <span>INVOICES &amp; CUSTOMER PORTAL</span>
+              </a>
+            </div>
           </div>
 
           <!-- Card 3: Team Edition (5 Workstations) -->
@@ -621,11 +631,21 @@
                 <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Priority In-Editor Support Gateway</li>
               </ul>
             </div>
-            <a 
-              href="https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v"
-              class="mt-6 w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-mono text-xs font-bold text-center block transition-colors">
-              DEPLOY TEAM ({{ formatPrice(499) }})
-            </a>
+            <div class="mt-6 flex flex-col gap-2">
+              <a 
+                href="https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v"
+                class="w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-mono text-xs font-bold text-center block transition-colors">
+                DEPLOY TEAM ({{ formatPrice(499) }})
+              </a>
+              <a 
+                href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full py-1.5 border border-zinc-700 hover:border-zinc-500 text-zinc-300 font-mono text-[11px] text-center block transition-colors flex items-center justify-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                <span>INVOICES &amp; CUSTOMER PORTAL</span>
+              </a>
+            </div>
           </div>
 
           <!-- Card 4: Department / Integrator (20 Workstations) -->
@@ -653,11 +673,14 @@
                 class="w-full py-2 bg-cyan-700 hover:bg-cyan-600 text-white font-mono text-xs font-bold text-center block transition-colors">
                 DEPLOY INTEGRATOR ({{ formatPrice(1499) }})
               </a>
-              <button 
-                @click="openQuoteModal"
-                class="w-full py-1.5 border border-zinc-700 hover:border-zinc-500 text-zinc-300 font-mono text-[11px] text-center block transition-colors">
-                REQUEST INVOICE / B2B QUOTE
-              </button>
+              <a 
+                href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full py-1.5 border border-zinc-700 hover:border-zinc-500 text-zinc-300 font-mono text-[11px] text-center block transition-colors flex items-center justify-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                <span>OFFICIAL INVOICES &amp; CUSTOMER PORTAL</span>
+              </a>
             </div>
           </div>
 
@@ -667,47 +690,95 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
           
           <!-- Monthly -->
-          <div :class="['border p-4 flex items-center justify-between', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-            <div>
-              <span class="text-zinc-400 block font-bold">PRO MONTHLY</span>
-              <span class="text-lg font-black text-white">{{ formatPrice(19) }} / mo</span>
-              <span class="text-[10px] text-zinc-500 block">1 Seat • Cancel anytime</span>
+          <div :class="['border p-4 flex flex-col justify-between gap-3', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-zinc-400 block font-bold">PRO MONTHLY</span>
+                <span class="text-lg font-black text-white">{{ formatPrice(19) }} / mo</span>
+                <span class="text-[10px] text-zinc-500 block">1 Seat • Cancel anytime</span>
+              </div>
+              <a 
+                href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"
+                class="px-3 py-1.5 border border-zinc-700 hover:border-white font-bold text-white transition-colors">
+                BUY MONTHLY
+              </a>
             </div>
             <a 
-              href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp"
-              class="px-3 py-1.5 border border-zinc-700 hover:border-white font-bold text-white transition-colors">
-              BUY MONTHLY
+              href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[10px] text-zinc-400 hover:text-white underline text-center block">
+              Invoices &amp; Customer Portal &rarr;
             </a>
           </div>
 
           <!-- Lifetime -->
-          <div :class="['border p-4 flex items-center justify-between', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-            <div>
-              <span class="text-zinc-400 block font-bold">PRO LIFETIME</span>
-              <span class="text-lg font-black text-white">{{ formatPrice(699) }}</span>
-              <span class="text-[10px] text-zinc-500 block">1 Seat • Perpetual updates</span>
+          <div :class="['border p-4 flex flex-col justify-between gap-3', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-zinc-400 block font-bold">PRO LIFETIME</span>
+                <span class="text-lg font-black text-white">{{ formatPrice(699) }}</span>
+                <span class="text-[10px] text-zinc-500 block">1 Seat • Perpetual updates</span>
+              </div>
+              <a 
+                href="https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr"
+                class="px-3 py-1.5 border border-zinc-700 hover:border-white font-bold text-white transition-colors">
+                BUY LIFETIME
+              </a>
             </div>
             <a 
-              href="https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr"
-              class="px-3 py-1.5 border border-zinc-700 hover:border-white font-bold text-white transition-colors">
-              BUY LIFETIME
+              href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[10px] text-zinc-400 hover:text-white underline text-center block">
+              Invoices &amp; Customer Portal &rarr;
             </a>
           </div>
 
           <!-- Enterprise Site (100 Workstations) -->
-          <div :class="['border p-4 flex items-center justify-between border-cyan-500/40', isDaylight ? 'bg-white' : 'bg-[#111114]']">
-            <div>
-              <span class="text-cyan-400 block font-bold">ENTERPRISE SITE (100 SEATS)</span>
-              <span class="text-lg font-black text-white">{{ formatPrice(4999) }} / yr</span>
-              <span class="text-[10px] text-zinc-500 block">Full plant license • 4-hr SLA</span>
+          <div :class="['border p-4 flex flex-col justify-between gap-3 border-cyan-500/40', isDaylight ? 'bg-white' : 'bg-[#111114]']">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-cyan-400 block font-bold">ENTERPRISE SITE (100 SEATS)</span>
+                <span class="text-lg font-black text-white">{{ formatPrice(4999) }} / yr</span>
+                <span class="text-[10px] text-zinc-400 block">100 Workstations • Priority Support Gateway</span>
+              </div>
+              <a 
+                href="https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP"
+                class="px-3 py-1.5 bg-cyan-600 hover:bg-cyan-500 font-bold text-white transition-colors">
+                DEPLOY PLANT
+              </a>
             </div>
             <a 
-              href="https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP"
-              class="px-3 py-1.5 bg-cyan-600 hover:bg-cyan-500 font-bold text-white transition-colors">
-              DEPLOY PLANT
+              href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[10px] text-cyan-400 hover:text-white underline text-center block">
+              Invoices &amp; Customer Portal &rarr;
             </a>
           </div>
 
+        </div>
+
+        <!-- DODO CUSTOMER PORTAL & INVOICES GLOBAL BANNER -->
+        <div :class="['mt-6 p-4 border flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs', isDaylight ? 'bg-zinc-100 border-zinc-300' : 'bg-zinc-900/60 border-zinc-800']">
+          <div class="flex items-center gap-3 text-left">
+            <div class="w-8 h-8 rounded bg-[#00D68F]/20 text-[#00D68F] flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div>
+              <div class="font-bold text-white">Need an official invoice, VAT receipt, or seat management?</div>
+              <div class="text-[11px] text-zinc-400">All payments are processed securely by Dodo Payments Inc. Download tax PDF receipts, update billing credentials, or manage workstations anytime.</div>
+            </div>
+          </div>
+          <a 
+            href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="shrink-0 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white font-bold border border-zinc-700 hover:border-zinc-500 transition-colors flex items-center gap-2">
+            <span>DODO CUSTOMER PORTAL</span>
+            <span class="text-[#00D68F]">&rarr;</span>
+          </a>
         </div>
 
         <!-- BUYER TRUST & ANTI-CHARGEBACK GUARANTEES GRID -->
@@ -944,6 +1015,7 @@
           <div>© 2024–2026 Liskin Labs (Silvestr Liskin). All rights reserved.</div>
           <div class="flex items-center gap-4">
             <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension" class="hover:text-white">VS Code Marketplace</a>
+            <a href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1" target="_blank" rel="noopener noreferrer" class="hover:text-white">Customer Portal &amp; Invoices</a>
             <a href="https://github.com/LiskinLabs/kuka-krl-extension" class="hover:text-white">GitHub</a>
             <a href="/guide/features" class="hover:text-white">Documentation</a>
           </div>
@@ -1022,6 +1094,13 @@
         <div class="flex justify-between items-center pt-2">
           <div class="text-[11px] font-mono text-zinc-500">Authorized signatory: Silvestr Liskin</div>
           <div class="flex gap-2 font-mono text-xs">
+            <a 
+              href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-4 py-2 bg-zinc-800 text-white hover:bg-zinc-700 font-bold flex items-center gap-1.5">
+              CUSTOMER PORTAL (INVOICES)
+            </a>
             <button 
               @click="printQuote"
               class="px-4 py-2 bg-black text-white hover:bg-zinc-800 font-bold">

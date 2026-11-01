@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Liskin Labs | KUKA 3D Digital Twin & Simulation Platform</title>
   <link rel="icon" type="image/png" sizes="256x256" href="./favicon.png" />
-  <script type="module" crossorigin src="./assets/index-BacpuH_5.js"></script>
+  <script type="module" crossorigin src="./assets/index-Tadt2lCl.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-BvaaUCN_.css">
 </head>
 <body>
@@ -64,6 +64,7 @@
                   id="robot-picker-search"
                   class="robot-picker-search"
                   type="search"
+                  data-i18n-placeholder="robot.searchPlaceholder"
                   placeholder="Поиск модели, семейства или ID…"
                   autocomplete="off"
                   spellcheck="false"
@@ -78,11 +79,11 @@
           <span class="selector-label" data-i18n="label.rail">Рельс ($E1):</span>
           <select id="rail-select" class="dropdown-select">
             <option value="NONE" selected data-i18n="rail.stationary">Без рельса (стационарный)</option>
-            <option value="KL_100_2">KL 100-2 · 2.0 м</option>
-            <option value="KL_250_4">KL 250-4 · 2.6 м</option>
-            <option value="KL_4000_S">KL 4000 S · 6.9 м</option>
-            <option value="KL_4000_2">KL 4000-2 · 6.9 м</option>
-            <option value="KL_5000">KL 5000 · 6.75 м</option>
+            <option value="KL_100_2">KL 100-2 · 2.0 m</option>
+            <option value="KL_250_4">KL 250-4 · 2.6 m</option>
+            <option value="KL_4000_S">KL 4000 S · 6.9 m</option>
+            <option value="KL_4000_2">KL 4000-2 · 6.9 m</option>
+            <option value="KL_5000">KL 5000 · 6.75 m</option>
           </select>
         </div>
 
@@ -120,7 +121,7 @@
         <div class="project-state">
           <span id="project-program" class="project-program">Demo.src</span>
           <span id="project-programs" class="project-stat">1 программа</span>
-          <span id="project-status" class="status-pill status-demo">ДЕМО</span>
+          <span id="project-status" class="status-pill status-demo" data-i18n="status.demo">ДЕМО</span>
         </div>
       </div>
       <canvas id="three-canvas"></canvas>
@@ -156,7 +157,7 @@
         <div class="tab-headers">
           <button class="tab-btn active" data-tab="waypoints" data-i18n="tab.trajectory">Траектория</button>
           <button class="tab-btn" data-tab="joint-jog" data-i18n="tab.axes">Оси</button>
-          <button class="tab-btn" data-tab="smartpad">SmartPAD</button>
+          <button class="tab-btn" data-tab="smartpad" data-i18n="tab.smartpad">SmartPAD</button>
           <button class="tab-btn" data-tab="analysis" data-i18n="tab.analysis">Анализ</button>
           <button class="tab-btn" data-tab="export" data-i18n="tab.export">Экспорт</button>
         </div>
@@ -255,27 +256,27 @@
             <div class="analysis-summary-grid">
               <div class="metric-card">
                 <span class="metric-num" id="an-cycle-time">0.0 s</span>
-                <span class="metric-lbl">Время цикла</span>
+                <span class="metric-lbl" data-i18n="analysis.cycleTime">Время цикла</span>
               </div>
               <div class="metric-card">
                 <span class="metric-num" id="an-path-length">0 m</span>
-                <span class="metric-lbl">Длина пути</span>
+                <span class="metric-lbl" data-i18n="analysis.pathLength">Длина пути</span>
               </div>
               <div class="metric-card">
                 <span class="metric-num" id="an-singularities">0</span>
-                <span class="metric-lbl">Сингулярности</span>
+                <span class="metric-lbl" data-i18n="analysis.singularities">Сингулярности</span>
               </div>
               <div class="metric-card">
                 <span class="metric-num" id="an-axis-overload">0</span>
-                <span class="metric-lbl">KSS01123 Скорость</span>
+                <span class="metric-lbl" data-i18n="analysis.kssSpeed">KSS01123 Скорость</span>
               </div>
               <div class="metric-card">
                 <span class="metric-num" id="an-torque-load">0%</span>
-                <span class="metric-lbl">KSS01124 Момент</span>
+                <span class="metric-lbl" data-i18n="analysis.kssTorque">KSS01124 Момент</span>
               </div>
               <div class="metric-card">
-                <span class="metric-num" id="an-min-clearance">0 мм</span>
-                <span class="metric-lbl">Мин. зазор</span>
+                <span class="metric-num" id="an-min-clearance">0 mm</span>
+                <span class="metric-lbl" data-i18n="analysis.minClearance">Мин. зазор</span>
               </div>
             </div>
             <div class="analysis-subhead" data-i18n="analysis.title">ДИНАМИЧЕСКИЙ АНАЛИЗ И БЕЗОПАСНОСТЬ</div>
@@ -294,7 +295,7 @@
               <p class="export-card-desc" data-i18n="export.dossierDesc">Официальный протокол DIN EN ISO 10218-1/2 с паспортом робота, инструментами/базами и аудитом траекторий.</p>
               <button id="btn-export-dossier" class="btn-primary export-action-btn">
                 <svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>
-                <span>Открыть протокол приёмки</span>
+                <span data-i18n="export.openDossier">Открыть протокол приёмки</span>
               </button>
             </div>
 
@@ -305,16 +306,16 @@
               </div>
               <p class="export-card-desc" data-i18n="export.csvDesc">Плотный таймлайн 25 Гц углов осей (A1..A6, E1) для Excel / MATLAB.</p>
               <button id="btn-export-csv" class="btn-ghost export-action-btn">
-                <span>Скачать CSV траектории</span>
+                <span data-i18n="export.downloadCsv">Скачать CSV траектории</span>
               </button>
             </div>
 
             <div class="export-card">
               <div class="export-card-head">
                 <svg class="icon export-icon" aria-hidden="true"><use href="#i-video"/></svg>
-                <strong>Запись симуляции (WebM)</strong>
+                <strong data-i18n="export.videoTitle">Запись симуляции (WebM)</strong>
               </div>
-              <p class="export-card-desc">Запись 3D-движения в 60 FPS прямо из браузера через MediaRecorder.</p>
+              <p class="export-card-desc" data-i18n="export.videoDesc">Запись 3D-движения в 60 FPS прямо из браузера через MediaRecorder.</p>
               <button id="btn-record-video" class="btn-record export-action-btn">
                 <svg class="icon" aria-hidden="true"><use href="#i-video"/></svg>
                 <span id="record-btn-text" data-i18n="export.videoStart">Начать запись симуляции</span>
@@ -334,7 +335,7 @@
           <div id="pad-body" class="pad-body">
             <div id="pad-state" class="pad-state" data-i18n="pad.idle">Ожидание запуска</div>
             <div id="pad-request" class="pad-request" style="display:none;">
-              <div id="pad-request-title" class="pad-request-title">Ожидание сигнала</div>
+              <div id="pad-request-title" class="pad-request-title" data-i18n="pad.waitSignal">Ожидание сигнала</div>
               <div id="pad-request-detail" class="pad-request-detail"></div>
               <div id="pad-request-actions" class="pad-request-actions"></div>
             </div>
@@ -365,7 +366,7 @@
           <button id="flow-panel-live" class="flow-live-btn" data-i18n-title="flow.live.title" title="Показать исполняемую программу"><svg class="icon" aria-hidden="true"><use href="#i-live"/></svg></button>
         </div>
         <div id="mini-flow" class="mini-flow"></div>
-        <div id="flow-panel-grip" class="flow-panel-grip" title="Изменить ширину"></div>
+        <div id="flow-panel-grip" class="flow-panel-grip" data-i18n-title="flow.resizeWidth" title="Изменить ширину"></div>
       </aside>
 
       <!-- Bottom Playback Controls -->
@@ -485,9 +486,9 @@
             <span class="presets-label" data-i18n="modal.presets">Готовые примеры программ:</span>
             <div class="chips-list">
               <button class="preset-chip" data-sample="backup">Robot1 · BJ_Final_Birakma (KR 50, BASE 29)</button>
-              <button class="preset-chip" data-sample="birakma">BJ_Final_Birakma (Рельс $E1)</button>
-              <button class="preset-chip" data-sample="weld">Сварочный контур (LIN / CIRC)</button>
-              <button class="preset-chip" data-sample="pallet">Паллетирование (PTP Сетка)</button>
+              <button class="preset-chip" data-sample="birakma" data-i18n="preset.birakma">BJ_Final_Birakma (Рельс $E1)</button>
+              <button class="preset-chip" data-sample="weld" data-i18n="preset.weld">Сварочный контур (LIN / CIRC)</button>
+              <button class="preset-chip" data-sample="pallet" data-i18n="preset.pallet">Паллетирование (PTP Сетка)</button>
             </div>
           </div>
         </div>
@@ -535,7 +536,7 @@
     <div id="server-progress" class="server-progress glass-panel" style="display:none;">
       <div class="server-progress-head">
         <span id="server-progress-title" data-i18n="server.title">СЕРВЕРНАЯ КОМПИЛЯЦИЯ</span>
-        <button id="server-progress-close" class="mini-btn" title="Скрыть"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+        <button id="server-progress-close" class="mini-btn" data-i18n-title="btn.hide" title="Скрыть"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
       </div>
       <div class="server-progress-bar"><div id="server-progress-fill"></div></div>
       <div id="server-progress-text">Загрузка…</div>

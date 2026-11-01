@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Liskin Labs | KUKA 3D Digital Twin & Simulation Platform</title>
   <link rel="icon" type="image/png" sizes="256x256" href="./favicon.png" />
-  <script type="module" crossorigin src="./assets/index-CuVeLwqg.js"></script>
+  <script type="module" crossorigin src="./assets/index-CyAxqBVu.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-rKFjvsNc.css">
 </head>
 <body>
@@ -489,6 +489,7 @@
             <button id="btn-browse" class="btn-secondary" data-i18n="modal.browse">Обзор файлов</button>
           </div>
 
+          <div id="manual-code-section">
           <div class="divider"><span data-i18n="modal.orManual">ИЛИ РЕДАКТИРУЙТЕ КОД ВРУЧНУЮ</span></div>
 
           <div class="code-editor-grid">
@@ -508,7 +509,7 @@
               <button class="preset-chip" data-sample="backup" data-i18n="preset.demo">Демо-программа (Demo.src)</button>
               <button class="preset-chip" data-sample="birakma" data-i18n="preset.birakma">Трансфер деталей (Рельс $E1)</button>
               <button class="preset-chip" data-sample="weld" data-i18n="preset.weld">Сварочный контур (LIN / CIRC)</button>
-              <button class="preset-chip" data-sample="pallet" data-i18n="preset.pallet">Паллетирование (PTP Сетка)</button>
+              <button class="preset-chip" data-sample="pallet" data-i18n="preset.pallet">Паллетирование (PTP Сетка)</button></div>
             </div>
           </div>
         </div>
@@ -532,17 +533,17 @@
         </div>
         <div class="modal-body consent-body">
           <p data-i18n="consent.body">
-            Бекап загружается на сервер и <strong>сохраняется на Google Drive</strong> владельца
-            проекта. Скомпилированная модель используется для обучения и улучшения симулятора.
+            Бекап загружается на защищённый сервер для <strong>компиляции траектории и кинематического анализа</strong>. Анонимизированная телеметрия используется для улучшения точности симуляции.
+
           </p>
           <ul class="consent-list">
             <li data-i18n="consent.list1">Парсер KRL, IK и S/T выполняются только на сервере.</li>
             <li data-i18n="consent.list2">В браузере остаётся готовая траектория (суставы), без исходных алгоритмов.</li>
-            <li data-i18n="consent.list3">Если бекап не читается, файл всё равно сохраняется в папку <code>unparsed/</code>.</li>
+            <li data-i18n="consent.list3">Нераспознанные архивы логируются в изолированном каталоге для диагностики парсера.</li>
           </ul>
           <label class="consent-check">
             <input type="checkbox" id="consent-check" />
-            <span data-i18n="consent.check">Я согласен на загрузку и сохранение бекапа. Если не согласен — не загружайте файл.</span>
+            <span data-i18n="consent.check">Я согласен на отправку бекапа для серверной компиляции.</span>
           </label>
         </div>
         <div class="modal-footer">

@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Liskin Labs | KUKA 3D Digital Twin & Simulation Platform</title>
   <link rel="icon" type="image/png" sizes="256x256" href="./favicon.png" />
-  <script type="module" crossorigin src="./assets/index-DmYMm6gT.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DMPfbCA8.css">
+  <script type="module" crossorigin src="./assets/index-BacpuH_5.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BvaaUCN_.css">
 </head>
 <body>
   <!-- Inline SVG icon sprite: the UI uses vector icons only, no emoji. -->
@@ -27,6 +27,8 @@
     <symbol id="i-live" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16z" opacity=".55"/></symbol>
     <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></symbol>
     <symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 11V6.2a1.6 1.6 0 0 1 3.2 0V10h.8V4.6a1.6 1.6 0 0 1 3.2 0V10h.8V6.4a1.6 1.6 0 0 1 3.2 0v6.1c0 4.3-2.8 7.5-6.9 7.5-2.2 0-4.1-.9-5.4-2.6l-3.2-4.2a1.65 1.65 0 0 1 2.6-2L8 13z"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><path d="M15 8v8l5 4V4l-5 4zM4 6h11v12H4z" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
   </svg>
   <div id="app-container">
     <!-- Top Header -->
@@ -138,6 +140,11 @@
           <div class="coord-box"><span class="lbl">C</span><span class="val" id="val-c">0.0°</span></div>
           <div class="coord-box rail-coord" id="hud-box-e1" style="display:none;"><span class="lbl">E1</span><span class="val" id="val-e1">0.0</span><span class="unit">mm</span></div>
         </div>
+        <div class="hud-metrics-row" id="hud-metrics-row">
+          <span class="hud-speed-pill"><span class="lbl">TCP:</span> <span id="val-tcp-speed">0</span> mm/s</span>
+          <span class="hud-speed-pill"><span class="lbl">MAX ω:</span> <span id="val-axis-speed">0</span> °/s</span>
+          <span id="hud-singularity-badge" class="hud-singularity-badge" style="display:none;">A5 WRIST</span>
+        </div>
       </div>
 
       <!-- Right Inspector Sidebar -->
@@ -150,6 +157,8 @@
           <button class="tab-btn active" data-tab="waypoints" data-i18n="tab.trajectory">Траектория</button>
           <button class="tab-btn" data-tab="joint-jog" data-i18n="tab.axes">Оси</button>
           <button class="tab-btn" data-tab="smartpad">SmartPAD</button>
+          <button class="tab-btn" data-tab="analysis" data-i18n="tab.analysis">Анализ</button>
+          <button class="tab-btn" data-tab="export" data-i18n="tab.export">Экспорт</button>
         </div>
 
         <!-- Tab 1: Waypoints -->
@@ -237,6 +246,80 @@
               <button class="jog-btn" data-axis="C" data-dir="-1">C −</button>
             </div>
 
+          </div>
+        </div>
+
+        <!-- Tab 4: Dynamic Analysis -->
+        <div class="tab-content" id="tab-analysis">
+          <div class="analysis-box">
+            <div class="analysis-summary-grid">
+              <div class="metric-card">
+                <span class="metric-num" id="an-cycle-time">0.0 s</span>
+                <span class="metric-lbl">Время цикла</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-num" id="an-path-length">0 m</span>
+                <span class="metric-lbl">Длина пути</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-num" id="an-singularities">0</span>
+                <span class="metric-lbl">Сингулярности</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-num" id="an-axis-overload">0</span>
+                <span class="metric-lbl">KSS01123 Скорость</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-num" id="an-torque-load">0%</span>
+                <span class="metric-lbl">KSS01124 Момент</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-num" id="an-min-clearance">0 мм</span>
+                <span class="metric-lbl">Мин. зазор</span>
+              </div>
+            </div>
+            <div class="analysis-subhead" data-i18n="analysis.title">ДИНАМИЧЕСКИЙ АНАЛИЗ И БЕЗОПАСНОСТЬ</div>
+            <div id="analysis-issues" class="analysis-issues-list"></div>
+          </div>
+        </div>
+
+        <!-- Tab 5: Export & Reports -->
+        <div class="tab-content" id="tab-export">
+          <div class="export-box">
+            <div class="export-card">
+              <div class="export-card-head">
+                <svg class="icon export-icon" aria-hidden="true"><use href="#i-doc"/></svg>
+                <strong data-i18n="export.dossier">Протокол приёмки (HTML/PDF)</strong>
+              </div>
+              <p class="export-card-desc" data-i18n="export.dossierDesc">Официальный протокол DIN EN ISO 10218-1/2 с паспортом робота, инструментами/базами и аудитом траекторий.</p>
+              <button id="btn-export-dossier" class="btn-primary export-action-btn">
+                <svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>
+                <span>Открыть протокол приёмки</span>
+              </button>
+            </div>
+
+            <div class="export-card">
+              <div class="export-card-head">
+                <svg class="icon export-icon" aria-hidden="true"><use href="#i-folder"/></svg>
+                <strong data-i18n="export.csv">Траектория осей (CSV)</strong>
+              </div>
+              <p class="export-card-desc" data-i18n="export.csvDesc">Плотный таймлайн 25 Гц углов осей (A1..A6, E1) для Excel / MATLAB.</p>
+              <button id="btn-export-csv" class="btn-ghost export-action-btn">
+                <span>Скачать CSV траектории</span>
+              </button>
+            </div>
+
+            <div class="export-card">
+              <div class="export-card-head">
+                <svg class="icon export-icon" aria-hidden="true"><use href="#i-video"/></svg>
+                <strong>Запись симуляции (WebM)</strong>
+              </div>
+              <p class="export-card-desc">Запись 3D-движения в 60 FPS прямо из браузера через MediaRecorder.</p>
+              <button id="btn-record-video" class="btn-record export-action-btn">
+                <svg class="icon" aria-hidden="true"><use href="#i-video"/></svg>
+                <span id="record-btn-text" data-i18n="export.videoStart">Начать запись симуляции</span>
+              </button>
+            </div>
           </div>
         </div>
 

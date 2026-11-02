@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Liskin Labs | KUKA 3D Digital Twin & Simulation Platform</title>
   <link rel="icon" type="image/png" sizes="256x256" href="./favicon.png" />
-  <script type="module" crossorigin src="./assets/index-CJt2w4Z7.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DixgFlRp.css">
+  <script type="module" crossorigin src="./assets/index-BUcWhE6A.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CXg3_i2T.css">
 </head>
 <body>
   <!-- Inline SVG icon sprite: the UI uses vector icons only, no emoji. -->
@@ -145,6 +145,8 @@
         <button id="btn-vp-front" class="vtool-btn">Front</button>
         <button id="btn-vp-side" class="vtool-btn">Side</button>
         <div class="vtool-sep"></div>
+        <button id="btn-vp-hud" class="vtool-btn active" title="Телеметрия TCP/BASE">HUD</button>
+        <div class="vtool-sep"></div>
         <button id="btn-toggle-fullscreen" class="vtool-btn" data-i18n-title="btn.fullscreen" title="На весь экран">
           <svg class="icon" aria-hidden="true"><use href="#i-fullscreen"/></svg>
         </button>
@@ -155,6 +157,7 @@
       <div id="telemetry-hud" class="hud-panel">
         <div class="hud-title">
           <span class="hud-indicator"></span> <span id="hud-title" data-i18n="hud.tool">ФЛАНЕЦ РОБОТА ($TOOL)</span>
+          <button id="btn-hud-collapse" class="hud-collapse-btn" title="Свернуть / развернуть координаты" aria-label="Свернуть / развернуть координаты">▾</button>
         </div>
         <div class="coords-grid">
           <div class="coord-box"><span class="lbl">X</span><span class="val" id="val-x">0.0</span><span class="unit">mm</span></div>

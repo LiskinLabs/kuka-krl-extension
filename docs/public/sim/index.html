@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Liskin Labs | KUKA 3D Digital Twin & Simulation Platform</title>
   <link rel="icon" type="image/png" sizes="256x256" href="./favicon.png" />
-  <script type="module" crossorigin src="./assets/index-BIjQ9lWv.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-Bk0KCLee.css">
+  <script type="module" crossorigin src="./assets/index-COnelOxx.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DvE5Clun.css">
 </head>
 <body>
   <!-- Inline SVG icon sprite: the UI uses vector icons only, no emoji. -->
@@ -156,6 +156,7 @@
       <!-- Telemetry HUD Overlay -->
       <div id="telemetry-hud" class="hud-panel">
         <div class="hud-title">
+          <span class="hud-grip" title="Перетащите панель координат (двойной клик — возврат в центр)">⋮⋮</span>
           <span class="hud-indicator"></span> <span id="hud-title" data-i18n="hud.tool">ФЛАНЕЦ РОБОТА ($TOOL)</span>
           <button id="btn-hud-collapse" class="hud-collapse-btn" title="Свернуть / развернуть координаты" aria-label="Свернуть / развернуть координаты">▾</button>
         </div>
@@ -388,6 +389,7 @@
       <!-- Separate flowchart window (right, collapsible, resizable) -->
       <aside id="flow-panel" class="glass-panel">
         <div class="flow-panel-head">
+          <span class="flow-panel-grip-head" title="Перетащите панель блок-схемы (двойной клик — исходное положение)">⋮⋮</span>
           <span class="flow-panel-title" data-i18n="flow.title">БЛОК-СХЕМА</span>
           <span id="flow-panel-module" class="flow-panel-module">Demo.src</span>
           <button id="btn-flow-full" class="mini-btn" data-i18n="flow.open">Открыть</button>
@@ -488,6 +490,7 @@
     <div id="code-modal" class="modal-backdrop" style="display:none;">
       <div class="modal-window glass-panel">
         <div class="modal-header">
+          <span class="modal-grip" title="Перетащите окно мышью">⋮⋮</span>
           <div class="modal-title">
             <svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg>
             <h3 data-i18n="modal.title">Загрузка KRL программы (.src / .dat)</h3>
@@ -548,6 +551,7 @@
     <div id="consent-modal" class="modal-backdrop consent-backdrop" style="display:none;">
       <div class="modal-window glass-panel consent-window">
         <div class="modal-header">
+          <span class="modal-grip" title="Перетащите окно мышью">⋮⋮</span>
           <div class="modal-title">
             <svg class="icon" aria-hidden="true"><use href="#i-warning"/></svg>
             <h3 data-i18n="consent.title">Экспериментальная модель</h3>

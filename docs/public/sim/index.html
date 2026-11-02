@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Liskin Labs | KUKA 3D Digital Twin & Simulation Platform</title>
   <link rel="icon" type="image/png" sizes="256x256" href="./favicon.png" />
-  <script type="module" crossorigin src="./assets/index-D9bgZ7n3.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-CPQZKyV4.css">
+  <script type="module" crossorigin src="./assets/index-C2Xjizmb.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-u2-kP47a.css">
 </head>
 <body>
   <!-- Inline SVG icon sprite: the UI uses vector icons only, no emoji. -->
@@ -141,9 +141,9 @@
         </button>
         <div class="vtool-sep"></div>
         <button id="btn-vp-3d" class="vtool-btn active">3D</button>
-        <button id="btn-vp-top" class="vtool-btn">Top</button>
-        <button id="btn-vp-front" class="vtool-btn">Front</button>
-        <button id="btn-vp-side" class="vtool-btn">Side</button>
+        <button id="btn-vp-top" class="vtool-btn" data-i18n="view.top" data-i18n-title="view.top.title" title="Сверху">Top</button>
+        <button id="btn-vp-front" class="vtool-btn" data-i18n="view.front" data-i18n-title="view.front.title" title="Спереди">Front</button>
+        <button id="btn-vp-side" class="vtool-btn" data-i18n="view.side" data-i18n-title="view.side.title" title="Сбоку">Side</button>
         <div class="vtool-sep"></div>
         <button id="btn-vp-flow" class="vtool-btn" data-i18n-title="btn.flowchart" title="Блок-схема KRL">
           <svg class="icon" aria-hidden="true"><use href="#i-flow"/></svg>
@@ -398,6 +398,7 @@
           <span class="flow-panel-title" data-i18n="flow.title">БЛОК-СХЕМА</span>
           <span id="flow-panel-module" class="flow-panel-module">Demo.src</span>
           <button id="btn-flow-full" class="mini-btn" data-i18n="flow.open">Открыть</button>
+          <button id="flow-panel-reset-pos" class="mini-btn flow-reset-pos-btn" title="Вернуть блок-схему в исходное положение" data-no-drag>⛶</button>
           <button id="flow-panel-collapse" class="inspector-collapse" data-i18n-title="flow.collapse" title="Свернуть схему">⟨</button>
           <button id="flow-panel-close" class="inspector-collapse flow-close-panel" data-i18n-title="flow.close" title="Закрыть схему"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
         </div>

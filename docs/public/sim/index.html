@@ -4,9 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Liskin Labs | KUKA 3D Digital Twin & Simulation Platform</title>
-  <link rel="icon" type="image/png" sizes="256x256" href="./favicon.png" />
-  <script type="module" crossorigin src="./assets/index-Do_-hJRS.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-COaGeA7O.css">
+  <script>
+    try {
+      document.documentElement.dataset.theme =
+        localStorage.getItem('liskin_workstation_theme') || 'dark';
+    } catch (_) {
+      document.documentElement.dataset.theme = 'dark';
+    }
+  </script>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
+  <link rel="alternate icon" type="image/x-icon" href="./favicon.ico" />
+  <script type="module" crossorigin src="./assets/index-CMb2mmOZ.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Bi-FjnXh.css">
 </head>
 <body>
   <!-- Inline SVG icon sprite: the UI uses vector icons only, no emoji. -->
@@ -32,12 +43,20 @@
     <symbol id="i-fullscreen" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></symbol>
     <symbol id="i-fullscreen-exit" viewBox="0 0 24 24"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></symbol>
     <symbol id="i-focus" viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm-9 3h2a7 7 0 0 1 7-7V2a9 9 0 0 0-9 9zm0 2a9 9 0 0 0 9 9v-2a7 7 0 0 1-7-7H3zm18-2a9 9 0 0 0-9-9v2a7 7 0 0 1 7 7h2zm-2 2a7 7 0 0 1-7 7v2a9 9 0 0 0 9-9h-2z"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M12 5c-5 0-9.3 3.1-11 7.5C2.7 16.9 7 20 12 20s9.3-3.1 11-7.5C21.3 8.1 17 5 12 5zm0 12.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><path d="M18 8h-1V6a5 5 0 0 0-10 0v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zM9 6a3 3 0 0 1 6 0v2H9V6zm9 14H6V10h12v10zm-6-3a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></symbol>
+    <symbol id="i-magnet" viewBox="0 0 24 24"><path d="M4 4h5v7a3 3 0 0 0 6 0V4h5v7a8 8 0 0 1-16 0V4zm0 3h5V5H4v2zm11 0h5V5h-5v2z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6.1c0 5 3.4 9.7 8 10.9 4.6-1.2 8-5.9 8-10.9V5l-8-3zm0 17.9c-3.3-1-6-4.7-6-8.8V6.4l6-2.2 6 2.2v4.7c0 4.1-2.7 7.8-6 8.8z"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></symbol>
   </svg>
   <div id="app-container">
-    <!-- Top Header -->
+    <!-- Top Workstation Header -->
     <header id="top-bar">
       <div class="brand-badge">
-        <div class="brand-mark"><img src="./liskinlabs_logo.png" alt="LiskinLabs" class="brand-logo" /></div>
+        <div class="brand-mark" aria-hidden="true">
+          <img src="./logo-light.svg" alt="" class="brand-logo brand-logo-on-light" />
+          <img src="./logo-dark.svg" alt="" class="brand-logo brand-logo-on-dark" />
+        </div>
         <div class="brand-info">
           <span class="brand-name">LiskinLabs</span>
           <span class="brand-tag" data-i18n="brand.tag">KUKA DIGITAL TWIN SIMULATOR</span>
@@ -90,9 +109,9 @@
           </select>
         </div>
 
-        <button id="btn-open-flowchart" class="btn-ghost" data-i18n-title="btn.flowchart.title" title="Блок-схема бекапа">
-          <svg class="icon" aria-hidden="true"><use href="#i-flow"/></svg>
-          <span data-i18n="btn.flowchart">Блок-схема</span>
+        <button id="btn-toggle-scene-dock" class="btn-ghost mobile-only" title="Дерево сцены">
+          <svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg>
+          <span>Сцена</span>
         </button>
 
         <button id="btn-open-code-modal" class="btn-primary">
@@ -100,63 +119,148 @@
           <span data-i18n="btn.importBackup">Импорт бекапа</span>
         </button>
 
-        <select id="lang-select" class="dropdown-select lang-select" data-i18n-title="lang.label" title="Язык"></select>
-      </div>
+        <select id="theme-select" class="dropdown-select theme-select" title="Тема интерфейса">
+          <option value="dark" data-i18n="theme.dark">Тёмная (Dark)</option>
+          <option value="light" data-i18n="theme.light">Светлая CAD (Light)</option>
+          <option value="kuka-industrial" data-i18n="theme.kuka">KUKA Industrial</option>
+          <option value="high-contrast" data-i18n="theme.contrast">Высокий контраст</option>
+        </select>
 
-      <div class="view-presets">
-        <button id="btn-focus-top" class="btn-icon" data-i18n-title="btn.focusScene" title="Фокус на роботе">
-          <svg class="icon" aria-hidden="true"><use href="#i-focus"/></svg>
-        </button>
-        <button id="btn-view-3d" class="btn-icon active" data-i18n-title="view.3d.title" title="3D Перспектива">3D</button>
-        <button id="btn-view-top" class="btn-icon" data-i18n-title="view.top.title" data-i18n="view.top" title="Сверху">Top</button>
-        <button id="btn-view-front" class="btn-icon" data-i18n-title="view.front.title" data-i18n="view.front" title="Спереди">Front</button>
-        <button id="btn-view-side" class="btn-icon" data-i18n-title="view.side.title" data-i18n="view.side" title="Сбоку">Side</button>
-        <button id="btn-fullscreen-top" class="btn-icon" data-i18n-title="btn.fullscreen" title="На весь экран">
-          <svg class="icon" aria-hidden="true"><use href="#i-fullscreen"/></svg>
-        </button>
+        <select id="lang-select" class="dropdown-select lang-select" data-i18n-title="lang.label" title="Язык"></select>
       </div>
     </header>
 
-    <!-- Main Viewport Area -->
-    <main id="viewport-container">
-      <!-- Persistent project context: never let the operator lose track of
-           which backup/robot/program is on screen. -->
-      <div id="project-bar" class="project-bar">
-        <div class="project-identity">
-          <span id="project-name" class="project-name">Demo</span>
-          <span class="project-sep">·</span>
-          <span id="project-meta" class="project-meta">KRC · KR 50 R2500</span>
+    <!-- 5-Zone CAD/SCADA Workstation Shell -->
+    <div id="workstation-shell" class="workstation-shell">
+      <!-- ZONE 1: Left Dock (Scene Tree & History) -->
+      <aside id="left-dock" class="ws-left-dock glass-panel">
+        <div class="ws-dock-tabs">
+          <button class="ws-dock-tab active" data-ld-tab="scene" data-i18n="dock.scene">Сцена</button>
+          <button class="ws-dock-tab" data-ld-tab="flow" data-i18n="dock.flow">Схема</button>
+          <button class="ws-dock-tab" data-ld-tab="history" data-i18n="dock.history">История</button>
+          <button id="left-dock-collapse" class="ws-dock-collapse" data-i18n-title="panel.collapse" title="Свернуть дерево сцены">▾</button>
         </div>
-        <div class="project-state">
-          <span id="project-program" class="project-program">Demo.src</span>
-          <span id="project-programs" class="project-stat">1 программа</span>
-          <span id="project-status" class="status-pill status-demo" data-i18n="status.demo">ДЕМО</span>
+
+        <div id="ld-pane-scene" class="ws-dock-pane active">
+          <div class="ws-scene-filter-row">
+            <input
+              id="scene-filter-input"
+              class="ws-scene-filter"
+              type="search"
+              data-i18n-placeholder="scene.filterPlaceholder"
+              placeholder="Фильтр узлов ячейки"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+          <div id="scene-tree-list" class="ws-scene-tree" role="tree" aria-label="Cell Hierarchy"></div>
         </div>
-      </div>
-      <canvas id="three-canvas"></canvas>
-      <!-- Floating CAD Viewport Tools (KUKA.Sim style) -->
-      <div id="viewport-tools" class="viewport-tools">
-        <button id="btn-focus-scene" class="vtool-btn" data-i18n-title="btn.focusScene" title="Фокус на роботе">
-          <svg class="icon" aria-hidden="true"><use href="#i-focus"/></svg>
-        </button>
-        <div class="vtool-sep"></div>
-        <button id="btn-vp-3d" class="vtool-btn active">3D</button>
-        <button id="btn-vp-top" class="vtool-btn" data-i18n="view.top" data-i18n-title="view.top.title" title="Сверху">Top</button>
-        <button id="btn-vp-front" class="vtool-btn" data-i18n="view.front" data-i18n-title="view.front.title" title="Спереди">Front</button>
-        <button id="btn-vp-side" class="vtool-btn" data-i18n="view.side" data-i18n-title="view.side.title" title="Сбоку">Side</button>
-        <div class="vtool-sep"></div>
-        <button id="btn-vp-flow" class="vtool-btn" data-i18n-title="btn.flowchart" title="Блок-схема KRL">
-          <svg class="icon" aria-hidden="true"><use href="#i-flow"/></svg>
-          <span class="vtool-label" data-i18n="btn.flowchart">Схема</span>
-        </button>
-        <div class="vtool-sep"></div>
-        <button id="btn-vp-hud" class="vtool-btn active" title="Телеметрия TCP/BASE">HUD</button>
-        <div class="vtool-sep"></div>
-        <button id="btn-toggle-fullscreen" class="vtool-btn" data-i18n-title="btn.fullscreen" title="На весь экран">
-          <svg class="icon" aria-hidden="true"><use href="#i-fullscreen"/></svg>
-        </button>
-      </div>
-      <a id="embed-open" class="embed-open" href="./" target="_top" data-i18n="embed.open">Открыть симулятор →</a>
+
+        <div id="ld-pane-flow" class="ws-dock-pane ws-dock-pane-flow">
+          <aside id="flow-panel" class="flow-dock-panel">
+            <div class="flow-panel-head">
+              <span class="flow-panel-title" data-i18n="flow.title">БЛОК-СХЕМА</span>
+              <span id="flow-panel-module" class="flow-panel-module">Demo.src</span>
+              <button id="btn-flow-full" class="flow-dock-icon-btn" data-i18n-title="flow.openFull" title="Открыть полный просмотр">
+                <svg class="icon" aria-hidden="true"><use href="#i-fullscreen"/></svg>
+              </button>
+            </div>
+            <div class="flow-panel-programs">
+              <button id="flow-panel-back" class="flow-dock-nav" data-i18n-title="flow.back" title="Назад" disabled>←</button>
+              <select id="flow-panel-program-select" class="flow-panel-program-select" aria-label="KRL program"></select>
+            </div>
+            <div class="flow-live-bar">
+              <span class="flow-live-dot"></span>
+              <span id="flow-current" class="flow-current">—</span>
+              <button id="flow-panel-live" class="flow-live-btn" data-i18n-title="flow.live.title" title="Показать исполняемую программу"><svg class="icon" aria-hidden="true"><use href="#i-live"/></svg></button>
+            </div>
+            <div id="mini-flow" class="mini-flow"></div>
+            <div class="flow-dock-hint" data-i18n="flow.dockHint">Движение — переход · вызов — внутрь</div>
+          </aside>
+        </div>
+
+        <div id="ld-pane-history" class="ws-dock-pane">
+          <div id="scene-history-list" class="ws-history-list"></div>
+        </div>
+      </aside>
+
+      <div id="left-dock-resizer" class="dock-resizer dock-resizer-left" title="Resize scene dock"></div>
+
+      <!-- ZONE 2 & 3: Center Viewport + Bottom Engineering Console -->
+      <div id="center-workstation-col" class="ws-center-col">
+        <!-- Main Viewport Area -->
+        <main id="viewport-container">
+          <!-- Persistent project context: never let the operator lose track of
+               which backup/robot/program is on screen. -->
+          <div id="project-bar" class="project-bar">
+            <div class="project-identity">
+              <span id="project-name" class="project-name">Demo</span>
+              <span class="project-sep">·</span>
+              <span id="project-meta" class="project-meta">KRC · KR 50 R2500</span>
+              <span class="project-health" aria-label="Simulation health">
+                <span class="sys-led is-ok"></span>SIM
+                <span class="sys-led is-ok"></span>PLC 60 Hz
+              </span>
+            </div>
+            <div class="project-state">
+              <span id="project-program" class="project-program">Demo.src</span>
+              <span id="project-programs" class="project-stat">1 программа</span>
+              <span id="project-status" class="status-pill status-demo" data-i18n="status.demo">ДЕМО</span>
+            </div>
+          </div>
+          <canvas id="three-canvas"></canvas>
+
+          <!-- Floating CAD Viewport Tools -->
+          <div id="viewport-tools" class="viewport-tools">
+            <button id="btn-focus-scene" class="vtool-btn" data-i18n-title="btn.focusScene" title="Фокус на роботе">
+              <svg class="icon" aria-hidden="true"><use href="#i-focus"/></svg>
+            </button>
+            <div class="vtool-sep"></div>
+            <button id="btn-vp-3d" class="vtool-btn active">3D</button>
+            <button id="btn-vp-top" class="vtool-btn" data-i18n="view.top" data-i18n-title="view.top.title" title="Сверху">Top</button>
+            <button id="btn-vp-front" class="vtool-btn" data-i18n="view.front" data-i18n-title="view.front.title" title="Спереди">Front</button>
+            <button id="btn-vp-side" class="vtool-btn" data-i18n="view.side" data-i18n-title="view.side.title" title="Сбоку">Side</button>
+            <div class="vtool-sep"></div>
+            <button id="btn-vp-snap" class="vtool-btn active" data-i18n-title="cad.snap" title="Сетка 50 мм">
+              <svg class="icon" aria-hidden="true"><use href="#i-magnet"/></svg>
+            </button>
+            <button id="btn-vp-envelope" class="vtool-btn" data-i18n-title="cad.envelope" title="Оценочная рабочая зона (не safety-сертификация)">
+              <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
+            </button>
+            <div class="vtool-sep"></div>
+            <button id="btn-vp-flow" class="vtool-btn" data-i18n-title="btn.flowchart" title="Блок-схема KRL">
+              <svg class="icon" aria-hidden="true"><use href="#i-flow"/></svg>
+              <span class="vtool-label" data-i18n="btn.flowchart">Схема</span>
+            </button>
+            <div class="vtool-sep"></div>
+            <button id="btn-toggle-fullscreen" class="vtool-btn" data-i18n-title="btn.fullscreen" title="На весь экран">
+              <svg class="icon" aria-hidden="true"><use href="#i-fullscreen"/></svg>
+            </button>
+          </div>
+
+          <!-- Interactive 3D Orientation NavCube (X/Y/Z Gizmo) -->
+          <div id="nav-cube" class="ws-nav-cube" aria-label="3D View Orientation">
+            <svg viewBox="0 0 96 96" class="nav-cube-svg">
+              <line id="nav-axis-x-line" x1="48" y1="48" x2="82" y2="62" stroke="#ef4444" stroke-width="2.5" />
+              <line id="nav-axis-y-line" x1="48" y1="48" x2="14" y2="62" stroke="#22c55e" stroke-width="2.5" />
+              <line id="nav-axis-z-line" x1="48" y1="48" x2="48" y2="12" stroke="#3b82f6" stroke-width="2.5" />
+              <circle cx="48" cy="48" r="5" fill="#94a3b8" class="nav-axis-hit" data-view="3d"><title>3D Изометрия</title></circle>
+              <g id="nav-axis-x" class="nav-axis-hit" data-view="front">
+                <circle cx="82" cy="62" r="10" fill="#ef4444" />
+                <text x="82" y="66" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">X</text>
+              </g>
+              <g id="nav-axis-y" class="nav-axis-hit" data-view="side">
+                <circle cx="14" cy="62" r="10" fill="#22c55e" />
+                <text x="14" y="66" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Y</text>
+              </g>
+              <g id="nav-axis-z" class="nav-axis-hit" data-view="top">
+                <circle cx="48" cy="12" r="10" fill="#3b82f6" />
+                <text x="48" y="16" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Z</text>
+              </g>
+            </svg>
+          </div>
+
+          <a id="embed-open" class="embed-open" href="./" target="_top" data-i18n="embed.open">Открыть симулятор →</a>
 
       <!-- Telemetry HUD Overlay -->
       <div id="telemetry-hud" class="hud-panel">
@@ -181,19 +285,220 @@
         </div>
       </div>
 
-      <!-- Right Inspector Sidebar -->
+          <!-- Bottom Playback Controls -->
+          <footer id="playback-bar" class="glass-panel">
+            <div class="playback-controls">
+              <button id="btn-prev" class="btn-ctrl" data-i18n-title="playback.prev" title="Предыдущая точка"><svg class="icon" aria-hidden="true"><use href="#i-prev"/></svg></button>
+              <button id="btn-play" class="btn-ctrl btn-play" data-i18n-title="playback.play" title="Старт / Пауза"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg></button>
+              <button id="btn-next" class="btn-ctrl" data-i18n-title="playback.next" title="Следующая точка"><svg class="icon" aria-hidden="true"><use href="#i-next"/></svg></button>
+              <button id="btn-reset" class="btn-ctrl" data-i18n-title="playback.reset" title="В начало"><svg class="icon" aria-hidden="true"><use href="#i-reset"/></svg></button>
+            </div>
+
+            <div class="timeline-box">
+              <span id="time-cur" class="time-readout">0.0s</span>
+              <div class="slider-container">
+                <input type="range" id="timeline-slider" min="0" max="1000" value="0" />
+                <div id="timeline-progress" class="timeline-progress-fill"></div>
+              </div>
+              <span id="time-total" class="time-readout">0.0s</span>
+            </div>
+
+            <div class="playback-tools">
+              <span id="playback-seg-info" class="playback-seg-info">SEG 1/1</span>
+              <select id="speed-select" class="dropdown-select speed-select">
+                <option value="0.25">0.25x</option>
+                <option value="0.5">0.5x</option>
+                <option value="1" selected>1.0x</option>
+                <option value="2">2.0x</option>
+                <option value="4">4.0x</option>
+              </select>
+              <button id="btn-loop" class="btn-icon active" data-i18n-title="playback.loop" title="Зациклить воспроизведение"><svg class="icon" aria-hidden="true"><use href="#i-loop"/></svg></button>
+            </div>
+          </footer>
+        </main>
+
+        <!-- ZONE 3: Bottom Engineering Console (Parts | KRL / PLC | Problems | Watch) -->
+        <section id="bottom-dock" class="ws-bottom-dock glass-panel">
+          <div class="ws-bottom-tabs">
+            <button class="ws-bottom-tab" data-bd-tab="parts" data-i18n="dock.parts">Компоненты</button>
+            <button class="ws-bottom-tab" data-bd-tab="krl" data-i18n="dock.krl_plc">KRL / ПЛК</button>
+            <button class="ws-bottom-tab" data-bd-tab="points">
+              <span data-i18n="dock.points">Точки</span>
+              <span id="points-count-badge" class="ws-tab-badge">0</span>
+            </button>
+            <button class="ws-bottom-tab" data-bd-tab="problems">
+              <span data-i18n="dock.problems">Проблемы</span>
+              <span id="problems-count-badge" class="ws-tab-badge">0</span>
+            </button>
+            <button class="ws-bottom-tab active" data-bd-tab="watch">
+              <span data-i18n="dock.watch">Сигналы (Watch)</span>
+              <span id="watch-count-badge" class="ws-tab-badge">0</span>
+            </button>
+            <div class="ws-bottom-spacer"></div>
+            <span id="plc-scan-indicator" class="ws-plc-scan-pill">SPS.SUB · 60 Hz (16.7 ms)</span>
+            <button id="bottom-dock-collapse" class="ws-dock-collapse" title="Свернуть/развернуть консоль">▾</button>
+          </div>
+
+          <!-- Pane 1: Cell Parts & Equipment Catalog -->
+          <div id="bd-pane-parts" class="ws-bottom-pane">
+            <div id="parts-catalog-grid" class="ws-parts-grid"></div>
+          </div>
+
+          <!-- Pane 2: KRL / SoftPLC Source & Execution Monitor -->
+          <div id="bd-pane-krl" class="ws-bottom-pane">
+            <div class="ws-krl-split">
+              <div class="ws-krl-code-wrap">
+                <div class="ws-krl-code-head">
+                  <span id="krl-live-module-name">Demo.src</span>
+                  <span id="krl-live-line-badge" class="ws-tab-badge">Line 1</span>
+                </div>
+                <pre id="krl-live-code" class="ws-krl-code"></pre>
+              </div>
+              <div class="ws-plc-status-wrap">
+                <div class="ws-krl-code-head">
+                  <span>Submit Interpreter (SPS.SUB / IEC 61131-3)</span>
+                  <span class="ws-plc-online-badge">RUN · 60 Hz</span>
+                </div>
+                <div id="plc-rules-list" class="ws-plc-rules-list"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pane 3: Point table / .dat integrity -->
+          <div id="bd-pane-points" class="ws-bottom-pane">
+            <div class="ws-points-toolbar">
+              <input
+                id="points-search"
+                class="ws-watch-add-input ws-points-search"
+                type="search"
+                data-i18n-placeholder="points.search"
+                placeholder="Фильтр по точке, типу или модулю…"
+                autocomplete="off"
+                spellcheck="false"
+              />
+              <span id="points-summary" class="ws-points-summary"></span>
+            </div>
+            <div class="ws-points-table-wrap">
+              <table class="ws-points-table">
+                <thead>
+                  <tr>
+                    <th data-i18n="points.col.name">Точка</th>
+                    <th data-i18n="points.col.type">Тип</th>
+                    <th data-i18n="points.col.module">Модуль</th>
+                    <th data-i18n="points.col.toolbase">TOOL / BASE</th>
+                    <th data-i18n="points.col.coords">Координаты</th>
+                    <th data-i18n="points.col.status">Статус</th>
+                    <th data-i18n="points.col.line">Строка</th>
+                  </tr>
+                </thead>
+                <tbody id="points-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Pane 4: Problems (Safety, Singularities, KRL Deadlocks) -->
+          <div id="bd-pane-problems" class="ws-bottom-pane">
+            <div class="ws-problems-summary" id="problems-summary"></div>
+            <label class="ws-problems-strict">
+              <input id="strict-krl-toggle" type="checkbox" checked />
+              <span data-i18n="problems.strict">Fail on unsupported KRL (recommended)</span>
+            </label>
+            <div id="problems-mirror-list" class="ws-problems-list"></div>
+          </div>
+
+          <!-- Pane 5: Live SCADA Watch Table + static I/O matrix -->
+          <div id="bd-pane-watch" class="ws-bottom-pane active">
+            <div class="ws-watch-subtabs">
+              <button class="ws-watch-subtab active" data-watch-view="live" data-i18n="watch.live">
+                Live
+              </button>
+              <button class="ws-watch-subtab" data-watch-view="matrix" data-i18n="watch.matrix">
+                I/O Matrix
+              </button>
+            </div>
+            <div id="watch-live-view" class="ws-watch-view active">
+              <div class="ws-watch-hint" data-i18n="watch.hint">
+                Запустите симуляцию для мониторинга сигналов и цикла сканирования (60 Гц / 16.7 мс)
+              </div>
+              <div class="ws-watch-table-wrap">
+                <table class="ws-watch-table">
+                  <thead>
+                    <tr>
+                      <th data-i18n="watch.col.name">Сигнал</th>
+                      <th data-i18n="watch.col.value">Значение</th>
+                      <th data-i18n="watch.col.mode">Режим / Форс</th>
+                      <th data-i18n="watch.col.type">Тип</th>
+                      <th data-i18n="watch.col.wired">Привязка / Модули KRL</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="watch-table-body"></tbody>
+                </table>
+              </div>
+              <div class="ws-watch-add-bar">
+                <input
+                  id="watch-add-input"
+                  class="ws-watch-add-input"
+                  type="text"
+                  data-i18n-placeholder="watch.addPlaceholder"
+                  placeholder="Имя или список через запятую ($IN[10], $OUT[5], PGNO)"
+                  autocomplete="off"
+                  spellcheck="false"
+                />
+                <button id="watch-add-btn" class="ws-watch-add-btn" type="button" data-i18n="watch.addBtn">Добавить</button>
+              </div>
+            </div>
+            <div id="watch-matrix-view" class="ws-watch-view">
+              <div class="ws-watch-hint" data-i18n="watch.matrixHint">
+                Статическая карта чтения/записи по всем программам. Клик по строке добавляет сигнал в Watch.
+              </div>
+              <div class="ws-watch-table-wrap">
+                <table class="ws-watch-table">
+                  <thead>
+                    <tr>
+                      <th data-i18n="watch.col.name">Сигнал</th>
+                      <th data-i18n="watch.matrix.kind">Тип</th>
+                      <th data-i18n="watch.matrix.rw">Чтение / запись</th>
+                      <th data-i18n="watch.matrix.modules">Модули</th>
+                      <th data-i18n="watch.matrix.lines">Строки</th>
+                    </tr>
+                  </thead>
+                  <tbody id="io-matrix-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ZONE 5: Right Inspector Sidebar -->
       <aside id="inspector-panel" class="glass-panel">
         <div class="mobile-sheet-handle" id="mobile-sheet-toggle"><span class="sheet-pill"></span></div>
         <div class="inspector-head">
-          <span class="inspector-title" data-i18n="panel.title">ПАНЕЛЬ</span>
-          <button id="inspector-collapse" class="inspector-collapse" data-i18n-title="panel.collapse" title="Свернуть панель">⟩</button>
+          <span class="inspector-title" data-i18n="dock.inspector">Инспектор</span>
+          <button id="inspector-collapse" class="inspector-collapse" data-i18n-title="panel.collapse" title="Свернуть панель">▾</button>
         </div>
+
+        <div class="ws-inspector-rate-card">
+          <div class="ws-rate-row">
+            <span class="ws-rate-lbl" data-i18n="inspector.physicsRate">Частота физики и ПЛК</span>
+            <div class="ws-rate-input-wrap">
+              <input id="inspector-physics-rate" type="number" value="60" min="15" max="120" readonly />
+              <span>Hz</span>
+            </div>
+          </div>
+          <p class="ws-rate-desc" data-i18n="inspector.scanDesc">
+            16.7 мс на шаг. Приводы и датчики ячейки синхронизируются каждый такт.
+          </p>
+        </div>
+
         <div class="tab-headers">
           <button class="tab-btn active" data-tab="waypoints" data-i18n="tab.trajectory">Траектория</button>
           <button class="tab-btn" data-tab="joint-jog" data-i18n="tab.axes">Оси</button>
           <button class="tab-btn" data-tab="smartpad" data-i18n="tab.smartpad">SmartPAD</button>
           <button class="tab-btn" data-tab="analysis" data-i18n="tab.analysis">Анализ</button>
           <button class="tab-btn" data-tab="export" data-i18n="tab.export">Экспорт</button>
+          <button class="tab-btn" data-tab="object" data-i18n="tab.object">Объект</button>
         </div>
 
         <!-- Tab 1: Waypoints -->
@@ -334,9 +639,9 @@
               <div class="export-card-head">
                 <svg class="icon export-icon" aria-hidden="true"><use href="#i-doc"/></svg>
                 <strong data-i18n="export.dossier">Robot Kabul Protokolü (Abnahmeprotokoll)</strong>
-                <span class="badge-pro" style="margin-left:auto;">ISO 10218</span>
+                <span class="badge-pro" style="margin-left:auto;">PRE-CHECK</span>
               </div>
-              <p class="export-card-desc" data-i18n="export.dossierDesc">DIN EN ISO 10218-1/2 standartlarına uygun robot pasaportu, $TOOL / $BASE kalibrasyonları, hareket listesi ve dinamik güvenlik denetim dosyası.</p>
+              <p class="export-card-desc" data-i18n="export.dossierDesc">Предварительный отчёт ПНР: паспорт робота, $TOOL / $BASE, список движений и оценка рисков. Не является сертификатом безопасности.</p>
               <button id="btn-export-dossier" class="btn-tool-pro export-action-btn">
                 <svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>
                 <span data-i18n="export.openDossier">Kabul Protokolü Oluştur (HTML/PDF)</span>
@@ -368,6 +673,26 @@
           </div>
         </div>
 
+        <div class="tab-content" id="tab-object">
+          <div class="object-inspector">
+            <div class="object-inspector-name" id="obj-name">Объект не выбран</div>
+            <div class="object-grid">
+              <label>X, m <input id="obj-x" type="number" step="0.01" disabled /></label>
+              <label>Y, m <input id="obj-y" type="number" step="0.01" disabled /></label>
+              <label>Z, m <input id="obj-z" type="number" step="0.01" disabled /></label>
+              <label>RX, ° <input id="obj-rx" type="number" step="1" disabled /></label>
+              <label>RY, ° <input id="obj-ry" type="number" step="1" disabled /></label>
+              <label>RZ, ° <input id="obj-rz" type="number" step="1" disabled /></label>
+            </div>
+            <label class="object-check"><input id="obj-lock" type="checkbox" disabled /> <span data-i18n="object.lock">Lock</span></label>
+            <label class="object-check"><input id="obj-visible" type="checkbox" disabled /> <span data-i18n="object.visible">Visible</span></label>
+            <div class="object-actions">
+              <button id="obj-apply" class="btn-secondary" type="button" data-i18n="object.apply" disabled>Применить</button>
+              <button id="obj-snap" class="btn-secondary" type="button" data-i18n="object.snap" disabled>Snap</button>
+            </div>
+          </div>
+        </div>
+
         <!-- Program pad: PLC / operator signals -->
         <div id="program-pad" class="program-pad" data-state="idle">
           <div class="pad-head">
@@ -391,61 +716,8 @@
         </div>
       </aside>
 
-      <!-- Separate flowchart window (right, collapsible, resizable) -->
-      <aside id="flow-panel" class="glass-panel">
-        <div class="flow-panel-head">
-          <span class="flow-panel-grip-head" title="Перетащите панель блок-схемы (двойной клик — исходное положение)">⋮⋮</span>
-          <span class="flow-panel-title" data-i18n="flow.title">БЛОК-СХЕМА</span>
-          <span id="flow-panel-module" class="flow-panel-module">Demo.src</span>
-          <button id="btn-flow-full" class="mini-btn" data-i18n="flow.open">Открыть</button>
-          <button id="flow-panel-reset-pos" class="mini-btn flow-reset-pos-btn" title="Вернуть блок-схему в исходное положение" data-no-drag>⛶</button>
-          <button id="flow-panel-collapse" class="inspector-collapse" data-i18n-title="flow.collapse" title="Свернуть схему">⟨</button>
-          <button id="flow-panel-close" class="inspector-collapse flow-close-panel" data-i18n-title="flow.close" title="Закрыть схему"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
-        </div>
-        <div class="flow-panel-programs">
-          <label class="flow-panel-programs-label" for="flow-panel-program-select" data-i18n="programs.title">ПРОГРАММЫ</label>
-          <select id="flow-panel-program-select" class="flow-panel-program-select"></select>
-        </div>
-        <div class="flow-live-bar">
-          <span class="flow-live-dot"></span>
-          <span id="flow-current" class="flow-current">—</span>
-          <button id="flow-panel-live" class="flow-live-btn" data-i18n-title="flow.live.title" title="Показать исполняемую программу"><svg class="icon" aria-hidden="true"><use href="#i-live"/></svg></button>
-        </div>
-        <div id="mini-flow" class="mini-flow"></div>
-        <div id="flow-panel-grip" class="flow-panel-grip" data-i18n-title="flow.resizeWidth" title="Изменить ширину"></div>
-      </aside>
-
-      <!-- Bottom Playback Controls -->
-      <footer id="playback-bar" class="glass-panel">
-        <div class="playback-controls">
-          <button id="btn-prev" class="btn-ctrl" data-i18n-title="playback.prev" title="Предыдущая точка"><svg class="icon" aria-hidden="true"><use href="#i-prev"/></svg></button>
-          <button id="btn-play" class="btn-ctrl btn-play" data-i18n-title="playback.play" title="Старт / Пауза"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg></button>
-          <button id="btn-next" class="btn-ctrl" data-i18n-title="playback.next" title="Следующая точка"><svg class="icon" aria-hidden="true"><use href="#i-next"/></svg></button>
-          <button id="btn-reset" class="btn-ctrl" data-i18n-title="playback.reset" title="В начало"><svg class="icon" aria-hidden="true"><use href="#i-reset"/></svg></button>
-        </div>
-
-        <div class="timeline-box">
-          <span id="time-cur" class="time-readout">0.0s</span>
-          <div class="slider-container">
-            <input type="range" id="timeline-slider" min="0" max="1000" value="0" />
-            <div id="timeline-progress" class="timeline-progress-fill"></div>
-          </div>
-          <span id="time-total" class="time-readout">0.0s</span>
-        </div>
-
-        <div class="playback-tools">
-          <span id="playback-seg-info" class="playback-seg-info">SEG 1/1</span>
-          <select id="speed-select" class="dropdown-select speed-select">
-            <option value="0.25">0.25x</option>
-            <option value="0.5">0.5x</option>
-            <option value="1" selected>1.0x</option>
-            <option value="2">2.0x</option>
-            <option value="4">4.0x</option>
-          </select>
-          <button id="btn-loop" class="btn-icon active" data-i18n-title="playback.loop" title="Зациклить воспроизведение"><svg class="icon" aria-hidden="true"><use href="#i-loop"/></svg></button>
-        </div>
-      </footer>
-    </main>
+      <div id="right-dock-resizer" class="dock-resizer dock-resizer-right" title="Resize inspector"></div>
+    </div>
 
     <!-- KRL Backup Flowchart Overlay -->
     <div id="flow-overlay" class="flow-overlay" style="display:none;">

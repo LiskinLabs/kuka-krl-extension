@@ -49,7 +49,7 @@
         <!-- Stats Bar -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto font-mono">
           <div class="p-4 rounded-2xl bg-[#0a0d14] border border-white/10 text-center hover:border-kuka-orange/50 transition-all shadow-lg">
-            <div class="text-2xl sm:text-3xl font-black text-white">{{ totalCount }}+</div>
+            <div class="text-2xl sm:text-3xl font-black text-white">{{ totalCount }}</div>
             <div class="text-[10px] sm:text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1">{{ text.statTotal }}</div>
           </div>
           <div class="p-4 rounded-2xl bg-[#0a0d14] border border-white/10 text-center hover:border-emerald-500/50 transition-all shadow-lg">
@@ -57,7 +57,7 @@
             <div class="text-[10px] sm:text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1">{{ text.statCommunity }}</div>
           </div>
           <div class="p-4 rounded-2xl bg-[#0a0d14] border border-white/10 text-center hover:border-kuka-orange/50 transition-all shadow-lg">
-            <div class="text-2xl sm:text-3xl font-black text-kuka-orange">{{ proCount }}+</div>
+            <div class="text-2xl sm:text-3xl font-black text-kuka-orange">{{ proCount }}</div>
             <div class="text-[10px] sm:text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1">{{ text.statPro }}</div>
           </div>
           <div class="p-4 rounded-2xl bg-[#0a0d14] border border-white/10 text-center hover:border-cyan-500/50 transition-all shadow-lg">
@@ -436,7 +436,7 @@ const features = [
     desc: { en: 'Full folding support for WorkVisual and SmartPAD FOLD blocks, subprograms, and data structures.', ru: 'Сворачивание и разворачивание служебных блоков FOLD/ENDFOLD в один клик.', tr: 'WorkVisual ve SmartPAD FOLD bloklarının tek tıkla katlanması ve yönetimi.' },
     benefit: { en: 'Hides thousands of lines of teach pendant boilerplate to focus on core process logic.', ru: 'Скрывает тысячи строк вспомогательного кода пульта, оставляя только суть алгоритма.', tr: 'Ana proses mantığına odaklanmak için binlerce satırlık kumanda kodunu gizler.' },
     codeBefore: '; FOLD BAS INI\n; 50 lines of motion initialization\n; ENDFOLD',
-    codeAfter: '▸ ; FOLD BAS INI ... [50 lines folded]'
+    codeAfter: '> ; FOLD BAS INI ... [50 lines folded]'
   },
   {
     id: 7, category: 'core', icon: '', isPro: false,
@@ -889,7 +889,7 @@ const features = [
     codeAfter: '[OK] Tab snippet "kuka-palletize" &rarr; Complete verified pattern'
   },
 
-  // 51-64: Next-Gen Industrial Intelligence & Safety (v1.9.4)
+// 51-64: Next-Gen Industrial Intelligence & Safety (v1.9.9)
   {
     id: 51, category: 'safety', icon: '', isPro: false,
     shortcut: 'Ctrl+Shift+P > Fix All Safe Issues', setting: 'kuka.quickFix.safeMode',
@@ -1065,7 +1065,7 @@ const filteredFeatures = computed(() => {
 const translations = {
   en: {
     backToLanding: 'Back to Main Landing',
-    heroBadge: 'v1.9.4 Industrial Suite • 64+ Industrial Tools',
+  heroBadge: 'v1.9.9 Industrial Suite • 64 Industrial Tools',
     heroTitlePrefix: 'KUKA KRL Professional — ',
     heroTitleHighlight: 'Complete Industrial Tools Encyclopedia',
     heroSubtitle: 'Exhaustive technical reference for industrial features, field commissioning benefits, keyboard shortcuts, configuration parameters, and before/after code examples.',
@@ -1085,7 +1085,7 @@ const translations = {
   },
   ru: {
     backToLanding: 'Вернуться на главную',
-    heroBadge: 'v1.9.4 Industrial Suite • 64+ Промышленных Инструментов',
+  heroBadge: 'v1.9.9 Industrial Suite • 64 Промышленных Инструмента',
     heroTitlePrefix: 'KUKA KRL Professional — ',
     heroTitleHighlight: 'Полная Энциклопедия Промышленных Инструментов',
     heroSubtitle: 'Исчерпывающий технический разбор функций расширения, пользы на пусконаладке, горячих клавиш, параметров settings.json и примеров кода «До / После».',
@@ -1105,7 +1105,7 @@ const translations = {
   },
   tr: {
     backToLanding: 'Ana Sayfaya Dön',
-    heroBadge: 'v1.9.4 Endüstriyel Paket • 64+ Endüstriyel Araç',
+  heroBadge: 'v1.9.9 Endüstriyel Paket • 64 Endüstriyel Araç',
     heroTitlePrefix: 'KUKA KRL Professional — ',
     heroTitleHighlight: 'Kapsamlı Endüstriyel Araç Ansiklopedisi',
     heroSubtitle: 'Tüm endüstriyel özelliklerin, saha devreye alma faydalarının, kısayolların, settings.json ayarlarının ve önce/sonra kod örneklerinin ayrıntılı teknik referansı.',

@@ -27,7 +27,8 @@
       <!-- Right: Action Badges -->
       <div class="flex items-center gap-2">
         <span class="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 font-mono font-bold">
-          ● KSS 8.7 AST ONLINE
+          <svg class="w-2 h-2" viewBox="0 0 8 8" aria-hidden="true"><circle cx="4" cy="4" r="3" fill="currentColor"/></svg>
+          KSS 8.7 AST ONLINE
         </span>
         <button 
           @click="togglePanel" 
@@ -89,13 +90,13 @@
         <!-- EXPLORER TAB CONTENT -->
         <div v-if="activeSideTab === 'explorer'" class="p-2 space-y-1 overflow-y-auto flex-1 font-mono text-[11px]">
           <div class="text-[#858585] px-1.5 py-0.5 flex items-center gap-1 font-bold">
-            <span>▼</span>
+            <svg class="w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
             <span>KUKA_CELL_04 [KRC4]</span>
           </div>
 
           <div class="pl-2 space-y-0.5">
             <div class="text-[#858585] px-1.5 py-0.5 flex items-center gap-1">
-              <span>▼</span>
+              <svg class="w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
               <span> R1/Program</span>
             </div>
 
@@ -106,9 +107,18 @@
               @click="openFile(file)"
               :class="['w-full text-left pl-6 pr-2 py-1 rounded flex items-center justify-between gap-1.5 transition-colors', activeFileName === file.name ? 'bg-[#37373d] text-white font-bold' : 'hover:bg-[#2a2d2e] text-[#cccccc]']">
               <span class="flex items-center gap-1.5 truncate">
-                <span :class="file.name.endsWith('.src') ? 'text-kuka-orange' : file.name.endsWith('.dat') ? 'text-cyan-400' : 'text-emerald-400'">
-                  {{ file.name.endsWith('.src') ? '' : file.name.endsWith('.dat') ? '' : '️' }}
-                </span>
+                <svg
+                  class="w-3 h-3 shrink-0"
+                  :class="file.name.endsWith('.src') ? 'text-kuka-orange' : file.name.endsWith('.dat') ? 'text-cyan-400' : 'text-emerald-400'"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <path d="M14 2v6h6"/>
+                </svg>
                 <span class="truncate">{{ file.name }}</span>
               </span>
               <span v-if="file.hasErrors" class="w-1.5 h-1.5 rounded-full bg-red-400"></span>
@@ -118,11 +128,11 @@
           <!-- Mounted Backup ZIP Section -->
           <div class="pt-3 pl-2">
             <div class="text-[#858585] px-1.5 py-0.5 flex items-center gap-1">
-              <span>▼</span>
+              <svg class="w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
               <span> KRCDiag_2026.zip [MOUNT]</span>
             </div>
             <div class="pl-6 text-[10px] text-gray-500 py-0.5">
-              • Auto-Patch Enabled (&lt;80ms)
+              Auto-Patch Enabled
             </div>
           </div>
         </div>
@@ -193,7 +203,18 @@
               v-for="line in currentLines" 
               :key="line.num" 
               class="h-5 flex items-center justify-end gap-1">
-              <span v-if="line.isFoldStart" @click="toggleFold(line.num)" class="cursor-pointer text-gray-400 hover:text-white text-[10px]">▼</span>
+              <svg
+                v-if="line.isFoldStart"
+                @click="toggleFold(line.num)"
+                class="w-3 h-3 cursor-pointer text-gray-400 hover:text-white"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
               <span :class="{'text-red-400 font-bold': line.hasError}">{{ line.num }}</span>
             </div>
           </div>

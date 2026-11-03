@@ -9,21 +9,21 @@
       <div class="flex items-center gap-6">
         <span class="inline-flex items-center gap-2 font-bold text-[#FF5500]">
           <span class="w-1.5 h-1.5 bg-[#FF5500] animate-pulse"></span>
-          KUKA KRL PROFESSIONAL v1.9.8
+      KUKA KRL PROFESSIONAL v1.9.9
         </span>
         <span class="hidden md:inline-flex items-center gap-1.5 text-[#00D68F]">
           <svg class="w-3.5 h-3.5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           REVERSINGLABS SPECTRA ASSURE: 100% PASS [0 CVE]
         </span>
         <span class="hidden lg:inline text-zinc-500">|</span>
-        <span class="hidden lg:inline text-zinc-400">4.2M+ LINES AUDITED</span>
+        <span class="hidden lg:inline text-zinc-400">124 COMMANDS</span>
         <span class="hidden xl:inline text-zinc-500">|</span>
-        <span class="hidden xl:inline text-zinc-400">3,500+ ACTIVE INDUSTRIAL ENGINEERS</span>
+        <span class="hidden xl:inline text-zinc-400">64 DOCUMENTED TOOLS</span>
       </div>
       <div class="flex items-center gap-4 text-[10px]">
         <span class="inline-flex items-center gap-1 text-emerald-400 font-bold">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-          AIR-GAP 100% ON-PREMISE COMPLIANT
+          AIR-GAP ED25519 LICENSE
         </span>
       </div>
     </div>
@@ -33,10 +33,12 @@
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
         
         <!-- Brand & Version -->
-        <a :href="withBase('/')" class="flex items-center gap-3 shrink-0 group">
-          <div :class="['w-8 h-8 flex items-center justify-center border font-mono font-black text-sm text-white bg-black transition-transform group-hover:scale-105', isDaylight ? 'border-zinc-400' : 'border-zinc-700']">
-            <span class="text-[#FF5500]">K</span>RL
-          </div>
+        <a :href="withBase('/')" class="flex items-center gap-3 shrink-0">
+          <img
+            :src="withBase(isDaylight ? '/logo-light.svg' : '/logo-dark.svg')"
+            alt="Liskin Labs"
+            class="w-8 h-8 object-contain"
+          />
           <div class="flex flex-col text-left">
             <span class="font-mono font-extrabold text-xs tracking-wider">
               LISKIN<span class="text-[#FF5500]">LABS</span>
@@ -52,7 +54,7 @@
           <a href="#simulator" :class="['hover:text-[#FF5500] transition-colors', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">[03] WEB IDE</a>
           <a href="#roi" :class="['hover:text-[#FF5500] transition-colors', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">[04] ROI & QUOTE</a>
           <a href="#pricing" :class="['hover:text-[#FF5500] transition-colors', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">[05] PRICING</a>
-          <a href="#inventory" :class="['hover:text-[#FF5500] transition-colors', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">[06] 80+ TOOLS</a>
+        <a href="#inventory" :class="['hover:text-[#FF5500] transition-colors', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">[06] CAPABILITIES</a>
           <a href="#telemetry" :class="['hover:text-[#FF5500] transition-colors', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">[07] HUBS</a>
         </nav>
 
@@ -117,7 +119,7 @@
           <a @click="mobileMenuOpen = false" href="#simulator" class="p-2 border border-zinc-800 hover:border-[#FF5500]">[03] WEB IDE</a>
           <a @click="mobileMenuOpen = false" href="#roi" class="p-2 border border-zinc-800 hover:border-[#FF5500]">[04] ROI & QUOTE</a>
           <a @click="mobileMenuOpen = false" href="#pricing" class="p-2 border border-zinc-800 hover:border-[#FF5500]">[05] PRICING</a>
-          <a @click="mobileMenuOpen = false" href="#inventory" class="p-2 border border-zinc-800 hover:border-[#FF5500]">[06] 80+ TOOLS</a>
+          <a @click="mobileMenuOpen = false" href="#inventory" class="p-2 border border-zinc-800 hover:border-[#FF5500]">[06] CAPABILITIES</a>
           <a @click="mobileMenuOpen = false" href="#telemetry" class="p-2 border border-zinc-800 hover:border-[#FF5500]">[07] HUBS</a>
         </div>
       </div>
@@ -161,7 +163,7 @@
                   KSS 8.3–8.7 & KRC5 READY
                 </span>
                 <span class="px-2 py-1 border border-blue-500/30 bg-blue-500/10 text-blue-400 font-medium">
-                  ISO 13849 LOGIC CHECKS
+              SAFETY LOGIC CHECKS
                 </span>
               </div>
 
@@ -216,20 +218,20 @@
             <!-- 4 Technical Metric Cards -->
             <div :class="['grid grid-cols-2 sm:grid-cols-4 border-t pt-4 text-left gap-4 font-mono', isDaylight ? 'border-zinc-300' : 'border-zinc-800']">
               <div>
-                <div class="text-2xl font-black text-[#FF5500] tabular-nums">&lt; 80 ms</div>
-                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">AST Parse Latency</div>
+                <div class="text-2xl font-black text-[#FF5500] tabular-nums">124</div>
+                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Commands</div>
               </div>
               <div>
                 <div class="text-2xl font-black text-[#00D68F] tabular-nums">0 CVE</div>
                 <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Spectra Assure</div>
               </div>
               <div>
-                <div class="text-2xl font-black tabular-nums">116+</div>
-                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Safety Rules</div>
+                <div class="text-2xl font-black tabular-nums">64</div>
+                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Documented Tools</div>
               </div>
               <div>
-                <div class="text-2xl font-black tabular-nums">80+</div>
-                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Industrial Tools</div>
+                <div class="text-2xl font-black tabular-nums">41</div>
+                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Pro Tools</div>
               </div>
             </div>
 
@@ -283,7 +285,7 @@
           <div class="font-mono text-xs text-[#FF5500] font-bold tracking-wider">[02 // INCIDENT SIMULATOR]</div>
           <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">PREVENT CATASTROPHIC DOWNTIME BEFORE COMPILING</h2>
           <p :class="['text-sm leading-relaxed', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">
-            Automotive body shops lose an average of $24,000 per hour during unplanned robotic cell halts. KRL Professional statically detects and auto-fixes the 4 most frequent causes of shop-floor stoppages.
+              Illustrative industry estimate: $24,000 per hour of unplanned robotic cell downtime. KRL Professional statically detects and auto-fixes the 4 most frequent causes of shop-floor stoppages.
           </p>
         </div>
 
@@ -536,6 +538,9 @@
             <p :class="['text-sm', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">
               Single engineers, integration teams, or plant-wide deployments. Direct invoicing by Dodo Payments Inc. with EU VAT, US Sales Tax, and corporate purchase orders.
             </p>
+          <p class="text-[10px] font-mono text-zinc-500">
+            Currency display is indicative. Checkout and invoices are processed in USD.
+          </p>
           </div>
 
           <!-- Currency Toggles -->
@@ -584,9 +589,6 @@
                   <span class="text-[#FF5500] font-bold">PRO ANNUAL</span>
                   <span class="text-[10px] px-1.5 py-0.5 bg-[#FF5500]/20 text-[#FF5500] font-bold">1 SEAT</span>
                 </div>
-                <div class="inline-flex items-center gap-1.5 px-2 py-0.5 bg-[#FF5500]/15 border border-[#FF5500]/30 text-[#FF5500] font-mono text-[10px] font-bold">
-                  🔥 15% OFF TRIAL PROMO CODE: LAUNCH30
-                </div>
               </div>
               <div class="flex items-baseline gap-1">
                 <span class="text-3xl sm:text-4xl font-black font-mono text-white">{{ formatPrice(149) }}</span>
@@ -595,7 +597,7 @@
               <p class="text-xs text-zinc-400">Full professional robotics toolset. Save 35% compared to monthly billing.</p>
               <ul class="text-xs font-mono space-y-1.5 pt-2 border-t border-zinc-800 text-zinc-300">
                 <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Interactive Logic Flowcharts v2.0</li>
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> All 80+ Industrial Tools</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> All 64 Industrial Tools</li>
                 <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Advance Run Stop Detection</li>
                 <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> 3-Point Frame Kinematic Solver</li>
               </ul>
@@ -700,7 +702,7 @@
               <div>
                 <span class="text-zinc-400 block font-bold">PRO MONTHLY</span>
                 <span class="text-lg font-black text-white">{{ formatPrice(19) }} / mo</span>
-                <span class="text-[10px] text-zinc-500 block">1 Seat • Cancel anytime</span>
+                  <span class="text-[10px] text-zinc-500 block">1 Seat / Cancel anytime</span>
               </div>
               <a 
                 href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp?showDiscounts=true"
@@ -723,7 +725,7 @@
               <div>
                 <span class="text-zinc-400 block font-bold">PRO LIFETIME</span>
                 <span class="text-lg font-black text-white">{{ formatPrice(699) }}</span>
-                <span class="text-[10px] text-zinc-500 block">1 Seat • Perpetual updates</span>
+                  <span class="text-[10px] text-zinc-500 block">1 Seat / Perpetual updates</span>
               </div>
               <a 
                 href="https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr?showDiscounts=true"
@@ -746,7 +748,7 @@
               <div>
                 <span class="text-cyan-400 block font-bold">ENTERPRISE SITE (100 SEATS)</span>
                 <span class="text-lg font-black text-white">{{ formatPrice(4999) }} / yr</span>
-                <span class="text-[10px] text-zinc-400 block">100 Workstations • Priority Support Gateway</span>
+                  <span class="text-[10px] text-zinc-400 block">100 Workstations / Priority Support Gateway</span>
               </div>
               <a 
                 href="https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP?showDiscounts=true"
@@ -816,7 +818,7 @@
 
       </section>
 
-      <!-- BLOCK 7: SEARCHABLE 80+ INDUSTRIAL TOOLS INVENTORY -->
+<!-- BLOCK 7: SEARCHABLE 64 INDUSTRIAL TOOLS INVENTORY -->
       <section id="inventory" :class="['relative border-b py-12 lg:py-16 text-left', isDaylight ? 'border-[#D4D4CE]' : 'border-zinc-800']">
         <span class="absolute -top-1.5 -left-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
         <span class="absolute -top-1.5 -right-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
@@ -825,9 +827,9 @@
         <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
           <div class="space-y-2 max-w-2xl">
             <div class="font-mono text-xs text-[#FF5500] font-bold tracking-wider">[06 // CAPABILITIES DIRECTORY]</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">80+ PRODUCTION TOOLS & DIAGNOSTICS</h2>
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">FULL PLATFORM CAPABILITY INVENTORY</h2>
             <p :class="['text-sm', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">
-              Complete inventory of commands, language servers, kinematic solvers, and safety checkers included in KUKA KRL Professional v1.9.8.
+              Complete inventory of {{ allInventory.length }} commands, settings, views, themes and language services included in KUKA KRL Professional v1.9.9.
             </p>
           </div>
 
@@ -982,7 +984,14 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           
           <div class="space-y-3">
-            <div class="font-bold text-white text-sm">LISKIN LABS INDUSTRIAL</div>
+            <div class="flex items-center gap-2">
+              <img
+                :src="withBase(isDaylight ? '/logo-light.svg' : '/logo-dark.svg')"
+                alt="Liskin Labs"
+                class="w-8 h-8 object-contain"
+              />
+              <div class="font-bold text-white text-sm">LISKIN LABS INDUSTRIAL</div>
+            </div>
             <p class="text-[11px] text-zinc-400 leading-relaxed">Advanced systems engineering, static safety analyzers, and high-precision CAD tooling for industrial robotics.</p>
             <div class="text-[10px] text-zinc-500">Lead Systems Architect: Silvestr Liskin</div>
           </div>
@@ -992,7 +1001,7 @@
             <ul class="space-y-1 text-[11px]">
               <li><a href="#hero" class="hover:text-[#FF5500]">KUKA KRL Professional</a></li>
               <li><a href="#simulator" class="hover:text-[#FF5500]">VS Code Web Simulator</a></li>
-              <li><a href="#inventory" class="hover:text-[#FF5500]">80+ Industrial Tools Wiki</a></li>
+          <li><a href="#inventory" class="hover:text-[#FF5500]">64 Industrial Tools Wiki</a></li>
               <li><a href="#pricing" class="hover:text-[#FF5500]">B2B Licensing & Pricing</a></li>
             </ul>
           </div>
@@ -1070,7 +1079,7 @@
             <tbody>
               <tr class="border-b border-zinc-200">
                 <td class="p-2 font-bold">{{ recommendedTier.name }}</td>
-                <td class="p-2">KUKA KRL Professional IDE v1.9.8 Suite (80+ Industrial Tools, Air-Gap License, Spectra Assure 0 CVE)</td>
+        <td class="p-2">KUKA KRL Professional IDE v1.9.9 Suite (64 Industrial Tools, Air-Gap License, Spectra Assure 0 CVE)</td>
                 <td class="p-2 text-center">{{ recommendedTier.seats }} Seats</td>
                 <td class="p-2 text-right font-bold">{{ formatPrice(recommendedTier.priceUsd) }}</td>
               </tr>
@@ -1081,10 +1090,10 @@
         <!-- ROI Summary Block -->
         <div class="bg-zinc-50 border border-zinc-200 p-4 mb-6 text-xs font-mono space-y-1">
           <div class="font-bold text-black uppercase">PLANT ROI & DOWNTIME REDUCTION ANALYSIS:</div>
-          <div>• Configured Robot Fleet: {{ calcRobots }} Robots in active production cells</div>
-          <div>• Automation Team: {{ calcEngineers }} Commissioning & Maintenance Engineers</div>
-          <div>• Anticipated Downtime Prevented: ~{{ preventedHours }} Hours / Year</div>
-          <div class="text-[#00D68F] font-bold">• Estimated Net Financial Benefit: {{ formatPrice(annualSavings) }} / Year</div>
+      <div>- Configured Robot Fleet: {{ calcRobots }} Robots in active production cells</div>
+      <div>- Automation Team: {{ calcEngineers }} Commissioning & Maintenance Engineers</div>
+      <div>- Anticipated Downtime Prevented: ~{{ preventedHours }} Hours / Year</div>
+      <div class="text-[#00D68F] font-bold">- Estimated Net Financial Benefit: {{ formatPrice(annualSavings) }} / Year</div>
         </div>
 
         <!-- Terms & Delivery -->
@@ -1132,7 +1141,7 @@
         </button>
 
         <div class="text-sm font-bold text-[#FF5500]">ACTIVATE 14-DAY PRO TRIAL</div>
-        <p class="text-zinc-400 text-xs">Experience all 80+ Pro features with zero credit card and zero commitment.</p>
+      <p class="text-zinc-400 text-xs">Experience all 41 Pro features with zero credit card and zero commitment.</p>
 
         <div class="space-y-3 border-t border-b border-zinc-800 py-3 text-xs">
           <div>
@@ -1409,7 +1418,7 @@ const printQuote = () => {
   }
 }
 
-// 80+ Tools Inventory Processing
+// 64 Tools Inventory Processing
 const allInventory = []
 if (inventoryData && inventoryData.inventory) {
   Object.keys(inventoryData.inventory).forEach(cat => {

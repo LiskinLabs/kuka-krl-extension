@@ -1,5 +1,6 @@
 import DefaultTheme from 'vitepress/theme'
 import './tailwind.css'
+import './industrial.css'
 import FeaturesWiki from './components/FeaturesWiki.vue'
 import LandingPage from './components/LandingPage.vue'
 

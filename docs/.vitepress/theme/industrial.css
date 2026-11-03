@@ -1,0 +1,648 @@
+/* ==========================================================================
+   Liskin Labs Industrial UI skin
+   Shared visual language with the KUKA 3D Digital Twin workstation:
+   flat sheet-metal panels, 1px borders, dense typography, orange machine
+   state accent, no glassmorphism and no decorative glow.
+   ========================================================================== */
+
+:root {
+  --ll-bg: #f4f5f7;
+  --ll-panel: #ffffff;
+  --ll-panel-alt: #f8fafc;
+  --ll-panel-deep: #eef2f6;
+  --ll-border: #cbd5e1;
+  --ll-border-strong: #94a3b8;
+  --ll-text: #0f172a;
+  --ll-text-soft: #334155;
+  --ll-muted: #475569;
+  --ll-faint: #64748b;
+  --ll-orange: #ff5500;
+  --ll-orange-strong: #c2410c;
+  --ll-green: #16a34a;
+  --ll-cyan: #059669;
+  --ll-red: #dc2626;
+  --ll-font: 'Bahnschrift', 'DIN Alternate', 'Segoe UI', 'Inter', system-ui, sans-serif;
+  --ll-mono: 'Cascadia Mono', 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+
+  --vp-font-family-base: var(--ll-font);
+  --vp-font-family-mono: var(--ll-mono);
+  --vp-c-bg: var(--ll-bg);
+  --vp-c-bg-alt: var(--ll-panel-alt);
+  --vp-c-bg-elv: var(--ll-panel);
+  --vp-c-bg-soft: var(--ll-panel-alt);
+  --vp-c-border: var(--ll-border);
+  --vp-c-divider: var(--ll-border);
+  --vp-c-text-1: var(--ll-text);
+  --vp-c-text-2: var(--ll-muted);
+  --vp-c-text-3: var(--ll-faint);
+  --vp-c-brand-1: var(--ll-orange);
+  --vp-c-brand-2: #ff7a1a;
+  --vp-c-brand-3: var(--ll-orange-strong);
+  --vp-c-brand-soft: rgba(255, 85, 0, 0.12);
+  --vp-c-green-1: var(--ll-green);
+  --vp-c-green-2: #22c55e;
+  --vp-c-green-3: #15803d;
+  --vp-button-brand-bg: var(--ll-orange);
+  --vp-button-brand-hover-bg: #ff7a1a;
+  --vp-button-brand-border: #ff8a3d;
+  --vp-button-brand-text: #ffffff;
+  --vp-button-alt-bg: var(--ll-panel);
+  --vp-button-alt-hover-bg: var(--ll-panel-alt);
+  --vp-button-alt-border: var(--ll-border-strong);
+  --vp-button-alt-text: var(--ll-text);
+}
+
+html.dark {
+  --ll-bg: #0b0e11;
+  --ll-panel: #14191e;
+  --ll-panel-alt: #10151a;
+  --ll-panel-deep: #0d1216;
+  --ll-border: #2c353e;
+  --ll-border-strong: #3d4853;
+  --ll-text: #d9e1e8;
+  --ll-text-soft: #c2ccd6;
+  --ll-muted: #8795a2;
+  --ll-faint: #6b7785;
+  --ll-orange: #ff6a00;
+  --ll-orange-strong: #ff8a3d;
+  --ll-green: #35c46a;
+  --ll-cyan: #27c1a1;
+  --ll-red: #ff5c5c;
+}
+
+html,
+body {
+  background: var(--ll-bg) !important;
+  color: var(--ll-text);
+}
+
+body {
+  font-family: var(--ll-font) !important;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0.005em;
+}
+
+::selection {
+  background: var(--ll-orange);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ll-panel-alt);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ll-border-strong);
+  border-radius: 1px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ll-orange);
+}
+
+/* --------------------------------------------------------------------------
+   VitePress chrome
+   -------------------------------------------------------------------------- */
+
+.VPNavBar,
+.VPNavBar .container,
+.VPNav {
+  background: var(--ll-panel) !important;
+  border-bottom: 1px solid var(--ll-border-strong) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.VPNavBar {
+  height: 54px;
+}
+
+.VPNavBarTitle .title {
+  font-family: var(--ll-font);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.VPNavBarMenuLink {
+  font-family: var(--ll-font);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.VPNavBarMenuLink.active,
+.VPNavBarMenuLink:hover {
+  color: var(--ll-orange) !important;
+}
+
+.VPSidebar {
+  background: var(--ll-panel-alt) !important;
+  border-right: 1px solid var(--ll-border) !important;
+  padding-top: 18px;
+}
+
+.VPSidebarItem.level-0 > .item > .text {
+  font-family: var(--ll-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ll-muted) !important;
+}
+
+.VPSidebarItem.level-1 .text,
+.VPSidebarItem.level-2 .text {
+  font-size: 12px;
+}
+
+.VPSidebarItem.is-active > .item .text {
+  color: var(--ll-orange) !important;
+}
+
+.VPDoc,
+.VPContent,
+.VPContent .content-container,
+.VPDoc .content {
+  background: var(--ll-bg) !important;
+}
+
+.VPDoc {
+  padding-bottom: 48px;
+}
+
+.VPDoc h1 {
+  font-family: var(--ll-font);
+  font-size: clamp(26px, 2.5vw, 34px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.VPDoc h2 {
+  font-family: var(--ll-font);
+  font-size: 21px;
+  line-height: 1.2;
+  padding-top: 22px;
+  border-top: 1px solid var(--ll-border);
+}
+
+.VPDoc h3 {
+  font-family: var(--ll-font);
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.VPDoc p,
+.VPDoc li,
+.VPDoc td,
+.VPDoc th {
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
+.VPDoc a {
+  color: var(--ll-orange);
+}
+
+.VPDoc table {
+  border-collapse: collapse;
+  border: 1px solid var(--ll-border);
+}
+
+.VPDoc tr:nth-child(2n) {
+  background: var(--ll-panel-alt);
+}
+
+.VPDoc th {
+  background: var(--ll-panel-deep);
+  border-bottom: 1px solid var(--ll-border-strong);
+}
+
+.VPDoc td,
+.VPDoc th {
+  border-color: var(--ll-border) !important;
+}
+
+.VPDoc div[class*='language-'],
+.VPDoc .custom-block,
+.VPDoc .vp-doc .custom-block {
+  border-radius: 2px !important;
+  border-color: var(--ll-border) !important;
+  box-shadow: none !important;
+}
+
+.VPDoc div[class*='language-'] {
+  border: 1px solid var(--ll-border);
+}
+
+.VPDoc .custom-block {
+  border-left-width: 3px;
+}
+
+.VPDocAsideOutline .outline-title,
+.VPDocAsideOutline .outline-link {
+  font-family: var(--ll-mono);
+  font-size: 11px;
+}
+
+.VPDocFooter {
+  border-top: 1px solid var(--ll-border);
+}
+
+.VPButton {
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  font-family: var(--ll-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.VPButton.brand {
+  background: var(--ll-orange) !important;
+  border-color: #ff8a3d !important;
+  color: #ffffff !important;
+}
+
+.VPButton.alt {
+  background: var(--ll-panel) !important;
+  border: 1px solid var(--ll-border-strong) !important;
+  color: var(--ll-text) !important;
+}
+
+.VPSwitchAppearance,
+.VPSwitch {
+  border-radius: 2px !important;
+}
+
+.VPSwitchAppearance .check {
+  border-radius: 1px !important;
+}
+
+.VPLocalNav {
+  background: var(--ll-panel-alt) !important;
+  border-bottom: 1px solid var(--ll-border) !important;
+}
+
+.VPLocalNav .menu,
+.VPLocalNav .VPLocalNavOutlineDropdown {
+  font-family: var(--ll-font);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.DocSearch-Button,
+.VPNavBarSearch .DocSearch-Button {
+  background: var(--ll-panel-alt) !important;
+  border: 1px solid var(--ll-border) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+
+.DocSearch-Button:hover {
+  border-color: var(--ll-orange) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Landing page
+   -------------------------------------------------------------------------- */
+
+.kuka-landing {
+  background: var(--ll-bg) !important;
+  color: var(--ll-text) !important;
+}
+
+/* The landing page carries its own day/night state; bind the industrial
+   tokens to that state instead of the VitePress html.dark class. */
+.kuka-landing[class*='bg-[#F4F3EF]'] {
+  --ll-bg: #f4f5f7;
+  --ll-panel: #ffffff;
+  --ll-panel-alt: #f8fafc;
+  --ll-panel-deep: #eef2f6;
+  --ll-border: #cbd5e1;
+  --ll-border-strong: #94a3b8;
+  --ll-text: #0f172a;
+  --ll-text-soft: #334155;
+  --ll-muted: #475569;
+  --ll-faint: #64748b;
+  --ll-orange: #ff5500;
+  --ll-orange-strong: #c2410c;
+  --ll-green: #16a34a;
+  --ll-cyan: #059669;
+}
+
+.kuka-landing[class*='bg-[#09090B]'] {
+  --ll-bg: #0b0e11;
+  --ll-panel: #14191e;
+  --ll-panel-alt: #10151a;
+  --ll-panel-deep: #0d1216;
+  --ll-border: #2c353e;
+  --ll-border-strong: #3d4853;
+  --ll-text: #d9e1e8;
+  --ll-text-soft: #c2ccd6;
+  --ll-muted: #8795a2;
+  --ll-faint: #6b7785;
+  --ll-orange: #ff6a00;
+  --ll-orange-strong: #ff8a3d;
+  --ll-green: #35c46a;
+  --ll-cyan: #27c1a1;
+}
+
+.kuka-landing > .fixed.inset-0 {
+  display: none !important;
+}
+
+.VPContent .fixed.inset-0 {
+  display: none !important;
+}
+
+.kuka-landing header {
+  background: var(--ll-panel) !important;
+  border-bottom: 1px solid var(--ll-border-strong) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.kuka-landing header > div {
+  height: 54px !important;
+}
+
+.kuka-landing > div.relative.z-50 {
+  background: var(--ll-panel-alt) !important;
+  border-color: var(--ll-border) !important;
+  color: var(--ll-muted) !important;
+  font-size: 10px !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+
+.kuka-landing section {
+  padding-top: 32px !important;
+  padding-bottom: 32px !important;
+  border-color: var(--ll-border) !important;
+}
+
+.kuka-landing h1 {
+  font-family: var(--ll-font) !important;
+  font-size: clamp(28px, 3.2vw, 44px) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.02em !important;
+  font-weight: 800 !important;
+}
+
+.kuka-landing h2 {
+  font-family: var(--ll-font) !important;
+  font-size: clamp(20px, 2vw, 28px) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.kuka-landing h3 {
+  font-family: var(--ll-font) !important;
+  font-size: 15px !important;
+  line-height: 1.3 !important;
+}
+
+.kuka-landing p {
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+}
+
+.kuka-landing .font-mono,
+.kuka-landing .font-mono * {
+  font-family: var(--ll-mono) !important;
+}
+
+.kuka-landing [class*='backdrop-blur'],
+.VPContent [class*='backdrop-blur'] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.kuka-landing [class*='blur-'],
+.VPContent [class*='blur-'] {
+  filter: none !important;
+}
+
+.kuka-landing [class*='shadow'],
+.VPContent [class*='shadow'] {
+  box-shadow: none !important;
+}
+
+.kuka-landing [class*='rounded']:not([class*='rounded-full']),
+.VPContent [class*='rounded']:not([class*='rounded-full']) {
+  border-radius: 2px !important;
+}
+
+.kuka-landing [class*='bg-gradient']:not([class*='bg-clip-text']),
+.VPContent [class*='bg-gradient']:not([class*='bg-clip-text']) {
+  background-image: none !important;
+}
+
+.kuka-landing [class*='bg-clip-text'],
+.VPContent [class*='bg-clip-text'] {
+  background-image: none !important;
+  color: var(--ll-orange) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+.kuka-landing [class*='bg-[#09090B]'],
+.kuka-landing [class*='bg-[#0a0d14]'],
+.kuka-landing [class*='bg-[#0d121d]'],
+.kuka-landing [class*='bg-[#111114]'],
+.kuka-landing [class*='bg-[#16161A]'],
+.kuka-landing [class*='bg-[#16161a]'] {
+  background: var(--ll-panel) !important;
+}
+
+.kuka-landing [class*='bg-[#0C0C0F]'],
+.kuka-landing [class*='bg-[#07090e]'] {
+  background: var(--ll-panel-deep) !important;
+}
+
+.kuka-landing [class*='border-zinc'],
+.kuka-landing [class*='border-white'],
+.kuka-landing [class*='border-[#D4D4CE]'] {
+  border-color: var(--ll-border) !important;
+}
+
+.kuka-landing .text-zinc-300 {
+  color: var(--ll-text-soft) !important;
+}
+
+.kuka-landing .text-zinc-400,
+.kuka-landing .text-zinc-500,
+.kuka-landing .text-zinc-600 {
+  color: var(--ll-muted) !important;
+}
+
+.kuka-landing[class*='bg-[#F4F3EF]'] .text-white {
+  color: var(--ll-text) !important;
+}
+
+.kuka-landing[class*='bg-[#F4F3EF]'] a[class*='bg-[#FF5500]'].text-white,
+.kuka-landing[class*='bg-[#F4F3EF]'] button[class*='bg-[#FF5500]'].text-white {
+  color: #ffffff !important;
+}
+
+.kuka-landing[class*='bg-[#F4F3EF]'] .text-gray-300 {
+  color: var(--ll-text-soft) !important;
+}
+
+.kuka-landing[class*='bg-[#F4F3EF]'] .text-gray-400,
+.kuka-landing[class*='bg-[#F4F3EF]'] .text-gray-500 {
+  color: var(--ll-muted) !important;
+}
+
+.kuka-landing button,
+.kuka-landing a[class*='bg-[#FF5500]'] {
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+
+.kuka-landing input,
+.kuka-landing select,
+.kuka-landing textarea {
+  border-radius: 2px !important;
+  background: var(--ll-panel) !important;
+  color: var(--ll-text) !important;
+  border: 1px solid var(--ll-border-strong) !important;
+  font-family: var(--ll-mono) !important;
+  font-size: 12px !important;
+}
+
+.kuka-landing input:focus,
+.kuka-landing select:focus,
+.kuka-landing textarea:focus {
+  border-color: var(--ll-orange) !important;
+  outline: 1px solid rgba(255, 85, 0, 0.25) !important;
+}
+
+.kuka-landing #hero {
+  padding-top: 28px !important;
+  padding-bottom: 28px !important;
+}
+
+.kuka-landing #hero h1 {
+  max-width: 760px;
+}
+
+.kuka-landing #hero iframe {
+  border: 0;
+}
+
+.kuka-landing #hero [class*='border-zinc'] {
+  border-color: var(--ll-border-strong) !important;
+}
+
+.kuka-landing #pricing article,
+.kuka-landing #pricing > div > div {
+  border-radius: 2px !important;
+}
+
+.kuka-landing footer {
+  border-top: 1px solid var(--ll-border);
+  color: var(--ll-muted) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Feature wiki / docs cards
+   -------------------------------------------------------------------------- */
+
+.VPContent [class*='bg-[#0a0d14]'],
+.VPContent [class*='bg-[#0d121d]'],
+.VPContent [class*='bg-[#07090e]'] {
+  background: var(--ll-panel) !important;
+}
+
+.VPContent [class*='border-white'] {
+  border-color: var(--ll-border) !important;
+}
+
+.VPContent [class*='text-gray-400'],
+.VPContent [class*='text-slate-400'] {
+  color: var(--ll-muted) !important;
+}
+
+.VPContent [class*='text-gray-300'] {
+  color: var(--ll-text-soft) !important;
+}
+
+.VPContent [class*='bg-[#0a0d14]'] .text-white,
+.VPContent [class*='bg-[#0d121d]'] .text-white,
+.VPContent [class*='bg-[#07090e]'] .text-white {
+  color: var(--ll-text) !important;
+}
+
+.VPContent [class*='text-orange-200'] {
+  color: var(--ll-orange-strong) !important;
+}
+
+.VPContent .animate-ping,
+.VPContent .animate-pulse {
+  animation: none !important;
+}
+
+.kuka-landing .animate-ping,
+.kuka-landing .animate-pulse {
+  animation: none !important;
+}
+
+.kuka-landing .hud-corner-tl,
+.kuka-landing .hud-corner-br {
+  display: none !important;
+}
+
+/* Keep status LEDs readable, but remove decorative glow from panels. */
+.glass-panel,
+.glass-panel-glow {
+  background: var(--ll-panel) !important;
+  border: 1px solid var(--ll-border) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.neon-glow-orange,
+.neon-glow-cyan,
+.neon-glow-emerald {
+  box-shadow: none !important;
+}
+
+@media (max-width: 960px) {
+  .VPNavBar {
+    height: 54px;
+  }
+
+  .kuka-landing h1 {
+    font-size: clamp(26px, 8vw, 36px) !important;
+  }
+
+  .kuka-landing section {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .VPDoc h1 {
+    font-size: 25px;
+  }
+
+  .VPDoc h2 {
+    font-size: 19px;
+  }
+
+  .kuka-landing header > div {
+    height: auto !important;
+    min-height: 54px;
+  }
+}

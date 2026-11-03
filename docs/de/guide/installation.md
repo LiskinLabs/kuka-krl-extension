@@ -51,7 +51,7 @@ Für sicherheitskritische Produktionsanlagen ohne Internetverbindung wird der as
 ### Schritt 2: Signierte Lizenz im Webportal generieren
 1. Schließen Sie den USB-Stick an einen PC mit Internetzugang an.
 2. Rufen Sie das Liskin Labs-Aktivierungsportal auf:  
-   👉 **[Air-Gap Offline-Lizenzportal](https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap)**
+**[Air-Gap Offline-Lizenzportal](https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap)**
 3. Ziehen Sie Ihre Datei `liskin-hardware-id.lic` in das Upload-Feld — der Hardware-Fingerabdruck wird automatisch eingetragen.
 4. Geben Sie Ihren Lizenzschlüssel ein und klicken Sie auf **Offline-Lizenz generieren**.
 5. Laden Sie die signierte Datei `liskin-krl-license.lic` auf den USB-Stick herunter.

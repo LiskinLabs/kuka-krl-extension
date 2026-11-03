@@ -10,15 +10,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'kuka-orange': '#FF6600',
-        'kuka-dark': '#0D1117',
-        'kuka-darker': '#090C10',
-        'kuka-gray': '#161B22',
-        'kuka-border': '#30363D'
+        'kuka-orange': '#FF6A00',
+        'kuka-dark': '#0B0E11',
+        'kuka-darker': '#090B0D',
+        'kuka-gray': '#14191E',
+        'kuka-border': '#2C353E'
       },
       fontFamily: {
-        sans: ['Inter', 'Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Roboto Mono', 'ui-monospace', 'monospace']
+        sans: ['Bahnschrift', 'DIN Alternate', 'Segoe UI', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['Cascadia Mono', 'JetBrains Mono', 'Roboto Mono', 'Consolas', 'ui-monospace', 'monospace']
       }
     },
   },

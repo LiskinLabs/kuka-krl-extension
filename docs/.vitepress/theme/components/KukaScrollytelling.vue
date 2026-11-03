@@ -35,10 +35,13 @@
           <button 
             @click="toggleAutoPlay" 
             class="px-2.5 py-1 rounded border border-white/10 hover:border-kuka-orange/50 text-gray-300 hover:text-white transition-colors flex items-center gap-1">
-            <span>{{ isAutoPlaying ? '⏸ Pause Tour' : '▶ Auto Tour' }}</span>
+            <svg v-if="isAutoPlaying" class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+            <svg v-else class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            <span>{{ isAutoPlaying ? 'Pause Tour' : 'Auto Tour' }}</span>
           </button>
           <span class="text-emerald-400 flex items-center gap-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> 120 FPS READY
+            <svg class="w-2 h-2" viewBox="0 0 8 8" aria-hidden="true"><circle cx="4" cy="4" r="3" fill="currentColor"/></svg>
+            3D VIEWPORT READY
           </span>
         </div>
       </div>

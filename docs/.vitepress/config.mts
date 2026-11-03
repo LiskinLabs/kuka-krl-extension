@@ -18,23 +18,25 @@ const getBase = () => {
 
 export default defineConfig({
   title: "KUKA KRL Professional",
-  appearance: 'force-dark',
+  appearance: 'dark',
   base: getBase(),
   outDir: '../public',
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/kuka-krl-extension/favicon.svg' }],
-    ['link', { rel: 'icon', type: 'image/png', href: '/kuka-krl-extension/logo.png' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/kuka-krl-extension/favicon-32.png' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/kuka-krl-extension/favicon-16.png' }],
+    ['link', { rel: 'apple-touch-icon', href: '/kuka-krl-extension/logo-original.png' }],
     ['meta', { name: 'theme-color', content: '#FF5500' }],
     ['meta', { name: 'keywords', content: 'KUKA, KRL, KRC4, KRC5, Robot, Robotics, Industrial Automation, WorkVisual, VS Code, SCADA, MCP' }],
     ['meta', { property: 'og:title', content: 'KUKA KRL Professional — Industrial Robotics IDE Suite' }],
     ['meta', { property: 'og:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Live SCADA, Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
-    ['meta', { property: 'og:image', content: '/kuka-krl-extension/logo.png' }],
+    ['meta', { property: 'og:image', content: '/kuka-krl-extension/logo-original.png' }],
     ['meta', { property: 'og:site_name', content: 'KUKA KRL Professional' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
     ['meta', { name: 'twitter:title', content: 'KUKA KRL Professional — Industrial Robotics IDE Suite' }],
     ['meta', { name: 'twitter:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Live SCADA, Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
-    ['meta', { name: 'twitter:image', content: '/kuka-krl-extension/logo.png' }]
+    ['meta', { name: 'twitter:image', content: '/kuka-krl-extension/logo-original.png' }]
   ],
   vite: {
     css: {
@@ -71,7 +73,7 @@ export default defineConfig({
     }
   },
   themeConfig: {
-    logo: '/logo.png',
+    logo: { light: '/logo-light.svg', dark: '/logo-dark.svg', alt: 'Liskin Labs' },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/LiskinLabs/kuka-krl-extension' }
     ],
@@ -327,7 +329,7 @@ export default defineConfig({
             ]
           },
           {
-            text: 'v1.9.8 Suites de Ingeniería',
+          text: 'v1.9.9 Suites de Ingeniería',
             items: [
               { text: 'Monitor SCADA en Vivo y Telemetría', link: '/es/guide/scada-live-monitor' },
               { text: 'Tabla de Puntos y Sincronizador .DAT', link: '/es/guide/point-synchronizer' },
@@ -384,7 +386,7 @@ export default defineConfig({
             ]
           },
           {
-            text: 'v1.9.8 Suite Ingegneristiche',
+          text: 'v1.9.9 Suite Ingegneristiche',
             items: [
               { text: 'Monitor SCADA Live e Telemetria', link: '/it/guide/scada-live-monitor' },
               { text: 'Tabella Punti e Sincronizzatore .DAT', link: '/it/guide/point-synchronizer' },

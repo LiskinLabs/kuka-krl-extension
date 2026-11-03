@@ -114,7 +114,7 @@ Industrial motion simulation and kinematic safety rules conforming to KSS 8.x an
 ---
 
 ### 34. Enterprise Fleet Reliability & Non-Destructive Code Verification
-Verified across 9,804 real industrial plant modules (4.2M+ LoC across 17 robotics installations and 8 automotive/Tier-1 clients) with 0 line truncations, 0 block regressions, and 100% code preservation.
+Validated against real KRC backup archives and production KRL modules. Run the built-in backup audit on your own cell before deployment; the product does not claim certification or controller-exact behavior.
 
 ---
 

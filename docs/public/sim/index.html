@@ -16,8 +16,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
   <link rel="alternate icon" type="image/x-icon" href="./favicon.ico" />
-  <script type="module" crossorigin src="./assets/index-Ctx5-Nw4.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BgT8e3fm.css">
+  <script type="module" crossorigin src="./assets/index-D5kHY1Kl.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BTZXGbe5.css">
 </head>
 <body>
   <!-- Inline SVG icon sprite: the UI uses vector icons only, no emoji. -->
@@ -458,6 +458,9 @@
               <button class="ws-watch-subtab" data-watch-view="matrix" data-i18n="watch.matrix">
                 I/O Matrix
               </button>
+          <button class="ws-watch-subtab" data-watch-view="trend" data-i18n="watch.trend">
+            Trend
+          </button>
             </div>
             <div id="watch-live-view" class="ws-watch-view active">
               <div class="ws-watch-hint" data-i18n="watch.hint">
@@ -510,6 +513,20 @@
                 </table>
               </div>
             </div>
+
+        <div id="watch-trend-view" class="ws-watch-view">
+          <div class="ws-trend-toolbar">
+            <button id="trend-record-btn" class="ws-watch-add-btn" type="button" data-i18n="trend.record">Record</button>
+            <button id="trend-clear-btn" class="ws-watch-add-btn" type="button" data-i18n="trend.clear">Clear</button>
+            <button id="trend-export-btn" class="ws-watch-add-btn" type="button" data-i18n="trend.export">CSV</button>
+            <span id="trend-status" class="ws-trend-status"></span>
+            <span id="trend-buffer-badge" class="ws-trend-badge"></span>
+          </div>
+          <div class="ws-trend-layout">
+            <div id="trend-signal-list" class="ws-trend-signals"></div>
+            <div id="trend-chart" class="ws-trend-chart"></div>
+          </div>
+        </div>
           </div>
         </section>
       </div>
@@ -704,6 +721,19 @@
 
             <div class="export-card">
               <div class="export-card-head">
+                <svg class="icon export-icon" aria-hidden="true"><use href="#i-doc"/></svg>
+                <strong data-i18n="diff.title">Сравнение бекапов</strong>
+              </div>
+              <p class="export-card-desc" data-i18n="diff.desc">Сравнить текущий бекап с ранее скомпилированным: TOOL/BASE, точки, I/O, программы и cycle time.</p>
+              <select id="diff-base-select" class="dropdown-select diff-base-select"></select>
+              <button id="btn-diff-compare" class="btn-ghost export-action-btn" disabled>
+                <span data-i18n="diff.compare">Сравнить</span>
+              </button>
+              <span id="diff-status" class="diff-status"></span>
+            </div>
+
+            <div class="export-card">
+              <div class="export-card-head">
                 <svg class="icon export-icon" aria-hidden="true"><use href="#i-video"/></svg>
                 <strong data-i18n="export.videoTitle">Запись симуляции (WebM)</strong>
               </div>
@@ -864,6 +894,27 @@
         <div class="modal-footer">
           <button id="btn-cancel-modal" class="btn-secondary" data-i18n="modal.cancel">Отмена</button>
           <button id="btn-apply-code" class="btn-primary" data-i18n="modal.apply">Загрузить в симулятор</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backup diff -->
+    <div id="diff-modal" class="modal-backdrop" style="display:none;">
+      <div class="modal-window glass-panel diff-window">
+        <div class="modal-header">
+          <div class="modal-title">
+            <svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>
+            <h3 data-i18n="diff.title">Сравнение бекапов</h3>
+          </div>
+          <button id="diff-close" class="btn-close"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+        </div>
+        <div class="modal-body">
+          <div id="diff-summary" class="diff-summary"></div>
+          <div id="diff-body" class="diff-body"></div>
+        </div>
+        <div class="modal-footer">
+          <button id="diff-download" class="btn-secondary" data-i18n="diff.download">Скачать JSON</button>
+          <button id="diff-close-footer" class="btn-primary" data-i18n="diff.close">Закрыть</button>
         </div>
       </div>
     </div>

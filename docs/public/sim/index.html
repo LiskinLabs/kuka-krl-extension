@@ -16,8 +16,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
   <link rel="alternate icon" type="image/x-icon" href="./favicon.ico" />
-  <script type="module" crossorigin src="./assets/index-z8Aj4CJe.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-7Yb8RE0z.css">
+  <script type="module" crossorigin src="./assets/index-CEDmOtIz.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DzUwWiH5.css">
 </head>
 <body>
   <!-- Inline SVG icon sprite: the UI uses vector icons only, no emoji. -->
@@ -113,9 +113,9 @@
           </select>
         </div>
 
-        <button id="btn-toggle-scene-dock" class="btn-ghost mobile-only" title="Дерево сцены">
+        <button id="btn-toggle-scene-dock" class="btn-ghost mobile-only" data-i18n-title="btn.mobileMenu" title="Дерево сцены">
           <svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg>
-          <span>Сцена</span>
+          <span data-i18n="dock.scene">Сцена</span>
         </button>
 
         <button id="btn-open-code-modal" class="btn-primary">
@@ -139,7 +139,7 @@
         <div id="settings-panel-body" class="settings-panel-body">
           <div id="theme-selector-group" class="selector-group">
             <span class="selector-label" data-i18n="settings.theme">Тема</span>
-            <select id="theme-select" class="dropdown-select theme-select" title="Тема интерфейса">
+            <select id="theme-select" class="dropdown-select theme-select" data-i18n-title="theme.title" title="Тема интерфейса">
               <option value="dark" data-i18n="theme.dark">Тёмная (Dark)</option>
               <option value="light" data-i18n="theme.light">Светлая CAD (Light)</option>
               <option value="kuka-industrial" data-i18n="theme.kuka">KUKA Industrial</option>
@@ -155,6 +155,27 @@
           <input id="settings-base-frames" type="checkbox" />
           <span data-i18n="settings.baseFrames">Показывать все BASE-фреймы</span>
         </label>
+        <div class="settings-sound">
+          <span class="selector-label" data-i18n="settings.sound">Звук</span>
+          <label class="settings-check">
+            <input id="settings-sound-notify" type="checkbox" />
+            <span data-i18n="settings.soundNotify">Звук уведомления оператора</span>
+          </label>
+          <label class="settings-check">
+            <input id="settings-sound-robot" type="checkbox" />
+            <span data-i18n="settings.soundRobot">Звук сервоприводов робота</span>
+          </label>
+          <label class="settings-range">
+            <span data-i18n="settings.volume">Громкость</span>
+            <input id="settings-sound-volume" type="range" min="0" max="100" step="1" />
+          </label>
+          <button id="settings-sound-test" class="btn-secondary settings-sound-test" type="button" data-i18n="settings.soundTest">
+            Проверить звук
+          </button>
+          <div class="settings-note" data-i18n="settings.soundHint">
+            Звук робота зависит от скорости осей и массы робота.
+          </div>
+        </div>
         <div class="settings-note" data-i18n="settings.note">Изменения сохраняются автоматически.</div>
       </div>
     </header>
@@ -216,7 +237,7 @@
         </div>
       </aside>
 
-      <div id="left-dock-resizer" class="dock-resizer dock-resizer-left" title="Resize scene dock"></div>
+      <div id="left-dock-resizer" class="dock-resizer dock-resizer-left" data-i18n-title="dock.resize" title="Resize scene dock"></div>
 
       <!-- ZONE 2 & 3: Center Viewport + Bottom Engineering Console -->
       <div id="center-workstation-col" class="ws-center-col">
@@ -253,9 +274,6 @@
             <button id="btn-vp-front" class="vtool-btn" data-i18n="view.front" data-i18n-title="view.front.title" title="Спереди">Front</button>
             <button id="btn-vp-side" class="vtool-btn" data-i18n="view.side" data-i18n-title="view.side.title" title="Сбоку">Side</button>
             <div class="vtool-sep"></div>
-            <button id="btn-vp-snap" class="vtool-btn active" data-i18n-title="cad.snap" title="Сетка 50 мм">
-              <svg class="icon" aria-hidden="true"><use href="#i-magnet"/></svg>
-            </button>
             <button id="btn-vp-envelope" class="vtool-btn" data-i18n-title="cad.envelope" title="Оценочная рабочая зона (не safety-сертификация)">
               <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
             </button>
@@ -297,9 +315,9 @@
       <!-- Telemetry HUD Overlay -->
       <div id="telemetry-hud" class="hud-panel">
         <div class="hud-title">
-          <span class="hud-grip" title="Перетащите панель координат (двойной клик — возврат в центр)">⋮⋮</span>
+          <span class="hud-grip" data-i18n-title="hud.grip" title="Перетащите панель координат (двойной клик — возврат в центр)">⋮⋮</span>
           <span class="hud-indicator"></span> <span id="hud-title" data-i18n="hud.tool">ФЛАНЕЦ РОБОТА ($TOOL)</span>
-          <button id="btn-hud-collapse" class="hud-collapse-btn" title="Свернуть / развернуть координаты" aria-label="Свернуть / развернуть координаты">▾</button>
+          <button id="btn-hud-collapse" class="hud-collapse-btn" data-i18n-title="hud.collapse" data-i18n-aria-label="hud.collapse" title="Свернуть / развернуть координаты" aria-label="Свернуть / развернуть координаты">▾</button>
         </div>
         <div class="coords-grid">
           <div class="coord-box"><span class="lbl">X</span><span class="val" id="val-x">0.0</span><span class="unit">mm</span></div>
@@ -349,10 +367,9 @@
           </footer>
         </main>
 
-        <!-- ZONE 3: Bottom Engineering Console (Parts | KRL / PLC | Problems | Watch) -->
+        <!-- ZONE 3: Bottom Engineering Console (KRL / PLC | Points | Problems | Watch) -->
         <section id="bottom-dock" class="ws-bottom-dock glass-panel">
           <div class="ws-bottom-tabs">
-            <button class="ws-bottom-tab" data-bd-tab="parts" data-i18n="dock.parts">Компоненты</button>
             <button class="ws-bottom-tab" data-bd-tab="krl" data-i18n="dock.krl_plc">KRL / ПЛК</button>
             <button class="ws-bottom-tab" data-bd-tab="points">
               <span data-i18n="dock.points">Точки</span>
@@ -368,12 +385,7 @@
             </button>
             <div class="ws-bottom-spacer"></div>
             <span id="plc-scan-indicator" class="ws-plc-scan-pill">SPS.SUB · 60 Hz (16.7 ms)</span>
-            <button id="bottom-dock-collapse" class="ws-dock-collapse" title="Свернуть/развернуть консоль">▾</button>
-          </div>
-
-          <!-- Pane 1: Cell Parts & Equipment Catalog -->
-          <div id="bd-pane-parts" class="ws-bottom-pane">
-            <div id="parts-catalog-grid" class="ws-parts-grid"></div>
+            <button id="bottom-dock-collapse" class="ws-dock-collapse" data-i18n-title="console.collapse" title="Свернуть/развернуть консоль">▾</button>
           </div>
 
           <!-- Pane 2: KRL / SoftPLC Source & Execution Monitor -->
@@ -707,7 +719,7 @@
 
         <div class="tab-content" id="tab-object">
           <div class="object-inspector">
-            <div class="object-inspector-name" id="obj-name">Объект не выбран</div>
+            <div class="object-inspector-name" id="obj-name" data-i18n="object.none">Объект не выбран</div>
             <div class="object-grid">
               <label>X, m <input id="obj-x" type="number" step="0.01" disabled /></label>
               <label>Y, m <input id="obj-y" type="number" step="0.01" disabled /></label>
@@ -748,7 +760,7 @@
         </div>
       </aside>
 
-      <div id="right-dock-resizer" class="dock-resizer dock-resizer-right" title="Resize inspector"></div>
+      <div id="right-dock-resizer" class="dock-resizer dock-resizer-right" data-i18n-title="dock.resize" title="Resize inspector"></div>
     </div>
 
     <!-- KRL Backup Flowchart Overlay -->
@@ -800,7 +812,7 @@
     <div id="code-modal" class="modal-backdrop" style="display:none;">
       <div class="modal-window glass-panel">
         <div class="modal-header">
-          <span class="modal-grip" title="Перетащите окно мышью">⋮⋮</span>
+          <span class="modal-grip" data-i18n-title="modal.drag" title="Перетащите окно мышью">⋮⋮</span>
           <div class="modal-title">
             <svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg>
             <h3 data-i18n="modal.title">Загрузка KRL программы (.src / .dat)</h3>
@@ -861,7 +873,7 @@
     <div id="consent-modal" class="modal-backdrop consent-backdrop" style="display:none;">
       <div class="modal-window glass-panel consent-window">
         <div class="modal-header">
-          <span class="modal-grip" title="Перетащите окно мышью">⋮⋮</span>
+          <span class="modal-grip" data-i18n-title="modal.drag" title="Перетащите окно мышью">⋮⋮</span>
           <div class="modal-title">
             <svg class="icon" aria-hidden="true"><use href="#i-warning"/></svg>
             <h3 data-i18n="consent.title">Экспериментальная модель</h3>

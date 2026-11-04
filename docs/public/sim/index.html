@@ -16,8 +16,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
   <link rel="alternate icon" type="image/x-icon" href="./favicon.ico" />
-  <script type="module" crossorigin src="./assets/index-DJTQOY5R.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-Bi-FjnXh.css">
+  <script type="module" crossorigin src="./assets/index-BZNpM5Av.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-7Yb8RE0z.css">
 </head>
 <body>
   <!-- Inline SVG icon sprite: the UI uses vector icons only, no emoji. -->
@@ -33,6 +33,7 @@
     <symbol id="i-loop" viewBox="0 0 24 24"><path d="M7 7h9v3l4-4-4-4v3H5v7h2zM17 17H8v-3l-4 4 4 4v-3h11v-7h-2z"/></symbol>
     <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12 19 17.6 17.6 19 12 13.4 6.4 19 5 17.6 10.6 12 5 6.4z"/></symbol>
+      <symbol id="i-gear" viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.01a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
     <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
     <symbol id="i-warning" viewBox="0 0 24 24"><path d="M12 2 1 21h22zm0 5.5 7.2 12.5H4.8zM11 9h2v6h-2zm0 7.5h2v2h-2z"/></symbol>
     <symbol id="i-live" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16z" opacity=".55"/></symbol>
@@ -64,7 +65,10 @@
       </div>
 
       <div class="top-controls">
-        <div class="selector-group">
+        <div id="top-playback-slot" class="top-control-slot"></div>
+        <div id="top-viewtools-slot" class="top-control-slot"></div>
+
+        <div id="robot-selector-group" class="selector-group">
           <span class="selector-label" data-i18n="label.robot">Робот:</span>
           <div id="robot-picker" class="robot-picker">
             <button
@@ -97,7 +101,7 @@
           </div>
         </div>
 
-        <div class="selector-group">
+        <div id="rail-selector-group" class="selector-group">
           <span class="selector-label" data-i18n="label.rail">Рельс ($E1):</span>
           <select id="rail-select" class="dropdown-select">
             <option value="NONE" selected data-i18n="rail.stationary">Без рельса (стационарный)</option>
@@ -119,14 +123,39 @@
           <span data-i18n="btn.importBackup">Импорт бекапа</span>
         </button>
 
-        <select id="theme-select" class="dropdown-select theme-select" title="Тема интерфейса">
-          <option value="dark" data-i18n="theme.dark">Тёмная (Dark)</option>
-          <option value="light" data-i18n="theme.light">Светлая CAD (Light)</option>
-          <option value="kuka-industrial" data-i18n="theme.kuka">KUKA Industrial</option>
-          <option value="high-contrast" data-i18n="theme.contrast">Высокий контраст</option>
-        </select>
+        <button id="btn-settings" class="btn-ghost settings-toggle" type="button" aria-expanded="false" aria-controls="settings-panel" data-i18n-title="settings.title" title="Настройки">
+          <svg class="icon" aria-hidden="true"><use href="#i-gear"/></svg>
+          <span data-i18n="settings.title">Настройки</span>
+        </button>
+      </div>
 
-        <select id="lang-select" class="dropdown-select lang-select" data-i18n-title="lang.label" title="Язык"></select>
+      <div id="settings-panel" class="settings-panel" hidden>
+        <div class="settings-panel-head">
+          <span data-i18n="settings.title">Настройки</span>
+          <button id="btn-settings-close" class="settings-panel-close" type="button" aria-label="Close">
+            <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+          </button>
+        </div>
+        <div id="settings-panel-body" class="settings-panel-body">
+          <div id="theme-selector-group" class="selector-group">
+            <span class="selector-label" data-i18n="settings.theme">Тема</span>
+            <select id="theme-select" class="dropdown-select theme-select" title="Тема интерфейса">
+              <option value="dark" data-i18n="theme.dark">Тёмная (Dark)</option>
+              <option value="light" data-i18n="theme.light">Светлая CAD (Light)</option>
+              <option value="kuka-industrial" data-i18n="theme.kuka">KUKA Industrial</option>
+              <option value="high-contrast" data-i18n="theme.contrast">Высокий контраст</option>
+            </select>
+          </div>
+          <div id="lang-selector-group" class="selector-group">
+            <span class="selector-label" data-i18n="settings.language">Язык</span>
+            <select id="lang-select" class="dropdown-select lang-select" data-i18n-title="lang.label" title="Язык"></select>
+          </div>
+        </div>
+        <label class="settings-check">
+          <input id="settings-base-frames" type="checkbox" />
+          <span data-i18n="settings.baseFrames">Показывать все BASE-фреймы</span>
+        </label>
+        <div class="settings-note" data-i18n="settings.note">Изменения сохраняются автоматически.</div>
       </div>
     </header>
 

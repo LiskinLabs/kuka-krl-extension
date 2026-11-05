@@ -10,6 +10,8 @@ The **Live Controller Monitor** (`krl.connectKukaRobot`, `krl.openLiveBridge`) e
 
 It brings shop-floor telemetry, 6-axis joint torque feedback, Cartesian TCP tracking, a 4096-pin I/O matrix, and live SmartPAD alarms with multilingual subtitles directly into your engineering workspace.
 
+> **Runtime requirement:** live controller features use the locally installed, licensed KUKA WorkVisual (WCF path) or a running KUKAVARPROXY/C3Bridge service. The extension does not bundle KUKA software. SMB backup requires the controller's KRC share.
+
 ---
 
 ## Architecture & Communication Protocols

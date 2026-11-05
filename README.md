@@ -50,6 +50,8 @@ Every industrial commissioning engineer, system integrator, and plant programmer
 
 **Liskin Labs KRL Engineering Toolkit** brings complete plant diagnostics, 3D kinematics, and live controller telemetry directly into Visual Studio Code.
 
+> **Runtime requirement:** live controller features use the locally installed, licensed KUKA WorkVisual (WCF path) or a running KUKAVARPROXY/C3Bridge service. The extension does not bundle KUKA software. SMB backup requires the controller's KRC share.
+
 ---
 
 ## Core Interactive Modules

@@ -27,15 +27,15 @@ export default defineConfig({
     ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/kuka-krl-extension/favicon-16.png' }],
     ['link', { rel: 'apple-touch-icon', href: '/kuka-krl-extension/logo-original.png' }],
     ['meta', { name: 'theme-color', content: '#FF5500' }],
-    ['meta', { name: 'keywords', content: 'KUKA, KRL, KRC4, KRC5, Robot, Robotics, Industrial Automation, WorkVisual, VS Code, SCADA, MCP' }],
+    ['meta', { name: 'keywords', content: 'KUKA, KRL, KRC4, KRC5, Robot, Robotics, Industrial Automation, WorkVisual, VS Code, Live Monitor, MCP' }],
     ['meta', { property: 'og:title', content: 'KUKA KRL Professional — Industrial Robotics IDE Suite' }],
-    ['meta', { property: 'og:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Live SCADA, Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
+    ['meta', { property: 'og:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Live Live Monitor, Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
     ['meta', { property: 'og:image', content: '/kuka-krl-extension/logo-original.png' }],
     ['meta', { property: 'og:site_name', content: 'KUKA KRL Professional' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
     ['meta', { name: 'twitter:title', content: 'KUKA KRL Professional — Industrial Robotics IDE Suite' }],
-    ['meta', { name: 'twitter:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Live SCADA, Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
+    ['meta', { name: 'twitter:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Live Live Monitor, Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
     ['meta', { name: 'twitter:image', content: '/kuka-krl-extension/logo-original.png' }]
   ],
   vite: {
@@ -86,7 +86,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Home', link: '/' },
-          { text: 'SCADA Live', link: '/guide/scada-live-monitor' },
+          { text: 'Live Monitor', link: '/guide/scada-live-monitor' },
           { text: 'Features Wiki', link: '/guide/features' },
           { text: 'Community', link: '/guide/community-features' },
           { text: 'Pro Features', link: '/guide/pro-features' },
@@ -103,7 +103,7 @@ export default defineConfig({
           {
             text: 'v1.9.11 Engineering Suites',
             items: [
-              { text: 'SCADA Live Monitor & Telemetry', link: '/guide/scada-live-monitor' },
+              { text: 'Live Controller Monitor & Telemetry', link: '/guide/scada-live-monitor' },
               { text: 'Point Table & .DAT Synchronizer', link: '/guide/point-synchronizer' },
               { text: 'WorkVisual & KUKA.Sim (VCMX)', link: '/guide/wvs-and-vcmx' },
               { text: 'KUKA.RSI Real-Time & CAM Importer', link: '/guide/rsi-and-cam' },
@@ -130,7 +130,7 @@ export default defineConfig({
           }
         ],
         footer: {
-          message: 'Licensed under Proprietary EULA. Independent tool by Liskin Labs; not affiliated with KUKA AG.',
+          message: 'Licensed under Proprietary EULA. Independent tool by Liskin Labs; not affiliated with KUKA AG. KUKA, KUKA.Sim and KRL are trademarks of KUKA Roboter GmbH. Offline engineering aids do not replace controller-side safety validation.',
           copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
         }
       }
@@ -143,7 +143,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Главная', link: '/ru/' },
-          { text: 'SCADA Live', link: '/ru/guide/scada-live-monitor' },
+          { text: 'Live Monitor', link: '/ru/guide/scada-live-monitor' },
           { text: 'Вики функций', link: '/ru/guide/features' },
           { text: 'Бесплатно (Community)', link: '/ru/guide/community-features' },
           { text: 'Pro функции', link: '/ru/guide/pro-features' },
@@ -160,7 +160,7 @@ export default defineConfig({
           {
             text: 'Инженерные комплексы v1.9.11',
             items: [
-              { text: 'SCADA Live Monitor реального времени', link: '/ru/guide/scada-live-monitor' },
+              { text: 'Live Controller Monitor реального времени', link: '/ru/guide/scada-live-monitor' },
               { text: 'Таблица точек и синхронизатор .DAT', link: '/ru/guide/point-synchronizer' },
               { text: 'WorkVisual и KUKA.Sim (VCMX)', link: '/ru/guide/wvs-and-vcmx' },
               { text: 'KUKA.RSI реального времени и CAM-импортер', link: '/ru/guide/rsi-and-cam' },
@@ -187,7 +187,7 @@ export default defineConfig({
           }
         ],
         footer: {
-          message: 'Проприетарная лицензия (EULA). Независимая разработка Liskin Labs; не аффилировано с KUKA AG.',
+          message: 'Проприетарная лицензия (EULA). Независимая разработка Liskin Labs; не аффилировано с KUKA AG. KUKA, KUKA.Sim и KRL — товарные знаки KUKA Roboter GmbH. Инженерные офлайн-инструменты не заменяют проверку безопасности на контроллере.',
           copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
         }
       }
@@ -200,7 +200,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Ana Sayfa', link: '/tr/' },
-          { text: 'SCADA Canlı', link: '/tr/guide/scada-live-monitor' },
+          { text: 'Canlı Monitör', link: '/tr/guide/scada-live-monitor' },
           { text: 'Özellikler Wiki', link: '/tr/guide/features' },
           { text: 'Ücretsiz (Community)', link: '/tr/guide/community-features' },
           { text: 'Pro Özellikler', link: '/tr/guide/pro-features' },
@@ -217,7 +217,7 @@ export default defineConfig({
           {
             text: 'v1.9.11 Mühendislik Paketleri',
             items: [
-              { text: 'SCADA Canlı İzleyici ve Telemetri', link: '/tr/guide/scada-live-monitor' },
+              { text: 'Canlı Kontrolör İzleyici ve Telemetri', link: '/tr/guide/scada-live-monitor' },
               { text: 'Nokta Tablosu ve .DAT Senkronizasyonu', link: '/tr/guide/point-synchronizer' },
               { text: 'WorkVisual ve KUKA.Sim (VCMX)', link: '/tr/guide/wvs-and-vcmx' },
               { text: 'KUKA.RSI Gerçek Zamanlı ve CAM İçe Aktarıcı', link: '/tr/guide/rsi-and-cam' },
@@ -244,7 +244,7 @@ export default defineConfig({
           }
         ],
         footer: {
-          message: 'Özel EULA altında lisanslanmıştır. Liskin Labs bağımsız geliştirme; KUKA AG ile bağlantılı değildir.',
+          message: 'Özel EULA altında lisanslanmıştır. Liskin Labs bağımsız geliştirme; KUKA AG ile bağlantılı değildir. KUKA, KUKA.Sim ve KRL, KUKA Roboter GmbH tarafından tescillenmiş ticari markalardır. Mühendislik araçları denetleyici tarafındaki güvenlik doğrulamasının yerini almaz.',
           copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
         }
       }
@@ -257,7 +257,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Startseite', link: '/de/' },
-          { text: 'SCADA Live', link: '/de/guide/scada-live-monitor' },
+          { text: 'Live Monitor', link: '/de/guide/scada-live-monitor' },
           { text: 'Features Wiki', link: '/de/guide/features' },
           { text: 'Community (Kostenlos)', link: '/de/guide/community-features' },
           { text: 'Pro-Funktionen', link: '/de/guide/pro-features' },
@@ -274,7 +274,7 @@ export default defineConfig({
           {
             text: 'v1.9.11 Engineering Suites',
             items: [
-              { text: 'SCADA Live Monitor & Telemetrie', link: '/de/guide/scada-live-monitor' },
+              { text: 'Live Controller Monitor & Telemetrie', link: '/de/guide/scada-live-monitor' },
               { text: 'Punkttabelle & .DAT-Synchronisation', link: '/de/guide/point-synchronizer' },
               { text: 'WorkVisual & KUKA.Sim (VCMX)', link: '/de/guide/wvs-and-vcmx' },
               { text: 'KUKA.RSI Echtzeit & CAM-Importer', link: '/de/guide/rsi-and-cam' },
@@ -301,7 +301,7 @@ export default defineConfig({
           }
         ],
         footer: {
-          message: 'Proprietäre EULA-Lizenz. Unabhängige Entwicklung von Liskin Labs; nicht mit der KUKA AG verbunden.',
+          message: 'Proprietäre EULA-Lizenz. Unabhängige Entwicklung von Liskin Labs; nicht mit der KUKA AG verbunden. KUKA, KUKA.Sim und KRL sind Marken der KUKA Roboter GmbH. Offline-Engineering-Werkzeuge ersetzen keine sicherheitsgerichtete Prüfung auf der Steuerung.',
           copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
         }
       }
@@ -314,7 +314,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Inicio', link: '/es/' },
-          { text: 'SCADA en Vivo', link: '/es/guide/scada-live-monitor' },
+          { text: 'Monitor en Vivo', link: '/es/guide/scada-live-monitor' },
           { text: 'Wiki de Funciones', link: '/es/guide/features' },
           { text: 'Community (Gratis)', link: '/es/guide/community-features' },
           { text: 'Funciones Pro', link: '/es/guide/pro-features' },
@@ -331,7 +331,7 @@ export default defineConfig({
           {
           text: 'v1.9.9 Suites de Ingeniería',
             items: [
-              { text: 'Monitor SCADA en Vivo y Telemetría', link: '/es/guide/scada-live-monitor' },
+              { text: 'Monitor Monitor en Vivo y Telemetría', link: '/es/guide/scada-live-monitor' },
               { text: 'Tabla de Puntos y Sincronizador .DAT', link: '/es/guide/point-synchronizer' },
               { text: 'WorkVisual y KUKA.Sim (VCMX)', link: '/es/guide/wvs-and-vcmx' },
               { text: 'KUKA.RSI en Tiempo Real e Importador CAM', link: '/es/guide/rsi-and-cam' },
@@ -358,7 +358,7 @@ export default defineConfig({
           }
         ],
         footer: {
-          message: 'Licenciado bajo EULA propietaria. Desarrollo independiente de Liskin Labs; no afiliado a KUKA AG.',
+          message: 'Licenciado bajo EULA propietaria. Desarrollo independiente de Liskin Labs; no afiliado a KUKA AG. KUKA, KUKA.Sim y KRL son marcas de KUKA Roboter GmbH. Las herramientas de ingeniería offline no sustituyen la validación de seguridad en el controlador.',
           copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
         }
       }
@@ -371,7 +371,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Home', link: '/it/' },
-          { text: 'SCADA Live', link: '/it/guide/scada-live-monitor' },
+          { text: 'Live Monitor', link: '/it/guide/scada-live-monitor' },
           { text: 'Wiki Funzioni', link: '/it/guide/features' },
           { text: 'Community (Gratis)', link: '/it/guide/community-features' },
           { text: 'Funzioni Pro', link: '/it/guide/pro-features' },
@@ -388,7 +388,7 @@ export default defineConfig({
           {
           text: 'v1.9.9 Suite Ingegneristiche',
             items: [
-              { text: 'Monitor SCADA Live e Telemetria', link: '/it/guide/scada-live-monitor' },
+              { text: 'Monitor Live Monitor e Telemetria', link: '/it/guide/scada-live-monitor' },
               { text: 'Tabella Punti e Sincronizzatore .DAT', link: '/it/guide/point-synchronizer' },
               { text: 'WorkVisual e KUKA.Sim (VCMX)', link: '/it/guide/wvs-and-vcmx' },
               { text: 'KUKA.RSI in Tempo Reale e Importatore CAM', link: '/it/guide/rsi-and-cam' },
@@ -415,7 +415,7 @@ export default defineConfig({
           }
         ],
         footer: {
-          message: 'Licenza proprietaria EULA. Sviluppo indipendente di Liskin Labs; non affiliato a KUKA AG.',
+          message: 'Licenza proprietaria EULA. Sviluppo indipendente di Liskin Labs; non affiliato a KUKA AG. KUKA, KUKA.Sim e KRL sono marchi di KUKA Roboter GmbH. Gli strumenti di ingegneria offline non sostituiscono la validazione di sicurezza sul controllore.',
           copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
         }
       }

@@ -1023,21 +1023,21 @@
         "id": "krl.live.connect",
         "title": "Connect to KUKA Robot Controller",
         "status": "PRO",
-        "valueProposition": "Establishes live bidirectional SCADA bridge to physical KRC4/KRC5 or OfficePC controllers over CrossComm WCF, OPC UA, or EthernetKRL."
+        "valueProposition": "Establishes live bidirectional Live Monitor bridge to physical KRC4/KRC5 or OfficePC controllers over CrossComm WCF, OPC UA, or EthernetKRL."
       },
       {
         "type": "Command",
         "id": "krl.live.disconnect",
         "title": "Disconnect from KUKA Robot Controller",
         "status": "PRO",
-        "valueProposition": "Safely disconnects active real-time SCADA telemetry session and releases network sockets."
+        "valueProposition": "Safely disconnects active real-time Live Monitor telemetry session and releases network sockets."
       },
       {
         "type": "Command",
         "id": "krl.live.openDashboard",
-        "title": "Open SCADA Live Bridge Dashboard",
+        "title": "Open Live Controller Bridge Dashboard",
         "status": "PRO",
-        "valueProposition": "Opens real-time SCADA dashboard displaying 3D Cartesian coordinates, axis angles, drives state, operating modes, override, and fieldbus I/O bits."
+        "valueProposition": "Opens real-time Live Monitor dashboard displaying 3D Cartesian coordinates, axis angles, drives state, operating modes, override, and fieldbus I/O bits."
       },
       {
         "type": "Command",

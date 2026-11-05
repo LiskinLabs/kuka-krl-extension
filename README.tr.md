@@ -1,3 +1,5 @@
+> **Trademark notice.** KUKA, KUKA.Sim and KRL are trademarks of KUKA Roboter GmbH. This is an independent tool, not affiliated with, endorsed by or sponsored by KUKA. Offline engineering aids do not replace controller-side safety validation.
+
 <h1 align="center">KUKA Engineering Toolkit</h1>
 
 <p align="center">

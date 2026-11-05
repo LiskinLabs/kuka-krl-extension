@@ -1,7 +1,9 @@
+> **Trademark notice.** KUKA, KUKA.Sim and KRL are trademarks of KUKA Roboter GmbH. This is an independent tool, not affiliated with, endorsed by or sponsored by KUKA. Offline engineering aids do not replace controller-side safety validation.
+
 <h1 align="center">KUKA Engineering Toolkit for VS Code</h1>
 
 <p align="center">
-  <b>Industrial Offline Programming (OLP), Real-Time SCADA Monitor, Pre-Deployment Diagnostics & Model Context Protocol (MCP) AI Bridge for KUKA Robotics.</b><br />
+  <b>Industrial Offline Programming (OLP), Live Controller Monitor, Pre-Deployment Diagnostics & Model Context Protocol (MCP) AI Bridge for KUKA Robotics.</b><br />
   <i>The complete offline & online engineering suite for Visual Studio Code.</i><br />
   Engineered for <b>KRC2, KRC4 & KRC5 Controllers (KSS 5.x – 8.7+)</b>, <b>iiQKA (KSS 9.x / iiQWorks)</b>, and <b>VKRC (VASS 2.6 / VASS 6)</b>.
 </p>
@@ -46,25 +48,25 @@ Every industrial commissioning engineer, system integrator, and plant programmer
 * **Night-Shift Point Drift**: Operators touch up taught points directly on the SmartPAD pendant without version control. Discovering what changed requires tedious manual comparison of dozens of `.dat` files.
 * **Slow Feedback Loops**: Transferring code to physical controllers or booting heavy virtual setups just to catch basic syntax or fold mismatches wastes critical commissioning hours.
 
-**Liskin Labs KUKA Engineering Toolkit** brings complete plant diagnostics, 3D kinematics, and real-time SCADA telemetry directly into Visual Studio Code.
+**Liskin Labs KUKA Engineering Toolkit** brings complete plant diagnostics, 3D kinematics, and live controller telemetry directly into Visual Studio Code.
 
 ---
 
 ## Core Interactive Modules
 
 <details open>
-<summary><b>1. SCADA Live Monitor & Real-Time Controller Telemetry [PRO]</b></summary>
+<summary><b>1. Live Controller Monitor & Live Controller Telemetry [PRO]</b></summary>
 <br>
 
-Direct industrial Ethernet connection to physical KUKA KR C2, KR C4, KR C5 controllers and virtual OfficePC setups via WCF and KUKAVARPROXY (port 7000):
+Direct industrial Ethernet connection to physical KUKA KR C2, KR C4, KR C5 controllers and virtual OfficePC setups via WCF or KUKAVARPROXY where available:
 * **6-Axis Joint Telemetry Gauges**: Real-time visualization of `$AXIS_ACT`, `$AXIS_MOT`, dynamic motor torque load bars (`$TORQMON`), and soft limit warnings (`$SOFTP_END`, `$SOFTN_END`).
 * **Cartesian TCP Telemetry**: Live readout of `$POS_ACT` (X, Y, Z, A, B, C) with active `$TOOL` and `$BASE` frame indicators.
 * **Dynamic Digital I/O Matrix**: Live visual grid for `$IN[1..4096]`, `$OUT[1..4096]`, system flags `$FLAG`, and timers `$TIMER`.
 * **SmartPAD Alarm Stream & Subtitles**: Streams active controller messages with automatic severity badges and synchronous subtitles in 6 languages (EN, RU, DE, TR, ES, IT).
-* **Hot Controller Backup**: Download clean, complete `.zip` backup archives directly from running controllers over Ethernet without stopping automated production.
+* **Online Controller Backup**: Download complete `.zip` backup archives directly from the controller over Ethernet. Validate the operation on a non-production controller before use.
 
 <p align="center">
-  <img src="docs/public/media/kuka_control_center.gif" width="760" alt="KUKA SCADA Live Controller Monitor & Telemetry Dashboard" />
+  <img src="docs/public/media/kuka_control_center.gif" width="760" alt="KUKA Live Controller Monitor & Telemetry Dashboard" />
 </p>
 </details>
 
@@ -126,7 +128,7 @@ Real-time generation of interactive vector flowcharts from active `.src` program
 </details>
 
 <details>
-<summary><b>6. Hard Real-Time RSI (4ms) & CAM G-Code / SVG Importer [PRO]</b></summary>
+<summary><b>6. RSI Code Generation (4ms) & CAM G-Code / SVG Importer [PRO]</b></summary>
 <br>
 
 * **KUKA.RobotSensorInterface (`krl.validateRsiXml`, `krl.generateRsiCode`)**: Validates XML socket descriptors and generates `#IPO_FAST` (4ms / 250Hz) real-time driver loops for optical seam tracking (`#POSCORR`) and ROS 2 axis control (`#AXISCORR`).
@@ -166,7 +168,7 @@ We separate core language editing (free forever for all roboticists) from advanc
 | **Syntax Highlighting, FOLD/UNFOLD, KUKA Themes** | ✓ | ✓ | ✓ | ✓ |
 | **Basic Diagnostics, Code Formatting, Inlay Hints** | ✓ | ✓ | ✓ | ✓ |
 | **Language Server Protocol (LSP) Autocomplete** | ✓ | ✓ | ✓ | ✓ |
-| **SCADA Live Monitor & 4096 I/O Telemetry** | — | ✓ | ✓ | ✓ |
+| **Live Controller Monitor & 4096 I/O Telemetry** | — | ✓ | ✓ | ✓ |
 | **SmartPAD Backup Diff & Spatial Deltas ($\Delta X, Y, Z$)** | — | ✓ | ✓ | ✓ |
 | **Deterministic Safe Auto-Repair & Monaco Diff Review** | — | ✓ | ✓ | ✓ |
 | **Interactive Flowchart & Control Flow Graph** | — | ✓ | ✓ | ✓ |

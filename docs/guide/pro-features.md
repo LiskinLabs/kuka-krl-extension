@@ -151,7 +151,7 @@ Pre-flight kinematic simulation and singularity risk analysis directly in the ed
 
 ---
 
-### 38. SCADA Live Bridge & Real-Time Controller Connection (`krl.live.connect`, `krl.live.openDashboard`) [PRO]
+### 38. Live Controller Bridge & Real-Time Controller Connection (`krl.live.connect`, `krl.live.openDashboard`) [PRO]
 Direct bidirectional hardware telemetry and telemetry bridge to physical KUKA KRC4, KRC5, and OfficePC controllers over CrossComm WCF, OPC UA, or EthernetKRL:
 - **Live State & Kinematic Coordinates**: Real-time streaming of Cartesian TCP positions ($X, Y, Z, A, B, C$), active Tool/Base indices, and individual axis angles ($A_1..A_6$).
 - **Controller Operating Modes & Interlocks**: Live indicators for operating mode (T1, T2, AUT, EXT), drives enabled (`$PERI_RDY`), emergency stop status (`$ALARM_STOP`), and safety gate interlocks.

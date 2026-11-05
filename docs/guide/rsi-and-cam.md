@@ -14,7 +14,7 @@ The **KUKA.RSI Real-Time Suite** (`krl.validateRsiXml`, `krl.generateRsiCode`) p
 
 ## KUKA.RSI (RobotSensorInterface) Real-Time Suite
 
-* **Hard Real-Time Control**: Supports high-frequency `#IPO_FAST` (4ms / 250 Hz) and `#IPO` (12ms / 83 Hz) sensor correction cycles.
+* **RSI Control-Loop Code Generation**: Supports high-frequency `#IPO_FAST` (4ms / 250 Hz) and `#IPO` (12ms / 83 Hz) sensor correction cycles.
 * **SensorInterface XML Schema Validator (`krl.validateRsiXml`)**: Validates `SensorInterface/*.xml` descriptors, checking `<ROOT>`, `<CONFIG>`, `<IP_NUMBER>`, `<PORT>`, element data types (`BOOL`, `LONG`, `DOUBLE`), and index continuity (`INDX="1..N"`).
 * **Real-Time Driver Generator (`krl.generateRsiCode`)**: Generates synchronized KRL driver routines (`RSI_CREATE`, `RSI_ON`, `RSI_MOVECORR`, `RSI_OFF`, `RSI_DELETE`) and XML socket configurations for:
   - **Cartesian Correction (`#POSCORR`)**: External optical and laser seam tracker feedback.

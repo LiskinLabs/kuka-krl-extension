@@ -1,3 +1,5 @@
+> **Trademark notice.** KUKA, KUKA.Sim and KRL are trademarks of KUKA Roboter GmbH. This is an independent tool, not affiliated with, endorsed by or sponsored by KUKA. Offline engineering aids do not replace controller-side safety validation.
+
 <h1 align="center">KUKA Engineering Toolkit</h1>
 
 <p align="center">
@@ -252,7 +254,7 @@ Jeder Inbetriebnahme-Ingenieur kennt den Schmerz:
 | **KSS-8.7-Standard-Systembibliothek & F12-Definition** | Ja | Ja | Sofortiger F12-Sprung zu `bas.src`, `MsgLib.src`, `$config.dat` |
 | **1-Klick-KRC-Projektgerüst** | Ja | Ja | Initialisiert die Standard-`KRC/R1/System`-Ordnerstruktur |
 | **Werksvorgaben-Hover & $ADVANCE-Limiter** | Ja | Ja | Zeigt Werksvorgaben und warnt bei `$ADVANCE > 5` |
-| **23 offizielle Inline-Form-Snippets** (34 Bewegungs- & Logikvorlagen) | Ja | Ja | Vollständige `;FOLD ... ;%{PE}`-Vorlagen von KUKA Roboter GmbH |
+| **23 Inline-Form-Vorlagen** (34 Bewegungs- & Logikvorlagen) | Ja | Ja | Vollständige `;FOLD ... ;%{PE}`-Vorlagen für KUKA-Controller |
 | **Signal-Inlay-Hinweise & Hover-Dokumentation** | Ja | Ja | Inline-PLC-Signalbeschriftungen & Parametersignaturen |
 | **Code-Formatter & Matrix-Ausrichtung** | Ja | Ja | Sofortige 1-Klick-Bereinigung (`Shift+Alt+F`) |
 | **GitLens-Zeilenblame & Verlauf** | Ja | Ja | Sofortige Autor- & Commit-Verfolgung für jeden Punkt |

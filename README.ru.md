@@ -1,7 +1,9 @@
+> **Trademark notice.** KUKA, KUKA.Sim and KRL are trademarks of KUKA Roboter GmbH. This is an independent tool, not affiliated with, endorsed by or sponsored by KUKA. Offline engineering aids do not replace controller-side safety validation.
+
 <h1 align="center">KUKA Engineering Toolkit for VS Code</h1>
 
 <p align="center">
-  <b>Промышленная среда офлайн-программирования (OLP), SCADA-монитор реального времени, аудит безопасности и мост Model Context Protocol (MCP) для роботов KUKA.</b><br />
+  <b>Промышленная среда офлайн-программирования (OLP), монитор состояния контроллера в реальном времени, аудит безопасности и мост Model Context Protocol (MCP) для роботов KUKA.</b><br />
   <i>Премиальный инженерный комплекс нового поколения для Visual Studio Code.</i><br />
   Разработано для <b>KRC2, KRC4, KRC5 (KSS 5.x – 8.7+)</b>, <b>iiQKA (KSS 9.x / iiQWorks)</b> и <b>VKRC (VASS 2.6 / VASS 6)</b>.
 </p>
@@ -46,14 +48,14 @@
 * **Ночной дрейф координат (Touch-Up)**: Операторы корректируют обученные точки на пульте SmartPAD без версионного контроля. Понять, кто и что изменил, вручную по десяткам `.dat` файлов практически невозможно.
 * **Медленный цикл отладки**: Передача непроверенного кода на физический контроллер или запуск тяжеловесных виртуальных машин отнимает десятки часов на пусконаладке.
 
-**Liskin Labs KUKA Engineering Toolkit** переносит полноценную среду заводской диагностики, 3D-кинематику и SCADA-телеметрию прямо в ваш редактор.
+**Liskin Labs KUKA Engineering Toolkit** переносит полноценную среду заводской диагностики, 3D-кинематику и телеметрию контроллера прямо в ваш редактор.
 
 ---
 
 ## Ключевые интерактивные модули
 
 <details open>
-<summary><b>1. SCADA Live Monitor & Телеметрия контроллера в реальном времени [PRO]</b></summary>
+<summary><b>1. Live Controller Monitor & Телеметрия контроллера в реальном времени [PRO]</b></summary>
 <br>
 
 Прямое Ethernet-подключение к физическим контроллерам KUKA KR C2, KR C4, KR C5 и виртуальным OfficePC по протоколам WCF и KUKAVARPROXY (порт 7000):
@@ -64,7 +66,7 @@
 * **Горячий бэкап на лету**: Скачивание чистого `.zip`-архива проекта с работающего контроллера без остановки автоматического цикла.
 
 <p align="center">
-  <img src="docs/public/media/kuka_control_center.gif" width="760" alt="KUKA SCADA Live Controller Monitor & Telemetry Dashboard" />
+  <img src="docs/public/media/kuka_control_center.gif" width="760" alt="KUKA Live Monitor Controller Monitor & Telemetry Dashboard" />
 </p>
 </details>
 
@@ -168,7 +170,7 @@
 | **Подсветка синтаксиса, FOLD/UNFOLD, темы KUKA** | ✓ | ✓ | ✓ | ✓ |
 | **Базовая диагностика, автодополнение, Inlay Hints** | ✓ | ✓ | ✓ | ✓ |
 | **Форматирование кода и выравнивание присваиваний** | ✓ | ✓ | ✓ | ✓ |
-| **SCADA Live Monitor и 4096 I/O телеметрия** | — | ✓ | ✓ | ✓ |
+| **Live Controller Monitor и 4096 I/O телеметрия** | — | ✓ | ✓ | ✓ |
 | **Сравнение бэкапов SmartPAD и дельты $\Delta X, Y, Z$** | — | ✓ | ✓ | ✓ |
 | **Безопасный авторемонт Safe Auto-Repair & Monaco Diff** | — | ✓ | ✓ | ✓ |
 | **Интерактивные векторные блок-схемы (Flowchart)** | — | ✓ | ✓ | ✓ |

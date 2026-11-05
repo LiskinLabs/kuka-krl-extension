@@ -1,13 +1,13 @@
-KUKA KRL EXTENSION — END-USER LICENSE AGREEMENT (EULA)
+KRL ENGINEERING TOOLKIT — END-USER LICENSE AGREEMENT (EULA)
 ======================================================
 
-Version 1.0 — Effective Date: June 2, 2026
+Version 1.2 — Effective Date: November 5, 2026
 
 Copyright (c) 2024-2026 LiskinLabs (Silvestr Liskin). All rights reserved.
 
 IMPORTANT — READ CAREFULLY: This End-User License Agreement ("Agreement") is a
 legal agreement between you (either an individual or a single entity, "Licensee")
-and LiskinLabs ("Licensor") for the KUKA KRL Extension software product, which
+and LiskinLabs ("Licensor") for the KRL Engineering Toolkit software product, which
 includes computer software, associated media, documentation, and any updates
 thereto (collectively, the "Software").
 
@@ -24,7 +24,8 @@ non-transferable, revocable license to install and use the Software on the
 number of devices specified by the purchased license tier.
 
 1.2. The Software is available in two editions:
-  (a) COMMUNITY EDITION — Free of charge, with limited functionality.
+  (a) COMMUNITY EDITION — Free of charge for non-commercial evaluation,
+      education, and personal learning, with limited functionality.
   (b) PREMIUM EDITION — Requires a valid license key obtained through an
       authorized purchase channel. Premium features are unlocked upon successful
       license activation.
@@ -33,6 +34,47 @@ number of devices specified by the purchased license tier.
 specified at the time of purchase. Activation binds the license to a unique
 machine identifier. To transfer the license to a different device, the Licensee
 must first deactivate the license on the current device.
+
+1.4. "Commercial Use" means any use of the Software by or for a company,
+government body, non-profit organization, or other legal entity in connection
+with its business operations. Commercial Use includes, without limitation:
+  (a) programming, commissioning, maintenance, or auditing of a robot cell used
+      in production or for a customer;
+  (b) creating, editing, or validating programs delivered to a customer;
+  (c) internal business tooling, engineering services, system integration,
+      consulting, or customer training;
+  (d) use by an employee, contractor, or subcontractor on behalf of an entity.
+
+1.5. COMMUNITY EDITION is licensed solely for:
+  (a) personal learning and evaluation;
+  (b) academic teaching and non-commercial research;
+  (c) a thirty (30) day evaluation inside a commercial organization, provided
+      the Software is not used in production and its output is not delivered
+      to a customer.
+
+Any other use is Commercial Use and requires a valid PREMIUM EDITION license for
+each engineer or device, unless a separate written agreement states otherwise.
+If the Licensee is unsure whether a use is commercial, it shall be treated as
+Commercial Use.
+
+1.6. Standard plans are enforced automatically through the activation limits of
+the Dodo Payments License Key entitlement. Licensor may verify compliance using
+license activation records and aggregate telemetry. No written declaration is
+required for standard plans. Enterprise plans may include a separate written
+true-up or audit agreement.
+
+1.7. Transition for existing installations. A Licensee that installed a
+Community Edition before the Effective Date may continue its then-current
+commercial use for ninety (90) calendar days after the Effective Date. After
+that period, continued Commercial Use requires a Premium Edition license or a
+separate written agreement.
+
+1.8. Merchant of Record. Purchases are processed by Dodo Payments as the
+Merchant of Record and legal seller of the transaction. Dodo Payments handles
+checkout, payment methods, invoices, sales tax/VAT, refunds, and subscription
+billing. This Agreement governs the software license granted by Licensor. If a
+payment, tax, or refund term conflicts with Dodo Payments' customer terms, the
+Dodo Payments terms prevail for that transaction.
 
 2. LICENSE KEYS AND ACTIVATION
 ------------------------------
@@ -44,7 +86,8 @@ any third party.
 2.2. The Software may periodically validate the license key via an internet
 connection. If connectivity is unavailable, the Software will operate in offline
 mode using locally cached validation data for a grace period of up to thirty
-(30) calendar days from the last successful online validation.
+(30) calendar days from the last successful online validation, followed by a
+billing grace period of up to fourteen (14) calendar days where applicable.
 
 2.3. After the grace period expires without a successful online re-validation,
 Premium features will be disabled until connectivity is restored and the license
@@ -89,7 +132,10 @@ is and shall remain the exclusive property of Licensor.
 
 4.2. This Agreement does not grant the Licensee any rights to trademarks, trade
 names, or service marks of Licensor, including but not limited to "LiskinLabs",
-"KRL Extension", and associated logos.
+"KRL Engineering Toolkit", and associated logos. KUKA, KUKA.Sim and KRL are
+trademarks of KUKA Roboter GmbH. The Software is an independent product and is
+not affiliated with, endorsed by or sponsored by KUKA Roboter GmbH; no right to
+use those marks is granted.
 
 4.3. Any feedback, suggestions, or ideas provided by the Licensee regarding the
 Software may be used by Licensor without obligation or compensation to the
@@ -102,7 +148,13 @@ Licensee.
 
 5.2. License validation requests transmit the license key and machine identifier to the activation server.
 
-5.3. The Licensee may opt out of telemetry data collection at any time through the Software's settings (`krl.telemetry.enabled: false`) or by disabling global VS Code telemetry.
+5.3. The Licensee may opt out of telemetry data collection at any time through
+`krl.silentIndustrialMode: true` or by disabling global VS Code telemetry.
+
+5.4. The Licensee may optionally provide an organization name. The organization
+name is transmitted only when `krl.organization.shareForAnalytics` is enabled.
+It is used for aggregated country/company usage statistics and B2B product
+communication. Consent can be withdrawn at any time by disabling that setting.
 
 6. UPDATES AND SUPPORT
 ----------------------
@@ -191,6 +243,6 @@ the official website contact channels or in-editor support relay.
 
 For questions about licensing, visit: https://liskinlabs.github.io/kuka-krl-extension/
 Purchase licenses at: https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ
-Official website: https://liskinlabs.github.io/kuka-krl-extension/
+Project website: https://liskinlabs.github.io/kuka-krl-extension/
 
 LiskinLabs — Industrial Robot Programming Tools

@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the **KUKA KRL Extension** will be documented in this file.
+All notable changes to the **KRL Engineering Toolkit** will be documented in this file.
 
 ## [1.9.8] - 2026-10-27 (Enterprise Air-Gap .lic Licensing [PRO], WorkVisual .wvs Topology Parser [PRO], Point Normalizer & Auto-Sync [PRO], KUKA.Sim VCMX Intelligence Suite [PRO], KUKA.RSI 4ms Real-Time Suite [PRO], CAM CNC G-Code & SVG Importer [PRO], Vision Hand-Eye Calibration & PLC Tag Exporter [PRO], Full 6-Locale Multilingual Engine)
 

@@ -1,6 +1,6 @@
-# Liskin Labs | KUKA KRL Extension — Strategic Roadmap (2026+)
+# Liskin Labs | KRL Engineering Toolkit — Strategic Roadmap (2026+)
 
-Дорожная карта развития среды разработки **KUKA KRL Extension** на базе анализа передовых решений в промышленной робототехнике (ABB RAPID Live, FANUC TP/Karel, truST Platform DAP, 3D Kinematics Webviews).
+Дорожная карта развития среды разработки **KRL Engineering Toolkit** на базе анализа передовых решений в промышленной робототехнике (ABB RAPID Live, FANUC TP/Karel, truST Platform DAP, 3D Kinematics Webviews).
 
 ---
 

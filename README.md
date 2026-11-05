@@ -1,6 +1,6 @@
 > **Trademark notice.** KUKA, KUKA.Sim and KRL are trademarks of KUKA Roboter GmbH. This is an independent tool, not affiliated with, endorsed by or sponsored by KUKA. Offline engineering aids do not replace controller-side safety validation.
 
-<h1 align="center">KUKA Engineering Toolkit for VS Code</h1>
+<h1 align="center">KRL Engineering Toolkit for VS Code</h1>
 
 <p align="center">
   <b>Industrial Offline Programming (OLP), Live Controller Monitor, Pre-Deployment Diagnostics & Model Context Protocol (MCP) AI Bridge for KUKA Robotics.</b><br />
@@ -48,7 +48,7 @@ Every industrial commissioning engineer, system integrator, and plant programmer
 * **Night-Shift Point Drift**: Operators touch up taught points directly on the SmartPAD pendant without version control. Discovering what changed requires tedious manual comparison of dozens of `.dat` files.
 * **Slow Feedback Loops**: Transferring code to physical controllers or booting heavy virtual setups just to catch basic syntax or fold mismatches wastes critical commissioning hours.
 
-**Liskin Labs KUKA Engineering Toolkit** brings complete plant diagnostics, 3D kinematics, and live controller telemetry directly into Visual Studio Code.
+**Liskin Labs KRL Engineering Toolkit** brings complete plant diagnostics, 3D kinematics, and live controller telemetry directly into Visual Studio Code.
 
 ---
 
@@ -203,7 +203,7 @@ We separate core language editing (free forever for all roboticists) from advanc
 ## Legal Disclaimers, Trademarks & Safety Compliance
 
 ### Mandatory Safety & Industrial Compliance (ISO 10218-1/-2 & ISO 13849-1)
-**KUKA Engineering Toolkit** is an independent engineering development, static analysis, and backup diff suite developed by **Liskin Labs**. It is **NOT safety-certified software (Non-SIL / Non-PL)** and does **not** replace mandatory physical commissioning procedures, reduced override verification (`$OV_PRO <= 30%` in T1 mode on the physical KUKA SmartPAD teach pendant), or formal risk assessments required by **ISO 10218-1/-2** and **ISO 13849-1**. Always perform manual path dry-runs in T1 mode before engaging automated production.
+**KRL Engineering Toolkit** is an independent engineering development, static analysis, and backup diff suite developed by **Liskin Labs**. It is **NOT safety-certified software (Non-SIL / Non-PL)** and does **not** replace mandatory physical commissioning procedures, reduced override verification (`$OV_PRO <= 30%` in T1 mode on the physical KUKA SmartPAD teach pendant), or formal risk assessments required by **ISO 10218-1/-2** and **ISO 13849-1**. Always perform manual path dry-runs in T1 mode before engaging automated production.
 
 ### Trademarks & Brand Neutrality
 * **KUKA®, KRL®, KRC®, WorkVisual®, iiQWorks®, and SmartPAD®** are registered trademarks of **KUKA AG** / **KUKA Deutschland GmbH**.

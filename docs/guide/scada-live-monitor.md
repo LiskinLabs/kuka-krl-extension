@@ -23,7 +23,7 @@ The live monitor uses a resilient dual-driver communication architecture:
 ```
 +-------------------------------------------------------------+
 |                VS Code Engineering Workstation              |
-|        (KUKA KRL Extension + Live Dashboard)      |
+|        (KRL Engineering Toolkit + Live Dashboard)      |
 +-------------------------------------------------------------+
                               |
                      Industrial Ethernet

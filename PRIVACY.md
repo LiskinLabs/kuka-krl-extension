@@ -1,5 +1,5 @@
 # Privacy Policy & GDPR Compliance Statement
-**KUKA KRL Extension for Visual Studio Code**  
+**KRL Engineering Toolkit for Visual Studio Code**  
 *Last updated: 2026-09-30*  
 *Liskin Labs / Silvestr Liskin Engineering*
 

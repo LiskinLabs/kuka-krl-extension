@@ -8,7 +8,7 @@ Connect external AI assistants directly to live industrial robot telemetry and w
 
 The **Model Context Protocol (MCP)** is an open standard that enables AI systems to securely interface with development tools and industrial hardware.
 
-The KUKA KRL extension features an **embedded local MCP Bridge Server** running on `127.0.0.1`. It connects modern AI programming environments (**Cursor, Google Antigravity, Claude Code CLI, Windsurf**) directly to your KUKA workspace, offline AST diagnostics, and live robot controller telemetry.
+The KRL Engineering Toolkit features an **embedded local MCP Bridge Server** running on `127.0.0.1`. It connects modern AI programming environments (**Cursor, Google Antigravity, Claude Code CLI, Windsurf**) directly to your KUKA workspace, offline AST diagnostics, and live robot controller telemetry.
 
 ```
 +-------------------------------------------------------------+

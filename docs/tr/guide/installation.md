@@ -13,7 +13,7 @@ KUKA KRL Professional eklentisini kurmak, yapılandırmak ve çevrimdışı etki
 ---
 
 ## 2. VSIX Dosyası İle Kurulum (Air-Gapped Çevrimdışı Kurulum)
-1. Resmi yayın deposundan en güncel `kuka-krl-extension-1.9.9.vsix` paketini indirin.
+1. Resmi yayın deposundan en güncel `kuka-krl-extension-1.9.10.vsix` paketini indirin.
 2. VS Code'da Eklentiler panelinin (`Ctrl + Shift + X`) sağ üst köşesindeki `...` menüsünü tıklayın.
 3. **Install from VSIX...** seçeneğini seçip indirilen `.vsix` dosyasını belirleyin.
 4. Yeniden başlatma gerektirmez — tüm ayrıştırıcılar ve dil sunucuları derhal devreye girer.

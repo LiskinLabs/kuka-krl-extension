@@ -64,15 +64,15 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
   - **Comment Out Default**: Defaults to non-destructive commenting (`; DECL ...`) to ensure immediate field rollback from the SmartPAD teach pendant without loss of taught robot coordinates.
   - **Multi-File Side-by-Side Diff Review (`DiffPreviewService.showDiffPerFile`)**: Integrates with AST Safety Validator and Monaco Diff Review before applying any changes across the backup.
 
-## [1.9.5] - 2026-10-16 (SCADA Live Bridge & Online Controller Telemetry [PRO], Unified Event Log Timeline, Bracket-Tolerant Resolution, KSS 8.7 Parity & Industrial UI Hardening)
+## [1.9.5] - 2026-10-16 (Live Controller Bridge & Online Controller Telemetry [PRO], Unified Event Log Timeline, Bracket-Tolerant Resolution, KSS 8.7 Parity & Industrial UI Hardening)
 
-### [REALTIME] SCADA Live Bridge & Real-Time Online Controller Telemetry [PRO]
+### [REALTIME] Live Controller Bridge & Real-Time Online Controller Telemetry [PRO]
 - **Direct Online Controller Connection (`krl.openLiveBridge`, `krl.connectKukaRobot`)**: Live Ethernet connection to physical KUKA KRC2, KRC4, and KRC5 controllers over industrial network interfaces (CrossComm, WCF, EthernetKRL, WinGate port 49000 & 7000).
 - **Real-Time 6-Axis Telemetry Gauges**: Live visualization of `$AXIS_ACT` and `$AXIS_MOT` with dynamic axis limit bars and angular velocity indicators for axes A1 through A6.
 - **Real-Time Cartesian TCP Telemetry**: Live readout of `$POS_ACT` (X, Y, Z, A, B, C) with active `$TOOL` and `$BASE` frame indicators.
 - **Dynamic Digital I/O Matrix**: Live visual grid for `$IN`, `$OUT`, and `$FLAG` states with real-time state change pulse animations.
 - **Live KSS Alarm Stream & Multilingual Translation Subtitles (`KSS_LOOKUP`)**: Live stream of active controller messages with automatic severity badges (Error, Warning, Notice). Regardless of the controller installed language (Turkish, German, Italian, etc.), the extension automatically renders clear English and Russian translation subtitles beneath raw controller message codes (`KSS00203`, `KSS01442`, `KSS01123`, `KSS01422`, `KSS00020`, etc.).
-- **Live 1-Click Toolbar Language Switcher (`LNG: [EN | RU | TR | DE]`)**: Seamless language switching in the SCADA Live Monitor toolbar with bidirectional synchronization to `krl.locale`.
+- **Live 1-Click Toolbar Language Switcher (`LNG: [EN | RU | TR | DE]`)**: Seamless language switching in the Live Controller Monitor toolbar with bidirectional synchronization to `krl.locale`.
 - **Variable Watcher & Config Variable Inspector**: Real-time polling and inspection of `PGNO`, `PGNO_REQ`, `PGNO_TYPE`, `$LOAD`, and custom user variables.
 
 ### [METRICS] Unified KUKA Event Log Inspector & Multi-Log Timeline (`krl.openAllEventLogs`) [PRO]
@@ -96,7 +96,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Robot Model Passport**: Integrated hardware validation and envelope parameters for the Cybertech `KR50R2500` manipulator (50 kg payload, 2500 mm reach).
 
 ### [UI/UX] Industrial UI/UX Zero-Emoji Compliance
-- **Crisp SVG Vector Styling**: Replaced all casual emojis across SCADA Live Monitor, diagnostic reports, and views with crisp vector SVG icons (`currentColor`) adhering to industrial SCADA standards.
+- **Crisp SVG Vector Styling**: Replaced all casual emojis across Live Controller Monitor, diagnostic reports, and views with crisp vector SVG icons (`currentColor`) adhering to industrial monitoring standards.
 - **GitHub Alert Blocks**: Formatted diagnostic notices using standard GitHub markdown alerts (`> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`).
 
 ## [1.9.4] - 2026-10-09 (KRL Safe Auto-Repair Engine, QuickFix & Fix-All, Industrial Safety Audit Parity & Monaco Diff Review)
@@ -254,7 +254,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
     - **UserSubmit Task**: Multi-Submit task for KSS 8.3/8.5/8.7 background processing (`SPS1.SUB` .. `SPS5.SUB`).
     - **⭐ VKRC Folge Module (Pro Tier)**: Full Volkswagen VASS sequence module with `TPVW`, `SPS_TRIG`, `PENTER`, `PEXIT`.
     - **⭐ VKRC Makro Function (Pro Tier)**: Volkswagen VASS macro function with advance run `ADV` discrimination.
-- **Official Spline Inline Form Snippets**:
+- **Spline Inline Form Templates**:
   - Added snippets for `SLINI`, `SPTI`, `SCIRCI` with `%MKUKATPBASIS,%CSPLINE`, `SVEL_CP`, `STOOL2`, `SBASE`, `USE_CM_PRO_VALUES`.
   - Added `STOPWHEN` and `ON_ERROR_PROCEED` snippets.
 
@@ -262,7 +262,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 
 ### [ANALYSIS] Industrial Diagnostics & Safe Stopping Distances
 - **Exact Interrupt Priority Model (`InterruptPriorityValidation`)**:
-  - Enforces strict KSS KRC interrupt priority constraints decompiled directly from `Kuka.Sim.Programming.Statements.Validation`:
+  - Enforces strict KSS KRC interrupt priority constraints aligned with documented KUKA.Sim validation behavior:
     - Valid user interrupt priorities: `1..2` and `4..39` (`value != 3`).
     - **Priority 3 Strictly Forbidden**: Reserved by KSS system core (AutoExt / system task coordination).
     - **Priorities 40..80 Forbidden**: Allocated strictly to KUKA technology packages (`KUKA.SafeOperation`, `KUKA.RoboTeam`, `KUKA.ArcTech`, `KUKA.LaserTech`).
@@ -276,19 +276,19 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **High-Resolution Robot Photo in Quality & Audit Reports (`reportGenerator.ts`)**:
   - Embedded real robot preview photo in Section 1 (Hardware & System Passports) of generated Project Quality and Audit reports, resolved automatically via local WorkVisual / KUKA.Sim catalog.
 - **Dynamic Stopping Distance Calculation in Acceptance Reports (`acceptanceReport.ts`)**:
-  - Integrated dynamic stopping distance and stopping time models for STOP 0, STOP 1, and STOP 2 categories per EN ISO 10218-1 and `Kuka.Sim.StoppingDistance.dll`.
+  - Integrated dynamic stopping distance and stopping time models for STOP 0, STOP 1, and STOP 2 categories per EN ISO 10218-1 and documented stopping-distance models.
 - **Enhanced Robot Model Regex Parsing & Auto-Detection**:
-  - Fixed prefix parsing so that generation-2 and variant notations (e.g., `KR210R2700_2 C4 FLR`, `KR210R2700-2 KRC5`) accurately resolve to their official robot catalog images (`KR 210 R2700 prime`).
+  - Fixed prefix parsing so that generation-2 and variant notations (e.g., `KR210R2700_2 C4 FLR`, `KR210R2700-2 KRC5`) accurately resolve to their robot catalog images (`KR 210 R2700 prime`).
   - Added auto-detection paths for `KUKA.Sim 4.10` and `iiQWorks.Sim 1.3` RuntimeTools.
 
 ## [1.8.10] - 2026-10-01 (KUKA WorkVisual Compiler Analyzers, Robot Image Bridge & Acceptance Reports Integration)
 
 ### [BACKUP] KUKA WorkVisual Robot Image Bridge & Acceptance Protocol Reports
-- **Official Robot Photo in Acceptance Protocols (`krl.generateAcceptanceReport`)**: Acceptance reports generated for customer site buy-offs and CE/ISO 10218 safety audits now embed the official high-resolution robot render inside "Card 1: Robot Passport ($machine.dat)".
+- **Robot Photo in Acceptance Protocols (`krl.generateAcceptanceReport`)**: Acceptance reports generated for customer site buy-offs and CE/ISO 10218 safety audits now embed the high-resolution robot render inside "Card 1: Robot Passport ($machine.dat)".
 - **Local WorkVisual Asset Detection**: Seamlessly detects installed KUKA WorkVisual (3.0, 4.0, 5.0, 6.0) on the engineer's workstation (`C:\Program Files (x86)\KUKA\WorkVisual 6.0\Tools\RuntimeTools`).
-- **Fuzzy Kinematics Model Resolver**: Robust matching for both KRC4 and KRC5 notations (e.g., `#KR210R2700_2 C4 FLR`, `KR210R2700-2 KRC5`, `KR210R2700_2 C5 FLR` all reliably map to official kinematic render `KR 210 R2700 prime`).
-- **Copyright-Compliant Dynamic Extraction**: Extracts preview renders (`Preview.jpg`) directly from the local licensed `KRC4_robot_images.zip` using `KRC4_robots.xml` (183 official models) without redistributing proprietary assets.
-- **KUKA Fleet Robot Explorer Integration**: Discovered robot controllers and multi-robot cells in the active workspace display the official robot photo directly in the VS Code TreeView explorer.
+- **Fuzzy Kinematics Model Resolver**: Robust matching for both KRC4 and KRC5 notations (e.g., `#KR210R2700_2 C4 FLR`, `KR210R2700-2 KRC5`, `KR210R2700_2 C5 FLR` all reliably map to kinematic render `KR 210 R2700 prime`).
+- **Copyright-Compliant Dynamic Extraction**: Extracts preview renders (`Preview.jpg`) directly from the locally licensed robot image catalog using public KUKA robot specifications (183 models) without redistributing proprietary assets.
+- **KUKA Fleet Robot Explorer Integration**: Discovered robot controllers and multi-robot cells in the active workspace display the robot photo directly in the VS Code TreeView explorer.
 - **Robot Model Viewer (`krl.viewRobotImage`)**: 1-click preview of the active robot cell's photo inside VS Code editor.
 
 ### [ANALYSIS] KUKA WorkVisual 6.0 Compiler Analyzers Reverse-Engineering Integration
@@ -307,8 +307,8 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 
 ## [1.8.9] - 2026-09-30 (Automotive & OEM Standards Suite, 183 KUKA Robot Specs DB, VASS 26 Linter, VW_USER Tech Packages & Path Geometry)
 
-### [KINEMATICS] Official KUKA Robot Specs Catalog & Reach Envelope Guard (183 Models)
-- **183 Official KUKA Robot Models Catalog**: Embedded comprehensive physical reach, payload, arm series, and mounting position specifications parsed directly from KUKA Kinematics Specifications (`KRC4_robots.xml`).
+### [KINEMATICS] KUKA Robot Specs Catalog & Reach Envelope Guard (183 Models)
+- **183 KUKA Robot Models Catalog**: Embedded comprehensive physical reach, payload, arm series, and mounting position specifications compiled from publicly available KUKA robot specifications.
 - **Autonomous Robot Model Auto-Detection**: Automatically detects active robot kinematics and serial model from controller root `$machine.dat` (`$TRAFONAME[]`) or `am.ini`, supporting fuzzy matching and edition variations (`#KR210R2700_2 C4 FLR`).
 - **Cartesian Reach Envelope Validator (`krl.diagnostics.checkRobotReach`)**: Real-time diagnostic guard that flags Cartesian target coordinates (`E6POS`, `POS`, `FRAME`, literals) exceeding the robot's physical reach sphere ($R = \sqrt{X^2+Y^2+Z^2} > \text{reach} + 100\text{ mm}$), while properly factoring external linear track axes ($E1$).
 
@@ -402,7 +402,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 - **Decode & View KUKA Event Log (.evt) (`krl.openEventLog`)**:
   - 100% pure TypeScript zero-dependency binary decoder for KRC Windows EVTX event logs (`KrcLogS.evt`, `KrcLogB.evt`, `KrcLogP.evt`, etc.).
   - Registered `KukaEventLogCustomEditorProvider` as the default custom editor in VS Code for `.evt` files — double-clicking any event log in the workspace opens the interactive viewer instantly.
-  - Built-in offline diagnostic dictionary of official KUKA KSS CrossMeld messages across **all 6 supported languages**: EN (2,050), DE (2,051), RU (1,997), ES (2,048), IT (2,048), and TR (1,997).
+  - Built-in offline diagnostic dictionary of KUKA KSS CrossMeld messages across **all 6 supported languages**: EN (2,050), DE (2,051), RU (1,997), ES (2,048), IT (2,048), and TR (1,997).
   - Dynamic parameter substitution (`{0}`, `{1}`), fault severity classification (`ERROR`, `WARNING`, `INFO`, `DIALOG`), CSV/diagnostic report export, and one-click navigation to referenced KRL source files and line numbers.
 - **100% Adaptive Themes & Zero Fixed Colors**:
   - Complete elimination of hardcoded/fixed CSS colors across all extension webviews.
@@ -413,7 +413,7 @@ All notable changes to the **KUKA KRL Extension** will be documented in this fil
 ### KUKA.Sim & KSS 8.3–8.7 Standardization
 - **Motion Approximation Parameters**: Replaced pseudo-variable assignments with authentic KUKA KSS `$APO` structure fields (`$APO.CDIS = 50.0`, `$APO.CVEL = 50`, `$APO.CPTP = 50`, `$APO.CORI = 10.0`) and standard trajectory modifiers (`LIN XP1 C_DIS`, `PTP XP1 C_PTP`).
 - **Circular Interpolation Order (`CIRC` / `SCIRC`)**: Corrected point parameter mapping so auxiliary point (`auxPointName`) is strictly specified first and target point (`pointName`) second, adhering to KRL kinematics standards.
-- **Official Inline Form Generation (`SCIRC`)**: Aligned `generateOfficialSplineFold` with official KUKA.Sim 4.10 `scirc.snippet` (generating proper `Kuka.HelpPointName` parameter and full `$CIRC_TYPE = SCIRC_TYP(...)` / `$CIRC_MODE = SCIRC_M(...)` calls).
+- **Inline Form Generation (`SCIRC`)**: Aligned `generateOfficialSplineFold` with KUKA.Sim 4.10 `scirc.snippet` (generating proper `Kuka.HelpPointName` parameter and full `$CIRC_TYPE = SCIRC_TYP(...)` / `$CIRC_MODE = SCIRC_M(...)` calls).
 - **Fold Header Cleanliness**: Removed synthetic `{iiQKA}` tags and extraneous `;%{PE}` markers from custom logic folds, preventing smartPAD "Corrupted Inline Form" parsing warnings.
 - **Modern Spline Triggers**: Added support for both `TRIGGER WHEN PATH` and `TRIGGER WHEN DISTANCE` within `SPLINE ... ENDSPLINE` blocks while maintaining strict compile-time protection against non-interpolated logic.
 - **Safety Audit Non-ASCII Filter**: WorkVisual system metadata headers (`&ACCESS`, `&REL`, `&COMMENT`, `&PARAM`) and comments are now cleanly exempted from `NON_ASCII_CHARACTER` diagnostics.

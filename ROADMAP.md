@@ -148,7 +148,7 @@
 ## [ONLINE] Версия 1.9.5 — Vision-Guided Robotics & Real-Time Control (EKI & RSI / ROS 2)
 
 ### 4. [VISION] KUKA.EthernetKRL (EKI) & Vision-Guided Robotics (VGR) Suite
-* **Цель:** Комплексная интеграция KUKA с промышленными 3D-сканерами и системами машинного зрения (Roboception rc_visard, Photoneo PhoXi/MotionCam, Cognex, Keyence, Zivid) и SCADA по протоколу TCP/IP (XML / Binary Stream).
+* **Цель:** Комплексная интеграция KUKA с промышленными 3D-сканерами и системами машинного зрения (Roboception rc_visard, Photoneo PhoXi/MotionCam, Cognex, Keyence, Zivid) и системами мониторинга по протоколу TCP/IP (XML / Binary Stream).
 * **Практическая ценность для инженера на объекте:**
   * **Zero-Boilerplate EKI Integration:** Мгновенное развертывание сетевого сокета без необходимости вручную писать десятки строк инициализации каналов и обработки ошибок связи.
   * **Безопасная калибровка и наведение:** Готовые математические шаблоны расчета точек предзахвата (Pre-Grasp Approach) и калибровки камеры без риска ударить инструмент о тару или конвейер.

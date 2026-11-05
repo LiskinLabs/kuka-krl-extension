@@ -1,3 +1,5 @@
+> **Trademark notice.** KUKA, KUKA.Sim and KRL are trademarks of KUKA Roboter GmbH. This is an independent tool, not affiliated with, endorsed by or sponsored by KUKA. Offline engineering aids do not replace controller-side safety validation.
+
 <h1 align="center">KUKA Engineering Toolkit</h1>
 
 <p align="center">
@@ -160,7 +162,7 @@ Todo ingeniero de puesta en marcha conoce este dolor:
 * **957 variables de sistema**: cobertura exhaustiva de las variables de KSS 8.3–8.7/9.0 (`$ACC`, `$TOOL`, `$BASE`, `$POS_ACT`, `$VEL_AXIS`, etc.) con unidades físicas, límites de arrays (217 arrays) y estados de solo lectura.
 * **116 funciones de sistema integradas y Wonderlib**: soporte completo en runtime para cinemática (`FORWARD`, `INVERSE`, `INV_POS`, `TOOL_ADJ`), manipulación de cadenas, conversión de tipos, diálogos de mensajes, límites de par y rutinas Wonderlib con `signatureHelp` en tiempo real.
 * **111 estructuras y 112 ENUM (443 literales)**: autocompletado inteligente con punto (`$TOOL.`, `$ACC.`, `POINT.`) y autocompletado de literales enum `#` (`#AUT`, `#T1`, `#P_FREE`, `#QUIT`).
-* **23 snippets oficiales de formularios inline KUKA (34 plantillas)**: plantillas auténticas de Kuka Roboter GmbH (`ptpi`, `slini`, `sptpi`, `scirc`, `PTPCo`, `ptprel`, `trigdist`, `sigin`, `wsec`, `Forr`) con cabeceras completas (`;FOLD ... ;%{PE}`).
+* **23 plantillas de formularios inline (34 plantillas)**: plantillas de formularios inline (`ptpi`, `slini`, `sptpi`, `scirc`, `PTPCo`, `ptprel`, `trigdist`, `sigin`, `wsec`, `Forr`) con cabeceras completas (`;FOLD ... ;%{PE}`).
 * **Matriz del compilador de 451 palabras clave**: integración directa de las reglas `keyword.h` de C++ de KUKA — cero falsos positivos de sintaxis.
 * **Sintaxis hex/binaria con comillas simples**: pleno cumplimiento del parser y diagnóstico para `'B000001'` (binario), `'HFF'` (hexadecimal) y literales de carácter.
 * **Auditoría de flota con cero falsos positivos (4.1M+ líneas)**: verificada contra 107 copias de seguridad reales de robots en producción con 0 diagnósticos falsos.
@@ -252,7 +254,7 @@ Todo ingeniero de puesta en marcha conoce este dolor:
 | **Biblioteca estándar del sistema KSS 8.7 y definición F12** | Sí | Sí | Salto F12 instantáneo a `bas.src`, `MsgLib.src`, `$config.dat` |
 | **Andamiaje de proyecto KRC en 1 clic** | Sí | Sí | Inicializa la estructura estándar `KRC/R1/System` |
 | **Hover de valores de fábrica y limitador $ADVANCE** | Sí | Sí | Muestra valores de fábrica y advierte si `$ADVANCE > 5` |
-| **23 snippets oficiales de formularios inline** (34 plantillas de movimiento y lógica) | Sí | Sí | Plantillas completas `;FOLD ... ;%{PE}` de KUKA Roboter GmbH |
+| **23 snippets oficiales de formularios inline** (34 plantillas de movimiento y lógica) | Sí | Sí | Plantillas completas `;FOLD ... ;%{PE}` para controladores KUKA |
 | **Sugerencias inline de señales y documentación hover** | Sí | Sí | Etiquetas de señales PLC inline y firmas de parámetros |
 | **Formateador de código y alineación de matrices** | Sí | Sí | Limpieza instantánea con 1 clic (`Shift+Alt+F`) |
 | **Blame por línea GitLens e historial de revisiones** | Sí | Sí | Seguimiento instantáneo de autor y commit para cada punto |

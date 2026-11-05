@@ -1,12 +1,12 @@
-# Industrial SCADA & Real-Time Controller Monitor
+# Live Controller Monitor
 
-Real-time telemetry and online controller bridge for KUKA KRC2, KRC4, and KRC5 systems.
+Near-real-time telemetry and online controller bridge for KUKA KRC2, KRC4, and KRC5 systems.
 
 ---
 
 ## Overview
 
-The **Industrial SCADA Live Monitor** (`krl.connectKukaRobot`, `krl.openLiveBridge`) establishes a direct, high-frequency Ethernet connection between VS Code and physical KUKA robot controllers running KSS 5.x through 8.7+ and iiQKA 9.x.
+The **Live Controller Monitor** (`krl.connectKukaRobot`, `krl.openLiveBridge`) establishes a direct, high-frequency Ethernet connection between VS Code and physical KUKA robot controllers running KSS 5.x through 8.7+ and iiQKA 9.x.
 
 It brings shop-floor telemetry, 6-axis joint torque feedback, Cartesian TCP tracking, a 4096-pin I/O matrix, and live SmartPAD alarms with multilingual subtitles directly into your engineering workspace.
 
@@ -14,7 +14,7 @@ It brings shop-floor telemetry, 6-axis joint torque feedback, Cartesian TCP trac
 
 ## Architecture & Communication Protocols
 
-The SCADA monitor uses a resilient dual-driver communication architecture:
+The live monitor uses a resilient dual-driver communication architecture:
 
 1. **WCF OnlineServices**: Native encrypted Windows service running on KRC4/KRC5 smartHMI platforms. Provides authenticated access to system status, controller option packages, and filesystem archives.
 2. **KUKAVARPROXY (Port 7000)**: Ultra-low-latency variable bridge delivering high-frequency cyclical polling for real-time kinematics and I/O channels.
@@ -23,7 +23,7 @@ The SCADA monitor uses a resilient dual-driver communication architecture:
 ```
 +-------------------------------------------------------------+
 |                VS Code Engineering Workstation              |
-|        (KUKA KRL Extension + Embedded SCADA Dashboard)      |
+|        (KUKA KRL Extension + Live Dashboard)      |
 +-------------------------------------------------------------+
                               |
                      Industrial Ethernet
@@ -62,11 +62,12 @@ The SCADA monitor uses a resilient dual-driver communication architecture:
 ### 4. SmartPAD Alarm Stream & Multilingual Translation Subtitles
 * **Live Message Timeline**: Real-time stream of controller events, status messages, and emergency stops.
 * **Automatic Severity Tagging**: Instant categorisation into Error, Warning, Dialog, and Status notices.
-* **Multilingual Subtitles (`KSS_LOOKUP`)**: Eliminates language barriers during international commissioning. If the physical controller displays messages in German or Turkish, the extension displays authentic English and Russian translations beneath the raw message code (e.g. `KSS00203`, `KSS01442`, `KSS01123`).
+* **Multilingual Subtitles (`KSS_LOOKUP`)**: Eliminates language barriers during international commissioning. If the physical controller displays messages in German or Turkish, the extension displays English and Russian reference descriptions beneath the raw message code (e.g. `KSS00203`, `KSS01442`, `KSS01123`).
 
 ### 5. Hot Controller Backup over Ethernet
-* **Zero Downtime Archiving**: Download complete, clean `.zip` controller backup archives directly over Ethernet.
-* **Non-Blocking Operation**: The backup is generated and streamed without halting robot motion or interrupting automated production lines.
+* **Online Archiving**: Download complete, clean `.zip` controller backup archives directly over Ethernet.
+* **Read-only telemetry:** The telemetry client is non-blocking.
+* **Online backup:** The backup is a controller-side operation; validate it on a non-production controller before use.
 
 ---
 
@@ -75,5 +76,5 @@ The SCADA monitor uses a resilient dual-driver communication architecture:
 | Command | Identifier | Description |
 |---|---|---|
 | KUKA KRL: Connect to KUKA Robot | `krl.connectKukaRobot` | Open live Ethernet connection modal |
-| KUKA KRL: Open SCADA Live Dashboard | `krl.openLiveBridge` | Launch real-time telemetry dashboard |
-| KUKA KRL: Download Controller Backup | `krl.downloadLiveBackup` | Stream hot `.zip` backup from controller |
+| KUKA KRL: Open Live Monitor Dashboard | `krl.openLiveBridge` | Launch real-time telemetry dashboard |
+| KUKA KRL: Download Controller Backup | `krl.downloadLiveBackup` | Download a `.zip` backup from the controller |

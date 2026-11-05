@@ -103,7 +103,7 @@ Industrial offline trajectory and frame manipulation suite:
 ---
 
 ### 33. KUKA.Sim 4.10 & iiQWorks.Sim 1.3 Kinematic Safety Analyzers
-Deep industrial simulation rules reverse-engineered from KUKA.Sim 4.10 & iiQWorks.Sim 1.3:
+Deep industrial simulation rules aligned with public KUKA.Sim 4.10 project formats:
 - **Status (S) & Turn (T) Range Validator**: Flags illegal kinematic Status ($S \notin 0..7$) and Turn bitmasks ($T \notin 0..63$).
 - **Context-Aware RESUME Analyzer**: Flags illegal `RESUME` statements outside interrupt handling subroutines.
 - **FOR Loop STEP 0 Detector**: Identifies infinite controller loop conditions where `FOR` loop step increment equals 0.
@@ -147,7 +147,7 @@ Kinematische Vorab-Simulation und Singularitätsrisikoanalyse vor dem Laden auf 
 
 ---
 
-### 38. SCADA Live Bridge & Echtzeit-Steuerungsanbindung (`krl.live.connect`, `krl.live.openDashboard`) [PRO]
+### 38. Live Controller Bridge & Echtzeit-Steuerungsanbindung (`krl.live.connect`, `krl.live.openDashboard`) [PRO]
 Direkte bidirektionale Telemetrie- und Diagnoseanbindung an physikalische KUKA KRC4/KRC5 und OfficePC-Steuerungen über CrossComm WCF, OPC UA oder EthernetKRL:
 - **Echtzeit-Koordinaten**: Kartesische TCP-Positionen ($X, Y, Z, A, B, C$) und Achswinkel ($A_1..A_6$).
 - **Betriebsarten & Sicherheitskreise**: Betriebsarten (T1, T2, AUT, EXT), Antriebsbereitschaft (`$PERI_RDY`) und Not-Halt-Status (`$ALARM_STOP`).

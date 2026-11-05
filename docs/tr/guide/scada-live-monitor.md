@@ -1,4 +1,4 @@
-# Endüstriyel SCADA ve Gerçek Zamanlı Kontrolör İzleyici
+# Endüstriyel Live Monitor ve Gerçek Zamanlı Kontrolör İzleyici
 
 KUKA KRC2, KRC4 ve KRC5 sistemleri için gerçek zamanlı telemetri ve çevrimiçi kontrolör köprüsü.
 
@@ -6,7 +6,7 @@ KUKA KRC2, KRC4 ve KRC5 sistemleri için gerçek zamanlı telemetri ve çevrimi�
 
 ## Genel Bakış
 
-**Endüstriyel SCADA Canlı İzleyici** (`krl.connectKukaRobot`, `krl.openLiveBridge`), VS Code ile KSS 5.x–8.7+ ve iiQKA 9.x çalıştıran fiziksel KUKA robot kontrolörleri arasında doğrudan, yüksek frekanslı bir Ethernet bağlantısı kurar.
+**Endüstriyel Canlı Monitör İzleyici** (`krl.connectKukaRobot`, `krl.openLiveBridge`), VS Code ile KSS 5.x–8.7+ ve iiQKA 9.x çalıştıran fiziksel KUKA robot kontrolörleri arasında doğrudan, yüksek frekanslı bir Ethernet bağlantısı kurar.
 
 Fabrika sahası telemetrisini, 6 eksenli motor tork geri bildirimini, Kartezyen TCP takibini, 4096 pinli G/Ç (I/O) matrisini ve çok dilli SmartPAD alarmlarını doğrudan mühendislik ortamınıza taşır.
 
@@ -14,7 +14,7 @@ Fabrika sahası telemetrisini, 6 eksenli motor tork geri bildirimini, Kartezyen 
 
 ## Mimari ve İletişim Protokolleri
 
-SCADA izleyici dayanıklı bir çift sürücülü iletişim mimarisi kullanır:
+canlı izleyici dayanıklı bir çift sürücülü iletişim mimarisi kullanır:
 
 1. **WCF OnlineServices**: KRC4/KRC5 smartHMI platformlarında çalışan yerel şifreli Windows hizmeti. Sistem durumuna, kontrolör opsiyon paketlerine ve dosya sistemi arşivlerine kimlik doğrulamalı erişim sağlar.
 2. **KUKAVARPROXY (Port 7000)**: Gerçek zamanlı kinematik ve G/Ç kanalları için yüksek frekanslı döngüsel sorgulama sunan ultra düşük gecikmeli değişken köprüsü.

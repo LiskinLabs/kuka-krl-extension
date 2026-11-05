@@ -771,7 +771,7 @@ const features = [
     shortcut: 'Ctrl+Shift+P > OPC', setting: 'kuka.templates.opcua',
     media: '/media/KUKA Control Center.gif',
     title: { en: 'OPC UA & Modbus TCP Packet Templates', ru: 'Шаблоны телеметрии OPC UA и Modbus TCP', tr: 'OPC UA ve Modbus TCP Paket Şablonları' },
-    desc: { en: 'Generates telemetry publishing routines transmitting real-time robot coordinates to SCADA dashboards.', ru: 'Генерирует готовые шаблоны отправки координат и статусов робота в диспетчерские SCADA и облако.', tr: 'Robot koordinatlarını SCADA ve bulut panolarına aktaran hazır şablonlar üretir.' },
+    desc: { en: 'Generates telemetry publishing routines transmitting real-time robot coordinates to Live Monitor dashboards.', ru: 'Генерирует готовые шаблоны отправки координат и статусов робота в диспетчерские Live Monitor и облако.', tr: 'Robot koordinatlarını Live Monitor ve bulut panolarına aktaran hazır şablonlar üretir.' },
     benefit: { en: 'Zero-effort Industrial IoT integration for Industry 4.0 production monitoring.', ru: 'Быстрое подключение робота к системам сбора производственной аналитики Industry 4.0.', tr: 'Endüstri 4.0 üretim izleme sistemlerine zahmetsiz entegrasyon.' },
     codeBefore: '; Writing socket routines from scratch',
     codeAfter: '[OK] Complete OPC UA state publisher routine generated'
@@ -863,7 +863,7 @@ const features = [
     shortcut: 'Ctrl+Shift+P > Pack', setting: 'kuka.archive.builder',
     media: '/media/KRC Backup Diff & Point Delta Inspector.gif',
     title: { en: 'KUKA Deployment Archive Builder (.KRA / .ZIP)', ru: 'Сборщик архивов развертывания (.KRA / .ZIP)', tr: 'KUKA Dağıtım Arşivi Oluşturucu (.KRA / .ZIP)' },
-    desc: { en: 'Bundles code files into official KUKA SmartPAD archive structures ready for direct USB restoration.', ru: 'Упаковывает файлы в правильную структуру папок KUKA, готовую к немедленной загрузке с флешки.', tr: 'Kodları kumandadan doğrudan geri yüklemeye hazır resmi KUKA arşiv yapısında paketler.' },
+    desc: { en: 'Bundles code files into KUKA SmartPAD archive structures ready for direct USB restoration.', ru: 'Упаковывает файлы в правильную структуру папок KUKA, готовую к немедленной загрузке с флешки.', tr: 'Kodları kumandadan doğrudan geri yüklemeye hazır resmi KUKA arşiv yapısında paketler.' },
     benefit: { en: 'Zero "Corrupted Archive" errors when restoring backups on physical KRC controllers.', ru: 'Исключает ошибку «Архив поврежден» при попытке восстановления проекта на пульте.', tr: 'Fiziksel kumandada yedek yüklerken "Bozuk Arşiv" hatalarını önler.' },
     codeBefore: '; Manually zipping files into wrong folder depth',
     codeAfter: '[OK] Valid KRC_Archive.zip ready for USB restore'

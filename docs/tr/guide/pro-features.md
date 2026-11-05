@@ -141,8 +141,8 @@ Robot programını sahaya yüklemeden önce kinematiği simüle etme:
 
 ---
 
-### 38. SCADA Canlı Köprü ve Gerçek Zamanlı Kontrolör Bağlantısı (`krl.live.connect`, `krl.live.openDashboard`) [PRO]
-CrossComm WCF, OPC UA veya EthernetKRL üzerinden fiziksel KUKA KRC4/KRC5 ve OfficePC kontrolörlerine doğrudan donanımsal telemetri ve SCADA bağlantısı:
+### 38. Canlı Monitör Köprü ve Gerçek Zamanlı Kontrolör Bağlantısı (`krl.live.connect`, `krl.live.openDashboard`) [PRO]
+CrossComm WCF, OPC UA veya EthernetKRL üzerinden fiziksel KUKA KRC4/KRC5 ve OfficePC kontrolörlerine doğrudan donanımsal telemetri ve canlı bağlantı:
 - **Gerçek Zamanlı Koordinat ve Durum İzleme**: Kartezyen TCP pozisyonları ($X, Y, Z, A, B, C$), aktif Tool/Base indeksleri ve eksen açıları ($A_1..A_6$).
 - **Çalışma Modları ve Güvenlik Kilitleri**: Çalışma modu (T1, T2, AUT, EXT), sürücü hazır bilgisi (`$PERI_RDY`), acil stop (`$ALARM_STOP`) ve hücre güvenlik kilidi göstergeleri.
 - **Yorumlayıcı ve Program İşaretçisi**: Arka plan submit (`$SPS`) ve robot yorumlayıcı durumu (`$PRO_STATE`), aktif program adı (`$PRO_NAME`) ve çalışan satır işaretçisi (`$PRO_IP`).

@@ -13,7 +13,7 @@ Quick start guide for installing, configuring, and offline-activating KUKA KRL P
 ---
 
 ## 2. Install from VSIX (Air-Gapped Offline Installation)
-1. Download the latest `kuka-krl-extension-1.9.10.vsix` package from the official release repository.
+1. Download the latest `kuka-krl-extension-1.9.11.vsix` package from the official release repository.
 2. In VS Code, open the Extensions panel (`Ctrl + Shift + X`) and click the `...` menu in the top-right corner.
 3. Select **Install from VSIX...** and select the `.vsix` file.
 4. No editor restart required — all grammar parsers and diagnostic language servers activate immediately.

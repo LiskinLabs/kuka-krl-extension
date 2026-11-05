@@ -13,7 +13,7 @@ Schnellstartanleitung zur Installation, Konfiguration und Offline-Aktivierung vo
 ---
 
 ## 2. Installation aus VSIX-Datei (Air-Gapped Offline-Installation)
-1. Laden Sie das neueste Paket `kuka-krl-extension-1.9.11.vsix` aus dem offiziellen Release-Repository herunter.
+1. Laden Sie das neueste Paket `kuka-krl-extension-1.9.12.vsix` aus dem offiziellen Release-Repository herunter.
 2. Klicken Sie im Erweiterungsbereich von VS Code (`Ctrl + Shift + X`) auf das Drei-Punkte-Menü `...` oben rechts.
 3. Wählen Sie **Aus VSIX installieren...** und wählen Sie die `.vsix`-Datei aus.
 4. Kein Editor-Neustart erforderlich — alle Sprachserver und Parser starten sofort.

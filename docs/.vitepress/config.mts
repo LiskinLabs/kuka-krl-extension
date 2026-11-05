@@ -101,7 +101,7 @@ export default defineConfig({
             ]
           },
           {
-            text: 'v1.9.11 Engineering Suites',
+            text: 'v1.9.12 Engineering Suites',
             items: [
               { text: 'Live Controller Monitor & Telemetry', link: '/guide/scada-live-monitor' },
               { text: 'Point Table & .DAT Synchronizer', link: '/guide/point-synchronizer' },
@@ -158,7 +158,7 @@ export default defineConfig({
             ]
           },
           {
-            text: 'Инженерные комплексы v1.9.11',
+            text: 'Инженерные комплексы v1.9.12',
             items: [
               { text: 'Live Controller Monitor реального времени', link: '/ru/guide/scada-live-monitor' },
               { text: 'Таблица точек и синхронизатор .DAT', link: '/ru/guide/point-synchronizer' },
@@ -215,7 +215,7 @@ export default defineConfig({
             ]
           },
           {
-            text: 'v1.9.11 Mühendislik Paketleri',
+            text: 'v1.9.12 Mühendislik Paketleri',
             items: [
               { text: 'Canlı Kontrolör İzleyici ve Telemetri', link: '/tr/guide/scada-live-monitor' },
               { text: 'Nokta Tablosu ve .DAT Senkronizasyonu', link: '/tr/guide/point-synchronizer' },
@@ -272,7 +272,7 @@ export default defineConfig({
             ]
           },
           {
-            text: 'v1.9.11 Engineering Suites',
+            text: 'v1.9.12 Engineering Suites',
             items: [
               { text: 'Live Controller Monitor & Telemetrie', link: '/de/guide/scada-live-monitor' },
               { text: 'Punkttabelle & .DAT-Synchronisation', link: '/de/guide/point-synchronizer' },

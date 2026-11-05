@@ -13,7 +13,7 @@ Guía de inicio rápido para instalar, configurar y activar sin conexión KUKA K
 ---
 
 ## 2. Instalación desde archivo VSIX (Instalación Offline Air-Gapped)
-1. Descargue el paquete más reciente `kuka-krl-extension-1.9.11.vsix` del repositorio oficial.
+1. Descargue el paquete más reciente `kuka-krl-extension-1.9.12.vsix` del repositorio oficial.
 2. En el panel de Extensiones de VS Code (`Ctrl + Shift + X`), haga clic en el menú `...` en la esquina superior derecha.
 3. Seleccione **Install from VSIX...** y elija el archivo `.vsix`.
 4. No requiere reiniciar el editor: todos los servicios de lenguaje se activan inmediatamente.

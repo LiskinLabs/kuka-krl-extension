@@ -2,6 +2,22 @@
 
 All notable changes to the **KRL Engineering Toolkit** will be documented in this file.
 
+## [1.9.13] - 2026-11-06 (Documentation Accuracy & Brand Finalization)
+
+### [BRANDING] KRL Engineering Toolkit
+- Product name unified across UI strings, licence texts, reports, support gateway and documentation.
+- Removed vendor-provenance wording from the German, Spanish and Italian docs and READMEs.
+
+### [DOCS] Command surface aligned with the manifest
+- Command and settings inventory now derives from the shipped manifest: 124 commands, 90 settings, 6 themes, 4 views.
+- Stale command IDs replaced with the current ones (`krl.inspectWorkcellLayout`, `krl.exportWorkcellToKrl`, `krl.openEventLog`, `krl.mcp.copyConfig`, `krl.live.*`).
+- Removed documentation for commands that do not exist in the extension.
+- Removed the bank-statement descriptor claim; payments and statements are handled by Dodo Payments as merchant of record.
+
+### [ASSETS]
+- Removed KUKA-branded cinematic imagery and an unused scrollytelling component from the site bundle.
+- No vendor DLLs, KSS system files, extracted message databases or third-party 3D models are shipped.
+
 ## [1.9.8] - 2026-10-27 (Enterprise Air-Gap .lic Licensing [PRO], WorkVisual .wvs Topology Parser [PRO], Point Normalizer & Auto-Sync [PRO], KUKA.Sim VCMX Intelligence Suite [PRO], KUKA.RSI 4ms Real-Time Suite [PRO], CAM CNC G-Code & SVG Importer [PRO], Vision Hand-Eye Calibration & PLC Tag Exporter [PRO], Full 6-Locale Multilingual Engine)
 
 ### [LICENSING] Enterprise Air-Gap Offline Activation & File Integration (.lic) [PRO]

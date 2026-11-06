@@ -329,7 +329,7 @@ export default defineConfig({
             ]
           },
           {
-            text: 'v1.9.12 Suites de Ingeniería',
+            text: 'v1.9.13 Suites de Ingeniería',
             items: [
               { text: 'Monitor Monitor en Vivo y Telemetría', link: '/es/guide/scada-live-monitor' },
               { text: 'Tabla de Puntos y Sincronizador .DAT', link: '/es/guide/point-synchronizer' },
@@ -386,7 +386,7 @@ export default defineConfig({
             ]
           },
           {
-            text: 'v1.9.12 Suite Ingegneristiche',
+            text: 'v1.9.13 Suite Ingegneristiche',
             items: [
               { text: 'Monitor Live Monitor e Telemetria', link: '/it/guide/scada-live-monitor' },
               { text: 'Tabella Punti e Sincronizzatore .DAT', link: '/it/guide/point-synchronizer' },

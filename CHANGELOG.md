@@ -7,6 +7,10 @@ All notable changes to the **KRL Engineering Toolkit** will be documented in thi
 ### [BRANDING] KRL Engineering Toolkit
 - Product name unified across UI strings, licence texts, reports, support gateway and documentation.
 - Removed vendor-provenance wording from the German, Spanish and Italian docs and READMEs.
+- Marketplace display name now reads "KRL Engineering Toolkit for KUKA" (nominative compatibility reference).
+
+### [PRIVACY] Explicit telemetry opt-in
+- Added `krl.telemetry.enabled` (default `false`) as the single user-facing switch; every telemetry send is gated on it in addition to VS Code's own telemetry settings.
 
 ### [DOCS] Command surface aligned with the manifest
 - Command and settings inventory now derives from the shipped manifest: 124 commands, 90 settings, 6 themes, 4 views.

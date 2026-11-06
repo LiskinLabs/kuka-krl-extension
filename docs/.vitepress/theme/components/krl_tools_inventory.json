@@ -1073,6 +1073,13 @@
         "title": "KRL Commands",
         "status": "Free",
         "valueProposition": "Provides a quick access panel for frequently used KUKA KRL commands."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.telemetry.enabled",
+        "title": "Anonymous Usage Analytics",
+        "status": "Free",
+        "valueProposition": "Enables or disables anonymous usage analytics. Disabled by default."
       }
     ],
     "Reporting": [

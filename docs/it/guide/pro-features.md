@@ -16,20 +16,20 @@ Embedded support chat window directly inside the IDE connected with our dedicate
 
 ---
 
-### 18. KRC Fleet Backups & Point Delta Spatial Inspector (`krl.compareKrcBackups`)
+### 18. KRC Fleet Backups & Point Delta Spatial Inspector (`krl.compareKrcBackup`)
 Compare physical SmartPAD `.zip` backups directly without manual extraction. Calculates 6-axis spatial coordinate deltas ($\Delta X, \Delta Y, \Delta Z, \Delta A, \Delta B, \Delta C$) between teaching versions and highlights hazardous point shifts exceeding safety tolerances.
 
 ![KRC Backup Diff Demo](/media/krc_backup_diff.gif)
 
 ---
 
-### 19. Interactive Motion Trajectory & Spline Block Generator (`krl.insertMotionTrajectory`, `krl.insertSplineBlock`)
+### 19. Interactive Motion Trajectory & Spline Block Generator (`krl.insertSplineBlock`, `krl.insertSplineBlock`)
 Visual motion sequence builder for standard and modern KSS motions (`PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`, `SPLINE Block`) featuring dynamic SVG vector trajectory diagrams and `$SGEAR_JERK` profile validation.
 
 ---
 
 ### 20. Native Copilot-Style Persistent AI Diff Review (`KrlReviewService`)
-Professional multi-file diff staging system for AI-assisted refactoring. Displays pending changes inline, in side-by-side diff viewers, and via status bar indicators. Allows reviewing, accepting, or rejecting changes per-file or per-hunk (`krl.review.acceptFile`, `krl.review.rejectFile`, `krl.review.acceptHunk`, `krl.review.rejectHunk`).
+Professional multi-file diff staging system for AI-assisted refactoring. Displays pending changes inline, in side-by-side diff viewers, and via status bar indicators. Allows reviewing, accepting, or rejecting changes per-file or per-hunk (`krl.review.accept`, `krl.review.reject`, `krl.review.accept`, `krl.review.reject`).
 
 ---
 
@@ -46,17 +46,17 @@ Transforms intricate `.src` subroutine logic into interactive Mermaid SVG diagra
 
 ---
 
-### 23. EthernetKRL (EKI) Suite & Telegram Generator (`krl.generateEkiTelegram`)
+### 23. EthernetKRL (EKI) Suite & Telegram Generator (`krl.generateEkiCode`)
 Validates EKI XML schemas and channel descriptors, tests socket telegram buffers, and auto-generates complete KRL network send/receive routines.
 
 ---
 
-### 24. Industrial Safety & ISO 13849 Compliance Inspector (`krl.runSafetyCheck`)
+### 24. Industrial Safety & ISO 13849 Compliance Inspector (`krl.validateWorkspace`)
 Automated diagnostic inspector flagging uninitialized `$TOOL`/`$BASE`, missing `BAS(#INITMOV, 0)`, unmonitored `WAIT FOR` deadlocks, array index overruns (`TOOL_DATA[16]`), dual-channel `$SAFEIN` discrepancies, and invisible Cyrillic look-alike characters.
 
 ---
 
-### 25. EVT Binary Event Log Decoder (`krl.viewEvtLog`)
+### 25. EVT Binary Event Log Decoder (`krl.openEventLog`)
 High-speed zero-dependency decoder for KSS `.evt` binary diagnostic event archives. Decodes timestamps, event IDs, severity levels, and module origins into an interactive, filterable tabular log viewer.
 
 ---
@@ -66,7 +66,7 @@ Interactive cross-reference table mapping all `$IN`, `$OUT`, `$ANIN`, and `$ANOU
 
 ---
 
-### 27. Trajectory Welding & Motion Statistics Profiler (`krl.calculateMotionStats`)
+### 27. Trajectory Welding & Motion Statistics Profiler (`krl.estimateMotionStats`)
 Comprehensive motion path profiler computing total cycle distances, motion segment counts, seam welding lengths, and velocity distributions across programs.
 
 ---
@@ -81,7 +81,7 @@ Native context providers and AST extraction tools enabling Google Antigravity ID
 
 ---
 
-### 30. Industrial Acceptance Quality Report Generator (`krl.generateQualityReport`)
+### 30. Industrial Acceptance Quality Report Generator (`krl.generateAcceptanceReport`)
 Generates comprehensive HTML and JSON code quality reports with safety scorecards, cyclomatic complexity metrics, and standard compliance audits for customer project sign-off.
 
 ---
@@ -102,8 +102,8 @@ Industrial offline trajectory and frame manipulation suite:
 
 ---
 
-### 33. KUKA.Sim 4.10 & iiQWorks.Sim 1.3 Kinematic Safety Analyzers
-Deep industrial simulation rules aligned with public KUKA.Sim 4.10 project formats:
+### 33. Simulator Format & Kinematic Safety Analyzers
+Deep industrial simulation rules aligned with publicly documented simulator project formats:
 - **Status (S) & Turn (T) Range Validator**: Flags illegal kinematic Status ($S \notin 0..7$) and Turn bitmasks ($T \notin 0..63$).
 - **Context-Aware RESUME Analyzer**: Flags illegal `RESUME` statements outside interrupt handling subroutines.
 - **FOR Loop STEP 0 Detector**: Identifies infinite controller loop conditions where `FOR` loop step increment equals 0.
@@ -177,7 +177,7 @@ Modelli cinematici aggiornati per KSS 8.7.9 (inclusi KR 50 R2500 e GripperSpotTe
 
 ---
 
-### 43. Analizzatore topologia bus e cataloghi pacchetti KOP WorkVisual (`krl.inspectWvsTopology`) [PRO]
+### 43. Analizzatore topologia bus e cataloghi pacchetti KOP WorkVisual (`krl.inspectFieldbusTopology`) [PRO]
 Analisi diretta in memoria dei progetti binari KUKA WorkVisual senza estrazione manuale:
 - **Cataloghi opzioni KOP**: Estrazione dei pacchetti tecnologici (`KUKA.EthernetKRL`, `KUKA.SafeOperation`, `KUKA.GripperSpotTech`, `KUKA.Profinet`), versione runtime KSS e profili cinematici da `Solution.MetaData`.
 - **Topologia bus EtherCAT e Profinet**: Analisi dei moduli slave EtherCAT (`EcatDiag_*.xml`), bus Virtual I/O e reti Profinet con mappatura degli indirizzi.
@@ -194,7 +194,7 @@ Sincronizzazione deterministica di coordinate spaziali e parametri di movimento 
 ---
 
 ### 45. Suite intelligente KUKA.Sim e Visual Components (.vcmx) [PRO]
-Validazione e post-elaborazione di archivi di simulazione 3D `.vcmx` (`krl.inspectVcmxLayout`, `krl.validateVcmxSimulation`, `krl.exportVcmxToKrl`):
+Validazione e post-elaborazione di archivi di simulazione 3D `.vcmx` (`krl.inspectWorkcellLayout`, `krl.validateWorkcellSimulation`, `krl.exportWorkcellToKrl`):
 - **Ispettore isola robotica VCMX**: Parser a due livelli di `layout.rsc` per estrarre cinematica robot, segnali e logiche di processo senza avviare software CAD complessi.
 - **Validatore deadlock e corse critiche di simulazione**: Rileva e ripara 4 errori critici (`VCMX001` deadlock sui fronti, `VCMX002` timeout di attesa, `VCMX003` perdite variabili di prodotto, `VCMX004` segnali orfani) con backup `.bk1`/`.bk2`.
 - **Post-processore da VCMX a KRL**: Converte sequenze di simulazione (`LinMotion`, `PtpMotion`, `SetSignal`, `WaitSignal`) in moduli KRL sincronizzati `.src` + `.dat`.
@@ -225,7 +225,7 @@ Converte percorsi utensile CAD/CAM e profili 2D in codice KRL operativo:
 ### 49. Ponte integrato Model Context Protocol (MCP) per IA [PRO]
 Gateway locale sicuro per assistenti di intelligenza artificiale (`127.0.0.1`):
 - **Integrazione diretta con Cursor, Antigravity, Claude Code e Windsurf**: Espone telemetria in tempo reale (`krl_live_telemetry`), diagnostica statica (`krl_workspace_diagnostics`), autoriparazione del codice (`krl_safe_auto_repair`) e specifiche di 957+ variabili di sistema KSS.
-- **Copia configurazione rapida**: Comando `krl.copyMcpConfig` per copiare le impostazioni JSON pronte per Claude Desktop e Cursor.
+- **Copia configurazione rapida**: Comando `krl.mcp.copyConfig` per copiare le impostazioni JSON pronte per Claude Desktop e Cursor.
 
 ---
 

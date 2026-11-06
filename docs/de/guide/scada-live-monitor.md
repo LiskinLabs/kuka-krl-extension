@@ -6,7 +6,7 @@ Echtzeit-Telemetrie und Online-Steuerungsanbindung für KUKA KRC2, KRC4 und KRC5
 
 ## Übersicht
 
-Der **Industrielle Live Controller Monitor** (`krl.connectKukaRobot`, `krl.openLiveBridge`) stellt eine direkte, hochfrequente Ethernet-Verbindung zwischen VS Code und physikalischen KUKA-Robotersteuerungen her.
+Der **Industrielle Live Controller Monitor** (`krl.live.connect`, `krl.live.openDashboard`) stellt eine direkte, hochfrequente Ethernet-Verbindung zwischen VS Code und physikalischen KUKA-Robotersteuerungen her.
 
 Er bringt Hallen-Telemetrie, 6-Achs-Drehmomentanzeigen, kartesische TCP-Verfolgung, eine 4096-Pin E/A-Matrix und mehrsprachige KSS-Meldungen direkt in Ihren Entwicklungsbereich.
 

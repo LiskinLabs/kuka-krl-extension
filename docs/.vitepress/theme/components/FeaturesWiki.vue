@@ -220,7 +220,7 @@
               </div>
               <div v-if="feat.codeAfter" class="space-y-1 pt-2 border-t border-white/10">
                 <div class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider flex items-center justify-between">
-                  <span class="flex items-center gap-1"><span>[OK]</span> <span>With KUKA KRL Pro:</span></span>
+                  <span class="flex items-center gap-1"><span>[OK]</span> <span>With KRL Engineering Toolkit:</span></span>
                   <button @click="copyCode(feat.codeAfter, feat.id)" class="text-kuka-orange hover:text-white transition-colors text-[9px]">
                     {{ copiedCodeId === feat.id ? '[OK] Copied!' : '[ Copy ]' }}
                   </button>
@@ -1066,7 +1066,7 @@ const translations = {
   en: {
     backToLanding: 'Back to Main Landing',
   heroBadge: 'v1.9.9 Industrial Suite • 64 Industrial Tools',
-    heroTitlePrefix: 'KUKA KRL Professional — ',
+    heroTitlePrefix: 'KRL Engineering Toolkit — ',
     heroTitleHighlight: 'Complete Industrial Tools Encyclopedia',
     heroSubtitle: 'Exhaustive technical reference for industrial features, field commissioning benefits, keyboard shortcuts, configuration parameters, and before/after code examples.',
     statTotal: 'Total Tools',
@@ -1086,7 +1086,7 @@ const translations = {
   ru: {
     backToLanding: 'Вернуться на главную',
   heroBadge: 'v1.9.9 Industrial Suite • 64 Промышленных Инструмента',
-    heroTitlePrefix: 'KUKA KRL Professional — ',
+    heroTitlePrefix: 'KRL Engineering Toolkit — ',
     heroTitleHighlight: 'Полная Энциклопедия Промышленных Инструментов',
     heroSubtitle: 'Исчерпывающий технический разбор функций расширения, пользы на пусконаладке, горячих клавиш, параметров settings.json и примеров кода «До / После».',
     statTotal: 'Всего Утилит',
@@ -1106,7 +1106,7 @@ const translations = {
   tr: {
     backToLanding: 'Ana Sayfaya Dön',
   heroBadge: 'v1.9.9 Endüstriyel Paket • 64 Endüstriyel Araç',
-    heroTitlePrefix: 'KUKA KRL Professional — ',
+    heroTitlePrefix: 'KRL Engineering Toolkit — ',
     heroTitleHighlight: 'Kapsamlı Endüstriyel Araç Ansiklopedisi',
     heroSubtitle: 'Tüm endüstriyel özelliklerin, saha devreye alma faydalarının, kısayolların, settings.json ayarlarının ve önce/sonra kod örneklerinin ayrıntılı teknik referansı.',
     statTotal: 'Toplam Araç',

@@ -279,7 +279,7 @@ All notable changes to the **KRL Engineering Toolkit** will be documented in thi
   - Integrated dynamic stopping distance and stopping time models for STOP 0, STOP 1, and STOP 2 categories per EN ISO 10218-1 and documented stopping-distance models.
 - **Enhanced Robot Model Regex Parsing & Auto-Detection**:
   - Fixed prefix parsing so that generation-2 and variant notations (e.g., `KR210R2700_2 C4 FLR`, `KR210R2700-2 KRC5`) accurately resolve to their robot catalog images (`KR 210 R2700 prime`).
-  - Added auto-detection paths for `KUKA.Sim 4.10` and `iiQWorks.Sim 1.3` RuntimeTools.
+  - Added auto-detection paths for installed simulator runtime tools (version-agnostic).
 
 ## [1.8.10] - 2026-10-01 (KUKA WorkVisual Compiler Analyzers, Robot Image Bridge & Acceptance Reports Integration)
 
@@ -379,7 +379,7 @@ All notable changes to the **KRL Engineering Toolkit** will be documented in thi
 - **1-Click Hardware License Re-binding**: Instant workstation migration support for factory laptop replacement.
 
 
-## [1.8.7] - 2026-09-16 (Industrial Field Suite, KUKA.Sim 4.10 Standardization & Pure-TS KUKA Event Log Decoder)
+## [1.8.7] - 2026-09-16 (Industrial Field Suite, Simulator Format Standardization & Pure-TS KUKA Event Log Decoder)
 
 ### [REALTIME] Industrial Robotics Field Engineering Suite (PRO)
 - **Visual I/O Signal Matrix & Overlap Detector (`krl.showIoMatrix`)**:
@@ -410,10 +410,10 @@ All notable changes to the **KRL Engineering Toolkit** will be documented in thi
   - Dynamic 6-language switcher (EN, DE, RU, ES, IT, TR) integrated into all industrial tools.
 - **Pro Licensing Protection**: All industrial engineering tools are guarded with `ensurePremium`.
 
-### KUKA.Sim & KSS 8.3–8.7 Standardization
+### KSS 8.3–8.7 Standardization
 - **Motion Approximation Parameters**: Replaced pseudo-variable assignments with authentic KUKA KSS `$APO` structure fields (`$APO.CDIS = 50.0`, `$APO.CVEL = 50`, `$APO.CPTP = 50`, `$APO.CORI = 10.0`) and standard trajectory modifiers (`LIN XP1 C_DIS`, `PTP XP1 C_PTP`).
 - **Circular Interpolation Order (`CIRC` / `SCIRC`)**: Corrected point parameter mapping so auxiliary point (`auxPointName`) is strictly specified first and target point (`pointName`) second, adhering to KRL kinematics standards.
-- **Inline Form Generation (`SCIRC`)**: Aligned `generateOfficialSplineFold` with KUKA.Sim 4.10 `scirc.snippet` (generating proper `Kuka.HelpPointName` parameter and full `$CIRC_TYPE = SCIRC_TYP(...)` / `$CIRC_MODE = SCIRC_M(...)` calls).
+- **Inline Form Generation (`SCIRC`)**: Aligned `generateOfficialSplineFold` with the documented SCIRC parameter set (generating proper `Kuka.HelpPointName` parameter and full `$CIRC_TYPE = SCIRC_TYP(...)` / `$CIRC_MODE = SCIRC_M(...)` calls).
 - **Fold Header Cleanliness**: Removed synthetic `{iiQKA}` tags and extraneous `;%{PE}` markers from custom logic folds, preventing smartPAD "Corrupted Inline Form" parsing warnings.
 - **Modern Spline Triggers**: Added support for both `TRIGGER WHEN PATH` and `TRIGGER WHEN DISTANCE` within `SPLINE ... ENDSPLINE` blocks while maintaining strict compile-time protection against non-interpolated logic.
 - **Safety Audit Non-ASCII Filter**: WorkVisual system metadata headers (`&ACCESS`, `&REL`, `&COMMENT`, `&PARAM`) and comments are now cleanly exempted from `NON_ASCII_CHARACTER` diagnostics.

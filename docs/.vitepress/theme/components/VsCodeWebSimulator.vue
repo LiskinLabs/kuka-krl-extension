@@ -10,7 +10,7 @@
           <span class="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123]"></span>
           <span class="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29]"></span>
         </div>
-        <span class="text-[#858585] text-[11px] hidden sm:inline">KUKA KRL Professional — VS Code Web IDE [Online Simulator]</span>
+        <span class="text-[#858585] text-[11px] hidden sm:inline">KRL Engineering Toolkit — VS Code Web IDE [Online Simulator]</span>
       </div>
 
       <!-- Center: Clickable Command Palette Launcher (Ctrl+Shift+P) -->
@@ -91,7 +91,7 @@
         <div v-if="activeSideTab === 'explorer'" class="p-2 space-y-1 overflow-y-auto flex-1 font-mono text-[11px]">
           <div class="text-[#858585] px-1.5 py-0.5 flex items-center gap-1 font-bold">
             <svg class="w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-            <span>KUKA_CELL_04 [KRC4]</span>
+            <span>CELL_04 [KRC4]</span>
           </div>
 
           <div class="pl-2 space-y-0.5">
@@ -308,7 +308,7 @@
 
           <!-- Panel Tab 3: Output Log -->
           <div v-if="panelTab === 'output'" class="flex-1 p-2.5 overflow-y-auto text-[11px] text-gray-400 space-y-0.5">
-            <div>[LanguageServer - 14:00:02] KUKA KRL Professional Language Server v1.9.3 started.</div>
+            <div>[LanguageServer - 14:00:02] KRL Engineering Toolkit Language Server v1.9.3 started.</div>
             <div>[LanguageServer - 14:00:03] Indexed 10,327 symbols in 42ms. Controller scope: KSS 8.7.</div>
             <div>[LanguageServer - 14:00:04] AST Verified. 0 exceptions. Client HWID license node-locked.</div>
           </div>
@@ -323,7 +323,7 @@
     <div class="h-6 bg-[#007acc] text-white px-3 flex items-center justify-between text-[11px] font-mono select-none">
       <div class="flex items-center gap-3">
         <span class="flex items-center gap-1 font-bold">
-          <span></span> KUKA KRL Pro
+          <span></span> KRL Engineering Toolkit
         </span>
         <span class="flex items-center gap-1">
           <span>[ERROR]</span> {{ activeFileErrors.length }}

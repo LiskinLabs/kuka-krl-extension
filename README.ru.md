@@ -125,8 +125,8 @@
 <summary><b>5. Комплексы WorkVisual (.wvs) и KUKA.Sim (.vcmx) [PRO]</b></summary>
 <br>
 
-* **Инспектор проектов WorkVisual (`krl.inspectWvsTopology`)**: Чтение бинарных проектов `.wvs` в памяти без запуска САПР, извлечение каталогов опций KOP (`EthernetKRL`, `SafeOperation`, `GripperTech`), топологии шин EtherCAT / Profinet и мгновенный экспорт таблицы тегов в **Siemens TIA Portal**, **Beckhoff TwinCAT 3** и **EPLAN**.
-* **Аудит 3D-симуляций KUKA.Sim (`krl.inspectVcmxLayout`, `krl.validateVcmxSimulation`)**: Извлечение кинематики и дискретных сигналов из `.vcmx`, выявление 4 фатальных дедлоков симуляции (`VCMX001`–`VCMX004`) и постпроцессинг симуляции в синхронизированные модули KRL `.src` + `.dat`.
+* **Инспектор проектов WorkVisual (`krl.inspectFieldbusTopology`)**: Чтение бинарных проектов `.wvs` в памяти без запуска САПР, извлечение каталогов опций KOP (`EthernetKRL`, `SafeOperation`, `GripperTech`), топологии шин EtherCAT / Profinet и мгновенный экспорт таблицы тегов в **Siemens TIA Portal**, **Beckhoff TwinCAT 3** и **EPLAN**.
+* **Аудит 3D-симуляций KUKA.Sim (`krl.inspectWorkcellLayout`, `krl.validateWorkcellSimulation`)**: Извлечение кинематики и дискретных сигналов из `.vcmx`, выявление 4 фатальных дедлоков симуляции (`VCMX001`–`VCMX004`) и постпроцессинг симуляции в синхронизированные модули KRL `.src` + `.dat`.
 </details>
 
 <details>

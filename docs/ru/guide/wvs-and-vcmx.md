@@ -12,7 +12,7 @@
 
 ---
 
-## Инспектор топологии WorkVisual (.wvs / .wvps) (`krl.inspectWvsTopology`)
+## Инспектор топологии WorkVisual (.wvs / .wvps) (`krl.inspectFieldbusTopology`)
 
 * **Анализ без распаковки**: Чтение бинарных проектов `.wvs` и `.wvps` напрямую в оперативной памяти.
 * **Декодер XML-метаданных**: Декодирование hex-экранированных XML-тегов из `Solution.MetaData`.
@@ -24,11 +24,11 @@
 
 ## Комплекс KUKA.Sim & Visual Components (.vcmx)
 
-### 1. Инспектор сцены KUKA.Sim (`krl.inspectVcmxLayout`)
+### 1. Инспектор сцены KUKA.Sim (`krl.inspectWorkcellLayout`)
 * **Двухслойный парсер `layout.rsc`**: Извлечение компонентов ячейки напрямую из архивов `.vcmx`.
 * **Извлекаемые объекты**: Кинематика робота (`rSimKinController`), дискретные сигналы (`rSimBooleanSignal`), транспортные конвейеры (`ProductType`) и программы процессов (`ProgramData`).
 
-### 2. Валидатор гонок и дедлоков симуляции (`krl.validateVcmxSimulation`)
+### 2. Валидатор гонок и дедлоков симуляции (`krl.validateWorkcellSimulation`)
 Обнаружение и безопасное устранение четырёх критических классов ошибок симуляции:
 
 | Код ошибки | Классификация | Причина и проявление |
@@ -40,7 +40,7 @@
 
 * **Безопасный авторемонт**: Точечное исправление файла `layout.rsc` с сохранением версионных копий `.bk1`, `.bk2`.
 
-### 3. Пост-процессор VCMX в KRL (`krl.exportVcmxToKrl`)
+### 3. Пост-процессор VCMX в KRL (`krl.exportWorkcellToKrl`)
 * Преобразование процессов симуляции (`LinMotion`, `PtpMotion`, `SetSignal`, `WaitSignal`, `Delay`) в готовые модули KRL `.src` и `.dat`.
 
 ---
@@ -49,7 +49,7 @@
 
 | Команда | Идентификатор | Описание |
 |---|---|---|
-| KUKA KRL: Инспектор топологии WorkVisual | `krl.inspectWvsTopology` | Анализ проектов `.wvs` в памяти |
-| KUKA KRL: Инспектор ячейки VCMX | `krl.inspectVcmxLayout` | Извлечение логики из `.vcmx` |
-| KUKA KRL: Валидация симуляции VCMX | `krl.validateVcmxSimulation` | Аудит и ремонт дедлоков симуляции |
-| KUKA KRL: Экспорт VCMX в KRL | `krl.exportVcmxToKrl` | Пост-процессинг симуляции в KRL |
+| KUKA KRL: Инспектор топологии WorkVisual | `krl.inspectFieldbusTopology` | Анализ проектов `.wvs` в памяти |
+| KUKA KRL: Инспектор ячейки VCMX | `krl.inspectWorkcellLayout` | Извлечение логики из `.vcmx` |
+| KUKA KRL: Валидация симуляции VCMX | `krl.validateWorkcellSimulation` | Аудит и ремонт дедлоков симуляции |
+| KUKA KRL: Экспорт VCMX в KRL | `krl.exportWorkcellToKrl` | Пост-процессинг симуляции в KRL |

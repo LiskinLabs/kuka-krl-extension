@@ -6,7 +6,7 @@
 
 ## Обзор
 
-**Live Controller Monitor** (`krl.connectKukaRobot`, `krl.openLiveBridge`) устанавливает прямое высокоскоростное соединение по Ethernet между VS Code и физическими контроллерами роботов KUKA под управлением KSS 5.x – 8.7+ и iiQKA 9.x.
+**Live Controller Monitor** (`krl.live.connect`, `krl.live.openDashboard`) устанавливает прямое высокоскоростное соединение по Ethernet между VS Code и физическими контроллерами роботов KUKA под управлением KSS 5.x – 8.7+ и iiQKA 9.x.
 
 Инструмент выводит телеметрию цеха, нагрузки на двигатели 6 осей, декартовы координаты TCP, матрицу 4096 сигналов ввода-вывода и субтитры системных сообщений SmartPAD прямо в среду разработки.
 
@@ -52,6 +52,6 @@ Live-монитор использует отказоустойчивую дву
 
 | Команда | Идентификатор | Описание |
 |---|---|---|
-| KUKA KRL: Подключиться к роботу KUKA | `krl.connectKukaRobot` | Диалог Ethernet-подключения к роботу |
-| KUKA KRL: Открыть панель Live Monitor | `krl.openLiveBridge` | Запуск панели телеметрии реального времени |
-| KUKA KRL: Скачать бэкап с контроллера | `krl.downloadLiveBackup` | Горячая выгрузка `.zip` бэкапа с робота |
+| KUKA KRL: Подключиться к роботу KUKA | `krl.live.connect` | Диалог Ethernet-подключения к роботу |
+| KUKA KRL: Открыть панель Live Monitor | `krl.live.openDashboard` | Запуск панели телеметрии реального времени |
+| KUKA KRL: Скачать бэкап с контроллера | `krl.live.fetchBackup` | Горячая выгрузка `.zip` бэкапа с робота |

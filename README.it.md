@@ -68,7 +68,7 @@ Ogni ingegnere di messa in servizio conosce questo dolore:
 2. **Il rischio di collisione nascosto**: una singola assegnazione `$TOOL` o `$BASE` mancante, uno spostamento di coordinate non verificato o un superamento accidentale di `$VEL.CP` che causa un crash meccanico alla prima esecuzione automatica.
 3. **Le modifiche non verificate**: i colleghi ritoccano i punti sul pendolino durante il turno notturno con zero controllo di versione.
 
-**KUKA KRL Professional** trasforma il tuo editor in un **centro di comando di robotica industriale** ad alte prestazioni. Individua errori di sintassi, guasti cinematici, blocchi non bilanciati e disallineamenti di coordinate **PRIMA** che il codice tocchi il controllore fisico.
+**KRL Engineering Toolkit** trasforma il tuo editor in un **centro di comando di robotica industriale** ad alte prestazioni. Individua errori di sintassi, guasti cinematici, blocchi non bilanciati e disallineamenti di coordinate **PRIMA** che il codice tocchi il controllore fisico.
 
 > **La garanzia ROI:** individuare un singolo crash di sintassi o una collisione meccanica prima di eseguire il codice in reparto ripaga una licenza Pro a vita nei primi 5 minuti.
 
@@ -159,8 +159,8 @@ Ogni ingegnere di messa in servizio conosce questo dolore:
 
 ---
 
-### 8. Integrazione ufficiale kernel KUKA.Sim 4.10 e 957+ variabili di sistema
-*Specifiche industriali autentiche estratte direttamente da KUKA.Sim 4.10, WorkVisual e dal runtime dei controllori KRC.*
+### 8. Specifica del linguaggio KRL e 957+ variabili di sistema
+*Variabili, strutture e firme derivate dalla specifica pubblica del linguaggio KRL; nessun file del fornitore viene distribuito.*
 * **957 variabili di sistema**: copertura esaustiva delle variabili KSS 8.3–8.7/9.0 (`$ACC`, `$TOOL`, `$BASE`, `$POS_ACT`, `$VEL_AXIS`, ecc.) con unità fisiche, limiti degli array (217 array) e stati di sola lettura.
 * **116 funzioni di sistema integrate e Wonderlib**: pieno supporto runtime per cinematica (`FORWARD`, `INVERSE`, `INV_POS`, `TOOL_ADJ`), manipolazione stringhe, conversione tipi, dialoghi messaggi, limiti di coppia e routine Wonderlib con `signatureHelp` in tempo reale.
 * **111 strutture e 112 ENUM (443 letterali)**: completamento intelligente con punto (`$TOOL.`, `$ACC.`, `POINT.`) e autocompletamento letterali enum `#` (`#AUT`, `#T1`, `#P_FREE`, `#QUIT`).
@@ -239,7 +239,7 @@ Ogni ingegnere di messa in servizio conosce questo dolore:
 
 ### 16. Palette sintattica ad alto contrasto e libreria di sistema KSS
 *Palette colori ricca e contesto di sistema per lo sviluppo professionale KRL.*
-* **Palette ad alto contrasto diversificata**: schemi colore 100% autentici da KUKA.Sim (`KRLDark.xshd`) e WorkVisual (`KRL.xshd`). Scope differenziati per comandi di movimento (grassetto), operatori bitwise/logici, simboli matematici, direttive di sistema (`&ACCESS`, `&REL`) e numeri esadecimali/binari (`'H...'`, `'B...'`).
+* **Palette ad alto contrasto diversificata**: schemi colore propri con contrasto ispirato agli ambienti industriali. Scope differenziati per comandi di movimento (grassetto), operatori bitwise/logici, simboli matematici, direttive di sistema (`&ACCESS`, `&REL`) e numeri esadecimali/binari (`'H...'`, `'B...'`).
 * **Libreria di sistema standard KSS 8.7**: definizioni integrate, aiuto parametri e `F12` (Vai alla definizione) per `BAS()`, `MsgNotify()`, `MsgQuit()`, `MsgDialog()`, `USE_CM_PRO_VALUES()`, `TOOL_NAME[]` e `BASE_NAME[]` — direttamente ai moduli di riferimento ufficiali KSS 8.7.
 * **Scaffolding progetto KRC in 1 clic (`krl.scaffoldKrcFiles`)**: crea automaticamente l'albero standard `KRC/R1/System/`, `KRC/R1/Program/` e `KRC/R1/TP/` popolato con `$config.dat`, `bas.src`, `MsgLib.src`, `collmonlib.src` e `sps.sub`.
 * **Valori di fabbrica e limitatore Advance Run**: visualizzazione hover istantanea dei valori di fabbrica ufficiali (`operate.defaultvalues`) per `$ADVANCE = 3`, `$VEL.CP = 2.0 m/s`, `$ACC.CP = 2.3 m/s²`, `$JERK.CP = 500.0 m/s³` e avvisi lint automatici quando `$ADVANCE` supera l'intervallo valido `0..5`.
@@ -251,7 +251,7 @@ Ogni ingegnere di messa in servizio conosce questo dolore:
 | Funzionalità | Community (gratis) | Pro Industrial | Beneficio per gli ingegneri |
 |:---|:---:|:---:|:---|
 | **Evidenziazione sintassi KRL** (`.src`, `.dat`, `.sub`, `.kfd`) | Sì | Sì | Colorazione AST completa con palette KRL |
-| **Temi KRL e WorkVisual** | Sì | Sì | Schemi colore AvalonEdit autentici (scuri e chiari) |
+| **Temi KRL** | Sì | Sì | Schemi colore industriali propri (scuri e chiari) |
 | **Autocompletamento intelligente e specifiche di sistema** (957+ variabili, 116 funzioni, 111 strutture) | Sì | Sì | Autocompletamento completo variabili di sistema KSS e aiuto firme |
 | **Libreria di sistema standard KSS 8.7 e definizione F12** | Sì | Sì | Salto F12 istantaneo a `bas.src`, `MsgLib.src`, `$config.dat` |
 | **Scaffolding progetto KRC in 1 clic** | Sì | Sì | Inizializza la struttura standard `KRC/R1/System` |
@@ -300,7 +300,6 @@ Offriamo licenze flessibili di livello industriale tramite il nostro merchant ve
 | **Enterprise Site** | **$4,999** / anno | B2B — Fino a 100 postazioni | Tutti gli strumenti Pro e analizzatori • 100 postazioni di stabilimento • Report con marchio | [Ottieni Enterprise](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 ### Garanzie per l'Acquirente e Rimborso Immediato (Zero Chargeback Risk)
-* **Descrizione Chiara sull'Estratto Conto**: Le transazioni appaiono come **LISKINLABS KUKA** o **KUKA KRL VSCODE**.
 * **Gestione Abbonamento in 1 Clic direttamente in VS Code**: Barra di stato / Tavolozza dei comandi (`Ctrl+Shift+P` → `KUKA KRL: Manage Subscription / Support`).
 * **Rimborso Immediato al 100%**: Rimborsi immediati elaborati senza contestazioni bancarie tramite il supporto integrato.
 
@@ -317,7 +316,7 @@ Gli ingegneri di messa in servizio lavorano in stabilimenti pieni di interferenz
 
 ## Certificazione di sicurezza enterprise
 
-KUKA KRL Professional è certificato da **ReversingLabs Spectra Assure** con un **punteggio di sicurezza del 100%**:
+KRL Engineering Toolkit è certificato da **ReversingLabs Spectra Assure** con un **punteggio di sicurezza del 100%**:
 * **0 malware** (ispezione binaria pulita)
 * **0 vulnerabilità CVE** in tutte le dipendenze
 * **0 fughe di segreti/token**
@@ -374,7 +373,7 @@ Configura il comportamento dell'estensione nel tuo `settings.json`:
 ## Note legali, marchi e conformità di sicurezza
 
 ### Conformità alla sicurezza industriale (ISO 10218-1/-2 e ISO 13849-1)
-**KUKA KRL Professional** è una suite indipendente di sviluppo, analisi statica e confronto backup sviluppata da **Liskin Labs**. **NON è un software certificato per la sicurezza (Non-SIL / Non-PL)** e **non sostituisce** le procedure obbligatorie di messa in servizio fisica, la verifica della velocità ridotta (`$OV_PRO <= 30%` in modalità T1 sullo SmartPAD fisico) o le valutazioni formali dei rischi ai sensi delle norme **ISO 10218-1/-2** e **ISO 13849-1**. Eseguire sempre prove manuali in modalità T1 prima della produzione automatica.
+**KRL Engineering Toolkit** è una suite indipendente di sviluppo, analisi statica e confronto backup sviluppata da **Liskin Labs**. **NON è un software certificato per la sicurezza (Non-SIL / Non-PL)** e **non sostituisce** le procedure obbligatorie di messa in servizio fisica, la verifica della velocità ridotta (`$OV_PRO <= 30%` in modalità T1 sullo SmartPAD fisico) o le valutazioni formali dei rischi ai sensi delle norme **ISO 10218-1/-2** e **ISO 13849-1**. Eseguire sempre prove manuali in modalità T1 prima della produzione automatica.
 
 ### Marchi registrati ed esonero di responsabilità
 * **KUKA®, KRL®, KRC®, WorkVisual®, iiQWorks® e SmartPAD®** sono marchi registrati di **KUKA AG** / **KUKA Deutschland GmbH**.

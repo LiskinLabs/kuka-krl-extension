@@ -1,6 +1,6 @@
 ---
-title: KUKA KRL Professional — Энциклопедия и Справочник Функций
-description: Подробнейший технический разбор профессиональных функций расширения KUKA KRL Professional для VS Code, комбинаций клавиш и видеодемонстраций.
+title: KRL Engineering Toolkit — Энциклопедия и Справочник Функций
+description: Подробнейший технический разбор профессиональных функций расширения KRL Engineering Toolkit для VS Code, комбинаций клавиш и видеодемонстраций.
 ---
 
 <FeaturesWiki />

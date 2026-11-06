@@ -12,7 +12,7 @@ Bu paketler, arşivleri sabit diske açmadan doğrudan bellek içinde analiz ede
 
 ---
 
-## WorkVisual Topoloji İnceleyicisi (`krl.inspectWvsTopology`)
+## WorkVisual Topoloji İnceleyicisi (`krl.inspectFieldbusTopology`)
 
 * **Arşiv Açmadan Bellek İçi Analiz**: İkili `.wvs` ve `.wvps` projelerini doğrudan RAM içinde okur.
 * **KOP Opsiyon Paketleri**: `Solution.MetaData` üzerinden kurulu teknoloji paketlerini (`KUKA.EthernetKRL`, `KUKA.SafeOperation`, `KUKA.GripperSpotTech`, `KUKA.Profinet`), KSS sürümünü ve robot modelini tespit eder.
@@ -23,10 +23,10 @@ Bu paketler, arşivleri sabit diske açmadan doğrudan bellek içinde analiz ede
 
 ## KUKA.Sim ve Visual Components (.vcmx)
 
-### 1. Hücre İnceleyicisi (`krl.inspectVcmxLayout`)
+### 1. Hücre İnceleyicisi (`krl.inspectWorkcellLayout`)
 * **İki Katmanlı `layout.rsc` Ayrıştırıcısı**: Bileşen ağacını, robot denetleyicilerini (`rSimKinController`), sinyalleri ve süreç programlarını `.vcmx` arşivinden doğrudan çıkarır.
 
-### 2. Simülasyon Kilitlenme ve Yarış Doğrulayıcısı (`krl.validateVcmxSimulation`)
+### 2. Simülasyon Kilitlenme ve Yarış Doğrulayıcısı (`krl.validateWorkcellSimulation`)
 Simülasyonda 4 kritik hata sınıfını tespit eder ve güvenli şekilde otomatik onarır:
 
 | Hata Kodu | Sınıflandırma | Neden ve Belirti |
@@ -36,5 +36,5 @@ Simülasyonda 4 kritik hata sınıfını tespit eder ve güvenli şekilde otomat
 | `VCMX003` | Ürün Değişkeni Sızıntısı | Parça çıkışından sonra değişkenin sıfırlanmaması |
 | `VCMX004` | Kayıp Sinyal Referansı | Eksik veya geçersiz ayrık sinyal referansı |
 
-### 3. VCMX'ten KRL'ye Son İşlemci (`krl.exportVcmxToKrl`)
+### 3. VCMX'ten KRL'ye Son İşlemci (`krl.exportWorkcellToKrl`)
 * Simülasyon süreçlerini (`LinMotion`, `PtpMotion`, `SetSignal`, `WaitSignal`, `Delay`) doğrudan senkronize KRL `.src` ve `.dat` modüllerine çevirir.

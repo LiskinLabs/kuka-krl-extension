@@ -8,7 +8,7 @@ Ensure your code meets the high standards of automotive manufacturers (VASS, BMW
 
 ## How It Works
 
-KUKA KRL Professional indexes your entire workspace (all `.src`, `.dat`, and `.sub` files) to build a comprehensive dependency graph.
+KRL Engineering Toolkit indexes your entire workspace (all `.src`, `.dat`, and `.sub` files) to build a comprehensive dependency graph.
 
 * **Unused Locals**: Scans for unused local variables within routines.
 * **Dead Global Subroutines**: Identifies `GLOBAL DEF` subprograms that are declared but never called anywhere in the workspace.

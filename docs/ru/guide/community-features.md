@@ -1,4 +1,4 @@
-# Community Edition — Бесплатные базовые функции KUKA KRL Professional
+# Community Edition — Бесплатные базовые функции KRL Engineering Toolkit
 
 Подробный обзор 24 бесплатных базовых функций расширения для разработчиков и инженеров-робототехников.
 

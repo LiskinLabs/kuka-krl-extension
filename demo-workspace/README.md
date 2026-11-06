@@ -1,4 +1,4 @@
-#  KUKA KRL Professional Industrial Test Workspace
+#  KRL Engineering Toolkit Industrial Test Workspace
 > **Liskin Labs Industrial Pro Edition | KUKA KRC4 / KRC5 (KSS 8.3 - 8.7)**
 
 Добро пожаловать в эталонную расширенную рабочую область для комплексного тестирования абсолютно всех функций и модулей расширения **KUKA KRL Extension**.

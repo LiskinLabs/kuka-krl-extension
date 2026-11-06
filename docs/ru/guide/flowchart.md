@@ -2,7 +2,7 @@
 
 <span class="badge pro">Pro Функция</span>
 
-Забудьте о ручном разборе сложных алгоритмов с десятками вложенных ветвлений `IF`, `SWITCH` и циклов `LOOP`. KUKA KRL Professional превращает программы `.src` в интерактивные блок-схемы Mermaid SVG.
+Забудьте о ручном разборе сложных алгоритмов с десятками вложенных ветвлений `IF`, `SWITCH` и циклов `LOOP`. KRL Engineering Toolkit превращает программы `.src` в интерактивные блок-схемы Mermaid SVG.
 
 ![Control Flow Graph Demo](/media/control_flow_graph.gif)
 

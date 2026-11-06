@@ -1,6 +1,6 @@
 # Topluluk Sürümü — Ücretsiz Temel Özellikler
 
-KUKA KRL Professional eklentisinde bulunan 24 ücretsiz temel özelliğin ayrıntılı açıklaması.
+KRL Engineering Toolkit eklentisinde bulunan 24 ücretsiz temel özelliğin ayrıntılı açıklaması.
 
 ---
 

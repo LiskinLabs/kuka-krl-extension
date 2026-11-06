@@ -6,7 +6,7 @@ Near-real-time telemetry and online controller bridge for KUKA KRC2, KRC4, and K
 
 ## Overview
 
-The **Live Controller Monitor** (`krl.connectKukaRobot`, `krl.openLiveBridge`) establishes a direct, high-frequency Ethernet connection between VS Code and physical KUKA robot controllers running KSS 5.x through 8.7+ and iiQKA 9.x.
+The **Live Controller Monitor** (`krl.live.connect`, `krl.live.openDashboard`) establishes a direct, high-frequency Ethernet connection between VS Code and physical KUKA robot controllers running KSS 5.x through 8.7+ and iiQKA 9.x.
 
 It brings shop-floor telemetry, 6-axis joint torque feedback, Cartesian TCP tracking, a 4096-pin I/O matrix, and live SmartPAD alarms with multilingual subtitles directly into your engineering workspace.
 
@@ -77,6 +77,6 @@ The live monitor uses a resilient dual-driver communication architecture:
 
 | Command | Identifier | Description |
 |---|---|---|
-| KUKA KRL: Connect to KUKA Robot | `krl.connectKukaRobot` | Open live Ethernet connection modal |
-| KUKA KRL: Open Live Monitor Dashboard | `krl.openLiveBridge` | Launch real-time telemetry dashboard |
-| KUKA KRL: Download Controller Backup | `krl.downloadLiveBackup` | Download a `.zip` backup from the controller |
+| KUKA KRL: Connect to KUKA Robot | `krl.live.connect` | Open live Ethernet connection modal |
+| KUKA KRL: Open Live Monitor Dashboard | `krl.live.openDashboard` | Launch real-time telemetry dashboard |
+| KUKA KRL: Download Controller Backup | `krl.live.fetchBackup` | Download a `.zip` backup from the controller |

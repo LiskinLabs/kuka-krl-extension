@@ -2,7 +2,7 @@
 
 <span class="badge pro">Pro Özellik</span>
 
-Karmaşık iç içe geçmiş mantıkları (`IF`, `SWITCH`, `LOOP`) manuel olarak takip etmeyi bırakın. KUKA KRL Professional, karmaşık `.src` programlarını temiz, görsel kontrol akış diyagramlarına dönüştürür.
+Karmaşık iç içe geçmiş mantıkları (`IF`, `SWITCH`, `LOOP`) manuel olarak takip etmeyi bırakın. KRL Engineering Toolkit, karmaşık `.src` programlarını temiz, görsel kontrol akış diyagramlarına dönüştürür.
 
 ![Flowchart Viewer Demo](/media/control_flow_graph.gif)
 

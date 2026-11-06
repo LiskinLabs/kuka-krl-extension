@@ -12,7 +12,7 @@ Diese Suites analysieren Projektarchive direkt im Arbeitsspeicher, exportieren S
 
 ---
 
-## WorkVisual-Topologie-Inspektor (`krl.inspectWvsTopology`)
+## WorkVisual-Topologie-Inspektor (`krl.inspectFieldbusTopology`)
 
 * **In-Memory-Analyse**: Direktes Auslesen binärer WorkVisual-Projekte im RAM.
 * **KOP-Pakete & Steuerung**: Extrahiert KOP-Optionen, KSS-Version und Robotermodelle aus `Solution.MetaData`.
@@ -23,6 +23,6 @@ Diese Suites analysieren Projektarchive direkt im Arbeitsspeicher, exportieren S
 
 ## KUKA.Sim & Visual Components (.vcmx)
 
-* **Zellen-Inspektor (`krl.inspectVcmxLayout`)**: Liest Kinematiken, Signale und Prozesse aus `layout.rsc`.
-* **Deadlock- & Race-Validator (`krl.validateVcmxSimulation`)**: Behebt Deadlocks (`VCMX001`–`VCMX004`) mit Backup-Sicherheit.
-* **VCMX-zu-KRL Postprozessor (`krl.exportVcmxToKrl`)**: Wandelt Simulationsschritte in `.src` und `.dat` Module um.
+* **Zellen-Inspektor (`krl.inspectWorkcellLayout`)**: Liest Kinematiken, Signale und Prozesse aus `layout.rsc`.
+* **Deadlock- & Race-Validator (`krl.validateWorkcellSimulation`)**: Behebt Deadlocks (`VCMX001`–`VCMX004`) mit Backup-Sicherheit.
+* **VCMX-zu-KRL Postprozessor (`krl.exportWorkcellToKrl`)**: Wandelt Simulationsschritte in `.src` und `.dat` Module um.

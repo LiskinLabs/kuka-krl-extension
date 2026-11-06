@@ -66,7 +66,7 @@ Her devreye alma mühendisi bu acıyı bilir:
 2. **Gizli Çarpışma Riski**: Tek bir eksik `$TOOL` veya `$BASE` ataması, doğrulanmamış bir nokta koordinat kayması veya ilk otomatik test koşusunda mekanik çarpışmaya neden olan yanlışlıkla bir Kartezyen `$VEL.CP` aşımı.
 3. **Doğrulanmamış Değişiklikler**: Ekip arkadaşları gece vardiyasında robot panelinde noktaları düzeltir, sürüm kontrolü sıfırdır.
 
-**KUKA KRL Professional**, editörünüzü yüksek performanslı bir **endüstriyel robotik komuta merkezine** dönüştürür. Sözdizimi hatalarını, kinematik hataları, eksik blok dengelerini ve koordinat uyumsuzluklarını kod **fiziksel robot kontrolörüne dokunmadan ÖNCE** yakalar.
+**KRL Engineering Toolkit**, editörünüzü yüksek performanslı bir **endüstriyel robotik komuta merkezine** dönüştürür. Sözdizimi hatalarını, kinematik hataları, eksik blok dengelerini ve koordinat uyumsuzluklarını kod **fiziksel robot kontrolörüne dokunmadan ÖNCE** yakalar.
 
 > **Yatırım Getirisi Garantisi:** Kodu üretim hattında çalıştırmadan önce tek bir sözdizimi hatası veya mekanik çarpışma yakalamak, ilk 5 dakikada ömür boyu Pro lisansını karşılar.
 
@@ -338,7 +338,6 @@ Doğrulanmış satıcımız **Dodo Payments** üzerinden esnek, endüstriyel sı
 | **Enterprise Site** | **$4,999** / yıl | B2B — 100 İş İstasyonu | Tüm Pro Araçlar ve Güvenlik Analizörleri • 100 Tesis İş İstasyonu • Markalı Raporlar & SLA | [Enterprise Satın Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP) |
 
 ### Alıcı Garantileri ve İptal Güvencesi (Zero Chargeback Risk)
-* **Net Banka Ekstresi Açıklaması**: Ekstrenizde işlem açıkça **LISKINLABS KUKA** veya **KUKA KRL VSCODE** olarak görünür.
 * **VS Code İçinden Tek Tıkla Abonelik Yönetimi & İptal**: Durum çubuğu veya komut paleti üzerinden (`Ctrl+Shift+P` → `KUKA KRL: Manage Subscription / Support`) aboneliğinizi dilediğiniz an tek tıkla sonlandırabilirsiniz.
 * **Koşulsuz ve Anında İade (100% Refund)**: Herhangi bir sorun yaşamanız durumunda yerleşik destek hattımız üzerinden talep ettiğinizde anında tam iade sağlanır.
 
@@ -355,7 +354,7 @@ Devreye alma mühendisleri parazitli tesislerde, temiz odalarda ve otomotiv hüc
 
 ## Kurumsal Güvenlik Sertifikasyonu
 
-KUKA KRL Professional, **ReversingLabs Spectra Assure** tarafından **%100 Güvenlik Sağlık Skoru** ile sertifikalandırılmıştır:
+KRL Engineering Toolkit, **ReversingLabs Spectra Assure** tarafından **%100 Güvenlik Sağlık Skoru** ile sertifikalandırılmıştır:
 * **0 Zararlı Yazılım** (Temiz ikili inceleme)
 * Tüm bağımlılıklarda **0 CVE Güvenlik Açığı**
 * **0 Gizli Bilgi / Token Sızıntısı**
@@ -412,7 +411,7 @@ Uzantı davranışlarını `settings.json` dosyanızda yapılandırın:
 ## Yasal Uyarılar, Ticari Markalar ve Güvenlik Uyumluluğu
 
 ### Zorunlu Endüstriyel Güvenlik Bildirimi (ISO 10218-1/-2 ve ISO 13849-1)
-**KUKA KRL Professional**, **Liskin Labs** tarafından geliştirilen bağımsız bir mühendislik geliştirme, statik analiz ve yedek diff paketidir. **Güvenlik sertifikalı bir yazılım DEĞİLDİR (Non-SIL / Non-PL)** ve sahada fiziksel devreye alma prosedürlerinin, düşük hız doğrulamasının (fiziksel KUKA SmartPAD üzerinde T1 modunda `$OV_PRO <= 30%`) veya **ISO 10218-1/-2** ve **ISO 13849-1** standartlarının gerektirdiği resmi risk değerlendirmelerinin yerini **almaz**. Otomatik üretime geçmeden önce her zaman T1 modunda manuel yol testleri gerçekleştirin.
+**KRL Engineering Toolkit**, **Liskin Labs** tarafından geliştirilen bağımsız bir mühendislik geliştirme, statik analiz ve yedek diff paketidir. **Güvenlik sertifikalı bir yazılım DEĞİLDİR (Non-SIL / Non-PL)** ve sahada fiziksel devreye alma prosedürlerinin, düşük hız doğrulamasının (fiziksel KUKA SmartPAD üzerinde T1 modunda `$OV_PRO <= 30%`) veya **ISO 10218-1/-2** ve **ISO 13849-1** standartlarının gerektirdiği resmi risk değerlendirmelerinin yerini **almaz**. Otomatik üretime geçmeden önce her zaman T1 modunda manuel yol testleri gerçekleştirin.
 
 ### Ticari Markalar ve Bağımsızlık Beyanı
 * **KUKA®, KRL®, KRC®, WorkVisual®, iiQWorks® ve SmartPAD®**, **KUKA AG** / **KUKA Deutschland GmbH** şirketinin tescilli ticari markalarıdır.

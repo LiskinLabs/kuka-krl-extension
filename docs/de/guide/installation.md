@@ -1,13 +1,13 @@
 # Installations- und Einrichtungsleitfaden
 
-Schnellstartanleitung zur Installation, Konfiguration und Offline-Aktivierung von KUKA KRL Professional.
+Schnellstartanleitung zur Installation, Konfiguration und Offline-Aktivierung von KRL Engineering Toolkit.
 
 ---
 
 ## 1. Installation über den VS Code Marketplace
 1. Öffnen Sie VS Code.
 2. Gehen Sie zur Ansicht "Erweiterungen" (`Ctrl + Shift + X`).
-3. Suchen Sie nach `KUKA KRL Professional` (Liskin Labs).
+3. Suchen Sie nach `KRL Engineering Toolkit` (Liskin Labs).
 4. Klicken Sie auf **Installieren**.
 
 ---

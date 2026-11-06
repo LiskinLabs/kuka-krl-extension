@@ -125,8 +125,8 @@ Real-time generation of interactive vector flowcharts from active `.src` program
 <summary><b>5. WorkVisual (.wvs) & KUKA.Sim (.vcmx) Suites [PRO]</b></summary>
 <br>
 
-* **WorkVisual Project Inspector (`krl.inspectWvsTopology`)**: In-memory inspection of binary `.wvs` projects without running heavy CAD packages. Extracts KOP catalogs (`EthernetKRL`, `SafeOperation`, `GripperTech`), EtherCAT/Profinet topology, and exports I/O signal lists to **Siemens TIA Portal**, **Beckhoff TwinCAT 3**, and **EPLAN**.
-* **KUKA.Sim 3D Simulation Validator (`krl.inspectVcmxLayout`, `krl.validateVcmxSimulation`)**: Extracts kinematics and discrete signals from `.vcmx`, detects 4 fatal simulation deadlocks (`VCMX001`–`VCMX004`), and converts simulation processes into clean `.src` + `.dat` KRL modules.
+* **WorkVisual Project Inspector (`krl.inspectFieldbusTopology`)**: In-memory inspection of binary `.wvs` projects without running heavy CAD packages. Extracts KOP catalogs (`EthernetKRL`, `SafeOperation`, `GripperTech`), EtherCAT/Profinet topology, and exports I/O signal lists to **Siemens TIA Portal**, **Beckhoff TwinCAT 3**, and **EPLAN**.
+* **KUKA.Sim 3D Simulation Validator (`krl.inspectWorkcellLayout`, `krl.validateWorkcellSimulation`)**: Extracts kinematics and discrete signals from `.vcmx`, detects 4 fatal simulation deadlocks (`VCMX001`–`VCMX004`), and converts simulation processes into clean `.src` + `.dat` KRL modules.
 </details>
 
 <details>

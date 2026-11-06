@@ -9,7 +9,7 @@
       <div class="flex items-center gap-6">
         <span class="inline-flex items-center gap-2 font-bold text-[#FF5500]">
           <span class="w-1.5 h-1.5 bg-[#FF5500] animate-pulse"></span>
-      KUKA KRL PROFESSIONAL v1.9.9
+      KRL ENGINEERING TOOLKIT v1.9.12
         </span>
         <span class="hidden md:inline-flex items-center gap-1.5 text-[#00D68F]">
           <svg class="w-3.5 h-3.5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -243,7 +243,7 @@
               <ClientOnly>
                 <iframe
                   :src="withBase(`/sim/?embed=1&lang=${lang}`)"
-                  title="KUKA KR 50 R2500 3D Digital Twin"
+                  title="KR 50 R2500 3D Digital Twin"
                   class="w-full h-full min-h-[460px] border-0 bg-black"
                   loading="lazy"
                   allow="fullscreen"
@@ -285,7 +285,7 @@
           <div class="font-mono text-xs text-[#FF5500] font-bold tracking-wider">[02 // INCIDENT SIMULATOR]</div>
           <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">PREVENT CATASTROPHIC DOWNTIME BEFORE COMPILING</h2>
           <p :class="['text-sm leading-relaxed', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">
-              Illustrative industry estimate: $24,000 per hour of unplanned robotic cell downtime. KRL Professional statically detects and auto-fixes the 4 most frequent causes of shop-floor stoppages.
+              Illustrative industry estimate: $24,000 per hour of unplanned robotic cell downtime. KRL Engineering Toolkit statically detects and auto-fixes the 4 most frequent causes of shop-floor stoppages.
           </p>
         </div>
 
@@ -338,7 +338,7 @@
               <pre class="overflow-x-auto text-zinc-300 leading-relaxed font-mono"><code>{{ activeDisaster.beforeCode }}</code></pre>
             </div>
 
-            <!-- KUKA KRL Pro Safe Sanitized Code -->
+            <!-- KRL Engineering Toolkit Safe Sanitized Code -->
             <div class="border border-emerald-500/40 bg-[#090C10] p-4 text-left relative">
               <div class="flex items-center justify-between border-b border-zinc-800 pb-2 mb-3">
                 <span class="text-[#00D68F] font-bold text-[11px] flex items-center gap-1.5">
@@ -789,13 +789,7 @@
         </div>
 
         <!-- BUYER TRUST & ANTI-CHARGEBACK GUARANTEES GRID -->
-        <div class="mt-8 pt-6 border-t border-zinc-800 grid grid-cols-1 md:grid-cols-4 gap-4 font-mono text-[11px]">
-          <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">
-            <div class="text-[#00D68F] font-bold mb-1">[VERIFIED] CLEAR BANK DESCRIPTOR</div>
-            <p class="text-zinc-400 text-[10px] leading-relaxed">
-              Charges clearly appear as <span class="text-white font-bold">DODOPAY_LISKINLABS</span> or <span class="text-white font-bold">LISKINLABS KUKA</span> so plant finance teams immediately recognize invoices.
-            </p>
-          </div>
+        <div class="mt-8 pt-6 border-t border-zinc-800 grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-[11px]">
           <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">
             <div class="text-[#00D68F] font-bold mb-1">[VERIFIED] 1-CLICK IN-EDITOR CANCEL</div>
             <p class="text-zinc-400 text-[10px] leading-relaxed">
@@ -829,7 +823,7 @@
             <div class="font-mono text-xs text-[#FF5500] font-bold tracking-wider">[06 // CAPABILITIES DIRECTORY]</div>
             <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">FULL PLATFORM CAPABILITY INVENTORY</h2>
             <p :class="['text-sm', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">
-              Complete inventory of {{ allInventory.length }} commands, settings, views, themes and language services included in KUKA KRL Professional v1.9.9.
+              Complete inventory of {{ allInventory.length }} commands, settings, views, themes and language services included in KRL Engineering Toolkit v1.9.12.
             </p>
           </div>
 
@@ -959,7 +953,7 @@
 
               <div>
                 <span class="text-white font-bold block mb-1">3. REVERSINGLABS SPECTRA ASSURE AUDIT</span>
-                <p class="text-zinc-400 leading-relaxed">Every extension release undergoes formal static binary decompilation and CVE scanning via ReversingLabs Spectra Assure, ensuring 100% clean pipeline verification and 0 supply chain risks.</p>
+                <p class="text-zinc-400 leading-relaxed">Every extension release undergoes static binary analysis, malware scanning and CVE review via ReversingLabs Spectra Assure, with results recorded in the release pipeline.</p>
               </div>
             </div>
 
@@ -999,7 +993,7 @@
           <div class="space-y-2">
             <div class="font-bold text-white text-[11px] uppercase">PRODUCT SUITE</div>
             <ul class="space-y-1 text-[11px]">
-              <li><a href="#hero" class="hover:text-[#FF5500]">KUKA KRL Professional</a></li>
+              <li><a href="#hero" class="hover:text-[#FF5500]">KRL Engineering Toolkit</a></li>
               <li><a href="#simulator" class="hover:text-[#FF5500]">VS Code Web Simulator</a></li>
           <li><a href="#inventory" class="hover:text-[#FF5500]">64 Industrial Tools Wiki</a></li>
               <li><a href="#pricing" class="hover:text-[#FF5500]">B2B Licensing & Pricing</a></li>
@@ -1079,7 +1073,7 @@
             <tbody>
               <tr class="border-b border-zinc-200">
                 <td class="p-2 font-bold">{{ recommendedTier.name }}</td>
-        <td class="p-2">KUKA KRL Professional IDE v1.9.9 Suite (64 Industrial Tools, Air-Gap License, Spectra Assure 0 CVE)</td>
+        <td class="p-2">KRL Engineering Toolkit IDE v1.9.12 Suite (64 Industrial Tools, Air-Gap License, Spectra Assure 0 CVE)</td>
                 <td class="p-2 text-center">{{ recommendedTier.seats }} Seats</td>
                 <td class="p-2 text-right font-bold">{{ formatPrice(recommendedTier.priceUsd) }}</td>
               </tr>
@@ -1146,7 +1140,7 @@
         <div class="space-y-3 border-t border-b border-zinc-800 py-3 text-xs">
           <div>
             <span class="text-[#FF5500] font-bold block">STEP 1: INSTALL EXTENSION</span>
-            <span class="text-zinc-400">Install KUKA KRL Professional from the VS Code Marketplace.</span>
+            <span class="text-zinc-400">Install KRL Engineering Toolkit from the VS Code Marketplace.</span>
           </div>
           <div>
             <span class="text-[#FF5500] font-bold block">STEP 2: OPEN COMMAND PALETTE</span>

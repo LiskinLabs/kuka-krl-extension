@@ -1,6 +1,6 @@
 {
-  "extensionName": "KUKA KRL Professional VS Code Extension",
-  "version": "1.9.9",
+  "extensionName": "KRL Engineering Toolkit VS Code Extension",
+  "version": "1.9.12",
   "publisher": "LiskinLabs",
   "license": "SEE LICENSE IN LICENSE.txt",
   "pricing": "Free",
@@ -776,56 +776,56 @@
         "id": "krl.activateLicense",
         "title": "Activate License",
         "status": "Free",
-        "valueProposition": "Activates a KUKA KRL Professional license using a provided key."
+        "valueProposition": "Activates a KRL Engineering Toolkit license using a provided key."
       },
       {
         "type": "Command",
         "id": "krl.deactivateLicense",
         "title": "Deactivate License",
         "status": "Free",
-        "valueProposition": "Deactivates the current KUKA KRL Professional license on this machine."
+        "valueProposition": "Deactivates the current KRL Engineering Toolkit license on this machine."
       },
       {
         "type": "Command",
         "id": "krl.checkLicenseStatus",
         "title": "Check License Status",
         "status": "Free",
-        "valueProposition": "Displays the current status of the KUKA KRL Professional license."
+        "valueProposition": "Displays the current status of the KRL Engineering Toolkit license."
       },
       {
         "type": "Command",
         "id": "krl.openCustomerPortal",
         "title": "Open Customer Portal",
         "status": "Free",
-        "valueProposition": "Opens the customer portal for managing KUKA KRL Professional licenses and subscriptions."
+        "valueProposition": "Opens the customer portal for managing KRL Engineering Toolkit licenses and subscriptions."
       },
       {
         "type": "Command",
         "id": "krl.startTrial",
         "title": "Start Trial",
         "status": "Free",
-        "valueProposition": "Starts a free trial period for KUKA KRL Professional features."
+        "valueProposition": "Starts a free trial period for KRL Engineering Toolkit features."
       },
       {
         "type": "Command",
         "id": "krl.requestCorporateInvoice",
         "title": "Request Corporate Invoice",
         "status": "Free",
-        "valueProposition": "Requests a corporate invoice for KUKA KRL Professional licenses."
+        "valueProposition": "Requests a corporate invoice for KRL Engineering Toolkit licenses."
       },
       {
         "type": "Command",
         "id": "krl.downloadLatestInvoice",
         "title": "Download Latest Invoice",
         "status": "Free",
-        "valueProposition": "Downloads the most recent invoice for KUKA KRL Professional purchases."
+        "valueProposition": "Downloads the most recent invoice for KRL Engineering Toolkit purchases."
       },
       {
         "type": "Command",
         "id": "krl.activateOfflineLicense",
         "title": "Activate Offline License",
         "status": "Free",
-        "valueProposition": "Activates a KUKA KRL Professional license in an offline environment."
+        "valueProposition": "Activates a KRL Engineering Toolkit license in an offline environment."
       },
       {
         "type": "Command",
@@ -861,13 +861,6 @@
         "title": "License Server URL",
         "status": "Free",
         "valueProposition": "Configures the on-premise enterprise license server URL for offline factory networks."
-      },
-      {
-        "type": "Configuration",
-        "id": "krl.dodoApiKey",
-        "title": "Dodo Payments API Key",
-        "status": "Free",
-        "valueProposition": "Configures the API key for Dodo Payments integration."
       }
     ],
     "UI & Workflow Tools": [
@@ -1006,7 +999,7 @@
       },
       {
         "type": "Command",
-        "id": "krl.viewEvtLog",
+        "id": "krl.openEventLog",
         "title": "View Binary Event Log (.evt)",
         "status": "PRO",
         "valueProposition": "Decodes and inspects proprietary KUKA binary event log archives into structured chronological timelines."
@@ -1048,7 +1041,7 @@
       },
       {
         "type": "Command",
-        "id": "krl.calculateMotionStats",
+        "id": "krl.estimateMotionStats",
         "title": "Calculate Motion & Welding Stats",
         "status": "PRO",
         "valueProposition": "Calculates total path distance, segment count, torch seam length, and lookahead speed profile."
@@ -1061,18 +1054,11 @@
         "valueProposition": "Generates official compliant B2B invoices with EU VAT Reverse Charge and company Tax ID validation."
       },
       {
-        "type": "Command",
-        "id": "krl.configureWorkVisualPath",
-        "title": "Configure WorkVisual Path",
-        "status": "Free",
-        "valueProposition": "Configures the path to the KUKA WorkVisual installation for integration."
-      },
-      {
         "type": "View Container",
         "id": "kuka-krl-container",
-        "title": "KUKA KRL Professional",
+        "title": "KRL Engineering Toolkit",
         "status": "Free",
-        "valueProposition": "Provides a dedicated activity bar container for KUKA KRL Professional views."
+        "valueProposition": "Provides a dedicated activity bar container for KRL Engineering Toolkit views."
       },
       {
         "type": "View",
@@ -1087,27 +1073,6 @@
         "title": "KRL Commands",
         "status": "Free",
         "valueProposition": "Provides a quick access panel for frequently used KUKA KRL commands."
-      },
-      {
-        "type": "Configuration",
-        "id": "krl.telemetry.enabled",
-        "title": "Enable Telemetry",
-        "status": "Free",
-        "valueProposition": "Enables or disables telemetry data collection for extension usage."
-      },
-      {
-        "type": "Configuration",
-        "id": "krl.workVisual.path",
-        "title": "WorkVisual Path",
-        "status": "Free",
-        "valueProposition": "Specifies the installation path for KUKA WorkVisual."
-      },
-      {
-        "type": "Configuration",
-        "id": "krl.workVisual.imagesPath",
-        "title": "WorkVisual Images Path",
-        "status": "Free",
-        "valueProposition": "Specifies the path to WorkVisual image assets for display in the extension."
       }
     ],
     "Reporting": [
@@ -1185,15 +1150,15 @@
       },
       {
         "type": "Theme",
-        "id": "KRL WorkVisual Dark (Standard)",
-        "title": "KRL WorkVisual Dark (Standard)",
+        "id": "KRL Controller Project Dark (Standard)",
+        "title": "KRL Controller Project Dark (Standard)",
         "status": "Free",
         "valueProposition": "A dark color theme mimicking the default appearance of KUKA WorkVisual."
       },
       {
         "type": "Theme",
-        "id": "KRL WorkVisual Light (Standard)",
-        "title": "KRL WorkVisual Light (Standard)",
+        "id": "KRL Controller Project Light (Standard)",
+        "title": "KRL Controller Project Light (Standard)",
         "status": "Free",
         "valueProposition": "A light color theme mimicking the default appearance of KUKA WorkVisual."
       },

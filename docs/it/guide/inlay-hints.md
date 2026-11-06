@@ -8,7 +8,7 @@ No more constantly switching tabs between `.src` and `.dat` files to remember wh
 
 ## How It Works
 
-KUKA KRL Professional uses the Language Server Protocol (LSP) to provide context directly inline in your editor.
+KRL Engineering Toolkit uses the Language Server Protocol (LSP) to provide context directly inline in your editor.
 
 When you use an I/O signal (e.g., `$IN[12]`) or a generic system variable, the extension automatically injects a non-intrusive "hint" next to the code showing the signal's declared name or comment from your `.dat` files.
 

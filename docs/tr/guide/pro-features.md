@@ -16,20 +16,20 @@ Saha mühendislerinin doğrudan IDE içinden soru sormasını ve geri bildirim i
 
 ---
 
-### 18. KRC Filo Yedekleri ve Nokta Delta İnceleyicisi (`krl.compareKrcBackups`)
+### 18. KRC Filo Yedekleri ve Nokta Delta İnceleyicisi (`krl.compareKrcBackup`)
 Fiziksel SmartPAD `.zip` arşivlerini doğrudan karşılaştırır. Nokta versiyonları arasındaki 6 eksenli uzamsal koordinat farklarını ($\Delta X, \Delta Y, \Delta Z, \Delta A, \Delta B, \Delta C$) hesaplar ve güvenlik toleranslarını aşan tehlikeli kaymaları işaretler.
 
 ![KRC Backup Diff Demo](/media/krc_backup_diff.gif)
 
 ---
 
-### 19. Etkileşimli Hareket Yörüngesi ve Spline Blok Oluşturucu (`krl.insertMotionTrajectory`, `krl.insertSplineBlock`)
+### 19. Etkileşimli Hareket Yörüngesi ve Spline Blok Oluşturucu (`krl.insertSplineBlock`, `krl.insertSplineBlock`)
 Standart ve modern KSS hareketleri (`PTP`, `LIN`, `CIRC`, `SPTP`, `SLIN`, `SCIRC`, `SPLINE Block`) için dinamik SVG vektör yörünge şemaları ve `$SGEAR_JERK` profil doğrulaması içeren görsel oluşturucu.
 
 ---
 
 ### 20. Yerel Copilot Tarzı Kalıcı AI Fark İncelemesi (`KrlReviewService`)
-Yapay zeka refaktörleri için çok dosyalı fark hazırlama sistemi. Değişiklikleri satır içi ve yan yana görüntüleyicilerde sunar, durum çubuğu üzerinden dosya veya blok bazında kabul/reddetme imkanı sağlar (`krl.review.acceptFile`, `krl.review.rejectFile`, `krl.review.acceptHunk`, `krl.review.rejectHunk`).
+Yapay zeka refaktörleri için çok dosyalı fark hazırlama sistemi. Değişiklikleri satır içi ve yan yana görüntüleyicilerde sunar, durum çubuğu üzerinden dosya veya blok bazında kabul/reddetme imkanı sağlar (`krl.review.accept`, `krl.review.reject`, `krl.review.accept`, `krl.review.reject`).
 
 ---
 
@@ -46,17 +46,17 @@ Standart klasik hareketler (`PTP`, `LIN`, `CIRC`) ile modern Spline kinematiği 
 
 ---
 
-### 23. EthernetKRL (EKI) Paketi ve Telgraf Oluşturucu (`krl.generateEkiTelegram`)
+### 23. EthernetKRL (EKI) Paketi ve Telgraf Oluşturucu (`krl.generateEkiCode`)
 EKI XML şemalarını doğrular, soket veri paketlerini test eder ve eksiksiz KRL TCP/IP gönderme/alma yordamlarını otomatik üretir.
 
 ---
 
-### 24. Endüstriyel Güvenlik ve ISO 13849 Uyumluluk Denetçisi (`krl.runSafetyCheck`)
+### 24. Endüstriyel Güvenlik ve ISO 13849 Uyumluluk Denetçisi (`krl.validateWorkspace`)
 Başlatılmamış `$TOOL`/`$BASE`, eksik `BAS(#INITMOV, 0)`, zaman aşımı korumasız `WAIT FOR` kilitlenmeleri, dizi sınır aşımları (`TOOL_DATA[16]`), çift kanallı `$SAFEIN` uyumsuzlukları ve gizli yanıltıcı karakterleri denetleyen otomatik müfettiş.
 
 ---
 
-### 25. EVT İkili Olay Günlüğü Kod Çözücüsü (`krl.viewEvtLog`)
+### 25. EVT İkili Olay Günlüğü Kod Çözücüsü (`krl.openEventLog`)
 KSS `.evt` ikili tanısal olay arşivleri için sıfır bağımlılıklı yüksek hızlı kod çözücü. Zaman damgası, önem derecesi ve modül filtreleme seçenekleriyle etkileşimli tablo görünümü sunar.
 
 ---
@@ -66,7 +66,7 @@ KSS `.evt` ikili tanısal olay arşivleri için sıfır bağımlılıklı yükse
 
 ---
 
-### 27. Hareket Yörüngesi ve Kaynak İstatistikleri Profili (`krl.calculateMotionStats`)
+### 27. Hareket Yörüngesi ve Kaynak İstatistikleri Profili (`krl.estimateMotionStats`)
 Toplam döngü mesafesini, hareket segmenti sayılarını, kaynak dikiş uzunluklarını ve hız dağılımını hesaplayan kapsamlı yörünge profili çıkarıcı.
 
 ---
@@ -81,7 +81,7 @@ Google Antigravity IDE ve GitHub Copilot'un KRL mimarisini, sinyallerini ve kine
 
 ---
 
-### 30. Endüstriyel Kabul Kalite Raporu Oluşturucu (`krl.generateQualityReport`)
+### 30. Endüstriyel Kabul Kalite Raporu Oluşturucu (`krl.generateAcceptanceReport`)
 Müşteri proje teslimatı ve fabrika kabul testleri (FAT/SAT) için güvenlik karnesi ve kod karmaşıklığı analizlerini içeren HTML/JSON raporları üretir.
 
 ---
@@ -181,7 +181,7 @@ Hareket parametrelerindeki meta veri uyumsuzluklarını otomatik onaran motor:
 
 ---
 
-### 43. WorkVisual (.wvs / .wvps) Veriyolu Topolojisi ve KOP Paket Ayrıştırıcısı (`krl.inspectWvsTopology`) [PRO]
+### 43. WorkVisual (.wvs / .wvps) Veriyolu Topolojisi ve KOP Paket Ayrıştırıcısı (`krl.inspectFieldbusTopology`) [PRO]
 KUKA WorkVisual ikili projelerinin arşivleri açmadan doğrudan bellek içinde analizi:
 - **KOP Opsiyon Paketleri**: Yüklü teknoloji paketlerini (`KUKA.EthernetKRL`, `KUKA.SafeOperation`, `KUKA.GripperSpotTech`, `KUKA.Profinet`), hedef KSS çalışma zamanını ve robot modelini `Solution.MetaData` üzerinden çıkarma.
 - **EtherCAT ve Profinet Topolojisi**: EtherCAT dilim modülleri (`EcatDiag_*.xml`), Virtual I/O ve Profinet ağlarının adres haritalarını ayrıştırma.
@@ -198,7 +198,7 @@ KUKA WorkVisual ikili projelerinin arşivleri açmadan doğrudan bellek içinde 
 ---
 
 ### 45. KUKA.Sim ve Visual Components (.vcmx) Akıllı Analiz Paketi [PRO]
-`.vcmx` simülasyon arşivlerinin CAD yazılımlarını açmadan doğrudan analizi ve son işlemesi (`krl.inspectVcmxLayout`, `krl.validateVcmxSimulation`, `krl.exportVcmxToKrl`):
+`.vcmx` simülasyon arşivlerinin CAD yazılımlarını açmadan doğrudan analizi ve son işlemesi (`krl.inspectWorkcellLayout`, `krl.validateWorkcellSimulation`, `krl.exportWorkcellToKrl`):
 - **VCMX Hücre İnceleyicisi**: Robot kinematiğini (`rSimKinController`), sinyalleri ve süreç rutinlerini iki katmanlı `layout.rsc` ayrıştırıcısıyla bellekten çıkarma.
 - **Simülasyon Kilitlenme ve Yarış Doğrulayıcısı**: 4 kritik simülasyon hatasını (`VCMX001` sinyal kilitlenmesi, `VCMX002` bekleme zaman aşımı, `VCMX003` değişken sızıntısı, `VCMX004` kayıp sinyaller) `.bk1`/`.bk2` yedekleriyle güvenli şekilde onarma.
 - **VCMX'ten KRL'ye Son İşlemci**: Simülasyon süreçlerini (`LinMotion`, `PtpMotion`, `SetSignal`, `WaitSignal`) hazır `.src` + `.dat` modüllerine dönüştürme.
@@ -229,7 +229,7 @@ CNC işleme yörüngelerini ve 2D konturları doğrudan KRL koduna dönüştürm
 ### 49. Yapay Zeka Asistanları İçin Model Context Protocol (MCP) Köprüsü [PRO]
 Yerel güvenli yapay zeka entegrasyon ağ geçidi (`127.0.0.1`):
 - **Cursor, Antigravity, Claude Code ve Windsurf Bağlantısı**: Dış yapay zeka ajanlarına gerçek zamanlı robot telemetrisi (`krl_live_telemetry`), statik kod teşhisi (`krl_workspace_diagnostics`), güvenli otomatik onarım (`krl_safe_auto_repair`) ve 957+ KSS sistem değişkeni spesifikasyonu sunma.
-- **Tek Tıkla Yapılandırma Kopyalama**: `krl.copyMcpConfig` komutu ile Cursor ve Claude Desktop için hazır JSON ayarlarını panoya kopyalama.
+- **Tek Tıkla Yapılandırma Kopyalama**: `krl.mcp.copyConfig` komutu ile Cursor ve Claude Desktop için hazır JSON ayarlarını panoya kopyalama.
 
 ---
 

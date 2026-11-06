@@ -2,7 +2,7 @@
 
 <span class="badge pro">Pro Feature</span>
 
-Stop tracing nested logic (`IF`, `SWITCH`, `LOOP`) by hand. KUKA KRL Professional turns complex `.src` programs into clean, visual control-flow diagrams.
+Stop tracing nested logic (`IF`, `SWITCH`, `LOOP`) by hand. KRL Engineering Toolkit turns complex `.src` programs into clean, visual control-flow diagrams.
 
 ![Flowchart Viewer Demo](/media/control_flow_graph.gif)
 

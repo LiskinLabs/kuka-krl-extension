@@ -6,7 +6,7 @@ KUKA KRC2, KRC4 ve KRC5 sistemleri için gerçek zamanlı telemetri ve çevrimi�
 
 ## Genel Bakış
 
-**Endüstriyel Canlı Monitör İzleyici** (`krl.connectKukaRobot`, `krl.openLiveBridge`), VS Code ile KSS 5.x–8.7+ ve iiQKA 9.x çalıştıran fiziksel KUKA robot kontrolörleri arasında doğrudan, yüksek frekanslı bir Ethernet bağlantısı kurar.
+**Endüstriyel Canlı Monitör İzleyici** (`krl.live.connect`, `krl.live.openDashboard`), VS Code ile KSS 5.x–8.7+ ve iiQKA 9.x çalıştıran fiziksel KUKA robot kontrolörleri arasında doğrudan, yüksek frekanslı bir Ethernet bağlantısı kurar.
 
 Fabrika sahası telemetrisini, 6 eksenli motor tork geri bildirimini, Kartezyen TCP takibini, 4096 pinli G/Ç (I/O) matrisini ve çok dilli SmartPAD alarmlarını doğrudan mühendislik ortamınıza taşır.
 

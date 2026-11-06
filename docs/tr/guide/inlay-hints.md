@@ -8,7 +8,7 @@ Belirli bir G/Ç sinyal kanalının ne anlama geldiğini hatırlamak için `.src
 
 ## Nasıl Çalışır
 
-KUKA KRL Professional, bilgileri doğrudan editör içinde satır içi olarak sunmak için Dil Sunucusu Protokolünü (LSP) kullanır.
+KRL Engineering Toolkit, bilgileri doğrudan editör içinde satır içi olarak sunmak için Dil Sunucusu Protokolünü (LSP) kullanır.
 
 Bir donanım sinyali (ör. `$IN[12]`) kullandığınızda, eklenti `.dat` dosyalarınızdaki sinyal bildirim adını veya yorumunu kodun yanında otomatik olarak görüntüler.
 

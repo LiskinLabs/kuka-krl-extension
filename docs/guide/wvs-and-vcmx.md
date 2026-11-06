@@ -12,7 +12,7 @@ The **WorkVisual & VCMX Suites** provide zero-unpack archive parsing, bus topolo
 
 ---
 
-## WorkVisual (.wvs / .wvps) Topology Inspector (`krl.inspectWvsTopology`)
+## WorkVisual (.wvs / .wvps) Topology Inspector (`krl.inspectFieldbusTopology`)
 
 * **Zero-Unpack Archive Inspection**: Reads binary `.wvs` / `.wvps` project archives in-memory without disk extraction.
 * **XML Metadata Decoder**: Decodes hex-encoded XML metadata (`_x003C_`, `_x0022_`) from `Solution.MetaData`.
@@ -24,11 +24,11 @@ The **WorkVisual & VCMX Suites** provide zero-unpack archive parsing, bus topolo
 
 ## KUKA.Sim & Visual Components (.vcmx) Suite
 
-### 1. Simulation Workcell Inspector (`krl.inspectVcmxLayout`)
+### 1. Simulation Workcell Inspector (`krl.inspectWorkcellLayout`)
 * **Two-Layer `layout.rsc` Parser**: Reads 3D cell components directly from `.vcmx` archives without unpacking.
 * **Extracted Entities**: Manipulator kinematics (`rSimKinController`), discrete signals (`rSimBooleanSignal`), conveyor transport links (`ProductType`), and robot process logic (`ProgramData`).
 
-### 2. Simulation Race & Deadlock Validator (`krl.validateVcmxSimulation`)
+### 2. Simulation Race & Deadlock Validator (`krl.validateWorkcellSimulation`)
 Detects and safely repairs four critical simulation flaws that cause 3D workcells to freeze:
 
 | Bug Code | Classification | Root Cause & Impact |
@@ -40,7 +40,7 @@ Detects and safely repairs four critical simulation flaws that cause 3D workcell
 
 * **Safe Auto-Repair**: Applies surgical patches to `layout.rsc` with automated `.bk1`, `.bk2` backup preservation.
 
-### 3. VCMX to KRL Post-Processor (`krl.exportVcmxToKrl`)
+### 3. VCMX to KRL Post-Processor (`krl.exportWorkcellToKrl`)
 * Converts simulation process routines (`LinMotion`, `PtpMotion`, `SetSignal`, `WaitSignal`, `Delay`) directly into production-grade KRL `.src` and companion `.dat` modules.
 
 ---
@@ -49,7 +49,7 @@ Detects and safely repairs four critical simulation flaws that cause 3D workcell
 
 | Command | Identifier | Description |
 |---|---|---|
-| KUKA KRL: Inspect WorkVisual Topology | `krl.inspectWvsTopology` | Zero-unpack analysis of `.wvs` projects |
-| KUKA KRL: Inspect VCMX Layout | `krl.inspectVcmxLayout` | Extract components & logic from `.vcmx` |
-| KUKA KRL: Validate VCMX Simulation | `krl.validateVcmxSimulation` | Audit & repair simulation deadlocks |
-| KUKA KRL: Export VCMX to KRL | `krl.exportVcmxToKrl` | Post-process simulation paths into KRL |
+| KUKA KRL: Inspect WorkVisual Topology | `krl.inspectFieldbusTopology` | Zero-unpack analysis of `.wvs` projects |
+| KUKA KRL: Inspect VCMX Layout | `krl.inspectWorkcellLayout` | Extract components & logic from `.vcmx` |
+| KUKA KRL: Validate VCMX Simulation | `krl.validateWorkcellSimulation` | Audit & repair simulation deadlocks |
+| KUKA KRL: Export VCMX to KRL | `krl.exportWorkcellToKrl` | Post-process simulation paths into KRL |

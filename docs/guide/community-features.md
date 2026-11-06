@@ -1,6 +1,6 @@
 # Community Edition — Free Core Features
 
-Detailed walkthrough of the 24 core free features in KUKA KRL Professional.
+Detailed walkthrough of the 24 core free features in KRL Engineering Toolkit.
 
 ---
 

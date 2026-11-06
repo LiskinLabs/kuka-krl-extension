@@ -1,13 +1,13 @@
 # Kurulum ve Ayarlar Kılavuzu
 
-KUKA KRL Professional eklentisini kurmak, yapılandırmak ve çevrimdışı etkinleştirmek için hızlı başlangıç kılavuzu.
+KRL Engineering Toolkit eklentisini kurmak, yapılandırmak ve çevrimdışı etkinleştirmek için hızlı başlangıç kılavuzu.
 
 ---
 
 ## 1. VS Code Marketplace Üzerinden Kurulum
 1. VS Code'u açın.
 2. Eklentiler görünümüne gidin (`Ctrl + Shift + X`).
-3. `KUKA KRL Professional` (Liskin Labs) aramasını yapın.
+3. `KRL Engineering Toolkit` (Liskin Labs) aramasını yapın.
 4. **Install** düğmesine tıklayın.
 
 ---

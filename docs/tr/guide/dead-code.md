@@ -8,7 +8,7 @@ Kod tabanınızın otomotiv üreticilerinin (VASS, BMW, Stellantis) yüksek stan
 
 ## Nasıl Çalışır
 
-KUKA KRL Professional, kapsamlı bir bağımlılık grafiği oluşturmak için tüm çalışma alanınızı (tüm `.src`, `.dat` ve `.sub` dosyalarını) dizine ekler:
+KRL Engineering Toolkit, kapsamlı bir bağımlılık grafiği oluşturmak için tüm çalışma alanınızı (tüm `.src`, `.dat` ve `.sub` dosyalarını) dizine ekler:
 
 * **Kullanılmayan Yerel Değişkenler**: Alt programlar içinde bildirilen ancak hiçbir yerde kullanılmayan yerel değişkenleri tarar.
 * **Kullanılmayan Global Alt Programlar**: Bildirilen ancak çalışma alanında hiçbir zaman çağrılmayan `GLOBAL DEF` alt programlarını tanımlar.

@@ -5,7 +5,7 @@
   "payloadKg": 0,
   "maxReachMm": 0,
   "dof": 6,
-  "source": "C:\\Projects\\01_Robotics\\Simulation\\raw_assets\\vcmx_static\\KR_50_R2500.vcmx",
+  "source": "KR_50_R2500.vcmx",
   "units": "m",
   "joints": ["A1","A2","A3","A4","A5","A6"],
   "kinematics": { "d1": 575, "a1": 175, "a2": 1290, "a3": -50, "d4": 1035, "d6": 185, "jointSigns": [-1,1,1,-1,1,-1], "jointZeroOffsets": [0,-90,0,0,0,0], "a45": -90 },

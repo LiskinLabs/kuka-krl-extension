@@ -5,7 +5,7 @@
   "payloadKg": 0,
   "maxReachMm": 0,
   "dof": 6,
-  "source": "C:\\Projects\\01_Robotics\\Simulation\\raw_assets\\vcmx_static\\KR_10_R1100_CR.vcmx",
+  "source": "KR_10_R1100_CR.vcmx",
   "units": "m",
   "joints": ["A1","A2","A3","A4","A5","A6"],
   "kinematics": { "d1": 400, "a1": 25, "a2": 560, "a3": -35, "d4": 515, "d6": 80, "jointSigns": [-1,1,1,-1,1,-1], "jointZeroOffsets": [0,-90,0,0,0,0], "a45": -90 },

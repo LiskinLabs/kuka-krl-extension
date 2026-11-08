@@ -1,6 +1,7 @@
-# Liskin Labs Autonomous Industrial Suite: KR_50_R2500 - A6.obj
-# High-Precision Kinematic Solid Geometry | (c) Liskin Labs
+# Liskin Labs Industrial Robotics CAD Engine: KR_50_R2500 - A6.obj
+# (c) Liskin Labs Autonomous Industrial Suite | High-Precision Geometry
 mtllib A6.mtl
+usemtl mat_0
 v -0.029068 -0.057579 -0.0085
 v -0.029015 -0.057123 -0.0085
 v -0.029068 -0.057579 -0.0105
@@ -19,6 +20,17 @@ v -0.032458 -0.055738 -0.0085
 v -0.032458 -0.055738 -0.0105
 v -0.031323 -0.055147 -0.0105
 v -0.031323 -0.055147 -0.0085
+f 1 2 3
+f 3 2 4
+f 4 2 5
+f 5 6 4
+f 7 8 9
+f 9 10 7
+f 11 12 13
+f 13 12 14
+f 15 16 17
+f 18 15 17
+usemtl mat_1
 v -0.029191 -0.056304 -0.0105
 v -0.023918 -0.057742 -0.0105
 v -0.029068 -0.057579 -0.0105
@@ -2727,18 +2739,6 @@ v -0.036159 0.033415 -0.01425
 v -0.037455 0.035355 -0.01425
 v -0.036159 0.037295 -0.01425
 v -0.034552 0.037295 -0.01425
-usemtl mat_0
-f 1 2 3
-f 3 2 4
-f 4 2 5
-f 5 6 4
-f 7 8 9
-f 9 10 7
-f 11 12 13
-f 13 12 14
-f 15 16 17
-f 18 15 17
-usemtl mat_0
 f 19 20 21
 f 23 21 20
 f 20 19 22

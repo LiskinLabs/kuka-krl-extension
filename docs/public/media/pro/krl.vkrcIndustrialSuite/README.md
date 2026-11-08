@@ -1,4 +1,4 @@
-# Промышленный комбайн Volkswagen VKRC / VASS (A33, ControllerDataAudit)
+# Промышленный комбайн Volkswagen VKRC / VASS (A33, VASS 26)
 
 > **Категория:** `PRO` | **ID команды:** `krl.vkrcIndustrialSuite` | **Горячие клавиши:** `—`
 

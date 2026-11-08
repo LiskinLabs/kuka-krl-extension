@@ -1,5 +1,5 @@
-# Liskin Labs Industrial Robotics CAD Engine: KR_10_R1100_CR - KR_10_R1100_CR.obj
-# (c) Liskin Labs Autonomous Industrial Suite | High-Precision Geometry
+# Liskin Labs Autonomous Industrial Suite: KR_10_R1100_CR - KR_10_R1100_CR.obj
+# High-Precision Kinematic Solid Geometry | (c) Liskin Labs
 mtllib KR_10_R1100_CR.mtl
 usemtl mat_0
 v -0.194 -0.057774 0.016219

@@ -1,5 +1,5 @@
-# Liskin Labs Industrial Robotics CAD Engine: KR_10_R1100_CR - A2.obj
-# (c) Liskin Labs Autonomous Industrial Suite | High-Precision Geometry
+# Liskin Labs Autonomous Industrial Suite: KR_10_R1100_CR - A2.obj
+# High-Precision Kinematic Solid Geometry | (c) Liskin Labs
 mtllib A2.mtl
 usemtl mat_0
 v 0.057983 -0.109 0.518032
@@ -6101,7 +6101,7 @@ f 3122 3128 3124
 f 3123 3126 3129
 f 3123 3130 3127
 f 3124 3128 3131
-usemtl mat_1
+usemtl mat_0
 v 0.001607 0.0678 0.63662
 v 0 0.0678 0.6363
 v 0 0.067685 0.636323
@@ -6866,7 +6866,7 @@ f 3508 3510 3509
 f 3504 3502 3506
 f 3506 3508 3504
 f 3508 3506 3510
-usemtl mat_2
+usemtl mat_0
 v -0.014242 -0.036 0.071597
 v 0 -0.036 0.073
 v 0 -0.0375 0.073
@@ -7123,7 +7123,7 @@ f 3636 3638 3637
 f 3632 3630 3634
 f 3634 3636 3632
 f 3636 3634 3638
-usemtl mat_3
+usemtl mat_0
 v -0.014242 -0.0375 0.071597
 v -0.014144 -0.0375 0.071107
 v -0.027745 -0.0375 0.066981
@@ -7508,7 +7508,7 @@ f 3829 3830 3826
 f 3830 3829 3827
 f 3827 3825 3823
 f 3825 3827 3829
-usemtl mat_4
+usemtl mat_0
 v 0.063944 -0.109 0.546069
 v 0.064085 -0.109 0.551496
 v 0.064013 -0.109 0.546394
@@ -7681,7 +7681,7 @@ f 3923 3924 3925
 f 3926 3927 3928
 f 3929 3930 3931
 f 3931 3932 3929
-usemtl mat_5
+usemtl mat_0
 v -0.072144 -0.037149 0.157932
 v -0.070145 -0.033965 0.159274
 v -0.072152 -0.033965 0.159274

@@ -1,5 +1,5 @@
-# Liskin Labs Industrial Robotics CAD Engine: KR_50_R2500 - A2.obj
-# (c) Liskin Labs Autonomous Industrial Suite | High-Precision Geometry
+# Liskin Labs Autonomous Industrial Suite: KR_50_R2500 - A2.obj
+# High-Precision Kinematic Solid Geometry | (c) Liskin Labs
 mtllib A2.mtl
 usemtl mat_0
 v -0.177098 -0.1548 -0.03906
@@ -5493,7 +5493,7 @@ f 2786 2791 2790
 f 2792 2784 2790
 f 2793 2790 2791
 f 2794 2792 2790
-usemtl mat_1
+usemtl mat_0
 v -0.006526 -0.256261 1.187658
 v -0.006527 -0.211 1.187658
 v -0.010534 -0.211 1.187997

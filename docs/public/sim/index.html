@@ -16,7 +16,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
   <link rel="alternate icon" type="image/x-icon" href="./favicon.ico" />
-  <script type="module" crossorigin src="./assets/index-Ce8Oowy4.js"></script>
+  <script type="module" crossorigin src="./assets/index-BzMSX-7O.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-BTZXGbe5.css">
 </head>
 <body>
@@ -149,6 +149,13 @@
             <span class="selector-label" data-i18n="settings.language">Язык</span>
             <select id="lang-select" class="dropdown-select lang-select" data-i18n-title="lang.label" title="Язык"></select>
           </div>
+          <div id="visual-mode-selector-group" class="selector-group">
+            <span class="selector-label" data-i18n="settings.visualMode">Визуализация</span>
+            <select id="visual-mode-select" class="dropdown-select" data-i18n-title="settings.visualMode" title="Визуализация робота">
+              <option value="stylized" data-i18n="settings.visualStylized">Liskin Labs Industrial 3D</option>
+              <option value="cad" data-i18n="settings.visualCad">CAD Raw Geometry (OBJ)</option>
+            </select>
+          </div>
         </div>
         <label class="settings-check">
           <input id="settings-base-frames" type="checkbox" />
@@ -175,7 +182,7 @@
       </div>
     </header>
 
-    <!-- 5-Zone CAD/Live Monitor Workstation Shell -->
+    <!-- 5-Zone CAD/SCADA Workstation Shell -->
     <div id="workstation-shell" class="workstation-shell">
       <!-- ZONE 1: Left Dock (Scene Tree & History) -->
       <aside id="left-dock" class="ws-left-dock glass-panel">
@@ -445,7 +452,7 @@
             <div id="problems-mirror-list" class="ws-problems-list"></div>
           </div>
 
-          <!-- Pane 5: Live Live Monitor Watch Table + static I/O matrix -->
+          <!-- Pane 5: Live SCADA Watch Table + static I/O matrix -->
           <div id="bd-pane-watch" class="ws-bottom-pane active">
             <div class="ws-watch-subtabs">
               <button class="ws-watch-subtab active" data-watch-view="live" data-i18n="watch.live">

@@ -1,5 +1,5 @@
-# Liskin Labs Industrial Robotics CAD Engine: Linear Unit KL_5000 - KL5000.obj
-# (c) Liskin Labs Autonomous Industrial Suite | High-Precision Geometry
+# Liskin Labs High-Precision Linear Unit: KL_5000 - KL5000.obj
+# (c) Liskin Labs Autonomous Industrial Suite | Precision Guide Geometry
 mtllib KL5000.mtl
 usemtl mat_0
 v 2.775 0.689005 0.068538

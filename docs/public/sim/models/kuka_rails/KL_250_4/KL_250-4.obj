@@ -1,5 +1,5 @@
-# Liskin Labs Industrial Robotics CAD Engine: Linear Unit KL_250_4 - KL_250-4.obj
-# (c) Liskin Labs Autonomous Industrial Suite | High-Precision Geometry
+# Liskin Labs High-Precision Linear Unit: KL_250_4 - KL_250-4.obj
+# (c) Liskin Labs Autonomous Industrial Suite | Precision Guide Geometry
 mtllib KL_250-4.mtl
 usemtl mat_0
 v -0.445015 0.08 0.27

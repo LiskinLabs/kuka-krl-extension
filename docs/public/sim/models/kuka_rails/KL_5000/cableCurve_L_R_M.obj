@@ -1,5 +1,5 @@
-# Liskin Labs Industrial Robotics CAD Engine: Linear Unit KL_5000 - cableCurve_L_R_M.obj
-# (c) Liskin Labs Autonomous Industrial Suite | High-Precision Geometry
+# Liskin Labs High-Precision Linear Unit: KL_5000 - cableCurve_L_R_M.obj
+# (c) Liskin Labs Autonomous Industrial Suite | Precision Guide Geometry
 mtllib cableCurve_L_R_M.mtl
 usemtl mat_0
 v 0.4275 -0.692525 0.623

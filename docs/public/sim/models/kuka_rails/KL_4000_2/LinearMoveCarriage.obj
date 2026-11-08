@@ -1,5 +1,5 @@
-# Liskin Labs Industrial Robotics CAD Engine: Linear Unit KL_4000_2 - LinearMoveCarriage.obj
-# (c) Liskin Labs Autonomous Industrial Suite | High-Precision Geometry
+# Liskin Labs High-Precision Linear Unit: KL_4000_2 - LinearMoveCarriage.obj
+# (c) Liskin Labs Autonomous Industrial Suite | Precision Guide Geometry
 mtllib LinearMoveCarriage.mtl
 usemtl mat_0
 v -0.359707 0.486414 0.3365

@@ -1,5 +1,5 @@
-# Liskin Labs Industrial Robotics CAD Engine: Linear Unit KL_4000_2 - GuideRail.obj
-# (c) Liskin Labs Autonomous Industrial Suite | High-Precision Geometry
+# Liskin Labs High-Precision Linear Unit: KL_4000_2 - GuideRail.obj
+# (c) Liskin Labs Autonomous Industrial Suite | Precision Guide Geometry
 mtllib GuideRail.mtl
 usemtl mat_0
 v 2.785 0.829505 0.068538

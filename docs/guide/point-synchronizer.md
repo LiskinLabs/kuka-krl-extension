@@ -31,7 +31,7 @@ The **Point Table Engine & Auto-Synchronizer** (`krl.syncPointsToDat`, `krl.batc
 
 ### 4. SVD Kabsch 3-Point Base & Tool Calibration
 * **Exact Coordinate Alignment**: Calculates `TOOL_DATA` and `BASE_DATA` frames using Singular Value Decomposition (SVD Kabsch algorithm) directly from physical calibration points.
-* **Euler Angles (A, B, C)**: Computes authentic KUKA Euler rotation angles ($Z-Y'-X''$) with gimbal lock prevention.
+* **Euler Angles (A, B, C)**: Computes authentic KUKA Euler rotation angles (Z-Y'-X'') with gimbal lock prevention.
 
 ### 5. 6D Trajectory Mirroring & Batch Point Shift
 * **Geometric Mirroring (`krl.mirrorTrajectory`)**: Mirrors motion paths across Cartesian planes X, Y, or Z with automated Status and Turn bit recalculation.

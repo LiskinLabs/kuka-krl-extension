@@ -45,7 +45,7 @@
 
 ---
 
-### 5. Inlay Hints для сигналов ($IN / $OUT / $ANIN / $ANOUT)
+### 5. Inlay Hints для сигналов (`$IN` / `$OUT` / `$ANIN` / `$ANOUT`)
 Виртуальные полупрозрачные подсказки имен сигналов прямо в коде (например, `$IN[1]` `: diPartReady`).
 
 ![Inlay Hints Demo](/media/inlay_hints.gif)

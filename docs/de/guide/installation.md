@@ -13,7 +13,7 @@ Schnellstartanleitung zur Installation, Konfiguration und Offline-Aktivierung vo
 ---
 
 ## 2. Installation aus VSIX-Datei (Air-Gapped Offline-Installation)
-1. Laden Sie das neueste Paket `kuka-krl-extension-1.9.17.vsix` aus dem offiziellen Release-Repository herunter.
+1. Laden Sie das neueste Paket `kuka-krl-extension-1.9.18.vsix` aus dem offiziellen Release-Repository herunter.
 2. Klicken Sie im Erweiterungsbereich von VS Code (`Ctrl + Shift + X`) auf das Drei-Punkte-Menü `...` oben rechts.
 3. Wählen Sie **Aus VSIX installieren...** und wählen Sie die `.vsix`-Datei aus.
 4. Kein Editor-Neustart erforderlich — alle Sprachserver und Parser starten sofort.
@@ -36,6 +36,7 @@ Schnellstartanleitung zur Installation, Konfiguration und Offline-Aktivierung vo
 1. Öffnen Sie das **KUKA Control Center**, indem Sie auf das KUKA-Symbol in der Aktivitätsleiste klicken oder `KRL: Open Control Center` (`Ctrl + Shift + P`) ausführen.
 2. Klicken Sie auf **Enter License Key**.
 3. Fügen Sie Ihren Lizenzschlüssel von Dodo Payments ein und bestätigen Sie die Eingabe.
+4. **Vorab kostenlos testen?** Starten Sie das **14-Tage-Pro-Trial** per Befehl `krl.startTrial` — alle **63 Pro-Werkzeuge** ohne Kreditkarte freischalten.
 
 ---
 
@@ -60,7 +61,7 @@ Für sicherheitskritische Produktionsanlagen ohne Internetverbindung wird der as
 1. Kehren Sie zum Offline-Laptop im Werk zurück.
 2. Klicken Sie im KUKA Control Center auf **[Offline-Lizenzdatei laden (.lic)]** oder führen Sie `krl.importOfflineLicenseFile` aus.
 3. Wählen Sie die Datei `liskin-krl-license.lic` aus.
-4. Die Ed25519-Signatur wird sofort offline geprüft und schaltet dauerhaft alle 50+ PRO-Funktionen frei.
+4. Die Ed25519-Signatur wird sofort offline geprüft und schaltet dauerhaft alle **63 Pro-Werkzeuge** frei.
 
 ---
 
@@ -69,8 +70,10 @@ Für sicherheitskritische Produktionsanlagen ohne Internetverbindung wird der as
 | Tarif | Preis | Arbeitsplatz-Aktivierungen | Hauptmerkmale |
 | :--- | :--- | :--- | :--- |
 | **Engineer Pro (Monatlich)** | $19 / Monat | 1 Arbeitsplatz | KRC2/KRC4/KRC5-Unterstützung, Inbetriebnahme-Sprints |
-| **Engineer Pro (Jährlich)** | $149 / Jahr | 1 Arbeitsplatz | 35% Ersparnis, 1 Jahr Air-Gapped Offline-Zertifikat, 50 Werkzeuge |
+| **Engineer Pro (Jährlich)** | $149 / Jahr | 1 Arbeitsplatz | 35% Ersparnis, 1 Jahr Air-Gapped Offline-Zertifikat, 63 Pro-Werkzeuge |
 | **Engineer Pro (Lifetime)** | $699 einmalig | 1 Arbeitsplatz | Dauerhafte Einzellizenz, lebenslange Updates, permanentes Air-Gap-Zertifikat |
 | **Team Edition** | $499 / Jahr | Bis zu 5 Arbeitsplätze | B2B-Rechnung, 5 Arbeitsplätze Werk/Büro, KRC2–KRC5 |
-| **Department / Integrator** | $999 / Jahr | Bis zu 20 Arbeitsplätze | Bis zu 20 Arbeitsplätze, unbegrenzte Integrationsprojekte |
-| **Enterprise Plant Site** | $4.999 / Jahr | Bis zu 100 Arbeitsplätze | 100 Werksarbeitsplätze, 4h-SLA, Offline Air-Gap-Lizenz, OEM-Prüfprotokolle |
+| **Department / Integrator** | $1,499 / Jahr | Bis zu 20 Arbeitsplätze | Bis zu 20 Arbeitsplätze, unbegrenzte Integrationsprojekte |
+| **Enterprise Plant Site** | $4.999 / Jahr | Bis zu 100 Arbeitsplätze | 100 Werksarbeitsplätze, Prioritäts-Support-Gateway, Offline Air-Gap-Lizenz, OEM-Prüfprotokolle |
+
+> **Startrabatt (`LAUNCH30`) & B2B-Bestellung:** Mit dem Gutscheincode **`LAUNCH30`** erhalten Sie **30% Rabatt** im Dodo-Checkout (automatische MwSt./USt-IdNr.-Prüfung über VIES). Für den Enterprise Plant Site Tarif fordern Sie ein Angebot / PO über `krl.requestCorporateInvoice` an.

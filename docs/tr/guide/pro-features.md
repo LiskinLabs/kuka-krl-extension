@@ -17,7 +17,7 @@ Saha mühendislerinin doğrudan IDE içinden soru sormasını ve geri bildirim i
 ---
 
 ### 18. KRC Filo Yedekleri ve Nokta Delta İnceleyicisi (`krl.compareKrcBackup`)
-Fiziksel SmartPAD `.zip` arşivlerini doğrudan karşılaştırır. Nokta versiyonları arasındaki 6 eksenli uzamsal koordinat farklarını ($\Delta X, \Delta Y, \Delta Z, \Delta A, \Delta B, \Delta C$) hesaplar ve güvenlik toleranslarını aşan tehlikeli kaymaları işaretler.
+Fiziksel SmartPAD `.zip` arşivlerini doğrudan karşılaştırır. Nokta versiyonları arasındaki 6 eksenli uzamsal koordinat farklarını (ΔX, ΔY, ΔZ, ΔA, ΔB, ΔC) hesaplar ve güvenlik toleranslarını aşan tehlikeli kaymaları işaretler.
 
 ![KRC Backup Diff Demo](/media/krc_backup_diff.gif)
 
@@ -93,7 +93,7 @@ Dinamik SVG işleme yeteneğine sahip endüstriyel koyu, açık ve yüksek kontr
 
 ### 32. İleri Düzey KRL Kinematik ve 6B Dönüşüm Paketi
 Yörünge ve koordinat sistemi manipülasyonu:
-- **6B Yörünge Aynalama (`krl.mirrorTrajectory`)**: X, Y veya Z düzlemlerinde yansıtma ve otomatik Turn ($A_1..A_6$) biti yönetimi.
+- **6B Yörünge Aynalama (`krl.mirrorTrajectory`)**: X, Y veya Z düzlemlerinde yansıtma ve otomatik Turn (`A1..A6`) biti yönetimi.
 - **Toplu Nokta Kaydırma (`krl.batchShiftPoints`)**: Tool ve Base koordinat sistemlerinde geometrik operatör (`:`) hesaplaması.
 - **Yörünge Tersine Çevirme (`krl.reverseTrajectory`)**: Hareket hedeflerini yay ve dairesel hareketleri koruyarak tersine sıralama.
 - **Sıralı Nokta Yeniden Numaralandırma (`krl.renumberPoints`)**: `.src` ve `.dat` dosyalarında sembolleri senkronize olarak yeniden adlandırma.
@@ -135,7 +135,7 @@ SmartPAD `.zip` yedeklerini harici klasöre çıkarmadan doğrudan VS Code çal�
 
 ### 37. Dinamik Yörünge ve Tekillik (Singularity) Tahmin Aracı
 Robot programını sahaya yüklemeden önce kinematiği simüle etme:
-- **Bilek Tekilliği (Wrist Singularity)**: $A_5 \approx 0^\circ \pm 5^\circ$ yakınındaki doğrusal hareketleri tespit etme.
+- **Bilek Tekilliği (Wrist Singularity)**: A5 ≈ 0° ± 5° yakınındaki doğrusal hareketleri tespit etme.
 - **Erişim Sınırları**: Maksimum uzanma sınırının %96'sını aşan hedefleri uyarma.
 - **Çevrim Süresi Kaybı Analizi**: Vorlaufstopp duraklamalarından kaynaklanan tahmini gecikmeleri hesaplama.
 
@@ -143,7 +143,7 @@ Robot programını sahaya yüklemeden önce kinematiği simüle etme:
 
 ### 38. Canlı Monitör Köprü ve Gerçek Zamanlı Kontrolör Bağlantısı (`krl.live.connect`, `krl.live.openDashboard`) [PRO]
 CrossComm WCF, OPC UA veya EthernetKRL üzerinden fiziksel KUKA KRC4/KRC5 ve OfficePC kontrolörlerine doğrudan donanımsal telemetri ve canlı bağlantı:
-- **Gerçek Zamanlı Koordinat ve Durum İzleme**: Kartezyen TCP pozisyonları ($X, Y, Z, A, B, C$), aktif Tool/Base indeksleri ve eksen açıları ($A_1..A_6$).
+- **Gerçek Zamanlı Koordinat ve Durum İzleme**: Kartezyen TCP pozisyonları (X, Y, Z, A, B, C), aktif Tool/Base indeksleri ve eksen açıları (`A1..A6`).
 - **Çalışma Modları ve Güvenlik Kilitleri**: Çalışma modu (T1, T2, AUT, EXT), sürücü hazır bilgisi (`$PERI_RDY`), acil stop (`$ALARM_STOP`) ve hücre güvenlik kilidi göstergeleri.
 - **Yorumlayıcı ve Program İşaretçisi**: Arka plan submit (`$SPS`) ve robot yorumlayıcı durumu (`$PRO_STATE`), aktif program adı (`$PRO_NAME`) ve çalışan satır işaretçisi (`$PRO_IP`).
 - **Dinamik Program Override Değeri**: Robot çalışma hızı override değerini (`$OV_PRO`) canlı izleme ve ayarlama.
@@ -177,7 +177,7 @@ Hareket parametrelerindeki meta veri uyumsuzluklarını otomatik onaran motor:
 
 ### 42. KSS 8.7.9 Uyumluluğu ve Robot Modeli Genişletmeleri
 - **Genişletilmiş Kinematik Kataloğu**: KR 50 R2500 serisi ve GripperSpotTech dahil KSS 8.7.9 için tam kinematik ve yük sınırları tanımları.
-- **Dinamik Yük Modeli Doğrulaması**: Yüksek hızlı hareketlerde yörünge sapmalarını ve eksen aşırı yüklenmelerini önlemek için kütle ($M$), ağırlık merkezi ($COG: X, Y, Z$) ve atalet tensörlerini ($J_X, J_Y, J_Z$) titizlikle denetleme.
+- **Dinamik Yük Modeli Doğrulaması**: Yüksek hızlı hareketlerde yörünge sapmalarını ve eksen aşırı yüklenmelerini önlemek için kütle (M), ağırlık merkezi (COG: X, Y, Z) ve atalet tensörlerini (Jx, Jy, Jz) titizlikle denetleme.
 
 ---
 
@@ -215,13 +215,13 @@ Katı gerçek zamanlı sensör kontrol döngülerinin geliştirilmesi ve doğrul
 
 ### 47. CAM CNC G-Code ve SVG Vektör İçe Aktarıcısı (`krl.importGcodeToKrl`) [PRO]
 CNC işleme yörüngelerini ve 2D konturları doğrudan KRL koduna dönüştürme:
-- **ISO G-Code Ayrıştırma**: `G0` $\rightarrow$ `PTP`/`SPTP`, `G1` $\rightarrow$ `LIN`/`SLIN`, ve `G2`/`G3` yay komutlarını `CIRC`/`SCIRC` komutlarına dönüştürerek `I, J, K` veya `R` parametrelerinden uzamsal `AuxPoint` hesaplama. İlerleme hızını `$VEL.CP` değerine ve M kodlarını (`M3`, `M5`) `$OUT[...]` çıkışlarına eşleme.
+- **ISO G-Code Ayrıştırma**: `G0` → `PTP`/`SPTP`, `G1` → `LIN`/`SLIN`, ve `G2`/`G3` yay komutlarını `CIRC`/`SCIRC` komutlarına dönüştürerek `I, J, K` veya `R` parametrelerinden uzamsal `AuxPoint` hesaplama. İlerleme hızını `$VEL.CP` değerine ve M kodlarını (`M3`, `M5`) `$OUT[...]` çıkışlarına eşleme.
 - **SVG Vektör İçe Aktarma**: `<path>`, `<polyline>`, `<polygon>`, `<circle>` elemanlarını Bezier eğri yaklaşımı ile ayrıştırma, güvenli geçiş `Z_Safe` ve kesme `Z_Work` düzlemlerini otomatik yerleştirme.
 
 ---
 
 ### 48. 9 Noktalı Görsel El-Göz Kalibrasyon Sihirbazı ve PLC Etiket Aktarıcısı [PRO]
-- **El-Göz Kalibrasyon Piramidi (`krl.generateVisionCalibration`)**: `Eye-in-Hand` ve `Eye-to-Hand` kameralar için Look-At rotasyon matrisinden KUKA Euler ($A, B, C$) açılarını hesaplama ve yaklaşma vektörleri üretme.
+- **El-Göz Kalibrasyon Piramidi (`krl.generateVisionCalibration`)**: `Eye-in-Hand` ve `Eye-to-Hand` kameralar için Look-At rotasyon matrisinden KUKA Euler (A, B, C) açılarını hesaplama ve yaklaşma vektörleri üretme.
 - **PLC Saha Veriyolu Etiket Dışa Aktarıcısı (`krl.exportPlcTags`)**: Çalışma alanı `SIGNAL`, `$IN` ve `$OUT` bildirimlerini IEC 61131-3 adreslerine (`%I0.0`, `%Q0.0`) dönüştürerek TIA Portal XML/SDF, TwinCAT 3 GVL ve EPLAN CSV olarak kaydetme.
 
 ---

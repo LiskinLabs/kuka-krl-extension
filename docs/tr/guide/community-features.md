@@ -45,7 +45,7 @@ Fabrika sahaları ve SmartPAD ekranları için optimize edilmiş 6 profesyonel t
 
 ---
 
-### 5. Donanım Sinyal İpuçları (Inlay Hints: $IN / $OUT / $ANIN / $ANOUT)
+### 5. Donanım Sinyal İpuçları (Inlay Hints: `$IN` / `$OUT` / `$ANIN` / `$ANOUT`)
 Sinyal adlarını doğrudan donanım kanallarının yanında satır içi olarak görüntüler (örneğin: `$IN[1]` `: diPartReady`).
 
 ![Inlay Hints Demo](/media/inlay_hints.gif)

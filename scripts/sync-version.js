@@ -82,6 +82,10 @@ readmeFiles.forEach((file) => {
       replacement: `badge/Release-v${targetVersion}-FF6600`
     },
     {
+      pattern: /alt="Release v\d+\.\d+\.\d+"/g,
+      replacement: `alt="Release v${targetVersion}"`
+    },
+    {
       pattern: /kuka-krl-extension-\d+\.\d+\.\d+\.vsix/g,
       replacement: `kuka-krl-extension-${targetVersion}.vsix`
     }
@@ -118,6 +122,66 @@ if (fs.existsSync(configMtsPath)) {
     {
       pattern: /Инженерные\s+комплексы\s+v\d+\.\d+\.\d+/g,
       replacement: `Инженерные комплексы v${targetVersion}`
+    },
+    {
+      pattern: /v\d+\.\d+\.\d+\s+Suites\s+de\s+Ingeniería/g,
+      replacement: `v${targetVersion} Suites de Ingeniería`
+    },
+    {
+      pattern: /v\d+\.\d+\.\d+\s+Suite\s+Ingegneristiche/g,
+      replacement: `v${targetVersion} Suite Ingegneristiche`
+    }
+  ]);
+}
+
+const featuresWikiPath = path.join(repoRoot, 'docs', '.vitepress', 'theme', 'components', 'FeaturesWiki.vue');
+if (fs.existsSync(featuresWikiPath)) {
+  updateFile(featuresWikiPath, [
+    {
+      pattern: /v\d+\.\d+\.\d+(?=\s+(?:Industrial Suite|Endüstriyel Paket))/g,
+      replacement: `v${targetVersion}`
+    },
+    {
+      pattern: /\(v\d+\.\d+\.\d+\)(?=\s*$)/gm,
+      replacement: `(v${targetVersion})`
+    }
+  ]);
+}
+
+const vsCodeSimPath = path.join(repoRoot, 'docs', '.vitepress', 'theme', 'components', 'VsCodeWebSimulator.vue');
+if (fs.existsSync(vsCodeSimPath)) {
+  updateFile(vsCodeSimPath, [
+    {
+      pattern: /KRL Engineering Toolkit Language Server v\d+\.\d+\.\d+/g,
+      replacement: `KRL Engineering Toolkit Language Server v${targetVersion}`
+    }
+  ]);
+}
+
+const landingPagePath = path.join(repoRoot, 'docs', '.vitepress', 'theme', 'components', 'LandingPage.vue');
+if (fs.existsSync(landingPagePath)) {
+  updateFile(landingPagePath, [
+    {
+      pattern: /KRL ENGINEERING TOOLKIT v\d+\.\d+\.\d+/g,
+      replacement: `KRL ENGINEERING TOOLKIT v${targetVersion}`
+    },
+    {
+      pattern: /KRL Engineering Toolkit v\d+\.\d+\.\d+/g,
+      replacement: `KRL Engineering Toolkit v${targetVersion}`
+    },
+    {
+      pattern: /KRL Engineering Toolkit IDE v\d+\.\d+\.\d+ Suite/g,
+      replacement: `KRL Engineering Toolkit IDE v${targetVersion} Suite`
+    }
+  ]);
+}
+
+const inventoryJsonPath = path.join(repoRoot, 'docs', '.vitepress', 'theme', 'components', 'krl_tools_inventory.json');
+if (fs.existsSync(inventoryJsonPath)) {
+  updateFile(inventoryJsonPath, [
+    {
+      pattern: /"version":\s*"\d+\.\d+\.\d+"/,
+      replacement: `"version": "${targetVersion}"`
     }
   ]);
 }

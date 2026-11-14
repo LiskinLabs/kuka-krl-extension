@@ -1,6 +1,6 @@
 # KRC Backup Diff & Point Delta Inspector
 
-<span class="badge pro">Pro Feature (v1.8.4)</span>
+<span class="badge pro">Pro Feature</span>
 
 Compare current workspace logic and point coordinates against physical robot SmartPAD backup ZIP archives (KRC4 / KRC5).
 
@@ -9,5 +9,5 @@ Compare current workspace logic and point coordinates against physical robot Sma
 ## Capabilities
 
 * **ZIP Backup Parsing**: Select any SmartPAD `.zip` archive without extracting it manually.
-* **Component Point Delta Calculation**: Computes exact offset deltas ($\Delta X, \Delta Y, \Delta Z, \Delta A, \Delta B, \Delta C$) for `E6POS`, `POS`, `E6AXIS`, and `AXIS` coordinates.
+* **Component Point Delta Calculation**: Computes exact offset deltas (ΔX, ΔY, ΔZ, ΔA, ΔB, ΔC) for `E6POS`, `POS`, `E6AXIS`, and `AXIS` coordinates.
 * **Side-by-Side Diff Viewer**: Visualizes additions, deletions, and coordinate shifts in real-time.

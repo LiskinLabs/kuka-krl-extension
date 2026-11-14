@@ -29,13 +29,13 @@ export default defineConfig({
     ['meta', { name: 'theme-color', content: '#FF5500' }],
     ['meta', { name: 'keywords', content: 'KRL, KRC2, KRC4, KRC5, Robot, Robotics, Industrial Automation, WorkVisual, VS Code, Live Monitor, MCP' }],
     ['meta', { property: 'og:title', content: 'KRL Engineering Toolkit — Industrial Robotics IDE Suite' }],
-    ['meta', { property: 'og:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Live Live Monitor, Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
+    ['meta', { property: 'og:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Live Monitor, Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
     ['meta', { property: 'og:image', content: '/kuka-krl-extension/logo-original.png' }],
     ['meta', { property: 'og:site_name', content: 'KRL Engineering Toolkit' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
     ['meta', { name: 'twitter:title', content: 'KRL Engineering Toolkit — Industrial Robotics IDE Suite' }],
-    ['meta', { name: 'twitter:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Live Live Monitor, Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
+    ['meta', { name: 'twitter:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Live Monitor, Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
     ['meta', { name: 'twitter:image', content: '/kuka-krl-extension/logo-original.png' }]
   ],
   vite: {
@@ -48,6 +48,9 @@ export default defineConfig({
               path.resolve(__dirname, '../guide/**/*.md'),
               path.resolve(__dirname, '../ru/**/*.md'),
               path.resolve(__dirname, '../tr/**/*.md'),
+              path.resolve(__dirname, '../de/**/*.md'),
+              path.resolve(__dirname, '../es/**/*.md'),
+              path.resolve(__dirname, '../it/**/*.md'),
               path.resolve(__dirname, './**/*.{vue,ts,js}')
             ],
             darkMode: 'class',
@@ -90,7 +93,7 @@ export default defineConfig({
           { text: 'Features Wiki', link: '/guide/features' },
           { text: 'Community', link: '/guide/community-features' },
           { text: 'Pro Features', link: '/guide/pro-features' },
-          { text: 'Buy Pro License', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' },
+          { text: 'Buy Pro License', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Den&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
           { text: 'Invoices / Portal', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
@@ -101,7 +104,7 @@ export default defineConfig({
             ]
           },
           {
-            text: 'v1.9.17 Engineering Suites',
+            text: 'v1.9.18 Engineering Suites',
             items: [
               { text: 'Live Controller Monitor & Telemetry', link: '/guide/scada-live-monitor' },
               { text: 'Point Table & .DAT Synchronizer', link: '/guide/point-synchronizer' },
@@ -147,7 +150,7 @@ export default defineConfig({
           { text: 'Вики функций', link: '/ru/guide/features' },
           { text: 'Бесплатно (Community)', link: '/ru/guide/community-features' },
           { text: 'Pro функции', link: '/ru/guide/pro-features' },
-          { text: 'Купить Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' },
+          { text: 'Купить Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
           { text: 'Инвойсы / Портал', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
@@ -158,7 +161,7 @@ export default defineConfig({
             ]
           },
           {
-            text: 'Инженерные комплексы v1.9.17',
+            text: 'Инженерные комплексы v1.9.18',
             items: [
               { text: 'Live Controller Monitor реального времени', link: '/ru/guide/scada-live-monitor' },
               { text: 'Таблица точек и синхронизатор .DAT', link: '/ru/guide/point-synchronizer' },
@@ -204,7 +207,7 @@ export default defineConfig({
           { text: 'Özellikler Wiki', link: '/tr/guide/features' },
           { text: 'Ücretsiz (Community)', link: '/tr/guide/community-features' },
           { text: 'Pro Özellikler', link: '/tr/guide/pro-features' },
-          { text: 'Pro Satın Al', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' },
+          { text: 'Pro Satın Al', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dtr&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
           { text: 'Faturalar / Portal', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
@@ -215,7 +218,7 @@ export default defineConfig({
             ]
           },
           {
-            text: 'v1.9.17 Mühendislik Paketleri',
+            text: 'v1.9.18 Mühendislik Paketleri',
             items: [
               { text: 'Canlı Kontrolör İzleyici ve Telemetri', link: '/tr/guide/scada-live-monitor' },
               { text: 'Nokta Tablosu ve .DAT Senkronizasyonu', link: '/tr/guide/point-synchronizer' },
@@ -261,7 +264,7 @@ export default defineConfig({
           { text: 'Features Wiki', link: '/de/guide/features' },
           { text: 'Community (Kostenlos)', link: '/de/guide/community-features' },
           { text: 'Pro-Funktionen', link: '/de/guide/pro-features' },
-          { text: 'Pro kaufen', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' },
+          { text: 'Pro kaufen', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dde&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
           { text: 'Rechnungen / Portal', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
@@ -272,7 +275,7 @@ export default defineConfig({
             ]
           },
           {
-            text: 'v1.9.17 Engineering Suites',
+            text: 'v1.9.18 Engineering Suites',
             items: [
               { text: 'Live Controller Monitor & Telemetrie', link: '/de/guide/scada-live-monitor' },
               { text: 'Punkttabelle & .DAT-Synchronisation', link: '/de/guide/point-synchronizer' },
@@ -318,7 +321,7 @@ export default defineConfig({
           { text: 'Wiki de Funciones', link: '/es/guide/features' },
           { text: 'Community (Gratis)', link: '/es/guide/community-features' },
           { text: 'Funciones Pro', link: '/es/guide/pro-features' },
-          { text: 'Comprar Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' },
+          { text: 'Comprar Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Des&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
           { text: 'Facturas / Portal', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
@@ -329,9 +332,9 @@ export default defineConfig({
             ]
           },
           {
-            text: 'v1.9.17 Suites de Ingeniería',
+            text: 'v1.9.18 Suites de Ingeniería',
             items: [
-              { text: 'Monitor Monitor en Vivo y Telemetría', link: '/es/guide/scada-live-monitor' },
+              { text: 'Monitor en Vivo y Telemetría', link: '/es/guide/scada-live-monitor' },
               { text: 'Tabla de Puntos y Sincronizador .DAT', link: '/es/guide/point-synchronizer' },
               { text: 'WorkVisual y KUKA.Sim (VCMX)', link: '/es/guide/wvs-and-vcmx' },
               { text: 'KUKA.RSI en Tiempo Real e Importador CAM', link: '/es/guide/rsi-and-cam' },
@@ -375,7 +378,7 @@ export default defineConfig({
           { text: 'Wiki Funzioni', link: '/it/guide/features' },
           { text: 'Community (Gratis)', link: '/it/guide/community-features' },
           { text: 'Funzioni Pro', link: '/it/guide/pro-features' },
-          { text: 'Acquista Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6' },
+          { text: 'Acquista Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dit&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
           { text: 'Fatture / Portale', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
@@ -386,9 +389,9 @@ export default defineConfig({
             ]
           },
           {
-            text: 'v1.9.17 Suite Ingegneristiche',
+            text: 'v1.9.18 Suite Ingegneristiche',
             items: [
-              { text: 'Monitor Live Monitor e Telemetria', link: '/it/guide/scada-live-monitor' },
+              { text: 'Live Monitor e Telemetria', link: '/it/guide/scada-live-monitor' },
               { text: 'Tabella Punti e Sincronizzatore .DAT', link: '/it/guide/point-synchronizer' },
               { text: 'WorkVisual e KUKA.Sim (VCMX)', link: '/it/guide/wvs-and-vcmx' },
               { text: 'KUKA.RSI in Tempo Reale e Importatore CAM', link: '/it/guide/rsi-and-cam' },

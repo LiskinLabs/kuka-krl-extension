@@ -34,7 +34,7 @@ Full syntax parsing of `.src`, `.dat`, `.sub` files. Colorizes keywords, data ty
 ---
 
 ### 3. Smart Autocomplete (KSS 8.7 & System Variables)
-Intelligent dropdown for 350+ system variables (`$POS_ACT`, `$VEL.CP`, `$BASE`, `$TOOL`, `$IN`, `$OUT`).
+Intelligent dropdown for 957+ system variables (`$POS_ACT`, `$VEL.CP`, `$BASE`, `$TOOL`, `$IN`, `$OUT`).
 
 ![Smart Autocomplete Demo](/media/smart_autocomplete.gif)
 
@@ -45,7 +45,7 @@ Native UI localization for 6 industrial languages: English, German, Russian, Spa
 
 ---
 
-### 5. Hardware Signal Inlay Hints ($IN / $OUT / $ANIN / $ANOUT)
+### 5. Hardware Signal Inlay Hints (`$IN` / `$OUT` / `$ANIN` / `$ANOUT`)
 Displays signal names inline right next to hardware channels (e.g., `$IN[1]` `: diPartReady`).
 
 ![Inlay Hints Demo](/media/inlay_hints.gif)

@@ -31,5 +31,5 @@ Saha devreye alma süreçlerinde `.src` ve `.dat` arasındaki manuel senkronizas
 * Fiziksel olarak ölçülen referans noktalarından Tekil Değer Ayrışımı (SVD) ile `TOOL_DATA` ve `BASE_DATA` matrislerini yüksek hassasiyetle hesaplama.
 
 ### 5. 6D Yörünge Aynalama ve Toplu Öteleme
-* **Yörünge Aynalama (`krl.mirrorTrajectory`)**: X, Y, Z düzlemlerine göre yörüngeleri durum ve dönüş ($A_1..A_6$) bitleriyle birlikte aynalama.
+* **Yörünge Aynalama (`krl.mirrorTrajectory`)**: X, Y, Z düzlemlerine göre yörüngeleri durum ve dönüş (`A1..A6`) bitleriyle birlikte aynalama.
 * **Toplu Nokta Kaydırma (`krl.batchShiftPoints`)**: Fikstür veya takım değişikliklerinde noktaları yeniden öğretmeden 6D uzamsal öteleme.

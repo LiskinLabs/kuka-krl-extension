@@ -2,6 +2,18 @@
 
 All notable changes to the **KRL Engineering Toolkit** will be documented in this file.
 
+## [1.9.18] - 2026-11-14 (In-IDE Trial & B2B Checkout Funnel, Hexa-Locale Docs & Storefront)
+
+### [LICENSING] Streamlined Free → 14-Day Trial → Pro Conversion Flow
+- Added `krl.openPricingPlans` command (`KUKA Commands` TreeView, `KUKA Control Center`, and walkthrough/docs CTAs) for side-by-side plan comparison and one-click checkout with `LAUNCH30` (`30% OFF`).
+- Upgraded B2B invoicing, Tax ID / VIES guidance, and 14-day Free Trial onboarding (`krl.startTrial`) across all 6 UI languages.
+- Synchronized Cloudflare Worker `/activate`, `/checkout/success`, `/airgap`, and dynamic checkout session creation across all 6 UI languages.
+
+### [DOCUMENTATION & STOREFRONT] Hexa-Locale VitePress & Marketplace Overhaul
+- Rewrote all 6 localized READMEs (`EN`, `DE`, `RU`, `TR`, `ES`, `IT`) with live GIF walkthroughs, `126` command / `63` Pro tool metrics, `14-day Free Trial` entry, and `LAUNCH30` checkout CTAs.
+- Added [SUPPORT.md](SUPPORT.md) and enforced strict Markdown/LaTeX/link validation across all 6 `README*.md` locales.
+- Cleaned 90 VitePress documentation pages across 6 locales (`1,499 USD` Integrator tier parity, updated KSS 957+ variable coverage, and removed unrendered `$...$` math expressions).
+
 ## [1.9.17] - 2026-11-12 (Version-Aware KSS Migration & Honest Syntax Gate)
 
 ### [MIGRATION] Exact KSS 8.3–9.3 Profiles
@@ -271,13 +283,13 @@ All notable changes to the **KRL Engineering Toolkit** will be documented in thi
 
 ### [SECURITY] Trajectory Approximation & Manipulator Dynamics Hardening
 - **Motion Approximation Tokens Validator**: Flags duplicate approximation modifiers (`LIN XP19 C_Dis C_Dis`) and invalid modifier combinations (`PTP` with Cartesian `C_DIS`, `LIN/CIRC` with axis `C_PTP`).
-- **Manipulator Payload Capacity & Dynamics Checker**: Cross-validates `$config.dat` `LOAD_DATA` arrays against nominal manipulator payload from `$TRAFONAME` (e.g. KR300 -> 300 kg), warning on payload overload and zero mass moment of inertia tensors ($J = 0$).
+- **Manipulator Payload Capacity & Dynamics Checker**: Cross-validates `$config.dat` `LOAD_DATA` arrays against nominal manipulator payload from `$TRAFONAME` (e.g. KR300 -> 300 kg), warning on payload overload and zero mass moment of inertia tensors (`J = 0`).
 - **Formal Parameter & Subprogram Vorlaufstopp Resolution**: Eliminated false positives on KRL keywords (`IF`, `WHILE`) and formal parameter declarations (`DEF Sub(param:IN)`).
 - **KUKA Firmware Integrity Isolation**: Dedicated isolated integrity section for KSS vendor modules (`/R1/System/*`, `/R1/TP/*`), focusing project health index strictly on customer application code.
 
 ### [BILLING] Industrial Licensing & Pricing Model Standardization
 - **RoboDK Workstation Model Parity**: Transitioned commercial tiers to transparent device / workstation activations (1, 25, 200 activations) matching industrial automation and robotics CAD standards.
-- **Dodo Payments Live Synchronization**: Updated all live payment gateways, B2B invoicing endpoints, and multi-seat entitlements to reflect new Engineer Pro ($19/mo, $149/yr), Pro Lifetime ($699), Team ($499/yr, 25 seats), and Enterprise Site ($2,490/yr, 200 seats) pricing.
+- **Dodo Payments Live Synchronization**: Updated all live payment gateways, B2B invoicing endpoints, and multi-seat entitlements to reflect new Engineer Pro (USD 19/mo, USD 149/yr), Pro Lifetime (USD 699), Team (USD 499/yr, 25 seats), and Enterprise Site (USD 2,490/yr, 200 seats) pricing.
 
 ## [1.9.2] - 2026-10-04 (Universal Industrial Safety Suite, KRCDiag Deep Audit & CSP Hardening)
 
@@ -336,14 +348,14 @@ All notable changes to the **KRL Engineering Toolkit** will be documented in thi
 
 ### [RELEASE] Industrial 6D Kinematics & Offline Transformation Suite
 - **6D Robotics Kinematic Math Engine (KRL Euler Matrix Formulation)**:
-  - Exact 4x4 Homogeneous Transformation Matrices, Euler angle conversions ($R_z(A) \cdot R_y(B) \cdot R_x(C)$), frame inversion, and KUKA geometric operator (`:`).
+  - Exact 4x4 Homogeneous Transformation Matrices, Euler angle conversions (`Rz(A) · Ry(B) · Rx(C)`), frame inversion, and KUKA geometric operator (`:`).
   - Bitwise manipulation of `STATUS` (0..7) and `TURN` (0..63) bitmasks matching KUKA controller specs.
 - **⭐ 6D Trajectory & Point Mirroring (`krl.mirrorTrajectory`) [Pro Tier]**:
   - Mirrors motion paths across Cartesian planes X (YZ-plane), Y (XZ-plane), or Z (XY-plane).
-  - Inverts corresponding Turn bitmasks: Plane X ($T \oplus 32$), Plane Y ($T \oplus 40$), Plane Z ($T \oplus 48$), with optional A1 Turn bit reflection ($T \oplus 1$).
+  - Inverts corresponding Turn bitmasks: Plane X (`T ⊕ 32`), Plane Y (`T ⊕ 40`), Plane Z (`T ⊕ 48`), with optional A1 Turn bit reflection (`T ⊕ 1`).
   - Full side-by-side VS Code Diff-Preview before committing coordinate changes to `.src` and companion `.dat` files.
 - **⭐ 6D Batch Point Transformation & Shift (`krl.batchShiftPoints`) [Pro Tier]**:
-  - Batch shifts selected positions across `.src` and `.dat` using Tool Offset ($P : \Delta F$), Base Offset ($\Delta F : P$), or Cartesian Delta vector.
+  - Batch shifts selected positions across `.src` and `.dat` using Tool Offset (`P : ΔF`), Base Offset (`ΔF : P`), or Cartesian Delta vector.
   - Interactive Preview via Diff Editor before applying updates.
 - **Bidirectional Trajectory Reversal (`krl.reverseTrajectory`) [Free Tier]**:
   - Inverts motion path order backwards with intelligent circular motion handling (swaps target and auxiliary points for `CIRC` / `SCIRC`) and preserves `;FOLD` envelopes.
@@ -358,9 +370,9 @@ All notable changes to the **KRL Engineering Toolkit** will be documented in thi
 
 ### [ANALYSIS] Advanced Kinematic & Simulation Safety Analyzers (KSS 8.3–8.7)
 - **Status (S) & Turn (T) Kinematic Validator (`validateStatusAndTurn`)**:
-  - Validates Status $S$ literal values and assignments: strictly enforces range $0..7$ (`'B000'`..`'B111'`). Out of range values trigger KSS error 1033 (*Status/Turn ungültig*).
-  - Validates Turn $T$ literal values and assignments: strictly enforces 6-axis range $0..63$ (`'B000000'`..`'B111111'`).
-  - **4-Axis Palletizer Kinematics Guard**: Enforces constant Status $S = 2$ (`'B010'`) for palletizer robots (e.g. `KR 300-2 PA`, `KR 470 PA`, `KR 700 PA`), preventing singular configuration faults.
+  - Validates Status `S` literal values and assignments: strictly enforces range `0..7` (`'B000'`..`'B111'`). Out of range values trigger KSS error 1033 (*Status/Turn ungültig*).
+  - Validates Turn `T` literal values and assignments: strictly enforces 6-axis range `0..63` (`'B000000'`..`'B111111'`).
+  - **4-Axis Palletizer Kinematics Guard**: Enforces constant Status `S = 2` (`'B010'`) for palletizer robots (e.g. `KR 300-2 PA`, `KR 470 PA`, `KR 700 PA`), preventing singular configuration faults.
 - **FOR Loop Step Zero Guard (`ForInterpreter`)**:
   - Prohibits `STEP 0` in `FOR` loop declarations, preventing infinite interpreter loops (KSS `InterpreterException: Step 0 is not allowed`).
 - **RESUME Statement Constraints (`ResumeInterpreter`)**:
@@ -437,7 +449,7 @@ All notable changes to the **KRL Engineering Toolkit** will be documented in thi
 ### [KINEMATICS] KUKA Robot Specs Catalog & Reach Envelope Guard (183 Models)
 - **183 KUKA Robot Models Catalog**: Embedded comprehensive physical reach, payload, arm series, and mounting position specifications compiled from publicly available KUKA robot specifications.
 - **Autonomous Robot Model Auto-Detection**: Automatically detects active robot kinematics and serial model from controller root `$machine.dat` (`$TRAFONAME[]`) or `am.ini`, supporting fuzzy matching and edition variations (`#KR210R2700_2 C4 FLR`).
-- **Cartesian Reach Envelope Validator (`krl.diagnostics.checkRobotReach`)**: Real-time diagnostic guard that flags Cartesian target coordinates (`E6POS`, `POS`, `FRAME`, literals) exceeding the robot's physical reach sphere ($R = \sqrt{X^2+Y^2+Z^2} > \text{reach} + 100\text{ mm}$), while properly factoring external linear track axes ($E1$).
+- **Cartesian Reach Envelope Validator (`krl.diagnostics.checkRobotReach`)**: Real-time diagnostic guard that flags Cartesian target coordinates (`E6POS`, `POS`, `FRAME`, literals) exceeding the robot's physical reach sphere (`R = √(X² + Y² + Z²) > reach + 100 mm`), while properly factoring external linear track axes (`E1`).
 
 ### [SIMULATION] Volkswagen, Audi, SEAT, Škoda (VASS 26 Standard) Rules Linter (`krl.diagnostics.checkVassStandard`, `krl.diagnostics.checkVassStrictRules`)
 - **Macro Call Approximation Guard**: Enforces VASS 26 exact stop rule (`SPSMAKRO` only allowed with `VE=0%`). Warns if continuous path approximation (`VE > 0%`) is programmed, preventing dangerous PLC desynchronization.
@@ -459,10 +471,10 @@ All notable changes to the **KRL Engineering Toolkit** will be documented in thi
 - **Full Technology Catalog (101..501)**: Embedded specifications for Spot Welding (`EZ/SP/KE`), Equalizing Gun (`VM-Ausgleich`), Clinching (`CZ`), MIG/MAG Arc (`MS`), Sensor Offset (`Baseverschiebung`), Stud Welding (`BS`), SafeRobot (`SFR`), Gluing/Dispensing (`Kleben`), Laser Optics (`3D-PFO`), Gripper Tech (`Handling`), Blind Riveting (`Nieten`), Seam Tracking (`NK`), and Flowdrill.
 - **LSP Inlay Hints & SPSMAKRO Integration**: Inline parameter name, macro descriptors (`Makro 340: Handling (Greifer)`), and technology labels directly in the editor for `VW_USER`, `VW_USR_R`, and `SPSMAKRO` calls.
 - **Standard System I/O Fallback Hints**: Displays standard industrial signal meanings for `$IN` and `$OUT` when unaliased.
-- **Interactive Hover & Signature Help**: Rich Markdown tables detailing parameter roles ($P1..P10$), physical units (`[1/10 mm]`, `[ms]`), and decoded enum values.
+- **Interactive Hover & Signature Help**: Rich Markdown tables detailing parameter roles (`P1..P10`), physical units (`[1/10 mm]`, `[ms]`), and decoded enum values.
 
 ### [GEOMETRY] Trajectory Geometry & Path Math Guard (`krl.diagnostics.checkPathApproximation`)
-- **CIRC Collinear & Coincident Point Guard**: Mathematically verifies 3-point circular arcs (`CIRC`, `SCIRC`, `KCIR`). Detects collinear points (infinite radius) and coincident points ($Aux = Target$) that crash KUKA motion planner at runtime.
+- **CIRC Collinear & Coincident Point Guard**: Mathematically verifies 3-point circular arcs (`CIRC`, `SCIRC`, `KCIR`). Detects collinear points (infinite radius) and coincident points (`Aux = Target`) that crash KUKA motion planner at runtime.
 - **$APO.CDIS 50% Segment Over-Approximation & Silent Reduction**: Enforces KSS trajectory constraint: flags `$APO.CDIS` exceeding 50% of the segment length and warns about silent approximation reduction by controller.
 - **Switch Points Range Verification (`TRIGGER WHEN PATH` & `Schaltpkt`)**: Compares switch point trigger distances against preceding and outgoing physical motion segments. Flags out-of-bounds trigger distances before controller runtime errors.
 - **Long Motion Segments Detection**: Identifies continuous seam motions (`KLIN`, `LIN`) exceeding 50 mm without intermediate support points to preserve bead application geometry.

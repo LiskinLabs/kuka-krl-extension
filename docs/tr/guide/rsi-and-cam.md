@@ -24,7 +24,7 @@ Lazer kesim, frezeleme, ark kaynağı ve mastik uygulama gibi yüksek hassasiyet
 
 ## CAM CNC G-Code ve SVG Vektör İçe Aktarıcısı (`krl.importGcodeToKrl`)
 
-* **ISO G-Code Dönüştürme**: `G0` $\rightarrow$ `PTP`, `G1` $\rightarrow$ `LIN`, `G2`/`G3` dairesel hareketlerini `CIRC` komutuna çevirme ve `I, J` parametrelerinden ara yay noktasını (`XAUX`) hesaplama. İlerleme hızını `$VEL.CP` (m/s) değerine ve M kodlarını (`M3`, `M5`) çıkışlara bağlama.
+* **ISO G-Code Dönüştürme**: `G0` → `PTP`, `G1` → `LIN`, `G2`/`G3` dairesel hareketlerini `CIRC` komutuna çevirme ve `I, J` parametrelerinden ara yay noktasını (`XAUX`) hesaplama. İlerleme hızını `$VEL.CP` (m/s) değerine ve M kodlarını (`M3`, `M5`) çıkışlara bağlama.
 * **SVG Vektör İçe Aktarma**: `<path>`, `<polyline>`, `<polygon>`, `<circle>` elemanlarını Bezier yaklaşımıyla işleme, güvenli yaklaşma `Z_Safe` ve işleme `Z_Work` düzlemlerini oluşturma.
 
 ---
@@ -32,4 +32,4 @@ Lazer kesim, frezeleme, ark kaynağı ve mastik uygulama gibi yüksek hassasiyet
 ## Görsel El-Göz (Hand-Eye) Kalibrasyon Sihirbazı (`krl.generateVisionCalibration`)
 
 * **9 Pozlu Kalibrasyon Piramidi**: `Eye-in-Hand` ve `Eye-to-Hand` kameralar için dokunma kalibrasyon ızgarası üretir.
-* **Euler Açıları Hesaplama**: Kamera optik eksen yönelimini doğrudan KUKA Euler ($A, B, C$) açılarına dönüştürür.
+* **Euler Açıları Hesaplama**: Kamera optik eksen yönelimini doğrudan KUKA Euler (A, B, C) açılarına dönüştürür.

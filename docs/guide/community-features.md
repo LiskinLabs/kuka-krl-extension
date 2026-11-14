@@ -45,7 +45,7 @@ Native UI localization for 6 industrial languages: English, German, Russian, Spa
 
 ---
 
-### 5. Hardware Signal Inlay Hints ($IN / $OUT / $ANIN / $ANOUT)
+### 5. Hardware Signal Inlay Hints (`$IN` / `$OUT` / `$ANIN` / `$ANOUT`)
 Displays signal names inline right next to hardware channels (e.g., `$IN[1]` `: diPartReady`).
 
 ![Inlay Hints Demo](/media/inlay_hints.gif)

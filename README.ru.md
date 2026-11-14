@@ -1,221 +1,132 @@
-> **Trademark notice.** KUKA, KUKA.Sim and KRL are trademarks of KUKA Roboter GmbH. This is an independent tool, not affiliated with, endorsed by or sponsored by KUKA. Offline engineering aids do not replace controller-side safety validation.
+> *Уведомление о товарных знаках: KUKA®, WorkVisual®, iiQWorks®, KUKA.Sim®, SmartPAD® и KRL являются зарегистрированными товарными знаками KUKA Aktiengesellschaft / KUKA Roboter GmbH. KRL Engineering Toolkit — независимая разработка Liskin Labs и не аффилирована с компанией KUKA. Офлайн-проверки дополняют, но не заменяют обязательную проверку безопасности на реальном контроллере.*
 
-<h1 align="center">KRL Engineering Toolkit for VS Code</h1>
+<h1 align="center">KRL Engineering Toolkit для VS Code</h1>
 
 <p align="center">
-  <b>Промышленная среда офлайн-программирования (OLP), монитор состояния контроллера в реальном времени, аудит безопасности и мост Model Context Protocol (MCP) для роботов KUKA.</b><br />
-  <i>Премиальный инженерный комплекс нового поколения для Visual Studio Code.</i><br />
-  Разработано для <b>KRC2, KRC4, KRC5 (KSS 5.x – 8.7+)</b>, <b>iiQKA (KSS 9.x / iiQWorks)</b> и <b>VKRC (VASS 2.6 / VASS 6)</b>.
+  <b>Промышленная KRL IDE, статический анализатор безопасности, сравнение бэкапов и live-мост к контроллерам KUKA.</b><br />
+  Поддержка <b>KRC2, KRC4 и KRC5</b> (<code>KSS 5.x – 8.7</code> и <code>KSS 9.x / iiQWorks / iiQKA.OS</code>) · <b>100% Offline-First · Без отправки кода в облако</b>
 </p>
 
 <p align="center">
-  <a href="README.md">English</a> •
-  <a href="README.ru.md"><b>Русский</b></a> •
-  <a href="README.tr.md">Türkçe</a> •
-  <a href="README.de.md">Deutsch</a> •
-  <a href="README.es.md">Español</a> •
-  <a href="README.it.md">Italiano</a>
+  [English](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.md) · [Русский](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.ru.md) · [Deutsch](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.de.md) · [Türkçe](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.tr.md) · [Español](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.es.md) · [Italiano](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/README.it.md)
 </p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://badgen.net/vs-marketplace/v/LiskinLabs.kuka-krl-extension?style=flat&label=VS%20Code%20Marketplace&color=FF6600" alt="VS Code Marketplace" /></a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://badgen.net/vs-marketplace/rating/LiskinLabs.kuka-krl-extension?style=flat&color=FF6600" alt="Marketplace Rating" /></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/v/LiskinLabs.kuka-krl-extension?style=flat-square&label=VS%20Code%20Marketplace&color=FF6600" alt="VS Code Marketplace" /></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://img.shields.io/visual-studio-marketplace/i/LiskinLabs.kuka-krl-extension?style=flat-square&label=Installs&color=2563EB" alt="Installs" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.17-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.17" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.18-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.18" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/ru/"><img src="https://img.shields.io/badge/Commands-124-FF6600?style=flat-square" alt="124 Commands" /></a>
-  <img src="https://img.shields.io/badge/Factory%20OT-Air--Gapped%20Safe-blue?style=flat-square" alt="Air-Gapped Safe" />
-  <a href="https://github.com/LiskinLabs/kuka-krl-mcp"><img src="https://img.shields.io/badge/MCP%20Server-Connected-00D68F?style=flat-square" alt="MCP Server Connected" /></a>
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Команды-126-FF6600?style=flat-square" alt="126 Commands" /></a>
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/guide/pro-features"><img src="https://img.shields.io/badge/Pro%20Инструменты-63-0EA5E9?style=flat-square" alt="63 Pro Tools" /></a>
 </p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><b>Установить из Marketplace</b></a> •
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/ru/"><b>Интерактивный 3D-симулятор и сайт</b></a> •
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/ru/guide/installation"><b>Документация</b></a> •
-  <a href="#тарифы-и-сравнение-редакций"><b>Сравнение тарифов</b></a> •
-  <a href="https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap"><b>Офлайн-шлюз Air-Gap</b></a>
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/ru/guide/installation"><b>Установка и быстрый старт</b></a> ·
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/ru/"><b>Документация и 64 гайда</b></a> ·
+  <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30"><b>Купить Pro Annual (-30%: LAUNCH30)</b></a> ·
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/blob/main/SUPPORT.md"><b>Поддержка и Air-Gap активация</b></a>
 </p>
 
-## Что нового в 1.9.17
-- **Нативный WCF-клиент KSS 8.x**: телеметрия KSS 8.x теперь полностью работает на Node.js через порт 49002 — без WorkVisual, KUKA.Sim, Python и DLL вендора.
-- **Полная телеметрия iiQKA.OS**: фреймы Tool/Base, предохранительные блокировки, моменты/температуры/токи/скорости по осям, софт-лимиты, детали PGNO, установленные KOP-пакеты и `$V_ROBCOR`.
-- **Окно сообщений SmartPAD**: на дашборде последние 3 сообщения; полная история (до 200, новые сверху) открывается в отдельной панели с фильтрами, поиском и live-обновлением (`krl.live.openMessages`).
-- **Compile gate целевого KSS** на iiQKA.OS: `SynchronizeMirror -> AnalyzeAllKrlFiles -> GetModuleInfos`, с исправлением шаблона для KSS 9.3 (`BSCmdNA`).
-- **Версионная миграция KSS 8.3-9.3** с точными профилями PDAT/LDAT и проверкой согласованности FOLD/Params.
-- **Проверено вживую** на KSS 8.6.2 (OfficeLite), KSS 8.7 (KR C5), iiQKA 9.2.3 (VRC) и iiQKA 9.3.4 (KRC5).
-
----
-
-## Промышленная реальность: ноль простоев до загрузки на робота
-
-> [!IMPORTANT]
-> **Устраняйте синтаксические ошибки, незакрытые FOLD, дедлоки, дрейф координат и сбросы Advance Run в VS Code ДО отправки кода в реальный контроллер.**
-
-Каждый инженер-робототехник и интегратор на производстве сталкивается с реальной ценой программных дефектов:
-* **Аварийный простой линии ($10,000+ в час)**: Неинициализированный фрейм `$TOOL` или `$BASE`, непреднамеренный срыв блендинга или ошибка деления на ноль в `SPS.SUB` останавливают роботизированный комплекс в разгар рабочей смены.
-* **Ночной дрейф координат (Touch-Up)**: Операторы корректируют обученные точки на пульте SmartPAD без версионного контроля. Понять, кто и что изменил, вручную по десяткам `.dat` файлов практически невозможно.
-* **Медленный цикл отладки**: Передача непроверенного кода на физический контроллер или запуск тяжеловесных виртуальных машин отнимает десятки часов на пусконаладке.
-
-**Liskin Labs KRL Engineering Toolkit** переносит полноценную среду заводской диагностики, 3D-кинематику и телеметрию контроллера прямо в ваш редактор.
-
----
-
-## Ключевые интерактивные модули
-
-<details open>
-<summary><b>1. Live Controller Monitor & Телеметрия контроллера в реальном времени [PRO]</b></summary>
-<br>
-
-Прямое Ethernet-подключение к физическим контроллерам KUKA KR C2, KR C4, KR C5 и виртуальным OfficePC по протоколам WCF и KUKAVARPROXY (порт 7000):
-* **6-осевая телеметрия шарниров**: Отслеживание `$AXIS_ACT`, динамические шкалы крутящих моментов осей `$TORQMON` и предупреждения о приближении к программным концевикам (`$SOFTP_END`, `$SOFTN_END`).
-* **Декартов TCP-трекинг**: Мгновенный вывод координат `$POS_ACT` (X, Y, Z, A, B, C) и номеров активных систем координат Tool/Base.
-* **Матрица 4096 дискретных I/O**: Живая сетка состояния `$IN[1..4096]`, `$OUT[1..4096]`, системных флагов `$FLAG` и таймеров `$TIMER`.
-* **Субтитры сообщений SmartPAD**: Потоковый перехват активных аварий контроллера с синхронным переводом системных кодов KSS на 6 языков (RU, EN, DE, TR, ES, IT).
-* **Горячий бэкап на лету**: Скачивание чистого `.zip`-архива проекта с работающего контроллера без остановки автоматического цикла.
+> **14 дней Pro бесплатно — без банковской карты:** откройте палитру команд в VS Code (`Ctrl+Shift+P`) и запустите **`KRL: Start 14-Day Free Trial`** (`krl.startTrial`) или **`KRL: Просмотр тарифов Pro`** (`krl.openPricingPlans`).
 
 <p align="center">
-  <img src="docs/public/media/kuka_control_center.gif" width="760" alt="KUKA Live Monitor Controller Monitor & Telemetry Dashboard" />
-</p>
-</details>
-
-<details open>
-<summary><b>2. Аудит бэкапов SmartPAD и пространственный расчёт дельт точек [PRO]</b></summary>
-<br>
-
-Мгновенный сравнительный анализ архивов роботов KUKA (`.zip`, `KRCDiag_*.zip`) прямо в оперативной памяти без распаковки:
-* **Расчёт 6-осевых дельт ($\Delta X, \Delta Y, \Delta Z, \Delta A, \Delta B, \Delta C$)**: Выявление скрытых смещений координат точек `E6POS`, выполненных операторами на смене.
-* **Цветовая индикация допусков**: Автоматическая подсветка критических отклонений, выходящих за технологический допуск безопасности (±1.0 мм / ±5.0 мм).
-* **Двустороннее монтирование .ZIP**: Открытие архива как рабочей папки в VS Code с возможностью редактирования и сохранения файлов напрямую в ZIP менее чем за 80 мс.
-
-<p align="center">
-  <img src="docs/public/media/krc_backup_diff.gif" width="760" alt="KUKA SmartPAD Backup Diff & Coordinate Delta Math" />
-</p>
-</details>
-
-<details>
-<summary><b>3. Детерминированный безопасный авторемонт кода и Monaco Diff Review [PRO]</b></summary>
-<br>
-
-Автоматическое устранение 7 критических классов производственных рисков в один клик (`Ctrl+.` QuickFix & `krl.fixAllSafeIssuesInFile`):
-1. **Устранение скрытых UTF-8 BOM и не-ASCII символов**: Удаление байтового BOM (`\xEF\xBB\xBF`), замена типографских кавычек, тире и умлаутов, предотвращая фатальный сбой компилятора KSS.
-2. **Обязательный BRAKE перед RESUME**: Защита от аварийных ударов при выходе из прерываний датчиков и коллизий (устранение аварии KSS01442).
-3. **Фиксация динамической нагрузки BAS(#TOOL)**: Автоматическая передача модели массы и инерции в интерполятор после изменения атрибутов `$LOAD` / `LOAD_DATA`.
-4. **Выравнивание структуры FOLD / ENDFOLD**: Автоматическая синхронизация повреждённых пользовательских и системных фолдов SmartPAD.
-5. **Защита от бесконечного цикла STEP 0**: Замена фатального шага `STEP 0` на безопасный инкремент `STEP 1` в циклах `FOR`.
-6. **Нормализация дубликатов аппроксимации**: Очистка случайных дубликатов модификаторов сглаживания (`C_DIS`, `C_PTP`).
-7. **Синхронизация метаданных Inline Form**: Защита от затирания логики программиста при Touch-Up на пульте SmartPAD (синхронизация XML `;Params` и кода `$OUT`).
-
-*Для глубокой очистки неиспользуемых переменных и мертвого кода во всем проекте используется отдельный инструмент: **Universal Backup & Unused Variable Purge Engine** (`krl.cleanupUnusedVariables`) с защитой `$config.dat`, фоновых задач `sps.sub` и EthernetKRL.*
-*Интерактивный Monaco Diff Editor позволяет оператору пошагово принять (`Ctrl+Enter`) или отклонить правки до записи на диск с защитой AST Rollback Guard.*
-
-<p align="center">
-  <img src="docs/public/media/type-validation-demo.gif" width="760" alt="KUKA Pre-Flight Static Analysis & Quality Audit" />
-</p>
-</details>
-
-<details>
-<summary><b>4. Интерактивная векторная блок-схема и Control Flow Graph [PRO]</b></summary>
-<br>
-
-Генерация интерактивной блок-схемы алгоритма программы `.src` в реальном времени:
-* **Двунаправленная навигация**: Клик по блоку схемы мгновенно перемещает курсор в редакторе к соответствующей строке кода KRL или совершает переход к кадру в 3D-симуляторе.
-* **Визуализация циклов и ветвлений**: Наглядное отображение логики `IF-ELSE`, `SWITCH-CASE`, `LOOP`, `FOR`, диспетчера `CELL.src` и вызовов подпрограмм.
-* **Проваливание в подпрограммы и запуск симуляции**: Мгновенный переход к подпрограммам по клику на узел вызова с возможностью запуска 3D-симуляции выбранного процесса прямо из блок-схемы.
-* **Smart Action Dialog & Мобильный тач-интерфейс**: Управление ветвлением программ и сигналами PLC через плавающий перемещаемый диалог, полноценная адаптация для планшетов и смартфонов с жестовым масштабированием (Pinch-to-zoom).
-* **Экспорт векторной графики**: Сохранение схем в формате SVG для проектной документации и паспортов ячеек.
-
-<p align="center">
-  <img src="docs/public/media/control_flow_graph.gif" width="760" alt="KUKA Control Flow Graph & Flowchart Generator" />
-</p>
-</details>
-
-<details>
-<summary><b>5. Комплексы WorkVisual (.wvs) и KUKA.Sim (.vcmx) [PRO]</b></summary>
-<br>
-
-* **Инспектор проектов WorkVisual (`krl.inspectFieldbusTopology`)**: Чтение бинарных проектов `.wvs` в памяти без запуска САПР, извлечение каталогов опций KOP (`EthernetKRL`, `SafeOperation`, `GripperTech`), топологии шин EtherCAT / Profinet и мгновенный экспорт таблицы тегов в **Siemens TIA Portal**, **Beckhoff TwinCAT 3** и **EPLAN**.
-* **Аудит 3D-симуляций KUKA.Sim (`krl.inspectWorkcellLayout`, `krl.validateWorkcellSimulation`)**: Извлечение кинематики и дискретных сигналов из `.vcmx`, выявление 4 фатальных дедлоков симуляции (`VCMX001`–`VCMX004`) и постпроцессинг симуляции в синхронизированные модули KRL `.src` + `.dat`.
-</details>
-
-<details>
-<summary><b>6. Системы жесткого реального времени RSI (4 мс) и CAM G-Code / SVG [PRO]</b></summary>
-<br>
-
-* **KUKA.RobotSensorInterface (`krl.validateRsiXml`, `krl.generateRsiCode`)**: Валидация XML-схем сокетов и генерация модулей драйверов реального времени `#IPO_FAST` (4 мс / 250 Гц) для оптической коррекции шва (`#POSCORR`) и управления осями через ROS 2 (`#AXISCORR`).
-* **CAM ЧПУ G-Code и 2D SVG импортер (`krl.importGcodeToKrl`)**: Конвертация траекторий фрезеровки, резки и сварки ISO G-Code (`G0`, `G1`, `G2`, `G3`) и векторных чертежей SVG в траектории робота с автоматической расстановкой безопасных высот.
-* **Мастер калибровки Hand-Eye (`krl.generateVisionCalibration`)**: 9-точечная калибровочная пирамида для 3D-камер с автоматическим расчётом углов Эйлера KUKA.
-</details>
-
-<details>
-<summary><b>7. Встроенный сервер Model Context Protocol (MCP) для ИИ [PRO]</b></summary>
-<br>
-
-Локальный шлюз интеграции ИИ (`127.0.0.1`), связывающий современные среды разработки (**Cursor, Google Antigravity, Claude Code, Windsurf**) напрямую с роботом:
-* Доступ ИИ к живой телеметрии контроллера (`krl_live_telemetry`).
-* Статический аудит кода проекта (`krl_workspace_diagnostics`).
-* Детерминированное автоисправление (`krl_safe_auto_repair`).
-* База данных типов и пределов 957+ системных переменных KSS (`krl_system_variable_spec`).
-</details>
-
-<details>
-<summary><b>8. Корпоративная автономная активация Air-Gap по файлам .lic [PRO]</b></summary>
-<br>
-
-Полная готовность к работе на закрытых оборонных и автомобильных предприятиях с изолированными OT-сетями без доступа к интернету:
-* **Экспорт запроса (`krl.exportHardwareIdFile`)**: Выгрузка цифрового отпечатка оборудования в файл `liskin-hardware-id.lic` для переноса через доверенный USB.
-* **Генерация лицензии**: Создание криптографически подписанного файла `liskin-krl-license.lic` на [веб-портале Air-Gap](https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap).
-* **Импорт лицензии (`krl.importOfflineLicenseFile`)**: Мгновенная валидация асимметричной подписи Ed25519 в VS Code со 100% офлайн-работой без фоновых опросов сети.
-</details>
-
----
-
-## Тарифы и сравнение редакций
-
-Мы разделяем базовые функции редактирования для сообщества и профессиональные инженерные комплексы для интеграторов и заводов. Актуальные цены, условия подписок и скидки всегда доступны на нашем [официальном интерактивном портале](https://liskinlabs.github.io/kuka-krl-extension/ru/).
-
-| Возможность / Инструмент | Community (Free) | Engineer Pro (ПК) | Team Edition (5 ПК) | Enterprise Plant (100 ПК) |
-|:---|:---:|:---:|:---:|:---:|
-| **Подсветка синтаксиса, FOLD/UNFOLD, темы KUKA** | ✓ | ✓ | ✓ | ✓ |
-| **Базовая диагностика, автодополнение, Inlay Hints** | ✓ | ✓ | ✓ | ✓ |
-| **Форматирование кода и выравнивание присваиваний** | ✓ | ✓ | ✓ | ✓ |
-| **Live Controller Monitor и 4096 I/O телеметрия** | — | ✓ | ✓ | ✓ |
-| **Сравнение бэкапов SmartPAD и дельты $\Delta X, Y, Z$** | — | ✓ | ✓ | ✓ |
-| **Безопасный авторемонт Safe Auto-Repair & Monaco Diff** | — | ✓ | ✓ | ✓ |
-| **Интерактивные векторные блок-схемы (Flowchart)** | — | ✓ | ✓ | ✓ |
-| **Point Table сплит-редактор и SVD-калибровка баз** | — | ✓ | ✓ | ✓ |
-| **Автосинхронизация точек в companion .DAT** | — | ✓ | ✓ | ✓ |
-| **WorkVisual (.wvs) топология и экспорт тегов ПЛК** | — | ✓ | ✓ | ✓ |
-| **KUKA.Sim (.vcmx) валидатор дедлоков и постпроцессор** | — | ✓ | ✓ | ✓ |
-| **KUKA.RSI (4 мс такт) и CAM ЧПУ G-Code / SVG импортер** | — | ✓ | ✓ | ✓ |
-| **Мастер 9-точечной калибровки Hand-Eye** | — | ✓ | ✓ | ✓ |
-| **Мост Model Context Protocol (MCP) для ИИ** | — | ✓ | ✓ | ✓ |
-| **Автономный Air-Gap режим (обмен файлами .lic)** | — | **1 рабочее место** | **5 рабочих мест** | **100 рабочих мест** |
-| **Единый B2B-счёт, акты и нулевой НДС (EU Reverse Charge)** | — | — | ✓ | ✓ |
-| **Автоматический KUKA Fleet Backup Hub & SLA** | — | — | — | ✓ |
-| **Индивидуальные правила линтинга (VW VASS, Audi, BMW)** | — | — | — | ✓ |
-
-<p align="center">
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/ru/#pricing"><b>👉 Посмотреть тарифы, скидки и оформить подписку на сайте</b></a><br />
-  <i>Мгновенная доставка лицензионного ключа, оплата картами любых стран и безналичный расчёт для юридических лиц (B2B Wire / SEPA / ACH).</i>
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension/main/docs/public/media/kuka_control_center.gif" width="760" alt="KUKA Control Center и панель live-телеметрии" />
 </p>
 
 ---
 
-## 3D-Симулятор и документация онлайн
+## Находите ошибки до загрузки программы на робот
 
-* **Интерактивный портал и 3D-демонстрация**: [https://liskinlabs.github.io/kuka-krl-extension/ru/](https://liskinlabs.github.io/kuka-krl-extension/ru/)
-* **Полная база знаний и руководство пользователя**: [https://liskinlabs.github.io/kuka-krl-extension/ru/guide/features](https://liskinlabs.github.io/kuka-krl-extension/ru/guide/features)
-* **Портал офлайн-активации Air-Gap**: [https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap](https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap)
-* **Открытый MCP-сервер на GitHub**: [LiskinLabs/kuka-krl-mcp](https://github.com/LiskinLabs/kuka-krl-mcp)
+Каждый час простоя линии стоит от **10 000 USD**: пропущенный `$TOOL` или `$BASE`, случайный Advance Run stop (`$OUT` в движении без `TRIGGER`), отсутствие `BRAKE` перед `RESUME` (`KSS 1422`) или рассинхрон `;FOLD` и `.dat`.
+
+**KRL Engineering Toolkit** объединяет **126 инженерных команд**, **957 системных переменных KSS**, **базу кинематики 183 моделей роботов KUKA**, аудит **VASS 26 / VKRC** и **прямой мониторинг контроллера** прямо в VS Code, Cursor, Windsurf и Open VSX.
+
+| Возможности из коробки | Community (Бесплатно) | Pro / Team / Enterprise |
+|---|---|---|
+| Подсветка KRL, 6 цеховых тем, автодополнение (`957` системных переменных, `116` функций) | Без лимита строк | Без лимита строк |
+| Переход `F12` между `.src` и `.dat`, поиск ссылок, форматирование, FOLD/ENDFOLD, сортировка | Включено | Включено |
+| Диагностика синтаксиса, баланса блоков, базовые проверки фреймов и сниппеты KRL | Включено | Включено |
+| Аудит безопасности перед загрузкой: Advance Run Guard, `S/T`, зона досягаемости 183 роботов | Триал / тест 30 дн. | Коммерческая работа |
+| Автомотив-линтер VASS 26 / `VW_USER` (`101..501`) и 3-сторонний контроль `FOLD` vs `.dat` | — | Полный доступ |
+| Живая телеметрия KSS 8.x WCF (порт `49002`) и iiQKA.OS, сообщения SmartPAD, Compile Gate | — | Полный доступ |
+| Монтирование `.zip`/`.wvs` без распаковки, дельта точек (`ΔX/Y/Z`), 6D сдвиг/зеркало, декодер `.evt` | — | Полный доступ |
 
 ---
 
-## Правовой статус, безопасность и стандарты
+## Ключевые инженерные модули
 
-### Промышленная безопасность (ISO 10218-1/-2, ISO 13849-1)
-**KRL Engineering Toolkit** является независимым инженерным инструментом статического анализа, разработки и сравнения бэкапов, разработанным **Liskin Labs**. Продукт **НЕ является сертифицированным средством безопасности (Non-SIL / Non-PL)** и **не заменяет** обязательные процедуры физической пусконаладки на реальном роботе, проверку траекторий при пониженной скорости (`$OV_PRO <= 30%` в ручном режиме T1 на пульте KUKA SmartPAD), а также официальную оценку рисков согласно стандартам **ISO 10218-1/-2** и **ISO 13849-1**. Всегда выполняйте пробный ручной прогон траекторий в режиме T1 перед включением автоматического цикла.
+### 1. Прямой мост к контроллерам и сообщения SmartPAD (`KSS 8.x` и `iiQKA.OS 9.x`)
+Подключайтесь к контроллерам KUKA напрямую с инженерного ноутбука без тяжелых пакетов и сторонних DLL:
+- **Нативный WCF-клиент KSS 8.x**: работает в чистом Node.js по порту `49002` — без WorkVisual, KUKA.Sim или Python.
+- **Телеметрия `iiQKA.OS` (`KRC5` / `9.x`) и Compile Gate**: отображает `$TOOL`/`$BASE`, моменты/токи/температуры осей, PGNO, установленные KOP-пакеты и историю SmartPAD (`krl.live.openMessages`).
+- **Инлайн-подсказки сигналов I/O**: подставляет реальные имена сигналов рядом с `$IN[x]`, `$OUT[y]` и `$FLAG[z]` прямо в коде.
 
-### Товарные знаки и бренды
-* **KUKA®, KRL®, KRC®, WorkVisual®, iiQWorks® и SmartPAD®** являются зарегистрированными товарными знаками **KUKA AG** / **KUKA Deutschland GmbH**.
-* **Visual Studio Code® и VS Code®** являются зарегистрированными товарными знаками **Microsoft Corporation**.
-* Данное программное обеспечение является независимой разработкой **Liskin Labs** и **не** связано, не спонсируется, не одобряется и не сертифицировано KUKA AG или Microsoft Corporation. Все упомянутые товарные знаки используются исключительно для идентификации совместимости в рамках добросовестного использования (nominative fair use).
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension/main/docs/public/media/krl_io_signals.gif" width="760" alt="Инспектор сигналов ввода-вывода и инлайн-подсказки" />
+</p>
+
+### 2. Предпусковой анализ безопасности, кинематики и VASS 26 / VKRC
+Ловите критические сбои статическим анализом до переноса файлов на пульт оператора:
+- **Контроль кинематики и сингулярностей**: предупреждения по сингулярности запястья/плеча, коллинеарным дугам `CIRC`, `$APO.CDIS > 50%`, битовым маскам `Status/Turn` и вылету за рабочий радиус (183 модели роботов).
+- **3-Way Motion Integrity**: выявляет скрытые расхождения скорости `VB`, инструмента и базы между комментарием `;FOLD` и структурами `.dat`.
+- **Пакет VASS 26 / VKRC**: полный аудит `Folge`, `UP`, `MakroSps`, `VW_USER` (`101..501`), защитных блокировок и допусков `Genau`.
+- **Блок-схемы программ (Flowchart)**: интерактивные SVG-графы переходов, циклов и вызовов подпрограмм.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension/main/docs/public/media/type-validation-demo.gif" width="760" alt="Статическая проверка типов и правил безопасности KRL" />
+</p>
+
+### 3. Сравнение бэкапов SmartPAD, 6D-трансформации и бинарные логи `.evt`
+Анализируйте архивы ячейки в цеху без создания тысяч временных файлов на диске:
+- **Монтирование `.zip` и `.wvs` как виртуального проекта**: мгновенный просмотр архивов, декодирование бинарных журналов `.evt` (EVTX) на 6 языках и генерация протоколов приемки ISO 10218-1.
+- **Инспектор дельт точек**: находит точные смещения координат (`ΔX, ΔY, ΔZ, A, B, C`) между сменами или архивами контроллера.
+- **Пакетный сдвиг и зеркалирование траекторий**: пересчет координат и масок Turn с просмотром diff до записи и откатом по AST/CRC32.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension/main/docs/public/media/krc_backup_diff.gif" width="760" alt="Сравнение архивов SmartPAD и анализ дельты точек" />
+</p>
+
+### 4. Базовый языковой сервер KRL (Бесплатная версия Community)
+Переход по `F12` между `.src` и `.dat`, автодополнение, форматирование, сворачивание `FOLD`/`ENDFOLD`, сортировка деклараций и проверка синтаксиса доступны **навсегда бесплатно без ограничения числа строк**.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension/main/docs/public/media/smart_autocomplete.gif" width="760" alt="Умное автодополнение KRL и документация системных переменных" />
+</p>
+
+---
+
+## Лицензии, EULA и прозрачные тарифы
+
+**Условия Community Edition:** бесплатно для личного обучения, академических/некоммерческих исследований и **30-дневной некоммерческой оценки** (не для серийного производства или сдачи коммерческих проектов — см. [LICENSE.txt](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/LICENSE.txt)). Для постоянной коммерческой и производственной пусконаладки требуется лицензия Pro, Team, Department или Enterprise.
+
+> **Скидка 30% (`LAUNCH30`):** промокод **`LAUNCH30`** автоматически применен в ссылках оплаты ниже. Оплата проходит через **Dodo Payments** (Merchant of Record) с поддержкой международных карт, автоматическим учетом НДС/VAT и выдачей официальных PDF-счетов и квитанций.
+
+| Тариф | Базовая цена | С промокодом `LAUNCH30` (-30%) | Лимит активаций | Для кого | Действие |
+|---|---|---|---|---|---|
+| **Community** | 0 USD | 0 USD | Личное / ВУЗ / тест 30 дн. | Обучение и некоммерческие задачи | [Установить](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
+| **Pro Monthly** | 19 USD / мес | **13.30 USD / мес** | 1 рабочая станция · Отмена в любой момент | Разовые командировки на объект | [Оформить Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Pro Annual** *(Рекомендуем)* | 149 USD / год | **104.30 USD / год** | 1 рабочая станция · 1 год обновлений | Инженеры-робототехники | [Купить Annual (-30%)](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Pro Lifetime** | 699 USD разово | **489.30 USD разово** | 1 рабочая станция · Бессрочно | Независимые наладчики | [Купить Lifetime](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Team Edition** | 499 USD / год | **349.30 USD / год** | **5 рабочих станций** · Единый счет | Инженерные бригады и отделы | [Купить Team (5 мест)](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Department / Integrator** | 1,499 USD / год | **1,049.30 USD / год** | **20 рабочих станций** · Air-Gap | Системные интеграторы | [Купить Integrator (20 мест)](https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Enterprise Plant** | 4,999 USD / год | Индивидуальный PO-инвойс | **100 рабочих станций** · Приоритетная связь | Заводы и OEM-производители | [Запросить корпоративный счет](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/SUPPORT.md#2-14-day-free-trial-upgrades--billing-dodo-payments-mor) |
+
+Уже есть ключ? **[Активировать онлайн](https://kuka-krl-support-gateway.redminotpro5.workers.dev/activate?lang=ru)** · **[Портал Air-Gap `.lic`](https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap)** · **[Личный кабинет и PDF-инвойсы](https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1)**
+
+---
+
+## Автономная работа в закрытых цеховых сетях
+
+- **100% локальная обработка**: исходники `.src`, `.dat`, `.sub`, бэкапы и логи не покидают ОЗУ вашего ПК ([PRIVACY.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/PRIVACY.md)).
+- **Офлайн-кэш 30 дней + 14 дней Grace Period**: после проверки лицензия продолжает работать без интернета в цеху.
+- **Полный Air-Gap**: генерация подписанных ключом Ed25519 файлов `.lic` на [портале Air-Gap](https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap) и импорт командой `krl.importOfflineLicenseFile`.
+
+---
+
+## Что нового в v1.9.17
+
+- **Нативный WCF-клиент KSS 8.x**: прямая телеметрия по порту `49002` внутри Node.js без WorkVisual, KUKA.Sim, Python или сторонних DLL.
+- **Полная телеметрия `iiQKA.OS` и окно сообщений SmartPAD**: фреймы Tool/Base, блокировки безопасности, момент/температура/ток/скорость по осям, PGNO, пакеты KOP и журнал `krl.live.openMessages`.
+- **Compile Gate для `iiQKA.OS` и миграция `KSS 8.3 – 9.3`**: точные профили PDAT/LDAT и проверка `FOLD/Params`, протестированные на KSS 8.6.2, KSS 8.7, iiQKA 9.2.3 и iiQKA 9.3.4.
+- **Полная история изменений**: [CHANGELOG.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/CHANGELOG.md).

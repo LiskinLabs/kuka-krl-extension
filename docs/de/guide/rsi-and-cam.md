@@ -27,4 +27,4 @@ Die **KUKA.RSI Real-Time Suite** (`krl.validateRsiXml`, `krl.generateRsiCode`) a
 
 ## Hand-Auge-Kamerakalibrierung (`krl.generateVisionCalibration`)
 
-* **9-Punkt-Pyramide**: Look-At Rotationsmatrix zur Berechnung der KUKA Euler-Winkel ($A, B, C$) für `Eye-in-Hand` und `Eye-to-Hand`.
+* **9-Punkt-Pyramide**: Look-At Rotationsmatrix zur Berechnung der KUKA Euler-Winkel (A, B, C) für `Eye-in-Hand` und `Eye-to-Hand`.

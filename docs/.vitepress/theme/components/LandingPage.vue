@@ -9,16 +9,16 @@
       <div class="flex items-center gap-6">
         <span class="inline-flex items-center gap-2 font-bold text-[#FF5500]">
           <span class="w-1.5 h-1.5 bg-[#FF5500] animate-pulse"></span>
-      KRL ENGINEERING TOOLKIT v1.9.17
+      KRL ENGINEERING TOOLKIT v1.9.18
         </span>
         <span class="hidden md:inline-flex items-center gap-1.5 text-[#00D68F]">
           <svg class="w-3.5 h-3.5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           REVERSINGLABS SPECTRA ASSURE: 100% PASS [0 CVE]
         </span>
         <span class="hidden lg:inline text-zinc-500">|</span>
-        <span class="hidden lg:inline text-zinc-400">124 COMMANDS</span>
+        <span class="hidden lg:inline text-zinc-400">126 COMMANDS</span>
         <span class="hidden xl:inline text-zinc-500">|</span>
-        <span class="hidden xl:inline text-zinc-400">64 DOCUMENTED TOOLS</span>
+        <span class="hidden xl:inline text-zinc-400">63 PRO COMMANDS &amp; ANALYZERS</span>
       </div>
       <div class="flex items-center gap-4 text-[10px]">
         <span class="inline-flex items-center gap-1 text-emerald-400 font-bold">
@@ -160,7 +160,7 @@
                   SYS.STATUS: OPERATIONAL
                 </span>
                 <span :class="['px-2 py-1 border font-medium', isDaylight ? 'border-zinc-300 bg-white text-zinc-700' : 'border-zinc-800 bg-zinc-900 text-zinc-400']">
-                  KSS 8.3–8.7 & KRC5 READY
+                  KSS 8.x &amp; iiQKA.OS 9.x READY
                 </span>
                 <span class="px-2 py-1 border border-blue-500/30 bg-blue-500/10 text-blue-400 font-medium">
               SAFETY LOGIC CHECKS
@@ -218,7 +218,7 @@
             <!-- 4 Technical Metric Cards -->
             <div :class="['grid grid-cols-2 sm:grid-cols-4 border-t pt-4 text-left gap-4 font-mono', isDaylight ? 'border-zinc-300' : 'border-zinc-800']">
               <div>
-                <div class="text-2xl font-black text-[#FF5500] tabular-nums">124</div>
+                <div class="text-2xl font-black text-[#FF5500] tabular-nums">126</div>
                 <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Commands</div>
               </div>
               <div>
@@ -227,11 +227,11 @@
               </div>
               <div>
                 <div class="text-2xl font-black tabular-nums">64</div>
-                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Documented Tools</div>
+                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Tool Guides</div>
               </div>
               <div>
-                <div class="text-2xl font-black tabular-nums">41</div>
-                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Pro Tools</div>
+                <div class="text-2xl font-black tabular-nums">63</div>
+                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Pro Commands</div>
               </div>
             </div>
 
@@ -254,11 +254,11 @@
               <div class="bg-[#111114] border-t border-zinc-800 p-2.5 font-mono text-[10px] grid grid-cols-2 gap-2 text-zinc-400 select-none">
                 <div>
                   <span class="text-zinc-600 block">ACTIVE TOOL:</span>
-                  <span class="text-white font-bold truncate block">TOOL_DATA[1] (BJ_GRP)</span>
+                  <span class="text-white font-bold truncate block">TOOL_DATA[1] (WELD_GUN_1)</span>
                 </div>
                 <div>
                   <span class="text-zinc-600 block">ACTIVE BASE:</span>
-                  <span class="text-white font-bold truncate block">BASE_DATA[29] (CIKIS_KONVEYOR)</span>
+                  <span class="text-white font-bold truncate block">BASE_DATA[29] (FIXTURE_STN_1)</span>
                 </div>
                 <div>
                   <span class="text-zinc-600 block">INTERPOLATION:</span>
@@ -538,8 +538,8 @@
             <p :class="['text-sm', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">
               Single engineers, integration teams, or plant-wide deployments. Direct invoicing by Dodo Payments Inc. with EU VAT, US Sales Tax, and corporate purchase orders.
             </p>
-          <p class="text-[10px] font-mono text-zinc-500">
-            Currency display is indicative. Checkout and invoices are processed in USD.
+          <p class="text-[11px] font-mono text-[#00D68F] font-bold">
+            [LAUNCH PROMO] Use code LAUNCH30 for 30% OFF — pre-applied automatically at checkout. Currency display is indicative; invoices settle in USD.
           </p>
           </div>
 
@@ -597,24 +597,17 @@
               <p class="text-xs text-zinc-400">Full professional robotics toolset. Save 35% compared to monthly billing.</p>
               <ul class="text-xs font-mono space-y-1.5 pt-2 border-t border-zinc-800 text-zinc-300">
                 <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Interactive Logic Flowcharts v2.0</li>
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> All 64 Industrial Tools</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> All 63 Pro Commands + 126 Tools</li>
                 <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Advance Run Stop Detection</li>
                 <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> 3-Point Frame Kinematic Solver</li>
               </ul>
             </div>
             <div class="mt-6 flex flex-col gap-2">
               <a 
-                href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?showDiscounts=true"
-                class="w-full py-2.5 bg-[#FF5500] hover:bg-orange-600 text-white font-mono text-xs font-bold text-center block transition-colors">
-                GET ANNUAL PRO ({{ formatPrice(149) }})
-              </a>
-              <a 
-                href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="w-full py-1.5 border border-zinc-700 hover:border-zinc-500 text-zinc-300 font-mono text-[11px] text-center block transition-colors flex items-center justify-center gap-1.5">
-                <svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                <span>INVOICES &amp; CUSTOMER PORTAL</span>
+                :href="buildCheckoutUrl('pdt_0NmAV012KFHSjUMyDomJ6')"
+                @click.prevent="startCheckout('pdt_0NmAV012KFHSjUMyDomJ6')"
+                class="w-full py-2.5 bg-[#FF5500] hover:bg-orange-600 text-white font-mono text-xs font-bold text-center block transition-colors cursor-pointer">
+                {{ checkoutBusy === 'pdt_0NmAV012KFHSjUMyDomJ6' ? 'OPENING CHECKOUT...' : `GET ANNUAL PRO (${formatPrice(149)} · -30% LAUNCH30)` }}
               </a>
             </div>
           </div>
@@ -640,17 +633,10 @@
             </div>
             <div class="mt-6 flex flex-col gap-2">
               <a 
-                href="https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v?showDiscounts=true"
-                class="w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-mono text-xs font-bold text-center block transition-colors">
-                DEPLOY TEAM ({{ formatPrice(499) }})
-              </a>
-              <a 
-                href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="w-full py-1.5 border border-zinc-700 hover:border-zinc-500 text-zinc-300 font-mono text-[11px] text-center block transition-colors flex items-center justify-center gap-1.5">
-                <svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                <span>INVOICES &amp; CUSTOMER PORTAL</span>
+                :href="buildCheckoutUrl('pdt_0NnLCdgD69GiXDLRJ0K5v')"
+                @click.prevent="startCheckout('pdt_0NnLCdgD69GiXDLRJ0K5v')"
+                class="w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-mono text-xs font-bold text-center block transition-colors cursor-pointer">
+                {{ checkoutBusy === 'pdt_0NnLCdgD69GiXDLRJ0K5v' ? 'OPENING CHECKOUT...' : `DEPLOY TEAM (${formatPrice(499)})` }}
               </a>
             </div>
           </div>
@@ -676,17 +662,10 @@
             </div>
             <div class="mt-6 flex flex-col gap-2">
               <a 
-                href="https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn?showDiscounts=true"
-                class="w-full py-2 bg-cyan-700 hover:bg-cyan-600 text-white font-mono text-xs font-bold text-center block transition-colors">
-                DEPLOY INTEGRATOR ({{ formatPrice(1499) }})
-              </a>
-              <a 
-                href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="w-full py-1.5 border border-zinc-700 hover:border-zinc-500 text-zinc-300 font-mono text-[11px] text-center block transition-colors flex items-center justify-center gap-1.5">
-                <svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                <span>OFFICIAL INVOICES &amp; CUSTOMER PORTAL</span>
+                :href="buildCheckoutUrl('pdt_0Nq5QVTrbkJbWAUf8qoyn')"
+                @click.prevent="startCheckout('pdt_0Nq5QVTrbkJbWAUf8qoyn')"
+                class="w-full py-2 bg-cyan-700 hover:bg-cyan-600 text-white font-mono text-xs font-bold text-center block transition-colors cursor-pointer">
+                {{ checkoutBusy === 'pdt_0Nq5QVTrbkJbWAUf8qoyn' ? 'OPENING CHECKOUT...' : `DEPLOY INTEGRATOR (${formatPrice(1499)})` }}
               </a>
             </div>
           </div>
@@ -698,71 +677,53 @@
           
           <!-- Monthly -->
           <div :class="['border p-4 flex flex-col justify-between gap-3', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between gap-3">
               <div>
                 <span class="text-zinc-400 block font-bold">PRO MONTHLY</span>
                 <span class="text-lg font-black text-white">{{ formatPrice(19) }} / mo</span>
-                  <span class="text-[10px] text-zinc-500 block">1 Seat / Cancel anytime</span>
+                <span class="text-[10px] text-zinc-500 block">1 Seat / Cancel anytime</span>
               </div>
               <a 
-                href="https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp?showDiscounts=true"
-                class="px-3 py-1.5 border border-zinc-700 hover:border-white font-bold text-white transition-colors">
-                BUY MONTHLY
+                :href="buildCheckoutUrl('pdt_0NmAUzwdbzeERSktsOLTp')"
+                @click.prevent="startCheckout('pdt_0NmAUzwdbzeERSktsOLTp')"
+                class="px-3 py-1.5 border border-zinc-700 hover:border-white font-bold text-white transition-colors shrink-0 cursor-pointer">
+                {{ checkoutBusy === 'pdt_0NmAUzwdbzeERSktsOLTp' ? 'OPENING...' : 'BUY MONTHLY' }}
               </a>
             </div>
-            <a 
-              href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-[10px] text-zinc-400 hover:text-white underline text-center block">
-              Invoices &amp; Customer Portal &rarr;
-            </a>
           </div>
 
           <!-- Lifetime -->
           <div :class="['border p-4 flex flex-col justify-between gap-3', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between gap-3">
               <div>
                 <span class="text-zinc-400 block font-bold">PRO LIFETIME</span>
                 <span class="text-lg font-black text-white">{{ formatPrice(699) }}</span>
-                  <span class="text-[10px] text-zinc-500 block">1 Seat / Perpetual updates</span>
+                <span class="text-[10px] text-zinc-500 block">1 Seat / Perpetual updates</span>
               </div>
               <a 
-                href="https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr?showDiscounts=true"
-                class="px-3 py-1.5 border border-zinc-700 hover:border-white font-bold text-white transition-colors">
-                BUY LIFETIME
+                :href="buildCheckoutUrl('pdt_0NmAcoqVCfuwQ6Xx7qyqr')"
+                @click.prevent="startCheckout('pdt_0NmAcoqVCfuwQ6Xx7qyqr')"
+                class="px-3 py-1.5 border border-zinc-700 hover:border-white font-bold text-white transition-colors shrink-0 cursor-pointer">
+                {{ checkoutBusy === 'pdt_0NmAcoqVCfuwQ6Xx7qyqr' ? 'OPENING...' : 'BUY LIFETIME' }}
               </a>
             </div>
-            <a 
-              href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-[10px] text-zinc-400 hover:text-white underline text-center block">
-              Invoices &amp; Customer Portal &rarr;
-            </a>
           </div>
 
           <!-- Enterprise Site (100 Workstations) -->
           <div :class="['border p-4 flex flex-col justify-between gap-3 border-cyan-500/40', isDaylight ? 'bg-white' : 'bg-[#111114]']">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between gap-3">
               <div>
                 <span class="text-cyan-400 block font-bold">ENTERPRISE SITE (100 SEATS)</span>
                 <span class="text-lg font-black text-white">{{ formatPrice(4999) }} / yr</span>
-                  <span class="text-[10px] text-zinc-400 block">100 Workstations / Priority Support Gateway</span>
+                <span class="text-[10px] text-zinc-400 block">100 Workstations / Corporate PO &amp; Invoice</span>
               </div>
-              <a 
-                href="https://checkout.dodopayments.com/buy/pdt_0NnLCdkLwd0dECkpSE1JP?showDiscounts=true"
-                class="px-3 py-1.5 bg-cyan-600 hover:bg-cyan-500 font-bold text-white transition-colors">
-                DEPLOY PLANT
-              </a>
+              <button 
+                type="button"
+                @click="openQuoteModal()"
+                class="px-3 py-1.5 bg-cyan-600 hover:bg-cyan-500 font-bold text-white transition-colors shrink-0 cursor-pointer">
+                REQUEST PO / QUOTE
+              </button>
             </div>
-            <a 
-              href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-[10px] text-cyan-400 hover:text-white underline text-center block">
-              Invoices &amp; Customer Portal &rarr;
-            </a>
           </div>
 
         </div>
@@ -823,7 +784,7 @@
             <div class="font-mono text-xs text-[#FF5500] font-bold tracking-wider">[06 // CAPABILITIES DIRECTORY]</div>
             <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">FULL PLATFORM CAPABILITY INVENTORY</h2>
             <p :class="['text-sm', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">
-              Complete inventory of {{ allInventory.length }} commands, settings, views, themes and language services included in KRL Engineering Toolkit v1.9.17.
+              Complete inventory of {{ allInventory.length }} commands, settings, views, themes and language services included in KRL Engineering Toolkit v1.9.18.
             </p>
           </div>
 
@@ -1025,7 +986,7 @@
             <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension" class="hover:text-white">VS Code Marketplace</a>
             <a href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1" target="_blank" rel="noopener noreferrer" class="hover:text-white">Customer Portal &amp; Invoices</a>
             <a href="https://github.com/LiskinLabs/kuka-krl-extension" class="hover:text-white">GitHub</a>
-            <a href="/guide/features" class="hover:text-white">Documentation</a>
+            <a :href="withBase('/guide/features')" class="hover:text-white">Documentation</a>
           </div>
         </div>
       </footer>
@@ -1073,7 +1034,7 @@
             <tbody>
               <tr class="border-b border-zinc-200">
                 <td class="p-2 font-bold">{{ recommendedTier.name }}</td>
-        <td class="p-2">KRL Engineering Toolkit IDE v1.9.17 Suite (64 Industrial Tools, Air-Gap License, Spectra Assure 0 CVE)</td>
+        <td class="p-2">KRL Engineering Toolkit IDE v1.9.18 Suite (63 Pro Tools, 126 Commands, Air-Gap License, Spectra Assure 0 CVE)</td>
                 <td class="p-2 text-center">{{ recommendedTier.seats }} Seats</td>
                 <td class="p-2 text-right font-bold">{{ formatPrice(recommendedTier.priceUsd) }}</td>
               </tr>
@@ -1135,7 +1096,7 @@
         </button>
 
         <div class="text-sm font-bold text-[#FF5500]">ACTIVATE 14-DAY PRO TRIAL</div>
-      <p class="text-zinc-400 text-xs">Experience all 41 Pro features with zero credit card and zero commitment.</p>
+      <p class="text-zinc-400 text-xs">Experience all 63 Pro engineering tools with zero credit card and zero commitment.</p>
 
         <div class="space-y-3 border-t border-b border-zinc-800 py-3 text-xs">
           <div>
@@ -1154,6 +1115,11 @@
         </div>
 
         <div class="flex justify-end gap-2">
+          <a
+            href="vscode://LiskinLabs.kuka-krl-extension/control-center"
+            class="px-4 py-2 border border-zinc-700 hover:border-white text-white font-bold">
+            OPEN IN VS CODE
+          </a>
           <button 
             @click="showTrialModal = false"
             class="px-4 py-2 bg-[#FF5500] text-white font-bold hover:bg-orange-600">
@@ -1254,6 +1220,50 @@ const formatPrice = (usd) => {
   const raw = usd * cur.rate
   const valStr = (usd % 1 !== 0 && cur.rate === 1.0) ? raw.toFixed(2) : Math.round(raw).toLocaleString()
   return cur.isPrefix ? `${cur.symbol}${valStr}` : `${valStr} ${cur.symbol}`
+}
+
+// Dynamic Checkout (Worker create-session -> fallback static link with LAUNCH30 & redirect_url)
+const GATEWAY_URL = 'https://kuka-krl-support-gateway.redminotpro5.workers.dev'
+const checkoutBusy = ref(null)
+
+const buildCheckoutUrl = (productId) => {
+  const locale = encodeURIComponent(currentLang.value || 'en')
+  const returnUrl = encodeURIComponent(`${GATEWAY_URL}/checkout/success?lang=${locale}`)
+  return `https://checkout.dodopayments.com/buy/${productId}?redirect_url=${returnUrl}&singlePage=true&showDiscounts=true&discountCode=LAUNCH30`
+}
+
+const startCheckout = async (productId) => {
+  if (checkoutBusy.value) return
+  checkoutBusy.value = productId
+  const fallback = buildCheckoutUrl(productId)
+  try {
+    const controller = new AbortController()
+    const timer = setTimeout(() => controller.abort(), 5000)
+    const res = await fetch(`${GATEWAY_URL}/api/v1/checkout/create-session`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        productId,
+        discountCode: 'LAUNCH30',
+        source: 'landing_page',
+        locale: currentLang.value || 'en'
+      }),
+      signal: controller.signal
+    })
+    clearTimeout(timer)
+    if (res.ok) {
+      const data = await res.json()
+      if (data && data.url) {
+        window.location.href = data.url
+        return
+      }
+    }
+  } catch (_) {
+    // Fallback to static Dodo Payments URL with redirect & LAUNCH30
+  } finally {
+    checkoutBusy.value = null
+  }
+  window.location.href = fallback
 }
 
 // Translations Dictionary
@@ -1457,14 +1467,14 @@ const openToolPreview = (tool) => {
 }
 
 const getToolMediaSrc = (tool) => {
-  if (!tool) return withBase('/media/Smart Autocomplete.gif')
+  if (!tool) return withBase('/media/smart_autocomplete.gif')
   const id = tool.id.toLowerCase()
   if (id.includes('inlay')) return withBase('/media/inlay_hints.gif')
   if (id.includes('backup') || id.includes('diff')) return withBase('/media/krc_backup_diff.gif')
   if (id.includes('definition')) return withBase('/media/goto_definition.gif')
   if (id.includes('signal') || id.includes('io')) return withBase('/media/krl_io_signals.gif')
   if (id.includes('fold')) return withBase('/media/quick_fold_toolbar.gif')
-  return withBase('/media/Smart Autocomplete.gif')
+  return withBase('/media/smart_autocomplete.gif')
 }
 
 const onMediaError = (e) => {
@@ -1475,13 +1485,21 @@ const onMediaError = (e) => {
 const pingLatency = ref(24)
 const isPinging = ref(false)
 
-const testEdgePing = () => {
+const testEdgePing = async () => {
+  if (isPinging.value) return
   isPinging.value = true
-  const startTime = Date.now()
-  setTimeout(() => {
-    pingLatency.value = Math.floor(Math.random() * 18) + 16
+  const startTime = typeof performance !== 'undefined' ? performance.now() : Date.now()
+  try {
+    const res = await fetch(`${GATEWAY_URL}/health`, { cache: 'no-store' })
+    if (res.ok) {
+      const elapsed = (typeof performance !== 'undefined' ? performance.now() : Date.now()) - startTime
+      pingLatency.value = Math.max(1, Math.round(elapsed))
+    }
+  } catch (_) {
+    // Keep prior latency value when offline
+  } finally {
     isPinging.value = false
-  }, 450)
+  }
 }
 
 const primaryHubs = [

@@ -13,7 +13,7 @@ Quick start guide for installing, configuring, and offline-activating KRL Engine
 ---
 
 ## 2. Install from VSIX (Air-Gapped Offline Installation)
-1. Download the latest `kuka-krl-extension-1.9.17.vsix` package from the official release repository.
+1. Download the latest `kuka-krl-extension-1.9.18.vsix` package from the official release repository.
 2. In VS Code, open the Extensions panel (`Ctrl + Shift + X`) and click the `...` menu in the top-right corner.
 3. Select **Install from VSIX...** and select the `.vsix` file.
 4. No editor restart required — all grammar parsers and diagnostic language servers activate immediately.
@@ -36,6 +36,7 @@ Quick start guide for installing, configuring, and offline-activating KRL Engine
 1. Open the **KUKA Control Center** by clicking the KUKA icon in the Activity Bar or executing `KRL: Open Control Center` (`Ctrl + Shift + P`).
 2. In the license header card, click **Enter License Key**.
 3. Paste your license key from Dodo Payments and confirm. The extension validates with the licensing gateway and enables PRO mode instantly.
+4. **Need to evaluate first?** Run `KRL: Start 14-Day Free Pro Trial` (`krl.startTrial`) — unlocks all **63 Pro tools** for 14 days with zero credit card required.
 
 ---
 
@@ -60,7 +61,7 @@ For security-restricted automotive production plants and air-gapped OT networks 
 1. Return to your air-gapped factory workstation.
 2. In KUKA Control Center, click **[Load Offline License File (.lic)]** or execute `krl.importOfflineLicenseFile`.
 3. Select your `liskin-krl-license.lic` file.
-4. The extension validates the Ed25519 signature instantly offline (zero network polling) and permanently unlocks all 50+ PRO engineering features.
+4. The extension validates the Ed25519 signature instantly offline (zero network polling) and permanently unlocks all **63 Pro engineering tools**.
 
 ---
 
@@ -69,12 +70,14 @@ For security-restricted automotive production plants and air-gapped OT networks 
 | Tier | Price | Workstation Activations | Key Differentiator |
 | :--- | :--- | :--- | :--- |
 | **Engineer Pro (Monthly)** | $19 / mo | 1 Workstation | KRC2/KRC4/KRC5 support, short commissioning sprints, 30-day offline cache |
-| **Engineer Pro (Annual)** | $149 / yr | 1 Workstation | Save 35%, 1-Year Air-Gapped offline certificate, 50 industrial tools |
+| **Engineer Pro (Annual)** | $149 / yr | 1 Workstation | Save 35%, 1-Year Air-Gapped offline certificate, 63 Pro tools & KRC backup diff |
 | **Engineer Pro (Lifetime)** | $699 once | 1 Workstation | Perpetual license, zero subscriptions, permanent Air-Gapped certificate |
 | **Team Edition** | $499 / yr | Up to 5 Workstations | Centralized B2B invoicing, 5 plant/office devices, KRC2–KRC5 |
 | **Department / Integrator** | $1,499 / yr | Up to 20 Workstations | Up to 20 workstations, unlimited integration projects, dedicated engineering support |
 | **Enterprise Plant Site** | $4,999 / yr | Up to 100 Workstations | 100 plant workstations, Priority Support Gateway, offline Air-Gap license, comprehensive robotics toolset |
 
-### Why Pro Lifetime ($699) vs Enterprise Site ($4,999/yr)?
+### Why Pro Lifetime (USD 699) vs Enterprise Site (USD 4,999/yr)?
 - **Pro Lifetime ($699 once)** provides a perpetual standalone license for **1 workstation** with zero recurring subscription fees and lifetime updates. Includes personalized cryptographic Air-Gapped certificate generation for isolated OT factory networks.
-- **Enterprise Site ($4,999/yr)** provides **up to 100 workstation activations** for the entire manufacturing plant or robotics system integrator. It covers all plant computers, engineering laptops, and diagnostic stations. It includes priority direct developer assistance via Telegram Support Gateway, centralized automated KUKA Fleet Backup Hub, custom linting rules, comprehensive robotics linting, and dedicated support gateway.
+- **Enterprise Site ($4,999/yr)** provides **up to 100 workstation activations** for the entire manufacturing plant or robotics system integrator. It covers all plant computers, engineering laptops, and diagnostic stations, plus priority direct developer assistance via Telegram Support Gateway, centralized automated KUKA Fleet Backup Hub, and custom robotics linting. Order via corporate Quote / PO (`krl.requestCorporateInvoice`).
+
+> **Launch Discount (`LAUNCH30`):** Apply promo code **`LAUNCH30`** at Dodo Payments checkout for **30% OFF** Engineer Pro, Team, and Department / Integrator plans. EU/UK/global companies automatically receive VAT-exempt B2B invoices via Tax ID / VIES validation.

@@ -17,7 +17,7 @@ Embedded support chat window directly inside the IDE connected with our dedicate
 ---
 
 ### 18. KRC Fleet Backups & Point Delta Spatial Inspector (`krl.compareKrcBackup`)
-Compare physical SmartPAD `.zip` backups directly without manual extraction. Calculates 6-axis spatial coordinate deltas ($\Delta X, \Delta Y, \Delta Z, \Delta A, \Delta B, \Delta C$) between teaching versions and highlights hazardous point shifts exceeding safety tolerances.
+Compare physical SmartPAD `.zip` backups directly without manual extraction. Calculates 6-axis spatial coordinate deltas (ΔX, ΔY, ΔZ, ΔA, ΔB, ΔC) between teaching versions and highlights hazardous point shifts exceeding safety tolerances.
 
 ![KRC Backup Diff Demo](/media/krc_backup_diff.gif)
 
@@ -93,7 +93,7 @@ Factory-tuned dark, light, and high-contrast OLED themes with reactive SVG diagr
 
 ### 32. Advanced KRL Kinematics & 6D Transformation Suite
 Industrial offline trajectory and frame manipulation suite:
-- **6D Trajectory Mirroring (`krl.mirrorTrajectory`)**: Cartesian reflection across Planes X, Y, Z with automated Turn bit manipulation ($A_1..A_6$).
+- **6D Trajectory Mirroring (`krl.mirrorTrajectory`)**: Cartesian reflection across Planes X, Y, Z with automated Turn bit manipulation (`A1..A6`).
 - **6D Batch Point Transformation (`krl.batchShiftPoints`)**: Geometric operator multiplication (`:`) for Tool offsets, Base offsets, and direct vector shifts.
 - **Reverse Motion Path Trajectory (`krl.reverseTrajectory`)**: Inverts sequence of motion targets while preserving circular trajectory segments and inline form folds.
 - **Sequential Point Renumbering (`krl.renumberPoints`)**: Synchronized batch renaming of points across `.src` motions, inline form folds, and companion `.dat` symbols (`XP1`, `FP1`, `PPDAT1`).
@@ -104,7 +104,7 @@ Industrial offline trajectory and frame manipulation suite:
 
 ### 33. Simulator Format & Kinematic Safety Analyzers
 Deep industrial simulation rules aligned with publicly documented simulator project formats:
-- **Status (S) & Turn (T) Range Validator**: Flags illegal kinematic Status ($S \notin 0..7$) and Turn bitmasks ($T \notin 0..63$).
+- **Status (S) & Turn (T) Range Validator**: Flags illegal kinematic Status (S ∉ 0..7) and Turn bitmasks (T ∉ 0..63).
 - **Context-Aware RESUME Analyzer**: Flags illegal `RESUME` statements outside interrupt handling subroutines.
 - **FOR Loop STEP 0 Detector**: Identifies infinite controller loop conditions where `FOR` loop step increment equals 0.
 - **SUBMIT Interpreter Restrictions**: Flags illegal synchronous robot motion commands inside background `$SPS.SUB` tasks.
@@ -141,7 +141,7 @@ Abre copias de seguridad de SmartPAD (`Robot1.zip`, `KRCDiag_*.zip`) directament
 
 ### 37. Perfilador dinámico de trayectorias y predictor de singularidades
 Simulación cinemática previa y análisis de riesgos antes de transferir el programa al robot físico:
-- **Singularidad de muñeca (Wrist)**: Detección de trayectorias lineales cerca de $A_5 \approx 0^\circ \pm 5^\circ$.
+- **Singularidad de muñeca (Wrist)**: Detección de trayectorias lineales cerca de A5 ≈ 0° ± 5°.
 - **Límites de alcance**: Alertas al superar el 96% del radio máximo de alcance.
 - **Análisis de tiempo de ciclo**: Cálculo de pérdidas de tiempo por paradas de avance (Vorlaufstopp).
 
@@ -149,7 +149,7 @@ Simulación cinemática previa y análisis de riesgos antes de transferir el pro
 
 ### 38. Puente Live Monitor en vivo y conexión en tiempo real con el controlador (`krl.live.connect`, `krl.live.openDashboard`) [PRO]
 Enlace directo de telemetría bidireccional a controladores físicos KUKA KRC4/KRC5 y OfficePC mediante CrossComm WCF, OPC UA o EthernetKRL:
-- **Coordenadas y estado en vivo**: Posiciones cartesianas TCP ($X, Y, Z, A, B, C$) y ángulos de ejes ($A_1..A_6$).
+- **Coordenadas y estado en vivo**: Posiciones cartesianas TCP (X, Y, Z, A, B, C) y ángulos de ejes (`A1..A6`).
 - **Modos de operación y enclavamientos**: Modo de servicio (T1, T2, AUT, EXT), habilitación de accionamientos (`$PERI_RDY`) y parada de emergencia (`$ALARM_STOP`).
 - **Seguimiento de intérprete y puntero**: Estado de Submit (`$SPS`) e intérprete del robot (`$PRO_STATE`), nombre de programa (`$PRO_NAME`) y puntero de línea (`$PRO_IP`).
 - **Override dinámico**: Visualización y ajuste del override de velocidad (`$OV_PRO`).
@@ -211,13 +211,13 @@ Desarrollo y validación de lazos de control de sensores en tiempo real (`krl.va
 
 ### 47. Importador CAM CNC G-Code y vectores SVG (`krl.importGcodeToKrl`) [PRO]
 Convierte trayectorias de mecanizado CNC y contornos 2D en código KRL:
-- **Conversión de ISO G-Code**: `G0` $\rightarrow$ `PTP`/`SPTP`, `G1` $\rightarrow$ `LIN`/`SLIN`, y `G2`/`G3` $\rightarrow$ `CIRC`/`SCIRC` calculando el punto intermedio 3D `AuxPoint`. Conversión de avance a `$VEL.CP` y códigos M (`M3`, `M5`) a `$OUT[...]`.
+- **Conversión de ISO G-Code**: `G0` → `PTP`/`SPTP`, `G1` → `LIN`/`SLIN`, y `G2`/`G3` → `CIRC`/`SCIRC` calculando el punto intermedio 3D `AuxPoint`. Conversión de avance a `$VEL.CP` y códigos M (`M3`, `M5`) a `$OUT[...]`.
 - **Importación de vectores SVG**: Procesamiento de elementos `<path>`, `<polyline>`, `<polygon>`, `<circle>` con aproximación Bézier y planos automáticos de seguridad `Z_Safe` y corte `Z_Work`.
 
 ---
 
 ### 48. Asistente de calibración visual Hand-Eye y exportador de tags PLC [PRO]
-- **Pirámide de calibración de 9 puntos (`krl.generateVisionCalibration`)**: Cálculo de ángulos Euler KUKA ($A, B, C$) mediante matriz de rotación Look-At para configuraciones `Eye-in-Hand` y `Eye-to-Hand`.
+- **Pirámide de calibración de 9 puntos (`krl.generateVisionCalibration`)**: Cálculo de ángulos Euler KUKA (A, B, C) mediante matriz de rotación Look-At para configuraciones `Eye-in-Hand` y `Eye-to-Hand`.
 - **Exportador de señales de bus de campo (`krl.exportPlcTags`)**: Mapeo de `SIGNAL`, `$IN`, `$OUT` a direcciones IEC 61131-3 (`%I0.0`, `%Q0.0`) y exportación a TIA Portal XML/SDF, TwinCAT 3 GVL y EPLAN CSV.
 
 ---

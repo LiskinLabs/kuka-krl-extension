@@ -37,6 +37,7 @@
 </p>
 
 ## What's new in 1.9.17
+- **Native KSS 8.x WCF client**: KSS 8.x live telemetry now runs entirely in Node.js over port 49002 — no WorkVisual, KUKA.Sim, Python or vendor DLLs required.
 - **Full iiQKA.OS telemetry**: tool/base frames, safety interlocks, per-axis torque/temperature/current/velocity, soft limits, PGNO details, installed KOP packages and `$V_ROBCOR`.
 - **SmartPAD message window**: the dashboard keeps the latest 3 messages; the full history (up to 200, newest first) opens in a dedicated panel with type filters, search and live refresh (`krl.live.openMessages`).
 - **Target-KSS compile gate** on iiQKA.OS: `SynchronizeMirror -> AnalyzeAllKrlFiles -> GetModuleInfos`, with the KSS 9.3 `BSCmdNA` pattern fix.
@@ -57,7 +58,7 @@ Every industrial commissioning engineer, system integrator, and plant programmer
 
 **Liskin Labs KRL Engineering Toolkit** brings complete plant diagnostics, 3D kinematics, and live controller telemetry directly into Visual Studio Code.
 
-> **Runtime requirement:** live controller features use the locally installed, licensed KUKA WorkVisual (WCF path) or a running KUKAVARPROXY/C3Bridge service. The extension does not bundle KUKA software. SMB backup requires the controller's KRC share.
+> **Runtime requirement:** KSS 8.x live telemetry uses the built-in native WCF OnlineServices client (port 49002); WorkVisual, KUKA.Sim and vendor DLLs are not required. iiQKA.OS 9.x uses native gRPC, and KUKAVARPROXY/C3Bridge remains an optional fallback. The extension does not bundle KUKA software. SMB backup requires the controller's KRC share.
 
 ---
 
@@ -67,7 +68,7 @@ Every industrial commissioning engineer, system integrator, and plant programmer
 <summary><b>1. Live Controller Monitor & Live Controller Telemetry [PRO]</b></summary>
 <br>
 
-Direct industrial Ethernet connection to physical KUKA KR C2, KR C4, KR C5 controllers and virtual OfficePC setups via WCF or KUKAVARPROXY where available:
+Direct industrial Ethernet connection to physical KUKA KR C2, KR C4, KR C5 controllers and virtual OfficePC setups via native WCF OnlineServices, KUKAVARPROXY or iiQKA gRPC:
 * **6-Axis Joint Telemetry Gauges**: Real-time visualization of `$AXIS_ACT`, `$AXIS_MOT`, dynamic motor torque load bars (`$TORQMON`), and soft limit warnings (`$SOFTP_END`, `$SOFTN_END`).
 * **Cartesian TCP Telemetry**: Live readout of `$POS_ACT` (X, Y, Z, A, B, C) with active `$TOOL` and `$BASE` frame indicators.
 * **Dynamic Digital I/O Matrix**: Live visual grid for `$IN[1..4096]`, `$OUT[1..4096]`, system flags `$FLAG`, and timers `$TIMER`.

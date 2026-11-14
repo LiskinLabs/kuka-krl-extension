@@ -10,7 +10,7 @@ The **Live Controller Monitor** (`krl.live.connect`, `krl.live.openDashboard`) e
 
 It brings shop-floor telemetry, 6-axis joint torque feedback, Cartesian TCP tracking, a 4096-pin I/O matrix, and live SmartPAD alarms with multilingual subtitles directly into your engineering workspace.
 
-> **Runtime requirement:** live controller features use the locally installed, licensed KUKA WorkVisual (WCF path) or a running KUKAVARPROXY/C3Bridge service. The extension does not bundle KUKA software. SMB backup requires the controller's KRC share.
+> **Runtime requirement:** KSS 8.x live telemetry uses the built-in native WCF OnlineServices client (port 49002); WorkVisual, KUKA.Sim and vendor DLLs are not required. iiQKA.OS 9.x uses native gRPC, and KUKAVARPROXY/C3Bridge remains an optional fallback. The extension does not bundle KUKA software. SMB backup requires the controller's KRC share.
 
 ---
 
@@ -18,9 +18,10 @@ It brings shop-floor telemetry, 6-axis joint torque feedback, Cartesian TCP trac
 
 The live monitor uses a resilient dual-driver communication architecture:
 
-1. **WCF OnlineServices**: Native encrypted Windows service running on KRC4/KRC5 smartHMI platforms. Provides authenticated access to system status, controller option packages, and filesystem archives.
+1. **WCF OnlineServices**: Native encrypted Windows service running on KRC4/KRC5 smartHMI platforms. The extension talks to it directly from Node.js over `[MS-NMF]` + `[MC-NBFS]` on port 49002 — no WorkVisual, KUKA.Sim or vendor DLLs.
 2. **KUKAVARPROXY (Port 7000)**: Ultra-low-latency variable bridge delivering high-frequency cyclical polling for real-time kinematics and I/O channels.
 3. **CrossComm (WinGate Port 49000)**: Legacy cross-communication driver for KRC2 and early KRC4 controllers.
+4. **iiQKA.OS gRPC**: Kratos-authenticated native Node.js client on port 443/5018 for KSS 9.x controllers.
 
 ```
 +-------------------------------------------------------------+
@@ -79,6 +80,7 @@ The live monitor uses a resilient dual-driver communication architecture:
 |---|---|---|
 | KUKA KRL: Connect to KUKA Robot | `krl.live.connect` | Open live Ethernet connection modal |
 | KUKA KRL: Open Live Monitor Dashboard | `krl.live.openDashboard` | Launch real-time telemetry dashboard |
+| KUKA KRL: Open SmartPAD Messages | `krl.live.openMessages` | Open the full SmartPAD message history (up to 200, filters/search) |
 | KUKA KRL: Download Controller Backup | `krl.live.fetchBackup` | Download a `.zip` backup from the controller |
 
 ---

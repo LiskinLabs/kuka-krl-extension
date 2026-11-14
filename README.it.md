@@ -48,6 +48,7 @@
 </p>
 
 ## Novità della 1.9.17
+- **Client WCF nativo per KSS 8.x**: la telemetria KSS 8.x ora viene eseguita interamente in Node.js sulla porta 49002, senza WorkVisual, KUKA.Sim, Python o DLL del produttore.
 - **Telemetria completa iiQKA.OS**: frame Tool/Base, interblocchi di sicurezza, coppia/temperatura/corrente/velocità per asse, limiti software, dettagli PGNO, pacchetti KOP installati e `$V_ROBCOR`.
 - **Finestra messaggi SmartPAD**: la dashboard mostra gli ultimi 3 messaggi; la cronologia completa (fino a 200, più recenti prima) si apre in un pannello dedicato con filtri, ricerca e aggiornamento live (`krl.live.openMessages`).
 - **Compile gate del KSS di destinazione** su iiQKA.OS: `SynchronizeMirror -> AnalyzeAllKrlFiles -> GetModuleInfos`, con la correzione del pattern `BSCmdNA` di KSS 9.3.

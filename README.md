@@ -21,7 +21,7 @@
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://badgen.net/vs-marketplace/v/LiskinLabs.kuka-krl-extension?style=flat&label=VS%20Code%20Marketplace&color=FF6600" alt="VS Code Marketplace" /></a>
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://badgen.net/vs-marketplace/rating/LiskinLabs.kuka-krl-extension?style=flat&color=FF6600" alt="Marketplace Rating" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.13-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.9" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.17-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.17" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Commands-124-FF6600?style=flat-square" alt="124 Commands" /></a>
   <img src="https://img.shields.io/badge/Factory%20OT-Air--Gapped%20Safe-blue?style=flat-square" alt="Air-Gapped Safe" />
@@ -35,6 +35,13 @@
   <a href="#licensing--edition-comparison"><b>Editions & Plans</b></a> •
   <a href="https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap"><b>Air-Gap Gateway</b></a>
 </p>
+
+## What's new in 1.9.17
+- **Full iiQKA.OS telemetry**: tool/base frames, safety interlocks, per-axis torque/temperature/current/velocity, soft limits, PGNO details, installed KOP packages and `$V_ROBCOR`.
+- **SmartPAD message window**: the dashboard keeps the latest 3 messages; the full history (up to 200, newest first) opens in a dedicated panel with type filters, search and live refresh (`krl.live.openMessages`).
+- **Target-KSS compile gate** on iiQKA.OS: `SynchronizeMirror -> AnalyzeAllKrlFiles -> GetModuleInfos`, with the KSS 9.3 `BSCmdNA` pattern fix.
+- **Version-aware KSS 8.3-9.3 migration** with exact PDAT/LDAT profiles and FOLD/Params consistency checks.
+- **Validated live** on KSS 8.6.2 (OfficeLite), KSS 8.7 (KR C5), iiQKA 9.2.3 (VRC) and iiQKA 9.3.4 (KRC5).
 
 ---
 

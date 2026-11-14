@@ -25,7 +25,7 @@
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://badgen.net/vs-marketplace/v/LiskinLabs.kuka-krl-extension?style=flat&label=VS%20Code%20Marketplace&color=FF6600" alt="VS Code Marketplace" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.13-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.9" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.17-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.17" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Commands-124-FF6600?style=flat-square" alt="124 Commands" /></a>
 </p>
@@ -46,6 +46,13 @@
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>Annual Pro ($149/yıl)</b></a> • 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>Güvenlik Denetim Raporu</b></a>
 </p>
+
+## 1.9.17 yenilikleri
+- **Tam iiQKA.OS telemetrisi**: Tool/Base çerçeveleri, güvenlik kilitlemeleri, eksen başına tork/sıcaklık/akım/hız, yazılım limitleri, PGNO ayrıntıları, kurulu KOP paketleri ve `$V_ROBCOR`.
+- **SmartPAD mesaj penceresi**: panelde son 3 mesaj gösterilir; tam geçmiş (en yeni önce, 200'e kadar) filtreler, arama ve canlı yenileme ile ayrı bir pencerede açılır (`krl.live.openMessages`).
+- **iiQKA.OS hedef KSS compile gate**: `SynchronizeMirror -> AnalyzeAllKrlFiles -> GetModuleInfos`; KSS 9.3 `BSCmdNA` desen düzeltmesi dahil.
+- **Sürüme duyarlı KSS 8.3-9.3 geçişi**: kesin PDAT/LDAT profilleri ve FOLD/Params tutarlılık denetimi.
+- **Canlı doğrulandı**: KSS 8.6.2 (OfficeLite), KSS 8.7 (KR C5), iiQKA 9.2.3 (VRC) ve iiQKA 9.3.4 (KRC5).
 
 ---
 
@@ -238,9 +245,9 @@ Her devreye alma mühendisi bu acıyı bilir:
 ### 16. Yüksek Kontrastlı Sözdizimi Paleti ve KSS Sistem Kütüphanesi
 *Profesyonel KRL geliştirmesi için zengin renk paleti ve sistem bağlamı.*
 * **Çeşitli Yüksek Kontrastlı Palet**: Endüstriyel stilde KRL Dark ve Light renk temaları. Hareket komutları (kalın), bit düzeyinde/mantıksal operatörler, matematiksel semboller, sistem direktifleri (`&ACCESS`, `&REL`) ve onaltılık/ikili sayılar (`'H...'`, `'B...'`) için farklılaştırılmış kapsamlar.
-* **KSS 8.7 Standart Sistem Kütüphanesi**: `BAS()`, `MsgNotify()`, `MsgQuit()`, `MsgDialog()`, `USE_CM_PRO_VALUES()`, `TOOL_NAME[]` ve `BASE_NAME[]` için yerleşik tanımlar, parametre yardımı ve `F12` — doğrudan resmi KSS 8.7 referans modüllerine.
-* **1 Tık KSS 8.7 Proje İskeleti (`krl.scaffoldKrcFiles`)**: `$config.dat`, `bas.src`, `MsgLib.src`, `collmonlib.src` ve `sps.sub` ile doldurulmuş standart `KRC/R1/System/`, `KRC/R1/Program/` ve `KRC/R1/TP/` klasör ağacını otomatik oluşturur.
-* **Fabrika Varsayılanları ve Advance Run Sınırlayıcı**: `$ADVANCE = 3`, `$VEL.CP = 2.0 m/s`, `$ACC.CP = 2.3 m/s²`, `$JERK.CP = 500.0 m/s³` için resmi fabrika değerlerinin (`kss-default-specs`) anlık Hover görüntüsü ve `$ADVANCE` geçerli aralığı `0..5` aştığında otomatik lint uyarıları.
+* **KSS Sistem Kütüphanesi ve F12 Referansı**: `BAS()`, `MsgNotify()`, `MsgQuit()`, `MsgDialog()`, `USE_CM_PRO_VALUES()`, `TOOL_NAME[]` ve `BASE_NAME[]` için yerleşik Clean-Room sanal imzaları (`system://`), parametre yardımı ve `F12` tanımı.
+* **1 Tık KRC Proje İskeleti (`krl.scaffoldKrcFiles`)**: Temiz `KRC/R1/Program/` klasör yapısını ve minimal Clean-Room modül şablonlarını (`.src` / `.dat`) otomatik oluşturur.
+* **Fabrika Varsayılanları ve Advance Run Sınırlayıcı**: `$ADVANCE = 3`, `$VEL.CP = 2.0 m/s`, `$ACC.CP = 2.3 m/s²`, `$JERK.CP = 500.0 m/s³` için referans fabrika değerlerinin anlık Hover görüntüsü ve `$ADVANCE` geçerli aralığı `0..5` aştığında otomatik lint uyarıları.
 
 ---
 
@@ -291,8 +298,8 @@ Her devreye alma mühendisi bu acıyı bilir:
 | **KRL Sözdizimi Vurgulama** (`.src`, `.dat`, `.sub`, `.kfd`) | Evet | Evet | KRL renk paletiyle tam AST renklendirme |
 | **KRL Temaları (Koyu ve Açık)** | Evet | Evet | Endüstriyel yüksek kontrastlı renk temaları |
 | **Akıllı Otomatik Tamamlama ve Sistem Spesifikasyonları** (957+ değişken, 116 fonksiyon, 111 yapı) | Evet | Evet | Tam KSS sistem değişkenleri ve imza yardımı |
-| **KSS 8.7 Standart Sistem Kütüphanesi ve F12 Tanımı** | Evet | Evet | `bas.src`, `MsgLib.src`, `$config.dat` dosyasına anında F12 atlama |
-| **1 Tık KRC Proje İskeleti** | Evet | Evet | Standart `KRC/R1/System` klasör yapısını başlatır |
+| **KSS Sistem Kütüphanesi ve F12 Tanımı** | Evet | Evet | `BAS()`, `MsgNotify()`, `$config.dat` için sanal `system://` referans imzaları |
+| **1 Tık KRC Proje İskeleti** | Evet | Evet | Temiz `KRC/R1/Program/` klasör yapısını başlatır |
 | **Fabrika Varsayılanları Hover'ı ve $ADVANCE Sınırlayıcı** | Evet | Evet | Fabrika varsayılanlarını gösterir ve `$ADVANCE > 5` durumunda uyarır |
 | **23 Standart Inline Form Snippet'i** (34 hareket ve mantık şablonu) | Evet | Evet | Tam `;FOLD ... ;%{PE}` şablonları |
 | **Sinyal Inlay İpuçları ve Hover Dokümanları** | Evet | Evet | Satır içi PLC sinyal etiketleri ve parametre imzaları |

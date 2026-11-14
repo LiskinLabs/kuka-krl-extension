@@ -25,7 +25,7 @@
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://badgen.net/vs-marketplace/v/LiskinLabs.kuka-krl-extension?style=flat&label=VS%20Code%20Marketplace&color=FF6600" alt="VS Code Marketplace" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.13-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.9" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.17-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.17" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(100%25)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Commands-124-FF6600?style=flat-square" alt="124 Commands" /></a>
 </p>
@@ -46,6 +46,13 @@
   <a href="https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6"><b>Annual Pro ($149/anno)</b></a> • 
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><b>Report audit di sicurezza</b></a>
 </p>
+
+## Novità della 1.9.17
+- **Telemetria completa iiQKA.OS**: frame Tool/Base, interblocchi di sicurezza, coppia/temperatura/corrente/velocità per asse, limiti software, dettagli PGNO, pacchetti KOP installati e `$V_ROBCOR`.
+- **Finestra messaggi SmartPAD**: la dashboard mostra gli ultimi 3 messaggi; la cronologia completa (fino a 200, più recenti prima) si apre in un pannello dedicato con filtri, ricerca e aggiornamento live (`krl.live.openMessages`).
+- **Compile gate del KSS di destinazione** su iiQKA.OS: `SynchronizeMirror -> AnalyzeAllKrlFiles -> GetModuleInfos`, con la correzione del pattern `BSCmdNA` di KSS 9.3.
+- **Migrazione KSS 8.3-9.3 per versione** con profili PDAT/LDAT esatti e verifica di coerenza FOLD/Params.
+- **Validato dal vivo** su KSS 8.6.2 (OfficeLite), KSS 8.7 (KR C5), iiQKA 9.2.3 (VRC) e iiQKA 9.3.4 (KRC5).
 
 ---
 
@@ -165,7 +172,7 @@ Ogni ingegnere di messa in servizio conosce questo dolore:
 * **116 funzioni di sistema integrate e Wonderlib**: pieno supporto runtime per cinematica (`FORWARD`, `INVERSE`, `INV_POS`, `TOOL_ADJ`), manipolazione stringhe, conversione tipi, dialoghi messaggi, limiti di coppia e routine Wonderlib con `signatureHelp` in tempo reale.
 * **111 strutture e 112 ENUM (443 letterali)**: completamento intelligente con punto (`$TOOL.`, `$ACC.`, `POINT.`) e autocompletamento letterali enum `#` (`#AUT`, `#T1`, `#P_FREE`, `#QUIT`).
 * **23 modelli di forme inline (34 template)**: modelli di forme inline (`ptpi`, `slini`, `sptpi`, `scirc`, `PTPCo`, `ptprel`, `trigdist`, `sigin`, `wsec`, `Forr`) con intestazioni complete (`;FOLD ... ;%{PE}`).
-* **Matrice compilatore a 451 parole chiave**: integrazione diretta delle regole `krl_keywords_ref` C++ di KUKA — zero falsi positivi di sintassi.
+* **Matrice compilatore a 451 parole chiave**: copertura completa delle regole di sintassi standard KRL — zero falsi positivi di sintassi.
 * **Sintassi hex/binaria tra apici singoli**: piena conformità parser e diagnostica per `'B000001'` (binario), `'HFF'` (esadecimale) e letterali carattere.
 * **Audit flotta zero falsi positivi (4.1M+ righe)**: verificato su 107 backup reali di robot in produzione con 0 diagnosi false.
 
@@ -240,9 +247,9 @@ Ogni ingegnere di messa in servizio conosce questo dolore:
 ### 16. Palette sintattica ad alto contrasto e libreria di sistema KSS
 *Palette colori ricca e contesto di sistema per lo sviluppo professionale KRL.*
 * **Palette ad alto contrasto diversificata**: schemi colore propri con contrasto ispirato agli ambienti industriali. Scope differenziati per comandi di movimento (grassetto), operatori bitwise/logici, simboli matematici, direttive di sistema (`&ACCESS`, `&REL`) e numeri esadecimali/binari (`'H...'`, `'B...'`).
-* **Libreria di sistema standard KSS 8.7**: definizioni integrate, aiuto parametri e `F12` (Vai alla definizione) per `BAS()`, `MsgNotify()`, `MsgQuit()`, `MsgDialog()`, `USE_CM_PRO_VALUES()`, `TOOL_NAME[]` e `BASE_NAME[]` — direttamente ai moduli di riferimento ufficiali KSS 8.7.
-* **Scaffolding progetto KRC in 1 clic (`krl.scaffoldKrcFiles`)**: crea automaticamente l'albero standard `KRC/R1/System/`, `KRC/R1/Program/` e `KRC/R1/TP/` popolato con `$config.dat`, `bas.src`, `MsgLib.src`, `collmonlib.src` e `sps.sub`.
-* **Valori di fabbrica e limitatore Advance Run**: visualizzazione hover istantanea dei valori di fabbrica ufficiali (`kss-default-specs`) per `$ADVANCE = 3`, `$VEL.CP = 2.0 m/s`, `$ACC.CP = 2.3 m/s²`, `$JERK.CP = 500.0 m/s³` e avvisi lint automatici quando `$ADVANCE` supera l'intervallo valido `0..5`.
+* **Libreria di sistema KSS e riferimento F12**: definizioni virtuali Clean-Room (`system://`), aiuto parametri e `F12` (Vai alla definizione) per `BAS()`, `MsgNotify()`, `MsgQuit()`, `MsgDialog()`, `USE_CM_PRO_VALUES()`, `TOOL_NAME[]` e `BASE_NAME[]`.
+* **Scaffolding progetto KRC in 1 clic (`krl.scaffoldKrcFiles`)**: crea automaticamente una struttura pulita `KRC/R1/Program/` con template minimi Clean-Room di moduli (`.src` / `.dat`).
+* **Valori di fabbrica e limitatore Advance Run**: visualizzazione hover istantanea dei valori di riferimento di fabbrica per `$ADVANCE = 3`, `$VEL.CP = 2.0 m/s`, `$ACC.CP = 2.3 m/s²`, `$JERK.CP = 500.0 m/s³` e avvisi lint automatici quando `$ADVANCE` supera l'intervallo valido `0..5`.
 
 ---
 
@@ -253,10 +260,10 @@ Ogni ingegnere di messa in servizio conosce questo dolore:
 | **Evidenziazione sintassi KRL** (`.src`, `.dat`, `.sub`, `.kfd`) | Sì | Sì | Colorazione AST completa con palette KRL |
 | **Temi KRL** | Sì | Sì | Schemi colore industriali propri (scuri e chiari) |
 | **Autocompletamento intelligente e specifiche di sistema** (957+ variabili, 116 funzioni, 111 strutture) | Sì | Sì | Autocompletamento completo variabili di sistema KSS e aiuto firme |
-| **Libreria di sistema standard KSS 8.7 e definizione F12** | Sì | Sì | Salto F12 istantaneo a `bas.src`, `MsgLib.src`, `$config.dat` |
-| **Scaffolding progetto KRC in 1 clic** | Sì | Sì | Inizializza la struttura standard `KRC/R1/System` |
+| **Libreria di sistema KSS e definizione F12** | Sì | Sì | Firme di riferimento virtuali `system://` per `BAS()`, `MsgNotify()`, `$config.dat` |
+| **Scaffolding progetto KRC in 1 clic** | Sì | Sì | Inizializza una struttura pulita `KRC/R1/Program/` |
 | **Hover valori di fabbrica e limitatore $ADVANCE** | Sì | Sì | Mostra i valori di fabbrica e avvisa se `$ADVANCE > 5` |
-| **23 snippet ufficiali di forme inline** (34 template di movimento e logica) | Sì | Sì | Template completi `;FOLD ... ;%{PE}` per controller KUKA |
+| **23 snippet standard di forme inline** (34 template di movimento e logica) | Sì | Sì | Template `;FOLD ... ;%{PE}` per controller KUKA |
 | **Hint inline segnali e documentazione hover** | Sì | Sì | Etichette segnali PLC inline e firme dei parametri |
 | **Formattatore codice e allineamento matrici** | Sì | Sì | Pulizia istantanea con 1 clic (`Shift+Alt+F`) |
 | **Blame per riga GitLens e cronologia revisioni** | Sì | Sì | Tracciamento istantaneo autore e commit per ogni punto |

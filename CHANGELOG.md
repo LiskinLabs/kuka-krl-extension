@@ -2,6 +2,113 @@
 
 All notable changes to the **KRL Engineering Toolkit** will be documented in this file.
 
+## [1.9.17] - 2026-11-12 (Version-Aware KSS Migration & Honest Syntax Gate)
+
+### [MIGRATION] Exact KSS 8.3–9.3 Profiles
+- Added a version-aware migration engine with exact profiles for KSS 8.3, 8.4, 8.5, 8.6, 8.7, 9.0, 9.1, 9.2 and 9.3.
+- KSS 9.x profiles reject the obsolete `VEL` field in `PDAT`/`LDAT` and enforce the 9.x field set.
+- KSS 9.2+ profiles use `SVEL_CP2` / `SACC_CP2` and `MotionParamSets.dat`; older profiles keep `SVEL_CP` / `SACC_CP`.
+- KSS 8.3/8.4 profiles reject collision-monitoring assignments that are not available in those versions.
+
+### [INLINE FORMS] FOLD / Params Consistency Gate
+- Normalizes `OUT`, `PULSE`, `WAIT` and `WAIT FOR` `;Params` only when the FOLD header and the actual KRL statement agree.
+- Detects `WAIT FOR` AND/OR/NOT metadata drift and reports it instead of guessing.
+- Removes `WAIT FOR` FOLD blocks whose WAIT statement is commented out.
+- Detects missing/neutralized `;Params` blocks, command/point mismatches and stale `IlfCommand` values.
+
+### [NATIVE FORMAT] Verified Inline-Form Contract
+- Verified movement and logic FOLD/Params output against the shipped engineering tools; the implementation is an independent reimplementation and no vendor code was copied.
+- KSS 9.2+: `PULSE OUT`, `Kuka.Logics.PulseFlag`, `Kuka.ColDetectFieldEnabled`, `Kuka.MovementParamSetIndex=1`, `AFAP`, `SVEL_CP2` / `SACC_CP2`.
+- KSS 8.3-8.7: `SVEL_CP` / `SACC_CP`, no motion-param-set name or index, PULSE header without `OUT`, no `PulseFlag`.
+- `WAIT FOR`: term/operand key layout matches the native serializer; `WaitForTermNumbers` and `WaitForOpNumbers` are comma-separated without spaces.
+- Legacy PTP/LIN to SPTP/SLIN keeps `CONT`/`NEAR` and adds `C_Spl` when blending is enabled.
+
+### [DATA INTEGRITY] DAT, Names and Case Sensitivity
+- Validates `DEF`/`DEFDAT` names against file names and reports case-only differences.
+- Detects case-duplicate files and duplicate module names across a KSS 9.x Linux target.
+- Checks point, FDAT and movement-data declarations against the matching `.dat` and global `$config.dat`.
+- Checks `FDAT` `TOOL_NO`/`BASE_NO` against the FOLD header.
+- Adds missing `EXT BAS` / `DECL INT SUCCESS` declarations to user `.dat` headers.
+
+### [COMMAND] `krl.convertToIiqkaFold`
+- The command now migrates the whole backup/workspace to a selected target KSS version.
+- Shows a per-file diff review before writing and a migration report with before/after diagnostics.
+- Honest syntax note: a zero-error result is a rule-level pass, not a substitute for compiling on the target controller.
+
+### [LIVE CONTROLLER] Native iiQKA.OS gRPC transport
+- Auto-Discover now recognizes iiQKA.OS by its authentication endpoint on port 443 and labels the controller as `KUKA iiQKA.OS gRPC (443)`.
+- Live connection uses the native gRPC ControllerManagement and RuntimeManagement services instead of falling back to legacy WCF/KVP ports.
+- Kratos password login (default `administrator` / `kuka`, configurable) with a short-lived Bearer session token; the token is kept in memory only.
+- Read-only telemetry includes `$AXIS_ACT`, `$MODE_OP`, `$OV_PRO`, `$ROBNAME`, `PGNO`, `$LOAD`, `$IN`, `$OUT`, `$TIMER`, `$CYCFLAG`, interpreter call stack and program pointer.
+- Watched variables are read directly from the controller in the same gRPC/KVP poll, including user globals such as `Gripper_*_Active` and `PGNO_VALID`.
+- The running controller instance is selected automatically; `krl.liveController.instanceId` can pin a specific GUID.
+- Legacy KSS 8.x telemetry uses a native Node KUKAVARPROXY/C3Bridge client on port 7000; Python is no longer required.
+- When a controller is detected but no live transport is available, the bridge reports an explicit offline reason instead of a synthetic connected snapshot.
+- iiQKA.OS Online Backup uses the native gRPC `InstanceBackupService` to list, create, download and delete controller-side backups; `.ibz` archives are ZIP-compatible and are extracted directly.
+- Self-signed controller certificates are accepted for loopback/RFC1918 targets with an explicit warning; public hosts still require a trusted certificate or `allowInsecureTls`.
+- Fixed the legacy telemetry port default (7000 instead of 4840).
+
+### [LIVE CONTROLLER] Transport Hardening
+- Auto-Discover now probes the configured `krl.liveController.iiqkaPort` in addition to 443 and labels the controller with the actual port.
+- `ReadVariables` falls back to chunked and per-variable reads when the controller rejects a batch; one unresolved watched variable no longer kills all telemetry.
+- Native fallback no longer synthesizes `connected: true` for SNMP/EtherNet/IP/Envoy-only discovery; it reports an explicit offline reason with the detected open ports.
+- `$POS_ACT` variable errors are exposed as `pos_act_error` and shown in the SCADA Cartesian card instead of silently displaying zeros.
+- iiQKA auth-probe failures are surfaced in the offline diagnostic instead of silently falling through to a generic failure.
+- Report passport resolves `Info.xml` from real iiQKA partial backups and accepts alphanumeric serial numbers.
+
+### [SCADA] Full iiQKA.OS Telemetry, SmartPAD Messages & Installed KOPs
+- Live telemetry now reads the complete diagnostic set in isolated batches: `$TOOL`/`$BASE` frames, `$ACT_TOOL`/`$ACT_BASE`, `$SAFETY_SW`, `$USER_SAF`, `$SR_VEL_RED`/`$SR_OV_RED`, `$ALARM_STOP_INTERN`, `$CONF_MESS`, `$EXT_START`, `$I_O_ACTCONF`, `$POWER_FAIL`, `$BRAKE_SIG`, soft limits (`$SOFTN_END`/`$SOFTP_END`), torques (`$TORQUE_AXIS_*`, `$HOLDING_TORQUE`, `$TORQ_DIFF`), motor temperatures/currents (`$MOT_TEMP`, `$CURR_ACT`), supply loads and `$VEL_AXIS_ACT`, plus `PGNO_PARITY`, `PGNO_FBIT_REFL`, `$EX_AX_NUM`, `$ROB_TIMER` and `$V_ROBCOR`.
+- A rejected diagnostic batch no longer aborts the whole poll: the client falls back to per-variable reads and keeps the base telemetry alive.
+- SmartPAD message list is streamed from `RuntimeManagementService/GetInstanceMessages` (refreshed every 2 s, cached between polls) and rendered in the SCADA banner with type badges and KSS message codes.
+- Installed technology packages are read from `InstallationService/GetInstalledPackages`, filtered to KOP entries, cached after connect and listed in the SCADA options card with name and version.
+- SCADA overview now renders the previously collected but hidden fields: `PGNO_PARITY`, `PGNO_FBIT_REFL`, `$ROB_TIMER`, `$EX_AX_NUM`, per-axis `$VEL_AXIS_ACT`, `$ALARM_STOP_INTERN`, `$CONF_MESS`, `$EXT_START`, `$I_O_ACTCONF`, `$PRO_ACT`, `$POWER_FAIL` and the `$V_ROBCOR` software version in the passport line.
+- Both additions are optional: on controllers that do not expose these services the connection and the rest of the telemetry continue to work unchanged.
+- The main dashboard banner keeps only the latest three SmartPAD messages and exposes an `Open all` button; the full list (newest first, up to 200) opens in a dedicated webview with type filters, text search, live refresh and an online/offline indicator. The window is also available as `krl.live.openMessages`.
+- Fixed the KSS compile gate on KSS 9.3.4: `GetModuleInfos` rejects the bare `*` search pattern with `13 INTERNAL: BSCmdNA`. The gate now queries `*.src` and `*.dat` explicitly and merges the results, with the old `*` path retained as a fallback for older controllers.
+
+
+
+## [1.9.16] - 2026-11-08 (Open VSX Synchronization & Global Multi-Registry Distribution)
+
+### [DISTRIBUTION] Dual-Registry Release (VS Code Marketplace + Eclipse Open VSX)
+- Synchronized package release across Microsoft VS Code Marketplace and Eclipse Open VSX registry.
+- Full multi-registry availability for VS Code, VSCodium, Eclipse Theia, and air-gapped industrial workstations.
+
+## [1.9.15] - 2026-11-08 (FAT/SAT ISO 10218-1/2 Acceptance Hub & Appendix A Quality Audit)
+
+### [ACCEPTANCE HUB] Interactive Configuration Webview
+- Replaced sequential modal prompts with a responsive Webview configuration hub (`krl.generateReport` -> Acceptance Protocol).
+- Added dual logo support (System Integrator + End Customer) with Base64 encoding and live preview.
+- Interactive section toggle: SafeOperation, IO Signal Matrix, Dispatcher Routing Flowchart, Appendix A.
+- Real-time locale switcher across 6 languages (EN, DE, ES, IT, RU, TR).
+- Graceful headless fallback for non-interactive / programmatic calls.
+
+### [PRINT & PDF] Industrial Polished Layout
+- Fixed critical print contrast bug: forced high-contrast text `#0f172a !important` over pure white background.
+- Standardized DIN A4 portrait pagination (`@page { size: A4 portrait; margin: 12mm 15mm 15mm 15mm; }`).
+- Enforced table header persistence across print pages (`thead { display: table-header-group !important; }`).
+- Isolated Mermaid/SVG dispatch flowcharts and signature matrices from accidental page breaks (`page-break-inside: avoid`).
+
+### [SAFETY STANDARDS] DIN EN ISO 10218-1/2 & ISO 13849-1 Punch List
+- Upgraded acceptance inspection punch list to 10 mandatory criteria referencing international standards:
+  - Emergency Stop Category 0/1 response time and circuit dualization.
+  - Safeguard interlocks & perimeter access monitoring.
+  - T1 manual reduced speed limit (<= 250 mm/s).
+  - T2 manual high speed enable device & confirmation logic.
+  - Automatic Mode safeguard perimeter interlocks.
+  - SafeOperation safety configuration checksum (SCTL) & dynamic axis zones.
+  - Cyclic brake test execution & monitoring interval ($BRAKETEST_REQ_EX / masref.src).
+  - Mastering & zero-mark reference verification (RDC.cal / $AXIS_ACT).
+  - Dispatcher & auto external handshake protocol (CELL / P00 / $PGNO_REQ).
+  - Protective equipotential bonding (PE) & electrical grounding continuity.
+
+### [STATIC ANALYSIS] Appendix A: Software Health & Code Quality Audit
+- Unified AST diagnostic health metrics, lint warnings, path metrics and syntax verification from the project diagnostics engine into the formal Acceptance Protocol as Appendix A.
+- Automated certification badge for zero-syntax-error deliverables.
+
+### [CONTROLLER EXTRACTION] Resilient Safety Parsing
+- Deep parsing of cyclic brake test indicators, axis mastering status, and SafeOperation CRC from diverse KRC backup layouts with graceful fallback degradation.
+
 ## [1.9.13] - 2026-11-06 (Documentation Accuracy & Brand Finalization)
 
 ### [BRANDING] KRL Engineering Toolkit

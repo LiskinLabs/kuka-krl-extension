@@ -80,3 +80,12 @@ The live monitor uses a resilient dual-driver communication architecture:
 | KUKA KRL: Connect to KUKA Robot | `krl.live.connect` | Open live Ethernet connection modal |
 | KUKA KRL: Open Live Monitor Dashboard | `krl.live.openDashboard` | Launch real-time telemetry dashboard |
 | KUKA KRL: Download Controller Backup | `krl.live.fetchBackup` | Download a `.zip` backup from the controller |
+
+---
+
+## What's new in 1.9.17
+
+- **Full iiQKA.OS telemetry**: tool/base frames, safety interlocks, per-axis torque/temperature/current/velocity, soft limits, PGNO details, installed KOP packages and `$V_ROBCOR`.
+- **SmartPAD message window**: the dashboard keeps the latest three messages; the full history (up to 200, newest first) opens in a dedicated panel with type filters, search and live refresh (`krl.live.openMessages`).
+- **Target-KSS compile gate**: the iiQKA.OS card runs `SynchronizeMirror -> AnalyzeAllKrlFiles -> GetModuleInfos` and reports the real module verdict. KSS 9.3 requires explicit `*.src` / `*.dat` patterns (the bare `*` returns `13 INTERNAL: BSCmdNA`).
+- **Validated transports**: WCF 49002 on KSS 8.6.2 (OfficeLite) and KSS 8.7 (KR C5); iiQKA gRPC on KSS 9.2.3 (VRC) and KSS 9.3.4 (KRC5).

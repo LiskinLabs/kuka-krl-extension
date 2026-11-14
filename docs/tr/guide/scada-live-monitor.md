@@ -39,3 +39,12 @@ canlı izleyici dayanıklı bir çift sürücülü iletişim mimarisi kullanır:
 
 ### 4. SmartPAD Alarmları ve Çok Dilli Altyazılar
 * Kontrolör hata kodlarını (örn. `KSS00203`, `KSS01442`) anında Türkçe, İngilizce, Almanca ve Rusça açıklamalarla görüntüleme.
+
+---
+
+## 1.9.17 yenilikleri
+
+- **Tam iiQKA.OS telemetrisi**: Tool/Base çerçeveleri, güvenlik kilitlemeleri, eksen başına tork/sıcaklık/akım/hız, yazılım limitleri, PGNO ayrıntıları, kurulu KOP paketleri ve `$V_ROBCOR`.
+- **SmartPAD mesaj penceresi**: panelde son üç mesaj gösterilir; tam geçmiş (en yeni önce, 200'e kadar) filtreler, arama ve canlı yenileme ile ayrı bir pencerede açılır (`krl.live.openMessages`).
+- **Hedef KSS compile gate**: iiQKA.OS kartı `SynchronizeMirror -> AnalyzeAllKrlFiles -> GetModuleInfos` çalıştırır ve gerçek modül sonucunu gösterir. KSS 9.3, açık `*.src` / `*.dat` desenleri gerektirir (yalnız `*` deseni `13 INTERNAL: BSCmdNA` döndürür).
+- **Doğrulanan taşıyıcılar**: KSS 8.6.2 (OfficeLite) ve KSS 8.7 (KR C5) üzerinde WCF 49002; KSS 9.2.3 (VRC) ve KSS 9.3.4 (KRC5) üzerinde iiQKA gRPC.

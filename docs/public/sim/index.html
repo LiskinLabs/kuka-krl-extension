@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
   <title>Liskin Labs | KUKA 3D Digital Twin & Simulation Platform</title>
   <script>
     try {
@@ -16,8 +17,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
   <link rel="alternate icon" type="image/x-icon" href="./favicon.ico" />
-  <script type="module" crossorigin src="./assets/index-BXtwH4yv.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BTZXGbe5.css">
+  <script type="module" crossorigin src="./assets/index-CBqH7WXt.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/vendor-three-CIjeNXwi.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-CrZmid2t.css">
 </head>
 <body>
   <!-- Inline SVG icon sprite: the UI uses vector icons only, no emoji. -->
@@ -729,6 +731,15 @@
               </div>
               <p class="export-card-desc" data-i18n="diff.desc">Сравнить текущий бекап с ранее скомпилированным: TOOL/BASE, точки, I/O, программы и cycle time.</p>
               <select id="diff-base-select" class="dropdown-select diff-base-select"></select>
+              <input
+                id="diff-manual-id"
+                class="dropdown-select diff-manual-id"
+                type="text"
+                data-i18n-placeholder="diff.manualPlaceholder"
+                placeholder="Или вставьте SHA-256 базового бекапа…"
+                autocomplete="off"
+                spellcheck="false"
+              />
               <button id="btn-diff-compare" class="btn-ghost export-action-btn" disabled>
                 <span data-i18n="diff.compare">Сравнить</span>
               </button>

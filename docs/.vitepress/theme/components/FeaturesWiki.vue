@@ -889,7 +889,7 @@ const features = [
     codeAfter: '[OK] Tab snippet "kuka-palletize" &rarr; Complete verified pattern'
   },
 
-// 51-64: Next-Gen Industrial Intelligence & Safety (v1.9.18)
+// 51-64: Next-Gen Industrial Intelligence & Safety (v1.9.24)
   {
     id: 51, category: 'safety', icon: '', isPro: false,
     shortcut: 'Ctrl+Shift+P > Fix All Safe Issues', setting: 'kuka.quickFix.safeMode',
@@ -1065,7 +1065,7 @@ const filteredFeatures = computed(() => {
 const translations = {
   en: {
     backToLanding: 'Back to Main Landing',
-  heroBadge: 'v1.9.18 Industrial Suite • 64 Illustrated Guides (126 Commands)',
+  heroBadge: 'v1.9.24 Industrial Suite • 64 Illustrated Guides (126 Commands)',
     heroTitlePrefix: 'KRL Engineering Toolkit — ',
     heroTitleHighlight: 'Complete Industrial Tools Encyclopedia',
     heroSubtitle: 'Exhaustive technical reference for industrial features, field commissioning benefits, keyboard shortcuts, configuration parameters, and before/after code examples.',
@@ -1085,7 +1085,7 @@ const translations = {
   },
   ru: {
     backToLanding: 'Вернуться на главную',
-  heroBadge: 'v1.9.18 Industrial Suite • 64 Промышленных Гида (126 команд)',
+  heroBadge: 'v1.9.24 Industrial Suite • 64 Промышленных Гида (126 команд)',
     heroTitlePrefix: 'KRL Engineering Toolkit — ',
     heroTitleHighlight: 'Полная Энциклопедия Промышленных Инструментов',
     heroSubtitle: 'Исчерпывающий технический разбор функций расширения, пользы на пусконаладке, горячих клавиш, параметров settings.json и примеров кода «До / После».',
@@ -1105,7 +1105,7 @@ const translations = {
   },
   tr: {
     backToLanding: 'Ana Sayfaya Dön',
-  heroBadge: 'v1.9.18 Endüstriyel Paket • 64 Araç Rehberi (126 Komut)',
+  heroBadge: 'v1.9.24 Endüstriyel Paket • 64 Araç Rehberi (126 Komut)',
     heroTitlePrefix: 'KRL Engineering Toolkit — ',
     heroTitleHighlight: 'Kapsamlı Endüstriyel Araç Ansiklopedisi',
     heroSubtitle: 'Tüm endüstriyel özelliklerin, saha devreye alma faydalarının, kısayolların, settings.json ayarlarının ve önce/sonra kod örneklerinin ayrıntılı teknik referansı.',

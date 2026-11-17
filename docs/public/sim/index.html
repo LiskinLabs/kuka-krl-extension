@@ -17,8 +17,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
   <link rel="alternate icon" type="image/x-icon" href="./favicon.ico" />
-  <script type="module" crossorigin src="./assets/index-BpTcUGCJ.js"></script>
-  <link rel="modulepreload" crossorigin href="./assets/vendor-three-CIjeNXwi.js">
+  <script type="module" crossorigin src="./assets/index-ILwv2Kru.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/vendor-three-BSZHkPHf.js">
   <link rel="stylesheet" crossorigin href="./assets/index-CrZmid2t.css">
 </head>
 <body>
@@ -50,6 +50,7 @@
     <symbol id="i-lock" viewBox="0 0 24 24"><path d="M18 8h-1V6a5 5 0 0 0-10 0v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zM9 6a3 3 0 0 1 6 0v2H9V6zm9 14H6V10h12v10zm-6-3a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></symbol>
     <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6.1c0 5 3.4 9.7 8 10.9 4.6-1.2 8-5.9 8-10.9V5l-8-3zm0 17.9c-3.3-1-6-4.7-6-8.8V6.4l6-2.2 6 2.2v4.7c0 4.1-2.7 7.8-6 8.8z"/></symbol>
     <symbol id="i-stop" viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></symbol>
+    <symbol id="i-wireframe" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5zm0 2.3L18.7 8 12 11.7 5.3 8 12 4.3zM5 9.8l6 3.3v6.5l-6-3.3V9.8zm8 9.8v-6.5l6-3.3v6.5l-6 3.3z"/></symbol>
   </svg>
   <div id="app-container">
     <!-- Top Workstation Header -->
@@ -154,8 +155,17 @@
           <div id="visual-mode-selector-group" class="selector-group">
             <span class="selector-label" data-i18n="settings.visualMode">Визуализация</span>
             <select id="visual-mode-select" class="dropdown-select" data-i18n-title="settings.visualMode" title="Визуализация робота">
-              <option value="cad" data-i18n="settings.visualCad">Liskin Labs High-Precision CAD (Solid)</option>
-              <option value="stylized" data-i18n="settings.visualStylized">Liskin Labs Lightweight 3D</option>
+              <option value="lines" data-i18n="settings.visualLines">Кинематические линии (Схема осей)</option>
+              <option value="wireframe" data-i18n="settings.visualWireframe">CAD Каркас / Инженерный скелет</option>
+              <option value="cad" data-i18n="settings.visualCad">Liskin Labs Precision Cast CAD (GLB)</option>
+              <option value="stylized" data-i18n="settings.visualStylized">Liskin Labs Industrial 3D</option>
+            </select>
+          </div>
+          <div id="robot-finish-selector-group" class="selector-group">
+            <span class="selector-label" data-i18n="settings.robotFinish">Окраска робота</span>
+            <select id="robot-finish-select" class="dropdown-select" data-i18n-title="settings.robotFinish" title="Окраска робота">
+              <option value="graphite" data-i18n="settings.finishGraphite">Liskin Graphite (Титан / Оранжевый)</option>
+              <option value="orange" data-i18n="settings.finishOrange">Factory Orange (Оранжевый / Графит)</option>
             </select>
           </div>
         </div>
@@ -178,6 +188,38 @@
           </button>
           <div class="settings-note" data-i18n="settings.soundHint">
             Короткий сигнал при запросе действия оператора.
+          </div>
+        </div>
+        <div class="settings-sound settings-byoc">
+          <span class="selector-label" data-i18n="settings.byocTitle">Своя CAD-модель (BYOC)</span>
+          <select id="byoc-cad-mode" class="dropdown-select" autocomplete="off">
+            <option value="auto" data-i18n="settings.byocModeAuto">Авто по узлам (ROOT, A1..A6)</option>
+            <option value="flange" data-i18n="settings.byocModeFlange">Оснастка на фланец (A6)</option>
+            <option value="base" data-i18n="settings.byocModeBase">Стенд на станину (ROOT)</option>
+          </select>
+          <label class="settings-check">
+            <input id="byoc-cad-mm" type="checkbox" />
+            <span data-i18n="settings.byocMm">Масштаб мм -> м</span>
+          </label>
+          <label class="settings-check">
+            <input id="byoc-cad-yup" type="checkbox" />
+            <span data-i18n="settings.byocYup">Ось Y вверх -> Z вверх</span>
+          </label>
+          <input id="byoc-cad-input" type="file" accept=".step,.stp,.iges,.igs,.brep,.glb,.gltf,.obj,.mtl,.stl,.dae,.fbx,.zip,.vcmx,.json" multiple hidden />
+          <input id="byoc-cad-folder" type="file" webkitdirectory directory multiple hidden />
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button id="btn-byoc-load" class="btn-secondary settings-sound-test" type="button" data-i18n="settings.byocLoad">
+              Загрузить STEP / OBJ / GLB
+            </button>
+            <button id="btn-byoc-folder" class="btn-secondary" type="button" data-i18n="settings.byocFolder">
+              Выбрать папку
+            </button>
+            <button id="btn-byoc-reset" class="btn-ghost" type="button" data-i18n="settings.byocReset">
+              Вернуть Clean-Room
+            </button>
+          </div>
+          <div id="byoc-cad-status" class="settings-note" data-i18n="settings.byocHint">
+            STEP, OBJ+MTL папка, ZIP, GLB, DAE, STL — локально в браузере (или Drag&amp;Drop на 3D-сцену).
           </div>
         </div>
         <div class="settings-note" data-i18n="settings.note">Изменения сохраняются автоматически.</div>
@@ -278,6 +320,14 @@
             <button id="btn-vp-front" class="vtool-btn" data-i18n="view.front" data-i18n-title="view.front.title" title="Спереди">Front</button>
             <button id="btn-vp-side" class="vtool-btn" data-i18n="view.side" data-i18n-title="view.side.title" title="Сбоку">Side</button>
             <div class="vtool-sep"></div>
+            <button id="btn-vp-wireframe" class="vtool-btn active" data-i18n-title="cad.wireframeToggle" title="Режим 3D: Линии / Каркас / Solid">
+              <svg class="icon" aria-hidden="true"><use href="#i-wireframe"/></svg>
+              <span class="vtool-label" data-i18n="cad.wireframeBtn">Вид</span>
+            </button>
+            <button id="btn-vp-step" class="vtool-btn" data-i18n-title="cad.stepUpload" title="Загрузить свой STEP / OBJ / GLB CAD">
+              <svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg>
+              <span class="vtool-label" data-i18n="cad.stepBtn">STEP</span>
+            </button>
             <button id="btn-vp-envelope" class="vtool-btn" data-i18n-title="cad.envelope" title="Оценочная рабочая зона (не safety-сертификация)">
               <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
             </button>

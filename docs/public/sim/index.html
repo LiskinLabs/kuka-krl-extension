@@ -17,9 +17,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
   <link rel="alternate icon" type="image/x-icon" href="./favicon.ico" />
-  <script type="module" crossorigin src="./assets/index-DXiA8oW6.js"></script>
-  <link rel="modulepreload" crossorigin href="./assets/vendor-three-BSZHkPHf.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-Ct2Ry_mK.css">
+  <script type="module" crossorigin src="./assets/index-BYKUS_xG.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/vendor-three-CBlFwIOp.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-dxoq0sXI.css">
 </head>
 <body>
   <!-- Inline SVG icon sprite: the UI uses vector icons only, no emoji. -->
@@ -155,13 +155,12 @@
           <div id="visual-mode-selector-group" class="selector-group">
             <span class="selector-label" data-i18n="settings.visualMode">Визуализация</span>
             <select id="visual-mode-select" class="dropdown-select" data-i18n-title="settings.visualMode" title="Визуализация робота">
-              <option value="lines" data-i18n="settings.visualLines">Кинематические линии (Схема осей)</option>
-              <option value="wireframe" data-i18n="settings.visualWireframe">CAD Каркас / Инженерный скелет</option>
-              <option value="cad" data-i18n="settings.visualCad">Liskin Labs Precision Cast CAD (GLB)</option>
-              <option value="stylized" data-i18n="settings.visualStylized">Liskin Labs Industrial 3D</option>
+              <option value="lines" data-i18n="settings.visualLines">Кинематические линии (Чертёж осей)</option>
+              <option value="wireframe" data-i18n="settings.visualWireframe">Инженерный каркас (Wireframe)</option>
+              <option value="cad" data-i18n="settings.visualCad">Твердотельный STEP / CAD (BYOC)</option>
             </select>
           </div>
-          <div id="robot-finish-selector-group" class="selector-group">
+          <div id="robot-finish-selector-group" class="selector-group" hidden>
             <span class="selector-label" data-i18n="settings.robotFinish">Окраска робота</span>
             <select id="robot-finish-select" class="dropdown-select" data-i18n-title="settings.robotFinish" title="Окраска робота">
               <option value="graphite" data-i18n="settings.finishGraphite">Liskin Graphite (Титан / Оранжевый)</option>
@@ -215,8 +214,12 @@
             <button id="btn-byoc-folder" class="btn-secondary" type="button" data-i18n="settings.byocFolder">
               Выбрать папку
             </button>
+            <a id="btn-byoc-xpert-link" class="btn-secondary settings-xpert-link" href="https://xpert.kuka.com/ID/FI18802" target="_blank" rel="noopener noreferrer">
+              <svg class="ico" aria-hidden="true"><use href="#i-download"/></svg>
+              <span data-i18n="settings.byocDownloadStep">Скачать STEP (KUKA Xpert)</span>
+            </a>
             <button id="btn-byoc-reset" class="btn-ghost" type="button" data-i18n="settings.byocReset">
-              Вернуть Clean-Room
+              Сбросить CAD (только чертёж)
             </button>
           </div>
           <div id="byoc-cad-status" class="settings-note" data-i18n="settings.byocHint">

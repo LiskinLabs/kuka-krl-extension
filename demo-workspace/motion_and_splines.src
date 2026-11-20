@@ -7,11 +7,12 @@ GLOBAL DEF motion_and_splines()
   ; Tests: Conventional motions, modern Splines, Inline Forms,
   ; Torque Monitoring (CollisionGuard), and circular arcs
   ; ========================================================
-  DECL E6AXIS axHomeAxis = {A1 0.0, A2 -90.0, A3 90.0, A4 0.0, A5 45.0, A6 0.0, E1 0.0}
+  DECL E6AXIS axHomeAxis
 
   BAS(#INITMOV, 0)
   $TOOL = TOOL_DATA[1]
   $BASE = BASE_DATA[1]
+  axHomeAxis = {A1 0.0, A2 -90.0, A3 90.0, A4 0.0, A5 45.0, A6 0.0, E1 0.0}
 
   ; 1. Conventional Axis Motion (PTP)
   $VEL_AXIS[1] = 75

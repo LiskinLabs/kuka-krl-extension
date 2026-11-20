@@ -2,6 +2,27 @@
 
 All notable changes to the **KRL Engineering Toolkit** will be documented in this file.
 
+## [1.9.25] - 2026-11-18 (Full KSS 5.4–9.4 Matrix, Bidirectional Migration & Formatting Fixes)
+
+### [KSS MIGRATION & CROSS-VERSION COMPATIBILITY] Full KSS `5.4–9.4` + `VKRC` Support
+- Expanded `kssMigrationEngine.ts` (`KssVersion`, `normalizeKssVersion`, `listKssVersions`, `buildProfile`) across all 15 KSS versions (`5.4`, `5.5`, `5.6`, `8.1`, `8.2`, `8.3`, `8.4`, `8.5`, `8.6`, `8.7`, `9.0`, `9.1`, `9.2`, `9.3`, `9.4`) with version-exact `PDAT`/`LDAT` field rules, balanced-brace `CB {...}` struct stripping, `SET_POSITION_CTRL()` removal pre-`9.2`, `SET_CD_PARAMS` removal pre-`8.5`, bare `SPTP`/`SLIN`/`SCIRC` downgrading pre-`8.3`, and classic `%R` inline-form `FOLD` / `PULSE OUT` handling without false `FOLD_PARAMS_MISSING` diagnostics.
+- Fixed `isSystemKrlPath` so user `R1/Program/Main.src` / `Main.dat` modules are migrated and validated while `/system/` firmware remains exempted, added `%MKUKATPVW` / `VW_MPARA_ACT` guards in `kssMigrationEngine.ts` and `foldTools.ts` so VKRC VASS folds are never rewritten into broken `SPTP XVB`, and expanded `validateWorkspace` (`GLOBAL DEF`/`DEFFCT`, `CIRC`/`SCIRC` `.dat` symbol verification) and `validateKrlText` (`5.4–9.4` compatibility + `4096` I/O check on `5.x`).
+
+### [SYSTEM VARIABLES & DIAGNOSTICS] Manual-Accurate Write Protection and Release Gating
+- Rebuilt write protection from the KSS 8.7 system-variable manual (`Writability` notes): **127** variables are read-only instead of the previous heuristic count of 188, removing false `readOnlySystemVariable` errors on legal writes such as `$STOPMESS = TRUE`, `$ALARM_STOP = TRUE`, `$AUT = FALSE`, `$ON_PATH = TRUE` and `$CYCFLAG[n] = expr`.
+- Added `server/src/data/systemVarAccess.ts` (manual-derived data module) wired into `SYSTEM_VARS_META`, plus `KSS_SYSTEM_VAR_MIN_VERSION` release gating: `$DELTA_WORKSPACE` / `$DELTAWORKSTATE` / `$SPL_MIXEDBLENDING_OPT` / energy and ET-name variables (8.6+), `$COLLMON_STARTUP_MAX` / `$TRACE_FOLDER` / `$OUT_NODRIVE` (8.5+), `$NORMAL_STOP_ACTIVE` / `$COULD_ENABLE_DRIVES` (9.3). Diagnostics emit one `KSS_SYSTEM_VAR_NOT_IN_TARGET` warning per variable used below its documented release.
+- Corrected `$CYCFLAG` limits: 1..256 from KSS 5.5 on (PB1343); only the KSS 5.2–5.4 signal table is limited to 32. `ERR_RAISE` is now gated with the 8.2+/9.1+ `ON_ERROR_PROCEED` feature set.
+- Added manual aliases `$WORKSPACE_NAME`, `$PRO_I_O_PROC_ID`, `$DRIVES_FAN_SPEED` and `STOP WHEN PATH` TextMate highlighting.
+- Interrupt declarations are now checked against the documented per-release limit (64 declared on KSS 8.x–9.x, 32 on 5.x); `$TOOL_DATA`/`$BASE_DATA` warnings use the profile values.
+- Fixed the generated metadata pipeline: `generate-data.js` now reads the `variables:` root of `System.Variables.yml` through `js-yaml`, normalizes `$NAME[]` / `$NAME[,]` keys, keeps array dimensions (`$ACC_AXIS` = `INT[6]`, `$ANIN` = `REAL[32]`, `$CYCFLAG` = `BOOL[256]`) and no longer misclassifies `$STOPMESS` / `$BWDSTART` as commands.
+- Hover and completion render array dimensions exactly once (previously `INT[[20]]`) and show the same manual-derived writability as the diagnostics.
+- Demo workspace `motion_and_splines.src` no longer initializes a local variable in the declaration section (KRL forbids it in `.src`; initialization stays in the instruction section).
+
+### [CONVERTERS, FORMATTING & SETTINGS]
+- Updated `foldTools.ts` (`generateOfficialClassicFold`, `transformSplinesToLegacyInText`, `unifyMixedMotionChainInText`, `convertHandwrittenKrlToInlineForms`, `convertHandwrittenToSnippets`, `unwrapFolds`) to respect target KSS version capabilities (`SET_CD_PARAMS`, `< 8.3` classic fallback, parent-folder KSS auto-detection), preserve geometric offset `:` expressions and line endings, and strip bare `;Params` lines cleanly.
+- Updated `KrlFormatter` (`formatter.ts`) to indent `GLOBAL DEF`/`DEFFCT`/`DEFDAT` and `TIME_BLOCK`/`CONST_VEL` blocks cleanly while keeping `&` headers and `#enum` literals untouched.
+- Expanded `krl.migration.targetKssVersion` enum + all 6 `package.nls*.json` files and the migration QuickPick (`kssMigration.ts`) to cover all KSS `5.4–9.4` targets, resolved missing i18n/Control Center/snippet/build/test issues (`companionDatSync.ts`, `kssIlfCatalog.ts`, `krl.code-snippets`, `controlCenter.ts`, `wrangler.toml`, `telemetry-admin-web`).
+
 ## [1.9.24] - 2026-11-16 (iiQKA CrossMeld Fix, Native .ibz Support & Update-Resilient Licensing)
 
 ### [LIVE TELEMETRY] SmartPAD `CrossMeld 1419 / 1516` Spam Elimination

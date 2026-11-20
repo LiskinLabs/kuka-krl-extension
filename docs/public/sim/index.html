@@ -17,9 +17,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
   <link rel="alternate icon" type="image/x-icon" href="./favicon.ico" />
-  <script type="module" crossorigin src="./assets/index-wpMO-ziU.js"></script>
-  <link rel="modulepreload" crossorigin href="./assets/vendor-three-CqoRqVAe.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-dxoq0sXI.css">
+  <script type="module" crossorigin src="./assets/index-DIEAVmOy.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/vendor-three-CNh8QIeh.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-BNW_Ae6M.css">
 </head>
 <body>
   <!-- Inline SVG icon sprite: the UI uses vector icons only, no emoji. -->
@@ -43,6 +43,7 @@
     <symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 11V6.2a1.6 1.6 0 0 1 3.2 0V10h.8V4.6a1.6 1.6 0 0 1 3.2 0V10h.8V6.4a1.6 1.6 0 0 1 3.2 0v6.1c0 4.3-2.8 7.5-6.9 7.5-2.2 0-4.1-.9-5.4-2.6l-3.2-4.2a1.65 1.65 0 0 1 2.6-2L8 13z"/></symbol>
     <symbol id="i-video" viewBox="0 0 24 24"><path d="M15 8v8l5 4V4l-5 4zM4 6h11v12H4z" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
     <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-fullscreen" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></symbol>
     <symbol id="i-fullscreen-exit" viewBox="0 0 24 24"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></symbol>
     <symbol id="i-focus" viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm-9 3h2a7 7 0 0 1 7-7V2a9 9 0 0 0-9 9zm0 2a9 9 0 0 0 9 9v-2a7 7 0 0 1-7-7H3zm18-2a9 9 0 0 0-9-9v2a7 7 0 0 1 7 7h2zm-2 2a7 7 0 0 1-7 7v2a9 9 0 0 0 9-9h-2z"/></symbol>
@@ -99,6 +100,16 @@
                 />
               </div>
               <div id="robot-picker-list" class="robot-picker-list" role="listbox" aria-label="KUKA robots"></div>
+              <div class="robot-picker-footer">
+                <a id="robot-picker-manual-link" class="robot-picker-footer-link" target="_blank" rel="noopener noreferrer">
+                  <svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg>
+                  <span data-i18n="robot.manualDocs">Manual / Docs</span>
+                </a>
+                <a id="robot-picker-step-link" class="robot-picker-footer-link" target="_blank" rel="noopener noreferrer">
+                  <svg class="ico" aria-hidden="true"><use href="#i-download"/></svg>
+                  <span data-i18n="robot.step">STEP</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -213,7 +224,7 @@
           <input id="byoc-cad-folder" type="file" webkitdirectory directory multiple hidden />
           <div style="display:flex;gap:6px;flex-wrap:wrap">
             <button id="btn-byoc-load" class="btn-secondary settings-sound-test" type="button" data-i18n="settings.byocLoad">
-              Загрузить STEP / OBJ / GLB
+              Загрузить STEP / VCMX / OBJ / GLB
             </button>
             <button id="btn-byoc-folder" class="btn-secondary" type="button" data-i18n="settings.byocFolder">
               Выбрать папку
@@ -222,12 +233,19 @@
               <svg class="ico" aria-hidden="true"><use href="#i-download"/></svg>
               <span data-i18n="settings.byocDownloadStep">Скачать STEP (KUKA Xpert)</span>
             </a>
+            <a id="btn-byoc-manual-link" class="btn-secondary settings-xpert-link" href="https://xpert.kuka.com/ID/FI18802" target="_blank" rel="noopener noreferrer">
+              <svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg>
+              <span data-i18n="settings.byocManualDocs">Руководство / документы (KUKA Xpert)</span>
+            </a>
             <button id="btn-byoc-reset" class="btn-ghost" type="button" data-i18n="settings.byocReset">
               Сбросить CAD (только чертёж)
             </button>
           </div>
-          <div id="byoc-cad-status" class="settings-note" data-i18n="settings.byocHint">
-            STEP, OBJ+MTL папка, ZIP, GLB, DAE, STL — локально в браузере (или Drag&amp;Drop на 3D-сцену).
+          <div id="byoc-cad-status" class="settings-note settings-byoc-status" data-i18n="settings.byocHint" role="status" aria-live="polite" aria-atomic="true">
+            STEP, VCMX (eCatalog), OBJ+MTL папка, ZIP, GLB, DAE, STL — локально в браузере (или Drag&amp;Drop на 3D-сцену).
+          </div>
+          <div class="settings-note settings-byoc-rights" data-i18n="settings.byocRights">
+            CAD-файлы не покидают браузер. Загружая модель, вы подтверждаете наличие прав на использование её геометрии.
           </div>
         </div>
         <div class="settings-note" data-i18n="settings.note">Изменения сохраняются автоматически.</div>
@@ -307,6 +325,19 @@
               <span id="project-name" class="project-name">Demo</span>
               <span class="project-sep">·</span>
               <span id="project-meta" class="project-meta">KRC · KR 50 R2500</span>
+              <span id="project-robot-warning" class="project-robot-warning" hidden>
+                <svg class="icon" aria-hidden="true"><use href="#i-warning"/></svg>
+              </span>
+              <span id="project-doc-links" class="project-doc-links">
+                <a id="project-manual-link" class="project-doc-link" target="_blank" rel="noopener noreferrer" title="Manual / Docs (KUKA Xpert)">
+                  <svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>
+                  <span data-i18n="robot.manualDocs">Manual / Docs</span>
+                </a>
+                <a id="project-step-link" class="project-doc-link" target="_blank" rel="noopener noreferrer" title="STEP / CAD (KUKA Xpert)">
+                  <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
+                  <span data-i18n="robot.step">STEP</span>
+                </a>
+              </span>
               <span class="project-health" aria-label="Simulation health">
                 <span class="sys-led is-ok"></span>SIM
                 <span class="sys-led is-ok"></span>PLC 60 Hz
@@ -336,9 +367,9 @@
               <svg class="icon" aria-hidden="true"><use href="#i-wireframe"/></svg>
               <span class="vtool-label" data-i18n="cad.wireframeBtn">Вид</span>
             </button>
-            <button id="btn-vp-step" class="vtool-btn" data-i18n-title="cad.stepUpload" title="Загрузить свой STEP / OBJ / GLB CAD">
+            <button id="btn-vp-step" class="vtool-btn" data-i18n-title="cad.stepUpload" title="Загрузить свой STEP / VCMX (eCatalog) / OBJ / GLB CAD">
               <svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg>
-              <span class="vtool-label" data-i18n="cad.stepBtn">STEP</span>
+              <span class="vtool-label" data-i18n="cad.stepBtn">STEP / VCMX</span>
             </button>
             <button id="btn-vp-envelope" class="vtool-btn" data-i18n-title="cad.envelope" title="Оценочная рабочая зона (не safety-сертификация)">
               <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
@@ -1035,7 +1066,15 @@
         <button id="server-progress-close" class="mini-btn" data-i18n-title="btn.hide" title="Скрыть"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
       </div>
       <div class="server-progress-bar"><div id="server-progress-fill"></div></div>
-      <div id="server-progress-text">Загрузка…</div>
+            <div id="server-progress-text" role="status" aria-live="polite" aria-atomic="false">Загрузка…</div>
+    </div>
+
+    <div id="app-error-toast" class="app-error-toast" role="alert" aria-live="assertive" hidden>
+      <svg class="icon" aria-hidden="true"><use href="#i-warning"/></svg>
+      <span id="app-error-text"></span>
+      <button id="app-error-close" class="app-error-close" type="button" aria-label="Close">
+        <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
     </div>
   </div>
 

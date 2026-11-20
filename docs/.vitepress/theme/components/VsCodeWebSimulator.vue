@@ -308,7 +308,7 @@
 
           <!-- Panel Tab 3: Output Log -->
           <div v-if="panelTab === 'output'" class="flex-1 p-2.5 overflow-y-auto text-[11px] text-gray-400 space-y-0.5">
-            <div>[LanguageServer - 14:00:02] KRL Engineering Toolkit Language Server v1.9.25 started.</div>
+            <div>[LanguageServer - 14:00:02] KRL Engineering Toolkit Language Server v1.9.26 started.</div>
             <div>[LanguageServer - 14:00:03] Indexed 10,327 symbols in 42ms. Controller scope: KSS 8.7.</div>
             <div>[LanguageServer - 14:00:04] AST Verified. 0 exceptions. Client HWID license node-locked.</div>
           </div>

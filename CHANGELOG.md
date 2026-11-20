@@ -2,7 +2,7 @@
 
 All notable changes to the **KRL Engineering Toolkit** will be documented in this file.
 
-## [1.9.25] - 2026-11-18 (Full KSS 5.4–9.4 Matrix, Bidirectional Migration & Formatting Fixes)
+## [1.9.25] - 2026-11-20 (KSS 5.4–9.4 Matrix, Bidirectional Migration, Universal Live Connection)
 
 ### [KSS MIGRATION & CROSS-VERSION COMPATIBILITY] Full KSS `5.4–9.4` + `VKRC` Support
 - Expanded `kssMigrationEngine.ts` (`KssVersion`, `normalizeKssVersion`, `listKssVersions`, `buildProfile`) across all 15 KSS versions (`5.4`, `5.5`, `5.6`, `8.1`, `8.2`, `8.3`, `8.4`, `8.5`, `8.6`, `8.7`, `9.0`, `9.1`, `9.2`, `9.3`, `9.4`) with version-exact `PDAT`/`LDAT` field rules, balanced-brace `CB {...}` struct stripping, `SET_POSITION_CTRL()` removal pre-`9.2`, `SET_CD_PARAMS` removal pre-`8.5`, bare `SPTP`/`SLIN`/`SCIRC` downgrading pre-`8.3`, and classic `%R` inline-form `FOLD` / `PULSE OUT` handling without false `FOLD_PARAMS_MISSING` diagnostics.
@@ -23,6 +23,13 @@ All notable changes to the **KRL Engineering Toolkit** will be documented in thi
 - Updated `KrlFormatter` (`formatter.ts`) to indent `GLOBAL DEF`/`DEFFCT`/`DEFDAT` and `TIME_BLOCK`/`CONST_VEL` blocks cleanly while keeping `&` headers and `#enum` literals untouched.
 - Expanded `krl.migration.targetKssVersion` enum + all 6 `package.nls*.json` files and the migration QuickPick (`kssMigration.ts`) to cover all KSS `5.4–9.4` targets, resolved missing i18n/Control Center/snippet/build/test issues (`companionDatSync.ts`, `kssIlfCatalog.ts`, `krl.code-snippets`, `controlCenter.ts`, `wrangler.toml`, `telemetry-admin-web`).
 
+### [LIVE CONTROLLER] Universal controller address, on-link diagnosis and cross-subnet scout
+- `krl.liveController.ipAddress` now defaults to **empty**: the extension uses the configured address, then the last successfully connected robot, otherwise it runs Auto-Discover. Every installation learns its own controller; no engineer's IP is baked into the package.
+- The connected controller is written back to `krl.liveController.ipAddress` (machine scope) after a successful session, so the next launch pre-fills the engineer's own robot.
+- On-link detection now validates reachability against the controller's own subnet (`/24` for KLI, `/16` for the documented `172.31.x.x` service network) in addition to the local adapter mask. A laptop at `192.168.1.152/16` no longer reports "same subnet" for a robot at `192.168.11.120/24`, which previously suppressed the "Configure Ethernet" action while every probe timed out. Mismatch messages show the local prefix (`192.168.1.152/16`).
+- New **subnet scout**: when discovery finds nothing, the extension probes common KUKA `/24` networks (last used subnet, `192.168.11.0/24`, `192.168.0.0/24`, `192.168.5.0/24`, `192.168.1.0/24`) by temporarily adding a secondary IP to the wired adapter, runs the standard discovery pass and keeps the address only when a controller answers. Otherwise the temporary address is removed. Existing addresses, default gateway and DNS are never modified; UAC confirmation is required.
+- New setting `krl.liveController.autoScanSubnets` (default off) runs the scout automatically after an empty Auto-Discover.
+- Regression coverage: on-link subnet rules, candidate planning, probe-address collision avoidance, and a guard that no site-specific IP ships with the extension.
 ## [1.9.24] - 2026-11-16 (iiQKA CrossMeld Fix, Native .ibz Support & Update-Resilient Licensing)
 
 ### [LIVE TELEMETRY] SmartPAD `CrossMeld 1419 / 1516` Spam Elimination

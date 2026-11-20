@@ -9,7 +9,7 @@
       <div class="flex items-center gap-6">
         <span class="inline-flex items-center gap-2 font-bold text-[#FF5500]">
           <span class="w-1.5 h-1.5 bg-[#FF5500] animate-pulse"></span>
-      KRL ENGINEERING TOOLKIT v1.9.26
+      KRL ENGINEERING TOOLKIT v1.9.25
         </span>
         <span class="hidden md:inline-flex items-center gap-1.5 text-[#00D68F]">
           <svg class="w-3.5 h-3.5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -784,7 +784,7 @@
             <div class="font-mono text-xs text-[#FF5500] font-bold tracking-wider">[06 // CAPABILITIES DIRECTORY]</div>
             <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">FULL PLATFORM CAPABILITY INVENTORY</h2>
             <p :class="['text-sm', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">
-              Complete inventory of {{ allInventory.length }} commands, settings, views, themes and language services included in KRL Engineering Toolkit v1.9.26.
+              Complete inventory of {{ allInventory.length }} commands, settings, views, themes and language services included in KRL Engineering Toolkit v1.9.25.
             </p>
           </div>
 
@@ -1034,7 +1034,7 @@
             <tbody>
               <tr class="border-b border-zinc-200">
                 <td class="p-2 font-bold">{{ recommendedTier.name }}</td>
-        <td class="p-2">KRL Engineering Toolkit IDE v1.9.26 Suite (63 Pro Tools, 126 Commands, Air-Gap License, Spectra Assure 0 CVE)</td>
+        <td class="p-2">KRL Engineering Toolkit IDE v1.9.25 Suite (63 Pro Tools, 126 Commands, Air-Gap License, Spectra Assure 0 CVE)</td>
                 <td class="p-2 text-center">{{ recommendedTier.seats }} Seats</td>
                 <td class="p-2 text-right font-bold">{{ formatPrice(recommendedTier.priceUsd) }}</td>
               </tr>

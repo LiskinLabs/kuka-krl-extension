@@ -4,8 +4,8 @@
 
 <p align="center">
   <b>Hücreye hatasız KRL kodu gönderin, devreye alma süresini kısaltın.</b><br />
-  Dağıtım öncesi güvenlik analizi, 7 kritik hata sınıfı için otomatik onarım, açmadan yedek karşılaştırma, VASS 26 denetimi ve canlı KSS 8.x / iiQKA.OS telemetrisi VS Code, Cursor ve Windsurf içinde.<br />
-  <b>KRC2, KRC4 ve KRC5</b> (<code>KSS 5.x–8.7</code> · <code>iiQKA.OS 9.x</code> · <code>VKRC / VASS 26</code>) · <b>%100 Yerel RAM İşleme · Buluta Kod Yüklemesi Yok</b>
+  Dağıtım öncesi güvenlik analizi, 7 kritik hata sınıfı için otomatik onarım, açmadan yedek karşılaştırma, VASS 26 denetimi ve canlı KSS 8.x / iiQKA.OS SCADA köprüsü VS Code, Cursor ve Windsurf içinde.<br />
+  <b>KRC2, KRC4 ve KRC5</b> (<code>KSS 5.4–8.7</code> · <code>iiQKA.OS 9.0–9.4</code> · <code>VKRC / VASS 26</code>) · <b>%100 Yerel RAM İşleme · Buluta Kod Yüklemesi Yok</b>
 </p>
 
 <p align="center">
@@ -24,7 +24,7 @@
   <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.25-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.25" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(0%20CVE)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Audited-4.13M%2B%20LoC-10b981?style=flat-square" alt="4.13M+ Satır Doğrulandı" /></a>
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/guide/pro-features"><img src="https://img.shields.io/badge/Commands-126%20(63%20Free%20%7C%2063%20Pro)-0EA5E9?style=flat-square" alt="126 Komut" /></a>
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/guide/pro-features"><img src="https://img.shields.io/badge/Commands-135%20(69%20Free%20%7C%2066%20Pro)-0EA5E9?style=flat-square" alt="135 Komut" /></a>
 </p>
 
 <p align="center">
@@ -35,7 +35,7 @@
   <a href="https://github.com/LiskinLabs/kuka-krl-extension/blob/main/SUPPORT.md"><b>Destek ve Air-Gap Lisans</b></a>
 </p>
 
-> **63 Pro mühendislik aracının tamamını 14 gün ücretsiz deneyin — kredi kartı gerekmez:** VS Code içinde `Ctrl+Shift+P` tuşlarına basın ve **`KRL: Start 14-Day Free Trial`** (`krl.startTrial`) komutunu çalıştırın veya **`KRL: View Pro Plans & Pricing`** (`krl.openPricingPlans`) ile planları inceleyin.
+> **66 Pro mühendislik aracının tamamını 14 gün ücretsiz deneyin — kredi kartı gerekmez:** VS Code içinde `Ctrl+Shift+P` tuşlarına basın ve **`KRL: Start 14-Day Free Trial`** (`krl.startTrial`) komutunu çalıştırın veya **`KRL: View Pro Plans & Pricing`** (`krl.openPricingPlans`) ile planları inceleyin.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension/main/docs/public/media/kuka_control_center.gif" width="780" alt="KRL Engineering Toolkit Kontrol Merkezi ve Canlı Kontrolör Telemetrisi" />
@@ -61,7 +61,7 @@
 ## Doğrulanmış Endüstriyel Ölçümler
 
 - **4.13M+ Satır Filo Denetimi**: `108` gerçek fabrika yedeği (`4,136,829` satır) `25.4 s` içinde uçtan uca tarandı.
-- **Derin KSS Bilgi Tabanı**: `957` sistem değişkeni, `116` fonksiyon, `111` yapı, `112` enum, `183` KUKA robot profili ve **`126` komut (`63` Ücretsiz + `63` Pro)**.
+- **Derin KSS Bilgi Tabanı**: `957` sistem değişkeni (`127` kılavuz uyumlu salt okunur koruma + sürüm kontrolü), `116` fonksiyon, `111` yapı, `112` enum, `183` KUKA robot profili ve **`135` komut (`69` Ücretsiz + `66` Pro)**.
 - **Gerçek Kontrolörlerde Doğrulandı**: `KSS 8.6.2 (OfficeLite)`, `KSS 8.7 (KR C5)`, `iiQKA 9.2.3 (VRC)` ve `iiQKA 9.3.4 (KR C5)` üzerinde test edildi.
 - **OT Güvenliği**: **ReversingLabs Spectra Assure PASSED (0 CVE)** · `%100` yerel RAM · sıfır bulut yüklemesi · **Air-Gap Ed25519 `.lic`** çevrimdışı aktivasyon.
 
@@ -69,9 +69,9 @@
 
 ## Temel Mühendislik Modülleri
 
-### 1. Canlı Kontrolör Telemetrisi, SmartPAD Mesajları & Compile Gate `[PRO]`
-- **Yerel KSS 8.x WCF (`49002`) ve KVP (`7000`) İstemcisi**: WorkVisual, KUKA.Sim, Python veya üçüncü taraf DLL gerekmez.
-- **iiQKA.OS (`KRC5` / `9.x`) gRPC (`443`) ve Compile Gate**: aktif `$TOOL`/`$BASE`, eksen tork/sıcaklık, yumuşak limitler, PGNO, KOP paketleri, canlı `.zip`/`.ibz` yedekleme ve 200 kayıtlı SmartPAD geçmişi (`krl.live.openMessages`).
+### 1. Canlı SCADA Köprüsü, Saha Veriyolu I/O, Sağlık Tanısı & Compile Gate `[PRO]`
+- **Evrensel Keşif & `SecretStorage` Güvenliği**: Sabit IP olmadan otomatik tarama, `/24` alt ağ teşhisi, isteğe bağlı **Cross-Subnet Scout** (`krl.liveController.autoScanSubnets`) ve **VS Code `SecretStorage`** içinde kontrolör bazlı kimlik bilgileri (`krl.live.changeCredentials`, sabit şifre yok).
+- **Yerel KSS 8.x WCF (`49002`), KVP (`7000`), iiQKA.OS gRPC (`443`) & OPC UA (`4840`) Probu**: aktif `$TOOL`/`$BASE`, eksen tork/sıcaklık, yumuşak limit göstergeleri, Watch SVG trendi, otomatik tekrarlı Compile Gate (`PARTIAL`/tam sonuç), tam 4096-pin I/O yoklaması (**CFG** filtresi, 128-pin sayfaları, **iiQWorks / PROFINET** ve **SmartPAD `UserTexts.kxr`** açıklamaları), **Logbook** (`krl.live.openMessages`) ve 7 kontrollü **Health / Diagnostics** Markdown raporu.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension/main/docs/public/media/krl_io_signals.gif" width="760" alt="Gerçek Zamanlı I/O Sinyal Denetçisi" />
@@ -79,7 +79,7 @@
 
 ### 2. Ön Güvenlik Denetimi, 7 Tehlike Otomatik Onarımı & VASS 26 / VKRC `[PRO]`
 - **7 Tehlikeyi Tek Tıkla Onar (`krl.fixAllSafeIssuesInFile`)**: BOM, eksik `BRAKE`, `$LOAD`/`BAS(#TOOL)`, `;FOLD` kayması, `FOR STEP 0`, çift `C_DIS`/`C_PTP` ve XML `;Params` Monaco Diff & AST korumasıyla onarılır; artı kullanılmayan değişken temizliği (`krl.cleanupUnusedVariables`).
-- **183 Robot Kinematiği, `KSS 8.3–9.3` Geçişi (`krl.convertToIiqkaFold`) & VW VASS 26**: tekillik, `CIRCLE`, `Status`/`Turn`, `Folge`, `UP`, `MakroSps` ve `VW_USER` (`101..501`) denetimi.
+- **183 Robot Kinematiği, `KSS 5.4–9.4` Çift Yönlü Geçiş (`krl.convertToIiqkaFold`) & VW VASS 26**: 15 KSS profili + VKRC VASS koruması, `127` kılavuz doğrulamalı salt okunur koruma, tekillik, `CIRCLE`, `Status`/`Turn`, `Folge`, `UP`, `MakroSps` ve `VW_USER` (`101..501`) denetimi.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension/main/docs/public/media/type-validation-demo.gif" width="760" alt="Statik KRL Güvenlik ve Tip Kontrolü" />
@@ -101,7 +101,7 @@
 </p>
 
 ### 5. Yüksek Hızlı KRL Dil Sunucusu — Her Zaman Ücretsiz `[FREE CORE]`
-Sınırsız satırda `F12` `.src` ↔ `.dat` geçişi, referans bulma, yeniden adlandırma, **`957` KSS değişkeni**, **`116` fonksiyon**, **`111` yapı**, **`112` enum** otomatik tamamlama ve **6 endüstriyel tema**.
+Sınırsız satırda `F12` `.src` ↔ `.dat` geçişi, referans bulma, yeniden adlandırma, **`957` KSS değişkeni**, **`116` fonksiyon**, **`111` yapı**, **`112` enum** otomatik tamamlama (`69` ücretsiz komut) ve **6 endüstriyel tema**.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension/main/docs/public/media/smart_autocomplete.gif" width="760" alt="Akıllı KRL Otomatik Tamamlama" />
@@ -139,11 +139,11 @@ code --install-extension LiskinLabs.kuka-krl-extension
 
 ---
 
-## v1.9.24 Yenilikleri
+## v1.9.25 Yenilikleri
 
-- **Canlı `CrossMeld 1419/1516` Düzeltmesi, Yerel `.ibz` &amp; Kalıcı Lisans (`v1.9.24`)**: Program/baz seçili değilken çevrimiçi bağlantıda oluşan SmartPAD `CrossMeld` mesaj yağmuru durduruldu, `.ibz`/`.IBZ` dosya desteği eklendi ve güncelleme/adaptör değişimlerinden etkilenmeyen `v4` lisans koruması devreye alındı.
-- **Open VSX Tek Satır Düzeltmesi (`v1.9.20 – v1.9.23`)**: Tek satırlık minifikasyon ve gizli anahtar tarayıcı muafiyet işaretiyle senkron yayın.
-- **IDE İçi Deneme &amp; Yerel Telemetri (`v1.9.17 – v1.9.19`)**: `krl.openPricingPlans`, 14 günlük deneme (`krl.startTrial`), `LAUNCH30` ve saf Node.js KSS 8.x (`49002`) / iiQKA.OS 9.x telemetrisi (`krl.live.openMessages`). Tüm notlar: [CHANGELOG.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/CHANGELOG.md).
+- **Canlı SCADA Köprüsü, Fieldbus / `UserTexts.kxr` &amp; `SecretStorage` (`v1.9.25`)**: Evrensel keşif, `/24` teşhis &amp; isteğe bağlı **Cross-Subnet Scout** (`krl.liveController.autoScanSubnets`), **VS Code `SecretStorage`** kimlik koruması (`krl.live.changeCredentials`), tam 4096-pin I/O yoklaması (`$IOSIM_IN[]`/`$IN[]` + **CFG** filtresi, **iiQWorks / PROFINET** ve **SmartPAD `UserTexts.kxr`** açıklamaları), **Logbook**, Watch SVG trendi, **OPC UA `4840`** probu, Compile Gate tekrar denemesi ve 7 kontrollü **Health / Diagnostics** Markdown raporu.
+- **Tam `KSS 5.4–9.4` Matrisi &amp; Salt Okunur Değişken Koruması (`v1.9.25`)**: 15 KSS sürümünde çift yönlü geçiş, VKRC VASS koruması, `127` kılavuz uyumlu yazma koruması ve sürüm kapıları (`8.5+`/`8.6+`/`9.3`).
+- **Önceki Sürümler (`v1.9.18 – v1.9.24`)**: `CrossMeld 1419/1516` gürültü düzeltmesi, yerel `.ibz`/`.IBZ`, kalıcı `v4` lisanslama ve Open VSX tek satır senkronizasyonu. Tüm notlar: [CHANGELOG.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/CHANGELOG.md).
 
 ---
 

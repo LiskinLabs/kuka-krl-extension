@@ -4,8 +4,8 @@
 
 <p align="center">
   <b>Отправляйте проверенный KRL-код в ячейку без простоев и аварий.</b><br />
-  Предполетный аудит безопасности, авторемонт 7 классов критических ошибок, diff бэкапов без распаковки, VASS 26 линтер и живая телеметрия KSS 8.x / iiQKA.OS прямо в VS Code, Cursor и Windsurf.<br />
-  Создан для <b>KRC2, KRC4 и KRC5</b> (<code>KSS 5.x–8.7</code> · <code>iiQKA.OS 9.x</code> · <code>VKRC / VASS 26</code>) · <b>100% локально в RAM · Без отправки кода в облако</b>
+  Предполетный аудит безопасности, авторемонт 7 классов критических ошибок, diff бэкапов без распаковки, VASS 26 линтер и живой SCADA-мост KSS 8.x / iiQKA.OS прямо в VS Code, Cursor и Windsurf.<br />
+  Создан для <b>KRC2, KRC4 и KRC5</b> (<code>KSS 5.4–8.7</code> · <code>iiQKA.OS 9.0–9.4</code> · <code>VKRC / VASS 26</code>) · <b>100% локально в RAM · Без отправки кода в облако</b>
 </p>
 
 <p align="center">
@@ -24,7 +24,7 @@
   <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.25-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.25" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(0%20CVE)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Audited-4.13M%2B%20LoC-10b981?style=flat-square" alt="Проверено 4.13M+ строк" /></a>
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/guide/pro-features"><img src="https://img.shields.io/badge/Commands-126%20(63%20Free%20%7C%2063%20Pro)-0EA5E9?style=flat-square" alt="126 команд" /></a>
+  <a href="https://liskinlabs.github.io/kuka-krl-extension/guide/pro-features"><img src="https://img.shields.io/badge/Commands-135%20(69%20Free%20%7C%2066%20Pro)-0EA5E9?style=flat-square" alt="135 команд" /></a>
 </p>
 
 <p align="center">
@@ -35,7 +35,7 @@
   <a href="https://github.com/LiskinLabs/kuka-krl-extension/blob/main/SUPPORT.md"><b>Поддержка и Air-Gap</b></a>
 </p>
 
-> **Попробуйте все 63 Pro-инструмента бесплатно 14 дней — банковская карта не нужна:** нажмите `Ctrl+Shift+P` в VS Code и выполните **`KRL: Start 14-Day Free Trial`** (`krl.startTrial`), или сравните тарифы через **`KRL: View Pro Plans & Pricing`** (`krl.openPricingPlans`).
+> **Попробуйте все 66 Pro-инструментов бесплатно 14 дней — банковская карта не нужна:** нажмите `Ctrl+Shift+P` в VS Code и выполните **`KRL: Start 14-Day Free Trial`** (`krl.startTrial`), или сравните тарифы через **`KRL: View Pro Plans & Pricing`** (`krl.openPricingPlans`).
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension/main/docs/public/media/kuka_control_center.gif" width="780" alt="Панель управления KRL Engineering Toolkit и живая телеметрия контроллера" />
@@ -61,7 +61,7 @@
 ## Промышленная база и проверенные метрики
 
 - **Проверено на 4.13M+ строк реального кода**: прогнано на `108` реальных промышленных бэкапах KUKA (`4,136,829` строк) за `25.4 с`.
-- **Полная база знаний KSS**: `957` системных переменных, `116` функций, `111` структур, `112` перечислений, `183` кинематических профиля роботов KUKA и **`126` команд IDE (`63` Free + `63` Pro)**.
+- **Полная база знаний KSS**: `957` системных переменных (`127` точных правил защиты от записи и контроль по версиям), `116` функций, `111` структур, `112` перечислений, `183` кинематических профиля роботов KUKA и **`135` команд IDE (`69` Free + `66` Pro)**.
 - **Боевая валидация на контроллерах**: протестировано в реальном времени на `KSS 8.6.2 (OfficeLite)`, `KSS 8.7 (KR C5)`, `iiQKA 9.2.3 (VRC)` и `iiQKA 9.3.4 (KR C5)`.
 - **Безопасность цепочки поставок и OT-сетей**: **ReversingLabs Spectra Assure PASSED (0 CVE)** · `100%` локальная обработка в RAM · ноль отправок исходного кода · офлайн-лицензии **Air-Gap Ed25519 `.lic`**.
 
@@ -69,11 +69,11 @@
 
 ## Основные инженерные модули
 
-### 1. Живая телеметрия контроллера, сообщения SmartPAD и Compile Gate `[PRO]`
+### 1. Живой SCADA-мост, полевые шины I/O, диагностика и Compile Gate `[PRO]`
 Прямое подключение по промышленному Ethernet — **WorkVisual, KUKA.Sim, Python и сторонние DLL не требуются**:
-- **Нативный WCF OnlineServices для KSS 8.x (`49002`) и KUKAVARPROXY/C3Bridge (`7000`)**: транспорт полностью на TypeScript/Node.js без внешних рантаймов.
-- **gRPC-мост iiQKA.OS (`KRC5` / `9.x`, порт `443`) и Compile Gate**: читает активные фреймы `$TOOL`/`$BASE`, блокировки безопасности, моменты/токи/температуры по осям, программные ограничители, PGNO-флаги, пакеты KOP и запускает компиляцию на контроллере (`SynchronizeMirror -> AnalyzeAllKrlFiles -> GetModuleInfos`).
-- **Монитор сигналов I/O и журнал SmartPAD**: встроенные подсказки имен сигналов рядом с `$IN[1..4096]`, `$OUT[1..4096]`, `$FLAG[z]`, горячие бэкапы `.zip` / `.ibz` и окно истории SmartPAD на 200 записей (`krl.live.openMessages`).
+- **Универсальное обнаружение и безопасность `SecretStorage`**: автопоиск без зашитых IP, диагностика подсети KLI `/24`, опциональный **Cross-Subnet Scout** (`krl.liveController.autoScanSubnets`) и хранение паролей по каждому хосту в **VS Code `SecretStorage`** (`krl.live.changeCredentials`, без паролей по умолчанию в коде).
+- **Нативный WCF OnlineServices (`49002`), KVP/C3Bridge (`7000`), iiQKA.OS gRPC (`443`) и OPC UA (`4840`) зонд**: читает фреймы `$TOOL`/`$BASE`, блокировки, моменты/токи/температуры осей, шкалы программных лимитов (≤3% / ≤2°), SVG-тренды Watch, пакеты KOP и запускает Compile Gate с автоповтором (`PARTIAL`/полный вердикт).
+- **Полный опрос 4096 пинов I/O, Fieldbus, SmartPAD `UserTexts.kxr` и вкладка Health (7 проверок)**: загружает `$config.dat`, `$machine.dat` и `KrcIoSignals.xml`, объединяет **метки модулей iiQWorks / PROFINET** и **описания SmartPAD `UserTexts.kxr`**, опрашивает все 4096 пинов I/O с фильтром **CFG**, банками по 128 пинов и переходом по `$IN[n]`, объединяет журнал **Logbook** (`krl.live.openMessages`) и выгружает отчёт **Health / Diagnostics** в Markdown.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/LiskinLabs/kuka-krl-extension/main/docs/public/media/krl_io_signals.gif" width="760" alt="Инспектор сигналов ввода-вывода и встроенные подсказки" />
@@ -83,7 +83,7 @@
 Ловите ошибки кинематики, стандартов OEM и миграции KSS до переноса программы на пульт:
 - **Детерминированный авторемонт 7 классов сбоев (`krl.fixAllSafeIssuesInFile`)**: чистит BOM/не-ASCII, вставляет `BRAKE` перед `RESUME`, добавляет `BAS(#TOOL)` после `$LOAD`, синхронизирует `;FOLD`/`ENDFOLD`, исправляет бесконечный цикл `FOR STEP 0`, убирает дубли `C_DIS`/`C_PTP` и выравнивает XML `;Params` через безопасный Monaco Diff с откатом по AST-хэшу. Плюс глобальная очистка мертвого кода (`krl.cleanupUnusedVariables`).
 - **Контроль кинематики для 183 моделей KUKA**: обнаруживает сингулярности запястья/плеча, коллинеарные точки `CIRCLE`, перекрытие `$APO.CDIS`, сбои `Status`/`Turn` и выход за рабочую зону.
-- **Миграция версий `KSS 8.3 – 9.3` (`krl.convertToIiqkaFold`)**: точные профили `PDAT`/`LDAT` (`SVEL_CP2`/`SACC_CP2`, `MotionParamSets.dat`) и проверка согласованности `;FOLD`/`;Params`.
+- **Двунаправленная миграция `KSS 5.4 – 9.4` (`krl.convertToIiqkaFold`)**: профили для 15 версий KSS (`PDAT`/`LDAT`, `SVEL_CP2`/`SACC_CP2`, `MotionParamSets.dat`), защита VKRC VASS-фолдов, точная защита от записи (`127` системных переменных) и контроль доступности переменных по релизам (`8.5+`/`8.6+`/`9.3`).
 - **Линтер Volkswagen VASS 26 / VKRC**: автономная проверка `Folge`, `UP`, `MakroSps`, `VW_USER` (`101..501`), защитных блокировок и допусков `Genau`.
 
 <p align="center">
@@ -112,7 +112,7 @@
 </p>
 
 ### 5. Быстрый Language Server для KRL — бесплатно навсегда для каждого инженера `[FREE CORE]`
-Даже без покупки Pro вы получаете полноценную IDE для KRL без ограничения на число строк (`63` бесплатных инструмента):
+Даже без покупки Pro вы получаете полноценную IDE для KRL без ограничения на число строк (`69` бесплатных инструментов):
 - Мгновенный переход `F12` между `.src` и `.dat`, поиск всех ссылок, переименование символов, структура документа и иерархия вызовов.
 - Контекстное автодополнение и справка для **`957` системных переменных**, **`116` функций**, **`111` структур** и **`112` перечислений**, плюс встроенные подсказки I/O.
 - Автоматическое сворачивание `;FOLD` / `;ENDFOLD`, сортировка деклараций, балансировщик блоков, форматтер и **6 промышленных цветовых тем** (включая цеховые темные и OLED-режимы).
@@ -161,7 +161,7 @@ code --install-extension LiskinLabs.kuka-krl-extension
 ```
 
 1. **Откройте папку с проектом KRL или архив** (`.src`, `.dat`, `.sub`, `.zip`, `.ibz`, `.wvs`, `.vcmx`, `.evt`).
-2. Нажмите `Ctrl+Shift+P` → **`KRL: Start 14-Day Free Trial`** (`krl.startTrial`) для мгновенной разблокировки всех `63` Pro-инструментов, или откройте **`KRL: Open Control Center`** (`krl.openControlCenter`).
+2. Нажмите `Ctrl+Shift+P` → **`KRL: Start 14-Day Free Trial`** (`krl.startTrial`) для мгновенной разблокировки всех `66` Pro-инструментов, или откройте **`KRL: Open Control Center`** (`krl.openControlCenter`).
 3. **Аудируйте код автономно или подключайтесь к контроллеру** (`49002` KSS 8.x WCF, `7000` KVP или `443` iiQKA.OS gRPC).
 
 - **100% в локальной памяти**: код, бэкапы и логи EVTX не покидают ваш ноутбук ([PRIVACY.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/PRIVACY.md)).
@@ -170,11 +170,11 @@ code --install-extension LiskinLabs.kuka-krl-extension
 
 ---
 
-## Что нового в v1.9.24
+## Что нового в v1.9.25
 
-- **Фикс `CrossMeld 1419/1516`, поддержка `.ibz` и стойкая лицензия (`v1.9.24`)**: устранён спам уведомлений SmartPAD при онлайн-подключении без активной программы/базы, добавлена нативная поддержка расширений `.ibz`/`.IBZ`, усилена криптопроверка лицензий + добавлено зеркало `v4` против слета при обновлениях и смене USB/VPN-адаптеров, а документация приведена к 14-дневному триалу.
-- **Open VSX Single-Line Fix (`v1.9.20 – v1.9.23`)**: единый однострочный бандл со встроенным маркером подавления ложных срабатываний сканера секретов Open VSX.
-- **Триал в IDE и B2B-оплата (`v1.9.18 – v1.9.19`)**: `krl.openPricingPlans`, 14-дневный триал `krl.startTrial`, `LAUNCH30` (`-30%`) и нативный WCF/iiQKA.OS клиент.
+- **Живой SCADA-мост, Fieldbus / `UserTexts.kxr` и `SecretStorage` (`v1.9.25`)**: универсальный автопоиск контроллеров (без зашитого IP), диагностика `/24` и опциональный **Cross-Subnet Scout** (`krl.liveController.autoScanSubnets`), хранение паролей по хостам в **VS Code `SecretStorage`** (`krl.live.changeCredentials`). Полный опрос 4096 пинов I/O (`$IOSIM_IN[]`/`$IN[]` + фильтр **CFG**, банки по 128 и переход по `$IN[n]`), метки **iiQWorks / PROFINET** и описания **SmartPAD `UserTexts.kxr`**, слияние **Logbook**, SVG-тренды Watch, шкалы лимитов осей, OPC UA (`4840`), повтор Compile Gate и вкладка **Health / Diagnostics** (7 проверок + экспорт в Markdown).
+- **Полная матрица `KSS 5.4 – 9.4` и точная защита системных переменных (`v1.9.25`)**: двунаправленная миграция для 15 версий KSS, защита VKRC VASS-фолдов, точная таблица защиты от записи (`127` переменных вместо 188) и контроль по версиям (`8.5+`/`8.6+`/`9.3`).
+- **Предыдущие релизы (`v1.9.18 – v1.9.24`)**: устранение спама `CrossMeld 1419/1516`, нативная поддержка `.ibz`/`.IBZ`, стойкое лицензирование `v4`, синхронный однострочный бандл Open VSX и 14-дневный триал (`krl.openPricingPlans`, `LAUNCH30`).
 - **Полная история версий**: [CHANGELOG.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/CHANGELOG.md).
 
 ---

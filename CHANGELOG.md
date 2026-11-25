@@ -2,6 +2,41 @@
 
 All notable changes to the **KRL Engineering Toolkit** will be documented in this file.
 
+## [1.9.26] - 2026-11-25 (KSS 5.4–9.4 Compliance, Multi-Encoding CP1251/Win-1252, LSP & Kinematics Hardening)
+
+### [UNIVERSAL PRODUCTION MOTION AUTOMATION]
+- **Correct KUKA trigger semantics**: a `TRIGGER` refers to the **next** motion and its reference point is the motion END point. `PATH < 0` shifts the switching point **before** the taught point, `PATH > 0` **after** it.
+- **Exact call-to-motion binding**: a blocking call written after motion `M` is now inserted **before `M`**, so the trigger fires at the same physical point as the original call instead of one segment later.
+- **Vendor-neutral trigger selection**: scans the backup, lists every standalone subprogram call and every named OUT block with occurrence counts, and lets the user choose which ones become triggers. Blocking dialogs remain unselected.
+- **Mass motion-speed editing**: set absolute CP (m/s) and/or PTP (%) speeds, or scale current speeds, updating `$VEL.CP`, `$VEL_AXIS[n]`, `SVEL_CP`, `SVEL_CP2`, `SVEL_JOINT`, `BAS(#CP_PARAMS)`, `BAS(#PTP_PARAMS)`, `;FOLD ... Vel=`, `Kuka.VelocityPath`, and `Kuka.VelocityPtp`.
+- **Version-aware spline & dynamics control**: emits `SPTP`/`SLIN`/`SCIRC` only when supported by the detected/selected KSS profile, tunes `ACC`/`APO_DIST`/`APO_FAC`/`GEAR_JERK`/`JERK_FAC` only on referenced `LDAT`/`PDAT` records, preserves `$OV_PRO` across the program, and clamps `PATH` offsets to 40% of the preceding segment.
+
+### [INDUSTRIAL IDE RELIABILITY, MULTI-ENCODING & SAFETY HARDENING]
+- **Multi-Encoding KRC2/KRC4/KRC5 Support (`CP1251` / `Windows-1252` / `UTF-16LE`)**: Added unified `decodeKrlBuffer` / `readKrlFileSync` across LSP indexing, archive viewers/diffs, diagnostics, safety linters, Acceptance Reports, I/O Matrix, Fleet Explorer, and CAM/PointSync suites, plus lossless `CP1251` `.dat` round-trip encoding in `companionDatSync.ts`.
+- **LSP Precision & Performance**: Enabled full diagnostics on `SPS.SUB` and user `.sub` files while keeping vendor firmware isolated; added `EXTP` indexing; isolated module-local `.dat` symbols from cross-file `Rename`, `References`, and `GoTo Definition`; preserved WorkVisual/SmartHMI `;%{PE}` ILF blocks verbatim in `KrlFormatter` with exact `provideRangeFormatting` line mapping; added `params.range` filtering, comment/string guards, `LOAD_DATA[n]` aliases, and VKRC-only fallback gating in `InlayHintsProvider`; and added lazy LSP startup for non-KUKA workspaces.
+- **3-Way Data Integrity, Kinematics & CAM Invariants**: Added `LIN`/`CIRC` named `Tool[n]:Name` / `Base[m]:Name` and float `LDAT.VEL` support, forward `Tool[n]` scan for `LOAD_DATA`, `PTP %` vs `m/s` unit disambiguation, real analytical IK wrist singularity check (`|A5| <= 5°`), `mirrorAxis` Y/Z symmetry fixes with opt-in Status/E1 mirroring, CAM arc-fitting orientation/external-axis safety guards, and frame exclusions in 2D radius compensation.
+- **Non-Destructive Editing & Live Protocol Resilience**: Added mandatory diff-preview/overwrite confirmations (`DiffPreviewService`), pre-patch `.bak` backup protection on writable ZIP/TAR archive mounts, `krl.backup.defaultOpenMode` (`openAsProject` vs `previewArchive`) and `krl.robotImageCatalog.imagesPath` wiring, dirty-check confirmation before Git Graph `checkout`, expanded 39-code 6-language KSS message dictionary + plain-text `krc.log` fallback parser, KVP `E3..E6`/`msgId`/footer status checks, and settled OPC UA `end` handling.
+
+### [SAFE AUTO-REPAIR, VRC COMPILER PARITY & REPORT ACCURACY]
+- **Bare `;ENDFOLD` & `&PARAM DISKPATH` Header Preservation**: Fixed `repairFoldNameMismatches` / `repairFoldNameMismatchesInText` to leave standard bare `;ENDFOLD` tags untouched, and updated `repairUtf8BomAndNonAscii` / `repairUtf8BomAndNonAsciiInText` to exempt `&` directives (`&PARAM DISKPATH`) from umlaut transliteration.
+- **Vendor & TechPackage Template Isolation**: Isolated `torqueref_user.*` (fixed `torquefref` regex typo), `masref_*.*`, and iiQKA TechPackage templates (`TP/iiQKA.*/...`, `TP/*/Templates/*`) across `kssSystemFiles.ts`, `diagnostics.ts`, `industrialSafetyLinter.ts`, `dataIntegrity.ts`, and `reportGenerator.ts`.
+- **`APO_DIST` Geometry & Report Categorization**: Refined `validateMicroApoDist` (`krl-micro-apo-dist`) to skip dense short segments (`< 40 mm` or `>= 20%` of segment length) and standard `PPDAT` (`25 mm`), deduplicate per `PDAT`/`LDAT` struct, fix `getIssueDetails` category routing, deduplicate pair/clutter counts across `.src`/`.dat`, and align Section 2 metrics to `auditedWorkspaceFiles`.
+- **VRC Compiler Severity Alignment**: Verified against `VRC_KR50_923` (`KSS 9.2.3`) that `LIN ... C_Dis C_Dis` and `.src`/`.dat` case mismatches compile (`hasErrors: false`); downgraded `C_DIS C_DIS` (`KSS 8.6+`) and `krl-module-pair-case-mismatch` to `Warning` while keeping genuine KRC compiler errors (`PTP C_PTP C_PTP`, `SLIN C_Spl C_Spl`, `C_DIS C_DIS C_DIS`) as `Error`.
+
+### [KRL SYNTAX & KSS 5.4–9.4 COMPLIANCE] Official KUKA Documentation Parity
+- **Motion Approximation Matrix (`PB4880`–`PB14656` §11.5.7 / §11.6)**: Implemented exact version-specific validation and repair across all KSS targets:
+  - Classic `LIN`/`CIRC`/`*_REL`: single-modifier (`C_DIS|C_VEL|C_ORI`) pre-8.2; CP-PTP pairs including `C_DIS C_DIS` allowed on `KSS 8.2–8.5` (`PB4037–PB6917`); `C_DIS C_DIS`, `C_DIS C_ORI`, `C_DIS C_VEL` rejected as errors on `KSS 8.6–9.4` (`PB11620` / `PB14656`).
+  - Classic `PTP`/`PTP_REL`: standalone `C_DIS` and `C_DIS + (C_VEL|C_ORI)` enabled from `KSS 8.2+`, `C_PTP` required on `KSS <= 8.1`; `C_APX` restricted to standalone usage on `KSS 8.6–8.7` and `iiQKA.OS2 9.1+`; `C_SPL` gated to `KSS 8.3+` (`C_DIS` on `5.5–8.2`).
+  - Updated `repairDuplicateApproximationTokens`, `kssMigrationEngine.ts`, and `foldTools.ts` (`generateOfficialClassicFold`, `generateOfficialSplineFold`, `transformSplinesToLegacyInText`, `transformSelectionToSplineBlocks`) so version-aware repairs and FOLD generators produce documentation-valid motion/spline code across `KSS 5.4–9.4`.
+- **Interrupts, Splines, Triggers, `PULSE`, `FOR`, Operators & `PB4059` §6.3/§6.5**:
+  - Updated interrupt limits in `kssVersionProfile.ts` to `32` declared / `16` active (`KSS 5.4–8.4`) and `64` declared / `32` active (`KSS 8.5–9.4`), added active-interrupt tracking, `BRAKE FF`, and `INTERRUPT WITH BRAKE F/FF DECL` (`KSS 8.3+`).
+  - Tightened `SPLINE ... ENDSPLINE` checks: forbids `TRIGGER WHEN DISTANCE`, trailing `TRIGGER` between the last segment and `ENDSPLINE`, segment-level approximation modifiers, block-only `WITH` variables (`$BASE`, `$TOOL`, `$IPO_MODE`, `$APO`, `$LOAD*`), `CONST_VEL END` without a trailing segment, and non-spline assignments inside spline envelopes.
+  - Enforced `TRIGGER WHEN DISTANCE` (`0`/`1`), `TRIGGER WHEN PATH` positive `DELAY <= 1000` ms, no `TRIGGER WHEN PATH` on classic `PTP`/`PTP_REL`, `PRIO` range & KSS 9.x `90..91` collision warnings, `PULSE($OUT, ..., 0.1..3.0)` bounds, `FOR STEP` non-zero integer constant rules, >3D array and multi-variable `DECL` init checks, invalid non-KRL operators (`!=`, `&&`, `||`, `===`, `--`, `-=`, `*=`, `/=`), `PB4059` `IMPORT ... IS` / `:IN`/`:OUT` / expression-as-`OUT` / non-`CHAR` array `:IN` checks, `LDAT.EXAX_IGN` (`8.0+`) / `LDAT.CB` (`8.3+`), and `.src`/`.sub`/`.dat` LSP coverage.
+
+### [iiQKA.OS2 CONTROLLER HYGIENE & ANTI-JERK]
+- Added iiQKA.OS2 diagnostics and Safe Auto-Repair / CodeActions support for missing `DEFDAT ... PUBLIC`, `.src`/`.dat` filename case mismatches, R1 non-ASCII path checks, `.conflict*`/`.bak*` quarantine to `_krl_quarantine/`, ineffective `CONTINUE` before `;FOLD`/blank lines, KSS03171 identical consecutive points, and mixed Classic/Spline trajectory anti-jerk cleanup.
+- Added comprehensive regression suites `test_v1928_iiqka_hygiene_and_antijerk.js` and `test_v1929_krl_doc_compliance.js`.
+
 ## [1.9.25] - 2026-11-23 (KSS 5.4–9.4 Matrix, Bidirectional Migration & Universal Live SCADA Bridge)
 
 ### [KSS MIGRATION & CROSS-VERSION COMPATIBILITY] Full KSS `5.4–9.4` + `VKRC` Support

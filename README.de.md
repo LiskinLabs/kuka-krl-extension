@@ -21,7 +21,7 @@
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://vsmarketplacebadges.dev/version-short/LiskinLabs.kuka-krl-extension.svg?style=flat-square&label=VS%20Code%20Marketplace&color=FF6600" alt="VS Code Marketplace" /></a>
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://vsmarketplacebadges.dev/installs-short/LiskinLabs.kuka-krl-extension.svg?style=flat-square&label=Installs&color=2563EB" alt="Installationen" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.25-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.25" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.26-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.26" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(0%20CVE)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Audited-4.13M%2B%20LoC-10b981?style=flat-square" alt="4.13M+ Zeilen geprüft" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/guide/pro-features"><img src="https://img.shields.io/badge/Commands-135%20(69%20Free%20%7C%2066%20Pro)-0EA5E9?style=flat-square" alt="135 Befehle" /></a>
@@ -148,8 +148,9 @@ code --install-extension LiskinLabs.kuka-krl-extension
 
 ---
 
-## Neu in v1.9.25
+## Neu in v1.9.26
 
+- **Offizielle KRL-Konformität (`KSS 5.4 – 9.4`), Produktions-Motion-Automation &amp; Multi-Encoding (`v1.9.26`)**: Vollständige Überschleif-, Trigger-, Spline-, Interrupt- und `SPS.SUB`/`.sub`-Prüfung; Produktions-Automationsassistent (`TRIGGER PATH`, Geschwindigkeitsskalierung, `LDAT`/`PDAT`-Dynamik, `$OV_PRO`-Schutz); modullokale `.dat`-Isolierung für Rename/References; verlustfreie `;%{PE}`-ILF-Bewahrung im `KrlFormatter`; durchgängiges `CP1251`-/Windows-1252-/UTF-16LE-Decoding; analytische IK-Handgelenksingularität (`|A5| <= 5°`); verpflichtende Diff-Vorschauen &amp; `.bak`-Archiv-Backups; erweiterter 39-Code-KSS-Meldungskatalog + `krc.log`-Parser und verzögerter LSP-Start außerhalb von KUKA-Projekten.
 - **Live-SCADA-Bridge, Feldbus / `UserTexts.kxr` &amp; `SecretStorage` (`v1.9.25`)**: Universelle Auto-Discovery ohne fest kodierte IP, KLI-`/24`-Diagnose + optionaler **Cross-Subnet Scout** (`krl.liveController.autoScanSubnets`) und pro-Host-Zugangsdaten in **VS Code `SecretStorage`** (`krl.live.changeCredentials`). Streaming aller 4096 I/O-Pins (`$IOSIM_IN[]`/`$IN[]` + **CFG**-Filter, 128-Pin-Pager &amp; Direktsprung `$IN[n]`), Verknüpfung von **iiQWorks / PROFINET**-Modullabels und **SmartPAD `UserTexts.kxr`**, **Logbook**-Zusammenführung, Watch-SVG-Trends, Achslimit-Anzeigen, OPC UA (`4840`), Compile Gate Auto-Retry und **Health / Diagnostics**-Tab (7 Checks + Markdown-Export).
 - **KSS `5.4 – 9.4` Matrix &amp; handbuchgenauer Schreibschutz (`v1.9.25`)**: Bidirektionale Migration über 15 KSS-Versionen inkl. VKRC-VASS-Schutz, präziser Schreibschutz (`127` statt 188 Variablen) &amp; Release-Gating (`8.5+`/`8.6+`/`9.3`).
 - **Vorherige Releases (`v1.9.18 – v1.9.24`)**: Beseitigung von `CrossMeld 1419/1516`-Spam, natives `.ibz`/`.IBZ`, update-sichere `v4`-Lizenzspiegelung, Open VSX Single-Line-Sync und **14-Tage-Test** (`krl.openPricingPlans`, `LAUNCH30`).

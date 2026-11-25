@@ -21,7 +21,7 @@
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://vsmarketplacebadges.dev/version-short/LiskinLabs.kuka-krl-extension.svg?style=flat-square&label=VS%20Code%20Marketplace&color=FF6600" alt="VS Code Marketplace" /></a>
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><img src="https://vsmarketplacebadges.dev/installs-short/LiskinLabs.kuka-krl-extension.svg?style=flat-square&label=Installs&color=2563EB" alt="Instalaciones" /></a>
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/v/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX" alt="Open VSX" /></a>
-  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.25-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.25" /></a>
+  <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.26-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.26" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(0%20CVE)-10b981?style=flat-square&logo=shield&logoColor=white" alt="ReversingLabs Security Score" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Audited-4.13M%2B%20LoC-10b981?style=flat-square" alt="4.13M+ líneas auditadas" /></a>
   <a href="https://liskinlabs.github.io/kuka-krl-extension/guide/pro-features"><img src="https://img.shields.io/badge/Commands-135%20(69%20Free%20%7C%2066%20Pro)-0EA5E9?style=flat-square" alt="135 comandos" /></a>
@@ -126,13 +126,14 @@ Navegación `F12` entre `.src` y `.dat`, autocompletado de **`957` variables**, 
 
 ---
 
-## Inicio Rápido, Air-Gap y Novedades v1.9.25
+## Inicio Rápido, Air-Gap y Novedades v1.9.26
 
 ```bash
 code --install-extension LiskinLabs.kuka-krl-extension
 ```
 
 - **Seguridad OT**: `100%` procesamiento en RAM local ([PRIVACY.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/PRIVACY.md)), caché offline de 30 días para licencias comerciales + 14 días de gracia (prueba Pro gratuita de **14 días**) y licencias **Air-Gap Ed25519 `.lic`** (`krl.exportHardwareIdFile` / `krl.importOfflineLicenseFile`).
+- **Novedades `v1.9.26`**: Conformidad oficial `KSS 5.4–9.4` (aproximaciones, `TRIGGER PATH`, splines, interrupciones, diagnóstico completo `SPS.SUB`/`.sub`), automatización de movimientos de producción, aislamiento local `.dat` en Rename/References, preservación `;%{PE}` ILF en `KrlFormatter`, decodificación integral `CP1251`/`Windows-1252`/`UTF-16LE`, singularidad de muñeca IK (`|A5| <= 5°`), vistas previas Diff y backups `.bak` en archivos ZIP/TAR, diccionario KSS de 39 códigos en 6 idiomas + parser `krc.log` e inicio diferido del LSP fuera de proyectos KUKA.
 - **Novedades `v1.9.25`**: Puente SCADA en vivo (`SecretStorage` por controlador con `krl.live.changeCredentials`, autodescubrimiento `/24` y **Cross-Subnet Scout**, sondeo completo de 4096 pines I/O + filtro **CFG**, etiquetas **iiQWorks / PROFINET** y **SmartPAD `UserTexts.kxr`**, historial **Logbook**, tendencias SVG Watch, sonda **OPC UA `4840`**, reintento en Compile Gate y pestaña **Health / Diagnostics** con 7 comprobaciones y exportación Markdown), además de migración bidireccional `KSS 5.4–9.4` (15 perfiles) y `127` reglas precisas de solo lectura.
 - **Lanzamientos anteriores (`v1.9.24`)**: Corrección `CrossMeld 1419/1516`, soporte nativo `.ibz`/`.IBZ` y persistencia de licencia `v4`. Ver [CHANGELOG.md](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/CHANGELOG.md).
 - **Cumplimiento ISO 10218-1/-2 e ISO 13849-1**: Software **Non-SIL / Non-PL**; realice siempre validación manual T1 (`$OV_PRO <= 30%`) en el SmartPAD físico.

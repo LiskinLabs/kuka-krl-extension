@@ -17,9 +17,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
   <link rel="alternate icon" type="image/x-icon" href="./favicon.ico" />
-  <script type="module" crossorigin src="./assets/index-B1UjYKqL.js"></script>
-  <link rel="modulepreload" crossorigin href="./assets/vendor-three-Br1CH0ms.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-BNW_Ae6M.css">
+  <script type="module" crossorigin src="./assets/index-LUhLGVov.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/vendor-three-C0EWJPFM.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-BT3SfIUS.css">
 </head>
 <body>
   <!-- Inline SVG icon sprite: the UI uses vector icons only, no emoji. -->
@@ -133,6 +133,11 @@
         <button id="btn-toggle-scene-dock" class="btn-ghost mobile-only" data-i18n-title="btn.mobileMenu" title="Дерево сцены">
           <svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg>
           <span data-i18n="dock.scene">Сцена</span>
+        </button>
+
+        <button id="btn-command-palette" class="btn-ghost" type="button" title="Command Palette (Ctrl+K)">
+          <span class="cmd-kbd-pill">Ctrl+K</span>
+          <span data-i18n="cmdPalette.btn">Команды</span>
         </button>
 
         <button id="btn-open-code-modal" class="btn-primary">
@@ -279,6 +284,24 @@
             />
           </div>
           <div id="scene-tree-list" class="ws-scene-tree" role="tree" aria-label="Cell Hierarchy"></div>
+          <div class="ws-scene-parts-bar">
+            <select id="scene-add-part-select" class="dropdown-select ws-scene-part-select" aria-label="Cell part">
+              <option value="fixture-table" data-i18n="parts.table.opt">Сварочный стол</option>
+              <option value="safety-fence-2m" data-i18n="parts.fence.opt">Ограждение 2.0м</option>
+              <option value="clearance-pillar" data-i18n="parts.pillar.opt">Колонна-препятствие</option>
+              <option value="light-curtain" data-i18n="parts.light.opt">Световой барьер</option>
+            </select>
+            <select id="scene-part-base-select" class="dropdown-select ws-scene-part-select" aria-label="Attach to $BASE">
+              <option value="0" data-i18n="parts.baseWorld">World</option>
+              <option value="1">$BASE[1]</option>
+              <option value="2">$BASE[2]</option>
+              <option value="3">$BASE[3]</option>
+              <option value="4">$BASE[4]</option>
+            </select>
+            <button id="scene-add-part-btn" class="btn-secondary ws-scene-part-btn" type="button" data-i18n="parts.addBtn">+ Добавить</button>
+            <button id="scene-check-clearance-btn" class="btn-secondary ws-scene-part-btn" type="button" data-i18n-title="parts.checkClearance" title="Проверить зазоры CAD"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></button>
+            <button id="scene-clear-parts-btn" class="btn-ghost ws-scene-part-btn" type="button" data-i18n-title="parts.clear" title="Удалить добавленные объекты">×</button>
+          </div>
         </div>
 
         <div id="ld-pane-flow" class="ws-dock-pane ws-dock-pane-flow">
@@ -322,7 +345,7 @@
                which backup/robot/program is on screen. -->
           <div id="project-bar" class="project-bar">
             <div class="project-identity">
-              <span id="project-name" class="project-name">Demo</span>
+              <span id="project-name" class="project-name project-name-clickable" role="button" tabindex="0" title="Backup Passport">Demo</span>
               <span class="project-sep">·</span>
               <span id="project-meta" class="project-meta">KRC · KR 50 R2500</span>
               <span id="project-robot-warning" class="project-robot-warning" hidden>
@@ -412,7 +435,6 @@
       <!-- Telemetry HUD Overlay -->
       <div id="telemetry-hud" class="hud-panel">
         <div class="hud-title">
-          <span class="hud-grip" data-i18n-title="hud.grip" title="Перетащите панель координат (двойной клик — возврат в центр)">⋮⋮</span>
           <span class="hud-indicator"></span> <span id="hud-title" data-i18n="hud.tool">ФЛАНЕЦ РОБОТА ($TOOL)</span>
           <button id="btn-hud-collapse" class="hud-collapse-btn" data-i18n-title="hud.collapse" data-i18n-aria-label="hud.collapse" title="Свернуть / развернуть координаты" aria-label="Свернуть / развернуть координаты">▾</button>
         </div>
@@ -634,20 +656,8 @@
         <div class="mobile-sheet-handle" id="mobile-sheet-toggle"><span class="sheet-pill"></span></div>
         <div class="inspector-head">
           <span class="inspector-title" data-i18n="dock.inspector">Инспектор</span>
+          <span class="ws-rate-pill" title="60 Hz / 16.7 ms SoftPLC">60 Hz</span>
           <button id="inspector-collapse" class="inspector-collapse" data-i18n-title="panel.collapse" title="Свернуть панель">▾</button>
-        </div>
-
-        <div class="ws-inspector-rate-card">
-          <div class="ws-rate-row">
-            <span class="ws-rate-lbl" data-i18n="inspector.physicsRate">Частота физики и ПЛК</span>
-            <div class="ws-rate-input-wrap">
-              <input id="inspector-physics-rate" type="number" value="60" min="15" max="120" readonly />
-              <span>Hz</span>
-            </div>
-          </div>
-          <p class="ws-rate-desc" data-i18n="inspector.scanDesc">
-            16.7 мс на шаг. Приводы и датчики ячейки синхронизируются каждый такт.
-          </p>
         </div>
 
         <div class="tab-headers">
@@ -796,13 +806,16 @@
             <div class="export-card tool-card-acceptance">
               <div class="export-card-head">
                 <svg class="icon export-icon" aria-hidden="true"><use href="#i-doc"/></svg>
-                <strong data-i18n="export.dossier">Robot Kabul Protokolü (Abnahmeprotokoll)</strong>
+                <strong data-i18n="export.dossier">Предварительный отчёт ПНР</strong>
                 <span class="badge-pro" style="margin-left:auto;">PRE-CHECK</span>
               </div>
               <p class="export-card-desc" data-i18n="export.dossierDesc">Предварительный отчёт ПНР: паспорт робота, $TOOL / $BASE, список движений и оценка рисков. Не является сертификатом безопасности.</p>
               <button id="btn-export-dossier" class="btn-tool-pro export-action-btn">
                 <svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>
-                <span data-i18n="export.openDossier">Kabul Protokolü Oluştur (HTML/PDF)</span>
+                <span data-i18n="export.openDossier">Сформировать предварительный отчёт (HTML/PDF)</span>
+              </button>
+              <button id="btn-export-plc-tags" class="btn-secondary export-action-btn" style="margin-top:6px">
+                <span data-i18n="export.plcTags">PLC Tags (TIA Portal / TwinCAT / CSV)</span>
               </button>
             </div>
 
@@ -999,6 +1012,7 @@
         </div>
 
         <div class="modal-footer">
+          <button id="btn-load-demo-modal" class="btn-ghost" style="margin-right:auto;" data-i18n="preset.demo">Демо-программа (Demo.src)</button>
           <button id="btn-cancel-modal" class="btn-secondary" data-i18n="modal.cancel">Отмена</button>
           <button id="btn-apply-code" class="btn-primary" data-i18n="modal.apply">Загрузить в симулятор</button>
         </div>

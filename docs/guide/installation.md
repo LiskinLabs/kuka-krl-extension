@@ -36,7 +36,7 @@ Quick start guide for installing, configuring, and offline-activating KRL Engine
 1. Open the **KUKA Control Center** by clicking the KUKA icon in the Activity Bar or executing `KRL: Open Control Center` (`Ctrl + Shift + P`).
 2. In the license header card, click **Enter License Key**.
 3. Paste your license key from Dodo Payments and confirm. The extension validates with the licensing gateway and enables PRO mode instantly.
-4. **Need to evaluate first?** Run `KRL: Start 14-Day Free Pro Trial` (`krl.startTrial`) — unlocks all **63 Pro tools** for 14 days with zero credit card required.
+4. **Need to evaluate first?** Run `KRL: Start 14-Day Free Pro Trial` (`krl.startTrial`) — unlocks all **66 Pro tools** for 14 days with zero credit card required.
 
 ---
 
@@ -61,7 +61,7 @@ For security-restricted automotive production plants and air-gapped OT networks 
 1. Return to your air-gapped factory workstation.
 2. In KUKA Control Center, click **[Load Offline License File (.lic)]** or execute `krl.importOfflineLicenseFile`.
 3. Select your `liskin-krl-license.lic` file.
-4. The extension validates the Ed25519 signature instantly offline (zero network polling) and permanently unlocks all **63 Pro engineering tools**.
+4. The extension validates the Ed25519 signature instantly offline (zero network polling) and permanently unlocks all **66 Pro engineering tools**.
 
 ---
 
@@ -70,7 +70,7 @@ For security-restricted automotive production plants and air-gapped OT networks 
 | Tier | Price | Workstation Activations | Key Differentiator |
 | :--- | :--- | :--- | :--- |
 | **Engineer Pro (Monthly)** | $19 / mo | 1 Workstation | KRC2/KRC4/KRC5 support, short commissioning sprints, 30-day offline cache |
-| **Engineer Pro (Annual)** | $149 / yr | 1 Workstation | Save 35%, 1-Year Air-Gapped offline certificate, 63 Pro tools & KRC backup diff |
+| **Engineer Pro (Annual)** | $149 / yr | 1 Workstation | Save 35%, 1-Year Air-Gapped offline certificate, 66 Pro tools & KRC backup diff |
 | **Engineer Pro (Lifetime)** | $699 once | 1 Workstation | Perpetual license, zero subscriptions, permanent Air-Gapped certificate |
 | **Team Edition** | $499 / yr | Up to 5 Workstations | Centralized B2B invoicing, 5 plant/office devices, KRC2–KRC5 |
 | **Department / Integrator** | $1,499 / yr | Up to 20 Workstations | Up to 20 workstations, unlimited integration projects, dedicated engineering support |

@@ -36,7 +36,7 @@ Guida rapida per l'installazione, la configurazione e l'attivazione offline di K
 1. Apri **KUKA Control Center** facendo clic sull'icona KUKA nella barra delle attività o eseguendo `KRL: Open Control Center` (`Ctrl + Shift + P`).
 2. Fai clic su **Enter License Key**.
 3. Incolla la chiave di licenza di Dodo Payments e conferma l'attivazione.
-4. **Vuoi provarlo prima?** Esegui `krl.startTrial` per la **prova gratuita di 14 giorni** con tutti i **63 strumenti Pro**, senza carta di credito.
+4. **Vuoi provarlo prima?** Esegui `krl.startTrial` per la **prova gratuita di 14 giorni** con tutti i **66 strumenti Pro**, senza carta di credito.
 
 ---
 
@@ -61,7 +61,7 @@ Per gli stabilimenti automobilistici e le reti industriali isolate prive di conn
 1. Torna alla postazione di lavoro isolata in fabbrica.
 2. In KUKA Control Center, fai clic su **[Carica file licenza offline (.lic)]** o esegui `krl.importOfflineLicenseFile`.
 3. Seleziona il file `liskin-krl-license.lic`.
-4. La firma crittografica Ed25519 viene convalidata istantaneamente offline, sbloccando tutti i **63 strumenti Pro**.
+4. La firma crittografica Ed25519 viene convalidata istantaneamente offline, sbloccando tutti i **66 strumenti Pro**.
 
 ---
 
@@ -70,7 +70,7 @@ Per gli stabilimenti automobilistici e le reti industriali isolate prive di conn
 | Piano | Prezzo | Postazioni Attivate | Differenziatore Chiave |
 | :--- | :--- | :--- | :--- |
 | **Engineer Pro (Mensile)** | $19 / mese | 1 Postazione | Supporto KRC2/KRC4/KRC5, collaudi e brevi progetti |
-| **Engineer Pro (Annuale)** | $149 / anno | 1 Postazione | Risparmio del 35%, certificato offline Air-Gap per 1 anno, 63 strumenti Pro |
+| **Engineer Pro (Annuale)** | $149 / anno | 1 Postazione | Risparmio del 35%, certificato offline Air-Gap per 1 anno, 66 strumenti Pro |
 | **Engineer Pro (Lifetime)** | $699 una tantum | 1 Postazione | Licenza perpetua, aggiornamenti a vita, certificato Air-Gap permanente |
 | **Team Edition** | $499 / anno | Fino a 5 Postazioni | Fatturazione B2B centralizzata, 5 postazioni stabilimento/ufficio, KRC2–KRC5 |
 | **Department / Integrator** | $1,499 / anno | Fino a 20 Postazioni | Fino a 20 postazioni di lavoro, progetti di integrazione illimitati |

@@ -36,7 +36,7 @@ KRL Engineering Toolkit eklentisini kurmak, yapılandırmak ve çevrimdışı et
 1. Activity Bar'daki KUKA simgesine tıklayarak veya `KRL: Open Control Center` (`Ctrl + Shift + P`) komutunu çalıştırarak **KUKA Control Center**'ı açın.
 2. Başlıktaki **Enter License Key** düğmesine tıklayın.
 3. Dodo Payments lisans anahtarınızı yapıştırın ve onaylayın. Eklenti ağ üzerinden doğrulamayı tamamlayıp PRO modunu etkinleştirir.
-4. **Satın almadan önce test etmek ister misiniz?** Kredi kartı gerekmeden tüm **63 Pro aracı** 14 gün boyunca açmak için `krl.startTrial` komutunu çalıştırın.
+4. **Satın almadan önce test etmek ister misiniz?** Kredi kartı gerekmeden tüm **66 Pro aracı** 14 gün boyunca açmak için `krl.startTrial` komutunu çalıştırın.
 
 ---
 
@@ -61,7 +61,7 @@ KRL Engineering Toolkit eklentisini kurmak, yapılandırmak ve çevrimdışı et
 1. Fabrikadaki çevrimdışı iş istasyonunuza geri dönün.
 2. KUKA Control Center'da **[Çevrimdışı Lisans Dosyası Yükle (.lic)]** düğmesine tıklayın veya `krl.importOfflineLicenseFile` komutunu çalıştırın.
 3. `liskin-krl-license.lic` dosyasını seçin.
-4. Eklenti Ed25519 asimetrik imzasını ağ gereksinimi olmadan derhal doğrular ve tüm **63 Pro mühendislik aracını** kalıcı olarak açar.
+4. Eklenti Ed25519 asimetrik imzasını ağ gereksinimi olmadan derhal doğrular ve tüm **66 Pro mühendislik aracını** kalıcı olarak açar.
 
 ---
 
@@ -70,7 +70,7 @@ KRL Engineering Toolkit eklentisini kurmak, yapılandırmak ve çevrimdışı et
 | Plan | Fiyat | Cihaz Aktivasyonu | Temel Farklılaştırıcı |
 | :--- | :--- | :--- | :--- |
 | **Engineer Pro (Aylık)** | $19 / ay | 1 İş İstasyonu | KRC2/KRC4/KRC5 desteği, kısa vadeli devreye alma projeleri |
-| **Engineer Pro (Yıllık)** | $149 / yıl | 1 İş İstasyonu | %35 tasarruf, 1 Yıllık Air-Gapped çevrimdışı sertifika, 63 Pro araç ve KRC yedek diff |
+| **Engineer Pro (Yıllık)** | $149 / yıl | 1 İş İstasyonu | %35 tasarruf, 1 Yıllık Air-Gapped çevrimdışı sertifika, 66 Pro araç ve KRC yedek diff |
 | **Engineer Pro (Ömür Boyu)** | $699 tek seferlik | 1 İş İstasyonu | Kalıcı lisans, ömür boyu güncellemeler, kalıcı Air-Gapped sertifika |
 | **Team Edition** | $499 / yıl | 5 İş İstasyonuna Kadar | Merkezi B2B fatura, 5 fabrika/ofis cihazı, KRC2–KRC5 |
 | **Department / Integrator** | $1,499 / yıl | 20 İş İstasyonuna Kadar | 20 iş istasyonuna kadar, sınırsız entegrasyon projesi |

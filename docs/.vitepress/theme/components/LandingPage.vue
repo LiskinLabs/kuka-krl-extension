@@ -16,9 +16,9 @@
           REVERSINGLABS SPECTRA ASSURE: 100% PASS [0 CVE]
         </span>
         <span class="hidden lg:inline text-zinc-500">|</span>
-        <span class="hidden lg:inline text-zinc-400">126 COMMANDS</span>
+        <span class="hidden lg:inline text-zinc-400">135 COMMANDS</span>
         <span class="hidden xl:inline text-zinc-500">|</span>
-        <span class="hidden xl:inline text-zinc-400">63 PRO COMMANDS &amp; ANALYZERS</span>
+        <span class="hidden xl:inline text-zinc-400">66 PRO COMMANDS &amp; ANALYZERS</span>
       </div>
       <div class="flex items-center gap-4 text-[10px]">
         <span class="inline-flex items-center gap-1 text-emerald-400 font-bold">
@@ -218,7 +218,7 @@
             <!-- 4 Technical Metric Cards -->
             <div :class="['grid grid-cols-2 sm:grid-cols-4 border-t pt-4 text-left gap-4 font-mono', isDaylight ? 'border-zinc-300' : 'border-zinc-800']">
               <div>
-                <div class="text-2xl font-black text-[#FF5500] tabular-nums">126</div>
+                <div class="text-2xl font-black text-[#FF5500] tabular-nums">135</div>
                 <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Commands</div>
               </div>
               <div>
@@ -230,7 +230,7 @@
                 <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Tool Guides</div>
               </div>
               <div>
-                <div class="text-2xl font-black tabular-nums">63</div>
+                <div class="text-2xl font-black tabular-nums">66</div>
                 <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Pro Commands</div>
               </div>
             </div>
@@ -597,7 +597,7 @@
               <p class="text-xs text-zinc-400">Full professional robotics toolset. Save 35% compared to monthly billing.</p>
               <ul class="text-xs font-mono space-y-1.5 pt-2 border-t border-zinc-800 text-zinc-300">
                 <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Interactive Logic Flowcharts v2.0</li>
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> All 63 Pro Commands + 126 Tools</li>
+                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> All 66 Pro Commands + 135 Tools</li>
                 <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Advance Run Stop Detection</li>
                 <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> 3-Point Frame Kinematic Solver</li>
               </ul>
@@ -1034,7 +1034,7 @@
             <tbody>
               <tr class="border-b border-zinc-200">
                 <td class="p-2 font-bold">{{ recommendedTier.name }}</td>
-        <td class="p-2">KRL Engineering Toolkit IDE v1.9.26 Suite (63 Pro Tools, 126 Commands, Air-Gap License, Spectra Assure 0 CVE)</td>
+        <td class="p-2">KRL Engineering Toolkit IDE v1.9.26 Suite (66 Pro Tools, 135 Commands, Air-Gap License, Spectra Assure 0 CVE)</td>
                 <td class="p-2 text-center">{{ recommendedTier.seats }} Seats</td>
                 <td class="p-2 text-right font-bold">{{ formatPrice(recommendedTier.priceUsd) }}</td>
               </tr>
@@ -1096,7 +1096,7 @@
         </button>
 
         <div class="text-sm font-bold text-[#FF5500]">ACTIVATE 14-DAY PRO TRIAL</div>
-      <p class="text-zinc-400 text-xs">Experience all 63 Pro engineering tools with zero credit card and zero commitment.</p>
+      <p class="text-zinc-400 text-xs">Experience all 66 Pro engineering tools with zero credit card and zero commitment.</p>
 
         <div class="space-y-3 border-t border-b border-zinc-800 py-3 text-xs">
           <div>

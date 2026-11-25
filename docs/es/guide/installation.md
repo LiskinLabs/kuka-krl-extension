@@ -36,7 +36,7 @@ Guía de inicio rápido para instalar, configurar y activar sin conexión KRL En
 1. Abra el **KUKA Control Center** haciendo clic en el icono de KUKA en la barra de actividades o ejecutando `KRL: Open Control Center` (`Ctrl + Shift + P`).
 2. En la tarjeta principal, haga clic en **Enter License Key**.
 3. Ingrese su clave de licencia y confirme la activación.
-4. **¿Desea probarlo antes?** Ejecute `krl.startTrial` para activar la **prueba gratuita de 14 días** con acceso a las **63 herramientas Pro** sin tarjeta.
+4. **¿Desea probarlo antes?** Ejecute `krl.startTrial` para activar la **prueba gratuita de 14 días** con acceso a las **66 herramientas Pro** sin tarjeta.
 
 ---
 
@@ -61,7 +61,7 @@ Para plantas automotrices y redes industriales aisladas sin conexión a Internet
 1. Regrese a su estación de trabajo en la fábrica.
 2. En KUKA Control Center, haga clic en **[Cargar archivo de licencia offline (.lic)]** o ejecute `krl.importOfflineLicenseFile`.
 3. Seleccione el archivo `liskin-krl-license.lic`.
-4. La firma Ed25519 se valida al instante sin conexión, desbloqueando permanentemente todas las **63 herramientas Pro**.
+4. La firma Ed25519 se valida al instante sin conexión, desbloqueando permanentemente todas las **66 herramientas Pro**.
 
 ---
 
@@ -70,7 +70,7 @@ Para plantas automotrices y redes industriales aisladas sin conexión a Internet
 | Plan | Precio | Activaciones | Diferenciador Clave |
 | :--- | :--- | :--- | :--- |
 | **Engineer Pro (Mensual)** | $19 / mes | 1 estación | Soporte KRC2/KRC4/KRC5, proyectos de puesta en marcha |
-| **Engineer Pro (Anual)** | $149 / año | 1 estación | Ahorro del 35%, certificado offline Air-Gap por 1 año, 63 herramientas Pro |
+| **Engineer Pro (Anual)** | $149 / año | 1 estación | Ahorro del 35%, certificado offline Air-Gap por 1 año, 66 herramientas Pro |
 | **Engineer Pro (Lifetime)** | $699 único | 1 estación | Licencia perpetua, actualizaciones de por vida, certificado Air-Gap permanente |
 | **Team Edition** | $499 / año | Hasta 5 estaciones | Facturación B2B centralizada, 5 equipos de planta u oficina, KRC2–KRC5 |
 | **Department / Integrator** | $1,499 / año | Hasta 20 estaciones | Hasta 20 estaciones de trabajo, proyectos de integración ilimitados |

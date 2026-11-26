@@ -3,12 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="dark light" />
+  <meta name="color-scheme" content="light dark" />
   <title>Liskin Labs | KUKA 3D Digital Twin & Simulation Platform</title>
   <script>
     try {
-      document.documentElement.dataset.theme =
-        localStorage.getItem('liskin_workstation_theme') || 'dark';
+      var qpTheme = new URLSearchParams(window.location.search).get('theme');
+      var allowed = { dark: 1, light: 1, 'kuka-industrial': 1, 'high-contrast': 1 };
+      var resolved = (qpTheme && allowed[qpTheme])
+        ? qpTheme
+        : (localStorage.getItem('liskin_workstation_theme') || localStorage.getItem('krl-color-scheme') || 'dark');
+      if (!allowed[resolved]) resolved = 'dark';
+      document.documentElement.dataset.theme = resolved;
+      var metaCs = document.querySelector('meta[name="color-scheme"]');
+      if (metaCs) metaCs.content = resolved === 'light' ? 'light' : 'dark';
     } catch (_) {
       document.documentElement.dataset.theme = 'dark';
     }
@@ -17,9 +24,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
   <link rel="alternate icon" type="image/x-icon" href="./favicon.ico" />
-  <script type="module" crossorigin src="./assets/index-dNGTv6Oq.js"></script>
+  <script type="module" crossorigin src="./assets/index-CImjhbql.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/vendor-three-C0EWJPFM.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-DQHFaApI.css">
+  <link rel="stylesheet" crossorigin href="./assets/index-CYx7bKfV.css">
 </head>
 <body>
   <!-- Inline SVG icon sprite: the UI uses vector icons only, no emoji. -->
@@ -52,10 +59,13 @@
     <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6.1c0 5 3.4 9.7 8 10.9 4.6-1.2 8-5.9 8-10.9V5l-8-3zm0 17.9c-3.3-1-6-4.7-6-8.8V6.4l6-2.2 6 2.2v4.7c0 4.1-2.7 7.8-6 8.8z"/></symbol>
     <symbol id="i-stop" viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></symbol>
     <symbol id="i-wireframe" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5zm0 2.3L18.7 8 12 11.7 5.3 8 12 4.3zM5 9.8l6 3.3v6.5l-6-3.3V9.8zm8 9.8v-6.5l6-3.3v6.5l-6 3.3z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
   </svg>
   <div id="app-container">
     <!-- Top Workstation Header -->
     <header id="top-bar">
+      <h1 class="visually-hidden">LiskinLabs KUKA 3D Digital Twin Simulator</h1>
       <div class="brand-badge">
         <div class="brand-mark" aria-hidden="true">
           <img src="./logo-light.svg" alt="" class="brand-logo brand-logo-on-light" />
@@ -130,7 +140,7 @@
           </a>
         </div>
 
-        <button id="btn-toggle-scene-dock" class="btn-ghost mobile-only" data-i18n-title="btn.mobileMenu" title="Дерево сцены">
+        <button id="btn-toggle-scene-dock" class="btn-ghost mobile-only" type="button" data-i18n-title="btn.mobileMenu" data-i18n-aria-label="btn.mobileMenu" title="Дерево сцены" aria-label="Дерево сцены">
           <svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg>
           <span data-i18n="dock.scene">Сцена</span>
         </button>
@@ -140,9 +150,14 @@
           <span data-i18n="cmdPalette.btn">Команды</span>
         </button>
 
-        <button id="btn-open-code-modal" class="btn-primary">
+        <button id="btn-open-code-modal" class="btn-primary" type="button">
           <svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg>
           <span data-i18n="btn.importBackup">Импорт бекапа</span>
+        </button>
+
+        <button id="btn-theme-toggle" class="btn-ghost theme-quick-toggle" type="button" data-i18n-title="theme.toggle" data-i18n-aria-label="theme.toggle" title="Switch light / dark theme" aria-label="Switch light / dark theme" aria-pressed="false">
+          <svg class="icon theme-ico-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+          <svg class="icon theme-ico-moon" aria-hidden="true"><use href="#i-moon"/></svg>
         </button>
 
         <button id="btn-settings" class="btn-ghost settings-toggle" type="button" aria-expanded="false" aria-controls="settings-panel" data-i18n-title="settings.title" title="Настройки">
@@ -268,7 +283,7 @@
           <button class="ws-dock-tab active" data-ld-tab="scene" data-i18n="dock.scene">Сцена</button>
           <button class="ws-dock-tab" data-ld-tab="flow" data-i18n="dock.flow">Схема</button>
           <button class="ws-dock-tab" data-ld-tab="history" data-i18n="dock.history">История</button>
-          <button id="left-dock-collapse" class="ws-dock-collapse" data-i18n-title="panel.collapse" title="Свернуть дерево сцены">▾</button>
+          <button id="left-dock-collapse" class="ws-dock-collapse" type="button" data-i18n-title="panel.collapse" data-i18n-aria-label="panel.collapse" title="Свернуть дерево сцены" aria-label="Свернуть дерево сцены">▾</button>
         </div>
 
         <div id="ld-pane-scene" class="ws-dock-pane active">
@@ -299,8 +314,8 @@
               <option value="4">$BASE[4]</option>
             </select>
             <button id="scene-add-part-btn" class="btn-secondary ws-scene-part-btn" type="button" data-i18n="parts.addBtn">+ Добавить</button>
-            <button id="scene-check-clearance-btn" class="btn-secondary ws-scene-part-btn" type="button" data-i18n-title="parts.checkClearance" title="Проверить зазоры CAD"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></button>
-            <button id="scene-clear-parts-btn" class="btn-ghost ws-scene-part-btn" type="button" data-i18n-title="parts.clear" title="Удалить добавленные объекты">×</button>
+            <button id="scene-check-clearance-btn" class="btn-secondary ws-scene-part-btn" type="button" data-i18n-title="parts.checkClearance" data-i18n-aria-label="parts.checkClearance" title="Проверить зазоры CAD" aria-label="Проверить зазоры CAD"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></button>
+            <button id="scene-clear-parts-btn" class="btn-ghost ws-scene-part-btn" type="button" data-i18n-title="parts.clear" data-i18n-aria-label="parts.clear" title="Удалить добавленные объекты" aria-label="Удалить добавленные объекты">×</button>
           </div>
         </div>
 
@@ -309,21 +324,21 @@
             <div class="flow-panel-head">
               <span class="flow-panel-title" data-i18n="flow.title">БЛОК-СХЕМА</span>
               <span id="flow-panel-module" class="flow-panel-module">Demo.src</span>
-          <button id="flow-panel-close" class="flow-dock-icon-btn mobile-only" data-i18n-title="flow.close" title="Закрыть">
+          <button id="flow-panel-close" class="flow-dock-icon-btn mobile-only" type="button" data-i18n-title="flow.close" data-i18n-aria-label="flow.close" title="Закрыть" aria-label="Закрыть">
             <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
           </button>
-              <button id="btn-flow-full" class="flow-dock-icon-btn" data-i18n-title="flow.openFull" title="Открыть полный просмотр">
+              <button id="btn-flow-full" class="flow-dock-icon-btn" type="button" data-i18n-title="flow.openFull" data-i18n-aria-label="flow.openFull" title="Открыть полный просмотр" aria-label="Открыть полный просмотр">
                 <svg class="icon" aria-hidden="true"><use href="#i-fullscreen"/></svg>
               </button>
             </div>
             <div class="flow-panel-programs">
-              <button id="flow-panel-back" class="flow-dock-nav" data-i18n-title="flow.back" title="Назад" disabled>←</button>
+              <button id="flow-panel-back" class="flow-dock-nav" type="button" data-i18n-title="flow.back" data-i18n-aria-label="flow.back" title="Назад" aria-label="Назад" disabled>←</button>
               <select id="flow-panel-program-select" class="flow-panel-program-select" aria-label="KRL program"></select>
             </div>
             <div class="flow-live-bar">
               <span class="flow-live-dot"></span>
               <span id="flow-current" class="flow-current">—</span>
-              <button id="flow-panel-live" class="flow-live-btn" data-i18n-title="flow.live.title" title="Показать исполняемую программу"><svg class="icon" aria-hidden="true"><use href="#i-live"/></svg></button>
+              <button id="flow-panel-live" class="flow-live-btn" type="button" data-i18n-title="flow.live.title" data-i18n-aria-label="flow.live.title" title="Показать исполняемую программу" aria-label="Показать исполняемую программу"><svg class="icon" aria-hidden="true"><use href="#i-live"/></svg></button>
             </div>
             <div id="mini-flow" class="mini-flow"></div>
             <div class="flow-dock-hint" data-i18n="flow.dockHint">Движение — переход · вызов — внутрь</div>
@@ -377,7 +392,7 @@
 
           <!-- Floating CAD Viewport Tools -->
           <div id="viewport-tools" class="viewport-tools">
-            <button id="btn-focus-scene" class="vtool-btn" data-i18n-title="btn.focusScene" title="Фокус на роботе">
+            <button id="btn-focus-scene" class="vtool-btn" type="button" data-i18n-title="btn.focusScene" data-i18n-aria-label="btn.focusScene" title="Фокус на роботе" aria-label="Фокус на роботе">
               <svg class="icon" aria-hidden="true"><use href="#i-focus"/></svg>
             </button>
             <div class="vtool-sep"></div>
@@ -394,7 +409,7 @@
               <svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg>
               <span class="vtool-label" data-i18n="cad.stepBtn">STEP / VCMX</span>
             </button>
-            <button id="btn-vp-envelope" class="vtool-btn" data-i18n-title="cad.envelope" title="Оценочная рабочая зона (не safety-сертификация)">
+            <button id="btn-vp-envelope" class="vtool-btn" type="button" data-i18n-title="cad.envelope" data-i18n-aria-label="cad.envelope" title="Оценочная рабочая зона (не safety-сертификация)" aria-label="Оценочная рабочая зона">
               <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
             </button>
             <div class="vtool-sep"></div>
@@ -403,7 +418,7 @@
               <span class="vtool-label" data-i18n="btn.flowchart">Схема</span>
             </button>
             <div class="vtool-sep"></div>
-            <button id="btn-toggle-fullscreen" class="vtool-btn" data-i18n-title="btn.fullscreen" title="На весь экран">
+            <button id="btn-toggle-fullscreen" class="vtool-btn" type="button" data-i18n-title="btn.fullscreen" data-i18n-aria-label="btn.fullscreen" title="На весь экран" aria-label="На весь экран">
               <svg class="icon" aria-hidden="true"><use href="#i-fullscreen"/></svg>
             </button>
           </div>
@@ -436,7 +451,7 @@
       <div id="telemetry-hud" class="hud-panel">
         <div class="hud-title">
           <span class="hud-indicator"></span> <span id="hud-title" data-i18n="hud.tool">ФЛАНЕЦ РОБОТА ($TOOL)</span>
-          <button id="btn-hud-collapse" class="hud-collapse-btn" data-i18n-title="hud.collapse" data-i18n-aria-label="hud.collapse" title="Свернуть / развернуть координаты" aria-label="Свернуть / развернуть координаты">▾</button>
+          <button id="btn-hud-collapse" class="hud-collapse-btn" type="button" data-i18n-title="hud.collapse" data-i18n-aria-label="hud.collapse" title="Свернуть / развернуть координаты" aria-label="Свернуть / развернуть координаты">▾</button>
         </div>
         <div class="coords-grid">
           <div class="coord-box"><span class="lbl">X</span><span class="val" id="val-x">0.0</span><span class="unit">mm</span></div>
@@ -457,10 +472,10 @@
           <!-- Bottom Playback Controls -->
           <footer id="playback-bar" class="glass-panel">
             <div class="playback-controls">
-              <button id="btn-prev" class="btn-ctrl" data-i18n-title="playback.prev" title="Предыдущая точка"><svg class="icon" aria-hidden="true"><use href="#i-prev"/></svg></button>
-              <button id="btn-play" class="btn-ctrl btn-play" data-i18n-title="playback.play" title="Старт / Пауза"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg></button>
-              <button id="btn-next" class="btn-ctrl" data-i18n-title="playback.next" title="Следующая точка"><svg class="icon" aria-hidden="true"><use href="#i-next"/></svg></button>
-              <button id="btn-reset" class="btn-ctrl" data-i18n-title="playback.reset" title="В начало"><svg class="icon" aria-hidden="true"><use href="#i-reset"/></svg></button>
+              <button id="btn-prev" class="btn-ctrl" type="button" data-i18n-title="playback.prev" data-i18n-aria-label="playback.prev" title="Предыдущая точка" aria-label="Предыдущая точка"><svg class="icon" aria-hidden="true"><use href="#i-prev"/></svg></button>
+              <button id="btn-play" class="btn-ctrl btn-play" type="button" data-i18n-title="playback.play" data-i18n-aria-label="playback.play" title="Старт / Пауза" aria-label="Старт / Пауза"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg></button>
+              <button id="btn-next" class="btn-ctrl" type="button" data-i18n-title="playback.next" data-i18n-aria-label="playback.next" title="Следующая точка" aria-label="Следующая точка"><svg class="icon" aria-hidden="true"><use href="#i-next"/></svg></button>
+              <button id="btn-reset" class="btn-ctrl" type="button" data-i18n-title="playback.reset" data-i18n-aria-label="playback.reset" title="В начало" aria-label="В начало"><svg class="icon" aria-hidden="true"><use href="#i-reset"/></svg></button>
             </div>
 
             <div class="timeline-box">
@@ -481,7 +496,7 @@
                 <option value="2">2.0x</option>
                 <option value="4">4.0x</option>
               </select>
-              <button id="btn-loop" class="btn-icon active" data-i18n-title="playback.loop" title="Зациклить воспроизведение"><svg class="icon" aria-hidden="true"><use href="#i-loop"/></svg></button>
+              <button id="btn-loop" class="btn-icon active" type="button" data-i18n-title="playback.loop" data-i18n-aria-label="playback.loop" title="Зациклить воспроизведение" aria-label="Зациклить воспроизведение"><svg class="icon" aria-hidden="true"><use href="#i-loop"/></svg></button>
             </div>
           </footer>
         </main>
@@ -504,7 +519,7 @@
             </button>
             <div class="ws-bottom-spacer"></div>
             <span id="plc-scan-indicator" class="ws-plc-scan-pill">SPS.SUB · 60 Hz (16.7 ms)</span>
-            <button id="bottom-dock-collapse" class="ws-dock-collapse" data-i18n-title="console.collapse" title="Свернуть/развернуть консоль">▾</button>
+            <button id="bottom-dock-collapse" class="ws-dock-collapse" type="button" data-i18n-title="console.collapse" data-i18n-aria-label="console.collapse" title="Свернуть/развернуть консоль" aria-label="Свернуть/развернуть консоль">▾</button>
           </div>
 
           <!-- Pane 2: KRL / SoftPLC Source & Execution Monitor -->
@@ -657,7 +672,7 @@
         <div class="inspector-head">
           <span class="inspector-title" data-i18n="dock.inspector">Инспектор</span>
           <span class="ws-rate-pill" title="60 Hz / 16.7 ms SoftPLC">60 Hz</span>
-          <button id="inspector-collapse" class="inspector-collapse" data-i18n-title="panel.collapse" title="Свернуть панель">▾</button>
+          <button id="inspector-collapse" class="inspector-collapse" type="button" data-i18n-title="panel.collapse" data-i18n-aria-label="panel.collapse" title="Свернуть панель" aria-label="Свернуть панель">▾</button>
         </div>
 
         <div class="tab-headers">
@@ -892,7 +907,7 @@
             <span class="pad-dot"></span>
             <span class="pad-title" data-i18n="pad.title">ПУЛЬТ ПРОГРАММЫ</span>
             <span id="pad-module" class="pad-module">Demo.src</span>
-            <button id="pad-collapse" class="pad-collapse" data-i18n-title="pad.collapse" title="Свернуть пульт">▾</button>
+            <button id="pad-collapse" class="pad-collapse" type="button" data-i18n-title="pad.collapse" data-i18n-aria-label="pad.collapse" title="Свернуть пульт" aria-label="Свернуть пульт">▾</button>
           </div>
           <div id="pad-body" class="pad-body">
             <div id="pad-state" class="pad-state" data-i18n="pad.idle">Ожидание запуска</div>
@@ -937,11 +952,9 @@
             <span data-i18n="flow.simulate">Симуляция</span>
           </button>
           <span class="flow-sep"></span>
-          <label class="flow-btn flow-import" for="flow-backup-input" data-i18n="flow.backupZip">Бекап ZIP</label>
-          <input id="flow-backup-input" type="file" accept=".zip" hidden />
-          <label class="flow-btn flow-import" for="flow-folder-input" data-i18n="flow.folder">Папка</label>
-          <input id="flow-folder-input" type="file" webkitdirectory hidden />
-          <button id="flow-close" class="flow-btn flow-close" data-i18n-title="flow.close" title="Закрыть"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+          <label class="flow-btn flow-import" for="flow-backup-input"><span data-i18n="flow.backupZip">Бекап ZIP</span><input id="flow-backup-input" class="visually-hidden" type="file" accept=".zip" /></label>
+          <label class="flow-btn flow-import" for="flow-folder-input"><span data-i18n="flow.folder">Папка</span><input id="flow-folder-input" class="visually-hidden" type="file" webkitdirectory /></label>
+          <button id="flow-close" class="flow-btn flow-close" type="button" data-i18n-title="flow.close" data-i18n-aria-label="flow.close" title="Закрыть" aria-label="Закрыть"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
         </div>
       </div>
       <div class="flow-main">
@@ -949,7 +962,7 @@
         <div id="flow-source" class="flow-source" style="display:none;">
           <div class="flow-source-head">
             <span id="flow-source-title">Cell.src</span>
-            <button id="flow-source-close" class="flow-btn"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+            <button id="flow-source-close" class="flow-btn" type="button" aria-label="Close source"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
           </div>
           <pre id="flow-source-code" class="flow-source-code"></pre>
         </div>
@@ -966,7 +979,7 @@
             <svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg>
             <h3 data-i18n="modal.title">Загрузка KRL программы (.src / .dat)</h3>
           </div>
-          <button id="btn-close-modal" class="btn-close"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+          <button id="btn-close-modal" class="btn-close" type="button" aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
         </div>
 
         <div class="modal-body">
@@ -1027,7 +1040,7 @@
             <svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>
             <h3 data-i18n="diff.title">Сравнение бекапов</h3>
           </div>
-          <button id="diff-close" class="btn-close"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+          <button id="diff-close" class="btn-close" type="button" aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
         </div>
         <div class="modal-body">
           <div id="diff-summary" class="diff-summary"></div>
@@ -1049,7 +1062,7 @@
             <svg class="icon" aria-hidden="true"><use href="#i-warning"/></svg>
             <h3 data-i18n="consent.title">Экспериментальная модель</h3>
           </div>
-          <button id="consent-close" class="btn-close"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+          <button id="consent-close" class="btn-close" type="button" aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
         </div>
         <div class="modal-body consent-body">
           <p data-i18n="consent.body">
@@ -1077,7 +1090,7 @@
     <div id="server-progress" class="server-progress glass-panel" style="display:none;">
       <div class="server-progress-head">
         <span id="server-progress-title" data-i18n="server.title">СЕРВЕРНАЯ КОМПИЛЯЦИЯ</span>
-        <button id="server-progress-close" class="mini-btn" data-i18n-title="btn.hide" title="Скрыть"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+        <button id="server-progress-close" class="mini-btn" type="button" data-i18n-title="btn.hide" data-i18n-aria-label="btn.hide" title="Скрыть" aria-label="Скрыть"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
       </div>
       <div class="server-progress-bar"><div id="server-progress-fill"></div></div>
             <div id="server-progress-text" role="status" aria-live="polite" aria-atomic="false">Загрузка…</div>

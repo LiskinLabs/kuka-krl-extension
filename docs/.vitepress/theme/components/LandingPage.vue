@@ -392,8 +392,10 @@
                 <div class="aspect-video overflow-hidden rounded-md bg-[#0A0C0F]">
                   <ClientOnly>
                     <iframe
-                      :src="withBase(`/sim/?embed=1&lang=${currentLang}&theme=${isDark ? 'dark' : 'light'}`)"
+                      ref="simIframeRef"
+                      :src="withBase(simIframeSrc)"
                       :title="t.hero.simFrameTitle"
+                      @load="syncSimIframe"
                       class="h-full w-full border-0"
                     ></iframe>
                   </ClientOnly>
@@ -1572,7 +1574,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { withBase, useData } from 'vitepress'
 import inventoryData from './krl_tools_inventory.json'
 import { LANDING_LOCALES, LOCALE_PATHS, type LocaleCode, type PricingTier } from './landingI18n'
@@ -1717,6 +1719,37 @@ onBeforeUnmount(() => {
 const heroVisualMode = ref<'screenshots' | '3d'>('screenshots')
 const activeHeroSlide = ref(0)
 const currentHeroSlide = computed(() => t.value.hero.mediaSlides[activeHeroSlide.value] || t.value.hero.mediaSlides[0])
+const simIframeRef = ref<HTMLIFrameElement | null>(null)
+const initialSimTheme = ref<'dark' | 'light'>('dark')
+const simIframeSrc = computed(() => `/sim/?embed=1&lang=${currentLang.value}&theme=${initialSimTheme.value}`)
+
+const syncSimIframe = () => {
+  if (typeof window === 'undefined') return
+  const win = simIframeRef.value?.contentWindow
+  if (!win) return
+  win.postMessage(
+    {
+      type: 'liskin-sim-sync',
+      theme: isDark.value ? 'dark' : 'light',
+      lang: currentLang.value
+    },
+    window.location.origin
+  )
+}
+
+watch(
+  heroVisualMode,
+  (mode) => {
+    if (mode === '3d') {
+      initialSimTheme.value = isDark.value ? 'dark' : 'light'
+    }
+  },
+  { flush: 'sync' }
+)
+
+watch([isDark, currentLang], () => {
+  syncSimIframe()
+})
 
 // CLI copy
 const copiedCli = ref(false)

@@ -31,13 +31,13 @@ export default defineConfig({
     ['meta', { name: 'theme-color', content: '#FF5E00' }],
     ['meta', { name: 'keywords', content: 'KRL, KRC2, KRC4, KRC5, Robot, Robotics, Industrial Automation, WorkVisual, VS Code, Live Monitor, MCP' }],
     ['meta', { property: 'og:title', content: 'KRL Engineering Toolkit — Industrial Robotics IDE Suite' }],
-    ['meta', { property: 'og:description', content: 'Engineering VS Code extension for KUKA KRL with static analysis, backup diff, WorkVisual .wvs inspection, and offline commissioning.' }],
+    ['meta', { property: 'og:description', content: 'Engineering toolkit for KUKA KRL in VS Code (KR C2–C5, KSS 5.4–8.7, VSS & iiQKA.OS2 9.0–9.3): static diagnostics, SmartPAD backup diff, .wvs/.vcmx inspection, and live controller telemetry.' }],
     ['meta', { property: 'og:image', content: '/kuka-krl-extension/logo-original.png' }],
     ['meta', { property: 'og:site_name', content: 'KRL Engineering Toolkit' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
     ['meta', { name: 'twitter:title', content: 'KRL Engineering Toolkit — Industrial Robotics IDE Suite' }],
-    ['meta', { name: 'twitter:description', content: 'Engineering VS Code extension for KUKA KRL with static analysis, backup diff, WorkVisual .wvs inspection, and offline commissioning.' }],
+    ['meta', { name: 'twitter:description', content: 'Engineering toolkit for KUKA KRL in VS Code (KR C2–C5, KSS 5.4–8.7, VSS & iiQKA.OS2 9.0–9.3): static diagnostics, SmartPAD backup diff, .wvs/.vcmx inspection, and live controller telemetry.' }],
     ['meta', { name: 'twitter:image', content: '/kuka-krl-extension/logo-original.png' }]
   ],
   vite: {
@@ -87,7 +87,7 @@ export default defineConfig({
     root: {
       label: 'English',
       lang: 'en',
-      description: "The definitive industrial development suite for KUKA Robot Language.",
+      description: "Engineering toolkit for KUKA KRL in VS Code (KR C2–C5, KSS 5.4–8.7, VSS & iiQKA.OS2 9.0–9.3): static diagnostics, SmartPAD backup diff, .wvs/.vcmx inspection, and live telemetry.",
       themeConfig: {
         nav: [
           { text: 'Home', link: '/' },
@@ -144,7 +144,7 @@ export default defineConfig({
       label: 'Русский',
       lang: 'ru',
       link: '/ru/',
-      description: "Профессиональная среда разработки для KUKA Robot Language.",
+      description: "Инженерная среда для KUKA KRL в VS Code (KR C2–C5, KSS 5.4–8.7, VSS и iiQKA.OS2 9.0–9.3): статический анализ кода, diff бэкапов SmartPAD, разбор .wvs/.vcmx и телеметрия контроллера.",
       themeConfig: {
         nav: [
           { text: 'Главная', link: '/ru/' },
@@ -201,7 +201,7 @@ export default defineConfig({
       label: 'Türkçe',
       lang: 'tr',
       link: '/tr/',
-      description: "KUKA Robot Language için kesin endüstriyel geliştirme paketi.",
+      description: "VS Code için KUKA KRL mühendislik ortamı (KR C2–C5, KSS 5.4–8.7, VSS ve iiQKA.OS2 9.0–9.3): statik analiz, SmartPAD yedek diff, .wvs/.vcmx inceleme ve canlı telemetri.",
       themeConfig: {
         nav: [
           { text: 'Ana Sayfa', link: '/tr/' },
@@ -258,7 +258,7 @@ export default defineConfig({
       label: 'Deutsch',
       lang: 'de',
       link: '/de/',
-      description: "Die definitive industrielle Entwicklungsumgebung für KUKA Robot Language.",
+      description: "Engineering-Umgebung für KUKA KRL in VS Code (KR C2–C5, KSS 5.4–8.7, VSS & iiQKA.OS2 9.0–9.3): statische Analyse, SmartPAD-Backup-Diff, .wvs/.vcmx-Inspektion und Live-Telemetrie.",
       themeConfig: {
         nav: [
           { text: 'Startseite', link: '/de/' },
@@ -315,7 +315,7 @@ export default defineConfig({
       label: 'Español',
       lang: 'es',
       link: '/es/',
-      description: "La suite de desarrollo industrial definitiva para KUKA Robot Language.",
+      description: "Entorno de ingeniería para KUKA KRL en VS Code (KR C2–C5, KSS 5.4–8.7, VSS e iiQKA.OS2 9.0–9.3): análisis estático, diff de backups SmartPAD, inspección .wvs/.vcmx y telemetría en vivo.",
       themeConfig: {
         nav: [
           { text: 'Inicio', link: '/es/' },
@@ -372,7 +372,7 @@ export default defineConfig({
       label: 'Italiano',
       lang: 'it',
       link: '/it/',
-      description: "La suite definitiva di sviluppo industriale per KUKA Robot Language.",
+      description: "Ambiente di ingegneria per KUKA KRL in VS Code (KR C2–C5, KSS 5.4–8.7, VSS e iiQKA.OS2 9.0–9.3): analisi statica, diff backup SmartPAD, ispezione .wvs/.vcmx e telemetria live.",
       themeConfig: {
         nav: [
           { text: 'Home', link: '/it/' },

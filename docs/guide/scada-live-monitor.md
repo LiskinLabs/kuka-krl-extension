@@ -6,11 +6,11 @@ Near-real-time telemetry and online controller bridge for KUKA `KR C2`, `KR C4`,
 
 ## Overview
 
-The **Live Controller Monitor** (`krl.live.connect`, `krl.live.openDashboard`) establishes a direct Ethernet connection between VS Code and physical KUKA robot controllers running `KSS 5.4–8.7`, `VSS (VKRC) 8.3–8.7`, and `iiQKA.OS2 9.0–9.4`.
+The **Live Controller Monitor** (`krl.live.connect`, `krl.live.openDashboard`) establishes a direct Ethernet connection between VS Code and physical KUKA robot controllers running `KSS 5.4–8.7`, `VSS (VKRC) 8.3–8.7`, and `iiQKA.OS2 9.0–9.3`.
 
 It brings shop-floor telemetry, 6-axis joint torque feedback, Cartesian TCP tracking, a 4096-pin I/O matrix, SVG watch trends, a 7-check controller health view, and live SmartPAD alarms directly into your engineering workspace.
 
-> **Runtime requirement:** `KSS 8.x` live telemetry uses the built-in native WCF OnlineServices client (port `49002`); WorkVisual, KUKA.Sim and vendor DLLs are not required. `iiQKA.OS2 9.0–9.4` uses native gRPC over TLS (`443`), and KUKAVARPROXY / C3Bridge (`7000`) remains an optional fallback for legacy `KR C2`/`KR C4` cells. Controller credentials are stored per-host in VS Code `SecretStorage`. The extension does not bundle KUKA software. SMB backup requires the controller's KRC share.
+> **Runtime requirement:** `KSS 8.x` live telemetry uses the built-in native WCF OnlineServices client (port `49002`); WorkVisual, KUKA.Sim and vendor DLLs are not required. `iiQKA.OS2 9.0–9.3` uses native gRPC over TLS (`443`), and KUKAVARPROXY / C3Bridge (`7000`) remains an optional fallback for legacy `KR C2`/`KR C4` cells. Controller credentials are stored per-host in VS Code `SecretStorage`. The extension does not bundle KUKA software. SMB backup requires the controller's KRC share.
 
 ---
 
@@ -19,7 +19,7 @@ It brings shop-floor telemetry, 6-axis joint torque feedback, Cartesian TCP trac
 The live monitor selects the native transport for each controller generation (cross-checked against official KUKA port specifications `GC464` and `GC855`):
 
 1. **WCF OnlineServices (`TCP 49002`)**: Native Windows service running on `KR C4` / `KR C5` `smartHMI` platforms (`KSS 8.x` / `VSS`). Talked to directly from Node.js over `[MS-NMF]` + `[MC-NBFS]` — no WorkVisual, KUKA.Sim or vendor DLLs required.
-2. **iiQKA.OS2 gRPC / SmartHMI (`TCP 443`, Ory Kratos auth)**: Native Node.js client for `iiQKA.OS2 9.0–9.4` (`KR C5` / `KR C5 micro` / `KR C5-2`) with live telemetry and remote compile gate.
+2. **iiQKA.OS2 gRPC / SmartHMI (`TCP 443`, Ory Kratos auth)**: Native Node.js client for `iiQKA.OS2 9.0–9.3` (`KR C5` / `KR C5 micro` / `KR C5-2`) with live telemetry and remote compile gate.
 3. **OPC UA Server (`TCP 4840`)**: Non-intrusive connectivity probe verifying OPC UA server availability (`KSS 8.x` / `iiQKA.OS2`).
 4. **KUKAVARPROXY / C3Bridge (`TCP 7000`)**: High-frequency cyclical variable bridge for `$AXIS_ACT`, `$POS_ACT`, `$TORQMON`, and `$IN`/`$OUT` polling on `KR C2` and `KR C4`.
 5. **Ethernet KRL (`TCP/UDP 54600–54615`) & RSI (`49152+` / `60809` on iiQKA.OS2)**: Configurable XML/JSON sensor and real-time trajectory correction interfaces.
@@ -89,7 +89,7 @@ The live monitor selects the native transport for each controller generation (cr
 
 ---
 
-## Highlights in v1.9.25–1.9.26
+## Highlights in v1.9.25–1.9.27
 
 - **Zero-Config Discovery & Cross-Subnet Scout**: Locate online KRC / iiQKA controllers across routed industrial subnets without manual IP scanning.
 - **`CFG` I/O Filter, `UserTexts.kxr` & OPC UA `4840` Probe**: Filter 4,096 I/O pins down to active channels declared in `KrcIoSignals.xml` with SmartPAD labels, SVG watch trends, and port `4840` reachability checks.

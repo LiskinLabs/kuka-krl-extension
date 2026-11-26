@@ -282,7 +282,7 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       mobileMenuCloseAria: 'Закрыть меню'
     },
     hero: {
-      eyebrow: 'Расширение для Visual Studio Code · KR C2 / KR C4 / KR C5 (micro / -2) · KSS 5.4–8.7, VSS (VKRC) и iiQKA.OS2 9.0–9.4',
+      eyebrow: 'Расширение для Visual Studio Code · KR C2 / KR C4 / KR C5 (micro / -2) · KSS 5.4–8.7, VSS (VKRC) и iiQKA.OS2 9.0–9.3',
       h1: 'Инженерная среда для KUKA KRL в VS Code: анализ кода, сравнение бэкапов и работа с .wvs',
       subtitle:
         'Находите ошибки Advance Run, пропущенные BRAKE и смещённые точки SmartPAD до загрузки программы на контроллер. Открывайте архивы бэкапов (.zip) и проекты WorkVisual (.wvs) напрямую в VS Code — локально и без облака.',
@@ -349,7 +349,7 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       w2: {
         badge: 'Сценарий 02 · Статический аудит и автоисправление',
         title: 'Проверка логики KRL и безопасные исправления через стандартный Diff',
-        body: 'Анализатор находит типовые ошибки до переноса файлов на пульт: несинхронизированные выходы в сглаженном движении, пропуск BRAKE перед RESUME, движения внутри DRYRUN ... ENDDRYRUN, незаданные $TOOL/$BASE, UTF-8 BOM (запрещён в iiQKA.OS2) и несовместимости миграции KSS 5.4–9.4 / iiQKA.OS2 (PDAT/LDAT без VEL, SVEL_CP2, MotionParamSets.dat). Все исправления предлагаются через Diff с сохранением ;%{PE}-структур.',
+        body: 'Анализатор находит типовые ошибки до переноса файлов на пульт: несинхронизированные выходы в сглаженном движении, пропуск BRAKE перед RESUME, движения внутри DRYRUN ... ENDDRYRUN, незаданные $TOOL/$BASE, UTF-8 BOM (запрещён в iiQKA.OS2) и несовместимости миграции KSS 5.4–9.3 / iiQKA.OS2 (PDAT/LDAT без VEL, SVEL_CP2, MotionParamSets.dat). Все исправления предлагаются через Diff с сохранением ;%{PE}-структур.',
         bullets: [
           'Сохраняет Inline-формы (;FOLD ... ;%{PE}) и кодировки UTF-8 без BOM (iiQKA.OS2) / CP1251 / Windows-1252.',
           'Проверяет DRYRUN ... ENDDRYRUN, баланс блоков, $IN/$OUT/$FLAG/$TIMER, SPS.SUB, VASS 26 / VKRC и миграцию PDAT/LDAT.',
@@ -842,7 +842,7 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       mobileMenuCloseAria: 'Close menu'
     },
     hero: {
-      eyebrow: 'Visual Studio Code Extension · KR C2 / KR C4 / KR C5 (micro / -2) · KSS 5.4–8.7, VSS (VKRC) & iiQKA.OS2 9.0–9.4',
+      eyebrow: 'Visual Studio Code Extension · KR C2 / KR C4 / KR C5 (micro / -2) · KSS 5.4–8.7, VSS (VKRC) & iiQKA.OS2 9.0–9.3',
       h1: 'Engineering workspace for KUKA KRL in VS Code: static analysis, backup diff, and .wvs inspection',
       subtitle:
         'Catch Advance Run stops, missing BRAKE statements, and night-shift SmartPAD point drift before loading code onto the controller. Open .zip backups and WorkVisual (.wvs) projects directly in VS Code — locally and offline.',
@@ -908,7 +908,7 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       w2: {
         badge: 'Workflow 02 · Static Audit & Safe Diff Fix',
         title: 'Static KRL analysis and diff-reviewed repairs',
-        body: 'Detects common controller traps before code hits the pendant: unsynchronized $OUT calls breaking Advance Run, missing BRAKE before RESUME, motion inside DRYRUN ... ENDDRYRUN, unassigned $TOOL/$BASE frames, UTF-8 BOM (rejected by iiQKA.OS2), and KSS 5.4–9.4 / iiQKA.OS2 migration issues (PDAT/LDAT without VEL, SVEL_CP2, MotionParamSets.dat). Every repair opens in VS Code Diff while preserving ;%{PE} metadata.',
+        body: 'Detects common controller traps before code hits the pendant: unsynchronized $OUT calls breaking Advance Run, missing BRAKE before RESUME, motion inside DRYRUN ... ENDDRYRUN, unassigned $TOOL/$BASE frames, UTF-8 BOM (rejected by iiQKA.OS2), and KSS 5.4–9.3 / iiQKA.OS2 migration issues (PDAT/LDAT without VEL, SVEL_CP2, MotionParamSets.dat). Every repair opens in VS Code Diff while preserving ;%{PE} metadata.',
         bullets: [
           'Preserves Inline-Form checksums (;FOLD ... ;%{PE}) and UTF-8 without BOM (iiQKA.OS2), CP1251, and Windows-1252.',
           'Checks DRYRUN ... ENDDRYRUN blocks, block balance, $IN/$OUT/$FLAG/$TIMER bounds, SPS.SUB, VASS 26 / VKRC, and PDAT/LDAT migration.',
@@ -1377,7 +1377,7 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       mobileMenuCloseAria: 'Menü schließen'
     },
     hero: {
-      eyebrow: 'Erweiterung für Visual Studio Code · KR C2 / KR C4 / KR C5 (micro / -2) · KSS 5.4–8.7, VSS (VKRC) & iiQKA.OS2 9.0–9.4',
+      eyebrow: 'Erweiterung für Visual Studio Code · KR C2 / KR C4 / KR C5 (micro / -2) · KSS 5.4–8.7, VSS (VKRC) & iiQKA.OS2 9.0–9.3',
       h1: 'Engineering-Umgebung für KUKA KRL in VS Code: Codeanalyse, Backup-Diff und .wvs-Inspektion',
       subtitle:
         'Erkennen Sie Vorlaufstopps (Advance Run), fehlende BRAKE-Befehle und verschobene SmartPAD-Punkte vor der Übertragung auf die Steuerung. Öffnen Sie .zip-Backups und WorkVisual-Projekte (.wvs) direkt in VS Code — lokal und ohne Cloud.',
@@ -1443,7 +1443,7 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       w2: {
         badge: 'Workflow 02 · Statische Prüfung & Diff-Fix',
         title: 'Statische KRL-Prüfung und sichere Korrekturen im VS Code Diff',
-        body: 'Findet häufige KSS-Fehler vor der Inbetriebnahme: $OUT-Befehle, die den Vorlauf stoppen, fehlendes BRAKE vor RESUME, Bewegungen in DRYRUN ... ENDDRYRUN, nicht gesetzte $TOOL/$BASE-Frames, UTF-8-BOM (auf iiQKA.OS2 unzulässig) und Migrationsfehler KSS 5.4–9.4 / iiQKA.OS2 (PDAT/LDAT ohne VEL, SVEL_CP2, MotionParamSets.dat). Alle Fixes erscheinen im Diff unter Erhalt aller ;%{PE}-Inline-Forms.',
+        body: 'Findet häufige KSS-Fehler vor der Inbetriebnahme: $OUT-Befehle, die den Vorlauf stoppen, fehlendes BRAKE vor RESUME, Bewegungen in DRYRUN ... ENDDRYRUN, nicht gesetzte $TOOL/$BASE-Frames, UTF-8-BOM (auf iiQKA.OS2 unzulässig) und Migrationsfehler KSS 5.4–9.3 / iiQKA.OS2 (PDAT/LDAT ohne VEL, SVEL_CP2, MotionParamSets.dat). Alle Fixes erscheinen im Diff unter Erhalt aller ;%{PE}-Inline-Forms.',
         bullets: [
           'Erhält Inline-Form-Prüfsummen (;FOLD ... ;%{PE}) sowie UTF-8 ohne BOM (iiQKA.OS2), CP1251 und Windows-1252.',
           'Prüft DRYRUN ... ENDDRYRUN, Blockbalance, $IN/$OUT/$FLAG/$TIMER-Grenzen, SPS.SUB, VASS 26 / VKRC und PDAT/LDAT-Migration.',
@@ -1892,7 +1892,7 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       mobileMenuCloseAria: 'Menüyü kapat'
     },
     hero: {
-      eyebrow: 'Visual Studio Code Eklentisi · KR C2 / KR C4 / KR C5 (micro / -2) · KSS 5.4–8.7, VSS (VKRC) ve iiQKA.OS2 9.0–9.4',
+      eyebrow: 'Visual Studio Code Eklentisi · KR C2 / KR C4 / KR C5 (micro / -2) · KSS 5.4–8.7, VSS (VKRC) ve iiQKA.OS2 9.0–9.3',
       h1: 'VS Code içinde KUKA KRL mühendislik ortamı: kod analizi, yedek karşılaştırma ve .wvs inceleme',
       subtitle:
         'Programı kontrolöre yüklemeden önce Advance Run duruşlarını, eksik BRAKE komutlarını ve SmartPAD nokta kaymalarını yakalayın. .zip yedeklerini ve WorkVisual (.wvs) projelerini doğrudan VS Code’da açın — tamamen yerel ve bulutsuz.',
@@ -1958,7 +1958,7 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       w2: {
         badge: 'Senaryo 02 · Statik Denetim ve Diff Düzeltme',
         title: 'KRL mantık denetimi ve Diff önizlemeli güvenli düzeltmeler',
-        body: 'Dosyalar kontrolöre gitmeden önce yaygın hataları bulur: Advance Run durduran $OUT satırları, RESUME öncesi eksik BRAKE, DRYRUN ... ENDDRYRUN içi hareket, tanımsız $TOOL/$BASE, UTF-8 BOM (iiQKA.OS2 reddeder) ve KSS 5.4–9.4 / iiQKA.OS2 geçiş farkları (VEL içermeyen PDAT/LDAT, SVEL_CP2, MotionParamSets.dat). Düzeltmeler ;%{PE} formlarını bozmadan Diff olarak sunulur.',
+        body: 'Dosyalar kontrolöre gitmeden önce yaygın hataları bulur: Advance Run durduran $OUT satırları, RESUME öncesi eksik BRAKE, DRYRUN ... ENDDRYRUN içi hareket, tanımsız $TOOL/$BASE, UTF-8 BOM (iiQKA.OS2 reddeder) ve KSS 5.4–9.3 / iiQKA.OS2 geçiş farkları (VEL içermeyen PDAT/LDAT, SVEL_CP2, MotionParamSets.dat). Düzeltmeler ;%{PE} formlarını bozmadan Diff olarak sunulur.',
         bullets: [
           'Inline-Form sağlama toplamlarını (;FOLD ... ;%{PE}) ve BOM olmadan UTF-8 (iiQKA.OS2), CP1251 ve Windows-1252 kodlamalarını korur.',
           'DRYRUN ... ENDDRYRUN, blok dengesi, $IN/$OUT/$FLAG/$TIMER sınırları, SPS.SUB, VASS 26 / VKRC ve PDAT/LDAT geçişini denetler.',
@@ -2407,7 +2407,7 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       mobileMenuCloseAria: 'Cerrar menú'
     },
     hero: {
-      eyebrow: 'Extensión para Visual Studio Code · KR C2 / KR C4 / KR C5 (micro / -2) · KSS 5.4–8.7, VSS (VKRC) e iiQKA.OS2 9.0–9.4',
+      eyebrow: 'Extensión para Visual Studio Code · KR C2 / KR C4 / KR C5 (micro / -2) · KSS 5.4–8.7, VSS (VKRC) e iiQKA.OS2 9.0–9.3',
       h1: 'Entorno de ingeniería para KUKA KRL en VS Code: análisis estático, diff de backups e inspección .wvs',
       subtitle:
         'Detecte paradas de Advance Run, falta de BRAKE y desviaciones de puntos del SmartPAD antes de cargar el programa en el controlador. Abra archivos .zip y proyectos WorkVisual (.wvs) directamente en VS Code — en local y sin nube.',
@@ -2473,7 +2473,7 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       w2: {
         badge: 'Flujo 02 · Auditoría estática y Diff',
         title: 'Análisis estático KRL y correcciones revisadas por Diff',
-        body: 'Detecta errores habituales antes de subir al controlador: $OUT que detienen el Advance Run, falta de BRAKE antes de RESUME, movimientos en DRYRUN ... ENDDRYRUN, marcos $TOOL/$BASE sin asignar, UTF-8 BOM (rechazado por iiQKA.OS2) e incompatibilidades KSS 5.4–9.4 / iiQKA.OS2 (PDAT/LDAT sin VEL, SVEL_CP2, MotionParamSets.dat). Cada corrección respeta ;%{PE}.',
+        body: 'Detecta errores habituales antes de subir al controlador: $OUT que detienen el Advance Run, falta de BRAKE antes de RESUME, movimientos en DRYRUN ... ENDDRYRUN, marcos $TOOL/$BASE sin asignar, UTF-8 BOM (rechazado por iiQKA.OS2) e incompatibilidades KSS 5.4–9.3 / iiQKA.OS2 (PDAT/LDAT sin VEL, SVEL_CP2, MotionParamSets.dat). Cada corrección respeta ;%{PE}.',
         bullets: [
           'Conserva sumas Inline-Form (;FOLD ... ;%{PE}) y codificaciones UTF-8 sin BOM (iiQKA.OS2), CP1251 y Windows-1252.',
           'Comprueba DRYRUN ... ENDDRYRUN, balance de bloques, rangos $IN/$OUT/$FLAG/$TIMER, SPS.SUB, VASS 26 / VKRC y migración PDAT/LDAT.',
@@ -2922,7 +2922,7 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       mobileMenuCloseAria: 'Chiudi menu'
     },
     hero: {
-      eyebrow: 'Estensione per Visual Studio Code · KR C2 / KR C4 / KR C5 (micro / -2) · KSS 5.4–8.7, VSS (VKRC) e iiQKA.OS2 9.0–9.4',
+      eyebrow: 'Estensione per Visual Studio Code · KR C2 / KR C4 / KR C5 (micro / -2) · KSS 5.4–8.7, VSS (VKRC) e iiQKA.OS2 9.0–9.3',
       h1: 'Ambiente di ingegneria per KUKA KRL in VS Code: analisi statica, diff dei backup e ispezione .wvs',
       subtitle:
         'Individua arresti di Advance Run, comandi BRAKE mancanti e derive dei punti SmartPAD prima di caricare il programma sul controllore. Apri backup .zip e progetti WorkVisual (.wvs) direttamente in VS Code — in locale e senza cloud.',
@@ -2988,7 +2988,7 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       w2: {
         badge: 'Scenario 02 · Audit statico e Diff-Fix',
         title: 'Analisi statica KRL e correzioni sicure con anteprima Diff',
-        body: 'Rileva errori comuni prima del trasferimento sul pannello: $OUT che bloccano l’Advance Run, BRAKE mancanti prima di RESUME, movimenti in DRYRUN ... ENDDRYRUN, $TOOL/$BASE non assegnati, UTF-8 BOM (non ammesso su iiQKA.OS2) e migrazione KSS 5.4–9.4 / iiQKA.OS2 (PDAT/LDAT senza VEL, SVEL_CP2, MotionParamSets.dat). Ogni fix preserva ;%{PE}.',
+        body: 'Rileva errori comuni prima del trasferimento sul pannello: $OUT che bloccano l’Advance Run, BRAKE mancanti prima di RESUME, movimenti in DRYRUN ... ENDDRYRUN, $TOOL/$BASE non assegnati, UTF-8 BOM (non ammesso su iiQKA.OS2) e migrazione KSS 5.4–9.3 / iiQKA.OS2 (PDAT/LDAT senza VEL, SVEL_CP2, MotionParamSets.dat). Ogni fix preserva ;%{PE}.',
         bullets: [
           'Mantiene checksum Inline-Form (;FOLD ... ;%{PE}) e codifiche UTF-8 senza BOM (iiQKA.OS2), CP1251 e Windows-1252.',
           'Verifica DRYRUN ... ENDDRYRUN, bilanciamento blocchi, limiti $IN/$OUT/$FLAG/$TIMER, SPS.SUB, VASS 26 / VKRC e migrazione PDAT/LDAT.',

@@ -336,6 +336,132 @@
         "title": "Check Shadowed Variables",
         "status": "Free",
         "valueProposition": "Detects variables that are declared in a scope where another variable with the same name already exists, potentially leading to confusion."
+      },
+      {
+        "type": "Command",
+        "id": "krl.runDynamicAnalysis",
+        "title": "Run Dynamic Trajectory & Singularity Analysis",
+        "status": "PRO",
+        "valueProposition": "Run Dynamic Trajectory & Singularity Analysis."
+      },
+      {
+        "type": "Command",
+        "id": "krl.analyzePointDeviations",
+        "title": "Analyze Point Deviation from Neighbours (Seam Jitter & Deflection)",
+        "status": "PRO",
+        "valueProposition": "Analyze Point Deviation from Neighbours (Seam Jitter & Deflection)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.semanticInterlockDiff",
+        "title": "Compare Backup Interlock Zones (mm Path Length) & Tech Points",
+        "status": "PRO",
+        "valueProposition": "Compare Backup Interlock Zones (mm Path Length) & Tech Points."
+      },
+      {
+        "type": "Command",
+        "id": "krl.resolveDataIntegrity3Way",
+        "title": "Synchronize 3-Way Motion Data Integrity (Fold <-> .DAT)",
+        "status": "PRO",
+        "valueProposition": "Synchronize 3-Way Motion Data Integrity (Fold <-> .DAT)."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.errorLens.enabled",
+        "title": "Error Lens: Enabled",
+        "status": "Free",
+        "valueProposition": "Show diagnostic messages inline at the end of lines"
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.errorLens.inlineMessageEnabled",
+        "title": "Error Lens: Inline Message Enabled",
+        "status": "Free",
+        "valueProposition": "Show inline diagnostic text at line ends (toggle with command)"
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.errorLens.followCursor",
+        "title": "Error Lens: Follow Cursor",
+        "status": "Free",
+        "valueProposition": "Controls whether to show diagnostics on all lines, only the active cursor line, or the closest problem"
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.errorLens.messageBackgroundMode",
+        "title": "Error Lens: Message Background Mode",
+        "status": "Free",
+        "valueProposition": "Highlight line background (line), only message background (message), or text only (none)"
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.errorLens.gutterIconsEnabled",
+        "title": "Error Lens: Gutter Icons Enabled",
+        "status": "Free",
+        "valueProposition": "Show diagnostic severity icons in the editor gutter margin"
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.errorLens.delay",
+        "title": "Error Lens: Delay",
+        "status": "Free",
+        "valueProposition": "Delay in milliseconds before rendering diagnostic decorations while editing"
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.errorLens.onSave",
+        "title": "Error Lens: On Save",
+        "status": "Free",
+        "valueProposition": "Only refresh diagnostic decorations when saving the document"
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.errorLens.alignMessage",
+        "title": "Error Lens: Align Message",
+        "status": "Free",
+        "valueProposition": "Align inline error messages to a fixed column (e.g. 80). Set to 0 to disable"
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.errorLens.messageTemplate",
+        "title": "Error Lens: Message Template",
+        "status": "Free",
+        "valueProposition": "Template for inline message. Variables: $message, $code, $source, $severity"
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.errorLens.maxCharsPerLine",
+        "title": "Error Lens: Max Chars Per Line",
+        "status": "Free",
+        "valueProposition": "Maximum character length for inline diagnostic messages before truncating"
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.errorLens.statusBarEnabled",
+        "title": "Error Lens: Status Bar Enabled",
+        "status": "Free",
+        "valueProposition": "Show active file diagnostics and cursor line problem in the status bar"
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.errorLens.fontStyleItalic",
+        "title": "Error Lens: Font Style Italic",
+        "status": "Free",
+        "valueProposition": "Render inline diagnostic message in italic font style"
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.safetyLens.enabled",
+        "title": "Safety Lens: Enabled",
+        "status": "Free",
+        "valueProposition": "Enable dedicated inline safety and collision hazard lens annotations"
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.diagnostics.targetKssVersion",
+        "title": "Diagnostics: Target Kss Version",
+        "status": "Free",
+        "valueProposition": "Target KSS controller version for version-specific syntax and diagnostic checks ('auto' detects from controller backup metadata)"
       }
     ],
     "Code Editing & Formatting": [
@@ -399,35 +525,35 @@
         "type": "Command",
         "id": "krl.mirrorTrajectory",
         "title": "Mirror Trajectory",
-        "status": "Free",
+        "status": "PRO",
         "valueProposition": "Mirrors a selected robot trajectory along a specified axis or plane."
       },
       {
         "type": "Command",
         "id": "krl.batchShiftPoints",
         "title": "Batch Shift Points",
-        "status": "Free",
+        "status": "PRO",
         "valueProposition": "Applies a batch shift or offset to multiple robot points in a trajectory."
       },
       {
         "type": "Command",
         "id": "krl.reverseTrajectory",
         "title": "Reverse Trajectory",
-        "status": "Free",
+        "status": "PRO",
         "valueProposition": "Reverses the order of points in a selected robot trajectory."
       },
       {
         "type": "Command",
         "id": "krl.renumberPoints",
         "title": "Renumber Points",
-        "status": "Free",
+        "status": "PRO",
         "valueProposition": "Renumbers robot points in a selected block of code sequentially."
       },
       {
         "type": "Command",
         "id": "krl.toolBaseOverview",
         "title": "Tool/Base Overview",
-        "status": "Free",
+        "status": "PRO",
         "valueProposition": "Provides an overview of all declared and used TOOL and BASE frames in the workspace."
       },
       {
@@ -541,15 +667,78 @@
         "title": "Enable Document Highlights",
         "status": "Free",
         "valueProposition": "Enables or disables highlighting of all occurrences of a symbol in the current document."
+      },
+      {
+        "type": "Command",
+        "id": "krl.convertHandwrittenToSnippets",
+        "title": "Handwritten KRL Code -> Snippets (;FOLD Inline Forms)",
+        "status": "Free",
+        "valueProposition": "Handwritten KRL Code -> Snippets (;FOLD Inline Forms)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.refreshSnippetsView",
+        "title": "Refresh User .KFD / XML Forms",
+        "status": "Free",
+        "valueProposition": "Refresh User .KFD / XML Forms."
+      },
+      {
+        "type": "Command",
+        "id": "krl.editCatalogSnippet",
+        "title": "Open in Visual ILF Builder",
+        "status": "Free",
+        "valueProposition": "Open in Visual ILF Builder."
+      },
+      {
+        "type": "Command",
+        "id": "krl.insertCatalogSnippet",
+        "title": "Insert ILF Snippet",
+        "status": "Free",
+        "valueProposition": "Insert ILF Snippet."
+      },
+      {
+        "type": "Command",
+        "id": "krl.insertUserKfdForm",
+        "title": "Insert Custom KFD / UserTech Form",
+        "status": "Free",
+        "valueProposition": "Insert Custom KFD / UserTech Form."
+      },
+      {
+        "type": "Command",
+        "id": "krl.toggleAutoSelectSymbol",
+        "title": "Toggle Smart Symbol Auto-Selection (Click/Right-Click)",
+        "status": "Free",
+        "valueProposition": "Toggle Smart Symbol Auto-Selection (Click/Right-Click)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.toggleProtectFolds",
+        "title": "Toggle Protect Folds Mode (Lock ;FOLD Interior)",
+        "status": "Free",
+        "valueProposition": "Toggle Protect Folds Mode (Lock ;FOLD Interior)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.openKfdCommandDialog",
+        "title": "Insert / Edit KFD Inline Command Form (KRL Command Catalog)",
+        "status": "PRO",
+        "valueProposition": "Insert / Edit KFD Inline Command Form (KRL Command Catalog)."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.editor.autoSelectSymbolOnClick",
+        "title": "Editor: Auto Select Symbol On Click",
+        "status": "Free",
+        "valueProposition": "Automatically select KRL variable or function identifier when clicked or right-clicked with mouse."
       }
     ],
     "Motion & Trajectory Tools": [
       {
         "type": "Command",
         "id": "krl.estimateMotionStats",
-        "title": "Estimate Motion Stats",
-        "status": "Free",
-        "valueProposition": "Estimates motion statistics and cycle times for selected KRL motion blocks."
+        "title": "Calculate Motion & Welding Stats",
+        "status": "PRO",
+        "valueProposition": "Calculates total path distance, segment count, torch seam length, and lookahead speed profile."
       },
       {
         "type": "Command",
@@ -571,6 +760,97 @@
         "title": "Long Segment Threshold (mm)",
         "status": "Free",
         "valueProposition": "Sets the threshold in millimeters for identifying long motion segments in diagnostics."
+      },
+      {
+        "type": "Command",
+        "id": "krl.productionMotionAutomation",
+        "title": "Production Motion Automation - Spline + Triggers + APO",
+        "status": "PRO",
+        "valueProposition": "Production Motion Automation - Spline + Triggers + APO."
+      },
+      {
+        "type": "Command",
+        "id": "krl.splitProgram",
+        "title": "Split Large CAM Program into Subprograms",
+        "status": "PRO",
+        "valueProposition": "Split Large CAM Program into Subprograms."
+      },
+      {
+        "type": "Command",
+        "id": "krl.linToCircArcFitting",
+        "title": "LIN → CIRC 3D Arc Fitting (Chordal Tolerance)",
+        "status": "PRO",
+        "valueProposition": "LIN → CIRC 3D Arc Fitting (Chordal Tolerance)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.radiusCompensation",
+        "title": "2D Contour Tool Radius Compensation (G41/G42)",
+        "status": "PRO",
+        "valueProposition": "2D Contour Tool Radius Compensation (G41/G42)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.adjustVelocities",
+        "title": "Batch Scale & Cap Program Velocities (.src/.dat)",
+        "status": "PRO",
+        "valueProposition": "Batch Scale & Cap Program Velocities (.src/.dat)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.editStatusTurn",
+        "title": "Visual Status (S) & Turn (T) Bitmask Editor",
+        "status": "PRO",
+        "valueProposition": "Visual Status (S) & Turn (T) Bitmask Editor."
+      },
+      {
+        "type": "Command",
+        "id": "krl.arrayAssistant",
+        "title": "KRL Array Assistant (1D/2D/3D Generator)",
+        "status": "PRO",
+        "valueProposition": "KRL Array Assistant (1D/2D/3D Generator)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.importGcodeToKrl",
+        "title": "Import CAM CNC G-Code (.nc/.gcode) or Vector SVG (.svg) to KRL",
+        "status": "PRO",
+        "valueProposition": "Import CAM CNC G-Code (.nc/.gcode) or Vector SVG (.svg) to KRL."
+      },
+      {
+        "type": "Command",
+        "id": "krl.generateVisionCalibration",
+        "title": "Generate 2D/3D Vision Hand-Eye Calibration Grid (9-Pose Pyramid)",
+        "status": "PRO",
+        "valueProposition": "Generate 2D/3D Vision Hand-Eye Calibration Grid (9-Pose Pyramid)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.openPointTableEditor",
+        "title": "Open KRL Point Table & FK/IK Live Editor (Tool/Base Recalculation)",
+        "status": "PRO",
+        "valueProposition": "Open KRL Point Table & FK/IK Live Editor (Tool/Base Recalculation)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.smartDuplicateMotionFold",
+        "title": "Smart Duplicate Motion Fold (Auto-Create New Point in .dat)",
+        "status": "PRO",
+        "valueProposition": "Smart Duplicate Motion Fold (Auto-Create New Point in .dat)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.insertPointOnPath",
+        "title": "Insert Point on Path at Distance (mm / %, LIN & CIRC SLERP)",
+        "status": "PRO",
+        "valueProposition": "Insert Point on Path at Distance (mm / %, LIN & CIRC SLERP)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.calibrateBaseNPointSvd",
+        "title": "Calibrate Base from N Reference Points (Laser Tracker SVD Solver)",
+        "status": "PRO",
+        "valueProposition": "Calibrate Base from N Reference Points (Laser Tracker SVD Solver)."
       }
     ],
     "KRC Backup & Project Management": [
@@ -585,21 +865,21 @@
         "type": "Command",
         "id": "krl.openBackupZipExplorer",
         "title": "Open Backup ZIP Explorer",
-        "status": "Free",
+        "status": "PRO",
         "valueProposition": "Opens a KUKA KRC backup ZIP archive in a custom explorer view."
       },
       {
         "type": "Command",
         "id": "krl.mountBackupZipAsProject",
-        "title": "Mount Backup ZIP As Project",
-        "status": "Free",
-        "valueProposition": "Unpacks a KRC backup ZIP and opens it as a native workspace project with 2-way synchronization."
+        "title": "Mount Backup ZIP as Project",
+        "status": "PRO",
+        "valueProposition": "Mounts and navigates KRC backup ZIP archives in-memory as a virtual project folder with real-time bidirectional sync."
       },
       {
         "type": "Command",
         "id": "krl.syncAllToBackupZip",
         "title": "Sync All To Backup ZIP",
-        "status": "Free",
+        "status": "PRO",
         "valueProposition": "Synchronizes all changes in the mounted project back to the original backup ZIP archive."
       },
       {
@@ -633,9 +913,9 @@
       {
         "type": "Command",
         "id": "krl.openEventLog",
-        "title": "Open Event Log",
-        "status": "Free",
-        "valueProposition": "Opens a KUKA robot event log file in a custom inspector view."
+        "title": "View Binary Event Log (.evt)",
+        "status": "PRO",
+        "valueProposition": "Decodes and inspects proprietary KUKA binary event log archives into structured chronological timelines."
       },
       {
         "type": "Configuration",
@@ -650,6 +930,132 @@
         "title": "Backup Project Window Mode",
         "status": "Free",
         "valueProposition": "Determines whether mounted backup projects open in the current or a new VS Code window."
+      },
+      {
+        "type": "Command",
+        "id": "krl.launchVirtualController",
+        "title": "Launch Virtual Controller (VM)",
+        "status": "PRO",
+        "valueProposition": "Launch Virtual Controller (VM)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.checkVirtualControllerStatus",
+        "title": "Check Virtual Controller Status",
+        "status": "Free",
+        "valueProposition": "Check Virtual Controller Status."
+      },
+      {
+        "type": "Command",
+        "id": "krl.deployToVirtualController",
+        "title": "Deploy Active Program to Virtual Controller",
+        "status": "PRO",
+        "valueProposition": "Deploy Active Program to Virtual Controller."
+      },
+      {
+        "type": "Command",
+        "id": "krl.configureVirtualController",
+        "title": "Configure Virtual Controller Path...",
+        "status": "Free",
+        "valueProposition": "Configure Virtual Controller Path...."
+      },
+      {
+        "type": "Command",
+        "id": "krl.configureRobotImageCatalogPath",
+        "title": "Configure KUKA Controller Path...",
+        "status": "Free",
+        "valueProposition": "Configure KUKA Controller Path...."
+      },
+      {
+        "type": "Command",
+        "id": "krl.inspectWorkcellLayout",
+        "title": "Inspect Workcell Simulator / VCMX Simulation Workcell (.vcmx / layout.rsc)",
+        "status": "PRO",
+        "valueProposition": "Inspect Workcell Simulator / VCMX Simulation Workcell (.vcmx / layout.rsc)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.validateWorkcellSimulation",
+        "title": "Validate & Auto-Repair Workcell Simulator VCMX Simulation (VCMX001-VCMX004)",
+        "status": "PRO",
+        "valueProposition": "Validate & Auto-Repair Workcell Simulator VCMX Simulation (VCMX001-VCMX004)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.exportWorkcellToKrl",
+        "title": "Export Workcell Simulator VCMX Trajectories to KUKA KRL (.src/.dat)",
+        "status": "PRO",
+        "valueProposition": "Export Workcell Simulator VCMX Trajectories to KUKA KRL (.src/.dat)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.syncPointsToDat",
+        "title": "Auto-Sync Missing Points & Inline Forms to .dat",
+        "status": "PRO",
+        "valueProposition": "Auto-Sync Missing Points & Inline Forms to .dat."
+      },
+      {
+        "type": "Command",
+        "id": "krl.convertKrcVkrc",
+        "title": "Convert Program KRC <-> Volkswagen VKRC (Folge / UP + FK)",
+        "status": "PRO",
+        "valueProposition": "Convert Program KRC <-> Volkswagen VKRC (Folge / UP + FK)."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.virtualController.vmPath",
+        "title": "Virtual Controller: Vm Path",
+        "status": "Free",
+        "valueProposition": "Path to KRC Virtual Controller virtual machine image file (.vmx)."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.virtualController.deployPath",
+        "title": "Virtual Controller: Deploy Path",
+        "status": "Free",
+        "valueProposition": "Target folder for deploying KRL modules to Virtual Controller (e.g. C:\\KRC\\Roboter\\KRC\\R1\\Program)."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.migration.targetKssVersion",
+        "title": "Migration: Target Kss Version",
+        "status": "Free",
+        "valueProposition": "Target KSS version used by the backup migration command."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.migration.convertLegacyMotions",
+        "title": "Migration: Convert Legacy Motions",
+        "status": "Free",
+        "valueProposition": "Convert legacy PTP/LIN/CIRC inline forms to target-version spline forms."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.migration.removeDisabledWaitFolds",
+        "title": "Migration: Remove Disabled Wait Folds",
+        "status": "Free",
+        "valueProposition": "Remove WAIT FOR FOLD blocks whose WAIT statement is commented out."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.migration.ensureDatHeaders",
+        "title": "Migration: Ensure Dat Headers",
+        "status": "Free",
+        "valueProposition": "Add missing EXT BAS / DECL INT SUCCESS declarations to user .dat headers."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.robotImageCatalog.path",
+        "title": "Robot Image Catalog: Path",
+        "status": "Free",
+        "valueProposition": "Path to the KUKA Controller Tools runtime catalog directory. Set to 'auto' for automatic detection."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.robotImageCatalog.imagesPath",
+        "title": "Robot Image Catalog: Images Path",
+        "status": "Free",
+        "valueProposition": "Optional directory path to unzipped KUKA robot images folder"
       }
     ],
     "I/O & Signals": [
@@ -664,7 +1070,7 @@
         "type": "Command",
         "id": "krl.showIoMatrix",
         "title": "Show I/O Matrix",
-        "status": "Free",
+        "status": "PRO",
         "valueProposition": "Displays an interactive matrix of KUKA robot inputs and outputs."
       },
       {
@@ -689,6 +1095,209 @@
         "title": "Generate EKI Code",
         "status": "PRO",
         "valueProposition": "Generates boilerplate KRL code for EKI communication based on XML configurations."
+      },
+      {
+        "type": "Command",
+        "id": "krl.selectSnippetVersionFilter",
+        "title": "Filter Snippets by KSS Version",
+        "status": "Free",
+        "valueProposition": "Filter Snippets by KSS Version."
+      },
+      {
+        "type": "Command",
+        "id": "krl.live.openMessages",
+        "title": "Open Live SmartPAD Messages",
+        "status": "PRO",
+        "valueProposition": "Open Live SmartPAD Messages."
+      },
+      {
+        "type": "Command",
+        "id": "krl.live.scan",
+        "title": "Scan & Select KUKA Robot in Network",
+        "status": "PRO",
+        "valueProposition": "Scan & Select KUKA Robot in Network."
+      },
+      {
+        "type": "Command",
+        "id": "krl.live.restoreDhcp",
+        "title": "Restore Ethernet Adapter to Auto (DHCP)",
+        "status": "PRO",
+        "valueProposition": "Restore Ethernet Adapter to Auto (DHCP)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.live.changeCredentials",
+        "title": "Change Live KRC Controller Credentials",
+        "status": "PRO",
+        "valueProposition": "Change Live KRC Controller Credentials."
+      },
+      {
+        "type": "Command",
+        "id": "krl.validateRsiXml",
+        "title": "Validate KUKA.RobotSensorInterface (RSI) XML Configuration",
+        "status": "PRO",
+        "valueProposition": "Validate KUKA.RobotSensorInterface (RSI) XML Configuration."
+      },
+      {
+        "type": "Command",
+        "id": "krl.generateRsiCode",
+        "title": "Generate KUKA.RSI 4ms Real-Time KRL Driver & XML",
+        "status": "PRO",
+        "valueProposition": "Generate KUKA.RSI 4ms Real-Time KRL Driver & XML."
+      },
+      {
+        "type": "Command",
+        "id": "krl.exportPlcTags",
+        "title": "Export PLC Fieldbus Tags (Siemens TIA Portal XML / TwinCAT 3 GVL / CSV)",
+        "status": "PRO",
+        "valueProposition": "Export PLC Fieldbus Tags (Siemens TIA Portal XML / TwinCAT 3 GVL / CSV)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.inspectFieldbusTopology",
+        "title": "Inspect Controller (.wvs) Bus Topology & KOP Catalogs",
+        "status": "PRO",
+        "valueProposition": "Inspect Controller (.wvs) Bus Topology & KOP Catalogs."
+      },
+      {
+        "type": "Command",
+        "id": "krl.mcp.copyConfig",
+        "title": "Copy MCP Configuration (Cursor, Claude, Antigravity)",
+        "status": "Free",
+        "valueProposition": "Copy MCP Configuration (Cursor, Claude, Antigravity)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.mcp.status",
+        "title": "Show MCP Bridge Status",
+        "status": "Free",
+        "valueProposition": "Show MCP Bridge Status."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.ipAddress",
+        "title": "Live Controller: Ip Address",
+        "status": "Free",
+        "valueProposition": "IP address of the physical or virtual KUKA controller (e.g. 192.168.11.120). Leave empty to auto-discover; the last connected robot is remembered."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.port",
+        "title": "Live Controller: Port",
+        "status": "Free",
+        "valueProposition": "Legacy telemetry port (KUKAVARPROXY default: 7000). iiQKA.OS always uses 443."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.iiqkaPort",
+        "title": "Live Controller: Iiqka Port",
+        "status": "Free",
+        "valueProposition": "iiQKA.OS gRPC/TLS port. Use 443 for a real KRC5 and 5018 for the local virtual controller."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.username",
+        "title": "Live Controller: Username",
+        "status": "Free",
+        "valueProposition": "User name for iiQKA.OS / controller authentication (default: administrator). Also cached per host in globalState."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.password",
+        "title": "Live Controller: Password",
+        "status": "Free",
+        "valueProposition": "Deprecated and ignored. Controller passwords are stored securely per host in VS Code SecretStorage (krl.live.password.<host>)."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.promptForCredentials",
+        "title": "Live Controller: Prompt For Credentials",
+        "status": "Free",
+        "valueProposition": "Prompt interactively for username and password (stored securely in VS Code SecretStorage) when missing or when authentication returns 401/403/UNAUTHENTICATED."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.instanceId",
+        "title": "Live Controller: Instance Id",
+        "status": "Free",
+        "valueProposition": "Optional iiQKA.OS virtual controller instance GUID. Leave empty to auto-select a running instance."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.highlightExecutionLine",
+        "title": "Live Controller: Highlight Execution Line",
+        "status": "Free",
+        "valueProposition": "Highlight current active line executed by KUKA robot in editor gutter."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.followProgramPointer",
+        "title": "Live Controller: Follow Program Pointer",
+        "status": "Free",
+        "valueProposition": "Automatically scroll editor to follow robot's active execution line."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.allowInsecureTls",
+        "title": "Live Controller: Allow Insecure Tls",
+        "status": "Free",
+        "valueProposition": "Allow self-signed HTTPS/gRPC certificates for controller backup and iiQKA live telemetry. Loopback and RFC1918 controller addresses are accepted automatically; enable this only for non-private hosts on an isolated commissioning network."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.connectionMode",
+        "title": "Live Controller: Connection Mode",
+        "status": "Free",
+        "valueProposition": "Network transport profile for live robot connectivity (Auto-detect, Local Ethernet LAN, or VPN / Remote routed)."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.autoConfigureEthernet",
+        "title": "Live Controller: Auto Configure Ethernet",
+        "status": "Free",
+        "valueProposition": "Offer 1-click Ethernet IP configuration (including switching Windows DHCP/Auto/APIPA adapters to static + secondary IP and saving DHCP restore state) when connecting directly by cable."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.autoScanSubnets",
+        "title": "Live Controller: Auto Scan Subnets",
+        "status": "Free",
+        "valueProposition": "When Auto-Discover finds nothing, probe common KUKA /24 networks by temporarily adding a secondary IP to the wired adapter. A temporary address is removed automatically when no controller answers; UAC confirmation is requested."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.probeTimeoutMs",
+        "title": "Live Controller: Probe Timeout Ms",
+        "status": "Free",
+        "valueProposition": "Custom TCP port probe timeout in ms (0 = automatic: 1200 ms for Local LAN, 3500 ms for VPN/Remote)."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.pollIntervalMs",
+        "title": "Live Controller: Poll Interval Ms",
+        "status": "Free",
+        "valueProposition": "Custom live telemetry polling interval in ms (0 = automatic: 400-1000 ms Local LAN, 1200-1500 ms VPN/Remote)."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.liveController.backupIncludeLogs",
+        "title": "Live Controller: Backup Include Logs",
+        "status": "Free",
+        "valueProposition": "Include controller Windows Event Logs (Log Files/KrcLog*.evt, Archive config All) in online WCF backups."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.mcp.enabled",
+        "title": "Mcp: Enabled",
+        "status": "Free",
+        "valueProposition": "Enable the local read-only MCP bridge in trusted workspaces. The bridge is never started in Restricted Mode."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.mcp.packageSpec",
+        "title": "Mcp: Package Spec",
+        "status": "Free",
+        "valueProposition": "npm package spec used for MCP client registration. Pin an exact version in production to reduce supply-chain risk."
       }
     ],
     "Git & Version Control Integration": [
@@ -768,6 +1377,13 @@
         "title": "Toggle GitLens Inline Blame",
         "status": "Free",
         "valueProposition": "Toggles inline Git commit author blame annotations in KRL files."
+      },
+      {
+        "type": "Command",
+        "id": "krl.review.showPanel",
+        "title": "Show All Changed Files (KRL Review)",
+        "status": "Free",
+        "valueProposition": "Show All Changed Files (KRL Review)."
       }
     ],
     "Licensing & Support": [
@@ -809,9 +1425,9 @@
       {
         "type": "Command",
         "id": "krl.requestCorporateInvoice",
-        "title": "Request Corporate Invoice",
+        "title": "Request Corporate B2B Invoice",
         "status": "Free",
-        "valueProposition": "Requests a corporate invoice for KRL Engineering Toolkit licenses."
+        "valueProposition": "Generates official compliant B2B invoices with EU VAT Reverse Charge and company Tax ID validation."
       },
       {
         "type": "Command",
@@ -861,6 +1477,90 @@
         "title": "License Server URL",
         "status": "Free",
         "valueProposition": "Configures the on-premise enterprise license server URL for offline factory networks."
+      },
+      {
+        "type": "Command",
+        "id": "krl.manageSubscription",
+        "title": "Manage Subscription / Support (Cancel / Refund / Invoices)",
+        "status": "Free",
+        "valueProposition": "Manage Subscription / Support (Cancel / Refund / Invoices)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.openPricingPlans",
+        "title": "View Pricing Plans & Upgrade Options",
+        "status": "Free",
+        "valueProposition": "View Pricing Plans & Upgrade Options."
+      },
+      {
+        "type": "Command",
+        "id": "krl.manageInvoices",
+        "title": "Corporate Invoices & Quotes",
+        "status": "Free",
+        "valueProposition": "Corporate Invoices & Quotes."
+      },
+      {
+        "type": "Command",
+        "id": "krl.setOrganization",
+        "title": "Set Organization for Usage Analytics",
+        "status": "Free",
+        "valueProposition": "Set Organization for Usage Analytics."
+      },
+      {
+        "type": "Command",
+        "id": "krl.importOfflineLicenseFile",
+        "title": "Import Offline License File (.lic)",
+        "status": "Free",
+        "valueProposition": "Import Offline License File (.lic)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.exportHardwareIdFile",
+        "title": "Export Machine Hardware ID Request File (.lic)",
+        "status": "Free",
+        "valueProposition": "Export Machine Hardware ID Request File (.lic)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.vkrcIndustrialSuite",
+        "title": "Volkswagen VKRC / VASS6 Industrial Automation Suite (WPS, Sammelmerker, Longtext, Controller Data Audit)",
+        "status": "PRO",
+        "valueProposition": "Volkswagen VKRC / VASS6 Industrial Automation Suite (WPS, Sammelmerker, Longtext, Controller Data Audit)."
+      },
+      {
+        "type": "Command",
+        "id": "krl.checkForUpdates",
+        "title": "Check for Updates",
+        "status": "Free",
+        "valueProposition": "Check for Updates."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.organization.name",
+        "title": "Organization: Name",
+        "status": "Free",
+        "valueProposition": "Organization name shared only when Share for Analytics is enabled."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.organization.shareForAnalytics",
+        "title": "Organization: Share For Analytics",
+        "status": "Free",
+        "valueProposition": "Share the organization name in aggregated usage analytics (optional, explicit opt-in)."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.updates.checkEnabled",
+        "title": "Updates: Check Enabled",
+        "status": "Free",
+        "valueProposition": "Enable automatic background checking for extension updates."
+      },
+      {
+        "type": "Configuration",
+        "id": "krl.telegram.enabled",
+        "title": "Telegram: Enabled",
+        "status": "Free",
+        "valueProposition": "Allow automatic support-gateway polling in trusted workspaces. Restricted Mode never starts polling."
       }
     ],
     "UI & Workflow Tools": [
@@ -973,7 +1673,7 @@
         "type": "Command",
         "id": "krl.checkVkrcStatus",
         "title": "Check VKRC Status",
-        "status": "Free",
+        "status": "PRO",
         "valueProposition": "Checks the status of VKRC (Virtual KUKA Robot Controller) integration."
       },
       {
@@ -987,22 +1687,8 @@
         "type": "Command",
         "id": "krl.fixAllSafeIssuesInFile",
         "title": "Safe Auto-Repair Issues",
-        "status": "Free",
+        "status": "PRO",
         "valueProposition": "Batch applies verified non-destructive fixes across thousands of code issues (case normalization, P00 handshakes, block endings)."
-      },
-      {
-        "type": "Command",
-        "id": "krl.mountBackupZipAsProject",
-        "title": "Mount Backup ZIP as Project",
-        "status": "PRO",
-        "valueProposition": "Mounts and navigates KRC backup ZIP archives in-memory as a virtual project folder with real-time bidirectional sync."
-      },
-      {
-        "type": "Command",
-        "id": "krl.openEventLog",
-        "title": "View Binary Event Log (.evt)",
-        "status": "PRO",
-        "valueProposition": "Decodes and inspects proprietary KUKA binary event log archives into structured chronological timelines."
       },
       {
         "type": "Command",
@@ -1040,20 +1726,6 @@
         "valueProposition": "Pulls current project and system files directly from active online KUKA controller over network connection."
       },
       {
-        "type": "Command",
-        "id": "krl.estimateMotionStats",
-        "title": "Calculate Motion & Welding Stats",
-        "status": "PRO",
-        "valueProposition": "Calculates total path distance, segment count, torch seam length, and lookahead speed profile."
-      },
-      {
-        "type": "Command",
-        "id": "krl.requestCorporateInvoice",
-        "title": "Request Corporate B2B Invoice",
-        "status": "Free",
-        "valueProposition": "Generates official compliant B2B invoices with EU VAT Reverse Charge and company Tax ID validation."
-      },
-      {
         "type": "View Container",
         "id": "kuka-krl-container",
         "title": "KRL Engineering Toolkit",
@@ -1080,6 +1752,13 @@
         "title": "Anonymous Usage Analytics",
         "status": "Free",
         "valueProposition": "Enables or disables anonymous usage analytics. Disabled by default."
+      },
+      {
+        "type": "View",
+        "id": "krlSnippets",
+        "title": "ILF & Snippets (KSS)",
+        "status": "Free",
+        "valueProposition": "Integrated sidebar view for ILF & Snippets (KSS)."
       }
     ],
     "Reporting": [
@@ -1124,6 +1803,13 @@
         "title": "Company Logo Path for Reports",
         "status": "Free",
         "valueProposition": "Specifies the path to a company logo image to be included in generated KRL reports."
+      },
+      {
+        "type": "Command",
+        "id": "krl.generateSetupSheet",
+        "title": "Generate Robot Setup Sheet (Rüstplan)",
+        "status": "PRO",
+        "valueProposition": "Generate Robot Setup Sheet (Rüstplan)."
       }
     ],
     "Themes & Icons": [

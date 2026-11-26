@@ -1,32 +1,33 @@
 # Live Controller Monitor
 
-Near-real-time telemetry and online controller bridge for KUKA KRC2, KRC4, and KRC5 systems.
+Near-real-time telemetry and online controller bridge for KUKA `KR C2`, `KR C4`, and `KR C5` systems (`KR C5 micro`, `KR C5-2`).
 
 ---
 
 ## Overview
 
-The **Live Controller Monitor** (`krl.live.connect`, `krl.live.openDashboard`) establishes a direct, high-frequency Ethernet connection between VS Code and physical KUKA robot controllers running KSS 5.x through 8.7+ and iiQKA 9.x.
+The **Live Controller Monitor** (`krl.live.connect`, `krl.live.openDashboard`) establishes a direct Ethernet connection between VS Code and physical KUKA robot controllers running `KSS 5.4–8.7`, `VSS (VKRC) 8.3–8.7`, and `iiQKA.OS2 9.0–9.4`.
 
-It brings shop-floor telemetry, 6-axis joint torque feedback, Cartesian TCP tracking, a 4096-pin I/O matrix, and live SmartPAD alarms with multilingual subtitles directly into your engineering workspace.
+It brings shop-floor telemetry, 6-axis joint torque feedback, Cartesian TCP tracking, a 4096-pin I/O matrix, SVG watch trends, a 7-check controller health view, and live SmartPAD alarms directly into your engineering workspace.
 
-> **Runtime requirement:** KSS 8.x live telemetry uses the built-in native WCF OnlineServices client (port 49002); WorkVisual, KUKA.Sim and vendor DLLs are not required. iiQKA.OS 9.x uses native gRPC, and KUKAVARPROXY/C3Bridge remains an optional fallback. The extension does not bundle KUKA software. SMB backup requires the controller's KRC share.
+> **Runtime requirement:** `KSS 8.x` live telemetry uses the built-in native WCF OnlineServices client (port `49002`); WorkVisual, KUKA.Sim and vendor DLLs are not required. `iiQKA.OS2 9.0–9.4` uses native gRPC over TLS (`443`), and KUKAVARPROXY / C3Bridge (`7000`) remains an optional fallback for legacy `KR C2`/`KR C4` cells. Controller credentials are stored per-host in VS Code `SecretStorage`. The extension does not bundle KUKA software. SMB backup requires the controller's KRC share.
 
 ---
 
-## Architecture & Communication Protocols
+## Architecture & Official KUKA Ports
 
-The live monitor uses a resilient dual-driver communication architecture:
+The live monitor selects the native transport for each controller generation (cross-checked against official KUKA port specifications `GC464` and `GC855`):
 
-1. **WCF OnlineServices**: Native encrypted Windows service running on KRC4/KRC5 smartHMI platforms. The extension talks to it directly from Node.js over `[MS-NMF]` + `[MC-NBFS]` on port 49002 — no WorkVisual, KUKA.Sim or vendor DLLs.
-2. **KUKAVARPROXY (Port 7000)**: Ultra-low-latency variable bridge delivering high-frequency cyclical polling for real-time kinematics and I/O channels.
-3. **CrossComm (WinGate Port 49000)**: Legacy cross-communication driver for KRC2 and early KRC4 controllers.
-4. **iiQKA.OS gRPC**: Kratos-authenticated native Node.js client on port 443/5018 for KSS 9.x controllers.
+1. **WCF OnlineServices (`TCP 49002`)**: Native Windows service running on `KR C4` / `KR C5` `smartHMI` platforms (`KSS 8.x` / `VSS`). Talked to directly from Node.js over `[MS-NMF]` + `[MC-NBFS]` — no WorkVisual, KUKA.Sim or vendor DLLs required.
+2. **iiQKA.OS2 gRPC / SmartHMI (`TCP 443`, Ory Kratos auth)**: Native Node.js client for `iiQKA.OS2 9.0–9.4` (`KR C5` / `KR C5 micro` / `KR C5-2`) with live telemetry and remote compile gate.
+3. **OPC UA Server (`TCP 4840`)**: Non-intrusive connectivity probe verifying OPC UA server availability (`KSS 8.x` / `iiQKA.OS2`).
+4. **KUKAVARPROXY / C3Bridge (`TCP 7000`)**: High-frequency cyclical variable bridge for `$AXIS_ACT`, `$POS_ACT`, `$TORQMON`, and `$IN`/`$OUT` polling on `KR C2` and `KR C4`.
+5. **Ethernet KRL (`TCP/UDP 54600–54615`) & RSI (`49152+` / `60809` on iiQKA.OS2)**: Configurable XML/JSON sensor and real-time trajectory correction interfaces.
 
 ```
 +-------------------------------------------------------------+
 |                VS Code Engineering Workstation              |
-|        (KRL Engineering Toolkit + Live Dashboard)      |
+|    (KRL Engineering Toolkit + Live Dashboard + SecretStore) |
 +-------------------------------------------------------------+
                               |
                      Industrial Ethernet
@@ -35,12 +36,13 @@ The live monitor uses a resilient dual-driver communication architecture:
                               v
 +-------------------------------------------------------------+
 |                 KUKA Physical Controller                    |
-|  +--------------------+  +--------------------------------+ |
-|  | WCF OnlineServices |  |  KUKAVARPROXY (Port 7000)      | |
-|  +--------------------+  +--------------------------------+ |
-|  | SmartPAD Alarms    |  |  $AXIS_ACT, $POS_ACT, $TORQMON | |
-|  | Option Packages    |  |  $IN[1..4096], $OUT[1..4096]   | |
-|  +--------------------+  +--------------------------------+ |
+|  +----------------------+  +------------------------------+ |
+|  | WCF (49002)          |  | KUKAVARPROXY (7000)          | |
+|  | iiQKA gRPC (443)     |  | OPC UA Probe (4840)          | |
+|  +----------------------+  +------------------------------+ |
+|  | SmartPAD Alarms      |  | $AXIS_ACT, $POS_ACT, $TORQMON| |
+|  | Compile Gate / KOP   |  | $IN[1..4096], KrcIoSignals   | |
+|  +----------------------+  +------------------------------+ |
 +-------------------------------------------------------------+
 ```
 
@@ -57,18 +59,20 @@ The live monitor uses a resilient dual-driver communication architecture:
 * **Current TCP Readout**: Real-time position tracking (`$POS_ACT`) with X, Y, Z millimeter coordinates and Euler orientation angles A, B, C.
 * **Active Frame Status**: Displays currently loaded `$TOOL` (Tool Number and dimensions) and `$BASE` (Workpiece coordinate reference).
 
-### 3. Dynamic Digital & Analog I/O Matrix
-* **4096-Pin Discrete Grid**: Multi-bank visual grid for `$IN[1..4096]` and `$OUT[1..4096]` channels.
+### 3. Dynamic 4096-Pin I/O Matrix & Watch SVG Trends
+* **4096-Pin Discrete Grid + `CFG` Filter**: Multi-bank visual grid for `$IN[1..4096]` and `$OUT[1..4096]` channels with a **CFG** filter synced to WorkVisual `KrcIoSignals.xml` and SmartPAD `UserTexts.kxr` / `$config.dat` descriptions.
 * **Internal Flags & Timers**: Live inspection of `$FLAG[1..1024]` and `$TIMER[1..64]`.
-* **Pulse Animations**: Visual glow animations on state transitions to trace PLC handshake timing during production cycles.
+* **Watch SVG Trends & Pulse Highlights**: Live SVG sparkline trends for watched signals and visual edge transitions to trace PLC handshake timing during production cycles.
 
-### 4. SmartPAD Alarm Stream & Multilingual Translation Subtitles
-* **Live Message Timeline**: Real-time stream of controller events, status messages, and emergency stops.
-* **Automatic Severity Tagging**: Instant categorisation into Error, Warning, Dialog, and Status notices.
-* **Multilingual Subtitles (`KSS_LOOKUP`)**: Eliminates language barriers during international commissioning. If the physical controller displays messages in German or Turkish, the extension displays English and Russian reference descriptions beneath the raw message code (e.g. `KSS00203`, `KSS01442`, `KSS01123`).
+### 4. SmartPAD Alarm Stream, 7-Check Health Tab & Compile Gate
+* **Live Message Timeline**: Real-time stream of controller events, status messages, and emergency stops (up to 200 messages in `krl.live.openMessages` with search and type filters).
+* **7-Check Health Tab**: Consolidated operational check covering drives, safety stops, mode (`T1`/`T2`/`AUT`/`EXT`), SPS status, active connection, and KSS/iiQKA version.
+* **Zero-Config Discovery & Cross-Subnet Scout**: Automatically locates online KRC and iiQKA controllers across local subnets and routed shop-floor VLANs.
+* **Target-KSS Compile Gate with Retry**: Executes `SynchronizeMirror -> AnalyzeAllKrlFiles -> GetModuleInfos` with retry handling when the controller bus is busy (`KSS 9.3+` requires explicit `*.src` / `*.dat` patterns).
+* **Multilingual Subtitles (`KSS_LOOKUP`)**: Displays English and Russian reference descriptions beneath raw controller message codes during international commissioning.
 
 ### 5. Hot Controller Backup over Ethernet
-* **Online Archiving**: Download complete, clean `.zip` controller backup archives directly over Ethernet.
+* **Online Archiving**: Download complete, clean `.zip` controller backup archives directly over Ethernet (SMB `KRC` share or controller transport).
 * **Read-only telemetry:** The telemetry client is non-blocking.
 * **Online backup:** The backup is a controller-side operation; validate it on a non-production controller before use.
 
@@ -78,16 +82,16 @@ The live monitor uses a resilient dual-driver communication architecture:
 
 | Command | Identifier | Description |
 |---|---|---|
-| KUKA KRL: Connect to KUKA Robot | `krl.live.connect` | Open live Ethernet connection modal |
-| KUKA KRL: Open Live Monitor Dashboard | `krl.live.openDashboard` | Launch real-time telemetry dashboard |
-| KUKA KRL: Open SmartPAD Messages | `krl.live.openMessages` | Open the full SmartPAD message history (up to 200, filters/search) |
+| KUKA KRL: Connect to KUKA Robot | `krl.live.connect` | Open live connection wizard (WCF / gRPC / KVP / Scout) |
+| KUKA KRL: Open Live Monitor Dashboard | `krl.live.openDashboard` | Launch real-time telemetry, Watch SVG trends & Health tab |
+| KUKA KRL: Open SmartPAD Messages | `krl.live.openMessages` | Open full SmartPAD message history (up to 200, filters/search) |
 | KUKA KRL: Download Controller Backup | `krl.live.fetchBackup` | Download a `.zip` backup from the controller |
 
 ---
 
-## What's new in 1.9.17
+## Highlights in v1.9.25–1.9.26
 
-- **Full iiQKA.OS telemetry**: tool/base frames, safety interlocks, per-axis torque/temperature/current/velocity, soft limits, PGNO details, installed KOP packages and `$V_ROBCOR`.
-- **SmartPAD message window**: the dashboard keeps the latest three messages; the full history (up to 200, newest first) opens in a dedicated panel with type filters, search and live refresh (`krl.live.openMessages`).
-- **Target-KSS compile gate**: the iiQKA.OS card runs `SynchronizeMirror -> AnalyzeAllKrlFiles -> GetModuleInfos` and reports the real module verdict. KSS 9.3 requires explicit `*.src` / `*.dat` patterns (the bare `*` returns `13 INTERNAL: BSCmdNA`).
-- **Validated transports**: WCF 49002 on KSS 8.6.2 (OfficeLite) and KSS 8.7 (KR C5); iiQKA gRPC on KSS 9.2.3 (VRC) and KSS 9.3.4 (KRC5).
+- **Zero-Config Discovery & Cross-Subnet Scout**: Locate online KRC / iiQKA controllers across routed industrial subnets without manual IP scanning.
+- **`CFG` I/O Filter, `UserTexts.kxr` & OPC UA `4840` Probe**: Filter 4,096 I/O pins down to active channels declared in `KrcIoSignals.xml` with SmartPAD labels, SVG watch trends, and port `4840` reachability checks.
+- **7-Check Health Tab & Resilient Compile Gate**: Single-view cell readiness diagnostics plus retry-safe `SynchronizeMirror -> AnalyzeAllKrlFiles -> GetModuleInfos` verification for `KSS 9.3+`.
+- **Hardened Credentials (`SecretStorage`)**: Per-host controller credentials live exclusively in VS Code `SecretStorage` with zero default passwords.

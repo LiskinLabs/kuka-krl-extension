@@ -1,1239 +1,1848 @@
 <template>
-  <div :class="['kuka-landing min-h-screen relative font-sans selection:bg-[#FF5500] selection:text-white transition-colors duration-200 overflow-x-hidden', isDaylight ? 'bg-[#F4F3EF] text-[#111113]' : 'bg-[#09090B] text-[#F4F4F0]']">
-    
-    <!-- Exposed Architectural Blueprint Background Grid -->
-    <div :class="['fixed inset-0 pointer-events-none z-0', isDaylight ? 'bg-[linear-gradient(to_right,#d4d4ce40_1px,transparent_1px),linear-gradient(to_bottom,#d4d4ce40_1px,transparent_1px)]' : 'bg-[linear-gradient(to_right,#27272a26_1px,transparent_1px),linear-gradient(to_bottom,#27272a26_1px,transparent_1px)]']" style="background-size: 32px 32px;"></div>
+  <div
+    :class="[
+      'kuka-landing min-h-dvh transition-colors duration-200 selection:bg-[#FF5E00] selection:text-white',
+      isDark ? 'bg-[#0D0F12] text-[#E6E8EC]' : 'bg-[#F8F9FB] text-[#111827]'
+    ]"
+  >
+    <a
+      href="#main-content"
+      class="visually-hidden fixed left-4 top-4 z-50 rounded-md bg-[#D94A00] px-4 py-2 text-sm font-medium text-white shadow-sm"
+    >
+      {{ t.skipToContent }}
+    </a>
 
-    <!-- TOP TICKER RIBBON (Industrial Compliance & Live Telemetry) -->
-    <div :class="['relative z-50 border-b text-[11px] font-mono py-1.5 px-4 tracking-wider uppercase flex items-center justify-between overflow-x-auto whitespace-nowrap', isDaylight ? 'bg-[#EAE9E4] border-[#D4D4CE] text-[#555866]' : 'bg-[#111114] border-zinc-800 text-zinc-400']">
-      <div class="flex items-center gap-6">
-        <span class="inline-flex items-center gap-2 font-bold text-[#FF5500]">
-          <span class="w-1.5 h-1.5 bg-[#FF5500] animate-pulse"></span>
-      KRL ENGINEERING TOOLKIT v1.9.26
-        </span>
-        <span class="hidden md:inline-flex items-center gap-1.5 text-[#00D68F]">
-          <svg class="w-3.5 h-3.5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          REVERSINGLABS SPECTRA ASSURE: 100% PASS [0 CVE]
-        </span>
-        <span class="hidden lg:inline text-zinc-500">|</span>
-        <span class="hidden lg:inline text-zinc-400">135 COMMANDS</span>
-        <span class="hidden xl:inline text-zinc-500">|</span>
-        <span class="hidden xl:inline text-zinc-400">66 PRO COMMANDS &amp; ANALYZERS</span>
-      </div>
-      <div class="flex items-center gap-4 text-[10px]">
-        <span class="inline-flex items-center gap-1 text-emerald-400 font-bold">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-          AIR-GAP ED25519 LICENSE
-        </span>
-      </div>
-    </div>
-
-    <!-- BLOCK 1: TECHNICAL HUD NAVIGATION HEADER -->
-    <header :class="['sticky top-0 z-40 border-b backdrop-blur-md transition-colors', isDaylight ? 'bg-[#F4F3EF]/90 border-[#D4D4CE]' : 'bg-[#09090B]/90 border-zinc-800']">
-      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-        
-        <!-- Brand & Version -->
-        <a :href="withBase('/')" class="flex items-center gap-3 shrink-0">
+    <!-- Sticky Header (64px) -->
+    <header
+      :class="[
+        'sticky top-0 z-40 border-b backdrop-blur-md transition-colors',
+        isDark
+          ? 'border-white/[0.08] bg-[#0D0F12]/85'
+          : 'border-slate-900/10 bg-[#F8F9FB]/90'
+      ]"
+    >
+      <div class="mx-auto flex min-h-[4rem] max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+        <!-- Brand -->
+        <a :href="withBase(localePath)" class="flex shrink-0 items-center gap-3">
           <img
-            :src="withBase(isDaylight ? '/logo-light.svg' : '/logo-dark.svg')"
-            alt="Liskin Labs"
-            class="w-8 h-8 object-contain"
+            :src="withBase(isDark ? '/logo-dark.svg' : '/logo-light.svg')"
+            alt="LiskinLabs"
+            width="28"
+            height="28"
+            class="h-7 w-7 object-contain"
           />
-          <div class="flex flex-col text-left">
-            <span class="font-mono font-extrabold text-xs tracking-wider">
-              LISKIN<span class="text-[#FF5500]">LABS</span>
+          <div class="flex flex-col leading-tight">
+            <span class="text-sm font-semibold tracking-tight">LiskinLabs</span>
+            <span :class="['text-xs', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+              {{ t.header.brandSubtitle }}
             </span>
-            <span class="font-mono text-[9px] text-zinc-500 tracking-widest">[SYS.KRC5 // PRO]</span>
           </div>
         </a>
 
-        <!-- Anchor Navigation Links -->
-        <nav class="hidden xl:flex items-center gap-5 text-xs font-mono">
-          <a href="#hero" :class="['hover:text-[#FF5500] transition-colors', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">[01] OVERVIEW</a>
-          <a href="#disaster" :class="['hover:text-[#FF5500] transition-colors', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">[02] HAZARDS</a>
-          <a href="#simulator" :class="['hover:text-[#FF5500] transition-colors', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">[03] WEB IDE</a>
-          <a href="#roi" :class="['hover:text-[#FF5500] transition-colors', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">[04] ROI & QUOTE</a>
-          <a href="#pricing" :class="['hover:text-[#FF5500] transition-colors', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">[05] PRICING</a>
-        <a href="#inventory" :class="['hover:text-[#FF5500] transition-colors', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">[06] CAPABILITIES</a>
-          <a href="#telemetry" :class="['hover:text-[#FF5500] transition-colors', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">[07] HUBS</a>
+        <!-- Center Navigation (5 items max) -->
+        <nav :aria-label="t.header.navAriaLabel" class="hidden items-center gap-6 text-sm lg:flex">
+          <a
+            href="#workflows"
+            :class="['transition-colors hover:text-[#FF7A2F]', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']"
+          >
+            {{ t.header.navItems.workflows }}
+          </a>
+          <a
+            href="#comparison"
+            :class="['transition-colors hover:text-[#FF7A2F]', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']"
+          >
+            {{ t.header.navItems.comparison }}
+          </a>
+          <a
+            href="#pricing"
+            :class="['transition-colors hover:text-[#FF7A2F]', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']"
+          >
+            {{ t.header.navItems.pricing }}
+          </a>
+          <a
+            href="#security"
+            :class="['transition-colors hover:text-[#FF7A2F]', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']"
+          >
+            {{ t.header.navItems.security }}
+          </a>
+          <a
+            :href="withBase(t.header.docsLink)"
+            :class="['transition-colors hover:text-[#FF7A2F]', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']"
+          >
+            {{ t.header.navItems.docs }}
+          </a>
         </nav>
 
-        <!-- Control Bar: Languages + Currencies + Mode Switch + CTA -->
-        <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-          
-          <!-- Language Selector -->
-          <div :class="['inline-flex border p-0.5 text-[11px] font-mono', isDaylight ? 'bg-white border-[#D4D4CE]' : 'bg-[#111114] border-zinc-800']">
-            <button 
-              v-for="lang in ['en', 'de', 'ru', 'tr', 'it', 'es']" 
-              :key="lang"
-              @click="setLanguage(lang)"
-              :class="['px-1.5 py-0.5 font-bold uppercase transition-all', currentLang === lang ? 'bg-[#FF5500] text-white' : (isDaylight ? 'text-zinc-600 hover:text-black' : 'text-zinc-400 hover:text-white')]">
-              {{ lang }}
+        <!-- Right Controls: Language Dropdown, Theme Toggle, Install CTA -->
+        <div class="flex shrink-0 items-center gap-2 sm:gap-2.5">
+          <!-- Compact Language Dropdown -->
+          <div ref="langMenuRef" class="relative">
+            <button
+              type="button"
+              :aria-label="t.header.langButtonAria"
+              :aria-expanded="langMenuOpen ? 'true' : 'false'"
+              aria-haspopup="listbox"
+              @click="langMenuOpen = !langMenuOpen"
+              :class="[
+                'inline-flex min-h-[36px] items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-xs font-medium transition-colors',
+                isDark
+                  ? 'border-white/20 bg-[#13161B] text-[#E6E8EC] hover:border-white/35'
+                  : 'border-slate-900/20 bg-white text-[#111827] hover:border-slate-900/35'
+              ]"
+            >
+              <span>{{ t.label }}</span>
+              <svg class="h-3.5 w-3.5 opacity-75" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path
+                  fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd"
+                />
+              </svg>
             </button>
+
+            <div
+              v-if="langMenuOpen"
+              role="listbox"
+              :aria-label="t.header.langButtonAria"
+              :class="[
+                'absolute right-0 mt-1.5 w-36 rounded-lg border p-1 shadow-lg',
+                isDark
+                  ? 'border-white/15 bg-[#13161B] text-[#E6E8EC]'
+                  : 'border-slate-900/15 bg-white text-[#111827]'
+              ]"
+            >
+              <a
+                v-for="item in languageOptions"
+                :key="item.code"
+                :href="withBase(item.path)"
+                role="option"
+                :aria-selected="item.code === currentLang ? 'true' : 'false'"
+                @click="langMenuOpen = false"
+                :class="[
+                  'flex items-center justify-between rounded-md px-2.5 py-1.5 text-xs transition-colors',
+                  item.code === currentLang
+                    ? (isDark ? 'bg-white/10 font-semibold text-[#FF7A2F]' : 'bg-slate-100 font-semibold text-[#C2410C]')
+                    : (isDark ? 'text-[#CBD2DC] hover:bg-white/5' : 'text-[#374151] hover:bg-slate-100')
+                ]"
+              >
+                <span>{{ item.nativeName }}</span>
+                <span class="font-mono text-xs opacity-70">{{ item.code.toUpperCase() }}</span>
+              </a>
+            </div>
           </div>
 
-          <!-- Currency Selector -->
-          <div :class="['hidden sm:inline-flex border p-0.5 text-[11px] font-mono', isDaylight ? 'bg-white border-[#D4D4CE]' : 'bg-[#111114] border-zinc-800']">
-            <button 
-              v-for="curr in ['USD', 'EUR', 'RUB', 'TRY']" 
-              :key="curr"
-              @click="currentCurrency = curr"
-              :class="['px-1.5 py-0.5 font-bold transition-all', currentCurrency === curr ? (isDaylight ? 'bg-zinc-800 text-white' : 'bg-zinc-700 text-white') : (isDaylight ? 'text-zinc-600 hover:text-black' : 'text-zinc-400 hover:text-white')]">
-              {{ curr }}
-            </button>
-          </div>
-
-          <!-- Daylight / Obsidian Cell Theme Toggle -->
-          <button 
-            @click="isDaylight = !isDaylight"
-            :title="isDaylight ? 'Switch to Obsidian Cell Dark Mode' : 'Switch to Shop-Floor Daylight Mode'"
-            :class="['p-1.5 border transition-all flex items-center justify-center', isDaylight ? 'bg-white border-[#D4D4CE] text-zinc-700 hover:text-black' : 'bg-[#111114] border-zinc-800 text-zinc-300 hover:text-white']">
-            <svg v-if="!isDaylight" class="w-4 h-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-            <svg v-else class="w-4 h-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <!-- 2-State Theme Toggle -->
+          <button
+            type="button"
+            @click="toggleTheme"
+            :aria-label="isDark ? t.header.themeToggleToLight : t.header.themeToggleToDark"
+            :class="[
+              'inline-flex min-h-[36px] min-w-[36px] items-center justify-center rounded-md border p-2 transition-colors',
+              isDark
+                ? 'border-white/20 bg-[#13161B] text-[#E6E8EC] hover:border-white/35'
+                : 'border-slate-900/20 bg-white text-[#111827] hover:border-slate-900/35'
+            ]"
+          >
+            <svg
+              v-if="isDark"
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41" />
+            </svg>
+            <svg
+              v-else
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
           </button>
 
-          <!-- Primary CTA Button -->
-          <a 
-            href="#pricing"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FF5500] hover:bg-orange-600 text-white font-mono text-xs font-bold transition-all border border-orange-400/40">
-            <span>GET PRO</span>
-            <svg class="w-3.5 h-3.5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+          <!-- Primary Header CTA -->
+          <a
+            href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hidden min-h-[36px] items-center rounded-md bg-[#D94A00] px-3.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-[#B83E00] sm:inline-flex"
+          >
+            {{ t.header.ctaInstall }}
           </a>
 
-          <!-- Mobile Nav Toggle -->
-          <button 
+          <!-- Mobile Navigation Toggle -->
+          <button
+            type="button"
             @click="mobileMenuOpen = !mobileMenuOpen"
-            class="xl:hidden p-1.5 border text-zinc-400 hover:text-white"
-            :class="isDaylight ? 'bg-white border-[#D4D4CE]' : 'bg-[#111114] border-zinc-800'">
-            <svg class="w-4 h-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            :aria-label="mobileMenuOpen ? t.header.mobileMenuCloseAria : t.header.mobileMenuOpenAria"
+            :aria-expanded="mobileMenuOpen ? 'true' : 'false'"
+            :class="[
+              'inline-flex min-h-[36px] min-w-[36px] items-center justify-center rounded-md border p-2 lg:hidden',
+              isDark
+                ? 'border-white/20 bg-[#13161B] text-[#E6E8EC]'
+                : 'border-slate-900/20 bg-white text-[#111827]'
+            ]"
+          >
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path v-if="!mobileMenuOpen" d="M4 6h16M4 12h16M4 18h16" />
+              <path v-else d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </button>
         </div>
-
       </div>
 
-      <!-- Mobile Dropdown Menu -->
-      <div v-if="mobileMenuOpen" :class="['xl:hidden border-b px-4 py-4 space-y-3 font-mono text-xs', isDaylight ? 'bg-[#F4F3EF] border-[#D4D4CE]' : 'bg-[#09090B] border-zinc-800']">
-        <div class="grid grid-cols-2 gap-2">
-          <a @click="mobileMenuOpen = false" href="#hero" class="p-2 border border-zinc-800 hover:border-[#FF5500]">[01] OVERVIEW</a>
-          <a @click="mobileMenuOpen = false" href="#disaster" class="p-2 border border-zinc-800 hover:border-[#FF5500]">[02] HAZARDS</a>
-          <a @click="mobileMenuOpen = false" href="#simulator" class="p-2 border border-zinc-800 hover:border-[#FF5500]">[03] WEB IDE</a>
-          <a @click="mobileMenuOpen = false" href="#roi" class="p-2 border border-zinc-800 hover:border-[#FF5500]">[04] ROI & QUOTE</a>
-          <a @click="mobileMenuOpen = false" href="#pricing" class="p-2 border border-zinc-800 hover:border-[#FF5500]">[05] PRICING</a>
-          <a @click="mobileMenuOpen = false" href="#inventory" class="p-2 border border-zinc-800 hover:border-[#FF5500]">[06] CAPABILITIES</a>
-          <a @click="mobileMenuOpen = false" href="#telemetry" class="p-2 border border-zinc-800 hover:border-[#FF5500]">[07] HUBS</a>
+      <!-- Mobile Menu -->
+      <nav
+        v-if="mobileMenuOpen"
+        :aria-label="t.header.navAriaLabel"
+        :class="[
+          'border-t px-4 py-4 lg:hidden',
+          isDark ? 'border-white/[0.08] bg-[#0D0F12]' : 'border-slate-900/10 bg-[#F8F9FB]'
+        ]"
+      >
+        <div class="flex flex-col gap-2 text-sm">
+          <a @click="mobileMenuOpen = false" href="#workflows" class="rounded-md px-3 py-2 hover:text-[#FF7A2F]">
+            {{ t.header.navItems.workflows }}
+          </a>
+          <a @click="mobileMenuOpen = false" href="#comparison" class="rounded-md px-3 py-2 hover:text-[#FF7A2F]">
+            {{ t.header.navItems.comparison }}
+          </a>
+          <a @click="mobileMenuOpen = false" href="#pricing" class="rounded-md px-3 py-2 hover:text-[#FF7A2F]">
+            {{ t.header.navItems.pricing }}
+          </a>
+          <a @click="mobileMenuOpen = false" href="#security" class="rounded-md px-3 py-2 hover:text-[#FF7A2F]">
+            {{ t.header.navItems.security }}
+          </a>
+          <a @click="mobileMenuOpen = false" :href="withBase(t.header.docsLink)" class="rounded-md px-3 py-2 hover:text-[#FF7A2F]">
+            {{ t.header.navItems.docs }}
+          </a>
+          <a
+            href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-2 inline-flex min-h-[40px] items-center justify-center rounded-md bg-[#D94A00] px-4 py-2 text-sm font-semibold text-white"
+          >
+            {{ t.header.ctaInstall }}
+          </a>
         </div>
-      </div>
+      </nav>
     </header>
 
-    <!-- MAIN ARCHITECTURAL BLUEPRINT CONTAINER -->
-    <main class="max-w-[1440px] mx-auto px-4 sm:px-6 relative">
-      
-      <!-- Top Millimeter Coordinate Scale -->
-      <div :class="['hidden md:flex justify-between items-center text-[9px] font-mono tracking-widest border-b py-1 select-none', isDaylight ? 'text-zinc-500 border-[#D4D4CE]' : 'text-zinc-600 border-zinc-800/80']">
-        <span>[0000.00 mm]</span>
-        <span>250.00 mm</span>
-        <span>500.00 mm</span>
-        <span>750.00 mm</span>
-        <span>1000.00 mm</span>
-        <span>1250.00 mm</span>
-        <span>1500.00 mm</span>
-        <span>1750.00 mm</span>
-        <span>2000.00 mm</span>
-        <span>[2500.00 mm]</span>
-      </div>
-
-      <!-- BLOCK 2: HERO SECTION (Value Proposition & Kinematic Rig) -->
-      <section id="hero" :class="['relative border-b py-10 lg:py-16', isDaylight ? 'border-[#D4D4CE]' : 'border-zinc-800']">
-        <span class="absolute -top-1.5 -left-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
-        <span class="absolute -top-1.5 -right-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
-        
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          
-          <!-- Left Column: Copy, Quick CTAs, Metrics (7 Cols) -->
-          <div class="lg:col-span-7 flex flex-col justify-between space-y-6 text-left">
-            
-            <div class="space-y-4">
-              <!-- System Status Badges -->
-              <div class="flex flex-wrap items-center gap-2 font-mono text-[11px]">
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 border border-emerald-500/30 bg-emerald-500/10 text-[#00D68F] font-bold">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#00D68F]"></span>
-                  SYS.STATUS: OPERATIONAL
-                </span>
-                <span :class="['px-2 py-1 border font-medium', isDaylight ? 'border-zinc-300 bg-white text-zinc-700' : 'border-zinc-800 bg-zinc-900 text-zinc-400']">
-                  KSS 8.x &amp; iiQKA.OS 9.x READY
-                </span>
-                <span class="px-2 py-1 border border-blue-500/30 bg-blue-500/10 text-blue-400 font-medium">
-              SAFETY LOGIC CHECKS
-                </span>
-              </div>
-
-              <!-- Main Architectural Headline -->
-              <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.08] font-sans">
-                <span class="block">{{ t.heroHeadline1 || 'ZERO DOWNTIME' }}</span>
-                <span class="text-[#FF5500] block">{{ t.heroHeadline2 || 'BEFORE THE ROBOT TOUCHES THE PART' }}</span>
-              </h1>
-
-              <!-- Subhead -->
-              <p :class="['text-sm sm:text-base leading-relaxed max-w-2xl font-normal', isDaylight ? 'text-zinc-700' : 'text-zinc-400']">
-                {{ t.heroSubhead || 'Industrial IDE and static safety analyzer for KUKA KRL (KRC2/KRC4/KRC5). Detects Advance Run stops, $BASE/$TOOL frame drift, missing BRAKE commands, and uninitialized kinematic hazards before physical execution on the shop floor.' }}
-              </p>
-            </div>
-
-            <!-- Primary Action Buttons & Command Snippet -->
-            <div class="space-y-3 pt-2">
-              <div class="flex flex-wrap items-center gap-3">
-                <a 
-                  href="vscode:extension/LiskinLabs.kuka-krl-extension"
-                  class="inline-flex items-center gap-2 px-5 py-3 bg-[#FF5500] hover:bg-orange-600 text-white font-mono text-xs font-bold tracking-wider transition-all border border-orange-400/50 shadow-sm">
-                  <svg class="w-4 h-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                  <span>INSTALL IN VS CODE (FREE)</span>
-                </a>
-
-                <button 
-                  @click="showTrialModal = true"
-                  :class="['inline-flex items-center gap-2 px-4 py-3 border font-mono text-xs font-bold transition-all', isDaylight ? 'bg-white border-zinc-400 text-zinc-900 hover:bg-zinc-100' : 'bg-[#111114] border-zinc-700 text-zinc-200 hover:bg-zinc-800']">
-                  <svg class="w-4 h-4 stroke-current text-[#FF5500]" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                  <span>14-DAY PRO TRIAL</span>
-                </button>
-
-                <a 
-                  href="#pricing"
-                  :class="['inline-flex items-center gap-2 px-4 py-3 border font-mono text-xs font-medium transition-all', isDaylight ? 'border-zinc-300 text-zinc-600 hover:text-black' : 'border-zinc-800 text-zinc-400 hover:text-white']">
-                  <span>PRICING & TIERS</span>
-                  <svg class="w-3.5 h-3.5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
-                </a>
-              </div>
-
-              <!-- Quick CLI Copy Bar -->
-              <div :class="['flex items-center justify-between border px-3 py-2 text-xs font-mono max-w-xl', isDaylight ? 'bg-white border-zinc-300 text-zinc-600' : 'bg-[#111114] border-zinc-800 text-zinc-400']">
-                <span class="truncate">code --install-extension LiskinLabs.kuka-krl-extension</span>
-                <button 
-                  @click="copyCliInstall"
-                  class="ml-3 shrink-0 text-[#FF5500] hover:underline font-bold text-[11px]">
-                  {{ copiedCli ? '[COPIED]' : '[COPY]' }}
-                </button>
-              </div>
-            </div>
-
-            <!-- 4 Technical Metric Cards -->
-            <div :class="['grid grid-cols-2 sm:grid-cols-4 border-t pt-4 text-left gap-4 font-mono', isDaylight ? 'border-zinc-300' : 'border-zinc-800']">
-              <div>
-                <div class="text-2xl font-black text-[#FF5500] tabular-nums">135</div>
-                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Commands</div>
-              </div>
-              <div>
-                <div class="text-2xl font-black text-[#00D68F] tabular-nums">0 CVE</div>
-                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Spectra Assure</div>
-              </div>
-              <div>
-                <div class="text-2xl font-black tabular-nums">64</div>
-                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Tool Guides</div>
-              </div>
-              <div>
-                <div class="text-2xl font-black tabular-nums">66</div>
-                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Pro Commands</div>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Right Column: 3D CAD Kinematics Rig (5 Cols) -->
-          <div class="lg:col-span-5 flex flex-col relative min-h-[460px] lg:min-h-full">
-            <div class="relative w-full h-full flex flex-col border border-zinc-800 overflow-hidden bg-black">
-              <ClientOnly>
-                <iframe
-                  :src="withBase(`/sim/?embed=1&lang=${lang}`)"
-                  title="KR 50 R2500 3D Digital Twin"
-                  class="w-full h-full min-h-[460px] border-0 bg-black"
-                  loading="lazy"
-                  allow="fullscreen"
-                ></iframe>
-              </ClientOnly>
-
-              <!-- Real-time Kinematic Telemetry HUD Banner -->
-              <div class="bg-[#111114] border-t border-zinc-800 p-2.5 font-mono text-[10px] grid grid-cols-2 gap-2 text-zinc-400 select-none">
-                <div>
-                  <span class="text-zinc-600 block">ACTIVE TOOL:</span>
-                  <span class="text-white font-bold truncate block">TOOL_DATA[1] (WELD_GUN_1)</span>
-                </div>
-                <div>
-                  <span class="text-zinc-600 block">ACTIVE BASE:</span>
-                  <span class="text-white font-bold truncate block">BASE_DATA[29] (FIXTURE_STN_1)</span>
-                </div>
-                <div>
-                  <span class="text-zinc-600 block">INTERPOLATION:</span>
-                  <span class="text-[#00D68F] font-bold block">PTP / LIN (C_DIS)</span>
-                </div>
-                <div>
-                  <span class="text-zinc-600 block">ADVANCE RUN:</span>
-                  <span class="text-[#FF5500] font-bold block">$ADVANCE = 3 [IN_TOL]</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- BLOCK 3: PAIN-TO-PRO INTERACTIVE DISASTER SWITCHER -->
-      <section id="disaster" :class="['relative border-b py-12 lg:py-16 text-left', isDaylight ? 'border-[#D4D4CE]' : 'border-zinc-800']">
-        <span class="absolute -top-1.5 -left-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
-        <span class="absolute -top-1.5 -right-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
-
-        <!-- Section Header -->
-        <div class="max-w-3xl space-y-2 mb-8">
-          <div class="font-mono text-xs text-[#FF5500] font-bold tracking-wider">[02 // INCIDENT SIMULATOR]</div>
-          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">PREVENT CATASTROPHIC DOWNTIME BEFORE COMPILING</h2>
-          <p :class="['text-sm leading-relaxed', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">
-              Illustrative industry estimate: $24,000 per hour of unplanned robotic cell downtime. KRL Engineering Toolkit statically detects and auto-fixes the 4 most frequent causes of shop-floor stoppages.
-          </p>
-        </div>
-
-        <!-- 4 Scenario Tabs -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 mb-6 font-mono text-xs">
-          <button 
-            v-for="dis in disasterScenarios"
-            :key="dis.id"
-            @click="activeDisaster = dis"
-            :class="[
-              'p-3 border text-left transition-all relative',
-              activeDisaster.id === dis.id 
-                ? (isDaylight ? 'bg-white border-[#FF5500] shadow-sm' : 'bg-[#16161A] border-[#FF5500]') 
-                : (isDaylight ? 'bg-[#EAE9E4] border-zinc-300 text-zinc-600 hover:text-black' : 'bg-[#111114] border-zinc-800 text-zinc-400 hover:text-white')
-            ]">
-            <span v-if="activeDisaster.id === dis.id" class="absolute top-0 left-0 w-1 h-full bg-[#FF5500]"></span>
-            <div class="text-[10px] text-zinc-500 font-bold uppercase tracking-wider">{{ dis.tag }}</div>
-            <div class="font-bold text-xs mt-1 truncate">{{ dis.title }}</div>
-            <div class="text-[11px] text-[#FF5500] font-mono mt-1 font-bold">{{ dis.avoidedCost }}</div>
-          </button>
-        </div>
-
-        <!-- Scenario Detail & Side-by-Side Diff View -->
-        <div :class="['border p-4 sm:p-6 space-y-6', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-          
-          <!-- Scenario Summary Bar -->
-          <div class="flex flex-wrap items-center justify-between gap-4 border-b pb-4 border-zinc-700/50">
-            <div>
-              <div class="text-xs font-mono text-[#FF2E4C] font-bold uppercase">[KSS FAULT VECTOR]: {{ activeDisaster.title }}</div>
-              <p :class="['text-xs sm:text-sm mt-1 max-w-3xl', isDaylight ? 'text-zinc-700' : 'text-zinc-300']">{{ activeDisaster.description }}</p>
-            </div>
-            <div class="text-right">
-              <span class="text-[10px] font-mono text-zinc-500 block uppercase">SAVINGS PER INCIDENT:</span>
-              <span class="text-lg sm:text-xl font-mono font-black text-[#00D68F]">{{ activeDisaster.avoidedCost }}</span>
-            </div>
-          </div>
-
-          <!-- Split Diff Code View -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 font-mono text-xs">
-            
-            <!-- Dangerous Legacy Code -->
-            <div class="border border-[#FF2E4C]/40 bg-[#090C10] p-4 text-left relative">
-              <div class="flex items-center justify-between border-b border-zinc-800 pb-2 mb-3">
-                <span class="text-[#FF2E4C] font-bold text-[11px] flex items-center gap-1.5">
-                  <svg class="w-3.5 h-3.5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                  RAW CODE // HIGH COLLISION HAZARD
-                </span>
-                <span class="text-[10px] text-zinc-500">KSS COMPILER ABORT</span>
-              </div>
-              <pre class="overflow-x-auto text-zinc-300 leading-relaxed font-mono"><code>{{ activeDisaster.beforeCode }}</code></pre>
-            </div>
-
-            <!-- KRL Engineering Toolkit Safe Sanitized Code -->
-            <div class="border border-emerald-500/40 bg-[#090C10] p-4 text-left relative">
-              <div class="flex items-center justify-between border-b border-zinc-800 pb-2 mb-3">
-                <span class="text-[#00D68F] font-bold text-[11px] flex items-center gap-1.5">
-                  <svg class="w-3.5 h-3.5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
-                  KRL PRO AUTO-REPAIR // SAFE MOTION
-                </span>
-                <span class="text-[10px] text-emerald-400 font-bold">100% CYCLE ASSURED</span>
-              </div>
-              <pre class="overflow-x-auto text-emerald-400 leading-relaxed font-mono"><code>{{ activeDisaster.afterCode }}</code></pre>
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      <!-- BLOCK 4: CLIENT-SIDE VS CODE SIMULATOR / ZIP INSPECTOR -->
-      <section id="simulator" :class="['relative border-b py-12 lg:py-16 text-left', isDaylight ? 'border-[#D4D4CE]' : 'border-zinc-800']">
-        <span class="absolute -top-1.5 -left-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
-        <span class="absolute -top-1.5 -right-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
-
-        <!-- Section Header -->
-        <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
-          <div class="space-y-2 max-w-2xl">
-            <div class="font-mono text-xs text-[#FF5500] font-bold tracking-wider">[03 // IN-BROWSER SIMULATOR]</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">TRY KUKA KRL IN YOUR BROWSER</h2>
-            <p :class="['text-sm', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">
-              Test syntax diagnostics, AST tree visualization, or drop your own KRC .src / .zip backup. All parsing executes 100% locally in your browser with zero cloud transmission (Air-Gap compliant).
+    <main id="main-content" tabindex="-1" class="mx-auto max-w-6xl px-4 sm:px-6">
+      <!-- SECTION 1: HERO -->
+      <section id="hero" class="py-16 lg:py-24">
+        <div class="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-12">
+          <!-- Copy Column -->
+          <div class="space-y-6 lg:col-span-6">
+            <p :class="['text-xs font-medium sm:text-sm', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+              {{ t.hero.eyebrow }}
             </p>
-          </div>
 
-          <!-- Tab Selector: Editor vs Archive Inspector -->
-          <div :class="['border p-1 inline-flex text-xs font-mono', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-            <button 
-              @click="activeSimTab = 'editor'"
-              :class="['px-3 py-1.5 font-bold transition-all', activeSimTab === 'editor' ? 'bg-[#FF5500] text-white' : 'text-zinc-400 hover:text-white']">
-              VS CODE SIMULATOR
-            </button>
-            <button 
-              @click="activeSimTab = 'inspector'"
-              :class="['px-3 py-1.5 font-bold transition-all', activeSimTab === 'inspector' ? 'bg-[#FF5500] text-white' : 'text-zinc-400 hover:text-white']">
-              KRC BACKUP INSPECTOR (.ZIP)
-            </button>
-          </div>
-        </div>
+            <h1 class="text-[clamp(1.75rem,1.25rem+1.8vw,2.75rem)] font-bold leading-[1.15] tracking-tight">
+              {{ t.hero.h1 }}
+            </h1>
 
-        <!-- Embedded Interactive Components -->
-        <div class="w-full">
-          <ClientOnly>
-            <div v-show="activeSimTab === 'editor'">
-              <VsCodeWebSimulator />
-            </div>
-            <div v-show="activeSimTab === 'inspector'">
-              <KrlWebInspector />
-            </div>
-          </ClientOnly>
-        </div>
-
-      </section>
-
-      <!-- BLOCK 5: INTERACTIVE B2B ROI CALCULATOR & QUOTE GENERATOR -->
-      <section id="roi" :class="['relative border-b py-12 lg:py-16 text-left', isDaylight ? 'border-[#D4D4CE]' : 'border-zinc-800']">
-        <span class="absolute -top-1.5 -left-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
-        <span class="absolute -top-1.5 -right-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
-
-        <!-- Section Header -->
-        <div class="max-w-3xl space-y-2 mb-8">
-          <div class="font-mono text-xs text-[#FF5500] font-bold tracking-wider">[04 // B2B PROCUREMENT & ROI]</div>
-          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">ENTERPRISE ROI CALCULATOR & OFFICIAL QUOTATION</h2>
-          <p :class="['text-sm leading-relaxed', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">
-            Estimate your annual plant savings from prevented robot collisions and advance-run line interruptions. Generate an instant, official Commercial Proposal (Angebot / КП) on Liskin Labs letterhead for accounting and management approval.
-          </p>
-        </div>
-
-        <!-- Calculator Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          
-          <!-- Sliders Panel (7 cols) -->
-          <div :class="['lg:col-span-7 border p-6 space-y-6', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-            
-            <!-- Slider 1: Robots in Cell/Fleet -->
-            <div class="space-y-2">
-              <div class="flex justify-between items-center text-xs font-mono">
-                <span class="font-bold">1. ROBOTS IN PRODUCTION FLEET:</span>
-                <span class="text-[#FF5500] font-bold text-sm">{{ calcRobots }} ROBOTS</span>
-              </div>
-              <input 
-                type="range" 
-                min="1" 
-                max="200" 
-                v-model.number="calcRobots"
-                class="w-full accent-[#FF5500] cursor-pointer" />
-              <div class="flex justify-between text-[10px] font-mono text-zinc-500">
-                <span>1 Robot</span>
-                <span>50</span>
-                <span>100</span>
-                <span>200 Robots</span>
-              </div>
-            </div>
-
-            <!-- Slider 2: Automation & Commissioning Engineers -->
-            <div class="space-y-2">
-              <div class="flex justify-between items-center text-xs font-mono">
-                <span class="font-bold">2. ROBOTICS & COMMISSIONING ENGINEERS:</span>
-                <span class="text-[#FF5500] font-bold text-sm">{{ calcEngineers }} ENGINEERS</span>
-              </div>
-              <input 
-                type="range" 
-                min="1" 
-                max="50" 
-                v-model.number="calcEngineers"
-                class="w-full accent-[#FF5500] cursor-pointer" />
-              <div class="flex justify-between text-[10px] font-mono text-zinc-500">
-                <span>1 Engineer</span>
-                <span>15</span>
-                <span>30</span>
-                <span>50 Engineers</span>
-              </div>
-            </div>
-
-            <!-- Slider 3: Line Downtime Cost per Hour -->
-            <div class="space-y-2">
-              <div class="flex justify-between items-center text-xs font-mono">
-                <span class="font-bold">3. CELL DOWNTIME COST PER HOUR:</span>
-                <span class="text-[#FF5500] font-bold text-sm">{{ formatPrice(calcDowntimeCost) }} / HR</span>
-              </div>
-              <input 
-                type="range" 
-                min="1000" 
-                max="50000" 
-                step="1000"
-                v-model.number="calcDowntimeCost"
-                class="w-full accent-[#FF5500] cursor-pointer" />
-              <div class="flex justify-between text-[10px] font-mono text-zinc-500">
-                <span>$1,000 / hr</span>
-                <span>$15,000 / hr</span>
-                <span>$30,000 / hr</span>
-                <span>$50,000 / hr</span>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Results & Quotation Generator Card (5 cols) -->
-          <div class="lg:col-span-5 border border-[#FF5500]/50 bg-black p-6 flex flex-col justify-between text-left space-y-6">
-            
-            <div class="space-y-4">
-              <div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#FF5500]/15 border border-[#FF5500]/30 text-[#FF5500] font-mono text-[10px] font-bold">
-                ROI FORECAST & COST AVOIDANCE
-              </div>
-
-              <!-- Estimated Hours Prevented -->
-              <div>
-                <span class="text-xs font-mono text-zinc-500 uppercase block">Prevented Downtime per Year:</span>
-                <span class="text-3xl font-black font-mono text-white tabular-nums">{{ preventedHours }} HOURS / YR</span>
-              </div>
-
-              <!-- Net Annual Savings -->
-              <div>
-                <span class="text-xs font-mono text-zinc-500 uppercase block">Net Annual Factory Savings:</span>
-                <span class="text-3xl sm:text-4xl font-black font-mono text-[#00D68F] tabular-nums">{{ formatPrice(annualSavings) }}</span>
-              </div>
-
-              <!-- Recommended License Tier -->
-              <div class="border-t border-zinc-800 pt-3">
-                <span class="text-[11px] font-mono text-zinc-400 uppercase block">Recommended License Plan:</span>
-                <span class="text-base font-bold font-mono text-white block mt-0.5">{{ recommendedTier.name }} ({{ formatPrice(recommendedTier.priceUsd) }}/yr)</span>
-                <span class="text-[11px] font-mono text-zinc-500 block">Up to {{ recommendedTier.seats }} Workstations Included</span>
-              </div>
-            </div>
-
-            <!-- Button: Open Quotation Modal -->
-            <button 
-              @click="openQuoteModal"
-              class="w-full py-3 bg-[#FF5500] hover:bg-orange-600 text-white font-mono text-xs font-bold tracking-wider transition-all border border-orange-400/40 flex items-center justify-center gap-2">
-              <svg class="w-4 h-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-              <span>GENERATE OFFICIAL COMMERCIAL PROPOSAL</span>
-            </button>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      <!-- BLOCK 6: TRANSPARENT INDUSTRIAL PRICING MATRIX -->
-      <section id="pricing" :class="['relative border-b py-12 lg:py-16 text-left', isDaylight ? 'border-[#D4D4CE]' : 'border-zinc-800']">
-        <span class="absolute -top-1.5 -left-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
-        <span class="absolute -top-1.5 -right-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
-
-        <!-- Section Header & Currency Switcher -->
-        <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
-          <div class="space-y-2 max-w-2xl">
-            <div class="font-mono text-xs text-[#FF5500] font-bold tracking-wider">[05 // TRANSPARENT PRICING]</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">CHOOSE YOUR INDUSTRIAL WORKFLOW TIER</h2>
-            <p :class="['text-sm', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">
-              Single engineers, integration teams, or plant-wide deployments. Direct invoicing by Dodo Payments Inc. with EU VAT, US Sales Tax, and corporate purchase orders.
+            <p :class="['max-w-[60ch] text-base leading-relaxed', isDark ? 'text-[#CBD2DC]' : 'text-[#374151]']">
+              {{ t.hero.subtitle }}
             </p>
-          <p class="text-[11px] font-mono text-[#00D68F] font-bold">
-            [LAUNCH PROMO] Use code LAUNCH30 for 30% OFF — pre-applied automatically at checkout. Currency display is indicative; invoices settle in USD.
-          </p>
-          </div>
 
-          <!-- Currency Toggles -->
-          <div :class="['border p-1 inline-flex text-xs font-mono', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-            <button 
-              v-for="c in ['USD', 'EUR', 'RUB', 'TRY']" 
-              :key="c"
-              @click="currentCurrency = c"
-              :class="['px-3 py-1 font-bold transition-all', currentCurrency === c ? 'bg-[#FF5500] text-white' : 'text-zinc-400 hover:text-white']">
-              {{ c }}
-            </button>
-          </div>
-        </div>
-
-        <!-- 6 Main Pricing Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-10 items-stretch">
-          
-          <!-- Card 1: Free Community -->
-          <div :class="['border p-5 flex flex-col justify-between', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-            <div class="space-y-3">
-              <div class="flex justify-between items-center text-xs font-mono">
-                <span class="text-zinc-500 font-bold">COMMUNITY</span>
-                <span class="text-[10px] px-1.5 py-0.5 border border-zinc-700 bg-zinc-800 text-zinc-300">1 SEAT</span>
-              </div>
-              <div class="text-3xl font-black font-mono text-white">Free</div>
-              <p class="text-xs text-zinc-400">Essential KRL syntax, snippets, document symbols, outline and static diagnostics without file size limits.</p>
-              <ul class="text-xs font-mono space-y-1.5 pt-2 border-t border-zinc-800 text-zinc-300">
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Full KRL Syntax Highlighting</li>
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Document Symbol Outline</li>
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Unlimited Lines of Code (Free Forever)</li>
-              </ul>
-            </div>
-            <a 
-              href="vscode:extension/LiskinLabs.kuka-krl-extension"
-              class="mt-6 w-full py-2.5 border border-zinc-600 hover:border-white font-mono text-xs font-bold text-center block transition-colors">
-              INSTALL FREE
-            </a>
-          </div>
-
-          <!-- Card 2: Pro Annual (Featured) -->
-          <div class="border-2 border-[#FF5500] bg-black p-5 flex flex-col justify-between relative shadow-lg">
-            <span class="absolute -top-3 right-4 px-2 py-0.5 bg-[#FF5500] text-white font-mono text-[10px] font-bold">RECOMMENDED</span>
-            <div class="space-y-3">
-              <div class="space-y-1">
-                <div class="flex justify-between items-center text-xs font-mono">
-                  <span class="text-[#FF5500] font-bold">PRO ANNUAL</span>
-                  <span class="text-[10px] px-1.5 py-0.5 bg-[#FF5500]/20 text-[#FF5500] font-bold">1 SEAT</span>
-                </div>
-              </div>
-              <div class="flex items-baseline gap-1">
-                <span class="text-3xl sm:text-4xl font-black font-mono text-white">{{ formatPrice(149) }}</span>
-                <span class="text-xs font-mono text-zinc-500">/ year</span>
-              </div>
-              <p class="text-xs text-zinc-400">Full professional robotics toolset. Save 35% compared to monthly billing.</p>
-              <ul class="text-xs font-mono space-y-1.5 pt-2 border-t border-zinc-800 text-zinc-300">
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Interactive Logic Flowcharts v2.0</li>
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> All 66 Pro Commands + 135 Tools</li>
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Advance Run Stop Detection</li>
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> 3-Point Frame Kinematic Solver</li>
-              </ul>
-            </div>
-            <div class="mt-6 flex flex-col gap-2">
-              <a 
-                :href="buildCheckoutUrl('pdt_0NmAV012KFHSjUMyDomJ6')"
-                @click.prevent="startCheckout('pdt_0NmAV012KFHSjUMyDomJ6')"
-                class="w-full py-2.5 bg-[#FF5500] hover:bg-orange-600 text-white font-mono text-xs font-bold text-center block transition-colors cursor-pointer">
-                {{ checkoutBusy === 'pdt_0NmAV012KFHSjUMyDomJ6' ? 'OPENING CHECKOUT...' : `GET ANNUAL PRO (${formatPrice(149)} · -30% LAUNCH30)` }}
+            <!-- Exact 2 CTAs -->
+            <div class="flex flex-wrap items-center gap-3 pt-1">
+              <a
+                href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex min-h-[44px] items-center gap-2 rounded-md bg-[#D94A00] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#B83E00]"
+              >
+                <span>{{ t.hero.ctaInstall }}</span>
               </a>
-            </div>
-          </div>
 
-          <!-- Card 3: Team Edition (5 Workstations) -->
-          <div :class="['border p-5 flex flex-col justify-between', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-            <div class="space-y-3">
-              <div class="flex justify-between items-center text-xs font-mono">
-                <span class="text-zinc-300 font-bold">TEAM EDITION</span>
-                <span class="text-[10px] px-1.5 py-0.5 border border-zinc-700 bg-zinc-800 text-[#00D68F] font-bold">5 SEATS</span>
-              </div>
-              <div class="flex items-baseline gap-1">
-                <span class="text-3xl font-black font-mono text-white">{{ formatPrice(499) }}</span>
-                <span class="text-xs font-mono text-zinc-500">/ year</span>
-              </div>
-              <p class="text-xs text-zinc-400">For commissioning teams and automation cells. Up to 5 workstations ($99.80/seat/yr).</p>
-              <ul class="text-xs font-mono space-y-1.5 pt-2 border-t border-zinc-800 text-zinc-300">
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Up to 5 Workstations</li>
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Centralized Key Management</li>
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Single Corporate Invoice</li>
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Priority In-Editor Support Gateway</li>
-              </ul>
-            </div>
-            <div class="mt-6 flex flex-col gap-2">
-              <a 
-                :href="buildCheckoutUrl('pdt_0NnLCdgD69GiXDLRJ0K5v')"
-                @click.prevent="startCheckout('pdt_0NnLCdgD69GiXDLRJ0K5v')"
-                class="w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-mono text-xs font-bold text-center block transition-colors cursor-pointer">
-                {{ checkoutBusy === 'pdt_0NnLCdgD69GiXDLRJ0K5v' ? 'OPENING CHECKOUT...' : `DEPLOY TEAM (${formatPrice(499)})` }}
-              </a>
-            </div>
-          </div>
-
-          <!-- Card 4: Department / Integrator (20 Workstations) -->
-          <div :class="['border p-5 flex flex-col justify-between', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-            <div class="space-y-3">
-              <div class="flex justify-between items-center text-xs font-mono">
-                <span class="text-zinc-300 font-bold">INTEGRATOR</span>
-                <span class="text-[10px] px-1.5 py-0.5 border border-zinc-700 bg-zinc-800 text-cyan-400 font-bold">20 SEATS</span>
-              </div>
-              <div class="flex items-baseline gap-1">
-                <span class="text-3xl font-black font-mono text-white">{{ formatPrice(1499) }}</span>
-                <span class="text-xs font-mono text-zinc-500">/ year</span>
-              </div>
-              <p class="text-xs text-zinc-400">For system integration companies. Up to 20 workstations ($74.95/seat/yr).</p>
-              <ul class="text-xs font-mono space-y-1.5 pt-2 border-t border-zinc-800 text-zinc-300">
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Up to 20 Workstations</li>
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Unlimited OEM Line Projects</li>
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Offline Air-Gap Activation</li>
-                <li class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#00D68F] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Priority Support Relay</li>
-              </ul>
-            </div>
-            <div class="mt-6 flex flex-col gap-2">
-              <a 
-                :href="buildCheckoutUrl('pdt_0Nq5QVTrbkJbWAUf8qoyn')"
-                @click.prevent="startCheckout('pdt_0Nq5QVTrbkJbWAUf8qoyn')"
-                class="w-full py-2 bg-cyan-700 hover:bg-cyan-600 text-white font-mono text-xs font-bold text-center block transition-colors cursor-pointer">
-                {{ checkoutBusy === 'pdt_0Nq5QVTrbkJbWAUf8qoyn' ? 'OPENING CHECKOUT...' : `DEPLOY INTEGRATOR (${formatPrice(1499)})` }}
-              </a>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Additional Tiers Bar: Monthly ($19), Lifetime ($699), Enterprise Site ($4,999) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
-          
-          <!-- Monthly -->
-          <div :class="['border p-4 flex flex-col justify-between gap-3', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-            <div class="flex items-center justify-between gap-3">
-              <div>
-                <span class="text-zinc-400 block font-bold">PRO MONTHLY</span>
-                <span class="text-lg font-black text-white">{{ formatPrice(19) }} / mo</span>
-                <span class="text-[10px] text-zinc-500 block">1 Seat / Cancel anytime</span>
-              </div>
-              <a 
-                :href="buildCheckoutUrl('pdt_0NmAUzwdbzeERSktsOLTp')"
-                @click.prevent="startCheckout('pdt_0NmAUzwdbzeERSktsOLTp')"
-                class="px-3 py-1.5 border border-zinc-700 hover:border-white font-bold text-white transition-colors shrink-0 cursor-pointer">
-                {{ checkoutBusy === 'pdt_0NmAUzwdbzeERSktsOLTp' ? 'OPENING...' : 'BUY MONTHLY' }}
-              </a>
-            </div>
-          </div>
-
-          <!-- Lifetime -->
-          <div :class="['border p-4 flex flex-col justify-between gap-3', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-            <div class="flex items-center justify-between gap-3">
-              <div>
-                <span class="text-zinc-400 block font-bold">PRO LIFETIME</span>
-                <span class="text-lg font-black text-white">{{ formatPrice(699) }}</span>
-                <span class="text-[10px] text-zinc-500 block">1 Seat / Perpetual updates</span>
-              </div>
-              <a 
-                :href="buildCheckoutUrl('pdt_0NmAcoqVCfuwQ6Xx7qyqr')"
-                @click.prevent="startCheckout('pdt_0NmAcoqVCfuwQ6Xx7qyqr')"
-                class="px-3 py-1.5 border border-zinc-700 hover:border-white font-bold text-white transition-colors shrink-0 cursor-pointer">
-                {{ checkoutBusy === 'pdt_0NmAcoqVCfuwQ6Xx7qyqr' ? 'OPENING...' : 'BUY LIFETIME' }}
-              </a>
-            </div>
-          </div>
-
-          <!-- Enterprise Site (100 Workstations) -->
-          <div :class="['border p-4 flex flex-col justify-between gap-3 border-cyan-500/40', isDaylight ? 'bg-white' : 'bg-[#111114]']">
-            <div class="flex items-center justify-between gap-3">
-              <div>
-                <span class="text-cyan-400 block font-bold">ENTERPRISE SITE (100 SEATS)</span>
-                <span class="text-lg font-black text-white">{{ formatPrice(4999) }} / yr</span>
-                <span class="text-[10px] text-zinc-400 block">100 Workstations / Corporate PO &amp; Invoice</span>
-              </div>
-              <button 
+              <button
                 type="button"
-                @click="openQuoteModal()"
-                class="px-3 py-1.5 bg-cyan-600 hover:bg-cyan-500 font-bold text-white transition-colors shrink-0 cursor-pointer">
-                REQUEST PO / QUOTE
+                @click="openTrialDialog"
+                :class="[
+                  'inline-flex min-h-[44px] items-center rounded-md border px-5 py-2.5 text-sm font-semibold transition-colors',
+                  isDark
+                    ? 'border-white/20 bg-[#13161B] text-[#E6E8EC] hover:border-white/35 hover:bg-[#1A1E25]'
+                    : 'border-slate-900/20 bg-white text-[#111827] hover:border-slate-900/35 hover:bg-slate-50'
+                ]"
+              >
+                {{ t.hero.ctaTrial }}
               </button>
             </div>
-          </div>
 
-        </div>
-
-        <!-- DODO CUSTOMER PORTAL & INVOICES GLOBAL BANNER -->
-        <div :class="['mt-6 p-4 border flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs', isDaylight ? 'bg-zinc-100 border-zinc-300' : 'bg-zinc-900/60 border-zinc-800']">
-          <div class="flex items-center gap-3 text-left">
-            <div class="w-8 h-8 rounded bg-[#00D68F]/20 text-[#00D68F] flex items-center justify-center shrink-0">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <!-- CLI Copy Snippet -->
+            <div
+              :class="[
+                'flex max-w-xl items-center justify-between gap-3 rounded-md border px-3.5 py-2.5',
+                isDark ? 'border-white/15 bg-[#13161B]' : 'border-slate-900/15 bg-white'
+              ]"
+            >
+              <code class="truncate font-mono text-xs sm:text-sm">
+                code --install-extension LiskinLabs.kuka-krl-extension
+              </code>
+              <button
+                type="button"
+                :aria-label="t.hero.copyCliAria"
+                @click="copyCliInstall"
+                :class="[
+                  'shrink-0 rounded px-2 py-1 text-xs font-semibold transition-colors',
+                  isDark ? 'text-[#FF7A2F] hover:bg-white/5' : 'text-[#C2410C] hover:bg-slate-100'
+                ]"
+              >
+                {{ copiedCli ? t.hero.copiedLabel : t.hero.copyLabel }}
+              </button>
             </div>
-            <div>
-              <div class="font-bold text-white">Need an official invoice, VAT receipt, or seat management?</div>
-              <div class="text-[11px] text-zinc-400">All payments are processed securely by Dodo Payments Inc. Download tax PDF receipts, update billing credentials, or manage workstations anytime.</div>
-            </div>
-          </div>
-          <a 
-            href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="shrink-0 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white font-bold border border-zinc-700 hover:border-zinc-500 transition-colors flex items-center gap-2">
-            <span>DODO CUSTOMER PORTAL</span>
-            <span class="text-[#00D68F]">&rarr;</span>
-          </a>
-        </div>
 
-        <!-- BUYER TRUST & ANTI-CHARGEBACK GUARANTEES GRID -->
-        <div class="mt-8 pt-6 border-t border-zinc-800 grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-[11px]">
-          <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">
-            <div class="text-[#00D68F] font-bold mb-1">[VERIFIED] 1-CLICK IN-EDITOR CANCEL</div>
-            <p class="text-zinc-400 text-[10px] leading-relaxed">
-              Cancel subscriptions anytime right from VS Code status bar (<span class="text-white">krl.manageSubscription</span>) or Dodo Customer Portal without waiting.
-            </p>
-          </div>
-          <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">
-            <div class="text-[#00D68F] font-bold mb-1">[VERIFIED] 100% UNCONDITIONAL REFUND</div>
-            <p class="text-zinc-400 text-[10px] leading-relaxed">
-              14-day money-back guarantee. If not completely satisfied, request a refund directly via built-in VS Code chat (<span class="text-white">krl.openTelegramChat</span>) for an instant 100% refund, no questions asked.
-            </p>
-          </div>
-          <div class="p-3 border border-zinc-800/80 bg-zinc-900/30">
-            <div class="text-[#00D68F] font-bold mb-1">[VERIFIED] MINIMAL CHECKOUT & 0% EU VAT</div>
-            <p class="text-zinc-400 text-[10px] leading-relaxed">
-              Fast single-page checkout (Country &amp; Postal code only). Instant EU Reverse-Charge 0% VAT validation via VIES / HMRC.
-            </p>
-          </div>
-        </div>
-
-      </section>
-
-<!-- BLOCK 7: SEARCHABLE 64 INDUSTRIAL TOOLS INVENTORY -->
-      <section id="inventory" :class="['relative border-b py-12 lg:py-16 text-left', isDaylight ? 'border-[#D4D4CE]' : 'border-zinc-800']">
-        <span class="absolute -top-1.5 -left-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
-        <span class="absolute -top-1.5 -right-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
-
-        <!-- Section Header -->
-        <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
-          <div class="space-y-2 max-w-2xl">
-            <div class="font-mono text-xs text-[#FF5500] font-bold tracking-wider">[06 // CAPABILITIES DIRECTORY]</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">FULL PLATFORM CAPABILITY INVENTORY</h2>
-            <p :class="['text-sm', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">
-              Complete inventory of {{ allInventory.length }} commands, settings, views, themes and language services included in KRL Engineering Toolkit v1.9.26.
+            <!-- Honest Fact Line -->
+            <p :class="['text-xs sm:text-sm', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+              {{ t.hero.factsLine }}
             </p>
           </div>
 
-          <!-- Search Input -->
-          <div class="w-full sm:w-72">
-            <input 
-              type="text" 
-              v-model="toolSearchQuery"
-              placeholder="Filter by name, command ID..." 
-              :class="['w-full px-3 py-2 text-xs font-mono border outline-none focus:border-[#FF5500]', isDaylight ? 'bg-white border-zinc-300 text-zinc-900' : 'bg-[#111114] border-zinc-800 text-white']" />
-          </div>
-        </div>
+          <!-- Visual Proof Column (Real VS Code GIFs + 3D Toggle) -->
+          <div class="lg:col-span-6">
+            <div
+              :class="[
+                'overflow-hidden rounded-lg border',
+                isDark ? 'border-white/10 bg-[#13161B]' : 'border-slate-900/12 bg-white'
+              ]"
+            >
+              <!-- View Switcher Header -->
+              <div
+                :class="[
+                  'flex flex-wrap items-center justify-between gap-2 border-b px-3 py-2.5',
+                  isDark ? 'border-white/[0.08] bg-[#101318]' : 'border-slate-900/10 bg-[#F1F3F6]'
+                ]"
+              >
+                <div class="inline-flex rounded-md p-0.5 text-xs" role="tablist">
+                  <button
+                    type="button"
+                    role="tab"
+                    :aria-selected="heroVisualMode === 'screenshots' ? 'true' : 'false'"
+                    @click="heroVisualMode = 'screenshots'"
+                    :class="[
+                      'rounded-md px-3 py-1.5 font-medium transition-colors',
+                      heroVisualMode === 'screenshots'
+                        ? (isDark ? 'bg-[#1F242D] text-white' : 'bg-white text-[#111827] shadow-sm')
+                        : (isDark ? 'text-[#9AA3B2] hover:text-white' : 'text-[#4B5563] hover:text-[#111827]')
+                    ]"
+                  >
+                    {{ t.hero.viewModeScreenshots }}
+                  </button>
+                  <button
+                    type="button"
+                    role="tab"
+                    :aria-selected="heroVisualMode === '3d' ? 'true' : 'false'"
+                    @click="heroVisualMode = '3d'"
+                    :class="[
+                      'rounded-md px-3 py-1.5 font-medium transition-colors',
+                      heroVisualMode === '3d'
+                        ? (isDark ? 'bg-[#1F242D] text-white' : 'bg-white text-[#111827] shadow-sm')
+                        : (isDark ? 'text-[#9AA3B2] hover:text-white' : 'text-[#4B5563] hover:text-[#111827]')
+                    ]"
+                  >
+                    {{ t.hero.viewMode3d }}
+                  </button>
+                </div>
 
-        <!-- Category Pills -->
-        <div class="flex flex-wrap gap-1.5 mb-6 text-xs font-mono">
-          <button 
-            v-for="cat in toolCategories" 
-            :key="cat"
-            @click="selectedCategory = cat"
-            :class="['px-2.5 py-1 transition-all', selectedCategory === cat ? 'bg-[#FF5500] text-white font-bold' : (isDaylight ? 'bg-white border border-zinc-300 text-zinc-700' : 'bg-[#111114] border border-zinc-800 text-zinc-400 hover:text-white')]">
-            {{ cat }}
-          </button>
-        </div>
-
-        <!-- Tools Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-          <div 
-            v-for="tool in filteredTools" 
-            :key="tool.id"
-            @click="openToolPreview(tool)"
-            :class="['border p-3.5 flex flex-col justify-between cursor-pointer hover:border-[#FF5500] transition-colors', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-            <div class="space-y-2">
-              <div class="flex items-center justify-between text-[10px] font-mono">
-                <span class="text-zinc-500 truncate max-w-[150px]">{{ tool.category }}</span>
-                <span :class="['px-1.5 py-0.5 font-bold', tool.status === 'Pro' ? 'bg-[#FF5500]/20 text-[#FF5500]' : 'bg-zinc-800 text-zinc-300']">
-                  {{ tool.status }}
-                </span>
+                <div v-if="heroVisualMode === 'screenshots'" class="flex flex-wrap gap-1">
+                  <button
+                    v-for="(slide, idx) in t.hero.mediaSlides"
+                    :key="slide.id"
+                    type="button"
+                    @click="activeHeroSlide = idx"
+                    :class="[
+                      'rounded-md px-2.5 py-1 text-xs font-medium transition-colors',
+                      activeHeroSlide === idx
+                        ? 'bg-[#D94A00] text-white'
+                        : (isDark ? 'text-[#9AA3B2] hover:bg-white/5 hover:text-white' : 'text-[#4B5563] hover:bg-slate-200/70 hover:text-[#111827]')
+                    ]"
+                  >
+                    {{ slide.label }}
+                  </button>
+                </div>
               </div>
-              <div class="font-bold text-xs text-white truncate">{{ tool.title }}</div>
-              <div class="text-[10px] font-mono text-zinc-500 truncate">{{ tool.id }}</div>
-              <p class="text-xs text-zinc-400 line-clamp-2 leading-relaxed">{{ tool.valueProposition }}</p>
-            </div>
-            <div class="mt-3 pt-2 border-t border-zinc-800 flex justify-between items-center text-[10px] font-mono text-zinc-500">
-              <span>{{ tool.type }}</span>
-              <span class="text-[#FF5500] font-bold">VIEW DEMO &rarr;</span>
+
+              <!-- Real VS Code GIF Showcase -->
+              <div v-if="heroVisualMode === 'screenshots'" class="p-3">
+                <div class="aspect-video overflow-hidden rounded-md bg-[#0A0C0F]">
+                  <img
+                    :src="withBase(currentHeroSlide.src)"
+                    :alt="currentHeroSlide.alt"
+                    fetchpriority="high"
+                    class="h-full w-full object-contain"
+                  />
+                </div>
+                <p :class="['mt-2.5 px-1 text-xs', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                  {{ currentHeroSlide.caption }}
+                </p>
+              </div>
+
+              <!-- Optional 3D Trajectory Viewer -->
+              <div v-else class="p-3">
+                <div class="aspect-video overflow-hidden rounded-md bg-[#0A0C0F]">
+                  <ClientOnly>
+                    <iframe
+                      :src="withBase(`/sim/?embed=1&lang=${currentLang}&theme=${isDark ? 'dark' : 'light'}`)"
+                      :title="t.hero.simFrameTitle"
+                      class="h-full w-full border-0"
+                    ></iframe>
+                  </ClientOnly>
+                </div>
+                <p :class="['mt-2.5 px-1 text-xs', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                  {{ t.hero.simHint }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
-
       </section>
 
-      <!-- BLOCK 8: GLOBAL TELEMETRY RADAR & AIR-GAP COMPLIANCE -->
-      <section id="telemetry" :class="['relative border-b py-12 lg:py-16 text-left', isDaylight ? 'border-[#D4D4CE]' : 'border-zinc-800']">
-        <span class="absolute -top-1.5 -left-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
-        <span class="absolute -top-1.5 -right-1.5 text-zinc-500 font-mono text-[10px] select-none pointer-events-none">+</span>
+      <!-- SECTION 2: 3 KEY WORKFLOWS -->
+      <section
+        id="workflows"
+        :class="['border-t py-20 lg:py-28', isDark ? 'border-white/[0.08]' : 'border-slate-900/10']"
+      >
+        <div class="max-w-3xl space-y-3">
+          <p :class="['text-xs font-semibold uppercase tracking-wider', isDark ? 'text-[#FF7A2F]' : 'text-[#C2410C]']">
+            {{ t.workflows.eyebrow }}
+          </p>
+          <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
+            {{ t.workflows.heading }}
+          </h2>
+          <p :class="['max-w-[65ch] text-base leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+            {{ t.workflows.subtitle }}
+          </p>
+        </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          <!-- Left Column: Hub Matrix & Telemetry Status (6 cols) -->
-          <div class="lg:col-span-6 space-y-6">
-            <div class="space-y-2">
-              <div class="font-mono text-xs text-[#FF5500] font-bold tracking-wider">[07 // TELEMETRY & AIR-GAP COMPLIANCE]</div>
-              <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">GLOBAL INDUSTRIAL TELEMETRY RADAR</h2>
-              <p :class="['text-sm', isDaylight ? 'text-zinc-600' : 'text-zinc-400']">
-                Live heartbeat verification with distributed Cloudflare D1 edge network. Telemetry tracks compiler performance and error frequencies while strictly enforcing zero PII and zero source-code transmission.
+        <div class="mt-14 space-y-20">
+          <!-- Workflow 1: Backup Diff -->
+          <article class="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
+            <div class="space-y-4 lg:col-span-5">
+              <span
+                :class="[
+                  'inline-block rounded-md border px-2.5 py-1 text-xs font-medium',
+                  isDark ? 'border-white/15 bg-[#13161B] text-[#CBD2DC]' : 'border-slate-900/15 bg-white text-[#374151]'
+                ]"
+              >
+                {{ t.workflows.w1.badge }}
+              </span>
+              <h3 class="text-xl font-semibold tracking-tight sm:text-2xl">
+                {{ t.workflows.w1.title }}
+              </h3>
+              <p :class="['text-sm leading-relaxed sm:text-base', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                {{ t.workflows.w1.body }}
               </p>
+              <ul :class="['space-y-2 text-sm', isDark ? 'text-[#CBD2DC]' : 'text-[#374151]']">
+                <li v-for="(bullet, i) in t.workflows.w1.bullets" :key="i" class="flex items-start gap-2.5">
+                  <svg
+                    class="mt-1 h-4 w-4 shrink-0 text-[#22C55E]"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span>{{ bullet }}</span>
+                </li>
+              </ul>
             </div>
 
-            <!-- Ping Test Button & Stats Bar -->
-            <div :class="['border p-4 flex flex-wrap items-center justify-between gap-4 font-mono text-xs', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-              <div>
-                <span class="text-zinc-500 block text-[10px] uppercase">EDGE LATENCY:</span>
-                <span class="text-lg font-black text-[#00D68F] tabular-nums">{{ pingLatency }} ms</span>
+            <figure
+              :class="[
+                'overflow-hidden rounded-lg border p-3 lg:col-span-7',
+                isDark ? 'border-white/10 bg-[#13161B]' : 'border-slate-900/12 bg-white'
+              ]"
+            >
+              <div class="aspect-video overflow-hidden rounded-md bg-[#0A0C0F]">
+                <img
+                  :src="withBase(t.workflows.w1.mediaSrc)"
+                  :alt="t.workflows.w1.mediaAlt"
+                  loading="lazy"
+                  class="h-full w-full object-contain"
+                />
               </div>
-              <div>
-                <span class="text-zinc-500 block text-[10px] uppercase">ACTIVE NATIONS:</span>
-                <span class="text-lg font-black text-white tabular-nums">48 COUNTRIES</span>
+              <figcaption :class="['mt-2.5 px-1 text-xs', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                {{ t.workflows.w1.mediaCaption }}
+              </figcaption>
+            </figure>
+          </article>
+
+          <!-- Workflow 2: Static Audit & Diff Examples -->
+          <article class="space-y-8">
+            <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
+              <figure
+                :class="[
+                  'order-2 overflow-hidden rounded-lg border p-3 lg:order-1 lg:col-span-7',
+                  isDark ? 'border-white/10 bg-[#13161B]' : 'border-slate-900/12 bg-white'
+                ]"
+              >
+                <div class="aspect-video overflow-hidden rounded-md bg-[#0A0C0F]">
+                  <img
+                    :src="withBase(t.workflows.w2.mediaSrc)"
+                    :alt="t.workflows.w2.mediaAlt"
+                    loading="lazy"
+                    class="h-full w-full object-contain"
+                  />
+                </div>
+                <figcaption :class="['mt-2.5 px-1 text-xs', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                  {{ t.workflows.w2.mediaCaption }}
+                </figcaption>
+              </figure>
+
+              <div class="order-1 space-y-4 lg:order-2 lg:col-span-5">
+                <span
+                  :class="[
+                    'inline-block rounded-md border px-2.5 py-1 text-xs font-medium',
+                    isDark ? 'border-white/15 bg-[#13161B] text-[#CBD2DC]' : 'border-slate-900/15 bg-white text-[#374151]'
+                  ]"
+                >
+                  {{ t.workflows.w2.badge }}
+                </span>
+                <h3 class="text-xl font-semibold tracking-tight sm:text-2xl">
+                  {{ t.workflows.w2.title }}
+                </h3>
+                <p :class="['text-sm leading-relaxed sm:text-base', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                  {{ t.workflows.w2.body }}
+                </p>
+                <ul :class="['space-y-2 text-sm', isDark ? 'text-[#CBD2DC]' : 'text-[#374151]']">
+                  <li v-for="(bullet, i) in t.workflows.w2.bullets" :key="i" class="flex items-start gap-2.5">
+                    <svg
+                      class="mt-1 h-4 w-4 shrink-0 text-[#22C55E]"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span>{{ bullet }}</span>
+                  </li>
+                </ul>
               </div>
-              <button 
-                @click="testEdgePing"
-                :disabled="isPinging"
-                class="px-3 py-1.5 bg-[#FF5500] hover:bg-orange-600 text-white font-bold text-xs transition-colors">
-                {{ isPinging ? 'TESTING...' : 'PING EDGE NODE' }}
-              </button>
             </div>
 
-            <!-- Automotive & Industrial Hubs Table -->
-            <div :class="['border overflow-hidden', isDaylight ? 'border-zinc-300' : 'border-zinc-800']">
-              <table class="w-full text-xs font-mono text-left">
-                <thead :class="['border-b text-[10px] uppercase', isDaylight ? 'bg-zinc-200 border-zinc-300 text-zinc-600' : 'bg-[#16161A] border-zinc-800 text-zinc-400']">
-                  <tr>
-                    <th class="p-2.5">COUNTRY</th>
-                    <th class="p-2.5">PRIMARY CLUSTER</th>
-                    <th class="p-2.5">CONTROLLERS</th>
-                    <th class="p-2.5 text-right">STATUS</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-zinc-800">
-                  <tr v-for="hub in primaryHubs" :key="hub.city" class="hover:bg-zinc-800/40">
-                    <td class="p-2.5 font-bold text-white">{{ hub.code }} {{ hub.country }}</td>
-                    <td class="p-2.5 text-zinc-400">{{ hub.city }} ({{ hub.focus }})</td>
-                    <td class="p-2.5 text-zinc-400">{{ hub.kss }}</td>
-                    <td class="p-2.5 text-right text-[#00D68F] font-bold">ONLINE</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-          </div>
-
-          <!-- Right Column: Air-Gap Specification & Compliance Guarantees (6 cols) -->
-          <div :class="['lg:col-span-6 border p-6 space-y-6', isDaylight ? 'bg-white border-zinc-300' : 'bg-[#111114] border-zinc-800']">
-            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 text-[#00D68F] font-mono text-xs font-bold">
-              AIR-GAP COMPLIANCE SPECIFICATION
-            </div>
-
-            <div class="space-y-4 text-xs font-mono text-zinc-300">
-              <div class="border-b border-zinc-800 pb-3">
-                <span class="text-white font-bold block mb-1">1. ZERO SOURCE CODE UPLOAD</span>
-                <p class="text-zinc-400 leading-relaxed">No lines of KRL (.src, .dat, .sub), variable identifiers, coordinates, or project files are ever uploaded to cloud servers. All AST parsing, linter checks, and backup diffing execute 100% locally on the host CPU.</p>
+            <!-- Before / After Technical KRL Code Card -->
+            <div
+              :class="[
+                'rounded-lg border p-5 sm:p-6',
+                isDark ? 'border-white/10 bg-[#13161B]' : 'border-slate-900/12 bg-white'
+              ]"
+            >
+              <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+                <span class="text-sm font-semibold">{{ t.workflows.w2.diffHeading }}</span>
+                <div class="flex flex-wrap gap-1.5" role="tablist">
+                  <button
+                    v-for="(sc, idx) in t.workflows.w2.scenarios"
+                    :key="sc.id"
+                    type="button"
+                    role="tab"
+                    :aria-selected="activeDiffIdx === idx ? 'true' : 'false'"
+                    @click="activeDiffIdx = idx"
+                    :class="[
+                      'rounded-md border px-3 py-1.5 text-xs font-medium transition-colors',
+                      activeDiffIdx === idx
+                        ? 'border-[#D94A00] bg-[#D94A00] text-white'
+                        : (isDark ? 'border-white/15 bg-[#0D0F12] text-[#9AA3B2] hover:text-white' : 'border-slate-900/15 bg-[#F8F9FB] text-[#4B5563] hover:text-[#111827]')
+                    ]"
+                  >
+                    {{ sc.tabLabel }}
+                  </button>
+                </div>
               </div>
 
-              <div class="border-b border-zinc-800 pb-3">
-                <span class="text-white font-bold block mb-1">2. OFFLINE AIR-GAP NODE ACTIVATION</span>
-                <p class="text-zinc-400 leading-relaxed">For high-security defense and automotive plants with severed internet connections, offline cryptographic license keys (Ed25519 node-locked) are provided for perpetual operation without telemetry.</p>
+              <div class="mb-4 space-y-1">
+                <div class="text-sm font-semibold">{{ currentDiffScenario.issueTitle }}</div>
+                <p :class="['text-sm leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                  {{ currentDiffScenario.consequence }}
+                </p>
               </div>
 
-              <div>
-                <span class="text-white font-bold block mb-1">3. REVERSINGLABS SPECTRA ASSURE AUDIT</span>
-                <p class="text-zinc-400 leading-relaxed">Every extension release undergoes static binary analysis, malware scanning and CVE review via ReversingLabs Spectra Assure, with results recorded in the release pipeline.</p>
+              <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <div class="overflow-hidden rounded-md border border-red-500/30 bg-[#0A0C0F]">
+                  <div class="border-b border-white/10 px-3.5 py-2 font-mono text-xs text-red-400">
+                    {{ currentDiffScenario.beforeLabel }}
+                  </div>
+                  <pre class="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-[#E6E8EC]"><code>{{ currentDiffScenario.beforeCode }}</code></pre>
+                </div>
+
+                <div class="overflow-hidden rounded-md border border-emerald-500/30 bg-[#0A0C0F]">
+                  <div class="border-b border-white/10 px-3.5 py-2 font-mono text-xs text-emerald-400">
+                    {{ currentDiffScenario.afterLabel }}
+                  </div>
+                  <pre class="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-[#E6E8EC]"><code>{{ currentDiffScenario.afterCode }}</code></pre>
+                </div>
               </div>
             </div>
+          </article>
 
-            <div class="pt-2">
-              <a 
-                href="https://github.com/LiskinLabs/kuka-krl-extension"
-                target="_blank" 
-                class="inline-flex items-center gap-2 text-xs font-mono text-[#FF5500] hover:underline font-bold">
-                <span>VIEW OPEN SOURCE REPOSITORIES & AUDIT LOGS</span>
-                <svg class="w-3.5 h-3.5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3"/></svg>
-              </a>
+          <!-- Workflow 3: .wvs, .vcmx & Live Monitor -->
+          <article class="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
+            <div class="space-y-4 lg:col-span-5">
+              <span
+                :class="[
+                  'inline-block rounded-md border px-2.5 py-1 text-xs font-medium',
+                  isDark ? 'border-white/15 bg-[#13161B] text-[#CBD2DC]' : 'border-slate-900/15 bg-white text-[#374151]'
+                ]"
+              >
+                {{ t.workflows.w3.badge }}
+              </span>
+              <h3 class="text-xl font-semibold tracking-tight sm:text-2xl">
+                {{ t.workflows.w3.title }}
+              </h3>
+              <p :class="['text-sm leading-relaxed sm:text-base', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                {{ t.workflows.w3.body }}
+              </p>
+              <ul :class="['space-y-2 text-sm', isDark ? 'text-[#CBD2DC]' : 'text-[#374151]']">
+                <li v-for="(bullet, i) in t.workflows.w3.bullets" :key="i" class="flex items-start gap-2.5">
+                  <svg
+                    class="mt-1 h-4 w-4 shrink-0 text-[#22C55E]"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span>{{ bullet }}</span>
+                </li>
+              </ul>
             </div>
 
-          </div>
-
+            <figure
+              :class="[
+                'overflow-hidden rounded-lg border p-3 lg:col-span-7',
+                isDark ? 'border-white/10 bg-[#13161B]' : 'border-slate-900/12 bg-white'
+              ]"
+            >
+              <div class="aspect-video overflow-hidden rounded-md bg-[#0A0C0F]">
+                <img
+                  :src="withBase(t.workflows.w3.mediaSrc)"
+                  :alt="t.workflows.w3.mediaAlt"
+                  loading="lazy"
+                  class="h-full w-full object-contain"
+                />
+              </div>
+              <figcaption :class="['mt-2.5 px-1 text-xs', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                {{ t.workflows.w3.mediaCaption }}
+              </figcaption>
+            </figure>
+          </article>
         </div>
-
       </section>
 
-      <!-- BLOCK 9: ENTERPRISE FOOTER -->
-      <footer :class="['py-12 text-left font-mono text-xs', isDaylight ? 'text-zinc-600' : 'text-zinc-500']">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          
-          <div class="space-y-3">
-            <div class="flex items-center gap-2">
-              <img
-                :src="withBase(isDaylight ? '/logo-light.svg' : '/logo-dark.svg')"
-                alt="Liskin Labs"
-                class="w-8 h-8 object-contain"
-              />
-              <div class="font-bold text-white text-sm">LISKIN LABS INDUSTRIAL</div>
-            </div>
-            <p class="text-[11px] text-zinc-400 leading-relaxed">Advanced systems engineering, static safety analyzers, and high-precision CAD tooling for industrial robotics.</p>
-            <div class="text-[10px] text-zinc-500">Lead Systems Architect: Silvestr Liskin</div>
-          </div>
-
-          <div class="space-y-2">
-            <div class="font-bold text-white text-[11px] uppercase">PRODUCT SUITE</div>
-            <ul class="space-y-1 text-[11px]">
-              <li><a href="#hero" class="hover:text-[#FF5500]">KRL Engineering Toolkit</a></li>
-              <li><a href="#simulator" class="hover:text-[#FF5500]">VS Code Web Simulator</a></li>
-          <li><a href="#inventory" class="hover:text-[#FF5500]">64 Industrial Tools Wiki</a></li>
-              <li><a href="#pricing" class="hover:text-[#FF5500]">B2B Licensing & Pricing</a></li>
-            </ul>
-          </div>
-
-          <div class="space-y-2">
-            <div class="font-bold text-white text-[11px] uppercase">COMPLIANCE & LEGAL</div>
-            <ul class="space-y-1 text-[11px]">
-              <li>Merchant of Record: Dodo Payments Inc.</li>
-              <li>Security: ReversingLabs 0 CVE Pass</li>
-              <li>License: Proprietary EULA & Community</li>
-              <li>Air-Gap: 100% On-Premise Capable</li>
-            </ul>
-          </div>
-
-          <div class="space-y-2">
-            <div class="font-bold text-white text-[11px] uppercase">DISCLAIMER</div>
-            <p class="text-[10px] leading-relaxed text-zinc-500">
-              KUKA, KRC, KSS, WorkVisual, and smartPAD are registered trademarks of KUKA AG. Liskin Labs is an independent industrial software laboratory and is not officially affiliated with KUKA AG.
-            </p>
-          </div>
-
+      <!-- SECTION 3: HONEST COMPARISON -->
+      <section
+        id="comparison"
+        :class="['border-t py-20 lg:py-28', isDark ? 'border-white/[0.08]' : 'border-slate-900/10']"
+      >
+        <div class="max-w-3xl space-y-3">
+          <p :class="['text-xs font-semibold uppercase tracking-wider', isDark ? 'text-[#FF7A2F]' : 'text-[#C2410C]']">
+            {{ t.comparison.eyebrow }}
+          </p>
+          <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
+            {{ t.comparison.heading }}
+          </h2>
+          <p :class="['max-w-[65ch] text-base leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+            {{ t.comparison.subtitle }}
+          </p>
         </div>
 
-        <div :class="['border-t pt-6 flex flex-wrap justify-between items-center gap-4 text-[11px]', isDaylight ? 'border-zinc-300' : 'border-zinc-800']">
-          <div>© 2024–2026 Liskin Labs (Silvestr Liskin). All rights reserved.</div>
-          <div class="flex items-center gap-4">
-            <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension" class="hover:text-white">VS Code Marketplace</a>
-            <a href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1" target="_blank" rel="noopener noreferrer" class="hover:text-white">Customer Portal &amp; Invoices</a>
-            <a href="https://github.com/LiskinLabs/kuka-krl-extension" class="hover:text-white">GitHub</a>
-            <a :href="withBase('/guide/features')" class="hover:text-white">Documentation</a>
-          </div>
-        </div>
-      </footer>
-
-    </main>
-
-    <!-- MODAL 1: OFFICIAL PRINTABLE COMMERCIAL PROPOSAL (ANGEBOT / КП) -->
-    <div v-if="showQuoteModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-      <div class="bg-white text-black w-full max-w-3xl border border-zinc-400 p-6 sm:p-8 font-sans shadow-2xl relative my-8">
-        
-        <!-- Modal Close Button -->
-        <button 
-          @click="showQuoteModal = false"
-          class="absolute top-4 right-4 text-zinc-500 hover:text-black font-mono text-sm">
-          [CLOSE]
-        </button>
-
-        <!-- Printable Document Header (Letterhead) -->
-        <div class="border-b-2 border-black pb-4 mb-6 flex justify-between items-start">
-          <div>
-            <div class="text-xl font-black tracking-tight">LISKIN LABS INDUSTRIAL ROBOTICS</div>
-            <div class="text-xs font-mono text-zinc-600">Advanced Tooling & Static Analysis Solutions</div>
-            <div class="text-xs font-mono text-zinc-600">Commercial Registration // Dodo Payments Merchant Network</div>
-          </div>
-          <div class="text-right font-mono text-xs">
-            <div class="font-bold text-sm">COMMERCIAL PROPOSAL</div>
-            <div>REF: {{ quoteDocRef }}</div>
-            <div>DATE: {{ quoteDate }}</div>
-            <div>VALIDITY: 30 DAYS</div>
-          </div>
-        </div>
-
-        <!-- Bill of Materials Table -->
-        <div class="space-y-4 mb-6">
-          <div class="font-mono text-xs font-bold uppercase tracking-wider text-zinc-700">SPECIFICATION OF DELIVERABLES & SEATS</div>
-          <table class="w-full text-xs font-mono border-collapse border border-zinc-300">
+        <div
+          :class="[
+            'mt-10 overflow-x-auto rounded-lg border',
+            isDark ? 'border-white/10 bg-[#13161B]' : 'border-slate-900/12 bg-white'
+          ]"
+        >
+          <table class="w-full min-w-[680px] border-collapse text-left text-sm">
+            <caption class="visually-hidden">
+              {{ t.comparison.tableCaption }}
+            </caption>
             <thead>
-              <tr class="bg-zinc-100 border-b border-zinc-300">
-                <th class="p-2 text-left">ITEM</th>
-                <th class="p-2 text-left">DESCRIPTION</th>
-                <th class="p-2 text-center">WORKSTATIONS</th>
-                <th class="p-2 text-right">ANNUAL TOTAL</th>
+              <tr :class="['border-b', isDark ? 'border-white/10 bg-[#101318]' : 'border-slate-900/10 bg-[#F1F3F6]']">
+                <th scope="col" class="px-4 py-3.5 font-semibold">{{ t.comparison.colCapability }}</th>
+                <th scope="col" :class="['px-4 py-3.5 font-semibold', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                  {{ t.comparison.colPlain }}
+                </th>
+                <th scope="col" :class="['px-4 py-3.5 font-semibold', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                  {{ t.comparison.colWorkVisual }}
+                </th>
+                <th scope="col" :class="['px-4 py-3.5 font-semibold', isDark ? 'text-[#FF7A2F]' : 'text-[#C2410C]']">
+                  {{ t.comparison.colToolkit }}
+                </th>
               </tr>
             </thead>
-            <tbody>
-              <tr class="border-b border-zinc-200">
-                <td class="p-2 font-bold">{{ recommendedTier.name }}</td>
-        <td class="p-2">KRL Engineering Toolkit IDE v1.9.26 Suite (66 Pro Tools, 135 Commands, Air-Gap License, Spectra Assure 0 CVE)</td>
-                <td class="p-2 text-center">{{ recommendedTier.seats }} Seats</td>
-                <td class="p-2 text-right font-bold">{{ formatPrice(recommendedTier.priceUsd) }}</td>
+            <tbody :class="['divide-y', isDark ? 'divide-white/[0.08]' : 'divide-slate-900/10']">
+              <tr v-for="row in t.comparison.rows" :key="row.feature">
+                <th scope="row" class="px-4 py-3.5 font-medium">{{ row.feature }}</th>
+                <td :class="['px-4 py-3.5', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">{{ row.plainSyntax }}</td>
+                <td :class="['px-4 py-3.5', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">{{ row.workVisual }}</td>
+                <td class="px-4 py-3.5 font-medium">{{ row.krlToolkit }}</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <!-- ROI Summary Block -->
-        <div class="bg-zinc-50 border border-zinc-200 p-4 mb-6 text-xs font-mono space-y-1">
-          <div class="font-bold text-black uppercase">PLANT ROI & DOWNTIME REDUCTION ANALYSIS:</div>
-      <div>- Configured Robot Fleet: {{ calcRobots }} Robots in active production cells</div>
-      <div>- Automation Team: {{ calcEngineers }} Commissioning & Maintenance Engineers</div>
-      <div>- Anticipated Downtime Prevented: ~{{ preventedHours }} Hours / Year</div>
-      <div class="text-[#00D68F] font-bold">- Estimated Net Financial Benefit: {{ formatPrice(annualSavings) }} / Year</div>
+        <div
+          :class="[
+            'mt-6 rounded-lg border p-4 sm:p-5',
+            isDark ? 'border-white/10 bg-[#13161B]' : 'border-slate-900/12 bg-white'
+          ]"
+        >
+          <div class="text-sm font-semibold">{{ t.comparison.honestNoteTitle }}</div>
+          <p :class="['mt-1 text-sm leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+            {{ t.comparison.honestNoteBody }}
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION 4: COMPACT CAPABILITIES CATALOG -->
+      <section
+        id="capabilities"
+        :class="['border-t py-20 lg:py-28', isDark ? 'border-white/[0.08]' : 'border-slate-900/10']"
+      >
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div class="max-w-2xl space-y-3">
+            <p :class="['text-xs font-semibold uppercase tracking-wider', isDark ? 'text-[#FF7A2F]' : 'text-[#C2410C]']">
+              {{ t.capabilities.eyebrow }}
+            </p>
+            <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
+              {{ t.capabilities.heading }}
+            </h2>
+            <p :class="['text-base leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+              {{ t.capabilities.subtitle }}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            @click="toggleAllCapabilities"
+            :aria-expanded="showFullCatalog ? 'true' : 'false'"
+            :class="[
+              'inline-flex min-h-[40px] items-center rounded-md border px-4 py-2 text-sm font-medium transition-colors',
+              isDark
+                ? 'border-white/20 bg-[#13161B] text-[#E6E8EC] hover:border-white/35'
+                : 'border-slate-900/20 bg-white text-[#111827] hover:border-slate-900/35'
+            ]"
+          >
+            {{ showFullCatalog ? t.capabilities.collapseBtn : `${t.capabilities.showAllBtn} (${allInventory.length})` }}
+          </button>
         </div>
 
-        <!-- Terms & Delivery -->
-        <div class="text-[11px] font-mono text-zinc-600 space-y-1 border-t border-zinc-200 pt-4 mb-6">
-          <div class="font-bold text-black uppercase">TERMS OF FULFILLMENT:</div>
-          <div>1. Instant digital license key delivery or offline Air-Gap package upon PO processing.</div>
-          <div>2. Payments processed securely via Dodo Payments Inc. (Corporate Wire, ACH, Credit Card, EU VAT Invoicing).</div>
-          <div>3. 14-day 100% money-back guarantee and dedicated engineering support.</div>
+        <!-- Default Curated 8 Modules -->
+        <div v-if="!showFullCatalog" class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <article
+            v-for="item in t.capabilities.featured"
+            :key="item.id"
+            :class="[
+              'flex flex-col justify-between rounded-lg border p-5 transition-colors',
+              isDark
+                ? 'border-white/[0.08] bg-[#13161B] hover:border-white/25'
+                : 'border-slate-900/10 bg-white hover:border-slate-900/25'
+            ]"
+          >
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between gap-2 text-xs">
+                <span :class="isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]'">{{ item.category }}</span>
+                <span
+                  :class="[
+                    'rounded px-2 py-0.5 font-medium',
+                    item.tier === 'Pro'
+                      ? (isDark ? 'bg-[#FF5E00]/15 text-[#FF7A2F]' : 'bg-orange-100 text-[#C2410C]')
+                      : (isDark ? 'bg-white/10 text-[#CBD2DC]' : 'bg-slate-100 text-[#374151]')
+                  ]"
+                >
+                  {{ item.tier === 'Pro' ? t.capabilities.badgePro : t.capabilities.badgeFree }}
+                </span>
+              </div>
+              <h3 class="text-base font-semibold leading-snug">{{ item.title }}</h3>
+              <p :class="['text-sm leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                {{ item.description }}
+              </p>
+            </div>
+
+            <div
+              :class="[
+                'mt-5 flex items-center justify-between gap-2 border-t pt-3 text-xs',
+                isDark ? 'border-white/[0.08]' : 'border-slate-900/10'
+              ]"
+            >
+              <code :class="['truncate font-mono', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                {{ item.commandId }}
+              </code>
+              <button
+                type="button"
+                @click="openToolPreview({ title: item.title, id: item.commandId, category: item.category, status: item.tier, valueProposition: item.description, mediaSrc: item.mediaSrc, mediaAlt: item.mediaAlt })"
+                :class="['shrink-0 font-semibold hover:underline', isDark ? 'text-[#FF7A2F]' : 'text-[#C2410C]']"
+              >
+                {{ t.capabilities.viewDemoBtn }}
+              </button>
+            </div>
+          </article>
         </div>
 
-        <!-- Action Buttons -->
-        <div class="flex justify-between items-center pt-2">
-          <div class="text-[11px] font-mono text-zinc-500">Authorized signatory: Silvestr Liskin</div>
-          <div class="flex gap-2 font-mono text-xs">
-            <a 
-              href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="px-4 py-2 bg-zinc-800 text-white hover:bg-zinc-700 font-bold flex items-center gap-1.5">
-              CUSTOMER PORTAL (INVOICES)
+        <!-- Expanded Filterable Registry -->
+        <div v-else class="mt-8 space-y-6">
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p :class="['text-xs', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+              {{ t.capabilities.registryNote }}
+            </p>
+            <input
+              v-model="toolSearchQuery"
+              type="search"
+              :aria-label="t.capabilities.searchAria"
+              :placeholder="t.capabilities.searchPlaceholder"
+              :class="[
+                'w-full rounded-md border px-3.5 py-2 text-sm sm:w-80',
+                isDark
+                  ? 'border-white/20 bg-[#13161B] text-[#E6E8EC] placeholder:text-[#7D8696]'
+                  : 'border-slate-900/20 bg-white text-[#111827] placeholder:text-[#6B7280]'
+              ]"
+            />
+          </div>
+
+          <!-- Category Pills -->
+          <div class="flex flex-wrap gap-1.5">
+            <button
+              v-for="cat in toolCategories"
+              :key="cat"
+              type="button"
+              @click="selectedCategory = cat"
+              :class="[
+                'rounded-md border px-3 py-1.5 text-xs font-medium transition-colors',
+                selectedCategory === cat
+                  ? 'border-[#D94A00] bg-[#D94A00] text-white'
+                  : (isDark ? 'border-white/15 bg-[#13161B] text-[#9AA3B2] hover:text-white' : 'border-slate-900/15 bg-white text-[#4B5563] hover:text-[#111827]')
+              ]"
+            >
+              {{ translateCategory(cat) }}
+            </button>
+          </div>
+
+          <div v-if="filteredTools.length === 0" :class="['rounded-lg border p-6 text-sm', isDark ? 'border-white/10 bg-[#13161B] text-[#9AA3B2]' : 'border-slate-900/12 bg-white text-[#4B5563]']">
+            {{ t.capabilities.emptyResults }}
+          </div>
+
+          <div v-else class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <article
+              v-for="tool in filteredTools"
+              :key="tool.id"
+              :class="[
+                'flex flex-col justify-between rounded-lg border p-4',
+                isDark ? 'border-white/[0.08] bg-[#13161B]' : 'border-slate-900/10 bg-white'
+              ]"
+            >
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between gap-2 text-xs">
+                  <span :class="['truncate', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                    {{ translateCategory(tool.category) }}
+                  </span>
+                  <span
+                    :class="[
+                      'rounded px-1.5 py-0.5 text-xs font-medium',
+                      (tool.status || '').toLowerCase() === 'pro'
+                        ? (isDark ? 'bg-[#FF5E00]/15 text-[#FF7A2F]' : 'bg-orange-100 text-[#C2410C]')
+                        : (isDark ? 'bg-white/10 text-[#CBD2DC]' : 'bg-slate-100 text-[#374151]')
+                    ]"
+                  >
+                    {{ (tool.status || '').toLowerCase() === 'pro' ? t.capabilities.badgePro : t.capabilities.badgeFree }}
+                  </span>
+                </div>
+                <h3 class="truncate text-sm font-semibold">{{ tool.title }}</h3>
+                <code :class="['block truncate font-mono text-xs', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                  {{ tool.id }}
+                </code>
+                <p :class="['line-clamp-2 text-xs leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                  {{ tool.valueProposition }}
+                </p>
+              </div>
+              <div
+                :class="[
+                  'mt-3 flex items-center justify-between border-t pt-2.5 text-xs',
+                  isDark ? 'border-white/[0.08]' : 'border-slate-900/10'
+                ]"
+              >
+                <span :class="isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]'">{{ translateType(tool.type) }}</span>
+                <button
+                  type="button"
+                  @click="openToolPreview(tool)"
+                  :class="['font-semibold hover:underline', isDark ? 'text-[#FF7A2F]' : 'text-[#C2410C]']"
+                >
+                  {{ t.capabilities.viewDemoBtn }}
+                </button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: PRICING & B2B PROCUREMENT -->
+      <section
+        id="pricing"
+        :class="['border-t py-20 lg:py-28', isDark ? 'border-white/[0.08]' : 'border-slate-900/10']"
+      >
+        <div class="flex flex-wrap items-end justify-between gap-6">
+          <div class="max-w-2xl space-y-3">
+            <p :class="['text-xs font-semibold uppercase tracking-wider', isDark ? 'text-[#FF7A2F]' : 'text-[#C2410C]']">
+              {{ t.pricing.eyebrow }}
+            </p>
+            <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
+              {{ t.pricing.heading }}
+            </h2>
+            <p :class="['text-base leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+              {{ t.pricing.subtitle }}
+            </p>
+          </div>
+
+          <!-- Currency Switcher inside Pricing -->
+          <div class="flex flex-wrap items-center gap-3">
+            <div
+              role="group"
+              :aria-label="t.pricing.currencyAria"
+              :class="[
+                'inline-flex rounded-md border p-1 text-xs font-medium',
+                isDark ? 'border-white/15 bg-[#13161B]' : 'border-slate-900/15 bg-white'
+              ]"
+            >
+              <button
+                v-for="curr in ['USD', 'EUR', 'RUB', 'TRY']"
+                :key="curr"
+                type="button"
+                @click="currentCurrency = curr"
+                :class="[
+                  'rounded px-2.5 py-1 transition-colors',
+                  currentCurrency === curr
+                    ? 'bg-[#D94A00] text-white'
+                    : (isDark ? 'text-[#9AA3B2] hover:text-white' : 'text-[#4B5563] hover:text-[#111827]')
+                ]"
+              >
+                {{ curr }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Pricing Cards in One Row -->
+        <div class="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <article
+            v-for="tier in t.pricing.tiers"
+            :key="tier.id"
+            :class="[
+              'flex flex-col justify-between rounded-lg border p-6',
+              tier.isPrimary
+                ? (isDark ? 'border-[#FF5E00]/70 bg-[#13161B]' : 'border-[#D94A00] bg-white')
+                : (isDark ? 'border-white/[0.08] bg-[#13161B]' : 'border-slate-900/10 bg-white')
+            ]"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between gap-2">
+                <h3 class="text-base font-semibold">{{ tier.name }}</h3>
+                <span
+                  :class="[
+                    'rounded px-2 py-0.5 text-xs font-medium',
+                    tier.isPrimary
+                      ? (isDark ? 'bg-[#FF5E00]/15 text-[#FF7A2F]' : 'bg-orange-100 text-[#C2410C]')
+                      : (isDark ? 'bg-white/10 text-[#CBD2DC]' : 'bg-slate-100 text-[#374151]')
+                  ]"
+                >
+                  {{ tier.seatsLabel }}
+                </span>
+              </div>
+
+              <!-- Price + Annual/Monthly Toggle on Pro -->
+              <div class="space-y-2">
+                <div class="flex items-baseline gap-1.5">
+                  <span v-if="tier.isCommunity" class="text-3xl font-bold tracking-tight">
+                    {{ tier.freeLabel }}
+                  </span>
+                  <template v-else>
+                    <span class="text-3xl font-bold tracking-tight tabular-nums">
+                      {{
+                        tier.id === 'pro' && proBillingCycle === 'monthly'
+                          ? formatPrice(tier.monthlyUsd)
+                          : formatPrice(tier.priceUsd)
+                      }}
+                    </span>
+                    <span :class="['text-sm', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                      {{
+                        tier.id === 'pro' && proBillingCycle === 'monthly'
+                          ? tier.periodMonth
+                          : tier.periodYear
+                      }}
+                    </span>
+                  </template>
+                </div>
+
+                <div v-if="tier.id === 'pro'" class="inline-flex rounded-md border p-0.5 text-xs" :class="isDark ? 'border-white/15 bg-[#0D0F12]' : 'border-slate-900/15 bg-[#F8F9FB]'">
+                  <button
+                    type="button"
+                    @click="proBillingCycle = 'annual'"
+                    :class="[
+                      'rounded px-2.5 py-1 font-medium transition-colors',
+                      proBillingCycle === 'annual'
+                        ? (isDark ? 'bg-[#1F242D] text-white' : 'bg-white text-[#111827] shadow-sm')
+                        : (isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]')
+                    ]"
+                  >
+                    {{ t.pricing.billingAnnual }}
+                  </button>
+                  <button
+                    type="button"
+                    @click="proBillingCycle = 'monthly'"
+                    :class="[
+                      'rounded px-2.5 py-1 font-medium transition-colors',
+                      proBillingCycle === 'monthly'
+                        ? (isDark ? 'bg-[#1F242D] text-white' : 'bg-white text-[#111827] shadow-sm')
+                        : (isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]')
+                    ]"
+                  >
+                    {{ t.pricing.billingMonthly }}
+                  </button>
+                </div>
+              </div>
+
+              <p :class="['text-sm leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                {{ tier.description }}
+              </p>
+
+              <ul
+                :class="[
+                  'space-y-2 border-t pt-4 text-sm',
+                  isDark ? 'border-white/[0.08] text-[#CBD2DC]' : 'border-slate-900/10 text-[#374151]'
+                ]"
+              >
+                <li v-for="(feat, i) in tier.features" :key="i" class="flex items-start gap-2">
+                  <svg
+                    class="mt-0.5 h-4 w-4 shrink-0 text-[#22C55E]"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span>{{ feat }}</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-6">
+              <a
+                v-if="tier.isCommunity"
+                href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"
+                target="_blank"
+                rel="noopener noreferrer"
+                :class="[
+                  'inline-flex min-h-[42px] w-full items-center justify-center rounded-md border px-4 py-2 text-sm font-semibold transition-colors',
+                  isDark
+                    ? 'border-white/20 bg-[#0D0F12] text-[#E6E8EC] hover:border-white/35'
+                    : 'border-slate-900/20 bg-[#F8F9FB] text-[#111827] hover:border-slate-900/35'
+                ]"
+              >
+                {{ tier.ctaLabel }}
+              </a>
+
+              <a
+                v-else
+                :href="buildCheckoutUrl(activeTierProductId(tier))"
+                @click.prevent="startCheckout(activeTierProductId(tier))"
+                :class="[
+                  'inline-flex min-h-[42px] w-full items-center justify-center rounded-md px-4 py-2 text-sm font-semibold transition-colors',
+                  tier.isPrimary
+                    ? 'bg-[#D94A00] text-white hover:bg-[#B83E00]'
+                    : (isDark ? 'border border-white/20 bg-[#0D0F12] text-[#E6E8EC] hover:border-white/35' : 'border border-slate-900/20 bg-[#F8F9FB] text-[#111827] hover:border-slate-900/35')
+                ]"
+              >
+                {{ checkoutBusy === activeTierProductId(tier) ? t.pricing.openingCheckout : tier.ctaLabel }}
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <!-- Lifetime & 100-Seat Plant Note -->
+        <div :class="['mt-5 flex flex-col gap-1.5 text-sm', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+          <p>
+            {{ t.pricing.lifetimeNotePrefix }}
+            <a
+              :href="buildCheckoutUrl('pdt_0NmAcoqVCfuwQ6Xx7qyqr')"
+              @click.prevent="startCheckout('pdt_0NmAcoqVCfuwQ6Xx7qyqr')"
+              :class="['font-semibold underline underline-offset-4', isDark ? 'text-[#E6E8EC] hover:text-[#FF7A2F]' : 'text-[#111827] hover:text-[#C2410C]']"
+            >
+              {{ t.pricing.lifetimeLinkLabel }} ({{ formatPrice(699) }})
             </a>
-            <button 
-              @click="printQuote"
-              class="px-4 py-2 bg-black text-white hover:bg-zinc-800 font-bold">
-              PRINT / EXPORT PDF
-            </button>
-            <button 
-              @click="showQuoteModal = false"
-              class="px-4 py-2 border border-zinc-400 hover:bg-zinc-100 font-bold">
-              CLOSE
-            </button>
+            {{ t.pricing.lifetimeNoteSuffix }}
+          </p>
+          <p>{{ t.pricing.enterprise100Note }}</p>
+        </div>
+
+        <!-- Calm Billing / Refund Strip -->
+        <div
+          :class="[
+            'mt-8 grid grid-cols-1 gap-6 rounded-lg border p-5 md:grid-cols-3',
+            isDark ? 'border-white/[0.08] bg-[#13161B]' : 'border-slate-900/10 bg-white'
+          ]"
+        >
+          <div class="space-y-1">
+            <h3 class="text-sm font-semibold">{{ t.pricing.billingStrip.dodoTitle }}</h3>
+            <p :class="['text-xs leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+              {{ t.pricing.billingStrip.dodoText }}
+            </p>
+          </div>
+          <div class="space-y-1">
+            <h3 class="text-sm font-semibold">{{ t.pricing.billingStrip.cancelTitle }}</h3>
+            <p :class="['text-xs leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+              {{ t.pricing.billingStrip.cancelText }}
+            </p>
+          </div>
+          <div class="space-y-1">
+            <h3 class="text-sm font-semibold">{{ t.pricing.billingStrip.refundTitle }}</h3>
+            <p :class="['text-xs leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+              {{ t.pricing.billingStrip.refundText }}
+            </p>
           </div>
         </div>
 
-      </div>
-    </div>
+        <!-- Quiet Promo Footnote -->
+        <p :class="['mt-4 text-xs', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+          {{ t.pricing.promoFootnote }}
+        </p>
 
-    <!-- MODAL 2: 14-DAY PRO TRIAL ACTIVATION -->
-    <div v-if="showTrialModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-      <div :class="['w-full max-w-lg border p-6 font-mono text-xs text-left shadow-2xl relative space-y-4', isDaylight ? 'bg-white border-zinc-400 text-black' : 'bg-[#111114] border-zinc-700 text-white']">
-        <button 
-          @click="showTrialModal = false"
-          class="absolute top-4 right-4 text-zinc-500 hover:text-white">
-          [&times;]
-        </button>
+        <!-- Compact B2B Procurement Block -->
+        <div
+          id="procurement"
+          :class="[
+            'mt-10 rounded-lg border p-6 sm:p-8',
+            isDark ? 'border-white/10 bg-[#13161B]' : 'border-slate-900/12 bg-white'
+          ]"
+        >
+          <div class="grid grid-cols-1 items-center gap-6 lg:grid-cols-12">
+            <div class="space-y-3 lg:col-span-7">
+              <p :class="['text-xs font-semibold uppercase tracking-wider', isDark ? 'text-[#FF7A2F]' : 'text-[#C2410C]']">
+                {{ t.pricing.procurement.eyebrow }}
+              </p>
+              <h3 class="text-xl font-semibold tracking-tight">
+                {{ t.pricing.procurement.heading }}
+              </h3>
+              <p :class="['text-sm leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                {{ t.pricing.procurement.body }}
+              </p>
+              <ul :class="['space-y-1.5 text-sm', isDark ? 'text-[#CBD2DC]' : 'text-[#374151]']">
+                <li v-for="(pt, idx) in t.pricing.procurement.points" :key="idx" class="flex items-start gap-2">
+                  <span aria-hidden="true" class="text-[#22C55E]">•</span>
+                  <span>{{ pt }}</span>
+                </li>
+              </ul>
+            </div>
 
-        <div class="text-sm font-bold text-[#FF5500]">ACTIVATE 14-DAY PRO TRIAL</div>
-      <p class="text-zinc-400 text-xs">Experience all 66 Pro engineering tools with zero credit card and zero commitment.</p>
-
-        <div class="space-y-3 border-t border-b border-zinc-800 py-3 text-xs">
-          <div>
-            <span class="text-[#FF5500] font-bold block">STEP 1: INSTALL EXTENSION</span>
-            <span class="text-zinc-400">Install KRL Engineering Toolkit from the VS Code Marketplace.</span>
-          </div>
-          <div>
-            <span class="text-[#FF5500] font-bold block">STEP 2: OPEN COMMAND PALETTE</span>
-            <span class="text-zinc-400">Press <kbd class="bg-zinc-800 px-1.5 py-0.5 border border-zinc-700">Ctrl+Shift+P</kbd> (or <kbd class="bg-zinc-800 px-1.5 py-0.5 border border-zinc-700">Cmd+Shift+P</kbd> on macOS).</span>
-          </div>
-          <div>
-            <span class="text-[#FF5500] font-bold block">STEP 3: RUN COMMAND</span>
-            <span class="text-zinc-400 block mb-1">Type and execute:</span>
-            <code class="bg-black p-2 border border-zinc-700 block text-emerald-400 font-bold select-all">krl.startTrial</code>
+            <div class="flex flex-col gap-2.5 lg:col-span-5">
+              <a
+                href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex min-h-[42px] items-center justify-center rounded-md bg-[#D94A00] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#B83E00]"
+              >
+                {{ t.pricing.procurement.btnPortal }}
+              </a>
+              <a
+                href="https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap"
+                target="_blank"
+                rel="noopener noreferrer"
+                :class="[
+                  'inline-flex min-h-[42px] items-center justify-center rounded-md border px-4 py-2 text-sm font-medium transition-colors',
+                  isDark
+                    ? 'border-white/20 bg-[#0D0F12] text-[#E6E8EC] hover:border-white/35'
+                    : 'border-slate-900/20 bg-[#F8F9FB] text-[#111827] hover:border-slate-900/35'
+                ]"
+              >
+                {{ t.pricing.procurement.btnAirGap }}
+              </a>
+              <a
+                href="vscode://LiskinLabs.kuka-krl-extension/support"
+                :class="[
+                  'inline-flex min-h-[42px] items-center justify-center rounded-md border px-4 py-2 text-sm font-medium transition-colors',
+                  isDark
+                    ? 'border-white/20 bg-[#0D0F12] text-[#E6E8EC] hover:border-white/35'
+                    : 'border-slate-900/20 bg-[#F8F9FB] text-[#111827] hover:border-slate-900/35'
+                ]"
+              >
+                {{ t.pricing.procurement.btnVsCodeInvoice }}
+              </a>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div class="flex justify-end gap-2">
+      <!-- SECTION 6: SECURITY & AIR-GAP -->
+      <section
+        id="security"
+        :class="['border-t py-20 lg:py-28', isDark ? 'border-white/[0.08]' : 'border-slate-900/10']"
+      >
+        <div class="max-w-3xl space-y-3">
+          <p :class="['text-xs font-semibold uppercase tracking-wider', isDark ? 'text-[#FF7A2F]' : 'text-[#C2410C]']">
+            {{ t.security.eyebrow }}
+          </p>
+          <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
+            {{ t.security.heading }}
+          </h2>
+          <p :class="['max-w-[65ch] text-base leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+            {{ t.security.subtitle }}
+          </p>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <article
+            v-for="item in t.security.items"
+            :key="item.title"
+            :class="[
+              'rounded-lg border p-6',
+              isDark ? 'border-white/[0.08] bg-[#13161B]' : 'border-slate-900/10 bg-white'
+            ]"
+          >
+            <h3 class="text-base font-semibold">{{ item.title }}</h3>
+            <p :class="['mt-2 text-sm leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+              {{ item.body }}
+            </p>
+          </article>
+        </div>
+
+        <div class="mt-6 flex flex-wrap gap-6 text-sm font-medium">
           <a
-            href="vscode://LiskinLabs.kuka-krl-extension/control-center"
-            class="px-4 py-2 border border-zinc-700 hover:border-white text-white font-bold">
-            OPEN IN VS CODE
+            href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"
+            target="_blank"
+            rel="noopener noreferrer"
+            :class="['underline underline-offset-4', isDark ? 'text-[#FF7A2F]' : 'text-[#C2410C]']"
+          >
+            {{ t.security.spectraLink }}
           </a>
-          <button 
-            @click="showTrialModal = false"
-            class="px-4 py-2 bg-[#FF5500] text-white font-bold hover:bg-orange-600">
-            GOT IT
-          </button>
+          <a
+            href="https://github.com/LiskinLabs/kuka-krl-extension"
+            target="_blank"
+            rel="noopener noreferrer"
+            :class="['underline underline-offset-4', isDark ? 'text-[#E6E8EC] hover:text-[#FF7A2F]' : 'text-[#111827] hover:text-[#C2410C]']"
+          >
+            {{ t.security.githubLink }}
+          </a>
+          <a
+            href="https://github.com/LiskinLabs/kuka-krl-extension/blob/main/PRIVACY.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            :class="['underline underline-offset-4', isDark ? 'text-[#E6E8EC] hover:text-[#FF7A2F]' : 'text-[#111827] hover:text-[#C2410C]']"
+          >
+            {{ t.security.privacyLink }}
+          </a>
+        </div>
+      </section>
+
+      <!-- SECTION 7: AUTHOR & VERIFIED CHANNELS -->
+      <section
+        id="author"
+        :class="['border-t py-20 lg:py-28', isDark ? 'border-white/[0.08]' : 'border-slate-900/10']"
+      >
+        <div class="grid grid-cols-1 gap-10 lg:grid-cols-12">
+          <div class="space-y-5 lg:col-span-7">
+            <p :class="['text-xs font-semibold uppercase tracking-wider', isDark ? 'text-[#FF7A2F]' : 'text-[#C2410C]']">
+              {{ t.author.eyebrow }}
+            </p>
+            <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
+              {{ t.author.heading }}
+            </h2>
+
+            <div class="flex items-center gap-4 pt-1">
+              <!-- Optional drop-in photo slot: add /docs/public/author.jpg if desired -->
+              <div
+                :aria-label="t.author.photoSlotNote"
+                :class="[
+                  'flex h-16 w-16 shrink-0 items-center justify-center rounded-lg border text-lg font-semibold',
+                  isDark ? 'border-white/15 bg-[#13161B] text-[#E6E8EC]' : 'border-slate-900/15 bg-white text-[#111827]'
+                ]"
+              >
+                SL
+              </div>
+              <div>
+                <div class="text-lg font-semibold">{{ t.author.name }}</div>
+                <div :class="['text-sm', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                  {{ t.author.role }}
+                </div>
+              </div>
+            </div>
+
+            <p :class="['max-w-[65ch] text-base leading-relaxed', isDark ? 'text-[#CBD2DC]' : 'text-[#374151]']">
+              {{ t.author.bio1 }}
+            </p>
+            <p :class="['max-w-[65ch] text-base leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+              {{ t.author.bio2 }}
+            </p>
+          </div>
+
+          <div class="space-y-4 lg:col-span-5">
+            <h3 class="text-base font-semibold">{{ t.author.channelsHeading }}</h3>
+            <div class="space-y-3">
+              <a
+                v-for="ch in t.author.channels"
+                :key="ch.label"
+                :href="ch.href"
+                :target="ch.external ? '_blank' : undefined"
+                :rel="ch.external ? 'noopener noreferrer' : undefined"
+                :class="[
+                  'block rounded-lg border p-4 transition-colors',
+                  isDark
+                    ? 'border-white/10 bg-[#13161B] hover:border-[#FF5E00]/60'
+                    : 'border-slate-900/12 bg-white hover:border-[#D94A00]'
+                ]"
+              >
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-sm font-semibold">{{ ch.label }}</span>
+                  <span aria-hidden="true" :class="isDark ? 'text-[#FF7A2F]' : 'text-[#C2410C]'">→</span>
+                </div>
+                <p :class="['mt-1 text-xs leading-relaxed', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+                  {{ ch.detail }}
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer
+      :class="[
+        'border-t py-14 text-sm',
+        isDark ? 'border-white/[0.08] bg-[#0A0C0F] text-[#9AA3B2]' : 'border-slate-900/10 bg-[#F1F3F6] text-[#4B5563]'
+      ]"
+    >
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-12">
+          <div class="space-y-3 md:col-span-4">
+            <div class="flex items-center gap-2.5">
+              <img
+                :src="withBase(isDark ? '/logo-dark.svg' : '/logo-light.svg')"
+                alt="LiskinLabs"
+                width="24"
+                height="24"
+                class="h-6 w-6 object-contain"
+              />
+              <span :class="['font-semibold', isDark ? 'text-[#E6E8EC]' : 'text-[#111827]']">
+                {{ t.footer.brandName }}
+              </span>
+            </div>
+            <p class="text-xs leading-relaxed">{{ t.footer.brandDesc }}</p>
+          </div>
+
+          <div class="space-y-2 md:col-span-2">
+            <div :class="['text-xs font-semibold uppercase tracking-wider', isDark ? 'text-[#E6E8EC]' : 'text-[#111827]']">
+              {{ t.footer.colProduct }}
+            </div>
+            <ul class="space-y-1.5 text-xs">
+              <li><a href="#workflows" class="hover:text-[#FF7A2F]">{{ t.footer.links.workflows }}</a></li>
+              <li><a href="#comparison" class="hover:text-[#FF7A2F]">{{ t.footer.links.comparison }}</a></li>
+              <li><a href="#pricing" class="hover:text-[#FF7A2F]">{{ t.footer.links.pricing }}</a></li>
+              <li><a href="#security" class="hover:text-[#FF7A2F]">{{ t.footer.links.security }}</a></li>
+            </ul>
+          </div>
+
+          <div class="space-y-2 md:col-span-3">
+            <div :class="['text-xs font-semibold uppercase tracking-wider', isDark ? 'text-[#E6E8EC]' : 'text-[#111827]']">
+              {{ t.footer.colResources }}
+            </div>
+            <ul class="space-y-1.5 text-xs">
+              <li><a :href="withBase(t.header.docsLink)" class="hover:text-[#FF7A2F]">{{ t.footer.links.docs }}</a></li>
+              <li>
+                <a
+                  href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-[#FF7A2F]"
+                >
+                  {{ t.footer.links.marketplace }}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-[#FF7A2F]"
+                >
+                  {{ t.footer.links.openVsx }}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/LiskinLabs/kuka-krl-extension"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-[#FF7A2F]"
+                >
+                  {{ t.footer.links.github }}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-[#FF7A2F]"
+                >
+                  {{ t.footer.links.portal }}
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2 md:col-span-3">
+            <div :class="['text-xs font-semibold uppercase tracking-wider', isDark ? 'text-[#E6E8EC]' : 'text-[#111827]']">
+              {{ t.footer.colLegal }}
+            </div>
+            <p class="text-xs leading-relaxed">{{ t.footer.disclaimer }}</p>
+          </div>
+        </div>
+
+        <div
+          :class="[
+            'mt-10 border-t pt-6 text-xs',
+            isDark ? 'border-white/[0.08]' : 'border-slate-900/10'
+          ]"
+        >
+          {{ t.footer.copyright }}
         </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- MODAL 3: TOOL PREVIEW DEMO MODAL -->
-    <div v-if="selectedTool" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-      <div :class="['w-full max-w-2xl border p-6 font-mono text-xs text-left shadow-2xl relative space-y-4', isDaylight ? 'bg-white border-zinc-400 text-black' : 'bg-[#111114] border-zinc-700 text-white']">
-        <button 
-          @click="selectedTool = null"
-          class="absolute top-4 right-4 text-zinc-500 hover:text-white">
-          [CLOSE]
+    <!-- NATIVE DIALOG: 14-DAY PRO TRIAL -->
+    <dialog
+      ref="trialDialogRef"
+      aria-labelledby="trial-dialog-title"
+      @click="onBackdropClick($event, closeTrialDialog)"
+      :class="[
+        'w-full max-w-lg rounded-lg border p-6 shadow-xl',
+        isDark ? 'border-white/15 bg-[#13161B] text-[#E6E8EC]' : 'border-slate-900/15 bg-white text-[#111827]'
+      ]"
+    >
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <h2 id="trial-dialog-title" class="text-lg font-semibold">
+            {{ t.modals.trialTitle }}
+          </h2>
+          <p :class="['mt-1 text-sm', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+            {{ t.modals.trialSubtitle }}
+          </p>
+        </div>
+        <button
+          type="button"
+          :aria-label="t.modals.closeAria"
+          @click="closeTrialDialog"
+          :class="['rounded p-1.5', isDark ? 'text-[#9AA3B2] hover:bg-white/5 hover:text-white' : 'text-[#4B5563] hover:bg-slate-100']"
+        >
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
+      </div>
 
-        <div class="flex items-center gap-2">
-          <span class="px-2 py-0.5 bg-[#FF5500] text-white font-bold text-[10px]">{{ selectedTool.status }}</span>
-          <span class="text-sm font-bold">{{ selectedTool.title }}</span>
-        </div>
+      <ol
+        :class="[
+          'my-5 space-y-3 border-y py-4 text-sm',
+          isDark ? 'border-white/10' : 'border-slate-900/10'
+        ]"
+      >
+        <li v-for="(s, idx) in t.modals.trialSteps" :key="idx" class="space-y-0.5">
+          <div class="font-semibold">{{ s.step }}</div>
+          <div :class="isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]'">{{ s.text }}</div>
+        </li>
+      </ol>
 
-        <div class="text-zinc-500 text-[11px]">{{ selectedTool.id }} // Category: {{ selectedTool.category }}</div>
+      <div class="flex flex-wrap justify-end gap-2.5">
+        <a
+          href="vscode://LiskinLabs.kuka-krl-extension/control-center"
+          :class="[
+            'inline-flex min-h-[38px] items-center rounded-md border px-4 py-2 text-sm font-medium',
+            isDark ? 'border-white/20 text-[#E6E8EC] hover:bg-white/5' : 'border-slate-900/20 text-[#111827] hover:bg-slate-50'
+          ]"
+        >
+          {{ t.modals.trialOpenVsCode }}
+        </a>
+        <button
+          type="button"
+          @click="closeTrialDialog"
+          class="inline-flex min-h-[38px] items-center rounded-md bg-[#D94A00] px-4 py-2 text-sm font-semibold text-white hover:bg-[#B83E00]"
+        >
+          {{ t.modals.trialGotIt }}
+        </button>
+      </div>
+    </dialog>
 
-        <p class="text-xs text-zinc-300 leading-relaxed">{{ selectedTool.valueProposition }}</p>
-
-        <!-- Tool Media Demo Preview (if matching media exists) -->
-        <div class="border border-zinc-800 bg-black p-2 flex items-center justify-center min-h-[220px]">
-          <img 
-            :src="getToolMediaSrc(selectedTool)" 
-            @error="onMediaError"
-            alt="Tool Demo" 
-            class="max-h-[300px] object-contain" />
-        </div>
-
-        <div class="flex justify-between items-center pt-2">
-          <span class="text-[10px] text-zinc-500">KSS 8.3 / 8.5 / 8.6 / 8.7 (KRC5) Compatible</span>
-          <button 
-            @click="selectedTool = null"
-            class="px-4 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-white font-bold">
-            CLOSE
+    <!-- NATIVE DIALOG: TOOL PREVIEW -->
+    <dialog
+      ref="toolDialogRef"
+      aria-labelledby="tool-dialog-title"
+      @click="onBackdropClick($event, closeToolPreview)"
+      :class="[
+        'w-full max-w-2xl rounded-lg border p-6 shadow-xl',
+        isDark ? 'border-white/15 bg-[#13161B] text-[#E6E8EC]' : 'border-slate-900/15 bg-white text-[#111827]'
+      ]"
+    >
+      <template v-if="selectedTool">
+        <div class="flex items-start justify-between gap-4">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span
+                :class="[
+                  'rounded px-2 py-0.5 text-xs font-medium',
+                  (selectedTool.status || '').toLowerCase() === 'pro'
+                    ? (isDark ? 'bg-[#FF5E00]/15 text-[#FF7A2F]' : 'bg-orange-100 text-[#C2410C]')
+                    : (isDark ? 'bg-white/10 text-[#CBD2DC]' : 'bg-slate-100 text-[#374151]')
+                ]"
+              >
+                {{ (selectedTool.status || '').toLowerCase() === 'pro' ? t.capabilities.badgePro : t.capabilities.badgeFree }}
+              </span>
+              <h2 id="tool-dialog-title" class="text-lg font-semibold">
+                {{ selectedTool.title }}
+              </h2>
+            </div>
+            <p :class="['font-mono text-xs', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+              {{ selectedTool.id }} · {{ t.modals.toolModalCategoryLabel }}: {{ translateCategory(selectedTool.category) }}
+            </p>
+          </div>
+          <button
+            type="button"
+            :aria-label="t.modals.closeAria"
+            @click="closeToolPreview"
+            :class="['rounded p-1.5', isDark ? 'text-[#9AA3B2] hover:bg-white/5 hover:text-white' : 'text-[#4B5563] hover:bg-slate-100']"
+          >
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </button>
         </div>
-      </div>
-    </div>
 
+        <p :class="['mt-4 text-sm leading-relaxed', isDark ? 'text-[#CBD2DC]' : 'text-[#374151]']">
+          {{ selectedTool.valueProposition }}
+        </p>
+
+        <div class="mt-4 aspect-video overflow-hidden rounded-md bg-[#0A0C0F]">
+          <img
+            :src="withBase(selectedTool.mediaSrc || getToolMediaSrc(selectedTool))"
+            :alt="selectedTool.mediaAlt || selectedTool.title"
+            @error="onMediaError"
+            class="h-full w-full object-contain"
+          />
+        </div>
+
+        <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+          <span :class="['text-xs', isDark ? 'text-[#9AA3B2]' : 'text-[#4B5563]']">
+            {{ t.modals.toolModalCompat }}
+          </span>
+          <button
+            type="button"
+            @click="closeToolPreview"
+            :class="[
+              'inline-flex min-h-[36px] items-center rounded-md border px-4 py-1.5 text-sm font-medium',
+              isDark ? 'border-white/20 text-[#E6E8EC] hover:bg-white/5' : 'border-slate-900/20 text-[#111827] hover:bg-slate-50'
+            ]"
+          >
+            {{ t.modals.closeBtn }}
+          </button>
+        </div>
+      </template>
+    </dialog>
   </div>
 </template>
 
-<script setup>
-import { ref, computed, onMounted } from 'vue'
+<script setup lang="ts">
+import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { withBase, useData } from 'vitepress'
-import VsCodeWebSimulator from './VsCodeWebSimulator.vue'
-import KrlWebInspector from './KrlWebInspector.vue'
 import inventoryData from './krl_tools_inventory.json'
-import localesExtra from './locales_de_es_it.json'
+import { LANDING_LOCALES, LOCALE_PATHS, type LocaleCode, type PricingTier } from './landingI18n'
 
-// Theme & Environment States
-const isDaylight = ref(false)
-const mobileMenuOpen = ref(false)
-const copiedCli = ref(false)
-const showTrialModal = ref(false)
-const showQuoteModal = ref(false)
-const selectedTool = ref(null)
-
-// Language Switcher
 const { lang } = useData()
-const currentLang = ref('en')
 
-const setLanguage = (l) => {
-  currentLang.value = l
+const currentLang = computed<LocaleCode>(() => {
+  const val = (lang.value || 'en').toLowerCase()
+  if (val.startsWith('ru')) return 'ru'
+  if (val.startsWith('de')) return 'de'
+  if (val.startsWith('tr')) return 'tr'
+  if (val.startsWith('es')) return 'es'
+  if (val.startsWith('it')) return 'it'
+  return 'en'
+})
+
+const t = computed(() => LANDING_LOCALES[currentLang.value] || LANDING_LOCALES.en)
+const localePath = computed(() => LOCALE_PATHS[currentLang.value] || '/')
+
+const languageOptions: { code: LocaleCode; nativeName: string; path: string }[] = [
+  { code: 'ru', nativeName: 'Русский', path: '/ru/' },
+  { code: 'en', nativeName: 'English', path: '/' },
+  { code: 'de', nativeName: 'Deutsch', path: '/de/' },
+  { code: 'tr', nativeName: 'Türkçe', path: '/tr/' },
+  { code: 'es', nativeName: 'Español', path: '/es/' },
+  { code: 'it', nativeName: 'Italiano', path: '/it/' }
+]
+
+// 2-State Color Scheme Sync (System default + explicit override in localStorage)
+const THEME_STORAGE_KEY = 'krl-color-scheme'
+const isDark = ref(true)
+let mediaQuery: MediaQueryList | null = null
+
+const applySchemeToDom = (dark: boolean, explicitOverride: 'light' | 'dark' | null) => {
+  if (typeof document === 'undefined') return
+  document.documentElement.classList.toggle('dark', dark)
+  const meta = document.querySelector('meta[name="color-scheme"]')
+  if (meta) {
+    meta.setAttribute('content', explicitOverride ?? 'light dark')
+  }
+}
+
+const syncSchemeFromSystemOrStorage = () => {
+  if (typeof window === 'undefined') return
+  let stored: string | null = null
+  try {
+    stored = window.localStorage.getItem(THEME_STORAGE_KEY)
+  } catch {
+    stored = null
+  }
+  if (stored === 'light' || stored === 'dark') {
+    isDark.value = stored === 'dark'
+    applySchemeToDom(isDark.value, stored)
+    return
+  }
+  const prefersDark = mediaQuery ? mediaQuery.matches : true
+  isDark.value = prefersDark
+  applySchemeToDom(prefersDark, null)
+}
+
+const toggleTheme = () => {
+  const nextDark = !isDark.value
+  const target: 'light' | 'dark' = nextDark ? 'dark' : 'light'
+  const systemDark = mediaQuery ? mediaQuery.matches : true
+  isDark.value = nextDark
+
+  if (typeof window !== 'undefined') {
+    try {
+      if (nextDark === systemDark) {
+        window.localStorage.removeItem(THEME_STORAGE_KEY)
+        applySchemeToDom(nextDark, null)
+      } else {
+        window.localStorage.setItem(THEME_STORAGE_KEY, target)
+        applySchemeToDom(nextDark, target)
+      }
+    } catch {
+      applySchemeToDom(nextDark, target)
+    }
+  }
+}
+
+const onSystemSchemeChange = (e: MediaQueryListEvent) => {
+  let stored: string | null = null
+  try {
+    stored = window.localStorage.getItem(THEME_STORAGE_KEY)
+  } catch {
+    stored = null
+  }
+  if (stored !== 'light' && stored !== 'dark') {
+    isDark.value = e.matches
+    applySchemeToDom(e.matches, null)
+  }
+}
+
+const onStorageSync = (e: StorageEvent) => {
+  if (e.key === THEME_STORAGE_KEY) {
+    syncSchemeFromSystemOrStorage()
+  }
+}
+
+// Header dropdown & mobile menu state
+const langMenuOpen = ref(false)
+const langMenuRef = ref<HTMLElement | null>(null)
+const mobileMenuOpen = ref(false)
+
+const handleDocClick = (e: MouseEvent) => {
+  if (langMenuOpen.value && langMenuRef.value && !langMenuRef.value.contains(e.target as Node)) {
+    langMenuOpen.value = false
+  }
+}
+
+const handleKeydown = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') {
+    langMenuOpen.value = false
+    mobileMenuOpen.value = false
+  }
 }
 
 onMounted(() => {
-  if (lang && lang.value) {
-    const l = lang.value.toLowerCase()
-    if (l.startsWith('ru')) currentLang.value = 'ru'
-    else if (l.startsWith('tr')) currentLang.value = 'tr'
-    else if (l.startsWith('de')) currentLang.value = 'de'
-    else if (l.startsWith('it')) currentLang.value = 'it'
-    else if (l.startsWith('es')) currentLang.value = 'es'
+  mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+  syncSchemeFromSystemOrStorage()
+  mediaQuery.addEventListener('change', onSystemSchemeChange)
+  window.addEventListener('storage', onStorageSync)
+  document.addEventListener('click', handleDocClick)
+  document.addEventListener('keydown', handleKeydown)
+})
+
+onBeforeUnmount(() => {
+  if (mediaQuery) {
+    mediaQuery.removeEventListener('change', onSystemSchemeChange)
+  }
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('storage', onStorageSync)
+  }
+  if (typeof document !== 'undefined') {
+    document.removeEventListener('click', handleDocClick)
+    document.removeEventListener('keydown', handleKeydown)
   }
 })
 
-// Currency Engine
-const currentCurrency = ref('USD')
-const currencyRates = {
+// Hero visual controls
+const heroVisualMode = ref<'screenshots' | '3d'>('screenshots')
+const activeHeroSlide = ref(0)
+const currentHeroSlide = computed(() => t.value.hero.mediaSlides[activeHeroSlide.value] || t.value.hero.mediaSlides[0])
+
+// CLI copy
+const copiedCli = ref(false)
+const copyCliInstall = async () => {
+  try {
+    await navigator.clipboard.writeText('code --install-extension LiskinLabs.kuka-krl-extension')
+    copiedCli.value = true
+    setTimeout(() => {
+      copiedCli.value = false
+    }, 2500)
+  } catch {
+    copiedCli.value = true
+  }
+}
+
+// Workflow 2 diff switcher
+const activeDiffIdx = ref(0)
+const currentDiffScenario = computed(
+  () => t.value.workflows.w2.scenarios[activeDiffIdx.value] || t.value.workflows.w2.scenarios[0]
+)
+
+// Capabilities catalog (8 featured by default; full 163 on toggle)
+interface InventoryEntry {
+  type: string
+  id: string
+  title: string
+  status: string
+  valueProposition: string
+  category: string
+  mediaSrc?: string
+  mediaAlt?: string
+}
+
+const allInventory: InventoryEntry[] = []
+if (inventoryData && (inventoryData as Record<string, any>).inventory) {
+  const inv = (inventoryData as Record<string, any>).inventory as Record<string, Omit<InventoryEntry, 'category'>[]>
+  Object.keys(inv).forEach((cat) => {
+    inv[cat].forEach((item) => {
+      allInventory.push({ ...item, category: cat })
+    })
+  })
+}
+
+const showFullCatalog = ref(false)
+const toolSearchQuery = ref('')
+const selectedCategory = ref('All')
+
+const toggleAllCapabilities = () => {
+  showFullCatalog.value = !showFullCatalog.value
+  if (!showFullCatalog.value) {
+    toolSearchQuery.value = ''
+    selectedCategory.value = 'All'
+  }
+}
+
+const toolCategories = computed(() => {
+  const cats = ['All']
+  if (inventoryData && (inventoryData as Record<string, any>).inventory) {
+    cats.push(...Object.keys((inventoryData as Record<string, any>).inventory))
+  }
+  return cats
+})
+
+const filteredTools = computed(() => {
+  let list = allInventory
+  if (selectedCategory.value !== 'All') {
+    list = list.filter((item) => item.category === selectedCategory.value)
+  }
+  if (toolSearchQuery.value.trim()) {
+    const q = toolSearchQuery.value.toLowerCase()
+    list = list.filter(
+      (item) =>
+        item.title.toLowerCase().includes(q) ||
+        item.id.toLowerCase().includes(q) ||
+        (item.valueProposition && item.valueProposition.toLowerCase().includes(q))
+    )
+  }
+  return list
+})
+
+const translateCategory = (cat: string) => {
+  return t.value.capabilities.categoryNames[cat] || cat
+}
+
+const translateType = (type: string) => {
+  return t.value.capabilities.typeNames[type] || type
+}
+
+// Currency & Pricing
+const currentCurrency = ref<'USD' | 'EUR' | 'RUB' | 'TRY'>('USD')
+const proBillingCycle = ref<'annual' | 'monthly'>('annual')
+
+const currencyRates: Record<string, { symbol: string; rate: number; isPrefix: boolean }> = {
   USD: { symbol: '$', rate: 1.0, isPrefix: true },
   EUR: { symbol: '€', rate: 0.92, isPrefix: false },
   RUB: { symbol: '₽', rate: 94.0, isPrefix: false },
   TRY: { symbol: '₺', rate: 34.5, isPrefix: false }
 }
 
-const formatPrice = (usd) => {
-  if (usd === 0) return 'Free'
+const formatPrice = (usd?: number) => {
+  if (!usd) return ''
   const cur = currencyRates[currentCurrency.value] || currencyRates.USD
   const raw = usd * cur.rate
-  const valStr = (usd % 1 !== 0 && cur.rate === 1.0) ? raw.toFixed(2) : Math.round(raw).toLocaleString()
+  const valStr = Math.round(raw).toLocaleString(currentLang.value === 'en' ? 'en-US' : currentLang.value)
   return cur.isPrefix ? `${cur.symbol}${valStr}` : `${valStr} ${cur.symbol}`
 }
 
-// Dynamic Checkout (Worker create-session -> fallback static link with LAUNCH30 & redirect_url)
-const GATEWAY_URL = 'https://kuka-krl-support-gateway.redminotpro5.workers.dev'
-const checkoutBusy = ref(null)
+const activeTierProductId = (tier: PricingTier) => {
+  if (tier.id === 'pro' && proBillingCycle.value === 'monthly' && tier.productIdMonthly) {
+    return tier.productIdMonthly
+  }
+  return tier.productIdAnnual || ''
+}
 
-const buildCheckoutUrl = (productId) => {
+// Dodo Payments Checkout
+const GATEWAY_URL = 'https://kuka-krl-support-gateway.redminotpro5.workers.dev'
+const checkoutBusy = ref<string | null>(null)
+
+const buildCheckoutUrl = (productId: string) => {
   const locale = encodeURIComponent(currentLang.value || 'en')
   const returnUrl = encodeURIComponent(`${GATEWAY_URL}/checkout/success?lang=${locale}`)
   return `https://checkout.dodopayments.com/buy/${productId}?redirect_url=${returnUrl}&singlePage=true&showDiscounts=true&discountCode=LAUNCH30`
 }
 
-const startCheckout = async (productId) => {
-  if (checkoutBusy.value) return
+const startCheckout = async (productId: string) => {
+  if (!productId || checkoutBusy.value) return
   checkoutBusy.value = productId
   const fallback = buildCheckoutUrl(productId)
   try {
@@ -1258,278 +1867,68 @@ const startCheckout = async (productId) => {
         return
       }
     }
-  } catch (_) {
-    // Fallback to static Dodo Payments URL with redirect & LAUNCH30
+  } catch {
+    // Fallback to static Dodo Payments URL
   } finally {
     checkoutBusy.value = null
   }
   window.location.href = fallback
 }
 
-// Translations Dictionary
-const translations = {
-  en: {
-    heroHeadline1: "ZERO DOWNTIME",
-    heroHeadline2: "BEFORE THE ROBOT TOUCHES THE PART",
-    heroSubhead: "Industrial IDE and static safety analyzer for KUKA KRL (KRC2/KRC4/KRC5). Detects Advance Run stops, $BASE/$TOOL frame drift, missing BRAKE commands, and uninitialized kinematic hazards before physical execution on the shop floor."
-  },
-  ru: {
-    heroHeadline1: "НОЛЬ ПРОСТОЕВ ДО ПЕРВОГО",
-    heroHeadline2: "КАСАНИЯ ДЕТАЛИ РОБОТОМ",
-    heroSubhead: "Промышленная IDE и статический анализатор безопасности для KUKA KRL (KRC2/KRC4/KRC5). Предотвращает срывы Advance Run, дрейф фреймов $BASE/$TOOL, пропущенные BRAKE и неинициализированные кинематические коллизии до компиляции на контроллере."
-  },
-  de: {
-    heroHeadline1: "NULL AUSFALLZEIT",
-    heroHeadline2: "BEVOR DER ROBOTER DAS TEIL BERÜHRT",
-    heroSubhead: "Industrielle IDE und statischer Sicherheitsanalysator für KUKA KRL (KRC2/KRC4/KRC5). Erkennt Vorlaufstopps, $BASE/$TOOL-Frame-Drift, fehlende BRAKE-Befehle und Kollisionen vor der Inbetriebnahme."
-  },
-  tr: {
-    heroHeadline1: "ROBOT PARÇAYA DOKUNMADAN ÖNCE",
-    heroHeadline2: "SIFIR DURUŞ SÜRESİ",
-    heroSubhead: "KUKA KRL (KRC2/KRC4/KRC5) için endüstriyel IDE ve statik güvenlik analizörü. Fiziksel çalıştırmadan önce Ön Çalışma (Advance Run) duruşlarını, $BASE/$TOOL sapmalarını ve eksik BRAKE komutlarını tespit eder."
-  },
-  es: {
-    heroHeadline1: "CERO TIEMPO DE INACTIVIDAD",
-    heroHeadline2: "ANTES DE QUE EL ROBOT TOQUE LA PIEZA",
-    heroSubhead: "IDE industrial y analizador estático de seguridad para KUKA KRL (KRC2/KRC4/KRC5). Detecta paradas de Advance Run, desviaciones de $BASE/$TOOL y comandos BRAKE omitidos antes de la ejecución física."
-  },
-  it: {
-    heroHeadline1: "ZERO TEMPI DI INATTIVITÀ",
-    heroHeadline2: "PRIMA CHE IL ROBOT TOCCHI IL PEZZO",
-    heroSubhead: "IDE industriale e analizzatore statico di sicurezza per KUKA KRL (KRC2/KRC4/KRC5). Rileva arresti di Advance Run, drift di $BASE/$TOOL e comandi BRAKE mancanti prima dell'esecuzione fisica."
+// Native <dialog> Modals
+const trialDialogRef = ref<HTMLDialogElement | null>(null)
+const toolDialogRef = ref<HTMLDialogElement | null>(null)
+const selectedTool = ref<Partial<InventoryEntry> | null>(null)
+
+const openTrialDialog = () => {
+  if (trialDialogRef.value && typeof trialDialogRef.value.showModal === 'function') {
+    trialDialogRef.value.showModal()
   }
 }
 
-const t = computed(() => translations[currentLang.value] || translations.en)
-
-// CLI Install Copy
-const copyCliInstall = async () => {
-  try {
-    await navigator.clipboard.writeText('code --install-extension LiskinLabs.kuka-krl-extension')
-    copiedCli.value = true
-    setTimeout(() => { copiedCli.value = false }, 2500)
-  } catch (e) {
-    copiedCli.value = true
+const closeTrialDialog = () => {
+  if (trialDialogRef.value && typeof trialDialogRef.value.close === 'function') {
+    trialDialogRef.value.close()
   }
 }
 
-// Disaster Scenarios Data
-const disasterScenarios = [
-  {
-    id: 'advance_run',
-    tag: 'ADVANCE RUN STOP',
-    title: '$ADVANCE Trajectory Interruption',
-    avoidedCost: '$24,000 / hr avoided',
-    description: 'Raw digital outputs ($OUT) or synchronous variable accesses within continuous path (CP) motion break the controller advance run pointer, causing sudden mechanical deceleration, seam burn-through, and conveyor stoppage.',
-    beforeCode: `; HAZARD: Unsynchronized raw I/O triggers implicit Vorlaufstopp!
-LIN XPICK_APPROACH C_DIS
-$OUT[12] = TRUE ; Advance run pointer halted! Robot stops on seam.
-LIN XPICK_PART`,
-    afterCode: `; SAFE: Trigger event dynamically synchronized with motion
-LIN XPICK_APPROACH C_DIS
-TRIGGER WHEN DISTANCE=1 DELAY=0 DO $OUT[12] = TRUE
-LIN XPICK_PART ; Trajectory continues at full CP speed without stopping`
-  },
-  {
-    id: 'missing_brake',
-    tag: 'KSS 1422 CRITICAL FAULT',
-    title: 'Missing BRAKE Before RESUME',
-    avoidedCost: '$18,500 / incident avoided',
-    description: 'Executing RESUME in an interrupt subroutine without a preceding BRAKE command causes instant controller fault KSS 1422, triggering emergency braking with excessive mechanical stress on axis gearboxes.',
-    beforeCode: `DEF PART_SEARCH_ISR()
-  INTERRUPT OFF 10
-  ; CRITICAL FAULT: RESUME without BRAKE triggers instant KSS 1422!
-  RESUME
-END`,
-    afterCode: `DEF PART_SEARCH_ISR()
-  INTERRUPT OFF 10
-  BRAKE ; Safely stops current motion before stack unwind
-  RESUME ; Smooth subroutine termination
-END`
-  },
-  {
-    id: 'frame_drift',
-    tag: 'FRAME DRIFT HAZARD',
-    title: 'Uninitialized $TOOL / $BASE Offset',
-    avoidedCost: '$42,000 / collision avoided',
-    description: 'Cartesian motions executed prior to BAS(#INITMOV, 0) or without explicitly assigned $TOOL and $BASE use default $NULLFRAME, shifting actual TCP trajectory by several hundred millimeters into fixture steel.',
-    beforeCode: `DEF WeldCycle()
-  ; HAZARD: No motion dynamics initialization & unassigned frames!
-  PTP XHOME
-  LIN XSEAM_START ; Moves with Flange TCP in World Coordinates!
-END`,
-    afterCode: `DEF WeldCycle()
-  BAS(#INITMOV, 0) ; Dynamics & interpolation parameters loaded
-  $TOOL = TOOL_DATA[1] ; Calibrated arc torch TCP
-  $BASE = BASE_DATA[2] ; Workpiece fixture coordinate frame
-  PTP XHOME
-  LIN XSEAM_START ; Guaranteed millimeter-accurate trajectory
-END`
-  },
-  {
-    id: 'fold_bom',
-    tag: 'KSS 00041 CORRUPTION',
-    title: 'Corrupted FOLD Header & UTF-8 BOM',
-    avoidedCost: '$8,000 / shift avoided',
-    description: 'Generic editors destroy KUKA SmartHMI checksums and insert invalid UTF-8 BOMs, rendering routines un-openable on the smartPAD pendant and stalling commissioning engineers on site.',
-    beforeCode: `; CORRUPTED: Generic text editor stripped KUKA checksum
-;FOLD INI
-  BAS (#INITMOV,0 )
-;ENDFOLD (INI)`,
-    afterCode: `; SANITIZED: Compliant KRL Pro checksum & CRLF preservation
-;FOLD INI;%{PE}%R 8.6.1,%MKUKATPBASIS,%CINITMOV,%VINITMOV,%P 1:INITMOV, 2:0
-  BAS (#INITMOV,0 )
-;ENDFOLD (INI)`
-  }
-]
-
-const activeDisaster = ref(disasterScenarios[0])
-
-// Web Simulator Tab
-const activeSimTab = ref('editor')
-
-// B2B ROI Calculator State
-const calcRobots = ref(12)
-const calcEngineers = ref(4)
-const calcDowntimeCost = ref(12000)
-
-const preventedHours = computed(() => Math.round(calcRobots.value * 0.75 + calcEngineers.value * 1.5))
-const annualSavings = computed(() => preventedHours.value * calcDowntimeCost.value)
-
-const recommendedTier = computed(() => {
-  if (calcEngineers.value <= 5) {
-    return { name: 'Team Edition', seats: 5, priceUsd: 499 }
-  } else if (calcEngineers.value <= 20) {
-    return { name: 'Department / Integrator', seats: 20, priceUsd: 1499 }
-  } else {
-    return { name: 'Enterprise Site', seats: 100, priceUsd: 4999 }
-  }
-})
-
-// Quotation Document Metadata
-const quoteDocRef = ref('KP-2026-KRL-84F2')
-const quoteDate = ref(new Date().toISOString().split('T')[0])
-
-const openQuoteModal = () => {
-  quoteDocRef.value = 'KP-2026-KRL-' + Math.random().toString(16).substr(2, 4).toUpperCase()
-  quoteDate.value = new Date().toISOString().split('T')[0]
-  showQuoteModal.value = true
-}
-
-const printQuote = () => {
-  if (typeof window !== 'undefined') {
-    window.print()
-  }
-}
-
-// 64 Tools Inventory Processing
-const allInventory = []
-if (inventoryData && inventoryData.inventory) {
-  Object.keys(inventoryData.inventory).forEach(cat => {
-    inventoryData.inventory[cat].forEach(item => {
-      allInventory.push({
-        ...item,
-        category: cat
-      })
-    })
-  })
-}
-
-const toolSearchQuery = ref('')
-const selectedCategory = ref('All')
-
-const toolCategories = computed(() => {
-  const cats = ['All']
-  if (inventoryData && inventoryData.inventory) {
-    cats.push(...Object.keys(inventoryData.inventory))
-  }
-  return cats.slice(0, 7)
-})
-
-const filteredTools = computed(() => {
-  let list = allInventory
-  if (selectedCategory.value !== 'All') {
-    list = list.filter(t => t.category === selectedCategory.value)
-  }
-  if (toolSearchQuery.value.trim()) {
-    const q = toolSearchQuery.value.toLowerCase()
-    list = list.filter(t => 
-      t.title.toLowerCase().includes(q) || 
-      t.id.toLowerCase().includes(q) || 
-      (t.valueProposition && t.valueProposition.toLowerCase().includes(q))
-    )
-  }
-  return list.slice(0, 16)
-})
-
-const openToolPreview = (tool) => {
+const openToolPreview = async (tool: Partial<InventoryEntry>) => {
   selectedTool.value = tool
-}
-
-const getToolMediaSrc = (tool) => {
-  if (!tool) return withBase('/media/smart_autocomplete.gif')
-  const id = tool.id.toLowerCase()
-  if (id.includes('inlay')) return withBase('/media/inlay_hints.gif')
-  if (id.includes('backup') || id.includes('diff')) return withBase('/media/krc_backup_diff.gif')
-  if (id.includes('definition')) return withBase('/media/goto_definition.gif')
-  if (id.includes('signal') || id.includes('io')) return withBase('/media/krl_io_signals.gif')
-  if (id.includes('fold')) return withBase('/media/quick_fold_toolbar.gif')
-  return withBase('/media/smart_autocomplete.gif')
-}
-
-const onMediaError = (e) => {
-  e.target.src = withBase('/logo.png')
-}
-
-// Global Telemetry Radar
-const pingLatency = ref(24)
-const isPinging = ref(false)
-
-const testEdgePing = async () => {
-  if (isPinging.value) return
-  isPinging.value = true
-  const startTime = typeof performance !== 'undefined' ? performance.now() : Date.now()
-  try {
-    const res = await fetch(`${GATEWAY_URL}/health`, { cache: 'no-store' })
-    if (res.ok) {
-      const elapsed = (typeof performance !== 'undefined' ? performance.now() : Date.now()) - startTime
-      pingLatency.value = Math.max(1, Math.round(elapsed))
-    }
-  } catch (_) {
-    // Keep prior latency value when offline
-  } finally {
-    isPinging.value = false
+  await nextTick()
+  if (toolDialogRef.value && typeof toolDialogRef.value.showModal === 'function') {
+    toolDialogRef.value.showModal()
   }
 }
 
-const primaryHubs = [
-  { code: '[DE]', country: 'Germany', city: 'Wolfsburg & Stuttgart', focus: 'Automotive BIW Lines', kss: 'KSS 8.7 (KRC5)' },
-  { code: '[TR]', country: 'Turkey', city: 'Bursa & Kocaeli', focus: 'Automotive & System Integration', kss: 'KSS 8.6 / 8.7' },
-  { code: '[US]', country: 'United States', city: 'Detroit & Spartanburg', focus: 'Assembly & Body Cells', kss: 'KSS 8.6 / 8.7' },
-  { code: '[IT]', country: 'Italy', city: 'Turin & Modena', focus: 'Precision Robotics Lines', kss: 'KSS 8.5 / 8.6' },
-  { code: '[KR]', country: 'South Korea', city: 'Ulsan & Hwaseong', focus: 'High-Speed Spot Welding', kss: 'KSS 8.7 (KRC5)' },
-  { code: '[JP]', country: 'Japan', city: 'Nagoya & Yokohama', focus: 'Automated Press Cells', kss: 'KSS 8.6 / 8.7' }
-]
+const closeToolPreview = () => {
+  if (toolDialogRef.value && typeof toolDialogRef.value.close === 'function') {
+    toolDialogRef.value.close()
+  }
+  selectedTool.value = null
+}
+
+const onBackdropClick = (e: MouseEvent, closeFn: () => void) => {
+  if (e.target === e.currentTarget) {
+    closeFn()
+  }
+}
+
+const getToolMediaSrc = (tool: Partial<InventoryEntry>) => {
+  const id = (tool.id || '').toLowerCase()
+  if (id.includes('inlay')) return '/media/inlay_hints.gif'
+  if (id.includes('backup') || id.includes('diff')) return '/media/krc_backup_diff.gif'
+  if (id.includes('definition')) return '/media/goto_definition.gif'
+  if (id.includes('signal') || id.includes('io') || id.includes('fieldbus')) return '/media/krl_io_signals.gif'
+  if (id.includes('fold')) return '/media/quick_fold_toolbar.gif'
+  if (id.includes('flowchart')) return '/media/control_flow_graph.gif'
+  if (id.includes('dead') || id.includes('cleanup')) return '/media/dead-code-demo.gif'
+  return '/media/smart_autocomplete.gif'
+}
+
+const onMediaError = (e: Event) => {
+  const img = e.target as HTMLImageElement | null
+  if (img) {
+    img.src = withBase('/logo.png')
+  }
+}
 </script>
-
-<style scoped>
-@media print {
-  body * {
-    visibility: hidden;
-  }
-  .bg-white.text-black.w-full.max-w-3xl,
-  .bg-white.text-black.w-full.max-w-3xl * {
-    visibility: visible;
-  }
-  .bg-white.text-black.w-full.max-w-3xl {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    border: none;
-    box-shadow: none;
-  }
-}
-</style>

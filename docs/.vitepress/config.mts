@@ -22,20 +22,22 @@ export default defineConfig({
   base: getBase(),
   outDir: '../public',
   head: [
+    ['meta', { name: 'color-scheme', content: 'light dark' }],
+    ['script', {}, `try{var s=localStorage.getItem('krl-color-scheme');if(s==='light'||s==='dark'){var m=document.querySelector('meta[name="color-scheme"]');if(m)m.content=s;document.documentElement.classList.toggle('dark',s==='dark');}}catch(e){}`],
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/kuka-krl-extension/favicon.svg' }],
     ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/kuka-krl-extension/favicon-32.png' }],
     ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/kuka-krl-extension/favicon-16.png' }],
     ['link', { rel: 'apple-touch-icon', href: '/kuka-krl-extension/logo-original.png' }],
-    ['meta', { name: 'theme-color', content: '#FF5500' }],
+    ['meta', { name: 'theme-color', content: '#FF5E00' }],
     ['meta', { name: 'keywords', content: 'KRL, KRC2, KRC4, KRC5, Robot, Robotics, Industrial Automation, WorkVisual, VS Code, Live Monitor, MCP' }],
     ['meta', { property: 'og:title', content: 'KRL Engineering Toolkit — Industrial Robotics IDE Suite' }],
-    ['meta', { property: 'og:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Live Monitor, Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
+    ['meta', { property: 'og:description', content: 'Engineering VS Code extension for KUKA KRL with static analysis, backup diff, WorkVisual .wvs inspection, and offline commissioning.' }],
     ['meta', { property: 'og:image', content: '/kuka-krl-extension/logo-original.png' }],
     ['meta', { property: 'og:site_name', content: 'KRL Engineering Toolkit' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
     ['meta', { name: 'twitter:title', content: 'KRL Engineering Toolkit — Industrial Robotics IDE Suite' }],
-    ['meta', { name: 'twitter:description', content: 'Enterprise-grade VS Code IDE extension for KUKA KRL with Live Monitor, Flowchart, Diagnostics, Delta Math, and Offline Commissioning.' }],
+    ['meta', { name: 'twitter:description', content: 'Engineering VS Code extension for KUKA KRL with static analysis, backup diff, WorkVisual .wvs inspection, and offline commissioning.' }],
     ['meta', { name: 'twitter:image', content: '/kuka-krl-extension/logo-original.png' }]
   ],
   vite: {
@@ -57,15 +59,15 @@ export default defineConfig({
             theme: {
               extend: {
                 colors: {
-                  'kuka-orange': '#FF5500',
-                  'kuka-dark': '#09090B',
-                  'kuka-darker': '#09090B',
-                  'kuka-gray': '#111114',
-                  'kuka-border': '#27272A'
+                  'kuka-orange': '#FF5E00',
+                  'kuka-dark': '#0D0F12',
+                  'kuka-darker': '#0A0C0F',
+                  'kuka-gray': '#13161B',
+                  'kuka-border': '#262B33'
                 },
                 fontFamily: {
-                  sans: ['Inter', 'Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-                  mono: ['JetBrains Mono', 'Roboto Mono', 'ui-monospace', 'monospace']
+                  sans: ['Inter', 'IBM Plex Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                  mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace']
                 }
               }
             }

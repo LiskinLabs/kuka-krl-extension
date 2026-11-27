@@ -18,54 +18,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Generate Legacy Redirector Site
+      - name: Prepare Legacy Redirector Artifact
         run: |
-          mkdir -p _gh_pages_redirect
-          touch _gh_pages_redirect/.nojekyll
-          cat << 'EOF' > _gh_pages_redirect/index.html
-          <!DOCTYPE html>
-          <html lang="en">
-          <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Moved to liskinlabs.com — LiskinLabs</title>
-            <meta name="robots" content="noindex, follow">
-            <link rel="canonical" href="https://liskinlabs.com/">
-            <meta http-equiv="refresh" content="1;url=https://liskinlabs.com/">
-            <script>
-              (function () {
-                var loc = window.location;
-                var path = loc.pathname || '/';
-                var rest = path.replace(/^\/kuka-krl-extension(?=\/|$)/i, '') || '/';
-                if (!rest.startsWith('/')) rest = '/' + rest;
-                var target;
-                if (/^\/sim(?:\/|$)/i.test(rest)) {
-                  var sub = rest.replace(/^\/sim\/?/i, '/');
-                  target = 'https://sim.liskinlabs.com' + sub + loc.search + loc.hash;
-                } else {
-                  target = 'https://liskinlabs.com' + rest + loc.search + loc.hash;
-                }
-                loc.replace(target);
-              })();
-            </script>
-          </head>
-          <body style="font-family:system-ui,sans-serif;background:#0d0f12;color:#e6e8ec;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;padding:24px;text-align:center;">
-            <div>
-              <h1>KRL Engineering Toolkit has moved to <a href="https://liskinlabs.com/" style="color:#ff5e00;">liskinlabs.com</a></h1>
-              <p>Redirecting automatically…</p>
-            </div>
-          </body>
-          </html>
-          EOF
-          cp _gh_pages_redirect/index.html _gh_pages_redirect/404.html
+          touch .github/gh-pages-redirect/.nojekyll
+          cp .github/gh-pages-redirect/index.html .github/gh-pages-redirect/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _gh_pages_redirect
+          path: .github/gh-pages-redirect
 
   deploy:
     environment:
@@ -77,4 +44,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: deploy-pages@v4
+        uses: actions/deploy-pages@v4

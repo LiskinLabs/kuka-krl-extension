@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moved to liskinlabs.com — LiskinLabs</title>
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://liskinlabs.com/">
+  <meta http-equiv="refresh" content="1;url=https://liskinlabs.com/">
+  <script>
+    (function () {
+      var loc = window.location;
+      var path = loc.pathname || '/';
+      var rest = path.replace(/^\/kuka-krl-extension(?=\/|$)/i, '') || '/';
+      if (!rest.startsWith('/')) rest = '/' + rest;
+      var target;
+      if (/^\/sim(?:\/|$)/i.test(rest)) {
+        var sub = rest.replace(/^\/sim\/?/i, '/');
+        target = 'https://sim.liskinlabs.com' + sub + loc.search + loc.hash;
+      } else {
+        target = 'https://liskinlabs.com' + rest + loc.search + loc.hash;
+      }
+      loc.replace(target);
+    })();
+  </script>
+</head>
+<body style="font-family:system-ui,sans-serif;background:#0d0f12;color:#e6e8ec;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;padding:24px;text-align:center;">
+  <div>
+    <h1>KRL Engineering Toolkit has moved to <a href="https://liskinlabs.com/" style="color:#ff5e00;">liskinlabs.com</a></h1>
+    <p>Redirecting automatically…</p>
+  </div>
+</body>
+</html>

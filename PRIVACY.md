@@ -80,5 +80,7 @@ When either setting is set to disabled, all outbound diagnostic heartbeats are i
 
 For questions regarding this Privacy Policy, data subject rights (GDPR Articles 15–22), or enterprise compliance audits, please contact:
 
+- **Email:** [info@liskinlabs.com](mailto:info@liskinlabs.com)
+- **Website:** [https://liskinlabs.com](https://liskinlabs.com/)
 - **In-Editor Contact:** VS Code Command Palette (`Ctrl+Shift+P` → `KUKA KRL: Open Telegram Support Chat`)
 - **Issue Tracker:** [GitHub Issues](https://github.com/LiskinLabs/kuka-krl-extension/issues)

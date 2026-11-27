@@ -1351,6 +1351,9 @@
               </span>
             </div>
             <p class="text-xs leading-relaxed">{{ t.footer.brandDesc }}</p>
+            <p class="pt-1 text-xs">
+              <a href="mailto:info@liskinlabs.com" class="text-[#FF7A2F] hover:underline">info@liskinlabs.com</a>
+            </p>
           </div>
 
           <div class="space-y-2 md:col-span-2">
@@ -1371,6 +1374,16 @@
             </div>
             <ul class="space-y-1.5 text-xs">
               <li><a :href="withBase(t.header.docsLink)" class="hover:text-[#FF7A2F]">{{ t.footer.links.docs }}</a></li>
+              <li>
+                <a
+                  href="https://sim.liskinlabs.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-[#FF7A2F]"
+                >
+                  3D Simulator
+                </a>
+              </li>
               <li>
                 <a
                   href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"

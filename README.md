@@ -21,14 +21,16 @@
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/dt/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX%20Downloads" alt="Open VSX Downloads" /></a>
   <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.27-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.27" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(0%20CVE)-10b981?style=flat-square&logo=shield&logoColor=white" alt="Spectra Assure Security Check" /></a>
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Audited-4.13M%2B%20LoC-10b981?style=flat-square" alt="Fleet Audited 4.13M+ LoC" /></a>
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/guide/pro-features"><img src="https://img.shields.io/badge/Commands-136%20(69%20Free%20%7C%2067%20Pro)-0EA5E9?style=flat-square" alt="136 Commands" /></a>
+  <a href="https://liskinlabs.com/"><img src="https://img.shields.io/badge/Fleet%20Audited-4.13M%2B%20LoC-10b981?style=flat-square" alt="Fleet Audited 4.13M+ LoC" /></a>
+  <a href="https://liskinlabs.com/guide/pro-features"><img src="https://img.shields.io/badge/Commands-136%20(69%20Free%20%7C%2067%20Pro)-0EA5E9?style=flat-square" alt="136 Commands" /></a>
 </p>
 
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><b>Install from Marketplace</b></a> ·
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><b>Install from Open VSX</b></a> ·
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><b>Documentation</b></a> ·
+  <a href="https://liskinlabs.com/"><b>Documentation</b></a> · ·
+  <a href="https://sim.liskinlabs.com/"><b>3D Simulator</b></a> ·
+  <a href="mailto:info@liskinlabs.com"><b>info@liskinlabs.com</b></a>
   <a href="https://github.com/LiskinLabs/kuka-krl-extension/blob/main/SUPPORT.md"><b>Support &amp; Air-Gap Licensing</b></a>
 </p>
 
@@ -122,14 +124,14 @@ Direct Ethernet communication from Node.js/TypeScript without WorkVisual, KUKA.S
 | Tier | Standard Price | Seats & Terms | Intended For | Checkout |
 |---|---|---|---|---|
 | **Community** | USD 0 | Personal / Academic · 14-day Pro trial | Learning & non-commercial work | [Install Free](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| **Pro Monthly** | USD 19 / mo | 1 workstation · Cancel anytime | Short commissioning trips | [Subscribe Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Den&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
-| **Pro Annual** | USD 149 / yr | 1 workstation · 1 year updates | Full-time KUKA engineers | [Buy Annual](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Den&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
-| **Pro Lifetime** | USD 699 once | 1 workstation · Perpetual | Independent consultants | [Buy Lifetime](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Den&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
-| **Team** | USD 499 / yr | 5 workstations · Single invoice | Engineering teams | [Buy Team](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Den&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
-| **Department** | USD 1,499 / yr | 20 workstations · Air-Gap support | System integrators | [Buy Department](https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Den&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Pro Monthly** | USD 19 / mo | 1 workstation · Cancel anytime | Short commissioning trips | [Subscribe Monthly](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Den&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Pro Annual** | USD 149 / yr | 1 workstation · 1 year updates | Full-time KUKA engineers | [Buy Annual](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Den&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Pro Lifetime** | USD 699 once | 1 workstation · Perpetual | Independent consultants | [Buy Lifetime](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Den&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Team** | USD 499 / yr | 5 workstations · Single invoice | Engineering teams | [Buy Team](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Den&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Department** | USD 1,499 / yr | 20 workstations · Air-Gap support | System integrators | [Buy Department](https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Den&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
 | **Enterprise** | USD 4,999 / yr | 100 workstations · PO & SLA | Plants & OEMs | [B2B Procurement](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/SUPPORT.md#2-14-day-free-trial-upgrades--billing-dodo-payments-mor) |
 
-<sub>Launch promo code `LAUNCH30` (30% off) is pre-applied in checkout links above. Payments and VAT/VIES invoices are processed by Dodo Payments (Merchant of Record). Already licensed: <a href="https://kuka-krl-support-gateway.redminotpro5.workers.dev/activate">Activate Online</a> · <a href="https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap">Generate Air-Gap .lic</a> · <a href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1">Customer Portal</a>.</sub>
+<sub>Launch promo code `LAUNCH30` (30% off) is pre-applied in checkout links above. Payments and VAT/VIES invoices are processed by Dodo Payments (Merchant of Record). Already licensed: <a href="https://api.liskinlabs.com/activate">Activate Online</a> · <a href="https://api.liskinlabs.com/airgap">Generate Air-Gap .lic</a> · <a href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1">Customer Portal</a> · <a href="mailto:info@liskinlabs.com">info@liskinlabs.com</a>.</sub>
 
 ---
 

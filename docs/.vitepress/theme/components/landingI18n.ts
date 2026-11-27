@@ -747,6 +747,12 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       channelsHeading: 'Прямые каналы связи и дистрибутивы',
       channels: [
         {
+          label: 'Email (поддержка и B2B)',
+          detail: 'info@liskinlabs.com — прямые запросы, счета и лицензии',
+          href: 'mailto:info@liskinlabs.com',
+          external: false
+        },
+        {
           label: 'Чат поддержки внутри VS Code',
           detail: 'Команда krl.openTelegramChat (быстрые вопросы и счета B2B)',
           href: 'vscode://LiskinLabs.kuka-krl-extension/support',
@@ -1282,6 +1288,12 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       channelsHeading: 'Verified support & distribution channels',
       channels: [
         {
+          label: 'Email (Support & B2B)',
+          detail: 'info@liskinlabs.com — direct inquiries, quotes & licensing',
+          href: 'mailto:info@liskinlabs.com',
+          external: false
+        },
+        {
           label: 'In-Editor Support Chat (VS Code)',
           detail: 'Run krl.openTelegramChat for direct engineering & B2B billing help',
           href: 'vscode://LiskinLabs.kuka-krl-extension/support',
@@ -1806,6 +1818,12 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       channelsHeading: 'Direkte Kanäle & Bezugsquellen',
       channels: [
         {
+          label: 'E-Mail (Support & B2B)',
+          detail: 'info@liskinlabs.com — Direktanfragen, Angebote & Lizenzen',
+          href: 'mailto:info@liskinlabs.com',
+          external: false
+        },
+        {
           label: 'Support-Chat direkt in VS Code',
           detail: 'Befehl krl.openTelegramChat für technische Fragen und B2B-Rechnungen',
           href: 'vscode://LiskinLabs.kuka-krl-extension/support',
@@ -2320,6 +2338,12 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       bio2: 'Şirket faturası, özel bir KRC yedeği desteği veya kapalı ağda deneme için VS Code içindeki destek sohbetinden ya da GitHub Issues üzerinden doğrudan yazabilirsiniz.',
       channelsHeading: 'Doğrudan iletişim ve dağıtım kanalları',
       channels: [
+        {
+          label: 'E-posta (Destek & B2B)',
+          detail: 'info@liskinlabs.com — doğrudan talepler, teklifler ve lisanslama',
+          href: 'mailto:info@liskinlabs.com',
+          external: false
+        },
         {
           label: 'VS Code İçi Destek Sohbeti',
           detail: 'Teknik destek ve B2B fatura talepleri için krl.openTelegramChat',
@@ -2836,6 +2860,12 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       channelsHeading: 'Canales directos y distribución',
       channels: [
         {
+          label: 'Correo electrónico (Soporte y B2B)',
+          detail: 'info@liskinlabs.com — consultas directas, presupuestos y licencias',
+          href: 'mailto:info@liskinlabs.com',
+          external: false
+        },
+        {
           label: 'Chat de soporte en VS Code',
           detail: 'Comando krl.openTelegramChat para soporte técnico y facturas B2B',
           href: 'vscode://LiskinLabs.kuka-krl-extension/support',
@@ -3350,6 +3380,12 @@ export const LANDING_LOCALES: Record<LocaleCode, LandingLocaleData> = {
       bio2: 'Serve una fattura aziendale, supporto su un archivio KRC particolare o un test in rete isolata? Scrivi tramite la chat integrata in VS Code o su GitHub Issues.',
       channelsHeading: 'Canali diretti e distribuzione',
       channels: [
+        {
+          label: 'Email (Supporto e B2B)',
+          detail: 'info@liskinlabs.com — richieste dirette, preventivi e licenze',
+          href: 'mailto:info@liskinlabs.com',
+          external: false
+        },
         {
           label: 'Chat di supporto in VS Code',
           detail: 'Comando krl.openTelegramChat per supporto tecnico e fatture B2B',

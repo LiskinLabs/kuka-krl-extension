@@ -241,8 +241,9 @@ the official website contact channels or in-editor support relay.
 
 ---
 
-For questions about licensing, visit: https://liskinlabs.github.io/kuka-krl-extension/
+For questions about licensing, visit: https://liskinlabs.com/
+Contact Email: info@liskinlabs.com
 Purchase licenses at: https://checkout.dodopayments.com/buy/pdc_0NmAaL3aw5WKbMZgAVCDZ
-Project website: https://liskinlabs.github.io/kuka-krl-extension/
+Project website: https://liskinlabs.com/
 
 LiskinLabs — Industrial Robot Programming Tools

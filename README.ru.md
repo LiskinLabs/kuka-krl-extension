@@ -21,14 +21,16 @@
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/dt/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX%20Downloads" alt="Скачивания Open VSX" /></a>
   <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.27-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.27" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(0%20CVE)-10b981?style=flat-square&logo=shield&logoColor=white" alt="Spectra Assure Security Check" /></a>
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Audited-4.13M%2B%20LoC-10b981?style=flat-square" alt="Проверено 4.13M+ строк" /></a>
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/ru/guide/pro-features"><img src="https://img.shields.io/badge/Commands-136%20(69%20Free%20%7C%2067%20Pro)-0EA5E9?style=flat-square" alt="136 команд" /></a>
+  <a href="https://liskinlabs.com/"><img src="https://img.shields.io/badge/Fleet%20Audited-4.13M%2B%20LoC-10b981?style=flat-square" alt="Проверено 4.13M+ строк" /></a>
+  <a href="https://liskinlabs.com/ru/guide/pro-features"><img src="https://img.shields.io/badge/Commands-136%20(69%20Free%20%7C%2067%20Pro)-0EA5E9?style=flat-square" alt="136 команд" /></a>
 </p>
 
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><b>Установить из Marketplace</b></a> ·
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><b>Установить из Open VSX</b></a> ·
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/ru/"><b>Документация</b></a> ·
+  <a href="https://liskinlabs.com/ru/"><b>Документация</b></a> · ·
+  <a href="https://sim.liskinlabs.com/"><b>3D-симулятор</b></a> ·
+  <a href="mailto:info@liskinlabs.com"><b>info@liskinlabs.com</b></a>
   <a href="https://github.com/LiskinLabs/kuka-krl-extension/blob/main/SUPPORT.md"><b>Поддержка и Air-Gap</b></a>
 </p>
 
@@ -122,14 +124,14 @@
 | Тариф | Стандартная цена | Лимит и условия | Для кого | Оформление |
 |---|---|---|---|---|
 | **Community** | USD 0 | Обучение / некоммерч. · +14 дн. триал Pro | Учёба и личные проекты | [Установить бесплатно](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| **Pro Monthly** | USD 19 / мес | 1 ПК · Отмена в любой момент | Разовые выезды на объект | [Оформить на месяц](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
-| **Pro Annual** | USD 149 / год | 1 ПК · 1 год обновлений | Инженеры-пусконаладчики | [Оформить на год](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
-| **Pro Lifetime** | USD 699 разово | 1 ПК · Бессрочно | Независимые интеграторы | [Купить бессрочно](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
-| **Team** | USD 499 / год | 5 ПК · Единый счёт | Инженерные группы | [Купить Team](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
-| **Department** | USD 1,499 / год | 20 ПК · Поддержка Air-Gap | Системные интеграторы | [Купить Department](https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Pro Monthly** | USD 19 / мес | 1 ПК · Отмена в любой момент | Разовые выезды на объект | [Оформить на месяц](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Pro Annual** | USD 149 / год | 1 ПК · 1 год обновлений | Инженеры-пусконаладчики | [Оформить на год](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Pro Lifetime** | USD 699 разово | 1 ПК · Бессрочно | Независимые интеграторы | [Купить бессрочно](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Team** | USD 499 / год | 5 ПК · Единый счёт | Инженерные группы | [Купить Team](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Department** | USD 1,499 / год | 20 ПК · Поддержка Air-Gap | Системные интеграторы | [Купить Department](https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
 | **Enterprise** | USD 4,999 / год | 100 ПК · Договор / SLA | Заводы и OEM | [Закупка для юрлиц](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/SUPPORT.md#2-14-day-free-trial-upgrades--billing-dodo-payments-mor) |
 
-<sub>Стартовый промокод `LAUNCH30` (-30%) автоматически подставлен в ссылки оплаты выше. Платёжный агент (MoR) — Dodo Payments (поддержка НДС / EU VIES 0% и PDF-инвойсов). Уже есть лицензия: <a href="https://kuka-krl-support-gateway.redminotpro5.workers.dev/activate">Онлайн-активация</a> · <a href="https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap">Создать Air-Gap .lic</a> · <a href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1">Кабинет клиента</a>.</sub>
+<sub>Стартовый промокод `LAUNCH30` (-30%) автоматически подставлен в ссылки оплаты выше. Платёжный агент (MoR) — Dodo Payments (поддержка НДС / EU VIES 0% и PDF-инвойсов). Уже есть лицензия: <a href="https://api.liskinlabs.com/activate">Онлайн-активация</a> · <a href="https://api.liskinlabs.com/airgap">Создать Air-Gap .lic</a> · <a href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1">Кабинет клиента</a>.</sub>
 
 ---
 

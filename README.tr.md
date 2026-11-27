@@ -21,14 +21,16 @@
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><img src="https://img.shields.io/open-vsx/dt/LiskinLabs/kuka-krl-extension?style=flat-square&logo=eclipseche&logoColor=white&color=007ACC&label=Open%20VSX%20Downloads" alt="Open VSX İndirmeleri" /></a>
   <a href="https://github.com/LiskinLabs/kuka-krl-extension/releases"><img src="https://img.shields.io/badge/Release-v1.9.27-FF6600?style=flat-square&logo=visualstudiocode&logoColor=white" alt="Release v1.9.27" /></a>
   <a href="https://secure.software/vscode/packages/liskinlabs/kuka-krl-extension"><img src="https://img.shields.io/badge/Spectra%20Assure-PASSED%20(0%20CVE)-10b981?style=flat-square&logo=shield&logoColor=white" alt="Spectra Assure" /></a>
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/"><img src="https://img.shields.io/badge/Fleet%20Audited-4.13M%2B%20LoC-10b981?style=flat-square" alt="4.13M+ Satır" /></a>
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/guide/pro-features"><img src="https://img.shields.io/badge/Commands-136%20(69%20Free%20%7C%2067%20Pro)-0EA5E9?style=flat-square" alt="136 Komut" /></a>
+  <a href="https://liskinlabs.com/"><img src="https://img.shields.io/badge/Fleet%20Audited-4.13M%2B%20LoC-10b981?style=flat-square" alt="4.13M+ Satır" /></a>
+  <a href="https://liskinlabs.com/guide/pro-features"><img src="https://img.shields.io/badge/Commands-136%20(69%20Free%20%7C%2067%20Pro)-0EA5E9?style=flat-square" alt="136 Komut" /></a>
 </p>
 
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension"><b>Marketplace'ten Kur</b></a> ·
   <a href="https://open-vsx.org/extension/LiskinLabs/kuka-krl-extension"><b>Open VSX'ten Kur</b></a> ·
-  <a href="https://liskinlabs.github.io/kuka-krl-extension/tr/"><b>Dokümantasyon</b></a> ·
+  <a href="https://liskinlabs.com/tr/"><b>Dokümantasyon</b></a> · ·
+  <a href="https://sim.liskinlabs.com/"><b>3D Simülatör</b></a> ·
+  <a href="mailto:info@liskinlabs.com"><b>info@liskinlabs.com</b></a>
   <a href="https://github.com/LiskinLabs/kuka-krl-extension/blob/main/SUPPORT.md"><b>Destek ve Air-Gap</b></a>
 </p>
 
@@ -81,14 +83,14 @@
 | Plan | Standart Fiyat | Kapsam | Hedef | Satın Alma |
 |---|---|---|---|---|
 | **Community** | USD 0 | Kişisel / Akademik · 14 gün Pro deneme | Eğitim ve test | [Ücretsiz Kur](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension) |
-| **Pro Monthly** | USD 19 / ay | 1 bilgisayar · İstediğiniz an iptal | Kısa saha görevleri | [Aylık Al](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dtr&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
-| **Pro Annual** | USD 149 / yıl | 1 bilgisayar · 1 yıl güncelleme | Tam zamanlı KUKA mühendisleri | [Yıllık Al](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dtr&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
-| **Pro Lifetime** | USD 699 tek seferlik | 1 bilgisayar · Kalıcı | Bağımsız danışmanlar | [Ömür Boyu](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dtr&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
-| **Team** | USD 499 / yıl | 5 bilgisayar · Tek fatura | Otomasyon ekipleri | [Team Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dtr&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
-| **Department** | USD 1,499 / yıl | 20 bilgisayar · Air-Gap desteği | Sistem entegratörleri | [Department Al](https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dtr&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Pro Monthly** | USD 19 / ay | 1 bilgisayar · İstediğiniz an iptal | Kısa saha görevleri | [Aylık Al](https://checkout.dodopayments.com/buy/pdt_0NmAUzwdbzeERSktsOLTp?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Dtr&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Pro Annual** | USD 149 / yıl | 1 bilgisayar · 1 yıl güncelleme | Tam zamanlı KUKA mühendisleri | [Yıllık Al](https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Dtr&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Pro Lifetime** | USD 699 tek seferlik | 1 bilgisayar · Kalıcı | Bağımsız danışmanlar | [Ömür Boyu](https://checkout.dodopayments.com/buy/pdt_0NmAcoqVCfuwQ6Xx7qyqr?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Dtr&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Team** | USD 499 / yıl | 5 bilgisayar · Tek fatura | Otomasyon ekipleri | [Team Al](https://checkout.dodopayments.com/buy/pdt_0NnLCdgD69GiXDLRJ0K5v?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Dtr&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
+| **Department** | USD 1,499 / yıl | 20 bilgisayar · Air-Gap desteği | Sistem entegratörleri | [Department Al](https://checkout.dodopayments.com/buy/pdt_0Nq5QVTrbkJbWAUf8qoyn?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Dtr&singlePage=true&showDiscounts=true&discountCode=LAUNCH30) |
 | **Enterprise** | USD 4,999 / yıl | 100 bilgisayar · PO ve SLA | Fabrikalar ve OEM | [Kurumsal Fatura](https://github.com/LiskinLabs/kuka-krl-extension/blob/main/SUPPORT.md#2-14-day-free-trial-upgrades--billing-dodo-payments-mor) |
 
-<sub>`LAUNCH30` (%30 indirim) yukarıdaki ödeme bağlantılarında otomatik uygulanır. Ödemeler Dodo Payments (Merchant of Record) tarafından işlenir. Lisanslı kullanıcılar: <a href="https://kuka-krl-support-gateway.redminotpro5.workers.dev/activate">Çevrimiçi Etkinleştir</a> · <a href="https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap">Air-Gap .lic</a> · <a href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1">Müşteri Portalı</a>.</sub>
+<sub>`LAUNCH30` (%30 indirim) yukarıdaki ödeme bağlantılarında otomatik uygulanır. Ödemeler Dodo Payments (Merchant of Record) tarafından işlenir. Lisanslı kullanıcılar: <a href="https://api.liskinlabs.com/activate">Çevrimiçi Etkinleştir</a> · <a href="https://api.liskinlabs.com/airgap">Air-Gap .lic</a> · <a href="https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1">Müşteri Portalı</a> · <a href="mailto:info@liskinlabs.com">info@liskinlabs.com</a>.</sub>
 
 ---
 

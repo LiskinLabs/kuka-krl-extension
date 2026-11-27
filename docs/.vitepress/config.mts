@@ -135,7 +135,7 @@ export default defineConfig({
           }
         ],
         footer: {
-          message: 'Licensed under Proprietary EULA. Independent tool by Liskin Labs; not affiliated with KUKA AG. KUKA, KUKA.Sim and KRL are trademarks of KUKA Roboter GmbH. Offline engineering aids do not replace controller-side safety validation.',
+          message: 'Licensed under Proprietary EULA. Independent tool by Liskin Labs; not affiliated with KUKA AG. KUKA, KUKA.Sim and KRL are trademarks of KUKA Roboter GmbH. Offline engineering aids do not replace controller-side safety validation. Contact: <a href="mailto:info@liskinlabs.com">info@liskinlabs.com</a>',
           copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
         }
       }
@@ -192,7 +192,7 @@ export default defineConfig({
           }
         ],
         footer: {
-          message: 'Проприетарная лицензия (EULA). Независимая разработка Liskin Labs; не аффилировано с KUKA AG. KUKA, KUKA.Sim и KRL — товарные знаки KUKA Roboter GmbH. Инженерные офлайн-инструменты не заменяют проверку безопасности на контроллере.',
+          message: 'Проприетарная лицензия (EULA). Независимая разработка Liskin Labs; не аффилировано с KUKA AG. KUKA, KUKA.Sim и KRL — товарные знаки KUKA Roboter GmbH. Инженерные офлайн-инструменты не заменяют проверку безопасности на контроллере. Связь: <a href="mailto:info@liskinlabs.com">info@liskinlabs.com</a>',
           copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
         }
       }
@@ -249,7 +249,7 @@ export default defineConfig({
           }
         ],
         footer: {
-          message: 'Özel EULA altında lisanslanmıştır. Liskin Labs bağımsız geliştirme; KUKA AG ile bağlantılı değildir. KUKA, KUKA.Sim ve KRL, KUKA Roboter GmbH tarafından tescillenmiş ticari markalardır. Mühendislik araçları denetleyici tarafındaki güvenlik doğrulamasının yerini almaz.',
+          message: 'Özel EULA altında lisanslanmıştır. Liskin Labs bağımsız geliştirme; KUKA AG ile bağlantılı değildir. KUKA, KUKA.Sim ve KRL, KUKA Roboter GmbH tarafından tescillenmiş ticari markalardır. Mühendislik araçları denetleyici tarafındaki güvenlik doğrulamasının yerini almaz. İletişim: <a href="mailto:info@liskinlabs.com">info@liskinlabs.com</a>',
           copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
         }
       }
@@ -306,7 +306,7 @@ export default defineConfig({
           }
         ],
         footer: {
-          message: 'Proprietäre EULA-Lizenz. Unabhängige Entwicklung von Liskin Labs; nicht mit der KUKA AG verbunden. KUKA, KUKA.Sim und KRL sind Marken der KUKA Roboter GmbH. Offline-Engineering-Werkzeuge ersetzen keine sicherheitsgerichtete Prüfung auf der Steuerung.',
+          message: 'Proprietäre EULA-Lizenz. Unabhängige Entwicklung von Liskin Labs; nicht mit der KUKA AG verbunden. KUKA, KUKA.Sim und KRL sind Marken der KUKA Roboter GmbH. Offline-Engineering-Werkzeuge ersetzen keine sicherheitsgerichtete Prüfung auf der Steuerung. Kontakt: <a href="mailto:info@liskinlabs.com">info@liskinlabs.com</a>',
           copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
         }
       }
@@ -363,7 +363,7 @@ export default defineConfig({
           }
         ],
         footer: {
-          message: 'Licenciado bajo EULA propietaria. Desarrollo independiente de Liskin Labs; no afiliado a KUKA AG. KUKA, KUKA.Sim y KRL son marcas de KUKA Roboter GmbH. Las herramientas de ingeniería offline no sustituyen la validación de seguridad en el controlador.',
+          message: 'Licenciado bajo EULA propietaria. Desarrollo independiente de Liskin Labs; no afiliado a KUKA AG. KUKA, KUKA.Sim y KRL son marcas de KUKA Roboter GmbH. Las herramientas de ingeniería offline no sustituyen la validación de seguridad en el controlador. Contacto: <a href="mailto:info@liskinlabs.com">info@liskinlabs.com</a>',
           copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
         }
       }
@@ -420,7 +420,7 @@ export default defineConfig({
           }
         ],
         footer: {
-          message: 'Licenza proprietaria EULA. Sviluppo indipendente di Liskin Labs; non affiliato a KUKA AG. KUKA, KUKA.Sim e KRL sono marchi di KUKA Roboter GmbH. Gli strumenti di ingegneria offline non sostituiscono la validazione di sicurezza sul controllore.',
+          message: 'Licenza proprietaria EULA. Sviluppo indipendente di Liskin Labs; non affiliato a KUKA AG. KUKA, KUKA.Sim e KRL sono marchi di KUKA Roboter GmbH. Gli strumenti di ingegneria offline non sostituiscono la validazione di sicurezza sul controllore. Contatti: <a href="mailto:info@liskinlabs.com">info@liskinlabs.com</a>',
           copyright: 'Copyright © 2024-2026 LiskinLabs (Silvestr Liskin)'
         }
       }

@@ -9,9 +9,11 @@
 
 | Channel | When to Use | How to Open |
 |---|---|---|
+| **Email (Support & B2B)** | Licensing, corporate quotes, PO invoices, security or general inquiries | [info@liskinlabs.com](mailto:info@liskinlabs.com) |
 | **Direct Engineering Chat** | Fast help with KRL parsing, KRC4/KRC5 live connection, commissioning issues, or urgent license troubleshooting | In VS Code (`Ctrl+Shift+P`): `KRL: Direct Engineering Support` (`krl.openTelegramChat`) or [Open Support in VS Code](vscode://LiskinLabs.kuka-krl-extension/support) |
 | **GitHub Issues** | Public bug reports, feature requests, sample `.src`/`.dat` parser edge cases, and release tracking | [LiskinLabs/kuka-krl-extension/issues](https://github.com/LiskinLabs/kuka-krl-extension/issues) |
-| **Interactive Documentation** | Full guide for KSS 8.x/9.x, VASS 26 linter, live telemetry bridge, and EULA FAQ | [Liskin Labs Engineering Wiki](https://liskinlabs.github.io/kuka-krl-extension/) |
+| **Interactive Documentation** | Full guide for KSS 8.x/9.x, VASS 26 linter, live telemetry bridge, and EULA FAQ | [liskinlabs.com](https://liskinlabs.com/) |
+| **3D Web Simulator** | Browser-based KUKA kinematic digital twin & backup preview | [sim.liskinlabs.com](https://sim.liskinlabs.com/) |
 
 When reporting a parser or diagnostics bug, please include:
 1. Extension version (`v1.9.17` or later) and VS Code / Cursor / Windsurf version.
@@ -27,7 +29,7 @@ All paid plans are processed through **Dodo Payments** (Merchant of Record) with
 | Action | In VS Code (`Ctrl+Shift+P`) | Web / Direct Link |
 |---|---|---|
 | **Start 14-Day Free Pro Trial** (no card required) | `krl.startTrial` (`KRL Control Center` -> Trial) | [Open Control Center](vscode://LiskinLabs.kuka-krl-extension/control-center) |
-| **View Pricing & Compare Plans** | `krl.openPricingPlans` | [Pricing & Checkout](https://liskinlabs.github.io/kuka-krl-extension/#pricing) |
+| **View Pricing & Compare Plans** | `krl.openPricingPlans` | [Pricing & Checkout](https://liskinlabs.com/#pricing) |
 | **Manage Subscription / Cancel / Receipts** | `krl.openCustomerPortal` | [Dodo Customer Portal](https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1) |
 | **Download Latest PDF Invoice** | `krl.downloadLatestInvoice` / `krl.manageInvoices` | [Dodo Customer Portal](https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1) |
 | **Generate Corporate Quote / Purchase Order** | `krl.requestCorporateInvoice` | Request via `krl.openTelegramChat` for Enterprise Plant (`USD 4,999` multi-site orders / bank transfer) |
@@ -40,7 +42,7 @@ Use promo code **`LAUNCH30`** at Dodo Checkout for **30% off** your initial Pro 
 ## 3. License Activation & Air-Gapped Factory Cells
 
 ### Online Workstations
-1. Copy your license key from the [Checkout Confirmation Page](https://kuka-krl-support-gateway.redminotpro5.workers.dev/activate) or Dodo Payments confirmation email.
+1. Copy your license key from the [Checkout Confirmation Page](https://api.liskinlabs.com/activate) or Dodo Payments confirmation email.
 2. Open VS Code -> `Ctrl+Shift+P` -> **`KRL: Activate License Key`** (`krl.activateLicense`) or click `Activate inside VS Code` on the confirmation page.
 3. Need to move an activation to a new engineering laptop? Run **`KRL: Deactivate License on This Machine`** (`krl.deactivateLicense`) or manage activations in the [Customer Portal](https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1).
 
@@ -49,7 +51,7 @@ Use promo code **`LAUNCH30`** at Dodo Checkout for **30% off** your initial Pro 
 ### Offline / Air-Gapped Commissioning Networks
 For segmented plant LANs with zero outbound internet:
 1. Run `Ctrl+Shift+P` -> **`KRL: Activate Offline Air-Gap License`** (`krl.activateOfflineLicense`) to generate your machine hardware request string.
-2. On an internet-connected device or mobile phone, open the [Air-Gap Activation Portal](https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap) to exchange your license key + machine request for a cryptographically signed **Ed25519 `.lic` entitlement token**.
+2. On an internet-connected device or mobile phone, open the [Air-Gap Activation Portal](https://api.liskinlabs.com/airgap) to exchange your license key + machine request for a cryptographically signed **Ed25519 `.lic` entitlement token**.
 3. Transfer the `.lic` file via USB / shared jump host and run **`KRL: Import Offline License File`** (`krl.importOfflineLicenseFile`).
 
 ---

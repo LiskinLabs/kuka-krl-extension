@@ -1,0 +1,16 @@
+name = "liskinlabs-site"
+main = "cf-worker.mjs"
+compatibility_date = "2024-09-23"
+workers_dev = false
+
+routes = [
+  { pattern = "liskinlabs.com", custom_domain = true },
+  { pattern = "www.liskinlabs.com", custom_domain = true },
+  { pattern = "docs.liskinlabs.com", custom_domain = true }
+]
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = true
+not_found_handling = "404-page"

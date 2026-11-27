@@ -52,7 +52,7 @@ KRL Engineering Toolkit eklentisini kurmak, yapılandırmak ve çevrimdışı et
 ### Adım 2: Çevrimiçi Web Portalında Lisans Üretme
 1. USB belleği internete bağlı bir bilgisayara takın.
 2. Liskin Labs güvenli etkinleştirme kapısına gidin:  
-**[Air-Gap Çevrimdışı Lisans Portalı](https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap)**
+**[Air-Gap Çevrimdışı Lisans Portalı](https://api.liskinlabs.com/airgap)**
 3. `liskin-hardware-id.lic` dosyanızı yükleme alanına sürükleyin — donanım parmak izi otomatik olarak doldurulacaktır.
 4. Lisans Anahtarınızı girin ve **Çevrimdışı Lisans Oluştur** düğmesine basın.
 5. İmzalanan `liskin-krl-license.lic` dosyasını USB belleğe indirin.

@@ -1168,7 +1168,7 @@
                 {{ t.pricing.procurement.btnPortal }}
               </a>
               <a
-                href="https://kuka-krl-support-gateway.redminotpro5.workers.dev/airgap"
+                href="https://api.liskinlabs.com/airgap"
                 target="_blank"
                 rel="noopener noreferrer"
                 :class="[
@@ -1721,7 +1721,7 @@ const activeHeroSlide = ref(0)
 const currentHeroSlide = computed(() => t.value.hero.mediaSlides[activeHeroSlide.value] || t.value.hero.mediaSlides[0])
 const simIframeRef = ref<HTMLIFrameElement | null>(null)
 const initialSimTheme = ref<'dark' | 'light'>('dark')
-const simIframeSrc = computed(() => `/sim/?embed=1&lang=${currentLang.value}&theme=${initialSimTheme.value}`)
+const simIframeSrc = computed(() => `https://sim.liskinlabs.com/?embed=1&lang=${currentLang.value}&theme=${initialSimTheme.value}`)
 
 const syncSimIframe = () => {
   if (typeof window === 'undefined') return
@@ -1865,7 +1865,7 @@ const activeTierProductId = (tier: PricingTier) => {
 }
 
 // Dodo Payments Checkout
-const GATEWAY_URL = 'https://kuka-krl-support-gateway.redminotpro5.workers.dev'
+const GATEWAY_URL = 'https://api.liskinlabs.com'
 const checkoutBusy = ref<string | null>(null)
 
 const buildCheckoutUrl = (productId: string) => {

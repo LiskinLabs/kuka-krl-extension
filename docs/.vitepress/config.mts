@@ -13,7 +13,7 @@ const getBase = () => {
       return '/'
     }
   }
-  return '/kuka-krl-extension/'
+  return '/'
 }
 
 export default defineConfig({
@@ -24,21 +24,21 @@ export default defineConfig({
   head: [
     ['meta', { name: 'color-scheme', content: 'light dark' }],
     ['script', {}, `try{var s=localStorage.getItem('krl-color-scheme');if(s==='light'||s==='dark'){var m=document.querySelector('meta[name="color-scheme"]');if(m)m.content=s;document.documentElement.classList.toggle('dark',s==='dark');}}catch(e){}`],
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/kuka-krl-extension/favicon.svg' }],
-    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/kuka-krl-extension/favicon-32.png' }],
-    ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/kuka-krl-extension/favicon-16.png' }],
-    ['link', { rel: 'apple-touch-icon', href: '/kuka-krl-extension/logo-original.png' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16.png' }],
+    ['link', { rel: 'apple-touch-icon', href: '/logo-original.png' }],
     ['meta', { name: 'theme-color', content: '#FF5E00' }],
     ['meta', { name: 'keywords', content: 'KRL, KRC2, KRC4, KRC5, Robot, Robotics, Industrial Automation, WorkVisual, VS Code, Live Monitor, MCP' }],
     ['meta', { property: 'og:title', content: 'KRL Engineering Toolkit — Industrial Robotics IDE Suite' }],
     ['meta', { property: 'og:description', content: 'Engineering toolkit for KUKA KRL in VS Code (KR C2–C5, KSS 5.4–8.7, VSS & iiQKA.OS2 9.0–9.3): static diagnostics, SmartPAD backup diff, .wvs/.vcmx inspection, and live controller telemetry.' }],
-    ['meta', { property: 'og:image', content: '/kuka-krl-extension/logo-original.png' }],
+    ['meta', { property: 'og:image', content: 'https://liskinlabs.com/logo-original.png' }],
     ['meta', { property: 'og:site_name', content: 'KRL Engineering Toolkit' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
     ['meta', { name: 'twitter:title', content: 'KRL Engineering Toolkit — Industrial Robotics IDE Suite' }],
     ['meta', { name: 'twitter:description', content: 'Engineering toolkit for KUKA KRL in VS Code (KR C2–C5, KSS 5.4–8.7, VSS & iiQKA.OS2 9.0–9.3): static diagnostics, SmartPAD backup diff, .wvs/.vcmx inspection, and live controller telemetry.' }],
-    ['meta', { name: 'twitter:image', content: '/kuka-krl-extension/logo-original.png' }]
+    ['meta', { name: 'twitter:image', content: 'https://liskinlabs.com/logo-original.png' }]
   ],
   vite: {
     css: {
@@ -95,7 +95,7 @@ export default defineConfig({
           { text: 'Features Wiki', link: '/guide/features' },
           { text: 'Community', link: '/guide/community-features' },
           { text: 'Pro Features', link: '/guide/pro-features' },
-          { text: 'Buy Pro License', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Den&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
+          { text: 'Buy Pro License', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Den&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
           { text: 'Invoices / Portal', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
@@ -152,7 +152,7 @@ export default defineConfig({
           { text: 'Вики функций', link: '/ru/guide/features' },
           { text: 'Бесплатно (Community)', link: '/ru/guide/community-features' },
           { text: 'Pro функции', link: '/ru/guide/pro-features' },
-          { text: 'Купить Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
+          { text: 'Купить Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Dru&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
           { text: 'Инвойсы / Портал', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
@@ -209,7 +209,7 @@ export default defineConfig({
           { text: 'Özellikler Wiki', link: '/tr/guide/features' },
           { text: 'Ücretsiz (Community)', link: '/tr/guide/community-features' },
           { text: 'Pro Özellikler', link: '/tr/guide/pro-features' },
-          { text: 'Pro Satın Al', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dtr&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
+          { text: 'Pro Satın Al', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Dtr&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
           { text: 'Faturalar / Portal', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
@@ -266,7 +266,7 @@ export default defineConfig({
           { text: 'Features Wiki', link: '/de/guide/features' },
           { text: 'Community (Kostenlos)', link: '/de/guide/community-features' },
           { text: 'Pro-Funktionen', link: '/de/guide/pro-features' },
-          { text: 'Pro kaufen', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dde&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
+          { text: 'Pro kaufen', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Dde&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
           { text: 'Rechnungen / Portal', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
@@ -323,7 +323,7 @@ export default defineConfig({
           { text: 'Wiki de Funciones', link: '/es/guide/features' },
           { text: 'Community (Gratis)', link: '/es/guide/community-features' },
           { text: 'Funciones Pro', link: '/es/guide/pro-features' },
-          { text: 'Comprar Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Des&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
+          { text: 'Comprar Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Des&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
           { text: 'Facturas / Portal', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
@@ -380,7 +380,7 @@ export default defineConfig({
           { text: 'Wiki Funzioni', link: '/it/guide/features' },
           { text: 'Community (Gratis)', link: '/it/guide/community-features' },
           { text: 'Funzioni Pro', link: '/it/guide/pro-features' },
-          { text: 'Acquista Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fkuka-krl-support-gateway.redminotpro5.workers.dev%2Fcheckout%2Fsuccess%3Flang%3Dit&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
+          { text: 'Acquista Pro', link: 'https://checkout.dodopayments.com/buy/pdt_0NmAV012KFHSjUMyDomJ6?redirect_url=https%3A%2F%2Fapi.liskinlabs.com%2Fcheckout%2Fsuccess%3Flang%3Dit&singlePage=true&showDiscounts=true&discountCode=LAUNCH30' },
           { text: 'Fatture / Portale', link: 'https://customer.dodopayments.com/login/bus_0NlrxPhrg9eHzPZKAgsF1' }
         ],
         sidebar: [
